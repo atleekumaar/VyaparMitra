@@ -25,18 +25,18 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { CardSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner } from '../components/EmptyState';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface ComparePageProps {
-  currentLanguage?: string;
   onNavigateTab?: (tab: string) => void;
   onQuickCopilot?: (query: string) => void;
 }
 
 export const ComparePage: React.FC<ComparePageProps> = ({
-  currentLanguage = 'hinglish',
   onNavigateTab,
   onQuickCopilot,
 }) => {
+  const { t, language, language: currentLanguage } = useLanguage();
   const [merchants, setMerchants] = useState<MerchantInfo[]>([]);
   const [selectedMerchantId, setSelectedMerchantId] = useState<string>('M015');
   const [benchmark, setBenchmark] = useState<BenchmarkData | null>(null);
@@ -121,8 +121,8 @@ export const ComparePage: React.FC<ComparePageProps> = ({
   };
 
   const getStatusLabel = (status: string, statusText: string, statusTextHi?: string | null) => {
-    if (currentLanguage === 'hindi' && statusTextHi) return statusTextHi;
-    if (currentLanguage === 'english') {
+    if (language === 'hindi' && statusTextHi) return statusTextHi;
+    if (language === 'english') {
       if (status === 'green') return 'Top Performer';
       if (status === 'yellow') return 'Average';
       return 'Needs Attention';
@@ -266,12 +266,10 @@ export const ComparePage: React.FC<ComparePageProps> = ({
             </div>
             <div>
               <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
-                {currentLanguage === 'hindi' ? 'दुकान की प्रतिस्पर्धा से तुलना (Benchmark)' : 'Peers se Tulna (Benchmark)'}
+                {t('compare_title', 'Peers se Tulna (Benchmark)')}
               </h2>
               <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5 font-medium">
-                {currentLanguage === 'hindi'
-                  ? 'समान शहर व श्रेणी की अन्य दुकानों से 6 मुख्य संकेतकों पर तुलना'
-                  : 'Compare your store against 6 core performance metrics of category peers'}
+                {t('compare_subtitle', 'Compare your store against 6 core performance metrics of category peers')}
               </p>
             </div>
           </div>
@@ -281,7 +279,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         <div className="flex items-center gap-2.5 self-start sm:self-auto">
           <label className="text-xs font-bold text-[#002970] dark:text-blue-100 flex items-center gap-1.5 whitespace-nowrap">
             <Store className="w-3.5 h-3.5 text-[#00BAF2]" />
-            <span>Select Shop:</span>
+            <span>{t('select_shop', 'Select Shop:')}</span>
           </label>
           <select
             value={selectedMerchantId}

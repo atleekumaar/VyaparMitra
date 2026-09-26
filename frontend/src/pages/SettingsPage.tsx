@@ -5,20 +5,21 @@ import { HealthStatus } from '../types';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { CardSkeleton } from '../components/LoadingSkeleton';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface SettingsPageProps {
-  currentLanguage: string;
-  onLanguageChange: (lang: string) => void;
+  currentLanguage?: string;
+  onLanguageChange?: (lang: string) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
 }
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({
-  currentLanguage,
-  onLanguageChange,
   isDarkMode,
   onToggleDarkMode,
+  onLanguageChange,
 }) => {
+  const { language: currentLanguage, setLanguage, t } = useLanguage();
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [loadingHealth, setLoadingHealth] = useState<boolean>(true);
 
@@ -165,7 +166,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           ].map((lang) => (
             <div
               key={lang.id}
-              onClick={() => onLanguageChange(lang.id)}
+              onClick={() => {
+                setLanguage(lang.id as any);
+                if (onLanguageChange) onLanguageChange(lang.id);
+              }}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 currentLanguage === lang.id
                   ? 'border-[#00BAF2] bg-[#F0F8FE] dark:bg-[#0B254A] ring-2 ring-[#00BAF2]/30 shadow-xs'

@@ -15,7 +15,6 @@ import { Menu } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
-  const [currentLanguage, setCurrentLanguage] = useState<string>('hinglish');
   const [isOpenMobile, setIsOpenMobile] = useState<boolean>(false);
   const [isHealthy, setIsHealthy] = useState<boolean>(true);
   const [pendingActionsCount, setPendingActionsCount] = useState<number>(0);
@@ -120,8 +119,6 @@ export const App: React.FC = () => {
 
         {/* Global top navigation bar */}
         <Navbar
-          currentLanguage={currentLanguage}
-          onLanguageChange={setCurrentLanguage}
           onOpenCopilot={() => {
             setCopilotQuery(null);
             setCurrentTab('copilot');
@@ -143,7 +140,6 @@ export const App: React.FC = () => {
 
           {currentTab === 'compare' && (
             <ComparePage
-              currentLanguage={currentLanguage}
               onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
               onQuickCopilot={handleQuickCopilot}
             />
@@ -166,15 +162,11 @@ export const App: React.FC = () => {
           {currentTab === 'copilot' && (
             <CopilotPage
               initialQuery={copilotQuery}
-              currentLanguage={currentLanguage}
-              onLanguageChange={setCurrentLanguage}
             />
           )}
 
           {currentTab === 'settings' && (
             <SettingsPage
-              currentLanguage={currentLanguage}
-              onLanguageChange={setCurrentLanguage}
               isDarkMode={isDarkMode}
               onToggleDarkMode={toggleDarkMode}
             />

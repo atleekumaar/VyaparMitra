@@ -144,6 +144,7 @@ export interface ProductDetail extends ProductListItem {
     action: string;
   }>;
   active_recommendations: ActionItem[];
+  stock_status_text?: string;
 }
 
 export interface CustomerListItem {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Bot, HelpCircle, Store, Bell, CheckCircle2, Volume2, ShieldCheck, Sun, Moon } from 'lucide-react';
 import { Badge } from './Badge';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface NavbarProps {
-  currentLanguage: string;
-  onLanguageChange: (lang: string) => void;
   onOpenCopilot: () => void;
   isHealthy?: boolean;
   isDarkMode: boolean;
@@ -12,13 +11,13 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  currentLanguage,
-  onLanguageChange,
   onOpenCopilot,
   isHealthy = true,
   isDarkMode,
   onToggleDarkMode,
 }) => {
+  const { language, setLanguage, t } = useLanguage();
+
   return (
     <header className="sticky top-0 z-30 bg-white dark:bg-[#0B1528] border-b border-[#CDE5F7] dark:border-[#1E3A6E] shadow-xs transition-colors duration-200">
       {/* Paytm Signature Brand Accent Strip */}
@@ -33,16 +32,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-extrabold text-[#002970] dark:text-white tracking-tight">
-                Vyapar Kirana Store
+                {t('store_name', 'Vyapar Kirana Store')}
               </h1>
               <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
                 <ShieldCheck className="w-3 h-3 text-[#00B970]" />
-                Paytm Verified
+                {t('verified_merchant', 'Paytm Verified')}
               </span>
             </div>
             <p className="text-xs text-[#4F6A94] dark:text-blue-200 flex items-center gap-1.5 mt-0.5">
               <Store className="w-3.5 h-3.5 text-[#00BAF2]" />
-              <span className="font-semibold text-[#002970] dark:text-blue-100">ID: M001</span> &bull; FMCG, Retail & Kirana &bull; Lucknow
+              <span className="font-semibold text-[#002970] dark:text-blue-100">ID: M001</span> &bull; {t('store_category', 'FMCG, Retail & Kirana • Lucknow')}
             </p>
           </div>
         </div>
@@ -53,8 +52,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs">
             <Volume2 className="w-4 h-4 text-[#00BAF2] animate-bounce" />
             <div className="text-[11px]">
-              <span className="font-bold text-[#002970] dark:text-white">Soundbox Ready:</span>{' '}
-              <span className="text-[#008A54] dark:text-[#00E68A] font-semibold">100% Instant Audio Alert</span>
+              <span className="font-bold text-[#002970] dark:text-white">{t('soundbox_ready', 'Soundbox Ready:')}</span>{' '}
+              <span className="text-[#008A54] dark:text-[#00E68A] font-semibold">{t('soundbox_instant', '100% Instant Audio Alert')}</span>
             </div>
           </div>
 
@@ -75,9 +74,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Language Selector */}
           <div className="flex items-center bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] rounded-xl p-1 text-xs font-semibold shadow-xs">
             <button
-              onClick={() => onLanguageChange('hinglish')}
+              onClick={() => setLanguage('hinglish')}
               className={`px-2.5 sm:px-3 py-1 rounded-lg transition-all ${
-                currentLanguage === 'hinglish'
+                language === 'hinglish'
                   ? 'bg-[#00BAF2] text-white shadow-xs font-bold'
                   : 'text-[#002970] dark:text-blue-200 hover:text-[#00BAF2]'
               }`}
@@ -85,9 +84,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               Hinglish
             </button>
             <button
-              onClick={() => onLanguageChange('hindi')}
+              onClick={() => setLanguage('hindi')}
               className={`px-2.5 sm:px-3 py-1 rounded-lg transition-all ${
-                currentLanguage === 'hindi'
+                language === 'hindi'
                   ? 'bg-[#00BAF2] text-white shadow-xs font-bold'
                   : 'text-[#002970] dark:text-blue-200 hover:text-[#00BAF2]'
               }`}
@@ -95,9 +94,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               हिंदी
             </button>
             <button
-              onClick={() => onLanguageChange('english')}
+              onClick={() => setLanguage('english')}
               className={`px-2.5 sm:px-3 py-1 rounded-lg transition-all ${
-                currentLanguage === 'english'
+                language === 'english'
                   ? 'bg-[#00BAF2] text-white shadow-xs font-bold'
                   : 'text-[#002970] dark:text-blue-200 hover:text-[#00BAF2]'
               }`}
@@ -112,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#002970] to-[#001F58] hover:from-[#00388F] hover:to-[#002970] text-white shadow-md shadow-[#002970]/20 border border-[#00BAF2]/40 transition-all active:scale-95"
           >
             <Bot className="w-4 h-4 text-[#00BAF2]" />
-            <span className="hidden sm:inline">Ask Copilot</span>
+            <span className="hidden sm:inline">{t('ask_copilot', 'Ask Copilot')}</span>
           </button>
         </div>
       </div>

@@ -17,6 +17,8 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
+import { useLanguage } from '../i18n/LanguageContext';
+
 export type NavTab =
   | 'dashboard'
   | 'compare'
@@ -43,21 +45,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isOpenMobile,
   onToggleMobile,
 }) => {
+  const { t } = useLanguage();
+
   const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { id: 'compare', label: 'Peers / Compare', icon: Trophy, isNew: true },
-    { id: 'analytics', label: 'Analytics', icon: BarChart3 },
-    { id: 'products', label: 'Products', icon: Package },
-    { id: 'customers', label: 'Customers', icon: Users },
-    { id: 'forecasts', label: 'Forecasts', icon: TrendingUp },
+    { id: 'dashboard', label: t('nav_dashboard', 'Dashboard'), icon: LayoutDashboard },
+    { id: 'compare', label: t('nav_compare', 'Peers / Compare'), icon: Trophy, isNew: true },
+    { id: 'analytics', label: t('nav_analytics', 'Analytics'), icon: BarChart3 },
+    { id: 'products', label: t('nav_products', 'Products'), icon: Package },
+    { id: 'customers', label: t('nav_customers', 'Customers'), icon: Users },
+    { id: 'forecasts', label: t('nav_forecasts', 'Forecasts'), icon: TrendingUp },
     {
       id: 'recommendations',
-      label: 'Action Center',
+      label: t('nav_recommendations', 'Action Center'),
       icon: Sparkles,
       badge: pendingActionsCount > 0 ? String(pendingActionsCount) : undefined,
     },
-    { id: 'copilot', label: 'AI Copilot', icon: Bot, isHighlight: true },
-    { id: 'settings', label: 'Settings', icon: Settings },
+    { id: 'copilot', label: t('nav_copilot', 'AI Copilot'), icon: Bot, isHighlight: true },
+    { id: 'settings', label: t('nav_settings', 'Settings'), icon: Settings },
   ];
 
   return (

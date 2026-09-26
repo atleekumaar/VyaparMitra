@@ -23,6 +23,7 @@ import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
 import { CardSkeleton, ChartSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner } from '../components/EmptyState';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface DashboardPageProps {
   onNavigateTab: (tab: any) => void;
@@ -35,6 +36,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   onSelectAction,
   onQuickCopilot,
 }) => {
+  const { t, language } = useLanguage();
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [actions, setActions] = useState<ActionItem[]>([]);
   const [salesAnalytics, setSalesAnalytics] = useState<SalesAnalytics | null>(null);
@@ -129,7 +131,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-black tracking-wider uppercase text-[#00BAF2]">
-                Paytm Soundbox 4.0 Live
+                {t('soundbox_banner_title', 'Paytm Soundbox 4.0 Live')}
               </span>
               <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-[#00B970] text-white">
                 Audio Active
@@ -137,8 +139,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
             <p className="text-sm font-bold text-white mt-0.5">
               {soundboxPlayed
-                ? '🔊 "Paytm par ₹4,250 prapt hue!"'
-                : '🔊 "Paytm par ₹4,250 prapt hue" • Aaj ka Total Collection: ₹45,280 (128 transactions)'}
+                ? (language === 'hindi' ? '🔊 "पेटीएम पर ₹4,250 प्राप्त हुए!"' : '🔊 "Paytm par ₹4,250 prapt hue!"')
+                : t('soundbox_banner_text')}
             </p>
           </div>
         </div>
@@ -149,10 +151,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
           >
             <Zap className="w-3.5 h-3.5 text-[#00BAF2]" />
-            <span>Test Audio</span>
+            <span>{t('test_audio', 'Test Audio')}</span>
           </button>
           <span className="text-xs text-blue-200 font-medium hidden md:inline">
-            100% Instant Bank Settlement
+            {t('instant_settlement', '100% Instant Bank Settlement')}
           </span>
         </div>
       </div>
@@ -162,12 +164,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div>
           <div className="flex items-center gap-2.5">
             <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
-              Shubh Prabhat, Merchant Ji 👋
+              {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
             </h2>
-            <Badge variant="demo">Paytm Verified Store</Badge>
+            <Badge variant="demo">{t('verified_merchant', 'Paytm Verified Store')}</Badge>
           </div>
           <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-1 max-w-xl font-medium">
-            Aapki dukaan ka poora commercial brief tayar hai. Sabhi metrics Phase 1-4 Feature Store aur ML models se verified hain.
+            {t('welcome_subtext')}
           </p>
         </div>
 
@@ -175,11 +177,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <Button
             variant="outline"
             size="sm"
-            onClick={() => onQuickCopilot('Mujhe aaj ka poora business brief batao')}
+            onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
             className="text-xs font-bold dark:border-[#00BAF2] dark:text-[#00BAF2] dark:hover:bg-[#132342]"
           >
             <Sparkles className="w-3.5 h-3.5 mr-1.5 text-[#00BAF2]" />
-            Today's Brief
+            {t('todays_brief', "Today's Brief")}
           </Button>
           <Button
             variant="primary"
@@ -187,7 +189,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             onClick={() => onNavigateTab('recommendations')}
             className="text-xs font-bold"
           >
-            <span>{summary.total_actions_pending} Priority Actions</span>
+            <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1" />
           </Button>
         </div>
@@ -225,8 +227,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Daily Sales Trend (Bikri)</h3>
-                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">Last 14 recorded business days</p>
+                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">{t('daily_sales_trend', 'Daily Sales Trend (Bikri)')}</h3>
+                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">{t('last_14_days', 'Last 14 recorded business days')}</p>
               </div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
@@ -263,14 +265,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
             <div className="mt-4 flex items-center justify-between text-xs text-[#4F6A94] dark:text-blue-200">
               <span className="font-semibold">
-                Peak Day Collection:{' '}
+                {t('peak_collection', 'Peak Day Collection:')}{' '}
                 <strong className="text-[#002970] dark:text-white font-extrabold">₹{maxRev.toLocaleString()}</strong>
               </span>
               <button
                 onClick={() => onNavigateTab('analytics')}
                 className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
               >
-                Deep Analytics <ArrowRight className="w-3.5 h-3.5" />
+                {t('deep_analytics', 'Deep Analytics')} <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
@@ -280,13 +282,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div>
               <div className="flex items-center gap-2 text-xs font-black text-[#00BAF2] uppercase tracking-wider">
                 <TrendingUp className="w-4 h-4 text-[#00BAF2]" />
-                <span>Phase 3 Predictive AI &bull; 7-Day Forecast</span>
+                <span>{t('forecast_7d_title', 'Phase 3 Predictive AI • 7-Day Forecast')}</span>
               </div>
               <p className="text-3xl font-black mt-1 text-white tracking-tight">
                 ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
               </p>
               <p className="text-xs text-blue-100 mt-1 max-w-md font-medium">
-                Autoregressive ML models ke anusaar agle 7 dino me anumanit store revenue.
+                {t('forecast_7d_subtext')}
               </p>
             </div>
             <Button
@@ -295,7 +297,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               onClick={() => onNavigateTab('forecasts')}
               className="border-white/40 text-white hover:bg-white/10 shrink-0 font-bold"
             >
-              View SKU Forecasts
+              {t('view_sku_forecasts', 'View SKU Forecasts')}
             </Button>
           </div>
         </div>
@@ -311,7 +313,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <Trophy className="w-4 h-4 text-[#00BAF2]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Peers se tulna</h3>
+                    <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('peers_comparison', 'Peers se tulna')}</h3>
                     <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{benchmark.peer_group}</p>
                   </div>
                 </div>

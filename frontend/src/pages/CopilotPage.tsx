@@ -4,18 +4,21 @@ import { api } from '../api/client';
 import { CopilotMessage } from '../types';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface CopilotPageProps {
   initialQuery?: string | null;
-  currentLanguage: string;
-  onLanguageChange: (lang: string) => void;
+  currentLanguage?: string;
+  onLanguageChange?: (lang: string) => void;
 }
 
 export const CopilotPage: React.FC<CopilotPageProps> = ({
   initialQuery,
-  currentLanguage,
+  currentLanguage: propLanguage,
   onLanguageChange,
 }) => {
+  const { language: contextLanguage, setLanguage, t } = useLanguage();
+  const currentLanguage = propLanguage || contextLanguage;
   const [messages, setMessages] = useState<CopilotMessage[]>([
     {
       id: 'welcome',
