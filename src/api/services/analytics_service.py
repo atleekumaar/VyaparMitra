@@ -57,11 +57,11 @@ class AnalyticsService:
             for _, r in df_d.iterrows():
                 daily_points.append(
                     DailySalesPoint(
-                        date=str(r.get("period_key", r.get("date", ""))),
+                        date=str(r.get("period_key", r.get("period_start", r.get("date", r.get("period", ""))))),
                         revenue=round(float(r.get("revenue", 0.0)), 2),
                         orders=int(r.get("orders", 0)),
-                        units=int(r.get("units", 0)) if "units" in r else None,
-                        average_order_value=round(float(r.get("average_order_value", 0.0)), 2) if "average_order_value" in r else None,
+                        units=int(r.get("units", 0)) if "units" in r and pd.notna(r.get("units")) else None,
+                        average_order_value=round(float(r.get("average_order_value", r.get("aov", 0.0))), 2) if ("average_order_value" in r or "aov" in r) else None,
                     )
                 )
 
@@ -139,7 +139,7 @@ class AnalyticsService:
                         category=str(r.get("product_category", "General")),
                         revenue=round(float(r.get("revenue", 0.0)), 2),
                         units=int(r.get("units", 0)),
-                        rank=int(r.get("revenue_rank", idx + 1)),
+                        rank=int(r.get("rank_by_revenue", r.get("revenue_rank", idx + 1))),
                     )
                 )
 
@@ -164,8 +164,8 @@ class AnalyticsService:
                 categories.append(
                     CategoryShareItem(
                         category=str(r.get("product_category", r.get("category", "General"))),
-                        revenue=round(float(r.get("revenue", 0.0)), 2),
-                        orders=int(r.get("orders", 0)),
+                        revenue=round(float(r.get("category_revenue", r.get("revenue", 0.0))), 2),
+                        orders=int(r.get("category_orders", r.get("orders", 0))),
                         revenue_share=round(float(r.get("revenue_share", 0.0)), 4),
                     )
                 )
@@ -185,8 +185,8 @@ class AnalyticsService:
                     methods.append(
                         PaymentMethodItem(
                             payment_method=str(r.get("payment_method", "")),
-                            transaction_count=int(r.get("orders", r.get("transaction_count", 0))),
-                            total_revenue=round(float(r.get("revenue", 0.0)), 2),
+                            transaction_count=int(r.get("payment_method_orders", r.get("orders", r.get("transaction_count", 0)))),
+                            total_revenue=round(float(r.get("payment_method_revenue", r.get("revenue", r.get("total_revenue", 0.0)))), 2),
                             revenue_share=round(float(r.get("revenue_share", 0.0)), 4),
                         )
                     )
@@ -214,7 +214,7 @@ class AnalyticsService:
 
         if True:
             df_h = fetch_table_df("trend_analysis")
-            rev_pts = df_h[df_h["metric"] == "revenue"] if "metric" in df_h.columns else df_h
+            rev_pts = df_h[df_h["metric"].isin(["revenue", "net_amount"])] if "metric" in df_h.columns else df_h
             if not rev_pts.empty:
                 hist_change = round(float(rev_pts.iloc[-1].get("percentage_change", 0.0)), 2)
 
@@ -227,21 +227,27 @@ class AnalyticsService:
 
     def get_anomaly_analytics(self) -> AnomalyResponse:
         anom_path = self.analytics_dir / "trends" / "anomalies.parquet"
+        if not anom_path.exists():
+            anom_path = self.analytics_dir / "trends" / "anomaly_analysis.parquet"
         items: List[AnomalyItem] = []
 
         if True:
             df_a = fetch_table_df("anomalies")
             for _, r in df_a.iterrows():
-                items.append(
-                    AnomalyItem(
-                        date=str(r.get("date", r.get("period", ""))),
-                        metric=str(r.get("metric", "revenue")),
-                        observed_value=round(float(r.get("observed_value", r.get("value", 0.0))), 2),
-                        expected_value=round(float(r.get("expected_value", r.get("rolling_mean", 0.0))), 2),
-                        deviation_score=round(float(r.get("deviation_score", r.get("z_score", 0.0))), 2),
-                        is_anomaly=bool(r.get("is_anomaly", True)),
+                is_anom = r.get("is_anomaly")
+                if is_anom is None:
+                    is_anom = str(r.get("status", "")).lower() in ["unusually_high", "unusually_low", "anomaly"]
+                if is_anom:
+                    items.append(
+                        AnomalyItem(
+                            date=str(r.get("date", r.get("period", ""))),
+                            metric=str(r.get("metric", "revenue")),
+                            observed_value=round(float(r.get("observed_value", r.get("value", 0.0))), 2),
+                            expected_value=round(float(r.get("expected_value", r.get("baseline", r.get("rolling_mean", 0.0)))), 2),
+                            deviation_score=round(float(r.get("deviation_score", r.get("deviation", r.get("z_score", 0.0)))), 2),
+                            is_anomaly=True,
+                        )
                     )
-                )
 
         return AnomalyResponse(
             total_anomalies_detected=len(items),

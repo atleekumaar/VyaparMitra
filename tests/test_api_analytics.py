@@ -42,6 +42,8 @@ def test_api_analytics_categories():
     data = response.json()
     assert "categories" in data
     assert len(data["categories"]) > 0
+    assert data["categories"][0]["revenue"] > 0
+    assert data["categories"][0]["orders"] > 0
 
 
 def test_api_analytics_payments():
@@ -51,6 +53,8 @@ def test_api_analytics_payments():
     assert "payment_methods" in data
     assert len(data["payment_methods"]) > 0
     assert data["primary_payment_method"] in ["UPI", "Cash", "Card", "Credit"]
+    assert data["payment_methods"][0]["total_revenue"] > 0
+    assert data["payment_methods"][0]["transaction_count"] > 0
 
 
 def test_api_analytics_trends():
