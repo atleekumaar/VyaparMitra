@@ -15,6 +15,8 @@ import {
   ShieldCheck,
   Percent,
   CheckCircle2,
+  Send,
+  Phone,
 } from 'lucide-react';
 import { api } from '../api/client';
 import { BenchmarkData, BenchmarkMetric, MerchantInfo } from '../types';
@@ -46,6 +48,12 @@ export const ComparePage: React.FC<ComparePageProps> = ({
   const [selectedExplainMetric, setSelectedExplainMetric] = useState<BenchmarkMetric | null>(null);
   const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState<boolean>(false);
   const [copiedWhatsApp, setCopiedWhatsApp] = useState<boolean>(false);
+
+  // Twilio WhatsApp delivery state
+  const [whatsAppPhone, setWhatsAppPhone] = useState<string>('+919876543210');
+  const [sendingWhatsApp, setSendingWhatsApp] = useState<boolean>(false);
+  const [whatsAppStatusMsg, setWhatsAppStatusMsg] = useState<string | null>(null);
+  const [whatsAppStatusType, setWhatsAppStatusType] = useState<'success' | 'info' | 'error' | null>(null);
 
   // Load merchants list on mount
   useEffect(() => {
@@ -83,6 +91,26 @@ export const ComparePage: React.FC<ComparePageProps> = ({
       navigator.clipboard.writeText(benchmark.whatsapp_digest);
       setCopiedWhatsApp(true);
       setTimeout(() => setCopiedWhatsApp(false), 2500);
+    }
+  };
+
+  const handleSendWhatsApp = async () => {
+    if (!benchmark?.whatsapp_digest || !whatsAppPhone.trim()) return;
+    setSendingWhatsApp(true);
+    setWhatsAppStatusMsg(null);
+    try {
+      const res = await api.sendWhatsAppDigest(
+        whatsAppPhone.trim(),
+        benchmark.whatsapp_digest,
+        benchmark.merchant_id
+      );
+      setWhatsAppStatusMsg(res.message);
+      setWhatsAppStatusType(res.success ? (res.status === 'simulated' ? 'info' : 'success') : 'error');
+    } catch (err: any) {
+      setWhatsAppStatusMsg(err?.message || 'Failed to send WhatsApp message via Twilio');
+      setWhatsAppStatusType('error');
+    } finally {
+      setSendingWhatsApp(false);
     }
   };
 
@@ -598,33 +626,91 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         )}
       </Modal>
 
-      {/* WhatsApp Digest Preview Modal */}
+      {/* WhatsApp Digest Preview & Twilio Send Modal */}
       <Modal
         isOpen={isWhatsAppModalOpen}
-        onClose={() => setIsWhatsAppModalOpen(false)}
-        title="WhatsApp Weekly Digest Preview"
+        onClose={() => {
+          setIsWhatsAppModalOpen(false);
+          setWhatsAppStatusMsg(null);
+        }}
+        title="WhatsApp Weekly Digest & Twilio Sender"
+        maxWidth="xl"
       >
         {benchmark && (
           <div className="space-y-4 text-sm text-[#002970] dark:text-white">
+            {/* Twilio Quick Sender Card */}
+            <div className="p-4 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border-2 border-[#CDE5F7] dark:border-[#1E3A6E] space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-extrabold text-[#002970] dark:text-white flex items-center gap-1.5">
+                  <Phone className="w-4 h-4 text-[#00BAF2]" />
+                  <span>Send Directly via Twilio WhatsApp</span>
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#00B970] text-white">
+                  Twilio Configured
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  value={whatsAppPhone}
+                  onChange={(e) => setWhatsAppPhone(e.target.value)}
+                  placeholder="+919876543210"
+                  className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-semibold"
+                />
+                <Button
+                  variant="success"
+                  size="sm"
+                  onClick={handleSendWhatsApp}
+                  disabled={sendingWhatsApp || !whatsAppPhone.trim()}
+                  className="flex items-center gap-1.5 font-bold shrink-0"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{sendingWhatsApp ? 'Sending...' : 'Send WhatsApp'}</span>
+                </Button>
+              </div>
+
+              {whatsAppStatusMsg && (
+                <div
+                  className={`p-3 rounded-xl text-xs font-semibold leading-relaxed border ${
+                    whatsAppStatusType === 'success'
+                      ? 'bg-[#E8F8F0] text-[#008A54] border-[#B6E8D0]'
+                      : whatsAppStatusType === 'info'
+                      ? 'bg-[#E8F4FD] text-[#002970] dark:text-blue-200 border-[#B3DCF8] dark:border-[#1E3A6E]'
+                      : 'bg-[#FEECEB] text-[#D92D20] border-[#FECDCA]'
+                  }`}
+                >
+                  {whatsAppStatusMsg}
+                </div>
+              )}
+            </div>
+
             <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
-              Copy and share this digest with your shop team or partners via WhatsApp:
+              Aapka weekly benchmark digest preview:
             </p>
 
-            <pre className="p-4 rounded-xl bg-slate-900 text-[#00B970] text-xs font-mono whitespace-pre-wrap leading-relaxed overflow-x-auto max-h-72 border border-slate-800">
+            <pre className="p-4 rounded-xl bg-slate-900 text-[#00B970] text-xs font-mono whitespace-pre-wrap leading-relaxed overflow-x-auto max-h-60 border border-slate-800">
               {benchmark.whatsapp_digest}
             </pre>
 
             <div className="flex items-center justify-between pt-2">
               <span className="text-xs text-[#4F6A94] dark:text-blue-200 font-semibold">
-                {copiedWhatsApp ? '✅ Copied to clipboard!' : 'Ready to paste into WhatsApp'}
+                {copiedWhatsApp ? '✅ Copied to clipboard!' : 'Or copy raw text for manual sharing'}
               </span>
               <div className="flex gap-2">
-                <Button variant="secondary" onClick={() => setIsWhatsAppModalOpen(false)} className="dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white">
-                  Cancel
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setIsWhatsAppModalOpen(false);
+                    setWhatsAppStatusMsg(null);
+                  }}
+                  className="dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white"
+                >
+                  Close
                 </Button>
-                <Button variant="success" onClick={handleCopyWhatsApp} className="flex items-center gap-1.5 font-bold">
+                <Button variant="outline" onClick={handleCopyWhatsApp} className="flex items-center gap-1.5 font-bold dark:border-[#00BAF2] dark:text-[#00BAF2]">
                   {copiedWhatsApp ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  <span>{copiedWhatsApp ? 'Copied!' : 'Copy Digest'}</span>
+                  <span>{copiedWhatsApp ? 'Copied!' : 'Copy Text'}</span>
                 </Button>
               </div>
             </div>

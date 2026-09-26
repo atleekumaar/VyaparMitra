@@ -11,6 +11,27 @@ from pathlib import Path
 from typing import List
 
 
+def _load_env_file():
+    """Lightweight .env loader that populates os.environ without requiring external packages."""
+    env_path = Path(".env")
+    if env_path.exists():
+        try:
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#") and "=" in line:
+                        key, _, val = line.partition("=")
+                        key = key.strip()
+                        val = val.strip().strip("'\"")
+                        if key and key not in os.environ:
+                            os.environ[key] = val
+        except Exception:
+            pass
+
+
+_load_env_file()
+
+
 @dataclass
 class APIConfig:
     """Production-ready API settings loaded from environment or defaults."""
@@ -29,6 +50,13 @@ class APIConfig:
     demo_mode: bool = field(default_factory=lambda: os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes"))
     default_merchant_id: str = field(default_factory=lambda: os.getenv("DEFAULT_MERCHANT_ID", "M001"))
     log_level: str = field(default_factory=lambda: os.getenv("LOG_LEVEL", "INFO"))
+
+    # Twilio Notification Configuration
+    twilio_account_sid: str = field(default_factory=lambda: os.getenv("TWILIO_ACCOUNT_SID", ""))
+    twilio_api_key_sid: str = field(default_factory=lambda: os.getenv("TWILIO_API_KEY_SID", ""))
+    twilio_api_key_secret: str = field(default_factory=lambda: os.getenv("TWILIO_API_KEY_SECRET", ""))
+    twilio_whatsapp_from: str = field(default_factory=lambda: os.getenv("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886"))
+    twilio_sms_from: str = field(default_factory=lambda: os.getenv("TWILIO_SMS_FROM", "+14155238886"))
 
 
 _config_instance: APIConfig | None = None

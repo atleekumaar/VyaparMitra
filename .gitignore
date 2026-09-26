@@ -43,3 +43,8 @@ htmlcov/
 # Node
 node_modules/
 .npm
+
+# Secrets and Environment Variables
+.env
+.env.local
+.env.*.local

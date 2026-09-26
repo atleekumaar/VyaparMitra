@@ -184,4 +184,24 @@ export const api = {
   getMerchants: () => request<{ total: number; merchants: MerchantInfo[] }>('/api/merchants'),
   getMerchantBenchmark: (merchantId: string = 'M015') =>
     request<BenchmarkData>(`/api/merchants/${merchantId}/benchmark`),
+
+  // Notifications (Twilio WhatsApp & SMS)
+  sendWhatsAppDigest: (phone: string, message: string, merchantId?: string) =>
+    request<{
+      success: boolean;
+      status: string;
+      message: string;
+      to?: string;
+      message_sid?: string;
+    }>('/api/notifications/whatsapp', {
+      method: 'POST',
+      body: JSON.stringify({ phone, message, merchant_id: merchantId }),
+    }),
+  getNotificationStatus: () =>
+    request<{
+      configured: boolean;
+      ready_for_live_delivery: boolean;
+      api_key_sid?: string;
+      mode: string;
+    }>('/api/notifications/status'),
 };
