@@ -112,14 +112,18 @@ export const api = {
     status?: string;
     limit?: number;
   }) => {
-    const q = new URLSearchParams();
-    if (params?.type && params.type !== 'ALL') q.set('type', params.type);
-    if (params?.priority && params.priority !== 'ALL') q.set('priority', params.priority);
-    if (params?.status && params.status !== 'ALL') q.set('status', params.status);
-    if (params?.limit) q.set('limit', String(params.limit));
-    return request<{ total_count: number; recommendations: RecommendationDetail[] }>(
-      `/api/recommendations?${q.toString()}`
-    );
+    let url = '/api/recommendations';
+    const parts = [];
+    if (params?.type && params.type !== 'ALL') parts.push(`type=${encodeURIComponent(params.type)}`);
+    if (params?.priority && params.priority !== 'ALL') parts.push(`priority=${encodeURIComponent(params.priority)}`);
+    if (params?.status && params.status !== 'ALL') parts.push(`status=${encodeURIComponent(params.status)}`);
+    if (params?.limit) parts.push(`limit=${params.limit}`);
+    
+    if (parts.length > 0) {
+      url += '?' + parts.join('&');
+    }
+    
+    return request<{ total_count: number; recommendations: RecommendationDetail[] }>(url);
   },
   getRecommendationDetail: (id: string) =>
     request<RecommendationDetail>(`/api/recommendations/${encodeURIComponent(id)}`),

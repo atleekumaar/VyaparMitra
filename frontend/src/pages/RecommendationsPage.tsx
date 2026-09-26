@@ -56,6 +56,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         if (found) setSelectedRec(found);
       }
     } catch (err: any) {
+      console.error('[loadRecommendations] Failed to fetch data:', err);
       setError(err?.message || 'Failed to load recommendations.');
     } finally {
       setLoading(false);
