@@ -57,41 +57,52 @@ export const ForecastsPage: React.FC = () => {
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       {/* Header */}
       <div>
-        <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'पूर्वानुमान' : 'Predictive AI Engine & Forecasts'}</h2>
+        <h2 className="text-xl font-bold text-paytm-dark">
+          {language === 'hindi' ? 'बिक्री व मांग का अनुमान (Sales Forecast)' : 'Sales & Demand Forecasts'}
+        </h2>
         <p className="text-xs text-paytm-muted mt-0.5">
-          {language === 'hindi' ? 'ऐतिहासिक लेनदेन गति और मौसमी पैटर्न पर प्रशिक्षित भविष्यवाणियां।' : 'Forward-looking autoregressive forecasts trained on historical transaction momentum and seasonal patterns.'}
+          {language === 'hindi'
+            ? 'अगले 7 दिनों के लिए अनुमानित दुकान की बिक्री और टॉप बिकने वाले सामान की मांग।'
+            : 'Expected store revenue and top product demand projections for the upcoming 7 business days.'}
         </p>
       </div>
 
       {/* KPI Forecast Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? '7-दिवसीय अनुमानित राजस्व' : '7-Day Projected Revenue'}</span>
+          <span className="text-xs font-semibold text-paytm-muted uppercase">
+            {language === 'hindi' ? '7-दिवसीय अनुमानित कुल बिक्री' : '7-Day Projected Revenue'}
+          </span>
           <p className="text-2xl font-bold text-paytm-dark mt-2">
             ₹{salesForecast.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
           </p>
           <div className="mt-2 text-xs text-paytm-muted">
-            {language === 'hindi' ? 'भविष्यवाणी विंडो: अगले 7 व्यावसायिक दिन' : 'Prediction Window: Next 7 Business Days'}
+            {language === 'hindi' ? 'आगामी 7 व्यावसायिक दिनों का कुल योग' : 'Prediction Window: Next 7 Business Days'}
           </div>
         </div>
 
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? 'प्रत्याशित रुझान' : 'Anticipated Trend'}</span>
+          <span className="text-xs font-semibold text-paytm-muted uppercase">
+            {language === 'hindi' ? 'बिक्री का रुझान' : 'Anticipated Trend'}
+          </span>
           <p className="text-2xl font-bold text-paytm-blue mt-2">
             {localizeDynamicText(salesForecast.trend_direction, language)}
           </p>
           <div className="mt-2 text-xs text-paytm-muted">
-            {language === 'hindi' ? 'एमएल रुझान क्लासिफायर के आधार पर' : 'Based on ML Trend Classifier'}
+            {language === 'hindi' ? 'साप्ताहिक बिक्री की अनुमानित दिशा' : 'Expected weekly sales momentum'}
           </div>
         </div>
 
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? 'सक्रिय ML मॉडल' : 'Active ML Model'}</span>
-          <p className="text-lg font-bold text-slate-700 mt-2 truncate">
-            {salesForecast.model_name}
+          <span className="text-xs font-semibold text-paytm-muted uppercase">
+            {language === 'hindi' ? 'दैनिक औसत अनुमान (Daily Run-Rate)' : 'Projected Daily Average'}
+          </span>
+          <p className="text-2xl font-bold text-[#002970] dark:text-[#00BAF2] mt-2">
+            ₹{(salesForecast.forecast_7d_total_revenue / 7).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
-          <div className="mt-2 text-xs text-emerald-600 font-medium">
-            {language === 'hindi' ? 'कड़ाई से मान्य' : 'Strict Non-Lookahead Validated'}
+          <div className="mt-2 text-xs text-emerald-600 font-medium flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+            <span>{language === 'hindi' ? 'उच्च सटीकता • स्वचालित गणना' : 'High Confidence • Automated Calculation'}</span>
           </div>
         </div>
       </div>

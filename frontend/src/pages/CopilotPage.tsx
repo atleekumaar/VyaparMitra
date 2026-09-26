@@ -203,8 +203,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
               <Bot className="w-4 h-4 animate-spin text-[#00BAF2]" />
             </div>
             <div className="bg-white dark:bg-[#132342] border-2 border-[#CDE5F7] dark:border-[#1E3A6E] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#002970] dark:text-white font-bold flex items-center gap-2 shadow-paytm">
-              <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#00BAF2] animate-ping" />
-              <span>Grounded feature store se uttar tayar kiya ja raha hai...</span>
+              <span>{currentLanguage === 'hindi' ? 'दुकान के डेटा से उत्तर तैयार किया जा रहा है...' : 'Dukaan ke verified data se uttar tayar kiya ja raha hai...'}</span>
             </div>
           </div>
         )}

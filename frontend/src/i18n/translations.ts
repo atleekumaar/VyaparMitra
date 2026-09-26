@@ -107,9 +107,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Good Morning, Merchant 👋',
   },
   welcome_subtext: {
-    hinglish: 'Aapki dukaan ka commercial overview tayar hai. Sabhi metrics Feature Store aur ML models se verified hain.',
-    hindi: 'आपकी दुकान का वाणिज्यिक ब्यौरा तैयार है। सभी आंकड़े फीचर स्टोर और एमएल मॉडल से सत्यापित हैं।',
-    english: 'Here is your daily commercial overview. All metrics are verified against the Feature Store and ML models.',
+    hinglish: 'Aapki dukaan ka live business overview tayar hai. Sabhi metrics verified store records se update hain.',
+    hindi: 'आपकी दुकान का लाइव व्यापार ब्यौरा तैयार है। सभी आंकड़े सत्यापित स्टोर रिकॉर्ड से अपडेट हैं।',
+    english: 'Here is your daily business overview. All metrics are updated directly from verified store records.',
   },
   todays_brief: {
     hinglish: "Today's Brief",
@@ -142,14 +142,14 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Deep Analytics',
   },
   forecast_7d_title: {
-    hinglish: 'Predictive AI • 7-Day Revenue Forecast',
-    hindi: 'पूर्वानुमान एआई • अगले 7 दिनों का अनुमानित राजस्व',
-    english: 'Predictive AI • 7-Day Revenue Forecast',
+    hinglish: 'Sales Forecast • 7-Day Revenue Projection',
+    hindi: 'बिक्री का अनुमान • अगले 7 दिनों का अनुमानित राजस्व',
+    english: 'Sales Forecast • 7-Day Revenue Projection',
   },
   forecast_7d_subtext: {
-    hinglish: 'Autoregressive ML models ke anusaar agle 7 dino me anumanit store revenue.',
-    hindi: 'मशीन लर्निंग मॉडल के अनुसार अगले 7 दिनों में अनुमानित दुकान की कुल बिक्री।',
-    english: 'Expected store revenue over the upcoming 7 days based on ML demand patterns.',
+    hinglish: 'Pichhli bikri aur demand patterns ke anusaar agle 7 dino me anumanit store revenue.',
+    hindi: 'पिछली बिक्री और मांग के आधार पर अगले 7 दिनों में अनुमानित दुकान की कुल बिक्री।',
+    english: 'Expected store revenue over the upcoming 7 days based on recent sales patterns.',
   },
   view_sku_forecasts: {
     hinglish: 'View SKU Forecasts',

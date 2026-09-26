@@ -337,7 +337,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
             <div className="pt-2 border-t border-slate-100">
               <h4 className="text-xs font-bold text-paytm-dark mb-2">{language === 'hindi' ? 'ऑडिट योग्य डेटा साक्ष्य' : 'Auditable Data Evidence'} ({selectedRec.evidence.length} {language === 'hindi' ? 'संकेतक' : 'Indicators'})</h4>
               {selectedRec.evidence.length === 0 ? (
-                <p className="text-xs text-paytm-muted">{language === 'hindi' ? 'साक्ष्य रिकॉर्ड फीचर स्टोर से संकलित किया गया है।' : 'Evidence record compiled from upstream feature store.'}</p>
+                <p className="text-xs text-paytm-muted">{language === 'hindi' ? 'साक्ष्य रिकॉर्ड दुकान की वास्तविक बिक्री से संकलित है।' : 'Evidence record compiled from verified store sales.'}</p>
               ) : (
                 <div className="space-y-2">
                   {selectedRec.evidence.map((ev, i) => (

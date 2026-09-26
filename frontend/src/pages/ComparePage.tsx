@@ -393,7 +393,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                     <span>{currentLanguage === 'hindi' ? '6 प्रमुख संकेतक मूल्यांकित' : '6 Metrics Scored'}</span>
                   </div>
                   <p className="text-[11px] text-blue-200">
-                    {currentLanguage === 'hindi' ? 'फीचर स्टोर से सत्यापित लाइव डेटा' : 'Updated live from Feature Store'}
+                    {currentLanguage === 'hindi' ? 'दुकान के लाइव रिकॉर्ड से अपडेट' : 'Updated live from verified store records'}
                   </p>
                 </div>
               </div>
