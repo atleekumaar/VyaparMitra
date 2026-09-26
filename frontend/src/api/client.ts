@@ -1,5 +1,5 @@
 /**
- * Centralized API client for VyaparMitra Phase 6 Command Center.
+ * Centralized API client for VyaparMitra Command Center.
  */
 
 import {
@@ -132,7 +132,7 @@ export const api = {
       }
     ),
 
-  // Copilot (Phase 5 integration)
+  // Multilingual Copilot
   askCopilot: async (
     query: string,
     sessionId: string = 'merchant_session_1',

@@ -354,7 +354,7 @@ export const AnalyticsPage: React.FC = () => {
                   {language === 'hindi' ? 'ऐतिहासिक राजस्व गति:' : 'Historical revenue momentum:'} {trends.historical_revenue_change_pct}% &bull; {language === 'hindi' ? 'भविष्यवाणी विश्वास:' : 'Prediction Confidence:'} {(trends.confidence * 100).toFixed(0)}%
                 </p>
               </div>
-              <Badge variant="info">{language === 'hindi' ? 'चरण 3 रुझान मॉडल' : 'Phase 3 Trend Model'}</Badge>
+              <Badge variant="info">{language === 'hindi' ? 'एआई रुझान मॉडल' : 'AI Trend Model'}</Badge>
             </div>
           )}
 

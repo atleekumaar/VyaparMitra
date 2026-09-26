@@ -57,7 +57,7 @@ export const CustomersPage: React.FC = () => {
         <div>
           <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'ग्राहक बुद्धिमत्ता और प्रतिधारण' : 'Customer Intelligence & Retention'}</h2>
           <p className="text-xs text-paytm-muted mt-0.5">
-            {language === 'hindi' ? 'चरण 3 चर्न जोखिम स्कोरिंग, खरीद नवीनता, और प्राथमिकता प्रतिधारण आउटरीच।' : 'Phase 3 churn risk scoring, purchase recency, and prioritized retention outreach.'}
+            {language === 'hindi' ? 'एआई चर्न जोखिम स्कोरिंग, खरीद नवीनता, और प्राथमिकता प्रतिधारण आउटरीच।' : 'AI churn risk scoring, purchase recency, and prioritized retention outreach.'}
           </p>
         </div>
         <Badge variant="info">{language === 'hindi' ? 'निगरानी वाले ग्राहक:' : 'Monitored Customers:'} {customers.length}</Badge>
@@ -202,7 +202,7 @@ export const CustomersPage: React.FC = () => {
           <div className="mt-4 p-4 rounded-xl border border-paytm-border bg-paytm-light">
             <div className="flex items-center gap-2 text-xs font-bold text-paytm-dark">
               <HeartHandshake className="w-4 h-4 text-paytm-blue" />
-              <span>{language === 'hindi' ? 'अनुशंसित प्रतिधारण रणनीति (चरण 4 निर्णय इंजन)' : 'Recommended Retention Strategy (Phase 4 Decision Engine)'}</span>
+              <span>{language === 'hindi' ? 'अनुशंसित प्रतिधारण रणनीति (एआई निर्णय इंजन)' : 'Recommended Retention Strategy (AI Decision Engine)'}</span>
             </div>
             <p className="text-xs text-paytm-text mt-2 font-medium">
               {localizeDynamicText(selectedCustomer.suggested_retention_action || (language === 'hindi' ? 'लक्षित श्रेणी की पेशकश के साथ फिर से जोड़ने वाला संदेश।' : 'Re-engagement message with targeted category offer.'), language)}

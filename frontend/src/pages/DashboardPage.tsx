@@ -296,7 +296,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div>
               <div className="flex items-center gap-2 text-xs font-black text-[#00BAF2] uppercase tracking-wider">
                 <TrendingUp className="w-4 h-4 text-[#00BAF2]" />
-                <span>{t('forecast_7d_title', 'Phase 3 Predictive AI • 7-Day Forecast')}</span>
+                <span>{t('forecast_7d_title', 'Predictive AI • 7-Day Forecast')}</span>
               </div>
               <p className="text-3xl font-black mt-1 text-white tracking-tight">
                 ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}

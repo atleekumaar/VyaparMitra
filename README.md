@@ -1,224 +1,284 @@
-# VyaparMitra — AI-Powered Business Assistant for Small Merchants
+# 🛍️ VyaparMitra (व्यापारमित्र)
+### *AI-Powered Business Intelligence & Multilingual Copilot for Retail Merchants*
 
-> **Phase 1 Completed: Data Foundation & Merchant Feature Store**
-
-VyaparMitra is an intelligent, localized decision-support system designed for small and medium retail merchants across India. This repository contains the complete implementation of **Phase 1: Data Foundation & Merchant Feature Store**, providing a modular data engineering pipeline that ingests, validates, cleans, enriches, and transforms raw transaction logs into an ML-ready feature store.
-
----
-
-## 1. Project Overview
-
-Small merchants face inventory bottlenecks, seasonal cash-flow volatility, and demand fluctuations driven by local festivals, weather patterns, and regional economic cycles. VyaparMitra addresses these challenges by transforming daily operational data into actionable predictive insights.
-
-Phase 1 establishes the rock-solid data foundation required for all downstream modeling, including:
-* Referential integrity and data hygiene.
-* Quarantine mechanisms that prevent data corruption without silent deletion.
-* Multi-scale temporal aggregations with strict anti-leakage protections.
-* Seamless integration of external context (multi-event festival calendars and meteorological conditions).
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-19-61DAFB.svg)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6.svg)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC.svg)](https://tailwindcss.com/)
+[![Tests](https://img.shields.io/badge/Tests-173%20Passed-00B970.svg)](tests/)
+[![Zero Hallucination](https://img.shields.io/badge/AI%20Copilot-Zero%20Hallucination-002970.svg)](#-multilingual-ai-copilot)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
-## 2. Phase 1 Objective
+## 📌 Overview
 
-Build a production-ready data pipeline that converts raw merchant transaction data into a clean, validated, and ML-ready **Merchant Feature Store**.
+**VyaparMitra** is a complete, production-grade business operating system and conversational AI assistant built specifically for small and medium retail merchants across India. 
+
+Operating a retail store comes with daily challenges: unpredictable seasonal demand, cash flow volatility, stockouts, customer churn, and lack of actionable insights. VyaparMitra converts raw transactional records into real-time visual analytics, machine learning forecasts, automated decision recommendations, and a conversational AI copilot that speaks the merchant's language (**Hindi**, **Hinglish**, and **English**).
+
+---
+
+## ✨ Key Features
+
+### 📊 1. Real-Time Command Center & Dashboard
+- **Instant Financial KPIs**: Track Gross Revenue, Completed Orders, Average Order Value (AOV), and Realized Discount Rates.
+- **Paytm-Inspired Soundbox UI**: Custom fintech color scheme (`#002970` Navy, `#00BAF2` Cyan, `#00B970` Green), dark/light mode toggle, and live soundbox banner.
+- **Dynamic Sales Trend Visualization**: Day-by-day and date-labeled sales bar charts with peak collection tracking.
+
+### 🤖 2. Multilingual Conversational AI Copilot
+- **100% Zero-Hallucination Architecture**: Strictly grounded in the merchant's underlying transactional feature store and peer benchmark data.
+- **Native Hindi, Hinglish & English Support**: Query business data naturally (e.g. *"Kal kitni bikri hui thi?"*, *"Agle hafte kaunsa maal restock karein?"*, *"Meri dukaan dusron se kaisi hai?"*).
+- **Daily Morning Audio/Text Briefs**: Instant summaries of yesterday's sales, urgent restock alerts, and top priority actions.
+
+### 🏆 3. Peer Benchmarking Engine
+- **Hyperlocal Comparison**: Compare performance against peer stores in the same city and category (e.g., *"Lucknow FMCG & Retail — Rank #4 of 9"*).
+- **Metric-by-Metric Scorecards**: Percentile rankings for Revenue, Basket Size, Customer Retention, and Transaction Velocity against peer group medians.
+- **"What Top Performers Do" Playbooks**: Actionable tactical playbooks derived from top-quartile merchant behaviors.
+
+### ⚡ 4. Action Center & Decision Engine
+- **Prioritized Recommendations**: AI-synthesized actions categorized across **Inventory Restock**, **Customer Retention**, **Cross-Sell Bundling**, and **Pricing Optimization**.
+- **Audit-Ready Evidence**: Every recommendation displays the underlying metric indicators, historical benchmarks, and estimated revenue impact in Rupees.
+- **Commercial Safety Guardrails**: Human-in-the-loop safeguards requiring merchant confirmation before execution.
+
+### 🔮 5. Predictive Machine Learning & Demand Forecasting
+- **7-Day Revenue Projections**: Autoregressive time-series forecasting with non-lookahead validation.
+- **SKU-Level Demand Forecasting**: Projected unit demand rankings for top inventory items.
+- **Customer Churn Risk Scoring**: RFM-based machine learning classifiers flagging at-risk patrons before they lapse.
+
+### 📱 6. Multi-Channel Notifications & Outreach
+- **WhatsApp & SMS Digests**: Integrated with Twilio to dispatch morning briefings, restock alerts, and customer re-engagement vouchers.
+
+---
+
+## 🏗️ Architecture & Data Flow
 
 ```text
-Raw Transaction & External Data
-              ↓
-  Data Quality Validation
-              ↓
- Data Cleaning & Quarantine Isolation
-              ↓
-      Feature Engineering
-              ↓
-   Merchant-Level Aggregation
-              ↓
-  External Context Integration (Festivals & Weather)
-              ↓
- Final Feature Store (Parquet & CSV)
+  ┌────────────────────────────────────────────────────────┐
+  │         Raw Ingested Data (CSV / Point-of-Sale)        │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+  ┌────────────────────────────────────────────────────────┐
+  │   Data Quality Validation, Cleaning & Quarantine Log   │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+                              ▼
+  ┌────────────────────────────────────────────────────────┐
+  │  Feature Store & Analytics Pipeline (Parquet Storage)  │
+  │  • Sales & Time Aggregations  • RFM Customer Segments  │
+  │  • Product Pareto Matrix      • Festival & Weather Joins│
+  └─────────────┬───────────────────────────┬──────────────┘
+                │                           │
+                ▼                           ▼
+  ┌───────────────────────────┐ ┌──────────────────────────┐
+  │  ML Predictive Engine     │ │  Benchmark & Action      │
+  │  • 7-Day Revenue Forecast │ │  Recommendation Engine   │
+  │  • SKU Demand Forecaster  │ │  • Priority Scoring      │
+  │  • Churn Risk Classifier  │ │  • Evidence Packaging    │
+  └─────────────┬─────────────┘ └───────────┬──────────────┘
+                │                           │
+                └─────────────┬─────────────┘
+                              │
+                              ▼
+  ┌────────────────────────────────────────────────────────┐
+  │            FastAPI Production Backend Layer            │
+  │    • RESTful Endpoints   • Context Builder Engine      │
+  │    • Multilingual Router • Grounded Response Validator │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+            ┌─────────────────┴─────────────────┐
+            ▼                                   ▼
+  ┌───────────────────┐               ┌───────────────────┐
+  │ React 19 Frontend │               │ WhatsApp & SMS    │
+  │ Tailwind UI & i18n│               │ Automated Digests │
+  └───────────────────┘               └───────────────────┘
 ```
 
 ---
 
-## 3. Architecture & Project Structure
+## 📂 Project Structure
 
 ```text
-vyaparmitra/
-├── configs/
-│   └── config.yaml               # Pipeline parameters, paths, thresholds, seeds
-├── data/
-│   ├── raw/                      # Raw ingested relational CSV tables
-│   ├── processed/                # Standardized Parquet & CSV tables
-│   ├── quarantine/               # Isolated invalid records with rejection reasons
-│   ├── quality_reports/          # Validation outputs (JSON & Markdown)
-│   └── features/                 # Final Feature Store (Parquet & CSV)
-├── docs/
-│   └── data_dictionary.md        # Comprehensive data dictionary & leakage rules
-├── src/
-│   ├── data_generation/
-│   │   ├── __init__.py
-│   │   └── generate_dataset.py   # Realistic generator and enriched source normalizer
-│   ├── ingestion/
-│   │   ├── __init__.py
-│   │   └── loader.py             # Strongly-typed data loader
-│   ├── validation/
-│   │   ├── __init__.py
-│   │   └── validator.py          # Quality checks and Markdown/JSON reporter
-│   ├── cleaning/
-│   │   ├── __init__.py
-│   │   └── cleaner.py            # Sanitizer and quarantine router
-│   ├── features/
-│   │   ├── __init__.py
-│   │   ├── transaction_features.py # Unit prices, net amounts, calendar flags
-│   │   ├── merchant_features.py    # Merchant lifetime revenue, velocity, AOV
-│   │   ├── customer_features.py    # RFM metrics, frequency, recency
-│   │   ├── product_features.py     # SKU volume sales, realized prices
-│   │   ├── time_features.py        # Daily time windows, rolling trailing averages
-│   │   ├── festival_features.py    # Multi-festival handling, days-to/after metrics
-│   │   └── weather_features.py     # Meteorological joins & graceful imputation
-│   └── pipeline.py               # End-to-end pipeline orchestrator & CLI
-├── tests/
-│   ├── __init__.py
-│   ├── test_validation.py        # Validation & referential integrity unit tests
-│   ├── test_cleaning.py          # Sanitization & quarantine unit tests
-│   ├── test_features.py          # Revenue math, aggregations, festival & weather tests
-│   └── test_pipeline_integration.py # Full end-to-end integration test
-├── pytest.ini                    # Pytest test execution configurations
-├── requirements.txt              # Production dependency specifications
+VyaparMitra/
+├── configs/                      # Pipeline and application configurations
+├── data/                         # Data storage layers
+│   ├── raw/                      # Ingested relational CSV tables
+│   ├── processed/                # Normalized Parquet data
+│   ├── features/                 # Merchant & customer feature store
+│   ├── analytics/                # Pre-aggregated business analytical tables
+│   ├── recommendations/          # Action plans, evidence records, summaries
+│   ├── knowledge/                # Grounding business glossaries & FAQs
+│   └── quality_reports/          # Data validation reports
+├── docs/                         # System documentation
+│   ├── data_dictionary.md        # Comprehensive data dictionary
+│   ├── analytics_architecture.md # Analytics and schema guide
+│   ├── recommendation_engine.md  # Recommendation framework
+│   └── hindi_ai_copilot.md       # Copilot grounding specification
+├── frontend/                     # React 19 + TypeScript + Tailwind CSS
+│   ├── src/
+│   │   ├── api/                  # Typed API client
+│   │   ├── components/           # UI components (Navbar, Sidebar, MetricCard, Modal, etc.)
+│   │   ├── i18n/                 # Multilingual translation dictionary & React Context
+│   │   ├── pages/                # Dashboard, Analytics, Compare, Action Center, Copilot, etc.
+│   │   └── types.ts              # Full TypeScript interface definitions
+│   ├── package.json
+│   └── vite.config.ts
+├── src/                          # Backend application source code
+│   ├── api/                      # FastAPI endpoints, routes, middleware, and schemas
+│   ├── cleaning/                 # Data hygiene and quarantine router
+│   ├── copilot/                  # Grounded intent classification, retrieval & response validation
+│   ├── features/                 # Time, festival, weather, and transaction feature generators
+│   ├── ingestion/                # Strongly-typed data ingestion
+│   ├── ml/                       # Autoregressive models, baselines, and inference engine
+│   ├── recommendations/          # Subsystems for inventory, pricing, churn & cross-sell
+│   ├── reporting/                # Markdown and summary artifact generators
+│   ├── schemas/                  # Pydantic data schemas
+│   ├── validation/               # Referential integrity and data validators
+│   └── pipeline.py               # End-to-end data pipeline runner
+├── tests/                        # Comprehensive unit & integration test suite (173 tests)
+├── .env.example                  # Environment configuration template
+├── docker-compose.yml            # Containerized multi-service orchestration
+├── Dockerfile                    # Production backend container definition
+├── requirements.txt              # Production Python dependencies
 └── README.md
 ```
 
 ---
 
-## 4. Dataset Schemas
+## 🚀 Quick Start Guide
 
-Phase 1 manages 6 relational entities:
-
-1. **Transactions (`transactions.csv`)**: 10,000+ records containing `transaction_id`, `merchant_id`, `customer_id`, `timestamp`, `product_id`, `product_category`, `quantity`, `unit_price`, `discount`, `payment_method`.
-2. **Merchants (`merchants.csv`)**: 50 merchants containing `merchant_id`, `merchant_name`, `business_type`, `city`, `state`, `pincode`, `latitude`, `longitude`.
-3. **Customers (`customers.csv`)**: 3,308 customers containing `customer_id`, `customer_name`, `customer_type`, `city`, `signup_date`.
-4. **Products (`products.csv`)**: 64 products across 32 categories containing `product_id`, `product_name`, `product_category`, `unit_cost`, `selling_price`.
-5. **Festivals (`festivals.csv`)**: Festival events supporting multiple festivals on the same date (e.g., Ambedkar Jayanti & Baisakhi), containing `date`, `festival_name`, `festival_type`, `is_festival`, `festival_intensity`.
-6. **Weather (`weather.csv`)**: 2,921 daily city observations containing `date`, `city`, `temperature`, `humidity`, `rainfall`, `weather_condition`.
-
-Full field-by-field definitions, constraints, and data types are detailed in [`docs/data_dictionary.md`](docs/data_dictionary.md).
+### Prerequisites
+- **Python 3.12+**
+- **Node.js 18+** & **npm**
 
 ---
 
-## 5. How to Generate Data
-
-Data can be generated or normalized directly using:
+### 1. Backend Setup
 
 ```bash
-python -m src.data_generation.generate_dataset
-```
+# Clone the repository
+git clone https://github.com/atleekumaar/VyaparMitra.git
+cd VyaparMitra
 
-* **Enriched Normalization**: Automatically transforms `data/raw/vyaparmitra_10000_transactions_enriched.csv` into fully normalized relational entities.
-* **Pure Synthetic Generation**: If no enriched source is present, generates reproducible data with realistic shopping correlations (weekend volume bumps, evening rushes, festival demand surges, weather impacts, and Zipfian customer frequencies) using `random_seed: 42`.
-* **Controlled Anomaly Injection**: Injects test anomalies (duplicate IDs, invalid prices, out-of-bounds discounts) to verify automated quarantine handling.
+# Create and activate virtual environment
+python -m venv .venv
+# On Windows:
+.venv\Scripts\activate
+# On Linux/macOS:
+source .venv/bin/activate
 
----
+# Install dependencies
+pip install -r requirements.txt
 
-## 6. How to Run the Pipeline
+# (Optional) Copy environment template
+cp .env.example .env
 
-Execute the complete Phase 1 pipeline with a single command:
-
-```bash
+# Run data pipeline to generate feature store and models
 python -m src.pipeline
+
+# Start the FastAPI server
+python -m uvicorn src.api.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
-Optional arguments:
-* `--config configs/config.yaml`: Use a custom configuration file.
-* `--regenerate`: Force re-normalization/re-generation of raw data tables.
-
-Sample execution output:
-```text
-============================================================
-VYAPARMITRA PHASE 1 EXECUTION SUMMARY
-============================================================
-Elapsed Time: 2.08 seconds
-Clean Transactions: 9,995
-Quarantined Records: 5
-Merchants in Feature Store: 50
-Customers in Feature Store: 3,308
-Products in Feature Store: 64
-Daily Time-Window Records: 358
-Overall Quality Status: PASS
-============================================================
-```
+The backend server will be live at `http://127.0.0.1:8000/`.  
+Interactive Swagger API documentation is available at `http://127.0.0.1:8000/docs`.
 
 ---
 
-## 7. Data Quality & Quarantine Pipeline
-
-The automated validation system verifies:
-* **Missing values**: Nulls, NaNs, empty strings across critical fields.
-* **Duplicate records**: Duplicate `transaction_id`.
-* **Value sanity**: `quantity <= 0`, `unit_price < 0`, `discount < 0`, `discount > (quantity * unit_price)`.
-* **Referential integrity**: Validates foreign keys against product, merchant, and customer dimension tables.
-* **Timestamp validity**: Ensures parseable ISO timestamps within acceptable date bounds.
-
-### Never Silently Delete Data
-Corrupt or invalid records are routed directly to:
-* `data/quarantine/quarantined_transactions.csv`
-
-Each quarantined record includes an explicit `rejection_reason` explaining why it was flagged (e.g., `DUPLICATE_TRANSACTION_ID`, `INVALID_QUANTITY`, `INVALID_UNIT_PRICE`).
-
-### Quality Reports
-Saved automatically after every pipeline run:
-* `data/quality_reports/data_quality_report.json`
-* `data/quality_reports/data_quality_report.md`
-
----
-
-## 8. Final Feature Store
-
-The feature store is persisted in `data/features/` in high-performance **Apache Parquet** format (along with companion CSV files for easy inspection):
-
-1. **`merchant_features.parquet`** (50 rows, 16 features): Total revenue, total orders, average order value, unique customers, catalog breadth, active days, revenue per day, orders per day, plus location metadata.
-2. **`customer_features.parquet`** (3,308 rows, 12 features): Total spend, order count, average order value, customer recency, purchase frequency, lifetime timestamps.
-3. **`product_features.parquet`** (64 rows, 11 features): Physical units sold, net revenue, order frequency, distinct purchasers, average quantity per basket, effective realized selling price.
-4. **`daily_features.parquet`** (358 rows, 28 features): Daily total revenue, orders, units, active merchants/customers, average order value, festival metrics, weather averages, calendar flags, and anti-leakage 7-day trailing rolling averages.
-5. **`transaction_features.parquet`** (9,995 rows, 37 features): Full transaction records enriched with calculated net amounts, temporal indicators, festival proximities, and local meteorological observations.
-
----
-
-## 9. Testing & Verification
-
-VyaparMitra includes unit and integration tests covering validation, cleaning, feature math, festival merging, weather imputation, and end-to-end pipeline execution.
-
-Run the entire test suite:
+### 2. Frontend Setup
 
 ```bash
-python -m pytest -v
+# Navigate to the frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+
+# Or build for production
+npm run build
 ```
 
-Output:
-```text
-tests/test_cleaning.py::test_quarantine_isolation PASSED                 [  6%]
-tests/test_cleaning.py::test_merchant_and_customer_cleaning PASSED       [ 13%]
-tests/test_features.py::test_transaction_feature_calculations PASSED     [ 20%]
-tests/test_features.py::test_merchant_feature_aggregations PASSED        [ 26%]
-tests/test_features.py::test_customer_feature_aggregations PASSED        [ 33%]
-tests/test_features.py::test_product_feature_aggregations PASSED         [ 40%]
-tests/test_features.py::test_festival_merge_and_distances PASSED         [ 46%]
-tests/test_features.py::test_weather_merge_and_graceful_imputation PASSED [ 53%]
-tests/test_features.py::test_daily_time_window_features_no_future_leakage PASSED [ 60%]
-tests/test_pipeline_integration.py::test_full_pipeline_integration PASSED [ 66%]
-tests/test_validation.py::test_clean_transactions_pass_validation PASSED [ 73%]
-tests/test_validation.py::test_duplicate_transaction_detection PASSED    [ 80%]
-tests/test_validation.py::test_invalid_prices_and_quantities PASSED      [ 86%]
-tests/test_validation.py::test_referential_integrity_violation PASSED    [ 93%]
-tests/test_validation.py::test_invalid_discounts PASSED                  [100%]
+The frontend application will be live at `http://localhost:5173/` (or served directly through FastAPI at `http://127.0.0.1:8000/`).
 
-============================= 15 passed in 3.08s ==============================
+---
+
+## 🌐 API Reference
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/health` | Service health status and uptime |
+| `GET` | `/api/dashboard/summary` | Complete merchant financial KPIs, trends & action counts |
+| `GET` | `/api/merchants/{id}/benchmark` | Hyperlocal peer group ranking, scorecard & percentiles |
+| `GET` | `/api/dashboard/actions` | Top priority recommendations for dashboard display |
+| `GET` | `/api/recommendations` | Full list of prioritized actions with evidence & filters |
+| `POST` | `/api/recommendations/{id}/status` | Update action state (`ACCEPTED`, `EXECUTED`, `REJECTED`) |
+| `POST` | `/api/copilot/ask` | Natural language business query (Hindi/Hinglish/English) |
+| `GET` | `/api/copilot/daily-brief` | Morning business briefing summary |
+| `GET` | `/api/analytics/sales` | Historical sales series, AOV, and discount rates |
+| `GET` | `/api/analytics/customers` | RFM customer segmentation and churn tiers |
+| `GET` | `/api/analytics/products` | Top revenue drivers and 80/20 Pareto distribution |
+| `GET` | `/api/forecasts/sales` | 7-day forward projected revenue and model info |
+| `GET` | `/api/forecasts/demand` | SKU-level projected 7-day unit demand |
+| `POST` | `/api/notifications/whatsapp` | Dispatch WhatsApp digests via Twilio |
+
+---
+
+## 🧪 Testing & Quality Assurance
+
+The codebase includes an extensive suite of **173 automated tests** covering data validation, machine learning zero-leakage guards, recommendation engines, and API endpoints.
+
+```bash
+# Run the entire test suite
+pytest tests/ -v
+
+# Run with coverage report
+pytest tests/ --cov=src --cov-report=term-missing
+```
+
+### Key Verification Checks:
+- ✅ **Referential Integrity**: Guarantees zero orphan records across merchants, products, and transactions.
+- ✅ **Strict Anti-Leakage**: Ensures feature store computations strictly use chronological cutoff dates.
+- ✅ **Zero Hallucination Retrieval**: Verifies copilot answers are backed 100% by validated parquet records.
+- ✅ **Dynamic Localization**: Validates responsive switching across Hindi, Hinglish, and English strings.
+
+---
+
+## 🐳 Docker Deployment
+
+To launch the full production stack using Docker:
+
+```bash
+# Build and run container
+docker-compose up --build -d
+
+# Verify container status
+docker-compose ps
 ```
 
 ---
 
-## 10. Future Phase 2 Integration
+## 🤝 Contributing
 
-The Phase 1 Feature Store exposes clean, standardized interfaces for future modules:
-* **Phase 2 (Analytics & Dashboards)**: Consumes `merchant_features.parquet` and `daily_features.parquet` to display sales velocity, AOV trends, and merchant performance cohorts.
-* **Phase 3 (Predictive ML & Forecasting)**: Leverages `daily_features.parquet` (with pre-computed trailing lags, festival proximity, and weather variables) for demand forecasting without risk of data leakage.
-* **Phase 4 (Customer Recommendation & Retention)**: Uses `customer_features.parquet` and `product_features.parquet` for RFM segmentation, affinity basket analysis, and re-order reminders.
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'feat: Add AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+<p align="center">
+  Built with ❤️ for Indian Retail Merchants by <b>VyaparMitra Team</b>
+</p>

@@ -142,9 +142,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Deep Analytics',
   },
   forecast_7d_title: {
-    hinglish: 'Phase 3 Predictive AI • 7-Day Forecast',
-    hindi: 'भविष्यवाणी • अगले 7 दिनों का अनुमानित राजस्व',
-    english: 'Phase 3 Predictive AI • 7-Day Forecast',
+    hinglish: 'Predictive AI • 7-Day Revenue Forecast',
+    hindi: 'पूर्वानुमान एआई • अगले 7 दिनों का अनुमानित राजस्व',
+    english: 'Predictive AI • 7-Day Revenue Forecast',
   },
   forecast_7d_subtext: {
     hinglish: 'Autoregressive ML models ke anusaar agle 7 dino me anumanit store revenue.',
@@ -293,9 +293,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Zero Hallucination',
   },
   copilot_subtext: {
-    hinglish: 'Grounded exclusively in Phase 1-4 Feature Store & Benchmark Data',
+    hinglish: 'Grounded exclusively in Verified Store & Benchmark Data',
     hindi: 'आपकी दुकान के वास्तविक डेटा और फीचर स्टोर पर आधारित',
-    english: 'Grounded exclusively in Phase 1-4 Feature Store & Benchmark Data',
+    english: 'Grounded exclusively in Verified Store & Benchmark Data',
   },
   copilot_placeholder: {
     hinglish: 'Poochiye apni dukaan ke baare mein koi bhi sawaal (e.g. Kal kitni bikri hui thi?)...',

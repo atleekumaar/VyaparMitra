@@ -1,5 +1,5 @@
 /**
- * TypeScript Data Models matching Phase 6 backend contracts.
+ * TypeScript Data Models matching VyaparMitra backend contracts.
  */
 
 export interface MetricCardData {

@@ -81,7 +81,7 @@ export const ForecastsPage: React.FC = () => {
             {localizeDynamicText(salesForecast.trend_direction, language)}
           </p>
           <div className="mt-2 text-xs text-paytm-muted">
-            {language === 'hindi' ? 'चरण 3 रुझान क्लासिफायरियर के आधार पर' : 'Based on Phase 3 Trend Classifier'}
+            {language === 'hindi' ? 'एमएल रुझान क्लासिफायर के आधार पर' : 'Based on ML Trend Classifier'}
           </div>
         </div>
 

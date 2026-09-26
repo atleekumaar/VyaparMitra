@@ -115,7 +115,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
               </span>
             </div>
             <p className="text-[11px] text-blue-100 font-medium">
-              Grounded exclusively in Phase 1-4 Feature Store &amp; Benchmark Data
+              {t('copilot_subtext', 'Grounded exclusively in Verified Store & Benchmark Data')}
             </p>
           </div>
         </div>
