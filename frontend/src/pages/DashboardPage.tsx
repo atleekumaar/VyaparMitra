@@ -225,7 +225,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         {/* Left 2 Cols: Sales Trends & Forecast */}
         <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Recent Sales History Chart */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors flex-1 flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-base font-extrabold text-[#002970] dark:text-white">{t('daily_sales_trend', 'Daily Sales Trend (Bikri)')}</h3>
@@ -243,7 +243,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
 
             {/* Custom Bar Visualization */}
-            <div className="h-56 min-h-[14rem] flex-1 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
+            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
               {recentDays.map((day, idx) => {
                 const heightPct = Math.max(10, (day.revenue / maxRev) * 100);
                 return (
@@ -260,9 +260,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       className="w-full bg-gradient-to-t from-[#00BAF2] to-[#41C9F7] hover:from-[#002970] hover:to-[#001D4E] dark:hover:from-white dark:hover:to-[#00BAF2] rounded-t-lg transition-all duration-150 cursor-pointer shadow-2xs"
                       style={{ height: `${heightPct}%` }}
                     />
-                    {/* Date label */}
-                    <span className="text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold mt-2 truncate w-full text-center">
-                      {day.date.split('-').slice(1).join('/')}
+                    {/* Date label — Day name + date */}
+                    <span className="text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold mt-2 truncate w-full text-center leading-tight">
+                      {(() => {
+                        const d = new Date(day.date);
+                        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                        return (
+                          <>
+                            <span className="block text-[9px] font-bold text-[#002970] dark:text-blue-200">{dayNames[d.getDay()]}</span>
+                            <span className="block">{d.getDate()}/{d.getMonth() + 1}</span>
+                          </>
+                        );
+                      })()}
                     </span>
                   </div>
                 );
@@ -468,7 +477,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
 
           {/* Quick Copilot Interactive Card */}
-          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors flex-1 flex flex-col justify-between">
+          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
             <div>
               <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
                 <Bot className="w-4 h-4 text-[#00BAF2]" />

@@ -129,7 +129,7 @@ export const App: React.FC = () => {
         />
 
         {/* Main Content Area */}
-        <main className="flex-1 px-4 lg:px-8 py-4 lg:py-6 w-full">
+        <main className="flex-1 px-4 lg:px-8 py-4 lg:py-6 max-w-7xl w-full mx-auto">
           {currentTab === 'dashboard' && (
             <DashboardPage
               onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
