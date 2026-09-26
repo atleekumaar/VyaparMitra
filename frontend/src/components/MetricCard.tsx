@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
 import { MetricCardData } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
+import { localizeDynamicText } from '../i18n/translations';
 
 interface MetricCardProps {
   card: MetricCardData;
@@ -9,8 +11,12 @@ interface MetricCardProps {
 }
 
 export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor = 'cyan' }) => {
+  const { language } = useLanguage();
   const isPositive = card.change_pct && card.change_pct > 0;
   const isNegative = card.change_pct && card.change_pct < 0;
+
+  const displayLabel = localizeDynamicText(card.label, language);
+  const displaySubtext = localizeDynamicText(card.subtext, language);
 
   const topBorderColors = {
     cyan: 'border-t-4 border-t-[#00BAF2]',
@@ -32,7 +38,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor 
     >
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold uppercase tracking-wider text-[#4F6A94] dark:text-blue-200">
-          {card.label}
+          {displayLabel}
         </span>
         {icon && (
           <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-xs ${iconBgColors[accentColor]}`}>
@@ -65,7 +71,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor 
               {Math.abs(card.change_pct)}%
             </span>
           )}
-          {card.subtext && <span className="truncate font-medium text-slate-500 dark:text-slate-400">{card.subtext}</span>}
+          {displaySubtext && <span className="truncate font-medium text-slate-500 dark:text-slate-400">{displaySubtext}</span>}
         </div>
       )}
     </div>

@@ -24,6 +24,7 @@ import { Button } from '../components/Button';
 import { CardSkeleton, ChartSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner } from '../components/EmptyState';
 import { useLanguage } from '../i18n/LanguageContext';
+import { localizeDynamicText } from '../i18n/translations';
 
 interface DashboardPageProps {
   onNavigateTab: (tab: any) => void;
@@ -232,7 +233,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
-                  Trend: {summary.sales_trend_direction}
+                  {summary.sales_trend_direction === 'DECREASING'
+                    ? t('trend_decreasing', 'Trend: DECREASING')
+                    : summary.sales_trend_direction === 'INCREASING'
+                    ? t('trend_increasing', 'Trend: INCREASING')
+                    : t('trend_stable', 'Trend: STABLE')}
                 </span>
               </div>
             </div>
@@ -314,7 +319,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </div>
                   <div>
                     <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('peers_comparison', 'Peers se tulna')}</h3>
-                    <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{benchmark.peer_group}</p>
+                    <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{localizeDynamicText(benchmark.peer_group, language)}</p>
                   </div>
                 </div>
                 <span
@@ -326,7 +331,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30'
                   }`}
                 >
-                  Rank {benchmark.rank} of {benchmark.peer_count}
+                  {language === 'hindi'
+                    ? `रैंक: ${benchmark.peer_count} में से ${benchmark.rank}`
+                    : language === 'hinglish'
+                    ? `Rank: ${benchmark.peer_count} me se ${benchmark.rank}`
+                    : `Rank ${benchmark.rank} of ${benchmark.peer_count}`}
                 </span>
               </div>
 
@@ -337,7 +346,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     key={m.name}
                     className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-[#172E58] last:border-none"
                   >
-                    <span className="text-[#002970] dark:text-blue-100 font-semibold">{m.label}</span>
+                    <span className="text-[#002970] dark:text-blue-100 font-semibold">{localizeDynamicText(m.label, language)}</span>
                     <div className="flex items-center gap-2">
                       <span className="font-black text-[#002970] dark:text-white">
                         {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
@@ -354,7 +363,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080]'
                         }`}
                       >
-                        {m.status_text}
+                        {localizeDynamicText(m.status_text, language)}
                       </span>
                     </div>
                   </div>
@@ -363,10 +372,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
               {/* Top Action Recommendation */}
               <div className="mt-1 p-3 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs">
-                <span className="font-extrabold text-[#002970] dark:text-white block text-[11px]">Recommended Action:</span>
+                <span className="font-extrabold text-[#002970] dark:text-white block text-[11px]">{t('recommended_action', 'Recommended Action:')}</span>
                 <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-0.5 line-clamp-2 font-medium">
-                  {benchmark.metrics.find((m) => m.status === 'red' || m.status === 'yellow')?.action ||
-                    benchmark.metrics[0]?.action}
+                  {localizeDynamicText(
+                    benchmark.metrics.find((m) => m.status === 'red' || m.status === 'yellow')?.action ||
+                    benchmark.metrics[0]?.action,
+                    language
+                  )}
                 </p>
               </div>
 
@@ -378,7 +390,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   onClick={() => onNavigateTab('recommendations')}
                   className="text-xs py-1.5 px-3 text-[#002970] dark:text-blue-100 dark:border-[#1E3A6E] font-bold"
                 >
-                  Offer bhejein
+                  {t('send_offer', 'Offer bhejein')}
                 </Button>
                 <Button
                   variant="primary"
@@ -386,7 +398,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   onClick={() => onNavigateTab('compare')}
                   className="text-xs py-1.5 px-3.5 flex items-center gap-1 font-bold"
                 >
-                  <span>Details dekhein</span>
+                  <span>{t('view_details', 'Details dekhein')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Button>
               </div>
@@ -398,10 +410,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#00BAF2]" />
-                <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Priority Actions</h3>
+                <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('priority_actions_title', 'Priority Actions')}</h3>
               </div>
               <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30">
-                {summary.critical_actions_count} Critical
+                {summary.critical_actions_count} {t('critical_badge', 'Critical')}
               </span>
             </div>
 
@@ -425,7 +437,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                           : 'medium'
                       }
                     >
-                      {act.priority_band}
+                      {localizeDynamicText(act.priority_band, language)}
                     </Badge>
                   </div>
                   <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 line-clamp-2 font-medium">
@@ -433,10 +445,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </p>
                   <div className="mt-2 flex items-center justify-between text-[11px]">
                     <span className="font-extrabold text-[#008A54] dark:text-[#00E68A]">
-                      Impact: ₹{act.expected_impact.toLocaleString()}
+                      {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
                     </span>
                     <span className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold">
-                      Review &rarr;
+                      {t('review_btn', 'Review →')}
                     </span>
                   </div>
                 </div>
@@ -450,7 +462,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 className="w-full text-xs font-bold dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white dark:hover:bg-[#1A335F]"
                 onClick={() => onNavigateTab('recommendations')}
               >
-                Open Action Center ({summary.total_actions_pending})
+                {t('open_action_center_btn', 'Open Action Center')} ({summary.total_actions_pending})
               </Button>
             </div>
           </div>
@@ -459,10 +471,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
             <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
               <Bot className="w-4 h-4 text-[#00BAF2]" />
-              <span>Ask VyaparMitra Copilot</span>
+              <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
             </div>
             <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
-              Sales, forecast, stockouts, ya Graahak ke baare mein Hindi/Hinglish me poochhein.
+              {t('ask_copilot_box_sub')}
             </p>
 
             <form onSubmit={handleQuickAsk} className="mt-3 space-y-2">
@@ -470,20 +482,27 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 type="text"
                 value={quickQuery}
                 onChange={(e) => setQuickQuery(e.target.value)}
-                placeholder="e.g. Kal kitni bikri hui thi?"
+                placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
                 className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
               />
               <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
-                Ask Copilot
+                {t('ask_btn', 'Ask Copilot')}
               </Button>
             </form>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {[
-                'Agle hafte sales kitni hogi?',
-                'Kaunsa maal restock karein?',
-                'Meri dukaan dusron se kaisi hai?',
-              ].map((q, i) => (
+              {(language === 'hindi'
+                ? [
+                    'अगले हफ्ते बिक्री कितनी होगी?',
+                    'कौन सा सामान रीस्टॉक करें?',
+                    'मेरी दुकान दूसरों से कैसी है?',
+                  ]
+                : [
+                    'Agle hafte sales kitni hogi?',
+                    'Kaunsa maal restock karein?',
+                    'Meri dukaan dusron se kaisi hai?',
+                  ]
+              ).map((q, i) => (
                 <button
                   key={i}
                   type="button"

@@ -307,4 +307,245 @@ export const translations: Record<string, Record<Language, string>> = {
     hindi: 'सुझाए गए प्रश्न:',
     english: 'Suggested:',
   },
+
+  // KPI Metrics Labels
+  kpi_revenue: {
+    hinglish: 'Total Revenue',
+    hindi: 'कुल राजस्व (बिक्री)',
+    english: 'Total Revenue',
+  },
+  kpi_orders: {
+    hinglish: 'Total Orders',
+    hindi: 'कुल ऑर्डर्स',
+    english: 'Total Orders',
+  },
+  kpi_aov: {
+    hinglish: 'Average Order Value (AOV)',
+    hindi: 'औसत बिल राशि (AOV)',
+    english: 'Average Order Value',
+  },
+  kpi_units: {
+    hinglish: 'Units Sold',
+    hindi: 'बिके हुए सामान (Units)',
+    english: 'Units Sold',
+  },
+
+  // Subtexts
+  subtext_vs_prev_7d: {
+    hinglish: 'vs pichhle 7 din',
+    hindi: 'पिछले 7 दिनों के मुकाबले',
+    english: 'vs previous 7-day period',
+  },
+  subtext_completed_orders: {
+    hinglish: 'Total poore hue orders',
+    hindi: 'कुल सफल ऑर्डर',
+    english: 'Total completed orders',
+  },
+  subtext_avg_ticket: {
+    hinglish: 'Average ticket size',
+    hindi: 'प्रति ग्राहक औसत खरीदारी',
+    english: 'Average ticket size',
+  },
+  subtext_items_moved: {
+    hinglish: 'Total items moved',
+    hindi: 'दुकान से बिका कुल माल',
+    english: 'Total inventory items moved',
+  },
+
+  // Trends
+  trend_decreasing: {
+    hinglish: 'Trend: Giravat (DECREASING)',
+    hindi: 'रुझान: गिरावट (कम हो रही है)',
+    english: 'Trend: Decreasing',
+  },
+  trend_increasing: {
+    hinglish: 'Trend: Badh rahi hai (INCREASING)',
+    hindi: 'रुझान: वृद्धि (बढ़ रही है)',
+    english: 'Trend: Increasing',
+  },
+  trend_stable: {
+    hinglish: 'Trend: Sthir (STABLE)',
+    hindi: 'रुझान: स्थिर',
+    english: 'Trend: Stable',
+  },
+
+  // Benchmark metrics & badges
+  repeat_customers: {
+    hinglish: 'Repeat Graahak',
+    hindi: 'दोहराने वाले ग्राहक',
+    english: 'Repeat Customers',
+  },
+  avg_bill_size: {
+    hinglish: 'Average Bill / Ticket Size',
+    hindi: 'औसत बिल / टिकट आकार',
+    english: 'Average Bill / Ticket Size',
+  },
+  payment_failure_rate: {
+    hinglish: 'Payment Failure Rate',
+    hindi: 'भुगतान विफलता दर',
+    english: 'Payment Failure Rate',
+  },
+  status_good: {
+    hinglish: 'Achha',
+    hindi: 'अच्छा',
+    english: 'Good',
+  },
+  status_fair: {
+    hinglish: 'Thik',
+    hindi: 'सामान्य',
+    english: 'Fair',
+  },
+  status_attention: {
+    hinglish: 'Dhyan Dein',
+    hindi: 'सुधार चाहिए',
+    english: 'Needs Attention',
+  },
+
+  // Priority Actions
+  priority_actions_title: {
+    hinglish: 'Priority Actions',
+    hindi: 'सर्वोच्च प्राथमिकता वाले कार्य',
+    english: 'Priority Actions',
+  },
+  critical_badge: {
+    hinglish: 'Critical',
+    hindi: 'अति-महत्वपूर्ण',
+    english: 'Critical',
+  },
+  high_badge: {
+    hinglish: 'High',
+    hindi: 'उच्च',
+    english: 'High',
+  },
+  medium_badge: {
+    hinglish: 'Medium',
+    hindi: 'मध्यम',
+    english: 'Medium',
+  },
+  expected_impact_label: {
+    hinglish: 'Impact:',
+    hindi: 'संभावित लाभ:',
+    english: 'Impact:',
+  },
+  review_btn: {
+    hinglish: 'Review →',
+    hindi: 'जांचें →',
+    english: 'Review →',
+  },
+  open_action_center_btn: {
+    hinglish: 'Open Action Center',
+    hindi: 'ऐक्शन सेंटर खोलें',
+    english: 'Open Action Center',
+  },
+
+  // Ask Copilot Box
+  ask_copilot_box_title: {
+    hinglish: 'Ask VyaparMitra Copilot',
+    hindi: 'व्यापारमित्र एआई कोपायलट से पूछें',
+    english: 'Ask VyaparMitra Copilot',
+  },
+  ask_copilot_box_sub: {
+    hinglish: 'Sales, forecast, stockouts, ya Graahak ke baare mein Hindi/Hinglish me poochhein.',
+    hindi: 'बिक्री, 7-दिवसीय अनुमान, स्टॉक या ग्राहकों के बारे में कुछ भी पूछें।',
+    english: 'Ask anything about your sales, forecasts, stockouts, or customers.',
+  },
+  quick_ask_placeholder: {
+    hinglish: 'e.g. Kal kitni bikri hui thi?',
+    hindi: 'उदा. कल कितनी बिक्री हुई थी?',
+    english: 'e.g. What were yesterday\'s sales?',
+  },
+  ask_btn: {
+    hinglish: 'Ask Copilot',
+    hindi: 'मित्र से पूछें',
+    english: 'Ask Copilot',
+  },
+
+  // Analytics
+  analytics_title: {
+    hinglish: 'Business Intelligence & Analytics',
+    hindi: 'व्यापार विश्लेषण और रिपोर्ट',
+    english: 'Business Intelligence & Analytics',
+  },
+  analytics_sub: {
+    hinglish: 'Empirical sales patterns, customer segments, category distributions, and payment methods.',
+    hindi: 'बिक्री रुझान, ग्राहक वर्ग, उत्पाद श्रेणी विभाजन और भुगतान माध्यमों का संपूर्ण विवरण।',
+    english: 'Empirical sales patterns, customer segments, category distributions, and payment methods.',
+  },
 };
+
+/**
+ * Universal text localizer for dynamic backend strings
+ */
+export function localizeDynamicText(text: string | null | undefined, language: Language): string {
+  if (!text) return '';
+  if (language === 'english') return text;
+
+  const hindiMap: Record<string, string> = {
+    // KPI labels
+    'Total Revenue': 'कुल राजस्व (बिक्री)',
+    'Total Orders': 'कुल ऑर्डर्स',
+    'Average Order Value': 'औसत बिल राशि (AOV)',
+    'Units Sold': 'कुल बिके सामान (Units)',
+    'vs previous 7-day period': 'पिछले 7 दिनों के मुकाबले',
+    'Total completed orders': 'कुल सफल ऑर्डर',
+    'Average ticket size': 'प्रति ग्राहक औसत खरीदारी',
+    'Total inventory items moved': 'दुकान से बिका कुल माल',
+
+    // Benchmark Labels
+    'Repeat Customers': 'दोहराने वाले ग्राहक',
+    'Average Bill / Ticket Size': 'औसत बिल / टिकट आकार',
+    'Payment Failure Rate': 'भुगतान विफलता दर',
+    'Inventory Turnover': 'स्टॉक चक्र गति (Turnover)',
+    'Gross Margin': 'सकल मुनाफा मार्जिन',
+    'Customer Retention': 'ग्राहक जुड़ाव (Retention)',
+
+    // Status Texts
+    'Achha': 'अच्छा',
+    'Thik': 'सामान्य',
+    'Dhyan Dein': 'सुधार चाहिए',
+    'Good': 'अच्छा',
+    'Fair': 'सामान्य',
+    'Needs Attention': 'सुधार चाहिए',
+
+    // Priorities & Bands
+    'CRITICAL': 'अति-गंभीर',
+    'HIGH': 'उच्च',
+    'MEDIUM': 'मध्यम',
+    'LOW': 'कम',
+
+    // Categories
+    'Grocery, Uttar Pradesh': 'किराना व दैनिक सामग्री, उत्तर प्रदेश',
+    'Grocery, Snacks & FMCG': 'किराना, स्नैक्स व दैनिक सामग्री',
+
+    // Actions
+    'Review quality and item packaging for frequently returned products': 'अक्सर वापस होने वाले सामान की गुणवत्ता और पैकेजिंग की समीक्षा करें।',
+    'Introduce combo pack or loyalty incentive to lift basket size': 'औसत बिल बढ़ाने के लिए कॉम्बो पैक या लॉयल्टी छूट ऑफर शुरू करें।',
+    'Encourage QR/UPI soundbox adoption to lower transaction drop-offs': 'ट्रांजेक्शन विफलता घटाने के लिए ग्राहकों को सीधे साउंडबॉक्स क्यूआर से भुगतान कराएं।',
+  };
+
+  const hinglishMap: Record<string, string> = {
+    'Total Revenue': 'Total Revenue (Bikri)',
+    'Total Orders': 'Total Orders',
+    'Average Order Value': 'Average Order Value (AOV)',
+    'Units Sold': 'Total Units Biki',
+    'vs previous 7-day period': 'vs pichhle 7 din',
+    'Total completed orders': 'Total poore hue orders',
+    'Average ticket size': 'Average khareedari size',
+    'Total inventory items moved': 'Total maal bika',
+    'Repeat Customers': 'Repeat Graahak',
+    'Average Bill / Ticket Size': 'Average Bill / Ticket Size',
+    'Payment Failure Rate': 'Payment Failure Rate',
+    'Achha': 'Achha',
+    'Thik': 'Thik-thaak',
+    'Dhyan Dein': 'Dhyan Dein',
+  };
+
+  if (language === 'hindi' && hindiMap[text]) {
+    return hindiMap[text];
+  }
+  if (language === 'hinglish' && hinglishMap[text]) {
+    return hinglishMap[text];
+  }
+
+  return text;
+}

@@ -375,7 +375,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
               <div className="flex items-center gap-6 bg-white/10 rounded-2xl p-5 backdrop-blur-xs border border-white/20 self-start lg:self-auto shadow-md">
                 <div className="text-center">
                   <span className="text-[11px] font-bold tracking-wider text-blue-200 uppercase block">
-                    Overall Benchmark Score
+                    {t('overall_score', 'Overall Benchmark Score')}
                   </span>
                   <div className="flex items-baseline justify-center gap-1 mt-0.5">
                     <span className="text-4xl font-black text-[#00BAF2] tracking-tight">
@@ -390,10 +390,10 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                 <div className="text-xs text-blue-100 space-y-1">
                   <div className="flex items-center gap-1.5 text-[#00B970] font-bold">
                     <CheckCircle2 className="w-4 h-4 text-[#00B970]" />
-                    <span>6 Metrics Scored</span>
+                    <span>{currentLanguage === 'hindi' ? '6 प्रमुख संकेतक मूल्यांकित' : '6 Metrics Scored'}</span>
                   </div>
                   <p className="text-[11px] text-blue-200">
-                    Updated live from Feature Store
+                    {currentLanguage === 'hindi' ? 'फीचर स्टोर से सत्यापित लाइव डेटा' : 'Updated live from Feature Store'}
                   </p>
                 </div>
               </div>
@@ -427,14 +427,18 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                       {/* Metric Comparison Numbers */}
                       <div className="mt-3 flex items-baseline justify-between">
                         <div>
-                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">Your Store</span>
+                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">
+                            {currentLanguage === 'hindi' ? 'आपकी दुकान' : 'Your Store'}
+                          </span>
                           <span className="text-2xl font-black text-[#002970] dark:text-white">
                             {metric.unit === '₹' ? `₹${Math.round(metric.you).toLocaleString('en-IN')}` : `${metric.you}${metric.unit}`}
                           </span>
                         </div>
 
                         <div className="text-right">
-                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">Peer Median</span>
+                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">
+                            {currentLanguage === 'hindi' ? 'प्रतिस्पर्धी औसत' : 'Peer Median'}
+                          </span>
                           <span className="text-sm font-bold text-[#002970] dark:text-blue-100">
                             {metric.unit === '₹' ? `₹${Math.round(metric.peer_median).toLocaleString('en-IN')}` : `${metric.peer_median}${metric.unit}`}
                           </span>
@@ -445,7 +449,9 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                       <div className="mt-4 space-y-1.5">
                         <div className="flex justify-between text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold">
                           <span>Min: {metric.peer_min}{metric.unit}</span>
-                          <span className="text-[#002970] dark:text-white font-bold">50th %ile (Median)</span>
+                          <span className="text-[#002970] dark:text-white font-bold">
+                            {currentLanguage === 'hindi' ? '50% औसत (Median)' : '50th %ile (Median)'}
+                          </span>
                           <span>Max: {metric.peer_max}{metric.unit}</span>
                         </div>
                         <div className="h-2.5 w-full bg-[#E8F4FD] dark:bg-[#132342] rounded-full relative overflow-hidden">
@@ -459,7 +465,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                           />
                         </div>
                         <div className="text-right text-[10px] font-bold text-[#00BAF2]">
-                          {metric.percentile}th Percentile Rank
+                          {currentLanguage === 'hindi' ? `${metric.percentile}% प्रतिशतक रैंक` : `${metric.percentile}th Percentile Rank`}
                         </div>
                       </div>
                     </div>
@@ -476,7 +482,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                         }}
                         className="text-[11px] font-bold text-[#00BAF2] hover:text-[#002970] dark:hover:text-white whitespace-nowrap flex items-center gap-0.5 transition-colors"
                       >
-                        <span>Kaise?</span>
+                        <span>{currentLanguage === 'hindi' ? 'कैसे सुधारें?' : 'Kaise?'}</span>
                         <ChevronRight className="w-3 h-3" />
                       </button>
                     </div>
