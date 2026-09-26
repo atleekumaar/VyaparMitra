@@ -253,3 +253,91 @@ class AnalyticsService:
             total_anomalies_detected=len(items),
             anomalies=items,
         )
+
+    def record_cash_sale(self, req: Any) -> Any:
+        import datetime
+        from src.api.schemas import CashSaleResponse
+
+        amount = float(req.amount)
+        now = datetime.datetime.now()
+        txn_id = f"CASH_{int(now.timestamp())}"
+        
+        updated_cash_rev = 0.0
+        updated_cash_orders = 0
+
+        # 1. Update payment_summary parquet tables
+        pay_paths = [
+            self.analytics_dir / "payments" / "payment_summary.parquet",
+            self.analytics_dir / "payment_summary.parquet",
+        ]
+        for p in pay_paths:
+            if p.exists():
+                try:
+                    df = pd.read_parquet(p)
+                    if "payment_method" in df.columns:
+                        mask = df["payment_method"].str.upper() == "CASH"
+                        if mask.any():
+                            df.loc[mask, "payment_method_orders"] = df.loc[mask, "payment_method_orders"] + 1
+                            df.loc[mask, "payment_method_revenue"] = df.loc[mask, "payment_method_revenue"] + amount
+                            updated_cash_rev = float(df.loc[mask, "payment_method_revenue"].iloc[0])
+                            updated_cash_orders = int(df.loc[mask, "payment_method_orders"].iloc[0])
+                        else:
+                            new_row = pd.DataFrame([{
+                                "payment_method": "CASH",
+                                "payment_method_orders": 1,
+                                "payment_method_revenue": amount,
+                                "orders_share": 0.05,
+                                "revenue_share": 0.05,
+                                "payment_method_aov": amount,
+                            }])
+                            df = pd.concat([df, new_row], ignore_index=True)
+                            updated_cash_rev = amount
+                            updated_cash_orders = 1
+
+                        # Recalculate shares
+                        tot_rev = df["payment_method_revenue"].sum()
+                        tot_ord = df["payment_method_orders"].sum()
+                        if tot_rev > 0:
+                            df["revenue_share"] = (df["payment_method_revenue"] / tot_rev).round(4)
+                        if tot_ord > 0:
+                            df["orders_share"] = (df["payment_method_orders"] / tot_ord).round(4)
+
+                        df.to_parquet(p, index=False)
+                except Exception as e:
+                    logger.warning(f"Could not update payment summary parquet: {e}")
+
+        # 2. Update daily sales summary if available
+        daily_paths = [
+            self.analytics_dir / "sales" / "sales_daily.parquet",
+            self.analytics_dir / "sales_daily.parquet",
+        ]
+        today_str = now.strftime("%Y-%m-%d")
+        for dp in daily_paths:
+            if dp.exists():
+                try:
+                    df_d = pd.read_parquet(dp)
+                    date_col = "date" if "date" in df_d.columns else "period"
+                    if date_col in df_d.columns:
+                        mask_d = df_d[date_col].astype(str) == today_str
+                        if mask_d.any():
+                            df_d.loc[mask_d, "revenue"] = df_d.loc[mask_d, "revenue"] + amount
+                            df_d.loc[mask_d, "orders"] = df_d.loc[mask_d, "orders"] + 1
+                        else:
+                            last_row = df_d.iloc[-1].to_dict() if not df_d.empty else {}
+                            last_row[date_col] = today_str
+                            last_row["revenue"] = amount
+                            last_row["orders"] = 1
+                            df_d = pd.concat([df_d, pd.DataFrame([last_row])], ignore_index=True)
+                        df_d.to_parquet(dp, index=False)
+                except Exception as e:
+                    logger.warning(f"Could not update daily sales parquet: {e}")
+
+        return CashSaleResponse(
+            status="SUCCESS",
+            message=f"Cash sale of ₹{amount:,.2f} recorded successfully!",
+            amount=amount,
+            transaction_id=txn_id,
+            updated_cash_total=round(updated_cash_rev, 2),
+            updated_cash_orders=updated_cash_orders,
+            timestamp=now.isoformat(),
+        )

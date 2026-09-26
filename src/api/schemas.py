@@ -153,6 +153,24 @@ class PaymentAnalyticsResponse(BaseModel):
     primary_payment_method: str
 
 
+class CashSaleRequest(BaseModel):
+    amount: float
+    product_name: Optional[str] = "General Item"
+    category: Optional[str] = "General"
+    customer_id: Optional[str] = "WALK_IN"
+    payment_method: Optional[str] = "CASH"
+
+
+class CashSaleResponse(BaseModel):
+    status: str
+    message: str
+    amount: float
+    transaction_id: str
+    updated_cash_total: float
+    updated_cash_orders: int
+    timestamp: str
+
+
 class TrendAnalyticsResponse(BaseModel):
     predicted_trend: str
     confidence: float

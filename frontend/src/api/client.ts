@@ -70,6 +70,19 @@ export const api = {
   getCategoryAnalytics: () =>
     request<{ categories: CategoryShare[] }>('/api/analytics/categories'),
   getPaymentAnalytics: () => request<PaymentAnalytics>('/api/analytics/payments'),
+  recordCashSale: (data: { amount: number; product_name?: string; category?: string }) =>
+    request<{
+      status: string;
+      message: string;
+      amount: number;
+      transaction_id: string;
+      updated_cash_total: number;
+      updated_cash_orders: number;
+      timestamp: string;
+    }>('/api/analytics/cash-sale', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   getTrendAnalytics: () => request<TrendAnalytics>('/api/analytics/trends'),
   getAnomalyAnalytics: () =>
     request<{ total_anomalies_detected: number; anomalies: AnomalyItem[] }>(

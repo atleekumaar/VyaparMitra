@@ -8,6 +8,9 @@ import {
   Activity,
   AlertCircle,
   TrendingUp,
+  Banknote,
+  PlusCircle,
+  CheckCircle2,
 } from 'lucide-react';
 import { api } from '../api/client';
 import {
@@ -22,6 +25,8 @@ import {
 import { TableSkeleton, CardSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner, EmptyState } from '../components/EmptyState';
 import { Badge } from '../components/Badge';
+import { Button } from '../components/Button';
+import { Modal } from '../components/Modal';
 import { useLanguage } from '../i18n/LanguageContext';
 import { localizeDynamicText } from '../i18n/translations';
 
@@ -38,6 +43,13 @@ export const AnalyticsPage: React.FC = () => {
   const [payments, setPayments] = useState<PaymentAnalytics | null>(null);
   const [trends, setTrends] = useState<TrendAnalytics | null>(null);
   const [anomalies, setAnomalies] = useState<AnomalyItem[]>([]);
+
+  // Cash recording state
+  const [isCashModalOpen, setIsCashModalOpen] = useState<boolean>(false);
+  const [cashAmount, setCashAmount] = useState<string>('');
+  const [cashNote, setCashNote] = useState<string>('');
+  const [isSubmittingCash, setIsSubmittingCash] = useState<boolean>(false);
+  const [cashSuccessMsg, setCashSuccessMsg] = useState<string | null>(null);
 
   const loadData = async () => {
     setLoading(true);
@@ -69,6 +81,39 @@ export const AnalyticsPage: React.FC = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const handleRecordCashSale = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const amt = parseFloat(cashAmount);
+    if (isNaN(amt) || amt <= 0) {
+      alert(language === 'hindi' ? 'कृपया सही राशि दर्ज करें (उदा. 100)' : 'Please enter a valid amount (e.g. 100)');
+      return;
+    }
+    setIsSubmittingCash(true);
+    setCashSuccessMsg(null);
+    try {
+      const res = await api.recordCashSale({
+        amount: amt,
+        product_name: cashNote || (language === 'hindi' ? 'दुकान नकद बिक्री' : 'Manual Cash Sale'),
+      });
+      setCashSuccessMsg(
+        language === 'hindi'
+          ? `₹${amt.toLocaleString()} की नकद बिक्री सफलतापूर्वक जोड़ी गई!`
+          : `Cash sale of ₹${amt.toLocaleString()} recorded successfully!`
+      );
+      setCashAmount('');
+      setCashNote('');
+      await loadData();
+      setTimeout(() => {
+        setIsCashModalOpen(false);
+        setCashSuccessMsg(null);
+      }, 1500);
+    } catch (err: any) {
+      alert(err?.message || 'Failed to record cash sale');
+    } finally {
+      setIsSubmittingCash(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -317,12 +362,26 @@ export const AnalyticsPage: React.FC = () => {
       {/* Tab 5: Payments */}
       {activeTab === 'payments' && payments && (
         <div className="space-y-6">
-          <div className="bg-white rounded-xl border border-paytm-border p-4 flex items-center justify-between">
+          <div className="bg-white rounded-xl border border-paytm-border p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
             <div>
               <span className="text-xs text-paytm-muted uppercase font-medium">{language === 'hindi' ? 'प्राथमिक भुगतान माध्यम' : 'Primary Payment Mode'}</span>
               <p className="text-xl font-bold text-paytm-dark mt-0.5">{payments.primary_payment_method}</p>
             </div>
-            <Badge variant="success">{language === 'hindi' ? 'फिनटेक सेटलमेंट तैयार' : 'Fintech Settlement Ready'}</Badge>
+            <div className="flex items-center gap-2">
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  setCashSuccessMsg(null);
+                  setIsCashModalOpen(true);
+                }}
+                className="bg-[#00B970] hover:bg-[#008A54] text-white font-bold flex items-center gap-1.5 shadow-2xs"
+              >
+                <Banknote className="w-4 h-4" />
+                <span>{language === 'hindi' ? '+ नकद बिक्री जोड़ें' : '+ Record Cash Sale'}</span>
+              </Button>
+              <Badge variant="success">{language === 'hindi' ? 'फिनटेक सेटलमेंट तैयार' : 'Fintech Settlement Ready'}</Badge>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -392,6 +451,123 @@ export const AnalyticsPage: React.FC = () => {
             )}
           </div>
         </div>
+      )}
+      {/* Record Cash Sale Modal */}
+      {isCashModalOpen && (
+        <Modal
+          isOpen={true}
+          onClose={() => {
+            if (!isSubmittingCash) {
+              setIsCashModalOpen(false);
+              setCashSuccessMsg(null);
+            }
+          }}
+          title={language === 'hindi' ? 'दुकान नकद बिक्री जोड़ें (Record Cash)' : 'Record Offline / Cash Sale'}
+          subtitle={language === 'hindi' ? 'नकद राशि सीधे दैनिक बिक्री व भुगतान रिपोर्ट में जुड़ जाएगी' : 'Add manual cash collections directly into daily revenue & payment analytics'}
+          maxWidth="md"
+        >
+          {cashSuccessMsg ? (
+            <div className="p-6 text-center space-y-3">
+              <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 rounded-full flex items-center justify-center mx-auto text-emerald-600">
+                <CheckCircle2 className="w-7 h-7" />
+              </div>
+              <h3 className="text-base font-bold text-paytm-dark dark:text-white">
+                {language === 'hindi' ? 'नकद बिक्री दर्ज हो गई!' : 'Cash Sale Recorded!'}
+              </h3>
+              <p className="text-xs text-paytm-muted">{cashSuccessMsg}</p>
+            </div>
+          ) : (
+            <form onSubmit={handleRecordCashSale} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-paytm-dark dark:text-white mb-1.5">
+                  {language === 'hindi' ? 'नकद राशि (₹ Amount) *' : 'Cash Amount (₹) *'}
+                </label>
+                <div className="relative">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-base font-extrabold text-[#002970] dark:text-[#00BAF2]">
+                    ₹
+                  </span>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="1"
+                    required
+                    value={cashAmount}
+                    onChange={(e) => setCashAmount(e.target.value)}
+                    placeholder="0.00"
+                    autoFocus
+                    className="w-full pl-8 pr-4 py-2.5 text-base font-bold rounded-xl border border-paytm-border bg-white dark:bg-[#0B1528] text-paytm-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2]"
+                  />
+                </div>
+
+                {/* Quick select chips */}
+                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                  {[50, 100, 200, 500, 1000, 2000].map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setCashAmount((prev) => String((parseFloat(prev) || 0) + v))}
+                      className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-paytm-light dark:bg-[#132342] border border-paytm-border text-[#002970] dark:text-blue-200 hover:bg-[#00BAF2]/10 hover:border-[#00BAF2] transition-colors"
+                    >
+                      +₹{v}
+                    </button>
+                  ))}
+                  {cashAmount && (
+                    <button
+                      type="button"
+                      onClick={() => setCashAmount('')}
+                      className="text-xs font-medium px-2 py-1 text-red-500 hover:underline"
+                    >
+                      {language === 'hindi' ? 'साफ़ करें' : 'Clear'}
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-paytm-dark dark:text-white mb-1">
+                  {language === 'hindi' ? 'विवरण या सामान (वैकल्पिक Note)' : 'Item / Note (Optional)'}
+                </label>
+                <input
+                  type="text"
+                  value={cashNote}
+                  onChange={(e) => setCashNote(e.target.value)}
+                  placeholder={language === 'hindi' ? 'उदा. आटा, चाय, या ग्राहक का नाम' : 'e.g. Rice 5kg, Daily Groceries, or Customer Name'}
+                  className="w-full px-3.5 py-2 text-xs rounded-lg border border-paytm-border bg-white dark:bg-[#0B1528] text-paytm-dark dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2]"
+                />
+              </div>
+
+              <div className="p-3 bg-slate-50 dark:bg-[#0F1D38] rounded-xl border border-paytm-border text-[11px] text-paytm-muted flex items-start gap-2">
+                <Banknote className="w-4 h-4 text-[#00B970] shrink-0 mt-0.5" />
+                <span>
+                  {language === 'hindi'
+                    ? 'यह नकद लेनदेन आपके कुल दैनिक संग्रह (Cash Revenue) और पेमेंट मेथड रिपोर्ट में तुरंत जुड़ जाएगा।'
+                    : 'This cash transaction will immediately update your daily collections, cash ledger, and payment method share.'}
+                </span>
+              </div>
+
+              <div className="pt-2 flex items-center justify-end gap-2 border-t border-slate-100 dark:border-slate-800">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setIsCashModalOpen(false)}
+                  disabled={isSubmittingCash}
+                >
+                  {language === 'hindi' ? 'रद्द करें' : 'Cancel'}
+                </Button>
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="sm"
+                  isLoading={isSubmittingCash}
+                  className="bg-[#00B970] hover:bg-[#008A54] text-white font-bold"
+                >
+                  {language === 'hindi' ? 'नकद दर्ज करें (Save Cash)' : 'Save Cash Sale'}
+                </Button>
+              </div>
+            </form>
+          )}
+        </Modal>
       )}
     </div>
   );

@@ -7,6 +7,8 @@ from __future__ import annotations
 from fastapi import APIRouter
 from src.api.schemas import (
     AnomalyResponse,
+    CashSaleRequest,
+    CashSaleResponse,
     CategoryAnalyticsResponse,
     CustomerAnalyticsResponse,
     PaymentAnalyticsResponse,
@@ -60,3 +62,10 @@ def get_trend_analytics() -> TrendAnalyticsResponse:
 def get_anomaly_analytics() -> AnomalyResponse:
     """Returns statistical revenue anomalies detected using IQR/z-score."""
     return service.get_anomaly_analytics()
+
+
+@router.post("/cash-sale", response_model=CashSaleResponse)
+def record_cash_sale(payload: CashSaleRequest) -> CashSaleResponse:
+    """Records a manual/cash sale transaction and updates payment & sales analytics."""
+    return service.record_cash_sale(payload)
+
