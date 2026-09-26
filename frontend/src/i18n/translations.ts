@@ -287,11 +287,6 @@ export const translations: Record<string, Record<Language, string>> = {
     hindi: 'व्यापार मित्र एआई बिजनेस कोपायलट',
     english: 'VyaparMitra AI Business Copilot',
   },
-  zero_hallucination: {
-    hinglish: 'Zero Hallucination',
-    hindi: '100% सत्यापित उत्तर',
-    english: 'Zero Hallucination',
-  },
   copilot_subtext: {
     hinglish: 'Grounded exclusively in Verified Store & Benchmark Data',
     hindi: 'आपकी दुकान के वास्तविक डेटा और फीचर स्टोर पर आधारित',

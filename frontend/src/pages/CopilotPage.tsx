@@ -110,9 +110,6 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
               <h2 className="text-sm lg:text-base font-black text-white tracking-tight">
                 VyaparMitra Hindi AI Copilot
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#00B970] text-white shadow-2xs">
-                Zero Hallucination
-              </span>
             </div>
             <p className="text-[11px] text-blue-100 font-medium">
               {t('copilot_subtext', 'Grounded exclusively in Verified Store & Benchmark Data')}
