@@ -1,0 +1,54 @@
+# VyaparMitra Phase 4: Recommendation & Decision Engine Configuration
+
+scoring:
+  confidence_weights:
+    prediction_confidence: 0.35
+    evidence_strength: 0.25
+    historical_consistency: 0.20
+    data_quality: 0.20
+  impact_weights:
+    revenue_opportunity: 0.30
+    margin_opportunity: 0.25
+    customer_value: 0.20
+    urgency: 0.15
+    scale: 0.10
+
+priority_thresholds:
+  critical: 0.79
+  high: 0.70
+  medium: 0.55
+
+inventory:
+  service_level: 0.95
+  z_score: 1.645
+  lead_time_days: 3
+  safety_stock_method: "stddev"
+  inventory_estimation_mode: true
+  min_reorder_units: 5
+  acceleration_threshold: 0.15
+
+cross_sell:
+  min_support: 0.005
+  min_confidence: 0.08
+  min_lift: 1.15
+  max_rules_per_product: 3
+
+customer:
+  churn_high_risk: 0.60
+  churn_medium_risk: 0.30
+  high_value_spend_percentile: 75.0
+  active_frequency_orders_per_month: 1.5
+
+pricing:
+  high_margin_threshold: 0.25
+  low_margin_threshold: 0.15
+  high_demand_percentile: 70.0
+  low_demand_percentile: 30.0
+  excessive_discount_rate: 0.15
+
+conflict_resolution_order:
+  - "DATA_QUALITY"
+  - "RISK"
+  - "MARGIN_PROTECTION"
+  - "REVENUE_GROWTH"
+  - "EXPERIMENTAL_ACTION"

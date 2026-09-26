@@ -1,0 +1,1370 @@
+recommendation_id,entity_id,metric,value,source,description
+REC_CUST_C03388,C03388,churn_risk_probability,0.6958,Phase 3 Churn Model,Inactivity likelihood within next 30 days (69.6%)
+REC_CUST_C03388,C03388,customer_recency_days,112.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03388,C03388,customer_total_spend,16767.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03388,C03388,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03388,C03388,average_order_value,5589.28,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01719,C01719,churn_risk_probability,0.6781,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.8%)
+REC_CUST_C01719,C01719,customer_recency_days,77.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01719,C01719,customer_total_spend,7575.64,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01719,C01719,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01719,C01719,average_order_value,3787.82,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01750,C01750,churn_risk_probability,0.6746,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.5%)
+REC_CUST_C01750,C01750,customer_recency_days,152.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01750,C01750,customer_total_spend,12311.86,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01750,C01750,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01750,C01750,average_order_value,3077.96,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02719,C02719,churn_risk_probability,0.6716,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.2%)
+REC_CUST_C02719,C02719,customer_recency_days,32.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02719,C02719,customer_total_spend,12387.47,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02719,C02719,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02719,C02719,average_order_value,3096.87,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03457,C03457,churn_risk_probability,0.6692,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.9%)
+REC_CUST_C03457,C03457,customer_recency_days,17.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03457,C03457,customer_total_spend,29573.55,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03457,C03457,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03457,C03457,average_order_value,4928.92,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02004,C02004,churn_risk_probability,0.6682,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.8%)
+REC_CUST_C02004,C02004,customer_recency_days,98.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02004,C02004,customer_total_spend,9413.47,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02004,C02004,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02004,C02004,average_order_value,3137.82,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02137,C02137,churn_risk_probability,0.6651,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.5%)
+REC_CUST_C02137,C02137,customer_recency_days,97.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02137,C02137,customer_total_spend,16991.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02137,C02137,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02137,C02137,average_order_value,2831.99,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02312,C02312,churn_risk_probability,0.662,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.2%)
+REC_CUST_C02312,C02312,customer_recency_days,83.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02312,C02312,customer_total_spend,17306.04,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02312,C02312,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02312,C02312,average_order_value,5768.68,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00617,C00617,churn_risk_probability,0.6585,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.8%)
+REC_CUST_C00617,C00617,customer_recency_days,74.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00617,C00617,customer_total_spend,15425.43,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00617,C00617,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00617,C00617,average_order_value,7712.72,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00305,C00305,churn_risk_probability,0.6582,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.8%)
+REC_CUST_C00305,C00305,customer_recency_days,155.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00305,C00305,customer_total_spend,13112.03,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00305,C00305,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00305,C00305,average_order_value,6556.02,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02142,C02142,churn_risk_probability,0.6689,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.9%)
+REC_CUST_C02142,C02142,customer_recency_days,73.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02142,C02142,customer_total_spend,10549.19,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02142,C02142,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02142,C02142,average_order_value,2637.3,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01225,C01225,churn_risk_probability,0.6568,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.7%)
+REC_CUST_C01225,C01225,customer_recency_days,90.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01225,C01225,customer_total_spend,10798.26,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01225,C01225,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01225,C01225,average_order_value,2699.56,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03276,C03276,churn_risk_probability,0.6564,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.6%)
+REC_CUST_C03276,C03276,customer_recency_days,165.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03276,C03276,customer_total_spend,7384.11,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03276,C03276,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03276,C03276,average_order_value,3692.06,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02038,C02038,churn_risk_probability,0.654,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.4%)
+REC_CUST_C02038,C02038,customer_recency_days,145.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02038,C02038,customer_total_spend,14661.69,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02038,C02038,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02038,C02038,average_order_value,3665.42,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03372,C03372,churn_risk_probability,0.6536,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.4%)
+REC_CUST_C03372,C03372,customer_recency_days,4.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03372,C03372,customer_total_spend,15230.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03372,C03372,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03372,C03372,average_order_value,3807.72,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02795,C02795,churn_risk_probability,0.6525,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.2%)
+REC_CUST_C02795,C02795,customer_recency_days,98.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02795,C02795,customer_total_spend,18887.56,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02795,C02795,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02795,C02795,average_order_value,2698.22,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00035,C00035,churn_risk_probability,0.6507,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.1%)
+REC_CUST_C00035,C00035,customer_recency_days,312.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00035,C00035,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00035,C00035,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00035,C00035,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01204,C01204,churn_risk_probability,0.6505,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.0%)
+REC_CUST_C01204,C01204,customer_recency_days,75.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01204,C01204,customer_total_spend,6690.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01204,C01204,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01204,C01204,average_order_value,3345.29,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02701,C02701,churn_risk_probability,0.6507,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.1%)
+REC_CUST_C02701,C02701,customer_recency_days,312.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02701,C02701,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02701,C02701,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02701,C02701,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03212,C03212,churn_risk_probability,0.6477,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.8%)
+REC_CUST_C03212,C03212,customer_recency_days,276.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03212,C03212,customer_total_spend,11827.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03212,C03212,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03212,C03212,average_order_value,2956.97,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01545,C01545,churn_risk_probability,0.6471,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
+REC_CUST_C01545,C01545,customer_recency_days,97.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01545,C01545,customer_total_spend,7685.19,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01545,C01545,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01545,C01545,average_order_value,3842.6,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00971,C00971,churn_risk_probability,0.6468,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
+REC_CUST_C00971,C00971,customer_recency_days,58.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00971,C00971,customer_total_spend,21119.35,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00971,C00971,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00971,C00971,average_order_value,3017.05,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02546,C02546,churn_risk_probability,0.6466,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
+REC_CUST_C02546,C02546,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02546,C02546,customer_total_spend,19467.39,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02546,C02546,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02546,C02546,average_order_value,3244.56,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02078,C02078,churn_risk_probability,0.6412,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.1%)
+REC_CUST_C02078,C02078,customer_recency_days,143.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02078,C02078,customer_total_spend,14580.24,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02078,C02078,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02078,C02078,average_order_value,3645.06,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00548,C00548,churn_risk_probability,0.6397,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.0%)
+REC_CUST_C00548,C00548,customer_recency_days,29.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00548,C00548,customer_total_spend,26934.81,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00548,C00548,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00548,C00548,average_order_value,8978.27,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02528,C02528,churn_risk_probability,0.6394,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.9%)
+REC_CUST_C02528,C02528,customer_recency_days,15.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02528,C02528,customer_total_spend,8174.23,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02528,C02528,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02528,C02528,average_order_value,4087.12,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01296,C01296,churn_risk_probability,0.6383,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.8%)
+REC_CUST_C01296,C01296,customer_recency_days,41.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01296,C01296,customer_total_spend,14810.5,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01296,C01296,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01296,C01296,average_order_value,2962.1,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00472,C00472,churn_risk_probability,0.6377,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.8%)
+REC_CUST_C00472,C00472,customer_recency_days,84.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00472,C00472,customer_total_spend,8659.31,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00472,C00472,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00472,C00472,average_order_value,2886.44,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00724,C00724,churn_risk_probability,0.6366,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.7%)
+REC_CUST_C00724,C00724,customer_recency_days,172.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00724,C00724,customer_total_spend,9080.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00724,C00724,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00724,C00724,average_order_value,3026.72,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00012,C00012,churn_risk_probability,0.6602,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.0%)
+REC_CUST_C00012,C00012,customer_recency_days,58.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00012,C00012,customer_total_spend,7661.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00012,C00012,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00012,C00012,average_order_value,2553.92,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02566,C02566,churn_risk_probability,0.6354,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.5%)
+REC_CUST_C02566,C02566,customer_recency_days,25.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02566,C02566,customer_total_spend,14241.53,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02566,C02566,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02566,C02566,average_order_value,2848.31,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01279,C01279,churn_risk_probability,0.6345,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
+REC_CUST_C01279,C01279,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01279,C01279,customer_total_spend,20478.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01279,C01279,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01279,C01279,average_order_value,6826.25,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02441,C02441,churn_risk_probability,0.6343,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
+REC_CUST_C02441,C02441,customer_recency_days,86.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02441,C02441,customer_total_spend,17662.96,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02441,C02441,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02441,C02441,average_order_value,8831.48,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03100,C03100,churn_risk_probability,0.6338,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
+REC_CUST_C03100,C03100,customer_recency_days,162.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03100,C03100,customer_total_spend,12168.01,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03100,C03100,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03100,C03100,average_order_value,3042.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00463,C00463,churn_risk_probability,0.6325,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.2%)
+REC_CUST_C00463,C00463,customer_recency_days,86.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00463,C00463,customer_total_spend,7503.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00463,C00463,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00463,C00463,average_order_value,3751.92,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01846,C01846,churn_risk_probability,0.6323,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.2%)
+REC_CUST_C01846,C01846,customer_recency_days,0.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01846,C01846,customer_total_spend,13903.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01846,C01846,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01846,C01846,average_order_value,3475.94,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02720,C02720,churn_risk_probability,0.6328,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.3%)
+REC_CUST_C02720,C02720,customer_recency_days,295.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02720,C02720,customer_total_spend,15900.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02720,C02720,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02720,C02720,average_order_value,15900.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00727,C00727,churn_risk_probability,0.631,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.1%)
+REC_CUST_C00727,C00727,customer_recency_days,28.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00727,C00727,customer_total_spend,14555.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00727,C00727,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00727,C00727,average_order_value,3638.89,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00516,C00516,churn_risk_probability,0.6305,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.0%)
+REC_CUST_C00516,C00516,customer_recency_days,232.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00516,C00516,customer_total_spend,19030.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00516,C00516,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00516,C00516,average_order_value,9515.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01950,C01950,churn_risk_probability,0.6301,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.0%)
+REC_CUST_C01950,C01950,customer_recency_days,47.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01950,C01950,customer_total_spend,15130.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01950,C01950,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01950,C01950,average_order_value,5043.65,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00740,C00740,churn_risk_probability,0.629,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.9%)
+REC_CUST_C00740,C00740,customer_recency_days,28.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00740,C00740,customer_total_spend,11001.96,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00740,C00740,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00740,C00740,average_order_value,3667.32,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00148,C00148,churn_risk_probability,0.6284,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
+REC_CUST_C00148,C00148,customer_recency_days,76.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00148,C00148,customer_total_spend,10172.04,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00148,C00148,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00148,C00148,average_order_value,3390.68,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02642,C02642,churn_risk_probability,0.6282,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
+REC_CUST_C02642,C02642,customer_recency_days,40.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02642,C02642,customer_total_spend,24782.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02642,C02642,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02642,C02642,average_order_value,4956.43,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02549,C02549,churn_risk_probability,0.6276,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
+REC_CUST_C02549,C02549,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02549,C02549,customer_total_spend,13214.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02549,C02549,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02549,C02549,average_order_value,4404.67,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00369,C00369,churn_risk_probability,0.6825,Phase 3 Churn Model,Inactivity likelihood within next 30 days (68.2%)
+REC_CUST_C00369,C00369,customer_recency_days,26.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00369,C00369,customer_total_spend,16643.32,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00369,C00369,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00369,C00369,average_order_value,2377.62,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01745,C01745,churn_risk_probability,0.6262,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.6%)
+REC_CUST_C01745,C01745,customer_recency_days,79.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01745,C01745,customer_total_spend,10852.04,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01745,C01745,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01745,C01745,average_order_value,5426.02,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02132,C02132,churn_risk_probability,0.6254,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.5%)
+REC_CUST_C02132,C02132,customer_recency_days,227.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02132,C02132,customer_total_spend,11356.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02132,C02132,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02132,C02132,average_order_value,5678.42,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01126,C01126,churn_risk_probability,0.6276,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
+REC_CUST_C01126,C01126,customer_recency_days,90.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01126,C01126,customer_total_spend,10728.87,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01126,C01126,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01126,C01126,average_order_value,2682.22,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00591,C00591,churn_risk_probability,0.6239,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.4%)
+REC_CUST_C00591,C00591,customer_recency_days,36.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00591,C00591,customer_total_spend,17308.23,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00591,C00591,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00591,C00591,average_order_value,5769.41,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01157,C01157,churn_risk_probability,0.6235,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.4%)
+REC_CUST_C01157,C01157,customer_recency_days,95.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01157,C01157,customer_total_spend,14442.29,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01157,C01157,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01157,C01157,average_order_value,2888.46,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01651,C01651,churn_risk_probability,0.6229,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.3%)
+REC_CUST_C01651,C01651,customer_recency_days,13.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01651,C01651,customer_total_spend,9029.6,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01651,C01651,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01651,C01651,average_order_value,3009.87,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00713,C00713,churn_risk_probability,0.6219,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.2%)
+REC_CUST_C00713,C00713,customer_recency_days,240.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00713,C00713,customer_total_spend,11885.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00713,C00713,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00713,C00713,average_order_value,5942.94,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00289,C00289,churn_risk_probability,0.6212,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.1%)
+REC_CUST_C00289,C00289,customer_recency_days,10.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00289,C00289,customer_total_spend,12423.53,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00289,C00289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00289,C00289,average_order_value,4141.18,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00450,C00450,churn_risk_probability,0.6205,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.1%)
+REC_CUST_C00450,C00450,customer_recency_days,91.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00450,C00450,customer_total_spend,11348.98,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00450,C00450,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00450,C00450,average_order_value,2837.24,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01328,C01328,churn_risk_probability,0.6471,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
+REC_CUST_C01328,C01328,customer_recency_days,56.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01328,C01328,customer_total_spend,12711.98,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01328,C01328,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01328,C01328,average_order_value,2542.4,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02917,C02917,churn_risk_probability,0.6203,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.0%)
+REC_CUST_C02917,C02917,customer_recency_days,99.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02917,C02917,customer_total_spend,6830.77,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02917,C02917,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02917,C02917,average_order_value,6830.77,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03289,C03289,churn_risk_probability,0.62,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.0%)
+REC_CUST_C03289,C03289,customer_recency_days,82.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03289,C03289,customer_total_spend,8511.25,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03289,C03289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03289,C03289,average_order_value,2837.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01554,C01554,churn_risk_probability,0.6192,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
+REC_CUST_C01554,C01554,customer_recency_days,64.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01554,C01554,customer_total_spend,15815.15,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01554,C01554,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01554,C01554,average_order_value,3163.03,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00567,C00567,churn_risk_probability,0.6187,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
+REC_CUST_C00567,C00567,customer_recency_days,78.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00567,C00567,customer_total_spend,12595.46,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00567,C00567,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00567,C00567,average_order_value,3148.86,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00058,C00058,churn_risk_probability,0.6181,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.8%)
+REC_CUST_C00058,C00058,customer_recency_days,170.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00058,C00058,customer_total_spend,17105.42,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00058,C00058,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00058,C00058,average_order_value,4276.35,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02429,C02429,churn_risk_probability,0.6185,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
+REC_CUST_C02429,C02429,customer_recency_days,26.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02429,C02429,customer_total_spend,13525.64,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02429,C02429,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02429,C02429,average_order_value,3381.41,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00955,C00955,churn_risk_probability,0.6174,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
+REC_CUST_C00955,C00955,customer_recency_days,277.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00955,C00955,customer_total_spend,18368.68,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00955,C00955,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00955,C00955,average_order_value,9184.34,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01998,C01998,churn_risk_probability,0.6177,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.8%)
+REC_CUST_C01998,C01998,customer_recency_days,19.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01998,C01998,customer_total_spend,12138.39,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01998,C01998,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01998,C01998,average_order_value,4046.13,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02848,C02848,churn_risk_probability,0.6173,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
+REC_CUST_C02848,C02848,customer_recency_days,99.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02848,C02848,customer_total_spend,9512.78,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02848,C02848,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02848,C02848,average_order_value,4756.39,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03199,C03199,churn_risk_probability,0.6168,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
+REC_CUST_C03199,C03199,customer_recency_days,140.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03199,C03199,customer_total_spend,13590.05,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03199,C03199,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03199,C03199,average_order_value,2718.01,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01707,C01707,churn_risk_probability,0.6165,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
+REC_CUST_C01707,C01707,customer_recency_days,121.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01707,C01707,customer_total_spend,11623.61,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01707,C01707,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01707,C01707,average_order_value,3874.54,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01588,C01588,churn_risk_probability,0.6253,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.5%)
+REC_CUST_C01588,C01588,customer_recency_days,12.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01588,C01588,customer_total_spend,13215.61,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01588,C01588,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01588,C01588,average_order_value,2643.12,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00949,C00949,churn_risk_probability,0.6151,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
+REC_CUST_C00949,C00949,customer_recency_days,148.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00949,C00949,customer_total_spend,16282.38,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00949,C00949,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00949,C00949,average_order_value,4070.6,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02922,C02922,churn_risk_probability,0.6147,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
+REC_CUST_C02922,C02922,customer_recency_days,319.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02922,C02922,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02922,C02922,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02922,C02922,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03139,C03139,churn_risk_probability,0.6147,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
+REC_CUST_C03139,C03139,customer_recency_days,130.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03139,C03139,customer_total_spend,13713.51,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03139,C03139,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03139,C03139,average_order_value,6856.76,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03279,C03279,churn_risk_probability,0.6145,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
+REC_CUST_C03279,C03279,customer_recency_days,152.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03279,C03279,customer_total_spend,7072.57,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03279,C03279,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03279,C03279,average_order_value,7072.57,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03375,C03375,churn_risk_probability,0.6141,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
+REC_CUST_C03375,C03375,customer_recency_days,115.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03375,C03375,customer_total_spend,13842.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03375,C03375,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03375,C03375,average_order_value,2768.48,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01160,C01160,churn_risk_probability,0.6138,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
+REC_CUST_C01160,C01160,customer_recency_days,215.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01160,C01160,customer_total_spend,11457.48,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01160,C01160,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01160,C01160,average_order_value,5728.74,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01679,C01679,churn_risk_probability,0.6136,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
+REC_CUST_C01679,C01679,customer_recency_days,75.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01679,C01679,customer_total_spend,24728.52,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01679,C01679,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01679,C01679,average_order_value,4945.7,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03410,C03410,churn_risk_probability,0.6137,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
+REC_CUST_C03410,C03410,customer_recency_days,265.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03410,C03410,customer_total_spend,10055.15,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03410,C03410,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03410,C03410,average_order_value,5027.58,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00671,C00671,churn_risk_probability,0.6124,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.2%)
+REC_CUST_C00671,C00671,customer_recency_days,155.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00671,C00671,customer_total_spend,10281.83,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00671,C00671,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00671,C00671,average_order_value,3427.28,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01891,C01891,churn_risk_probability,0.6125,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.3%)
+REC_CUST_C01891,C01891,customer_recency_days,300.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01891,C01891,customer_total_spend,12038.32,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01891,C01891,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01891,C01891,average_order_value,4012.77,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01099,C01099,churn_risk_probability,0.611,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
+REC_CUST_C01099,C01099,customer_recency_days,162.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01099,C01099,customer_total_spend,15078.1,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01099,C01099,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01099,C01099,average_order_value,7539.05,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02332,C02332,churn_risk_probability,0.6112,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
+REC_CUST_C02332,C02332,customer_recency_days,159.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02332,C02332,customer_total_spend,11572.49,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02332,C02332,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02332,C02332,average_order_value,2893.12,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01070,C01070,churn_risk_probability,0.6108,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
+REC_CUST_C01070,C01070,customer_recency_days,208.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01070,C01070,customer_total_spend,17067.6,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01070,C01070,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01070,C01070,average_order_value,4266.9,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02770,C02770,churn_risk_probability,0.6107,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
+REC_CUST_C02770,C02770,customer_recency_days,102.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02770,C02770,customer_total_spend,12801.74,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02770,C02770,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02770,C02770,average_order_value,3200.44,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00475,C00475,churn_risk_probability,0.6102,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
+REC_CUST_C00475,C00475,customer_recency_days,306.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00475,C00475,customer_total_spend,17693.31,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00475,C00475,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00475,C00475,average_order_value,8846.66,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02705,C02705,churn_risk_probability,0.6103,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
+REC_CUST_C02705,C02705,customer_recency_days,125.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02705,C02705,customer_total_spend,9019.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02705,C02705,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02705,C02705,average_order_value,4509.7,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01370,C01370,churn_risk_probability,0.6099,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
+REC_CUST_C01370,C01370,customer_recency_days,116.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01370,C01370,customer_total_spend,14739.47,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01370,C01370,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01370,C01370,average_order_value,2947.89,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01812,C01812,churn_risk_probability,0.6098,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
+REC_CUST_C01812,C01812,customer_recency_days,90.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01812,C01812,customer_total_spend,8130.83,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01812,C01812,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01812,C01812,average_order_value,4065.42,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00436,C00436,churn_risk_probability,0.6094,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
+REC_CUST_C00436,C00436,customer_recency_days,8.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00436,C00436,customer_total_spend,18375.99,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00436,C00436,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00436,C00436,average_order_value,3062.66,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00550,C00550,churn_risk_probability,0.6326,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.3%)
+REC_CUST_C00550,C00550,customer_recency_days,170.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00550,C00550,customer_total_spend,12806.59,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00550,C00550,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00550,C00550,average_order_value,2561.32,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01300,C01300,churn_risk_probability,0.6519,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.2%)
+REC_CUST_C01300,C01300,customer_recency_days,113.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01300,C01300,customer_total_spend,14672.81,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01300,C01300,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01300,C01300,average_order_value,2445.47,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01576,C01576,churn_risk_probability,0.6087,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
+REC_CUST_C01576,C01576,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01576,C01576,customer_total_spend,17145.62,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01576,C01576,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01576,C01576,average_order_value,2857.6,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01743,C01743,churn_risk_probability,0.6089,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
+REC_CUST_C01743,C01743,customer_recency_days,246.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01743,C01743,customer_total_spend,17689.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01743,C01743,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01743,C01743,average_order_value,4422.35,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02892,C02892,churn_risk_probability,0.6086,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
+REC_CUST_C02892,C02892,customer_recency_days,184.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02892,C02892,customer_total_spend,16871.32,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02892,C02892,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02892,C02892,average_order_value,8435.66,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01309,C01309,churn_risk_probability,0.6554,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.5%)
+REC_CUST_C01309,C01309,customer_recency_days,90.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01309,C01309,customer_total_spend,7262.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01309,C01309,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01309,C01309,average_order_value,2420.86,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01454,C01454,churn_risk_probability,0.6077,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.8%)
+REC_CUST_C01454,C01454,customer_recency_days,140.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01454,C01454,customer_total_spend,9224.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01454,C01454,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01454,C01454,average_order_value,4612.2,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02190,C02190,churn_risk_probability,0.608,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.8%)
+REC_CUST_C02190,C02190,customer_recency_days,237.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02190,C02190,customer_total_spend,15724.34,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02190,C02190,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02190,C02190,average_order_value,3931.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00420,C00420,churn_risk_probability,0.6071,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.7%)
+REC_CUST_C00420,C00420,customer_recency_days,214.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00420,C00420,customer_total_spend,11754.3,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00420,C00420,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00420,C00420,average_order_value,3918.1,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02952,C02952,churn_risk_probability,0.6071,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.7%)
+REC_CUST_C02952,C02952,customer_recency_days,100.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02952,C02952,customer_total_spend,15444.38,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02952,C02952,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02952,C02952,average_order_value,7722.19,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01584,C01584,churn_risk_probability,0.606,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
+REC_CUST_C01584,C01584,customer_recency_days,265.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01584,C01584,customer_total_spend,16663.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01584,C01584,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01584,C01584,average_order_value,8331.5,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01841,C01841,churn_risk_probability,0.6061,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
+REC_CUST_C01841,C01841,customer_recency_days,3.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01841,C01841,customer_total_spend,12901.89,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01841,C01841,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01841,C01841,average_order_value,3225.47,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00797,C00797,churn_risk_probability,0.6058,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
+REC_CUST_C00797,C00797,customer_recency_days,278.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00797,C00797,customer_total_spend,17266.01,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00797,C00797,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00797,C00797,average_order_value,5755.34,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01067,C01067,churn_risk_probability,0.6055,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
+REC_CUST_C01067,C01067,customer_recency_days,11.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01067,C01067,customer_total_spend,17477.37,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01067,C01067,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01067,C01067,average_order_value,3495.47,Phase 1 Feature Store,Average transaction basket value
+REC_SALES_PRD_LAP_02,PRD_LAP_02,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_LAP_02,PRD_LAP_02,product_revenue,1188873.16,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_LAP_02,PRD_LAP_02,unit_margin,289.0,Product Catalog,Profit margin ₹289.00 (57.9%)
+REC_SALES_PRD_LAP_02,PRD_LAP_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_SNK_01,PRD_SNK_01,forecast_7d_units,15.5,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_SNK_01,PRD_SNK_01,product_revenue,403820.34,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_SNK_01,PRD_SNK_01,unit_margin,23.0,Product Catalog,Profit margin ₹23.00 (51.1%)
+REC_SALES_PRD_SNK_01,PRD_SNK_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_ELE_01,PRD_ELE_01,forecast_7d_units,5.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_ELE_01,PRD_ELE_01,product_revenue,1080895.51,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_ELE_01,PRD_ELE_01,unit_margin,449.0,Product Catalog,Profit margin ₹449.00 (49.9%)
+REC_SALES_PRD_ELE_01,PRD_ELE_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_ACC_01,PRD_ACC_01,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_ACC_01,PRD_ACC_01,product_revenue,1250451.81,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_ACC_01,PRD_ACC_01,unit_margin,249.0,Product Catalog,Profit margin ₹249.00 (49.9%)
+REC_SALES_PRD_ACC_01,PRD_ACC_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_SNK_02,PRD_SNK_02,forecast_7d_units,15.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_SNK_02,PRD_SNK_02,product_revenue,380894.9,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_SNK_02,PRD_SNK_02,unit_margin,95.0,Product Catalog,Profit margin ₹95.00 (42.2%)
+REC_SALES_PRD_SNK_02,PRD_SNK_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_BEV_02,PRD_BEV_02,forecast_7d_units,5.0,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_BEV_02,PRD_BEV_02,product_revenue,246894.06,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_BEV_02,PRD_BEV_02,unit_margin,40.0,Product Catalog,Profit margin ₹40.00 (42.1%)
+REC_SALES_PRD_BEV_02,PRD_BEV_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_BEV_01,PRD_BEV_01,forecast_7d_units,6.2,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_BEV_01,PRD_BEV_01,product_revenue,233276.13,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_BEV_01,PRD_BEV_01,unit_margin,45.0,Product Catalog,Profit margin ₹45.00 (40.9%)
+REC_SALES_PRD_BEV_01,PRD_BEV_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_PRICE_PRD_SNK_01,PRD_SNK_01,forecast_7d_units,15.5,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_SNK_01,PRD_SNK_01,selling_price,45.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_SNK_01,PRD_SNK_01,unit_cost,22.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_SNK_01,PRD_SNK_01,unit_margin,23.0,Product Catalog,Unit margin ₹23.00 (51.1%)
+REC_PRICE_PRD_SNK_01,PRD_SNK_01,historical_avg_discount,0.0508,Historical Transactions,Average observed discount rate (5.1%)
+REC_PRICE_PRD_SNK_02,PRD_SNK_02,forecast_7d_units,15.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_SNK_02,PRD_SNK_02,selling_price,225.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_SNK_02,PRD_SNK_02,unit_cost,130.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_SNK_02,PRD_SNK_02,unit_margin,95.0,Product Catalog,Unit margin ₹95.00 (42.2%)
+REC_PRICE_PRD_SNK_02,PRD_SNK_02,historical_avg_discount,0.1193,Historical Transactions,Average observed discount rate (11.9%)
+REC_PRICE_PRD_LAP_02,PRD_LAP_02,forecast_7d_units,5.8,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_LAP_02,PRD_LAP_02,selling_price,499.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_LAP_02,PRD_LAP_02,unit_cost,210.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_LAP_02,PRD_LAP_02,unit_margin,289.0,Product Catalog,Unit margin ₹289.00 (57.9%)
+REC_PRICE_PRD_LAP_02,PRD_LAP_02,historical_avg_discount,0.0476,Historical Transactions,Average observed discount rate (4.8%)
+REC_PRICE_PRD_EAR_02,PRD_EAR_02,forecast_7d_units,4.9,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_EAR_02,PRD_EAR_02,selling_price,349.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_EAR_02,PRD_EAR_02,unit_cost,140.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_EAR_02,PRD_EAR_02,unit_margin,209.0,Product Catalog,Unit margin ₹209.00 (59.9%)
+REC_PRICE_PRD_EAR_02,PRD_EAR_02,historical_avg_discount,0.0801,Historical Transactions,Average observed discount rate (8.0%)
+REC_PRICE_PRD_ELE_01,PRD_ELE_01,forecast_7d_units,5.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_ELE_01,PRD_ELE_01,selling_price,899.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_ELE_01,PRD_ELE_01,unit_cost,450.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_ELE_01,PRD_ELE_01,unit_margin,449.0,Product Catalog,Unit margin ₹449.00 (49.9%)
+REC_PRICE_PRD_ELE_01,PRD_ELE_01,historical_avg_discount,0.0522,Historical Transactions,Average observed discount rate (5.2%)
+REC_PRICE_PRD_HOU_01,PRD_HOU_01,forecast_7d_units,4.9,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_HOU_01,PRD_HOU_01,selling_price,180.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_HOU_01,PRD_HOU_01,unit_cost,80.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_HOU_01,PRD_HOU_01,unit_margin,100.0,Product Catalog,Unit margin ₹100.00 (55.6%)
+REC_PRICE_PRD_HOU_01,PRD_HOU_01,historical_avg_discount,0.0699,Historical Transactions,Average observed discount rate (7.0%)
+REC_PRICE_PRD_PAS_02,PRD_PAS_02,forecast_7d_units,5.3,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_PAS_02,PRD_PAS_02,selling_price,110.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_PAS_02,PRD_PAS_02,unit_cost,50.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_PAS_02,PRD_PAS_02,unit_margin,60.0,Product Catalog,Unit margin ₹60.00 (54.5%)
+REC_PRICE_PRD_PAS_02,PRD_PAS_02,historical_avg_discount,0.0694,Historical Transactions,Average observed discount rate (6.9%)
+REC_PRICE_PRD_PAS_01,PRD_PAS_01,forecast_7d_units,5.8,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_PAS_01,PRD_PAS_01,selling_price,95.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_PAS_01,PRD_PAS_01,unit_cost,45.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_PAS_01,PRD_PAS_01,unit_margin,50.0,Product Catalog,Unit margin ₹50.00 (52.6%)
+REC_PRICE_PRD_PAS_01,PRD_PAS_01,historical_avg_discount,0.0597,Historical Transactions,Average observed discount rate (6.0%)
+REC_PRICE_PRD_ACC_01,PRD_ACC_01,forecast_7d_units,5.8,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_ACC_01,PRD_ACC_01,selling_price,499.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_ACC_01,PRD_ACC_01,unit_cost,250.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_ACC_01,PRD_ACC_01,unit_margin,249.0,Product Catalog,Unit margin ₹249.00 (49.9%)
+REC_PRICE_PRD_ACC_01,PRD_ACC_01,historical_avg_discount,0.0529,Historical Transactions,Average observed discount rate (5.3%)
+REC_PRICE_PRD_HOU_02,PRD_HOU_02,forecast_7d_units,5.8,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_HOU_02,PRD_HOU_02,selling_price,320.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_HOU_02,PRD_HOU_02,unit_cost,160.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_HOU_02,PRD_HOU_02,unit_margin,160.0,Product Catalog,Unit margin ₹160.00 (50.0%)
+REC_PRICE_PRD_HOU_02,PRD_HOU_02,historical_avg_discount,0.1171,Historical Transactions,Average observed discount rate (11.7%)
+REC_PRICE_PRD_BRD_02,PRD_BRD_02,forecast_7d_units,5.3,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_BRD_02,PRD_BRD_02,selling_price,140.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_BRD_02,PRD_BRD_02,unit_cost,75.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_BRD_02,PRD_BRD_02,unit_margin,65.0,Product Catalog,Unit margin ₹65.00 (46.4%)
+REC_PRICE_PRD_BRD_02,PRD_BRD_02,historical_avg_discount,0.0868,Historical Transactions,Average observed discount rate (8.7%)
+REC_PRICE_PRD_WEL_01,PRD_WEL_01,forecast_7d_units,5.2,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_WEL_01,PRD_WEL_01,selling_price,375.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_WEL_01,PRD_WEL_01,unit_cost,220.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_WEL_01,PRD_WEL_01,unit_margin,155.0,Product Catalog,Unit margin ₹155.00 (41.3%)
+REC_PRICE_PRD_WEL_01,PRD_WEL_01,historical_avg_discount,0.1019,Historical Transactions,Average observed discount rate (10.2%)
+REC_PRICE_PRD_BEV_01,PRD_BEV_01,forecast_7d_units,6.2,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_BEV_01,PRD_BEV_01,selling_price,110.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_BEV_01,PRD_BEV_01,unit_cost,65.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_BEV_01,PRD_BEV_01,unit_margin,45.0,Product Catalog,Unit margin ₹45.00 (40.9%)
+REC_PRICE_PRD_BEV_01,PRD_BEV_01,historical_avg_discount,0.0529,Historical Transactions,Average observed discount rate (5.3%)
+REC_PRICE_PRD_BEV_02,PRD_BEV_02,forecast_7d_units,5.0,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_BEV_02,PRD_BEV_02,selling_price,95.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_BEV_02,PRD_BEV_02,unit_cost,55.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_BEV_02,PRD_BEV_02,unit_margin,40.0,Product Catalog,Unit margin ₹40.00 (42.1%)
+REC_PRICE_PRD_BEV_02,PRD_BEV_02,historical_avg_discount,0.0477,Historical Transactions,Average observed discount rate (4.8%)
+REC_PRICE_PRD_MOB_01,PRD_MOB_01,forecast_7d_units,4.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_MOB_01,PRD_MOB_01,selling_price,6499.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_MOB_01,PRD_MOB_01,unit_cost,4800.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_MOB_01,PRD_MOB_01,unit_margin,1699.0,Product Catalog,Unit margin ₹1699.00 (26.1%)
+REC_PRICE_PRD_MOB_01,PRD_MOB_01,historical_avg_discount,0.3143,Historical Transactions,Average observed discount rate (31.4%)
+REC_PRICE_PRD_MOB_02,PRD_MOB_02,forecast_7d_units,3.1,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_MOB_02,PRD_MOB_02,selling_price,11999.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_MOB_02,PRD_MOB_02,unit_cost,8800.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_MOB_02,PRD_MOB_02,unit_margin,3199.0,Product Catalog,Unit margin ₹3199.00 (26.7%)
+REC_PRICE_PRD_MOB_02,PRD_MOB_02,historical_avg_discount,0.5412,Historical Transactions,Average observed discount rate (54.1%)
+REC_PRICE_PRD_EAR_01,PRD_EAR_01,forecast_7d_units,4.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_EAR_01,PRD_EAR_01,selling_price,1299.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_EAR_01,PRD_EAR_01,unit_cost,650.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_EAR_01,PRD_EAR_01,unit_margin,649.0,Product Catalog,Unit margin ₹649.00 (50.0%)
+REC_PRICE_PRD_EAR_01,PRD_EAR_01,historical_avg_discount,0.3219,Historical Transactions,Average observed discount rate (32.2%)
+REC_PRICE_PRD_CHG_01,PRD_CHG_01,forecast_7d_units,4.9,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_CHG_01,PRD_CHG_01,selling_price,699.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_CHG_01,PRD_CHG_01,unit_cost,320.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_CHG_01,PRD_CHG_01,unit_margin,379.0,Product Catalog,Unit margin ₹379.00 (54.2%)
+REC_PRICE_PRD_CHG_01,PRD_CHG_01,historical_avg_discount,0.1579,Historical Transactions,Average observed discount rate (15.8%)
+REC_PRICE_PRD_CAK_02,PRD_CAK_02,forecast_7d_units,6.1,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_CAK_02,PRD_CAK_02,selling_price,450.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_CAK_02,PRD_CAK_02,unit_cost,220.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_CAK_02,PRD_CAK_02,unit_margin,230.0,Product Catalog,Unit margin ₹230.00 (51.1%)
+REC_PRICE_PRD_CAK_02,PRD_CAK_02,historical_avg_discount,0.2941,Historical Transactions,Average observed discount rate (29.4%)
+REC_PRICE_PRD_CHG_02,PRD_CHG_02,forecast_7d_units,4.0,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_CHG_02,PRD_CHG_02,selling_price,999.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_CHG_02,PRD_CHG_02,unit_cost,450.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_CHG_02,PRD_CHG_02,unit_margin,549.0,Product Catalog,Unit margin ₹549.00 (54.9%)
+REC_PRICE_PRD_CHG_02,PRD_CHG_02,historical_avg_discount,0.2308,Historical Transactions,Average observed discount rate (23.1%)
+REC_PRICE_PRD_NOT_02,PRD_NOT_02,forecast_7d_units,5.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_NOT_02,PRD_NOT_02,selling_price,260.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_NOT_02,PRD_NOT_02,unit_cost,130.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_NOT_02,PRD_NOT_02,unit_margin,130.0,Product Catalog,Unit margin ₹130.00 (50.0%)
+REC_PRICE_PRD_NOT_02,PRD_NOT_02,historical_avg_discount,0.2477,Historical Transactions,Average observed discount rate (24.8%)
+REC_PRICE_PRD_DES_01,PRD_DES_01,forecast_7d_units,6.7,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_DES_01,PRD_DES_01,selling_price,220.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_DES_01,PRD_DES_01,unit_cost,120.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_DES_01,PRD_DES_01,unit_margin,100.0,Product Catalog,Unit margin ₹100.00 (45.5%)
+REC_PRICE_PRD_DES_01,PRD_DES_01,historical_avg_discount,0.1838,Historical Transactions,Average observed discount rate (18.4%)
+REC_PRICE_PRD_TEA_02,PRD_TEA_02,forecast_7d_units,5.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_TEA_02,PRD_TEA_02,selling_price,210.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_TEA_02,PRD_TEA_02,unit_cost,110.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_TEA_02,PRD_TEA_02,unit_margin,100.0,Product Catalog,Unit margin ₹100.00 (47.6%)
+REC_PRICE_PRD_TEA_02,PRD_TEA_02,historical_avg_discount,0.1745,Historical Transactions,Average observed discount rate (17.5%)
+REC_PRICE_PRD_CAK_01,PRD_CAK_01,forecast_7d_units,5.2,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_CAK_01,PRD_CAK_01,selling_price,550.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_CAK_01,PRD_CAK_01,unit_cost,280.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_CAK_01,PRD_CAK_01,unit_margin,270.0,Product Catalog,Unit margin ₹270.00 (49.1%)
+REC_PRICE_PRD_CAK_01,PRD_CAK_01,historical_avg_discount,0.3389,Historical Transactions,Average observed discount rate (33.9%)
+REC_PRICE_PRD_MEN_02,PRD_MEN_02,forecast_7d_units,2.7,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_MEN_02,PRD_MEN_02,selling_price,1199.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_MEN_02,PRD_MEN_02,unit_cost,550.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_MEN_02,PRD_MEN_02,unit_margin,649.0,Product Catalog,Unit margin ₹649.00 (54.1%)
+REC_PRICE_PRD_MEN_02,PRD_MEN_02,historical_avg_discount,0.2193,Historical Transactions,Average observed discount rate (21.9%)
+REC_PRICE_PRD_DES_02,PRD_DES_02,forecast_7d_units,4.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_DES_02,PRD_DES_02,selling_price,180.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_DES_02,PRD_DES_02,unit_cost,90.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_DES_02,PRD_DES_02,unit_margin,90.0,Product Catalog,Unit margin ₹90.00 (50.0%)
+REC_PRICE_PRD_DES_02,PRD_DES_02,historical_avg_discount,0.1521,Historical Transactions,Average observed discount rate (15.2%)
+REC_PRICE_PRD_COF_02,PRD_COF_02,forecast_7d_units,4.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_COF_02,PRD_COF_02,selling_price,280.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_COF_02,PRD_COF_02,unit_cost,150.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_COF_02,PRD_COF_02,unit_margin,130.0,Product Catalog,Unit margin ₹130.00 (46.4%)
+REC_PRICE_PRD_COF_02,PRD_COF_02,historical_avg_discount,0.2799,Historical Transactions,Average observed discount rate (28.0%)
+REC_PRICE_PRD_ART_01,PRD_ART_01,forecast_7d_units,5.2,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_ART_01,PRD_ART_01,selling_price,320.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_ART_01,PRD_ART_01,unit_cost,180.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_ART_01,PRD_ART_01,unit_margin,140.0,Product Catalog,Unit margin ₹140.00 (43.8%)
+REC_PRICE_PRD_ART_01,PRD_ART_01,historical_avg_discount,0.2402,Historical Transactions,Average observed discount rate (24.0%)
+REC_PRICE_PRD_TEA_01,PRD_TEA_01,forecast_7d_units,4.5,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_TEA_01,PRD_TEA_01,selling_price,240.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_TEA_01,PRD_TEA_01,unit_cost,130.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_TEA_01,PRD_TEA_01,unit_margin,110.0,Product Catalog,Unit margin ₹110.00 (45.8%)
+REC_PRICE_PRD_TEA_01,PRD_TEA_01,historical_avg_discount,0.2314,Historical Transactions,Average observed discount rate (23.1%)
+REC_PRICE_PRD_WOM_02,PRD_WOM_02,forecast_7d_units,1.6,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_WOM_02,PRD_WOM_02,selling_price,1499.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_WOM_02,PRD_WOM_02,unit_cost,650.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_WOM_02,PRD_WOM_02,unit_margin,849.0,Product Catalog,Unit margin ₹849.00 (56.6%)
+REC_PRICE_PRD_WOM_02,PRD_WOM_02,historical_avg_discount,0.204,Historical Transactions,Average observed discount rate (20.4%)
+REC_PRICE_PRD_MEA_02,PRD_MEA_02,forecast_7d_units,2.7,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_MEA_02,PRD_MEA_02,selling_price,250.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_MEA_02,PRD_MEA_02,unit_cost,125.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_MEA_02,PRD_MEA_02,unit_margin,125.0,Product Catalog,Unit margin ₹125.00 (50.0%)
+REC_PRICE_PRD_MEA_02,PRD_MEA_02,historical_avg_discount,0.1701,Historical Transactions,Average observed discount rate (17.0%)
+REC_PRICE_PRD_COF_01,PRD_COF_01,forecast_7d_units,3.5,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_COF_01,PRD_COF_01,selling_price,380.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_COF_01,PRD_COF_01,unit_cost,210.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_COF_01,PRD_COF_01,unit_margin,170.0,Product Catalog,Unit margin ₹170.00 (44.7%)
+REC_PRICE_PRD_COF_01,PRD_COF_01,historical_avg_discount,0.325,Historical Transactions,Average observed discount rate (32.5%)
+REC_PRICE_PRD_OFF_02,PRD_OFF_02,forecast_7d_units,3.8,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_OFF_02,PRD_OFF_02,selling_price,310.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_OFF_02,PRD_OFF_02,unit_cost,190.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_OFF_02,PRD_OFF_02,unit_margin,120.0,Product Catalog,Unit margin ₹120.00 (38.7%)
+REC_PRICE_PRD_OFF_02,PRD_OFF_02,historical_avg_discount,0.3041,Historical Transactions,Average observed discount rate (30.4%)
+REC_PRICE_PRD_STA_01,PRD_STA_01,forecast_7d_units,4.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_STA_01,PRD_STA_01,selling_price,540.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_STA_01,PRD_STA_01,unit_cost,380.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_STA_01,PRD_STA_01,unit_margin,160.0,Product Catalog,Unit margin ₹160.00 (29.6%)
+REC_PRICE_PRD_STA_01,PRD_STA_01,historical_avg_discount,0.2513,Historical Transactions,Average observed discount rate (25.1%)
+REC_PRICE_PRD_BABY_01,PRD_BABY_01,forecast_7d_units,1.6,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_BABY_01,PRD_BABY_01,selling_price,799.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_BABY_01,PRD_BABY_01,unit_cost,550.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_BABY_01,PRD_BABY_01,unit_margin,249.0,Product Catalog,Unit margin ₹249.00 (31.2%)
+REC_PRICE_PRD_BABY_01,PRD_BABY_01,historical_avg_discount,0.2298,Historical Transactions,Average observed discount rate (23.0%)
+REC_SALES_PRD_CAS_02,PRD_CAS_02,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_CAS_02,PRD_CAS_02,product_revenue,210168.77,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_CAS_02,PRD_CAS_02,unit_margin,270.0,Product Catalog,Profit margin ₹270.00 (60.0%)
+REC_SALES_PRD_CAS_02,PRD_CAS_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_CAB_01,PRD_CAB_01,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_CAB_01,PRD_CAB_01,product_revenue,205547.47,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_CAB_01,PRD_CAB_01,unit_margin,179.0,Product Catalog,Profit margin ₹179.00 (59.9%)
+REC_SALES_PRD_CAB_01,PRD_CAB_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_WOM_01,PRD_WOM_01,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_WOM_01,PRD_WOM_01,product_revenue,80642.89,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_WOM_01,PRD_WOM_01,unit_margin,389.0,Product Catalog,Profit margin ₹389.00 (55.6%)
+REC_SALES_PRD_WOM_01,PRD_WOM_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_WOM_01,PRD_WOM_01,selling_price,699.0,Product Catalog,Current shelf price
+REC_SALES_PRD_WOM_01,PRD_WOM_01,unit_cost,310.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_WOM_01,PRD_WOM_01,historical_avg_discount,0.0976,Historical Transactions,Average observed discount rate (9.8%)
+REC_SALES_PRD_HOU_01,PRD_HOU_01,forecast_7d_units,4.9,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_HOU_01,PRD_HOU_01,product_revenue,165761.3,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_HOU_01,PRD_HOU_01,unit_margin,100.0,Product Catalog,Profit margin ₹100.00 (55.6%)
+REC_SALES_PRD_HOU_01,PRD_HOU_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_PAS_02,PRD_PAS_02,forecast_7d_units,5.3,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_PAS_02,PRD_PAS_02,product_revenue,113494.86,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_PAS_02,PRD_PAS_02,unit_margin,60.0,Product Catalog,Profit margin ₹60.00 (54.5%)
+REC_SALES_PRD_PAS_02,PRD_PAS_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_CHG_01,PRD_CHG_01,forecast_7d_units,4.9,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_CHG_01,PRD_CHG_01,product_revenue,209803.16,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_CHG_01,PRD_CHG_01,unit_margin,379.0,Product Catalog,Profit margin ₹379.00 (54.2%)
+REC_SALES_PRD_CHG_01,PRD_CHG_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MEN_02,PRD_MEN_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_MEN_02,PRD_MEN_02,product_revenue,127503.96,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_MEN_02,PRD_MEN_02,unit_margin,649.0,Product Catalog,Profit margin ₹649.00 (54.1%)
+REC_SALES_PRD_MEN_02,PRD_MEN_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_KID_01,PRD_KID_01,forecast_7d_units,2.9,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_KID_01,PRD_KID_01,product_revenue,98595.32,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_KID_01,PRD_KID_01,unit_margin,189.0,Product Catalog,Profit margin ₹189.00 (54.1%)
+REC_SALES_PRD_KID_01,PRD_KID_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_KID_01,PRD_KID_01,selling_price,349.0,Product Catalog,Current shelf price
+REC_SALES_PRD_KID_01,PRD_KID_01,unit_cost,160.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_KID_01,PRD_KID_01,historical_avg_discount,0.0676,Historical Transactions,Average observed discount rate (6.8%)
+REC_SALES_PRD_KID_02,PRD_KID_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_KID_02,PRD_KID_02,product_revenue,63048.52,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_KID_02,PRD_KID_02,unit_margin,145.0,Product Catalog,Profit margin ₹145.00 (52.7%)
+REC_SALES_PRD_KID_02,PRD_KID_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_KID_02,PRD_KID_02,selling_price,275.0,Product Catalog,Current shelf price
+REC_SALES_PRD_KID_02,PRD_KID_02,unit_cost,130.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_KID_02,PRD_KID_02,historical_avg_discount,0.0598,Historical Transactions,Average observed discount rate (6.0%)
+REC_SALES_PRD_PAS_01,PRD_PAS_01,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_PAS_01,PRD_PAS_01,product_revenue,115361.08,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_PAS_01,PRD_PAS_01,unit_margin,50.0,Product Catalog,Profit margin ₹50.00 (52.6%)
+REC_SALES_PRD_PAS_01,PRD_PAS_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MEN_01,PRD_MEN_01,forecast_7d_units,3.5,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_MEN_01,PRD_MEN_01,product_revenue,99345.02,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_MEN_01,PRD_MEN_01,unit_margin,419.0,Product Catalog,Profit margin ₹419.00 (52.4%)
+REC_SALES_PRD_MEN_01,PRD_MEN_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MEN_01,PRD_MEN_01,selling_price,799.0,Product Catalog,Current shelf price
+REC_SALES_PRD_MEN_01,PRD_MEN_01,unit_cost,380.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_MEN_01,PRD_MEN_01,historical_avg_discount,0.1103,Historical Transactions,Average observed discount rate (11.0%)
+REC_SALES_PRD_WRI_02,PRD_WRI_02,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_WRI_02,PRD_WRI_02,product_revenue,52323.98,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_WRI_02,PRD_WRI_02,unit_margin,60.0,Product Catalog,Profit margin ₹60.00 (52.2%)
+REC_SALES_PRD_WRI_02,PRD_WRI_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_CAK_02,PRD_CAK_02,forecast_7d_units,6.1,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_CAK_02,PRD_CAK_02,product_revenue,115532.03,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_CAK_02,PRD_CAK_02,unit_margin,230.0,Product Catalog,Profit margin ₹230.00 (51.1%)
+REC_SALES_PRD_CAK_02,PRD_CAK_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_EAR_01,PRD_EAR_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_EAR_01,PRD_EAR_01,product_revenue,214882.96,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_EAR_01,PRD_EAR_01,unit_margin,649.0,Product Catalog,Profit margin ₹649.00 (50.0%)
+REC_SALES_PRD_EAR_01,PRD_EAR_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_NOT_02,PRD_NOT_02,forecast_7d_units,5.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_NOT_02,PRD_NOT_02,product_revenue,53992.71,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_NOT_02,PRD_NOT_02,unit_margin,130.0,Product Catalog,Profit margin ₹130.00 (50.0%)
+REC_SALES_PRD_NOT_02,PRD_NOT_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_HOU_02,PRD_HOU_02,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_HOU_02,PRD_HOU_02,product_revenue,181382.78,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_HOU_02,PRD_HOU_02,unit_margin,160.0,Product Catalog,Profit margin ₹160.00 (50.0%)
+REC_SALES_PRD_HOU_02,PRD_HOU_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_WRI_01,PRD_WRI_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_WRI_01,PRD_WRI_01,product_revenue,44380.2,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_WRI_01,PRD_WRI_01,unit_margin,45.0,Product Catalog,Profit margin ₹45.00 (50.0%)
+REC_SALES_PRD_WRI_01,PRD_WRI_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MEA_01,PRD_MEA_01,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_MEA_01,PRD_MEA_01,product_revenue,36417.86,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_MEA_01,PRD_MEA_01,unit_margin,110.0,Product Catalog,Profit margin ₹110.00 (50.0%)
+REC_SALES_PRD_MEA_01,PRD_MEA_01,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_DES_02,PRD_DES_02,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_DES_02,PRD_DES_02,product_revenue,97835.53,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_DES_02,PRD_DES_02,unit_margin,90.0,Product Catalog,Profit margin ₹90.00 (50.0%)
+REC_SALES_PRD_DES_02,PRD_DES_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MED_02,PRD_MED_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_MED_02,PRD_MED_02,product_revenue,73575.14,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_MED_02,PRD_MED_02,unit_margin,120.0,Product Catalog,Profit margin ₹120.00 (50.0%)
+REC_SALES_PRD_MED_02,PRD_MED_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_MED_02,PRD_MED_02,selling_price,240.0,Product Catalog,Current shelf price
+REC_SALES_PRD_MED_02,PRD_MED_02,unit_cost,120.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_MED_02,PRD_MED_02,historical_avg_discount,0.0583,Historical Transactions,Average observed discount rate (5.8%)
+REC_SALES_PRD_WEL_02,PRD_WEL_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_WEL_02,PRD_WEL_02,product_revenue,65510.15,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_WEL_02,PRD_WEL_02,unit_margin,140.0,Product Catalog,Profit margin ₹140.00 (50.0%)
+REC_SALES_PRD_WEL_02,PRD_WEL_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_SALES_PRD_WEL_02,PRD_WEL_02,selling_price,280.0,Product Catalog,Current shelf price
+REC_SALES_PRD_WEL_02,PRD_WEL_02,unit_cost,140.0,Product Catalog,Wholesale inventory replacement cost
+REC_SALES_PRD_WEL_02,PRD_WEL_02,historical_avg_discount,0.0821,Historical Transactions,Average observed discount rate (8.2%)
+REC_SALES_PRD_MEA_02,PRD_MEA_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day unit demand
+REC_SALES_PRD_MEA_02,PRD_MEA_02,product_revenue,36469.95,Phase 1 Feature Store,Historical total revenue
+REC_SALES_PRD_MEA_02,PRD_MEA_02,unit_margin,125.0,Product Catalog,Profit margin ₹125.00 (50.0%)
+REC_SALES_PRD_MEA_02,PRD_MEA_02,business_trend,DECREASING,Phase 3 Trend Model,Overall store revenue trajectory
+REC_INV_PRD_SNK_01,PRD_SNK_01,forecast_7d_units,15.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_SNK_01,PRD_SNK_01,daily_demand_velocity,2.22,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_SNK_01,PRD_SNK_01,safety_stock_units,5.04,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_SNK_01,PRD_SNK_01,reorder_point_units,11.69,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_SNK_01,PRD_SNK_01,unit_margin,23.0,Product Catalog,Unit profit ₹23.00 (51% margin)
+REC_INV_PRD_SNK_01,PRD_SNK_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_SNK_02,PRD_SNK_02,forecast_7d_units,15.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_SNK_02,PRD_SNK_02,daily_demand_velocity,2.2,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_SNK_02,PRD_SNK_02,safety_stock_units,4.55,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_SNK_02,PRD_SNK_02,reorder_point_units,11.14,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_SNK_02,PRD_SNK_02,unit_margin,95.0,Product Catalog,Unit profit ₹95.00 (42% margin)
+REC_INV_PRD_SNK_02,PRD_SNK_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MOB_01,PRD_MOB_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MOB_01,PRD_MOB_01,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MOB_01,PRD_MOB_01,safety_stock_units,2.4,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MOB_01,PRD_MOB_01,reorder_point_units,4.29,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MOB_01,PRD_MOB_01,unit_margin,1699.0,Product Catalog,Unit profit ₹1699.00 (26% margin)
+REC_INV_PRD_MOB_01,PRD_MOB_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_LAP_02,PRD_LAP_02,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_LAP_02,PRD_LAP_02,daily_demand_velocity,0.82,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_LAP_02,PRD_LAP_02,safety_stock_units,2.45,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_LAP_02,PRD_LAP_02,reorder_point_units,4.92,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_LAP_02,PRD_LAP_02,unit_margin,289.0,Product Catalog,Unit profit ₹289.00 (58% margin)
+REC_INV_PRD_LAP_02,PRD_LAP_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_EAR_02,PRD_EAR_02,forecast_7d_units,4.9,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_EAR_02,PRD_EAR_02,daily_demand_velocity,0.7,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_EAR_02,PRD_EAR_02,safety_stock_units,2.42,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_EAR_02,PRD_EAR_02,reorder_point_units,4.52,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_EAR_02,PRD_EAR_02,unit_margin,209.0,Product Catalog,Unit profit ₹209.00 (60% margin)
+REC_INV_PRD_EAR_02,PRD_EAR_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ELE_01,PRD_ELE_01,forecast_7d_units,5.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ELE_01,PRD_ELE_01,daily_demand_velocity,0.77,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ELE_01,PRD_ELE_01,safety_stock_units,2.51,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ELE_01,PRD_ELE_01,reorder_point_units,4.83,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ELE_01,PRD_ELE_01,unit_margin,449.0,Product Catalog,Unit profit ₹449.00 (50% margin)
+REC_INV_PRD_ELE_01,PRD_ELE_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAB_01,PRD_CAB_01,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAB_01,PRD_CAB_01,daily_demand_velocity,0.64,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAB_01,PRD_CAB_01,safety_stock_units,2.63,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAB_01,PRD_CAB_01,reorder_point_units,4.55,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAB_01,PRD_CAB_01,unit_margin,179.0,Product Catalog,Unit profit ₹179.00 (60% margin)
+REC_INV_PRD_CAB_01,PRD_CAB_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MOB_02,PRD_MOB_02,forecast_7d_units,3.1,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MOB_02,PRD_MOB_02,daily_demand_velocity,0.45,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MOB_02,PRD_MOB_02,safety_stock_units,2.72,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MOB_02,PRD_MOB_02,reorder_point_units,4.07,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MOB_02,PRD_MOB_02,unit_margin,3199.0,Product Catalog,Unit profit ₹3199.00 (27% margin)
+REC_INV_PRD_MOB_02,PRD_MOB_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_EAR_01,PRD_EAR_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_EAR_01,PRD_EAR_01,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_EAR_01,PRD_EAR_01,safety_stock_units,2.77,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_EAR_01,PRD_EAR_01,reorder_point_units,4.66,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_EAR_01,PRD_EAR_01,unit_margin,649.0,Product Catalog,Unit profit ₹649.00 (50% margin)
+REC_INV_PRD_EAR_01,PRD_EAR_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAB_02,PRD_CAB_02,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAB_02,PRD_CAB_02,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAB_02,PRD_CAB_02,safety_stock_units,2.63,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAB_02,PRD_CAB_02,reorder_point_units,4.52,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAB_02,PRD_CAB_02,unit_margin,209.0,Product Catalog,Unit profit ₹209.00 (60% margin)
+REC_INV_PRD_CAB_02,PRD_CAB_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ELE_02,PRD_ELE_02,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ELE_02,PRD_ELE_02,daily_demand_velocity,0.65,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ELE_02,PRD_ELE_02,safety_stock_units,2.33,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ELE_02,PRD_ELE_02,reorder_point_units,4.27,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ELE_02,PRD_ELE_02,unit_margin,549.0,Product Catalog,Unit profit ₹549.00 (50% margin)
+REC_INV_PRD_ELE_02,PRD_ELE_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CHG_01,PRD_CHG_01,forecast_7d_units,4.9,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CHG_01,PRD_CHG_01,daily_demand_velocity,0.69,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CHG_01,PRD_CHG_01,safety_stock_units,2.33,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CHG_01,PRD_CHG_01,reorder_point_units,4.41,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CHG_01,PRD_CHG_01,unit_margin,379.0,Product Catalog,Unit profit ₹379.00 (54% margin)
+REC_INV_PRD_CHG_01,PRD_CHG_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAK_02,PRD_CAK_02,forecast_7d_units,6.1,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAK_02,PRD_CAK_02,daily_demand_velocity,0.87,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAK_02,PRD_CAK_02,safety_stock_units,3.02,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAK_02,PRD_CAK_02,reorder_point_units,5.63,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAK_02,PRD_CAK_02,unit_margin,230.0,Product Catalog,Unit profit ₹230.00 (51% margin)
+REC_INV_PRD_CAK_02,PRD_CAK_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_HOU_01,PRD_HOU_01,forecast_7d_units,4.9,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_HOU_01,PRD_HOU_01,daily_demand_velocity,0.7,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_HOU_01,PRD_HOU_01,safety_stock_units,3.12,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_HOU_01,PRD_HOU_01,reorder_point_units,5.22,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_HOU_01,PRD_HOU_01,unit_margin,100.0,Product Catalog,Unit profit ₹100.00 (56% margin)
+REC_INV_PRD_HOU_01,PRD_HOU_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_PAS_02,PRD_PAS_02,forecast_7d_units,5.3,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_PAS_02,PRD_PAS_02,daily_demand_velocity,0.76,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_PAS_02,PRD_PAS_02,safety_stock_units,3.67,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_PAS_02,PRD_PAS_02,reorder_point_units,5.95,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_PAS_02,PRD_PAS_02,unit_margin,60.0,Product Catalog,Unit profit ₹60.00 (55% margin)
+REC_INV_PRD_PAS_02,PRD_PAS_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_LAP_01,PRD_LAP_01,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_LAP_01,PRD_LAP_01,daily_demand_velocity,0.64,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_LAP_01,PRD_LAP_01,safety_stock_units,2.7,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_LAP_01,PRD_LAP_01,reorder_point_units,4.62,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_LAP_01,PRD_LAP_01,unit_margin,479.0,Product Catalog,Unit profit ₹479.00 (53% margin)
+REC_INV_PRD_LAP_01,PRD_LAP_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_PAS_01,PRD_PAS_01,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_PAS_01,PRD_PAS_01,daily_demand_velocity,0.82,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_PAS_01,PRD_PAS_01,safety_stock_units,3.07,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_PAS_01,PRD_PAS_01,reorder_point_units,5.53,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_PAS_01,PRD_PAS_01,unit_margin,50.0,Product Catalog,Unit profit ₹50.00 (53% margin)
+REC_INV_PRD_PAS_01,PRD_PAS_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ACC_02,PRD_ACC_02,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ACC_02,PRD_ACC_02,daily_demand_velocity,0.65,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ACC_02,PRD_ACC_02,safety_stock_units,2.27,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ACC_02,PRD_ACC_02,reorder_point_units,4.21,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ACC_02,PRD_ACC_02,unit_margin,379.0,Product Catalog,Unit profit ₹379.00 (54% margin)
+REC_INV_PRD_ACC_02,PRD_ACC_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAS_01,PRD_CAS_01,forecast_7d_units,3.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAS_01,PRD_CAS_01,daily_demand_velocity,0.48,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAS_01,PRD_CAS_01,safety_stock_units,2.74,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAS_01,PRD_CAS_01,reorder_point_units,4.19,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAS_01,PRD_CAS_01,unit_margin,159.0,Product Catalog,Unit profit ₹159.00 (64% margin)
+REC_INV_PRD_CAS_01,PRD_CAS_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAS_02,PRD_CAS_02,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAS_02,PRD_CAS_02,daily_demand_velocity,0.51,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAS_02,PRD_CAS_02,safety_stock_units,2.72,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAS_02,PRD_CAS_02,reorder_point_units,4.26,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAS_02,PRD_CAS_02,unit_margin,270.0,Product Catalog,Unit profit ₹270.00 (60% margin)
+REC_INV_PRD_CAS_02,PRD_CAS_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ACC_01,PRD_ACC_01,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ACC_01,PRD_ACC_01,daily_demand_velocity,0.83,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ACC_01,PRD_ACC_01,safety_stock_units,2.84,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ACC_01,PRD_ACC_01,reorder_point_units,5.32,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ACC_01,PRD_ACC_01,unit_margin,249.0,Product Catalog,Unit profit ₹249.00 (50% margin)
+REC_INV_PRD_ACC_01,PRD_ACC_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CHG_02,PRD_CHG_02,forecast_7d_units,4.0,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CHG_02,PRD_CHG_02,daily_demand_velocity,0.57,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CHG_02,PRD_CHG_02,safety_stock_units,2.61,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CHG_02,PRD_CHG_02,reorder_point_units,4.32,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CHG_02,PRD_CHG_02,unit_margin,549.0,Product Catalog,Unit profit ₹549.00 (55% margin)
+REC_INV_PRD_CHG_02,PRD_CHG_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_NOT_02,PRD_NOT_02,forecast_7d_units,5.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_NOT_02,PRD_NOT_02,daily_demand_velocity,0.78,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_NOT_02,PRD_NOT_02,safety_stock_units,2.4,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_NOT_02,PRD_NOT_02,reorder_point_units,4.73,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_NOT_02,PRD_NOT_02,unit_margin,130.0,Product Catalog,Unit profit ₹130.00 (50% margin)
+REC_INV_PRD_NOT_02,PRD_NOT_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_HOU_02,PRD_HOU_02,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_HOU_02,PRD_HOU_02,daily_demand_velocity,0.83,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_HOU_02,PRD_HOU_02,safety_stock_units,2.99,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_HOU_02,PRD_HOU_02,reorder_point_units,5.47,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_HOU_02,PRD_HOU_02,unit_margin,160.0,Product Catalog,Unit profit ₹160.00 (50% margin)
+REC_INV_PRD_HOU_02,PRD_HOU_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_PRICE_PRD_CAS_01,PRD_CAS_01,forecast_7d_units,3.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_CAS_01,PRD_CAS_01,selling_price,249.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_CAS_01,PRD_CAS_01,unit_cost,90.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_CAS_01,PRD_CAS_01,unit_margin,159.0,Product Catalog,Unit margin ₹159.00 (63.9%)
+REC_PRICE_PRD_CAS_01,PRD_CAS_01,historical_avg_discount,0.0518,Historical Transactions,Average observed discount rate (5.2%)
+REC_PRICE_PRD_PER_02,PRD_PER_02,forecast_7d_units,3.5,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_PER_02,PRD_PER_02,selling_price,235.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_PER_02,PRD_PER_02,unit_cost,120.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_PER_02,PRD_PER_02,unit_margin,115.0,Product Catalog,Unit margin ₹115.00 (48.9%)
+REC_PRICE_PRD_PER_02,PRD_PER_02,historical_avg_discount,0.0526,Historical Transactions,Average observed discount rate (5.3%)
+REC_PRICE_PRD_MED_01,PRD_MED_01,forecast_7d_units,3.5,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_MED_01,PRD_MED_01,selling_price,35.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_MED_01,PRD_MED_01,unit_cost,18.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_MED_01,PRD_MED_01,unit_margin,17.0,Product Catalog,Unit margin ₹17.00 (48.6%)
+REC_PRICE_PRD_MED_01,PRD_MED_01,historical_avg_discount,0.0476,Historical Transactions,Average observed discount rate (4.8%)
+REC_PRICE_PRD_ESS_02,PRD_ESS_02,forecast_7d_units,3.1,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_ESS_02,PRD_ESS_02,selling_price,160.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_ESS_02,PRD_ESS_02,unit_cost,85.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_ESS_02,PRD_ESS_02,unit_margin,75.0,Product Catalog,Unit margin ₹75.00 (46.9%)
+REC_PRICE_PRD_ESS_02,PRD_ESS_02,historical_avg_discount,0.0588,Historical Transactions,Average observed discount rate (5.9%)
+REC_PRICE_PRD_ESS_01,PRD_ESS_01,forecast_7d_units,2.7,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_ESS_01,PRD_ESS_01,selling_price,145.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_ESS_01,PRD_ESS_01,unit_cost,75.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_ESS_01,PRD_ESS_01,unit_margin,70.0,Product Catalog,Unit margin ₹70.00 (48.3%)
+REC_PRICE_PRD_ESS_01,PRD_ESS_01,historical_avg_discount,0.0612,Historical Transactions,Average observed discount rate (6.1%)
+REC_PRICE_PRD_PER_01,PRD_PER_01,forecast_7d_units,2.7,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_PER_01,PRD_PER_01,selling_price,155.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_PER_01,PRD_PER_01,unit_cost,80.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_PER_01,PRD_PER_01,unit_margin,75.0,Product Catalog,Unit margin ₹75.00 (48.4%)
+REC_PRICE_PRD_PER_01,PRD_PER_01,historical_avg_discount,0.0497,Historical Transactions,Average observed discount rate (5.0%)
+REC_PRICE_PRD_BABY_02,PRD_BABY_02,forecast_7d_units,3.4,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_BABY_02,PRD_BABY_02,selling_price,160.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_BABY_02,PRD_BABY_02,unit_cost,90.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_BABY_02,PRD_BABY_02,unit_margin,70.0,Product Catalog,Unit margin ₹70.00 (43.8%)
+REC_PRICE_PRD_BABY_02,PRD_BABY_02,historical_avg_discount,0.0551,Historical Transactions,Average observed discount rate (5.5%)
+REC_PRICE_PRD_DAI_02,PRD_DAI_02,forecast_7d_units,3.2,Phase 3 Demand Model,7-day forward demand forecast
+REC_PRICE_PRD_DAI_02,PRD_DAI_02,selling_price,95.0,Product Catalog,Current shelf price
+REC_PRICE_PRD_DAI_02,PRD_DAI_02,unit_cost,65.0,Product Catalog,Wholesale inventory replacement cost
+REC_PRICE_PRD_DAI_02,PRD_DAI_02,unit_margin,30.0,Product Catalog,Unit margin ₹30.00 (31.6%)
+REC_PRICE_PRD_DAI_02,PRD_DAI_02,historical_avg_discount,0.0483,Historical Transactions,Average observed discount rate (4.8%)
+REC_INV_PRD_DES_01,PRD_DES_01,forecast_7d_units,6.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_DES_01,PRD_DES_01,daily_demand_velocity,0.96,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_DES_01,PRD_DES_01,safety_stock_units,3.01,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_DES_01,PRD_DES_01,reorder_point_units,5.89,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_DES_01,PRD_DES_01,unit_margin,100.0,Product Catalog,Unit profit ₹100.00 (45% margin)
+REC_INV_PRD_DES_01,PRD_DES_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_TEA_02,PRD_TEA_02,forecast_7d_units,5.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_TEA_02,PRD_TEA_02,daily_demand_velocity,0.77,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_TEA_02,PRD_TEA_02,safety_stock_units,2.43,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_TEA_02,PRD_TEA_02,reorder_point_units,4.74,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_TEA_02,PRD_TEA_02,unit_margin,100.0,Product Catalog,Unit profit ₹100.00 (48% margin)
+REC_INV_PRD_TEA_02,PRD_TEA_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_CROSS_PRD_DES_01_PRD_MOB_02,PRD_DES_01->PRD_MOB_02,association_lift,1.862,Association Rule Mining,Purchasing Gulab Jamun Box 500g multiplies odds of purchasing Budget 5G Smartphone 128GB by 1.86x
+REC_CROSS_PRD_DES_01_PRD_MOB_02,PRD_DES_01->PRD_MOB_02,rule_confidence,0.085,Association Rule Mining,8.5% of Gulab Jamun Box 500g buyers also ordered Budget 5G Smartphone 128GB
+REC_CROSS_PRD_DES_01_PRD_MOB_02,PRD_DES_01->PRD_MOB_02,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_DES_01_PRD_MOB_02,PRD_DES_01->PRD_MOB_02,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_INV_PRD_WRI_02,PRD_WRI_02,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WRI_02,PRD_WRI_02,daily_demand_velocity,0.65,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WRI_02,PRD_WRI_02,safety_stock_units,2.77,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WRI_02,PRD_WRI_02,reorder_point_units,4.72,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WRI_02,PRD_WRI_02,unit_margin,60.0,Product Catalog,Unit profit ₹60.00 (52% margin)
+REC_INV_PRD_WRI_02,PRD_WRI_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_WRI_01,PRD_WRI_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WRI_01,PRD_WRI_01,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WRI_01,PRD_WRI_01,safety_stock_units,2.33,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WRI_01,PRD_WRI_01,reorder_point_units,4.22,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WRI_01,PRD_WRI_01,unit_margin,45.0,Product Catalog,Unit profit ₹45.00 (50% margin)
+REC_INV_PRD_WRI_01,PRD_WRI_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_OFF_01,PRD_OFF_01,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_OFF_01,PRD_OFF_01,daily_demand_velocity,0.64,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_OFF_01,PRD_OFF_01,safety_stock_units,2.31,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_OFF_01,PRD_OFF_01,reorder_point_units,4.23,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_OFF_01,PRD_OFF_01,unit_margin,85.0,Product Catalog,Unit profit ₹85.00 (49% margin)
+REC_INV_PRD_OFF_01,PRD_OFF_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MEN_01,PRD_MEN_01,forecast_7d_units,3.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MEN_01,PRD_MEN_01,daily_demand_velocity,0.5,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MEN_01,PRD_MEN_01,safety_stock_units,1.84,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MEN_01,PRD_MEN_01,reorder_point_units,3.34,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MEN_01,PRD_MEN_01,unit_margin,419.0,Product Catalog,Unit profit ₹419.00 (52% margin)
+REC_INV_PRD_MEN_01,PRD_MEN_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_CAK_01,PRD_CAK_01,forecast_7d_units,5.2,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_CAK_01,PRD_CAK_01,daily_demand_velocity,0.74,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_CAK_01,PRD_CAK_01,safety_stock_units,3.7,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_CAK_01,PRD_CAK_01,reorder_point_units,5.92,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_CAK_01,PRD_CAK_01,unit_margin,270.0,Product Catalog,Unit profit ₹270.00 (49% margin)
+REC_INV_PRD_CAK_01,PRD_CAK_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_BRD_02,PRD_BRD_02,forecast_7d_units,5.3,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BRD_02,PRD_BRD_02,daily_demand_velocity,0.76,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BRD_02,PRD_BRD_02,safety_stock_units,2.77,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BRD_02,PRD_BRD_02,reorder_point_units,5.05,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BRD_02,PRD_BRD_02,unit_margin,65.0,Product Catalog,Unit profit ₹65.00 (46% margin)
+REC_INV_PRD_BRD_02,PRD_BRD_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MEN_02,PRD_MEN_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MEN_02,PRD_MEN_02,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MEN_02,PRD_MEN_02,safety_stock_units,1.62,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MEN_02,PRD_MEN_02,reorder_point_units,2.79,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MEN_02,PRD_MEN_02,unit_margin,649.0,Product Catalog,Unit profit ₹649.00 (54% margin)
+REC_INV_PRD_MEN_02,PRD_MEN_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MEA_01,PRD_MEA_01,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MEA_01,PRD_MEA_01,daily_demand_velocity,0.52,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MEA_01,PRD_MEA_01,safety_stock_units,2.0,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MEA_01,PRD_MEA_01,reorder_point_units,3.55,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MEA_01,PRD_MEA_01,unit_margin,110.0,Product Catalog,Unit profit ₹110.00 (50% margin)
+REC_INV_PRD_MEA_01,PRD_MEA_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_WEL_01,PRD_WEL_01,forecast_7d_units,5.2,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WEL_01,PRD_WEL_01,daily_demand_velocity,0.75,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WEL_01,PRD_WEL_01,safety_stock_units,1.94,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WEL_01,PRD_WEL_01,reorder_point_units,4.18,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WEL_01,PRD_WEL_01,unit_margin,155.0,Product Catalog,Unit profit ₹155.00 (41% margin)
+REC_INV_PRD_WEL_01,PRD_WEL_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_WOM_01,PRD_WOM_01,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WOM_01,PRD_WOM_01,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WOM_01,PRD_WOM_01,safety_stock_units,2.17,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WOM_01,PRD_WOM_01,reorder_point_units,3.34,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WOM_01,PRD_WOM_01,unit_margin,389.0,Product Catalog,Unit profit ₹389.00 (56% margin)
+REC_INV_PRD_WOM_01,PRD_WOM_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_PER_02,PRD_PER_02,forecast_7d_units,3.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_PER_02,PRD_PER_02,daily_demand_velocity,0.5,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_PER_02,PRD_PER_02,safety_stock_units,1.68,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_PER_02,PRD_PER_02,reorder_point_units,3.18,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_PER_02,PRD_PER_02,unit_margin,115.0,Product Catalog,Unit profit ₹115.00 (49% margin)
+REC_INV_PRD_PER_02,PRD_PER_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_DES_02,PRD_DES_02,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_DES_02,PRD_DES_02,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_DES_02,PRD_DES_02,safety_stock_units,3.05,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_DES_02,PRD_DES_02,reorder_point_units,4.94,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_DES_02,PRD_DES_02,unit_margin,90.0,Product Catalog,Unit profit ₹90.00 (50% margin)
+REC_INV_PRD_DES_02,PRD_DES_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_KID_02,PRD_KID_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_KID_02,PRD_KID_02,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_KID_02,PRD_KID_02,safety_stock_units,1.95,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_KID_02,PRD_KID_02,reorder_point_units,3.12,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_KID_02,PRD_KID_02,unit_margin,145.0,Product Catalog,Unit profit ₹145.00 (53% margin)
+REC_INV_PRD_KID_02,PRD_KID_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_COF_02,PRD_COF_02,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_COF_02,PRD_COF_02,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_COF_02,PRD_COF_02,safety_stock_units,2.49,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_COF_02,PRD_COF_02,reorder_point_units,4.38,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_COF_02,PRD_COF_02,unit_margin,130.0,Product Catalog,Unit profit ₹130.00 (46% margin)
+REC_INV_PRD_COF_02,PRD_COF_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_BEV_01,PRD_BEV_01,forecast_7d_units,6.2,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BEV_01,PRD_BEV_01,daily_demand_velocity,0.89,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BEV_01,PRD_BEV_01,safety_stock_units,3.15,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BEV_01,PRD_BEV_01,reorder_point_units,5.81,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BEV_01,PRD_BEV_01,unit_margin,45.0,Product Catalog,Unit profit ₹45.00 (41% margin)
+REC_INV_PRD_BEV_01,PRD_BEV_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MED_01,PRD_MED_01,forecast_7d_units,3.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MED_01,PRD_MED_01,daily_demand_velocity,0.5,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MED_01,PRD_MED_01,safety_stock_units,2.09,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MED_01,PRD_MED_01,reorder_point_units,3.59,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MED_01,PRD_MED_01,unit_margin,17.0,Product Catalog,Unit profit ₹17.00 (49% margin)
+REC_INV_PRD_MED_01,PRD_MED_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ART_01,PRD_ART_01,forecast_7d_units,5.2,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ART_01,PRD_ART_01,daily_demand_velocity,0.74,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ART_01,PRD_ART_01,safety_stock_units,3.57,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ART_01,PRD_ART_01,reorder_point_units,5.8,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ART_01,PRD_ART_01,unit_margin,140.0,Product Catalog,Unit profit ₹140.00 (44% margin)
+REC_INV_PRD_ART_01,PRD_ART_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_KID_01,PRD_KID_01,forecast_7d_units,2.9,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_KID_01,PRD_KID_01,daily_demand_velocity,0.41,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_KID_01,PRD_KID_01,safety_stock_units,2.85,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_KID_01,PRD_KID_01,reorder_point_units,4.08,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_KID_01,PRD_KID_01,unit_margin,189.0,Product Catalog,Unit profit ₹189.00 (54% margin)
+REC_INV_PRD_KID_01,PRD_KID_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_TEA_01,PRD_TEA_01,forecast_7d_units,4.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_TEA_01,PRD_TEA_01,daily_demand_velocity,0.64,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_TEA_01,PRD_TEA_01,safety_stock_units,2.66,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_TEA_01,PRD_TEA_01,reorder_point_units,4.58,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_TEA_01,PRD_TEA_01,unit_margin,110.0,Product Catalog,Unit profit ₹110.00 (46% margin)
+REC_INV_PRD_TEA_01,PRD_TEA_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ESS_02,PRD_ESS_02,forecast_7d_units,3.1,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ESS_02,PRD_ESS_02,daily_demand_velocity,0.45,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ESS_02,PRD_ESS_02,safety_stock_units,1.89,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ESS_02,PRD_ESS_02,reorder_point_units,3.24,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ESS_02,PRD_ESS_02,unit_margin,75.0,Product Catalog,Unit profit ₹75.00 (47% margin)
+REC_INV_PRD_ESS_02,PRD_ESS_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_NOT_01,PRD_NOT_01,forecast_7d_units,3.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_NOT_01,PRD_NOT_01,daily_demand_velocity,0.54,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_NOT_01,PRD_NOT_01,safety_stock_units,2.32,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_NOT_01,PRD_NOT_01,reorder_point_units,3.94,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_NOT_01,PRD_NOT_01,unit_margin,75.0,Product Catalog,Unit profit ₹75.00 (47% margin)
+REC_INV_PRD_NOT_01,PRD_NOT_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_WOM_02,PRD_WOM_02,forecast_7d_units,1.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WOM_02,PRD_WOM_02,daily_demand_velocity,0.23,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WOM_02,PRD_WOM_02,safety_stock_units,1.86,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WOM_02,PRD_WOM_02,reorder_point_units,2.56,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WOM_02,PRD_WOM_02,unit_margin,849.0,Product Catalog,Unit profit ₹849.00 (57% margin)
+REC_INV_PRD_WOM_02,PRD_WOM_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ART_02,PRD_ART_02,forecast_7d_units,4.0,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ART_02,PRD_ART_02,daily_demand_velocity,0.57,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ART_02,PRD_ART_02,safety_stock_units,2.66,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ART_02,PRD_ART_02,reorder_point_units,4.37,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ART_02,PRD_ART_02,unit_margin,80.0,Product Catalog,Unit profit ₹80.00 (46% margin)
+REC_INV_PRD_ART_02,PRD_ART_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MED_02,PRD_MED_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MED_02,PRD_MED_02,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MED_02,PRD_MED_02,safety_stock_units,1.59,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MED_02,PRD_MED_02,reorder_point_units,2.76,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MED_02,PRD_MED_02,unit_margin,120.0,Product Catalog,Unit profit ₹120.00 (50% margin)
+REC_INV_PRD_MED_02,PRD_MED_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_WEL_02,PRD_WEL_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_WEL_02,PRD_WEL_02,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_WEL_02,PRD_WEL_02,safety_stock_units,2.2,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_WEL_02,PRD_WEL_02,reorder_point_units,3.37,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_WEL_02,PRD_WEL_02,unit_margin,140.0,Product Catalog,Unit profit ₹140.00 (50% margin)
+REC_INV_PRD_WEL_02,PRD_WEL_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_MEA_02,PRD_MEA_02,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_MEA_02,PRD_MEA_02,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_MEA_02,PRD_MEA_02,safety_stock_units,2.6,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_MEA_02,PRD_MEA_02,reorder_point_units,3.77,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_MEA_02,PRD_MEA_02,unit_margin,125.0,Product Catalog,Unit profit ₹125.00 (50% margin)
+REC_INV_PRD_MEA_02,PRD_MEA_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_ESS_01,PRD_ESS_01,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_ESS_01,PRD_ESS_01,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_ESS_01,PRD_ESS_01,safety_stock_units,2.23,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_ESS_01,PRD_ESS_01,reorder_point_units,3.4,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_ESS_01,PRD_ESS_01,unit_margin,70.0,Product Catalog,Unit profit ₹70.00 (48% margin)
+REC_INV_PRD_ESS_01,PRD_ESS_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_PER_01,PRD_PER_01,forecast_7d_units,2.7,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_PER_01,PRD_PER_01,daily_demand_velocity,0.39,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_PER_01,PRD_PER_01,safety_stock_units,1.86,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_PER_01,PRD_PER_01,reorder_point_units,3.03,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_PER_01,PRD_PER_01,unit_margin,75.0,Product Catalog,Unit profit ₹75.00 (48% margin)
+REC_INV_PRD_PER_01,PRD_PER_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_BRD_01,PRD_BRD_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BRD_01,PRD_BRD_01,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BRD_01,PRD_BRD_01,safety_stock_units,3.0,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BRD_01,PRD_BRD_01,reorder_point_units,4.89,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BRD_01,PRD_BRD_01,unit_margin,22.0,Product Catalog,Unit profit ₹22.00 (44% margin)
+REC_INV_PRD_BRD_01,PRD_BRD_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_BEV_02,PRD_BEV_02,forecast_7d_units,5.0,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BEV_02,PRD_BEV_02,daily_demand_velocity,0.72,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BEV_02,PRD_BEV_02,safety_stock_units,2.98,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BEV_02,PRD_BEV_02,reorder_point_units,5.14,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BEV_02,PRD_BEV_02,unit_margin,40.0,Product Catalog,Unit profit ₹40.00 (42% margin)
+REC_INV_PRD_BEV_02,PRD_BEV_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_BABY_02,PRD_BABY_02,forecast_7d_units,3.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BABY_02,PRD_BABY_02,daily_demand_velocity,0.48,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BABY_02,PRD_BABY_02,safety_stock_units,2.64,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BABY_02,PRD_BABY_02,reorder_point_units,4.09,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BABY_02,PRD_BABY_02,unit_margin,70.0,Product Catalog,Unit profit ₹70.00 (44% margin)
+REC_INV_PRD_BABY_02,PRD_BABY_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_COF_01,PRD_COF_01,forecast_7d_units,3.5,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_COF_01,PRD_COF_01,daily_demand_velocity,0.5,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_COF_01,PRD_COF_01,safety_stock_units,3.2,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_COF_01,PRD_COF_01,reorder_point_units,4.7,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_COF_01,PRD_COF_01,unit_margin,170.0,Product Catalog,Unit profit ₹170.00 (45% margin)
+REC_INV_PRD_COF_01,PRD_COF_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_OFF_02,PRD_OFF_02,forecast_7d_units,3.8,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_OFF_02,PRD_OFF_02,daily_demand_velocity,0.54,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_OFF_02,PRD_OFF_02,safety_stock_units,2.68,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_OFF_02,PRD_OFF_02,reorder_point_units,4.3,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_OFF_02,PRD_OFF_02,unit_margin,120.0,Product Catalog,Unit profit ₹120.00 (39% margin)
+REC_INV_PRD_OFF_02,PRD_OFF_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_STA_01,PRD_STA_01,forecast_7d_units,4.4,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_STA_01,PRD_STA_01,daily_demand_velocity,0.63,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_STA_01,PRD_STA_01,safety_stock_units,2.39,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_STA_01,PRD_STA_01,reorder_point_units,4.28,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_STA_01,PRD_STA_01,unit_margin,160.0,Product Catalog,Unit profit ₹160.00 (30% margin)
+REC_INV_PRD_STA_01,PRD_STA_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_STA_02,PRD_STA_02,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_STA_02,PRD_STA_02,daily_demand_velocity,0.52,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_STA_02,PRD_STA_02,safety_stock_units,2.62,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_STA_02,PRD_STA_02,reorder_point_units,4.18,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_STA_02,PRD_STA_02,unit_margin,85.0,Product Catalog,Unit profit ₹85.00 (35% margin)
+REC_INV_PRD_STA_02,PRD_STA_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_DAI_02,PRD_DAI_02,forecast_7d_units,3.2,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_DAI_02,PRD_DAI_02,daily_demand_velocity,0.45,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_DAI_02,PRD_DAI_02,safety_stock_units,2.14,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_DAI_02,PRD_DAI_02,reorder_point_units,3.5,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_DAI_02,PRD_DAI_02,unit_margin,30.0,Product Catalog,Unit profit ₹30.00 (32% margin)
+REC_INV_PRD_DAI_02,PRD_DAI_02,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_INV_PRD_DAI_01,PRD_DAI_01,forecast_7d_units,3.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_DAI_01,PRD_DAI_01,daily_demand_velocity,0.51,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_DAI_01,PRD_DAI_01,safety_stock_units,2.42,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_DAI_01,PRD_DAI_01,reorder_point_units,3.96,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_DAI_01,PRD_DAI_01,unit_margin,18.0,Product Catalog,Unit profit ₹18.00 (27% margin)
+REC_INV_PRD_DAI_01,PRD_DAI_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_CROSS_PRD_TEA_02_PRD_DES_02,PRD_TEA_02->PRD_DES_02,association_lift,1.988,Association Rule Mining,Purchasing Organic Darjeeling Green Tea 100g multiplies odds of purchasing Belgian Waffle with Syrup by 1.99x
+REC_CROSS_PRD_TEA_02_PRD_DES_02,PRD_TEA_02->PRD_DES_02,rule_confidence,0.125,Association Rule Mining,12.5% of Organic Darjeeling Green Tea 100g buyers also ordered Belgian Waffle with Syrup
+REC_CROSS_PRD_TEA_02_PRD_DES_02,PRD_TEA_02->PRD_DES_02,rule_support,0.0063,Association Rule Mining,Observed across 0.63% of customer shopping journeys
+REC_CROSS_PRD_TEA_02_PRD_DES_02,PRD_TEA_02->PRD_DES_02,shared_transaction_count,21,Historical Transactions,Co-purchased by 21 verified customers
+REC_CROSS_PRD_DES_02_PRD_TEA_02,PRD_DES_02->PRD_TEA_02,association_lift,1.988,Association Rule Mining,Purchasing Belgian Waffle with Syrup multiplies odds of purchasing Organic Darjeeling Green Tea 100g by 1.99x
+REC_CROSS_PRD_DES_02_PRD_TEA_02,PRD_DES_02->PRD_TEA_02,rule_confidence,0.101,Association Rule Mining,10.1% of Belgian Waffle with Syrup buyers also ordered Organic Darjeeling Green Tea 100g
+REC_CROSS_PRD_DES_02_PRD_TEA_02,PRD_DES_02->PRD_TEA_02,rule_support,0.0063,Association Rule Mining,Observed across 0.63% of customer shopping journeys
+REC_CROSS_PRD_DES_02_PRD_TEA_02,PRD_DES_02->PRD_TEA_02,shared_transaction_count,21,Historical Transactions,Co-purchased by 21 verified customers
+REC_CROSS_PRD_MOB_02_PRD_DES_01,PRD_MOB_02->PRD_DES_01,association_lift,1.862,Association Rule Mining,Purchasing Budget 5G Smartphone 128GB multiplies odds of purchasing Gulab Jamun Box 500g by 1.86x
+REC_CROSS_PRD_MOB_02_PRD_DES_01,PRD_MOB_02->PRD_DES_01,rule_confidence,0.1126,Association Rule Mining,11.3% of Budget 5G Smartphone 128GB buyers also ordered Gulab Jamun Box 500g
+REC_CROSS_PRD_MOB_02_PRD_DES_01,PRD_MOB_02->PRD_DES_01,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_MOB_02_PRD_DES_01,PRD_MOB_02->PRD_DES_01,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_HOU_02_PRD_SNK_02,PRD_HOU_02->PRD_SNK_02,association_lift,1.403,Association Rule Mining,Purchasing Aromatherapy Reed Diffuser 100ml multiplies odds of purchasing Roasted Salted Almonds 200g by 1.40x
+REC_CROSS_PRD_HOU_02_PRD_SNK_02,PRD_HOU_02->PRD_SNK_02,rule_confidence,0.2476,Association Rule Mining,24.8% of Aromatherapy Reed Diffuser 100ml buyers also ordered Roasted Salted Almonds 200g
+REC_CROSS_PRD_HOU_02_PRD_SNK_02,PRD_HOU_02->PRD_SNK_02,rule_support,0.0157,Association Rule Mining,Observed across 1.57% of customer shopping journeys
+REC_CROSS_PRD_HOU_02_PRD_SNK_02,PRD_HOU_02->PRD_SNK_02,shared_transaction_count,52,Historical Transactions,Co-purchased by 52 verified customers
+REC_CROSS_PRD_SNK_02_PRD_HOU_02,PRD_SNK_02->PRD_HOU_02,association_lift,1.403,Association Rule Mining,Purchasing Roasted Salted Almonds 200g multiplies odds of purchasing Aromatherapy Reed Diffuser 100ml by 1.40x
+REC_CROSS_PRD_SNK_02_PRD_HOU_02,PRD_SNK_02->PRD_HOU_02,rule_confidence,0.089,Association Rule Mining,8.9% of Roasted Salted Almonds 200g buyers also ordered Aromatherapy Reed Diffuser 100ml
+REC_CROSS_PRD_SNK_02_PRD_HOU_02,PRD_SNK_02->PRD_HOU_02,rule_support,0.0157,Association Rule Mining,Observed across 1.57% of customer shopping journeys
+REC_CROSS_PRD_SNK_02_PRD_HOU_02,PRD_SNK_02->PRD_HOU_02,shared_transaction_count,52,Historical Transactions,Co-purchased by 52 verified customers
+REC_INV_PRD_BABY_01,PRD_BABY_01,forecast_7d_units,1.6,Phase 3 Demand Model,Expected 7-day customer unit demand
+REC_INV_PRD_BABY_01,PRD_BABY_01,daily_demand_velocity,0.23,Phase 3 Demand Model,Forecasted units per day
+REC_INV_PRD_BABY_01,PRD_BABY_01,safety_stock_units,2.1,Statistical Formula,Z=1.645 safety buffer for 95% service level
+REC_INV_PRD_BABY_01,PRD_BABY_01,reorder_point_units,2.8,Statistical Formula,Trigger threshold across 3 days lead time
+REC_INV_PRD_BABY_01,PRD_BABY_01,unit_margin,249.0,Product Catalog,Unit profit ₹249.00 (31% margin)
+REC_INV_PRD_BABY_01,PRD_BABY_01,inventory_estimation_mode,True,System Configuration,Recommendation based on forecast demand and historical velocity
+REC_CROSS_PRD_ESS_01_PRD_SNK_01,PRD_ESS_01->PRD_SNK_01,association_lift,1.667,Association Rule Mining,Purchasing Organic Hand Wash 500ml multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.67x
+REC_CROSS_PRD_ESS_01_PRD_SNK_01,PRD_ESS_01->PRD_SNK_01,rule_confidence,0.2982,Association Rule Mining,29.8% of Organic Hand Wash 500ml buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_ESS_01_PRD_SNK_01,PRD_ESS_01->PRD_SNK_01,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_ESS_01_PRD_SNK_01,PRD_ESS_01->PRD_SNK_01,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_WRI_01_PRD_SNK_02,PRD_WRI_01->PRD_SNK_02,association_lift,1.491,Association Rule Mining,Purchasing Gel Roller Pen Blue Pack of 5 multiplies odds of purchasing Roasted Salted Almonds 200g by 1.49x
+REC_CROSS_PRD_WRI_01_PRD_SNK_02,PRD_WRI_01->PRD_SNK_02,rule_confidence,0.2632,Association Rule Mining,26.3% of Gel Roller Pen Blue Pack of 5 buyers also ordered Roasted Salted Almonds 200g
+REC_CROSS_PRD_WRI_01_PRD_SNK_02,PRD_WRI_01->PRD_SNK_02,rule_support,0.0091,Association Rule Mining,Observed across 0.91% of customer shopping journeys
+REC_CROSS_PRD_WRI_01_PRD_SNK_02,PRD_WRI_01->PRD_SNK_02,shared_transaction_count,30,Historical Transactions,Co-purchased by 30 verified customers
+REC_CROSS_PRD_CAK_02_PRD_CAK_01,PRD_CAK_02->PRD_CAK_01,association_lift,1.531,Association Rule Mining,Purchasing Eggless Pineapple Cake 500g multiplies odds of purchasing Dutch Chocolate Truffle Cake 500g by 1.53x
+REC_CROSS_PRD_CAK_02_PRD_CAK_01,PRD_CAK_02->PRD_CAK_01,rule_confidence,0.1152,Association Rule Mining,11.5% of Eggless Pineapple Cake 500g buyers also ordered Dutch Chocolate Truffle Cake 500g
+REC_CROSS_PRD_CAK_02_PRD_CAK_01,PRD_CAK_02->PRD_CAK_01,rule_support,0.0076,Association Rule Mining,Observed across 0.76% of customer shopping journeys
+REC_CROSS_PRD_CAK_02_PRD_CAK_01,PRD_CAK_02->PRD_CAK_01,shared_transaction_count,25,Historical Transactions,Co-purchased by 25 verified customers
+REC_CROSS_PRD_CAK_01_PRD_CAK_02,PRD_CAK_01->PRD_CAK_02,association_lift,1.531,Association Rule Mining,Purchasing Dutch Chocolate Truffle Cake 500g multiplies odds of purchasing Eggless Pineapple Cake 500g by 1.53x
+REC_CROSS_PRD_CAK_01_PRD_CAK_02,PRD_CAK_01->PRD_CAK_02,rule_confidence,0.1004,Association Rule Mining,10.0% of Dutch Chocolate Truffle Cake 500g buyers also ordered Eggless Pineapple Cake 500g
+REC_CROSS_PRD_CAK_01_PRD_CAK_02,PRD_CAK_01->PRD_CAK_02,rule_support,0.0076,Association Rule Mining,Observed across 0.76% of customer shopping journeys
+REC_CROSS_PRD_CAK_01_PRD_CAK_02,PRD_CAK_01->PRD_CAK_02,shared_transaction_count,25,Historical Transactions,Co-purchased by 25 verified customers
+REC_CROSS_PRD_ART_02_PRD_SNK_01,PRD_ART_02->PRD_SNK_01,association_lift,1.386,Association Rule Mining,Purchasing Sketching Canvas Board 10x12 multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.39x
+REC_CROSS_PRD_ART_02_PRD_SNK_01,PRD_ART_02->PRD_SNK_01,rule_confidence,0.2481,Association Rule Mining,24.8% of Sketching Canvas Board 10x12 buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_ART_02_PRD_SNK_01,PRD_ART_02->PRD_SNK_01,rule_support,0.01,Association Rule Mining,Observed across 1.00% of customer shopping journeys
+REC_CROSS_PRD_ART_02_PRD_SNK_01,PRD_ART_02->PRD_SNK_01,shared_transaction_count,33,Historical Transactions,Co-purchased by 33 verified customers
+REC_CROSS_PRD_HOU_01_PRD_BRD_01,PRD_HOU_01->PRD_BRD_01,association_lift,1.426,Association Rule Mining,Purchasing Microfiber Cleaning Cloth 4-Pack multiplies odds of purchasing Brown Whole Wheat Bread 400g by 1.43x
+REC_CROSS_PRD_HOU_01_PRD_BRD_01,PRD_HOU_01->PRD_BRD_01,rule_confidence,0.0974,Association Rule Mining,9.7% of Microfiber Cleaning Cloth 4-Pack buyers also ordered Brown Whole Wheat Bread 400g
+REC_CROSS_PRD_HOU_01_PRD_BRD_01,PRD_HOU_01->PRD_BRD_01,rule_support,0.0057,Association Rule Mining,Observed across 0.57% of customer shopping journeys
+REC_CROSS_PRD_HOU_01_PRD_BRD_01,PRD_HOU_01->PRD_BRD_01,shared_transaction_count,19,Historical Transactions,Co-purchased by 19 verified customers
+REC_CROSS_PRD_BRD_01_PRD_HOU_01,PRD_BRD_01->PRD_HOU_01,association_lift,1.426,Association Rule Mining,Purchasing Brown Whole Wheat Bread 400g multiplies odds of purchasing Microfiber Cleaning Cloth 4-Pack by 1.43x
+REC_CROSS_PRD_BRD_01_PRD_HOU_01,PRD_BRD_01->PRD_HOU_01,rule_confidence,0.0841,Association Rule Mining,8.4% of Brown Whole Wheat Bread 400g buyers also ordered Microfiber Cleaning Cloth 4-Pack
+REC_CROSS_PRD_BRD_01_PRD_HOU_01,PRD_BRD_01->PRD_HOU_01,rule_support,0.0057,Association Rule Mining,Observed across 0.57% of customer shopping journeys
+REC_CROSS_PRD_BRD_01_PRD_HOU_01,PRD_BRD_01->PRD_HOU_01,shared_transaction_count,19,Historical Transactions,Co-purchased by 19 verified customers
+REC_CROSS_PRD_ART_01_PRD_SNK_01,PRD_ART_01->PRD_SNK_01,association_lift,1.254,Association Rule Mining,Purchasing Acrylic Color Set 12-Pack multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.25x
+REC_CROSS_PRD_ART_01_PRD_SNK_01,PRD_ART_01->PRD_SNK_01,rule_confidence,0.2245,Association Rule Mining,22.4% of Acrylic Color Set 12-Pack buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_ART_01_PRD_SNK_01,PRD_ART_01->PRD_SNK_01,rule_support,0.01,Association Rule Mining,Observed across 1.00% of customer shopping journeys
+REC_CROSS_PRD_ART_01_PRD_SNK_01,PRD_ART_01->PRD_SNK_01,shared_transaction_count,33,Historical Transactions,Co-purchased by 33 verified customers
+REC_CROSS_PRD_ACC_02_PRD_SNK_01,PRD_ACC_02->PRD_SNK_01,association_lift,1.193,Association Rule Mining,Purchasing Fashion Sunglasses multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.19x
+REC_CROSS_PRD_ACC_02_PRD_SNK_01,PRD_ACC_02->PRD_SNK_01,rule_confidence,0.2135,Association Rule Mining,21.3% of Fashion Sunglasses buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_ACC_02_PRD_SNK_01,PRD_ACC_02->PRD_SNK_01,rule_support,0.0115,Association Rule Mining,Observed across 1.15% of customer shopping journeys
+REC_CROSS_PRD_ACC_02_PRD_SNK_01,PRD_ACC_02->PRD_SNK_01,shared_transaction_count,38,Historical Transactions,Co-purchased by 38 verified customers
+REC_CROSS_PRD_HOU_02_PRD_CAK_01,PRD_HOU_02->PRD_CAK_01,association_lift,1.392,Association Rule Mining,Purchasing Aromatherapy Reed Diffuser 100ml multiplies odds of purchasing Dutch Chocolate Truffle Cake 500g by 1.39x
+REC_CROSS_PRD_HOU_02_PRD_CAK_01,PRD_HOU_02->PRD_CAK_01,rule_confidence,0.1048,Association Rule Mining,10.5% of Aromatherapy Reed Diffuser 100ml buyers also ordered Dutch Chocolate Truffle Cake 500g
+REC_CROSS_PRD_HOU_02_PRD_CAK_01,PRD_HOU_02->PRD_CAK_01,rule_support,0.0067,Association Rule Mining,Observed across 0.67% of customer shopping journeys
+REC_CROSS_PRD_HOU_02_PRD_CAK_01,PRD_HOU_02->PRD_CAK_01,shared_transaction_count,22,Historical Transactions,Co-purchased by 22 verified customers
+REC_CROSS_PRD_CAK_01_PRD_HOU_02,PRD_CAK_01->PRD_HOU_02,association_lift,1.392,Association Rule Mining,Purchasing Dutch Chocolate Truffle Cake 500g multiplies odds of purchasing Aromatherapy Reed Diffuser 100ml by 1.39x
+REC_CROSS_PRD_CAK_01_PRD_HOU_02,PRD_CAK_01->PRD_HOU_02,rule_confidence,0.0884,Association Rule Mining,8.8% of Dutch Chocolate Truffle Cake 500g buyers also ordered Aromatherapy Reed Diffuser 100ml
+REC_CROSS_PRD_CAK_01_PRD_HOU_02,PRD_CAK_01->PRD_HOU_02,rule_support,0.0067,Association Rule Mining,Observed across 0.67% of customer shopping journeys
+REC_CROSS_PRD_CAK_01_PRD_HOU_02,PRD_CAK_01->PRD_HOU_02,shared_transaction_count,22,Historical Transactions,Co-purchased by 22 verified customers
+REC_CROSS_PRD_TEA_01_PRD_SNK_01,PRD_TEA_01->PRD_SNK_01,association_lift,1.259,Association Rule Mining,Purchasing Assam Masala CTC Chai 500g multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.26x
+REC_CROSS_PRD_TEA_01_PRD_SNK_01,PRD_TEA_01->PRD_SNK_01,rule_confidence,0.2254,Association Rule Mining,22.5% of Assam Masala CTC Chai 500g buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_TEA_01_PRD_SNK_01,PRD_TEA_01->PRD_SNK_01,rule_support,0.0097,Association Rule Mining,Observed across 0.97% of customer shopping journeys
+REC_CROSS_PRD_TEA_01_PRD_SNK_01,PRD_TEA_01->PRD_SNK_01,shared_transaction_count,32,Historical Transactions,Co-purchased by 32 verified customers
+REC_CROSS_PRD_LAP_02_PRD_BEV_01,PRD_LAP_02->PRD_BEV_01,association_lift,1.412,Association Rule Mining,Purchasing Wireless Optical Mouse 2.4GHz multiplies odds of purchasing Fresh Mango Juice 1L by 1.41x
+REC_CROSS_PRD_LAP_02_PRD_BEV_01,PRD_LAP_02->PRD_BEV_01,rule_confidence,0.117,Association Rule Mining,11.7% of Wireless Optical Mouse 2.4GHz buyers also ordered Fresh Mango Juice 1L
+REC_CROSS_PRD_LAP_02_PRD_BEV_01,PRD_LAP_02->PRD_BEV_01,rule_support,0.006,Association Rule Mining,Observed across 0.60% of customer shopping journeys
+REC_CROSS_PRD_LAP_02_PRD_BEV_01,PRD_LAP_02->PRD_BEV_01,shared_transaction_count,20,Historical Transactions,Co-purchased by 20 verified customers
+REC_CROSS_PRD_CHG_02_PRD_SNK_02,PRD_CHG_02->PRD_SNK_02,association_lift,1.211,Association Rule Mining,Purchasing Wireless Charging Pad 15W multiplies odds of purchasing Roasted Salted Almonds 200g by 1.21x
+REC_CROSS_PRD_CHG_02_PRD_SNK_02,PRD_CHG_02->PRD_SNK_02,rule_confidence,0.2138,Association Rule Mining,21.4% of Wireless Charging Pad 15W buyers also ordered Roasted Salted Almonds 200g
+REC_CROSS_PRD_CHG_02_PRD_SNK_02,PRD_CHG_02->PRD_SNK_02,rule_support,0.0103,Association Rule Mining,Observed across 1.03% of customer shopping journeys
+REC_CROSS_PRD_CHG_02_PRD_SNK_02,PRD_CHG_02->PRD_SNK_02,shared_transaction_count,34,Historical Transactions,Co-purchased by 34 verified customers
+REC_CROSS_PRD_EAR_02_PRD_BEV_01,PRD_EAR_02->PRD_BEV_01,association_lift,1.38,Association Rule Mining,Purchasing Deep Bass Wired Earphones 3.5mm multiplies odds of purchasing Fresh Mango Juice 1L by 1.38x
+REC_CROSS_PRD_EAR_02_PRD_BEV_01,PRD_EAR_02->PRD_BEV_01,rule_confidence,0.1143,Association Rule Mining,11.4% of Deep Bass Wired Earphones 3.5mm buyers also ordered Fresh Mango Juice 1L
+REC_CROSS_PRD_EAR_02_PRD_BEV_01,PRD_EAR_02->PRD_BEV_01,rule_support,0.006,Association Rule Mining,Observed across 0.60% of customer shopping journeys
+REC_CROSS_PRD_EAR_02_PRD_BEV_01,PRD_EAR_02->PRD_BEV_01,shared_transaction_count,20,Historical Transactions,Co-purchased by 20 verified customers
+REC_CROSS_PRD_CAS_01_PRD_CAK_01,PRD_CAS_01->PRD_CAK_01,association_lift,1.377,Association Rule Mining,Purchasing Shockproof Matte Phone Case multiplies odds of purchasing Dutch Chocolate Truffle Cake 500g by 1.38x
+REC_CROSS_PRD_CAS_01_PRD_CAK_01,PRD_CAS_01->PRD_CAK_01,rule_confidence,0.1037,Association Rule Mining,10.4% of Shockproof Matte Phone Case buyers also ordered Dutch Chocolate Truffle Cake 500g
+REC_CROSS_PRD_CAS_01_PRD_CAK_01,PRD_CAS_01->PRD_CAK_01,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_CAS_01_PRD_CAK_01,PRD_CAS_01->PRD_CAK_01,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_CHG_02_PRD_SNK_01,PRD_CHG_02->PRD_SNK_01,association_lift,1.195,Association Rule Mining,Purchasing Wireless Charging Pad 15W multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.20x
+REC_CROSS_PRD_CHG_02_PRD_SNK_01,PRD_CHG_02->PRD_SNK_01,rule_confidence,0.2138,Association Rule Mining,21.4% of Wireless Charging Pad 15W buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_CHG_02_PRD_SNK_01,PRD_CHG_02->PRD_SNK_01,rule_support,0.0103,Association Rule Mining,Observed across 1.03% of customer shopping journeys
+REC_CROSS_PRD_CHG_02_PRD_SNK_01,PRD_CHG_02->PRD_SNK_01,shared_transaction_count,34,Historical Transactions,Co-purchased by 34 verified customers
+REC_CROSS_PRD_DES_01_PRD_DES_02,PRD_DES_01->PRD_DES_02,association_lift,1.352,Association Rule Mining,Purchasing Gulab Jamun Box 500g multiplies odds of purchasing Belgian Waffle with Syrup by 1.35x
+REC_CROSS_PRD_DES_01_PRD_DES_02,PRD_DES_01->PRD_DES_02,rule_confidence,0.085,Association Rule Mining,8.5% of Gulab Jamun Box 500g buyers also ordered Belgian Waffle with Syrup
+REC_CROSS_PRD_DES_01_PRD_DES_02,PRD_DES_01->PRD_DES_02,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_DES_01_PRD_DES_02,PRD_DES_01->PRD_DES_02,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_DES_02_PRD_DES_01,PRD_DES_02->PRD_DES_01,association_lift,1.352,Association Rule Mining,Purchasing Belgian Waffle with Syrup multiplies odds of purchasing Gulab Jamun Box 500g by 1.35x
+REC_CROSS_PRD_DES_02_PRD_DES_01,PRD_DES_02->PRD_DES_01,rule_confidence,0.0817,Association Rule Mining,8.2% of Belgian Waffle with Syrup buyers also ordered Gulab Jamun Box 500g
+REC_CROSS_PRD_DES_02_PRD_DES_01,PRD_DES_02->PRD_DES_01,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_DES_02_PRD_DES_01,PRD_DES_02->PRD_DES_01,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_DAI_01_PRD_SNK_02,PRD_DAI_01->PRD_SNK_02,association_lift,1.22,Association Rule Mining,Purchasing Fresh Cow Milk Pouch 1L multiplies odds of purchasing Roasted Salted Almonds 200g by 1.22x
+REC_CROSS_PRD_DAI_01_PRD_SNK_02,PRD_DAI_01->PRD_SNK_02,rule_confidence,0.2154,Association Rule Mining,21.5% of Fresh Cow Milk Pouch 1L buyers also ordered Roasted Salted Almonds 200g
+REC_CROSS_PRD_DAI_01_PRD_SNK_02,PRD_DAI_01->PRD_SNK_02,rule_support,0.0085,Association Rule Mining,Observed across 0.85% of customer shopping journeys
+REC_CROSS_PRD_DAI_01_PRD_SNK_02,PRD_DAI_01->PRD_SNK_02,shared_transaction_count,28,Historical Transactions,Co-purchased by 28 verified customers
+REC_CROSS_PRD_HOU_02_PRD_CAK_02,PRD_HOU_02->PRD_CAK_02,association_lift,1.307,Association Rule Mining,Purchasing Aromatherapy Reed Diffuser 100ml multiplies odds of purchasing Eggless Pineapple Cake 500g by 1.31x
+REC_CROSS_PRD_HOU_02_PRD_CAK_02,PRD_HOU_02->PRD_CAK_02,rule_confidence,0.0857,Association Rule Mining,8.6% of Aromatherapy Reed Diffuser 100ml buyers also ordered Eggless Pineapple Cake 500g
+REC_CROSS_PRD_HOU_02_PRD_CAK_02,PRD_HOU_02->PRD_CAK_02,rule_support,0.0054,Association Rule Mining,Observed across 0.54% of customer shopping journeys
+REC_CROSS_PRD_HOU_02_PRD_CAK_02,PRD_HOU_02->PRD_CAK_02,shared_transaction_count,18,Historical Transactions,Co-purchased by 18 verified customers
+REC_CROSS_PRD_CAK_02_PRD_HOU_02,PRD_CAK_02->PRD_HOU_02,association_lift,1.307,Association Rule Mining,Purchasing Eggless Pineapple Cake 500g multiplies odds of purchasing Aromatherapy Reed Diffuser 100ml by 1.31x
+REC_CROSS_PRD_CAK_02_PRD_HOU_02,PRD_CAK_02->PRD_HOU_02,rule_confidence,0.0829,Association Rule Mining,8.3% of Eggless Pineapple Cake 500g buyers also ordered Aromatherapy Reed Diffuser 100ml
+REC_CROSS_PRD_CAK_02_PRD_HOU_02,PRD_CAK_02->PRD_HOU_02,rule_support,0.0054,Association Rule Mining,Observed across 0.54% of customer shopping journeys
+REC_CROSS_PRD_CAK_02_PRD_HOU_02,PRD_CAK_02->PRD_HOU_02,shared_transaction_count,18,Historical Transactions,Co-purchased by 18 verified customers
+REC_CROSS_PRD_DES_01_PRD_BEV_02,PRD_DES_01->PRD_BEV_02,association_lift,1.25,Association Rule Mining,Purchasing Gulab Jamun Box 500g multiplies odds of purchasing Cold Pressed Orange Juice 500ml by 1.25x
+REC_CROSS_PRD_DES_01_PRD_BEV_02,PRD_DES_01->PRD_BEV_02,rule_confidence,0.11,Association Rule Mining,11.0% of Gulab Jamun Box 500g buyers also ordered Cold Pressed Orange Juice 500ml
+REC_CROSS_PRD_DES_01_PRD_BEV_02,PRD_DES_01->PRD_BEV_02,rule_support,0.0067,Association Rule Mining,Observed across 0.67% of customer shopping journeys
+REC_CROSS_PRD_DES_01_PRD_BEV_02,PRD_DES_01->PRD_BEV_02,shared_transaction_count,22,Historical Transactions,Co-purchased by 22 verified customers
+REC_CROSS_PRD_COF_02_PRD_SNK_01,PRD_COF_02->PRD_SNK_01,association_lift,1.15,Association Rule Mining,Purchasing Instant Cold Brew Premix 200g multiplies odds of purchasing Spicy Masala Potato Chips 150g by 1.15x
+REC_CROSS_PRD_COF_02_PRD_SNK_01,PRD_COF_02->PRD_SNK_01,rule_confidence,0.2059,Association Rule Mining,20.6% of Instant Cold Brew Premix 200g buyers also ordered Spicy Masala Potato Chips 150g
+REC_CROSS_PRD_COF_02_PRD_SNK_01,PRD_COF_02->PRD_SNK_01,rule_support,0.0085,Association Rule Mining,Observed across 0.85% of customer shopping journeys
+REC_CROSS_PRD_COF_02_PRD_SNK_01,PRD_COF_02->PRD_SNK_01,shared_transaction_count,28,Historical Transactions,Co-purchased by 28 verified customers
+REC_CROSS_PRD_ACC_01_PRD_CAK_02,PRD_ACC_01->PRD_CAK_02,association_lift,1.246,Association Rule Mining,Purchasing Leather Wallet multiplies odds of purchasing Eggless Pineapple Cake 500g by 1.25x
+REC_CROSS_PRD_ACC_01_PRD_CAK_02,PRD_ACC_01->PRD_CAK_02,rule_confidence,0.0817,Association Rule Mining,8.2% of Leather Wallet buyers also ordered Eggless Pineapple Cake 500g
+REC_CROSS_PRD_ACC_01_PRD_CAK_02,PRD_ACC_01->PRD_CAK_02,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_ACC_01_PRD_CAK_02,PRD_ACC_01->PRD_CAK_02,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_ACC_01_PRD_CAK_01,PRD_ACC_01->PRD_CAK_01,association_lift,1.214,Association Rule Mining,Purchasing Leather Wallet multiplies odds of purchasing Dutch Chocolate Truffle Cake 500g by 1.21x
+REC_CROSS_PRD_ACC_01_PRD_CAK_01,PRD_ACC_01->PRD_CAK_01,rule_confidence,0.0913,Association Rule Mining,9.1% of Leather Wallet buyers also ordered Dutch Chocolate Truffle Cake 500g
+REC_CROSS_PRD_ACC_01_PRD_CAK_01,PRD_ACC_01->PRD_CAK_01,rule_support,0.0057,Association Rule Mining,Observed across 0.57% of customer shopping journeys
+REC_CROSS_PRD_ACC_01_PRD_CAK_01,PRD_ACC_01->PRD_CAK_01,shared_transaction_count,19,Historical Transactions,Co-purchased by 19 verified customers
+REC_CROSS_PRD_LAP_01_PRD_BEV_01,PRD_LAP_01->PRD_BEV_01,association_lift,1.207,Association Rule Mining,Purchasing Laptop Stand Aluminum Ergonomic multiplies odds of purchasing Fresh Mango Juice 1L by 1.21x
+REC_CROSS_PRD_LAP_01_PRD_BEV_01,PRD_LAP_01->PRD_BEV_01,rule_confidence,0.1,Association Rule Mining,10.0% of Laptop Stand Aluminum Ergonomic buyers also ordered Fresh Mango Juice 1L
+REC_CROSS_PRD_LAP_01_PRD_BEV_01,PRD_LAP_01->PRD_BEV_01,rule_support,0.0051,Association Rule Mining,Observed across 0.51% of customer shopping journeys
+REC_CROSS_PRD_LAP_01_PRD_BEV_01,PRD_LAP_01->PRD_BEV_01,shared_transaction_count,17,Historical Transactions,Co-purchased by 17 verified customers
+REC_CROSS_PRD_LAP_01_PRD_BEV_02,PRD_LAP_01->PRD_BEV_02,association_lift,1.204,Association Rule Mining,Purchasing Laptop Stand Aluminum Ergonomic multiplies odds of purchasing Cold Pressed Orange Juice 500ml by 1.20x
+REC_CROSS_PRD_LAP_01_PRD_BEV_02,PRD_LAP_01->PRD_BEV_02,rule_confidence,0.1059,Association Rule Mining,10.6% of Laptop Stand Aluminum Ergonomic buyers also ordered Cold Pressed Orange Juice 500ml
+REC_CROSS_PRD_LAP_01_PRD_BEV_02,PRD_LAP_01->PRD_BEV_02,rule_support,0.0054,Association Rule Mining,Observed across 0.54% of customer shopping journeys
+REC_CROSS_PRD_LAP_01_PRD_BEV_02,PRD_LAP_01->PRD_BEV_02,shared_transaction_count,18,Historical Transactions,Co-purchased by 18 verified customers
