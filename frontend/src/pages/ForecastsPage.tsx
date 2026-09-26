@@ -5,8 +5,11 @@ import { SalesForecast, SKUForecastItem } from '../types';
 import { Badge } from '../components/Badge';
 import { TableSkeleton, CardSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner } from '../components/EmptyState';
+import { useLanguage } from '../i18n/LanguageContext';
+import { localizeDynamicText } from '../i18n/translations';
 
 export const ForecastsPage: React.FC = () => {
+  const { t, language } = useLanguage();
   const [salesForecast, setSalesForecast] = useState<SalesForecast | null>(null);
   const [demandForecast, setDemandForecast] = useState<SKUForecastItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -54,41 +57,41 @@ export const ForecastsPage: React.FC = () => {
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       {/* Header */}
       <div>
-        <h2 className="text-xl font-bold text-paytm-dark">Predictive AI Engine & Forecasts</h2>
+        <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'पूर्वानुमान' : 'Predictive AI Engine & Forecasts'}</h2>
         <p className="text-xs text-paytm-muted mt-0.5">
-          Forward-looking autoregressive forecasts trained on historical transaction momentum and seasonal patterns.
+          {language === 'hindi' ? 'ऐतिहासिक लेनदेन गति और मौसमी पैटर्न पर प्रशिक्षित भविष्यवाणियां।' : 'Forward-looking autoregressive forecasts trained on historical transaction momentum and seasonal patterns.'}
         </p>
       </div>
 
       {/* KPI Forecast Overview */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">7-Day Projected Revenue</span>
+          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? '7-दिवसीय अनुमानित राजस्व' : '7-Day Projected Revenue'}</span>
           <p className="text-2xl font-bold text-paytm-dark mt-2">
             ₹{salesForecast.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
           </p>
           <div className="mt-2 text-xs text-paytm-muted">
-            Prediction Window: Next 7 Business Days
+            {language === 'hindi' ? 'भविष्यवाणी विंडो: अगले 7 व्यावसायिक दिन' : 'Prediction Window: Next 7 Business Days'}
           </div>
         </div>
 
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">Anticipated Trend</span>
+          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? 'प्रत्याशित रुझान' : 'Anticipated Trend'}</span>
           <p className="text-2xl font-bold text-paytm-blue mt-2">
-            {salesForecast.trend_direction}
+            {localizeDynamicText(salesForecast.trend_direction, language)}
           </p>
           <div className="mt-2 text-xs text-paytm-muted">
-            Based on Phase 3 Trend Classifier
+            {language === 'hindi' ? 'चरण 3 रुझान क्लासिफायरियर के आधार पर' : 'Based on Phase 3 Trend Classifier'}
           </div>
         </div>
 
         <div className="bg-white rounded-xl border border-paytm-border p-5">
-          <span className="text-xs font-semibold text-paytm-muted uppercase">Active ML Model</span>
+          <span className="text-xs font-semibold text-paytm-muted uppercase">{language === 'hindi' ? 'सक्रिय ML मॉडल' : 'Active ML Model'}</span>
           <p className="text-lg font-bold text-slate-700 mt-2 truncate">
             {salesForecast.model_name}
           </p>
           <div className="mt-2 text-xs text-emerald-600 font-medium">
-            Strict Non-Lookahead Validated
+            {language === 'hindi' ? 'कड़ाई से मान्य' : 'Strict Non-Lookahead Validated'}
           </div>
         </div>
       </div>
@@ -96,7 +99,7 @@ export const ForecastsPage: React.FC = () => {
       {/* Daily Sales Forecast Table & Chart */}
       <div className="bg-white rounded-xl border border-paytm-border p-5 shadow-xs">
         <h3 className="text-xs font-bold text-paytm-dark uppercase tracking-wider mb-4">
-          Daily Store Sales Forecast (Next 7 Days)
+          {language === 'hindi' ? 'दैनिक स्टोर बिक्री पूर्वानुमान (अगले 7 दिन)' : 'Daily Store Sales Forecast (Next 7 Days)'}
         </h3>
 
         <div className="grid grid-cols-2 sm:grid-cols-7 gap-2">
@@ -105,7 +108,7 @@ export const ForecastsPage: React.FC = () => {
               key={i}
               className="p-3 rounded-lg border border-paytm-border bg-paytm-light/50 flex flex-col items-center text-center"
             >
-              <span className="text-[11px] text-paytm-muted font-medium">Day {i + 1}</span>
+              <span className="text-[11px] text-paytm-muted font-medium">{language === 'hindi' ? 'दिन' : 'Day'} {i + 1}</span>
               <span className="text-[10px] text-slate-400 mt-0.5">{d.forecast_date}</span>
               <span className="text-sm font-bold text-paytm-dark mt-2">
                 ₹{d.predicted_revenue.toLocaleString()}
@@ -121,20 +124,20 @@ export const ForecastsPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <Package className="w-4 h-4 text-paytm-blue" />
             <h3 className="text-xs font-bold text-paytm-dark uppercase tracking-wider">
-              Top SKU Projected Demand (Next 7 Days)
+              {language === 'hindi' ? 'शीर्ष SKU अनुमानित मांग (अगले 7 दिन)' : 'Top SKU Projected Demand (Next 7 Days)'}
             </h3>
           </div>
-          <span className="text-xs text-paytm-muted">Sorted by anticipated units</span>
+          <span className="text-xs text-paytm-muted">{language === 'hindi' ? 'अनुमानित इकाइयों द्वारा क्रमबद्ध' : 'Sorted by anticipated units'}</span>
         </div>
 
         <table className="w-full text-left text-xs">
           <thead className="bg-slate-50 border-b border-paytm-border text-paytm-muted font-semibold">
             <tr>
-              <th className="py-2.5 px-4">Rank</th>
-              <th className="py-2.5 px-4">Product Name</th>
-              <th className="py-2.5 px-4">Category</th>
-              <th className="py-2.5 px-4">SKU Code</th>
-              <th className="py-2.5 px-4 text-right">Projected Demand (Units)</th>
+              <th className="py-2.5 px-4">{language === 'hindi' ? 'रैंक' : 'Rank'}</th>
+              <th className="py-2.5 px-4">{language === 'hindi' ? 'उत्पाद का नाम' : 'Product Name'}</th>
+              <th className="py-2.5 px-4">{language === 'hindi' ? 'श्रेणी' : 'Category'}</th>
+              <th className="py-2.5 px-4">{language === 'hindi' ? 'SKU कोड' : 'SKU Code'}</th>
+              <th className="py-2.5 px-4 text-right">{language === 'hindi' ? 'अनुमानित मांग (इकाईयां)' : 'Projected Demand (Units)'}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
@@ -142,10 +145,10 @@ export const ForecastsPage: React.FC = () => {
               <tr key={sku.product_id} className="hover:bg-slate-50/60">
                 <td className="py-2.5 px-4 font-bold text-paytm-blue">#{idx + 1}</td>
                 <td className="py-2.5 px-4 font-semibold text-paytm-dark">{sku.product_name}</td>
-                <td className="py-2.5 px-4 text-paytm-muted">{sku.category}</td>
+                <td className="py-2.5 px-4 text-paytm-muted">{localizeDynamicText(sku.category, language)}</td>
                 <td className="py-2.5 px-4 font-mono text-[11px]">{sku.product_id}</td>
                 <td className="py-2.5 px-4 text-right font-bold text-emerald-700">
-                  {sku.predicted_7d_units} units
+                  {sku.predicted_7d_units} {language === 'hindi' ? 'इकाईयां' : 'units'}
                 </td>
               </tr>
             ))}

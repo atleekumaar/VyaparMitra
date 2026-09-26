@@ -223,9 +223,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       {/* Main Grid: Left Charts + Right Action Center */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Sales Trends & Forecast */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 flex flex-col gap-6">
           {/* Recent Sales History Chart */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
+          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors flex-1 flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h3 className="text-base font-extrabold text-[#002970] dark:text-white">{t('daily_sales_trend', 'Daily Sales Trend (Bikri)')}</h3>
@@ -243,7 +243,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
 
             {/* Custom Bar Visualization */}
-            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
+            <div className="h-56 min-h-[14rem] flex-1 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
               {recentDays.map((day, idx) => {
                 const heightPct = Math.max(10, (day.revenue / maxRev) * 100);
                 return (
@@ -308,7 +308,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
 
         {/* Right 1 Col: Priority Action Center & Quick Ask */}
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {/* Peer Benchmarking Summary Card */}
           {benchmark && (
             <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm relative overflow-hidden transition-colors">
@@ -468,27 +468,29 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
 
           {/* Quick Copilot Interactive Card */}
-          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
-            <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
-              <Bot className="w-4 h-4 text-[#00BAF2]" />
-              <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
-            </div>
-            <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
-              {t('ask_copilot_box_sub')}
-            </p>
+          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors flex-1 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
+                <Bot className="w-4 h-4 text-[#00BAF2]" />
+                <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
+              </div>
+              <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
+                {t('ask_copilot_box_sub')}
+              </p>
 
-            <form onSubmit={handleQuickAsk} className="mt-3 space-y-2">
-              <input
-                type="text"
-                value={quickQuery}
-                onChange={(e) => setQuickQuery(e.target.value)}
-                placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
-              />
-              <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
-                {t('ask_btn', 'Ask Copilot')}
-              </Button>
-            </form>
+              <form onSubmit={handleQuickAsk} className="mt-3 space-y-2">
+                <input
+                  type="text"
+                  value={quickQuery}
+                  onChange={(e) => setQuickQuery(e.target.value)}
+                  placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
+                />
+                <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
+                  {t('ask_btn', 'Ask Copilot')}
+                </Button>
+              </form>
+            </div>
 
             <div className="mt-3 flex flex-wrap gap-1.5">
               {(language === 'hindi'

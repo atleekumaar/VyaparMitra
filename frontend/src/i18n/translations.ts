@@ -55,9 +55,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Vyapar Kirana Store',
   },
   store_category: {
-    hinglish: 'FMCG, Retail & Kirana • Lucknow',
-    hindi: 'किराना व दैनिक सामग्री • लखनऊ',
-    english: 'FMCG, Retail & Kirana • Lucknow',
+    hinglish: 'FMCG & Retail • Lucknow',
+    hindi: 'दैनिक सामग्री व रिटेल • लखनऊ',
+    english: 'FMCG & Retail • Lucknow',
   },
   verified_merchant: {
     hinglish: 'Paytm Verified',

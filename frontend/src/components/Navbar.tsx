@@ -41,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <p className="text-xs text-[#4F6A94] dark:text-blue-200 flex items-center gap-1.5 mt-0.5">
               <Store className="w-3.5 h-3.5 text-[#00BAF2]" />
-              <span className="font-semibold text-[#002970] dark:text-blue-100">ID: M001</span> &bull; {t('store_category', 'FMCG, Retail & Kirana • Lucknow')}
+              <span className="font-semibold text-[#002970] dark:text-blue-100">ID: M001</span> &bull; {t('store_category', 'FMCG & Retail • Lucknow')}
             </p>
           </div>
         </div>

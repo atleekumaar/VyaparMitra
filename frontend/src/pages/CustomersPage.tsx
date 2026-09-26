@@ -7,8 +7,11 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { TableSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner, EmptyState } from '../components/EmptyState';
+import { useLanguage } from '../i18n/LanguageContext';
+import { localizeDynamicText } from '../i18n/translations';
 
 export const CustomersPage: React.FC = () => {
+  const { t, language } = useLanguage();
   const [customers, setCustomers] = useState<CustomerListItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -52,12 +55,12 @@ export const CustomersPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold text-paytm-dark">Customer Intelligence & Retention</h2>
+          <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'ग्राहक बुद्धिमत्ता और प्रतिधारण' : 'Customer Intelligence & Retention'}</h2>
           <p className="text-xs text-paytm-muted mt-0.5">
-            Phase 3 churn risk scoring, purchase recency, and prioritized retention outreach.
+            {language === 'hindi' ? 'चरण 3 चर्न जोखिम स्कोरिंग, खरीद नवीनता, और प्राथमिकता प्रतिधारण आउटरीच।' : 'Phase 3 churn risk scoring, purchase recency, and prioritized retention outreach.'}
           </p>
         </div>
-        <Badge variant="info">Monitored Customers: {customers.length}</Badge>
+        <Badge variant="info">{language === 'hindi' ? 'निगरानी वाले ग्राहक:' : 'Monitored Customers:'} {customers.length}</Badge>
       </div>
 
       {/* Filters */}
@@ -68,10 +71,10 @@ export const CustomersPage: React.FC = () => {
           onChange={(e) => setSelectedRisk(e.target.value)}
           className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
         >
-          <option value="">All Churn Tiers</option>
-          <option value="high">High Churn Risk</option>
-          <option value="medium">Medium Churn Risk</option>
-          <option value="low">Low Churn Risk</option>
+          <option value="">{language === 'hindi' ? 'सभी चर्न स्तर' : 'All Churn Tiers'}</option>
+          <option value="high">{language === 'hindi' ? 'उच्च चर्न जोखिम' : 'High Churn Risk'}</option>
+          <option value="medium">{language === 'hindi' ? 'मध्यम चर्न जोखिम' : 'Medium Churn Risk'}</option>
+          <option value="low">{language === 'hindi' ? 'कम चर्न जोखिम' : 'Low Churn Risk'}</option>
         </select>
 
         <select
@@ -79,15 +82,15 @@ export const CustomersPage: React.FC = () => {
           onChange={(e) => setSelectedSegment(e.target.value)}
           className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
         >
-          <option value="">All Segments</option>
-          <option value="Champions">Champions</option>
-          <option value="Loyal">Loyal Customers</option>
-          <option value="At Risk">At Risk</option>
-          <option value="Low Engagement">Low Engagement</option>
+          <option value="">{language === 'hindi' ? 'सभी सेगमेंट' : 'All Segments'}</option>
+          <option value="Champions">{language === 'hindi' ? 'चैंपियंस' : 'Champions'}</option>
+          <option value="Loyal">{language === 'hindi' ? 'वफादार ग्राहक' : 'Loyal Customers'}</option>
+          <option value="At Risk">{language === 'hindi' ? 'जोखिम में' : 'At Risk'}</option>
+          <option value="Low Engagement">{language === 'hindi' ? 'कम जुड़ाव' : 'Low Engagement'}</option>
         </select>
 
         <Button variant="secondary" size="sm" onClick={loadCustomers}>
-          Filter
+          {language === 'hindi' ? 'फ़िल्टर' : 'Filter'}
         </Button>
       </div>
 
@@ -98,9 +101,9 @@ export const CustomersPage: React.FC = () => {
         <ErrorBanner message={error} onRetry={loadCustomers} />
       ) : customers.length === 0 ? (
         <EmptyState
-          title="No Customers Match Filters"
-          message="No records found matching the selected segment or risk tier."
-          actionText="Clear Filters"
+          title={language === 'hindi' ? 'कोई ग्राहक फ़िल्टर से मेल नहीं खाता' : "No Customers Match Filters"}
+          message={language === 'hindi' ? 'चयनित सेगमेंट या जोखिम स्तर से मेल खाने वाला कोई रिकॉर्ड नहीं मिला।' : "No records found matching the selected segment or risk tier."}
+          actionText={language === 'hindi' ? 'फ़िल्टर हटाएं' : "Clear Filters"}
           onAction={() => {
             setSelectedSegment('');
             setSelectedRisk('');
@@ -112,24 +115,24 @@ export const CustomersPage: React.FC = () => {
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 border-b border-paytm-border text-paytm-muted font-semibold">
                 <tr>
-                  <th className="py-3 px-4">Customer ID</th>
-                  <th className="py-3 px-4">Segment</th>
-                  <th className="py-3 px-4">Lifetime Spend</th>
-                  <th className="py-3 px-4">Orders</th>
-                  <th className="py-3 px-4">Recency (Days)</th>
-                  <th className="py-3 px-4">Churn Risk Tier</th>
-                  <th className="py-3 px-4">Inactivity Prob.</th>
-                  <th className="py-3 px-4 text-right">Action</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'ग्राहक ID' : 'Customer ID'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'सेगमेंट' : 'Segment'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'कुल खर्च' : 'Lifetime Spend'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'ऑर्डर्स' : 'Orders'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'नवीनता (दिन)' : 'Recency (Days)'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'चर्न जोखिम' : 'Churn Risk Tier'}</th>
+                  <th className="py-3 px-4">{language === 'hindi' ? 'निष्क्रियता संभ.' : 'Inactivity Prob.'}</th>
+                  <th className="py-3 px-4 text-right">{language === 'hindi' ? 'कार्रवाई' : 'Action'}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {customers.map((c) => (
                   <tr key={c.customer_id} className="hover:bg-slate-50/70 transition-colors">
                     <td className="py-3 px-4 font-mono font-semibold text-paytm-dark">{c.customer_id}</td>
-                    <td className="py-3 px-4 font-medium text-paytm-text">{c.segment}</td>
+                    <td className="py-3 px-4 font-medium text-paytm-text">{localizeDynamicText(c.segment, language)}</td>
                     <td className="py-3 px-4 font-semibold text-emerald-700">₹{c.lifetime_spend.toLocaleString()}</td>
                     <td className="py-3 px-4">{c.total_orders}</td>
-                    <td className="py-3 px-4 text-paytm-muted">{c.recency_days} days ago</td>
+                    <td className="py-3 px-4 text-paytm-muted">{c.recency_days} {language === 'hindi' ? 'दिन पहले' : 'days ago'}</td>
                     <td className="py-3 px-4">
                       <Badge
                         variant={
@@ -140,7 +143,7 @@ export const CustomersPage: React.FC = () => {
                             : 'success'
                         }
                       >
-                        {c.churn_risk_tier}
+                        {localizeDynamicText(c.churn_risk_tier, language)}
                       </Badge>
                     </td>
                     <td className="py-3 px-4 font-medium">
@@ -152,7 +155,7 @@ export const CustomersPage: React.FC = () => {
                         size="sm"
                         onClick={() => handleOpenDetail(c.customer_id)}
                       >
-                        Retention Profile
+                        {language === 'hindi' ? 'प्रतिधारण प्रोफ़ाइल' : 'Retention Profile'}
                       </Button>
                     </td>
                   </tr>
@@ -168,29 +171,29 @@ export const CustomersPage: React.FC = () => {
         <Modal
           isOpen={true}
           onClose={() => setSelectedCustomer(null)}
-          title={`Customer ${selectedCustomer.customer_id} — Retention Profile`}
-          subtitle={`Segment: ${selectedCustomer.segment}`}
+          title={`${language === 'hindi' ? 'ग्राहक' : 'Customer'} ${selectedCustomer.customer_id} — ${language === 'hindi' ? 'प्रतिधारण प्रोफ़ाइल' : 'Retention Profile'}`}
+          subtitle={`${language === 'hindi' ? 'सेगमेंट:' : 'Segment:'} ${localizeDynamicText(selectedCustomer.segment, language)}`}
           footer={
             <Button variant="secondary" size="sm" onClick={() => setSelectedCustomer(null)}>
-              Close
+              {language === 'hindi' ? 'बंद करें' : 'Close'}
             </Button>
           }
         >
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <span className="text-[10px] uppercase font-bold text-paytm-muted">Lifetime Spend</span>
+              <span className="text-[10px] uppercase font-bold text-paytm-muted">{language === 'hindi' ? 'कुल खर्च' : 'Lifetime Spend'}</span>
               <p className="text-base font-bold text-paytm-dark mt-0.5">₹{selectedCustomer.lifetime_spend.toLocaleString()}</p>
             </div>
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <span className="text-[10px] uppercase font-bold text-paytm-muted">Completed Orders</span>
+              <span className="text-[10px] uppercase font-bold text-paytm-muted">{language === 'hindi' ? 'पूरे किए गए ऑर्डर्स' : 'Completed Orders'}</span>
               <p className="text-base font-bold text-paytm-dark mt-0.5">{selectedCustomer.total_orders}</p>
             </div>
             <div className="p-3 bg-slate-50 rounded-lg border border-slate-100">
-              <span className="text-[10px] uppercase font-bold text-paytm-muted">Days Since Last Visit</span>
-              <p className="text-base font-bold text-paytm-dark mt-0.5">{selectedCustomer.recency_days} days</p>
+              <span className="text-[10px] uppercase font-bold text-paytm-muted">{language === 'hindi' ? 'अंतिम यात्रा से दिन' : 'Days Since Last Visit'}</span>
+              <p className="text-base font-bold text-paytm-dark mt-0.5">{selectedCustomer.recency_days} {language === 'hindi' ? 'दिन' : 'days'}</p>
             </div>
             <div className="p-3 bg-red-50 rounded-lg border border-red-100">
-              <span className="text-[10px] uppercase font-bold text-red-800">Churn Probability</span>
+              <span className="text-[10px] uppercase font-bold text-red-800">{language === 'hindi' ? 'चर्न संभावना' : 'Churn Probability'}</span>
               <p className="text-base font-bold text-red-700 mt-0.5">{(selectedCustomer.churn_probability * 100).toFixed(1)}%</p>
             </div>
           </div>
@@ -199,25 +202,25 @@ export const CustomersPage: React.FC = () => {
           <div className="mt-4 p-4 rounded-xl border border-paytm-border bg-paytm-light">
             <div className="flex items-center gap-2 text-xs font-bold text-paytm-dark">
               <HeartHandshake className="w-4 h-4 text-paytm-blue" />
-              <span>Recommended Retention Strategy (Phase 4 Decision Engine)</span>
+              <span>{language === 'hindi' ? 'अनुशंसित प्रतिधारण रणनीति (चरण 4 निर्णय इंजन)' : 'Recommended Retention Strategy (Phase 4 Decision Engine)'}</span>
             </div>
             <p className="text-xs text-paytm-text mt-2 font-medium">
-              {selectedCustomer.suggested_retention_action || 'Re-engagement message with targeted category offer.'}
+              {localizeDynamicText(selectedCustomer.suggested_retention_action || (language === 'hindi' ? 'लक्षित श्रेणी की पेशकश के साथ फिर से जोड़ने वाला संदेश।' : 'Re-engagement message with targeted category offer.'), language)}
             </p>
             <div className="mt-3 flex items-center gap-2 text-[11px] text-paytm-muted">
-              <span>Privacy notice: Customer numbers and personally identifiable data are masked in demo mode.</span>
+              <span>{language === 'hindi' ? 'गोपनीयता सूचना: डेमो मोड में ग्राहक नंबर और व्यक्तिगत पहचान योग्य डेटा छिपे हुए हैं।' : 'Privacy notice: Customer numbers and personally identifiable data are masked in demo mode.'}</span>
             </div>
           </div>
 
           {/* Evidence Rationale */}
           {selectedCustomer.evidence && selectedCustomer.evidence.length > 0 && (
             <div className="mt-4 pt-3 border-t border-slate-100">
-              <h4 className="text-xs font-bold text-paytm-dark mb-2">Audit Evidence</h4>
+              <h4 className="text-xs font-bold text-paytm-dark mb-2">{language === 'hindi' ? 'ऑडिट साक्ष्य' : 'Audit Evidence'}</h4>
               <div className="space-y-1.5">
                 {selectedCustomer.evidence.map((ev, i) => (
                   <div key={i} className="text-xs p-2 rounded bg-slate-50 flex items-center justify-between">
-                    <span className="font-semibold text-paytm-dark">{ev.metric}: <span className="font-normal">{ev.value}</span></span>
-                    <span className="text-[10px] text-paytm-muted">{ev.source}</span>
+                    <span className="font-semibold text-paytm-dark">{localizeDynamicText(ev.metric, language)}: <span className="font-normal">{ev.value}</span></span>
+                    <span className="text-[10px] text-paytm-muted">{localizeDynamicText(ev.source, language)}</span>
                   </div>
                 ))}
               </div>

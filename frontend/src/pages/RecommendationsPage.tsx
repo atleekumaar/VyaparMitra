@@ -17,6 +17,8 @@ import { Button } from '../components/Button';
 import { Modal } from '../components/Modal';
 import { TableSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner, EmptyState } from '../components/EmptyState';
+import { useLanguage } from '../i18n/LanguageContext';
+import { localizeDynamicText } from '../i18n/translations';
 
 interface RecommendationsPageProps {
   initialActionId?: string | null;
@@ -25,6 +27,7 @@ interface RecommendationsPageProps {
 export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
   initialActionId,
 }) => {
+  const { t, language } = useLanguage();
   const [recommendations, setRecommendations] = useState<RecommendationDetail[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -90,22 +93,20 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         <div>
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-paytm-blue" />
-            <h2 className="text-xl font-bold text-paytm-dark">Merchant Action Center</h2>
+            <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'व्यापारी एक्शन सेंटर' : language === 'hinglish' ? 'Merchant Action Center' : 'Merchant Action Center'}</h2>
           </div>
           <p className="text-xs text-paytm-muted mt-0.5">
-            Prioritized business decisions synthesized across inventory restock, churn mitigation, and bundling.
+            {language === 'hindi' ? 'इन्वेंट्री, चर्न शमन और बंडलिंग के आधार पर व्यापारिक निर्णय।' : 'Prioritized business decisions synthesized across inventory restock, churn mitigation, and bundling.'}
           </p>
         </div>
-        <Badge variant="info">Total Actions: {recommendations.length}</Badge>
+        <Badge variant="info">{language === 'hindi' ? 'कुल कार्य:' : 'Total Actions:'} {recommendations.length}</Badge>
       </div>
 
       {/* Governance & Safeguard Notice */}
       <div className="bg-paytm-light rounded-xl border border-paytm-border p-4 text-xs text-paytm-dark flex items-start gap-3">
         <Info className="w-4 h-4 text-paytm-blue shrink-0 mt-0.5" />
         <p>
-          <span className="font-semibold text-paytm-dark">Commercial Safety Boundary:</span> VyaparMitra
-          surfaces evidence-backed recommendations for your consideration. The system will never execute
-          purchases, adjust prices, or dispatch customer messages without your explicit confirmation.
+          <span className="font-semibold text-paytm-dark">{language === 'hindi' ? 'व्यापार सुरक्षा सीमा:' : 'Commercial Safety Boundary:'}</span> {language === 'hindi' ? 'व्यापारमित्र साक्ष्य-समर्थित सुझाव देता है। सिस्टम आपकी स्पष्ट सहमति के बिना कोई भी कार्य निष्पादित नहीं करेगा।' : 'VyaparMitra surfaces evidence-backed recommendations for your consideration. The system will never execute purchases, adjust prices, or dispatch customer messages without your explicit confirmation.'}
         </p>
       </div>
 
@@ -119,11 +120,11 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
           onChange={(e) => setFilterType(e.target.value)}
           className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
         >
-          <option value="ALL">All Subsystems</option>
-          <option value="INVENTORY">Inventory Restock</option>
-          <option value="RETENTION">Customer Retention</option>
-          <option value="CROSS_SELL">Cross-Sell & Bundling</option>
-          <option value="PRICING">Pricing & Margin</option>
+          <option value="ALL">{language === 'hindi' ? 'सभी उपप्रणालियाँ' : 'All Subsystems'}</option>
+          <option value="INVENTORY">{language === 'hindi' ? 'इन्वेंट्री रेस्टॉक' : 'Inventory Restock'}</option>
+          <option value="RETENTION">{language === 'hindi' ? 'ग्राहक प्रतिधारण' : 'Customer Retention'}</option>
+          <option value="CROSS_SELL">{language === 'hindi' ? 'क्रॉस-सेल और बंडलिंग' : 'Cross-Sell & Bundling'}</option>
+          <option value="PRICING">{language === 'hindi' ? 'मूल्य और मार्जिन' : 'Pricing & Margin'}</option>
         </select>
 
         {/* Priority Filter */}
@@ -132,11 +133,11 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
           onChange={(e) => setFilterPriority(e.target.value)}
           className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
         >
-          <option value="ALL">All Priorities</option>
-          <option value="CRITICAL">🔴 Critical Priority</option>
-          <option value="HIGH">🟠 High Priority</option>
-          <option value="MEDIUM">🟡 Medium Priority</option>
-          <option value="LOW">🟢 Low Priority</option>
+          <option value="ALL">{language === 'hindi' ? 'सभी प्राथमिकताएं' : 'All Priorities'}</option>
+          <option value="CRITICAL">🔴 {language === 'hindi' ? 'अति-महत्वपूर्ण' : 'Critical Priority'}</option>
+          <option value="HIGH">🟠 {language === 'hindi' ? 'उच्च प्राथमिकता' : 'High Priority'}</option>
+          <option value="MEDIUM">🟡 {language === 'hindi' ? 'मध्यम प्राथमिकता' : 'Medium Priority'}</option>
+          <option value="LOW">🟢 {language === 'hindi' ? 'कम प्राथमिकता' : 'Low Priority'}</option>
         </select>
 
         {/* Status Filter */}
@@ -145,16 +146,16 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
           onChange={(e) => setFilterStatus(e.target.value)}
           className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
         >
-          <option value="ALL">All Statuses</option>
-          <option value="GENERATED">Generated</option>
-          <option value="VIEWED">Viewed</option>
-          <option value="ACCEPTED">Accepted</option>
-          <option value="REJECTED">Rejected</option>
-          <option value="EXECUTED">Executed</option>
+          <option value="ALL">{language === 'hindi' ? 'सभी स्थितियाँ' : 'All Statuses'}</option>
+          <option value="GENERATED">{language === 'hindi' ? 'उत्पन्न' : 'Generated'}</option>
+          <option value="VIEWED">{language === 'hindi' ? 'देखा गया' : 'Viewed'}</option>
+          <option value="ACCEPTED">{language === 'hindi' ? 'स्वीकृत' : 'Accepted'}</option>
+          <option value="REJECTED">{language === 'hindi' ? 'अस्वीकृत' : 'Rejected'}</option>
+          <option value="EXECUTED">{language === 'hindi' ? 'निष्पादित' : 'Executed'}</option>
         </select>
 
         <Button variant="secondary" size="sm" onClick={loadRecommendations}>
-          Filter
+          {language === 'hindi' ? 'फ़िल्टर' : 'Filter'}
         </Button>
       </div>
 
@@ -165,9 +166,9 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         <ErrorBanner message={error} onRetry={loadRecommendations} />
       ) : recommendations.length === 0 ? (
         <EmptyState
-          title="No Actions Matching Criteria"
-          message="All clear! No pending recommendations match your selected filters."
-          actionText="Reset Filters"
+          title={language === 'hindi' ? "कोई कार्य मेल नहीं खाता" : "No Actions Matching Criteria"}
+          message={language === 'hindi' ? "सभी स्पष्ट! कोई लंबित सुझाव आपके चयनित फ़िल्टर से मेल नहीं खाता।" : "All clear! No pending recommendations match your selected filters."}
+          actionText={language === 'hindi' ? "फ़िल्टर रीसेट करें" : "Reset Filters"}
           onAction={() => {
             setFilterType('ALL');
             setFilterPriority('ALL');
@@ -218,21 +219,21 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                           : 'neutral'
                       }
                     >
-                      Status: {rec.status}
+                      {language === 'hindi' ? 'स्थिति:' : 'Status:'} {localizeDynamicText(rec.status, language)}
                     </Badge>
                   </div>
 
-                  <h3 className="text-sm font-bold text-paytm-dark">{rec.title}</h3>
-                  <p className="text-xs text-paytm-text font-medium">{rec.action}</p>
-                  <p className="text-xs text-paytm-muted">{rec.reason}</p>
+                  <h3 className="text-sm font-bold text-paytm-dark">{localizeDynamicText(rec.title, language)}</h3>
+                  <p className="text-xs text-paytm-text font-medium">{localizeDynamicText(rec.action, language)}</p>
+                  <p className="text-xs text-paytm-muted">{localizeDynamicText(rec.reason, language)}</p>
 
                   <div className="flex items-center gap-4 text-xs pt-1">
                     <span className="font-semibold text-emerald-700">
-                      Expected Impact: ₹{rec.expected_impact.toLocaleString()}
+                      {language === 'hindi' ? 'अपेक्षित प्रभाव:' : 'Expected Impact:'} ₹{rec.expected_impact.toLocaleString()}
                     </span>
                     {rec.entity_id && (
                       <span className="text-paytm-muted font-mono">
-                        Target: {rec.entity_id}
+                        {language === 'hindi' ? 'लक्ष्य:' : 'Target:'} {rec.entity_id}
                       </span>
                     )}
                   </div>
@@ -245,7 +246,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                     size="sm"
                     onClick={() => setSelectedRec(rec)}
                   >
-                    View Why &amp; Evidence
+                    {language === 'hindi' ? 'कारण व साक्ष्य देखें' : 'View Why & Evidence'}
                   </Button>
 
                   {!isAccepted && !isExecuted && (
@@ -255,7 +256,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                       isLoading={updatingId === rec.recommendation_id}
                       onClick={() => handleStatusChange(rec.recommendation_id, 'ACCEPTED')}
                     >
-                      Accept
+                      {language === 'hindi' ? 'स्वीकार करें' : 'Accept'}
                     </Button>
                   )}
 
@@ -266,7 +267,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                       isLoading={updatingId === rec.recommendation_id}
                       onClick={() => handleStatusChange(rec.recommendation_id, 'EXECUTED')}
                     >
-                      Mark Executed
+                      {language === 'hindi' ? 'निष्पादित करें' : 'Mark Executed'}
                     </Button>
                   )}
 
@@ -277,7 +278,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                       isLoading={updatingId === rec.recommendation_id}
                       onClick={() => handleStatusChange(rec.recommendation_id, 'REJECTED')}
                     >
-                      Dismiss
+                      {language === 'hindi' ? 'रद्द करें' : 'Dismiss'}
                     </Button>
                   )}
                 </div>
@@ -292,8 +293,8 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         <Modal
           isOpen={true}
           onClose={() => setSelectedRec(null)}
-          title={`Recommendation Rationale: ${selectedRec.title}`}
-          subtitle={`Priority Band: ${selectedRec.priority_band} • Priority Score: ${selectedRec.priority_score.toFixed(4)}`}
+          title={`${language === 'hindi' ? 'सुझाव का कारण:' : 'Recommendation Rationale:'} ${localizeDynamicText(selectedRec.title, language)}`}
+          subtitle={`${language === 'hindi' ? 'प्राथमिकता बैंड:' : 'Priority Band:'} ${localizeDynamicText(selectedRec.priority_band, language)} • ${language === 'hindi' ? 'प्राथमिकता स्कोर:' : 'Priority Score:'} ${selectedRec.priority_score.toFixed(4)}`}
           footer={
             <div className="flex items-center gap-2">
               {selectedRec.status !== 'ACCEPTED' && selectedRec.status !== 'EXECUTED' && (
@@ -302,7 +303,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                   size="sm"
                   onClick={() => handleStatusChange(selectedRec.recommendation_id, 'ACCEPTED')}
                 >
-                  Accept Action
+                  {language === 'hindi' ? 'कार्य स्वीकार करें' : 'Accept Action'}
                 </Button>
               )}
               {selectedRec.status === 'ACCEPTED' && (
@@ -311,41 +312,41 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
                   size="sm"
                   onClick={() => handleStatusChange(selectedRec.recommendation_id, 'EXECUTED')}
                 >
-                  Confirm Execution
+                  {language === 'hindi' ? 'निष्पादन की पुष्टि करें' : 'Confirm Execution'}
                 </Button>
               )}
               <Button variant="secondary" size="sm" onClick={() => setSelectedRec(null)}>
-                Close
+                {language === 'hindi' ? 'बंद करें' : 'Close'}
               </Button>
             </div>
           }
         >
           <div className="space-y-4">
             <div className="p-3.5 rounded-xl bg-paytm-light border border-paytm-border">
-              <span className="text-[10px] uppercase font-bold text-paytm-blue">Recommended Business Action</span>
-              <p className="text-sm font-semibold text-paytm-dark mt-1">{selectedRec.action}</p>
+              <span className="text-[10px] uppercase font-bold text-paytm-blue">{language === 'hindi' ? 'सुझाए गए व्यापारिक कार्य' : 'Recommended Business Action'}</span>
+              <p className="text-sm font-semibold text-paytm-dark mt-1">{localizeDynamicText(selectedRec.action, language)}</p>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold text-paytm-dark mb-1">Underlying Rationale</h4>
-              <p className="text-xs text-paytm-text leading-relaxed">{selectedRec.reason}</p>
+              <h4 className="text-xs font-bold text-paytm-dark mb-1">{language === 'hindi' ? 'अंतर्निहित कारण' : 'Underlying Rationale'}</h4>
+              <p className="text-xs text-paytm-text leading-relaxed">{localizeDynamicText(selectedRec.reason, language)}</p>
             </div>
 
             {/* 6-Part Auditable Evidence */}
             <div className="pt-2 border-t border-slate-100">
-              <h4 className="text-xs font-bold text-paytm-dark mb-2">Auditable Data Evidence ({selectedRec.evidence.length} Indicators)</h4>
+              <h4 className="text-xs font-bold text-paytm-dark mb-2">{language === 'hindi' ? 'ऑडिट योग्य डेटा साक्ष्य' : 'Auditable Data Evidence'} ({selectedRec.evidence.length} {language === 'hindi' ? 'संकेतक' : 'Indicators'})</h4>
               {selectedRec.evidence.length === 0 ? (
-                <p className="text-xs text-paytm-muted">Evidence record compiled from upstream feature store.</p>
+                <p className="text-xs text-paytm-muted">{language === 'hindi' ? 'साक्ष्य रिकॉर्ड फीचर स्टोर से संकलित किया गया है।' : 'Evidence record compiled from upstream feature store.'}</p>
               ) : (
                 <div className="space-y-2">
                   {selectedRec.evidence.map((ev, i) => (
                     <div key={i} className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-paytm-dark">{ev.metric}</span>
+                        <span className="font-semibold text-paytm-dark">{localizeDynamicText(ev.metric, language)}</span>
                         <span className="font-bold text-emerald-700">{String(ev.value)}</span>
                       </div>
-                      {ev.description && <p className="text-[11px] text-paytm-muted mt-0.5">{ev.description}</p>}
-                      <div className="mt-1 text-[10px] text-slate-400 font-mono">Source: {ev.source}</div>
+                      {ev.description && <p className="text-[11px] text-paytm-muted mt-0.5">{localizeDynamicText(ev.description, language)}</p>}
+                      <div className="mt-1 text-[10px] text-slate-400 font-mono">{language === 'hindi' ? 'स्रोत:' : 'Source:'} {localizeDynamicText(ev.source, language)}</div>
                     </div>
                   ))}
                 </div>
