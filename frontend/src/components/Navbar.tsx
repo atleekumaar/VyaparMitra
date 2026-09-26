@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-extrabold text-[#002970] dark:text-white tracking-tight">
-                {t('store_name', 'Vyapar Kirana Store')}
+                {t('store_name', 'Vyapar Store')}
               </h1>
               <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
                 <ShieldCheck className="w-3 h-3 text-[#00B970]" />

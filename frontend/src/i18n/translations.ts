@@ -50,9 +50,9 @@ export const translations: Record<string, Record<Language, string>> = {
 
   // Navbar & Global
   store_name: {
-    hinglish: 'Vyapar Kirana Store',
-    hindi: 'व्यापार किराना स्टोर',
-    english: 'Vyapar Kirana Store',
+    hinglish: 'Vyapar Store',
+    hindi: 'व्यापार स्टोर',
+    english: 'Vyapar Store',
   },
   store_category: {
     hinglish: 'FMCG & Retail • Lucknow',
