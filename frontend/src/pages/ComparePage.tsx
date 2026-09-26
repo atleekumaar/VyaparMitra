@@ -145,7 +145,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
             cy={center}
             r={radius * lvl}
             fill="none"
-            stroke="#D0E5F7"
+            className="stroke-[#D0E5F7] dark:stroke-[#1E3A6E]"
             strokeWidth="1"
             strokeDasharray={lvl === 0.5 ? '3 3' : undefined}
           />
@@ -163,7 +163,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
               y1={center}
               x2={x}
               y2={y}
-              stroke="#D0E5F7"
+              className="stroke-[#D0E5F7] dark:stroke-[#1E3A6E]"
               strokeWidth="1"
             />
           );
@@ -173,7 +173,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         <polygon
           points={peerPoints}
           fill="none"
-          stroke="#002970"
+          stroke="#00BAF2"
           strokeWidth="1.5"
           strokeDasharray="4 4"
         />
@@ -212,7 +212,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                 y={ly}
                 textAnchor="middle"
                 dominantBaseline="central"
-                className="text-[10px] font-bold fill-[#002970] pointer-events-none"
+                className="text-[10px] font-bold fill-[#002970] dark:fill-white pointer-events-none"
               >
                 {m.name === 'repeat_rate' ? 'Repeat' :
                  m.name === 'ticket_size' ? 'Ticket' :
@@ -230,17 +230,17 @@ export const ComparePage: React.FC<ComparePageProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       {/* Top Header & Merchant Selector */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-[#CDE5F7] shadow-paytm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0F1D38] p-5 rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] shadow-paytm transition-colors">
         <div>
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] text-[#00BAF2] border border-[#B3E3FA]">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] dark:from-[#0B254A] dark:to-[#0F356B] text-[#00BAF2] border border-[#B3E3FA] dark:border-[#1A4B8C]">
               <Trophy className="w-6 h-6 text-[#00BAF2]" />
             </div>
             <div>
-              <h2 className="text-xl lg:text-2xl font-black text-[#002970] tracking-tight">
+              <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
                 {currentLanguage === 'hindi' ? 'दुकान की प्रतिस्पर्धा से तुलना (Benchmark)' : 'Peers se Tulna (Benchmark)'}
               </h2>
-              <p className="text-xs text-[#4F6A94] mt-0.5 font-medium">
+              <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5 font-medium">
                 {currentLanguage === 'hindi'
                   ? 'समान शहर व श्रेणी की अन्य दुकानों से 6 मुख्य संकेतकों पर तुलना'
                   : 'Compare your store against 6 core performance metrics of category peers'}
@@ -251,14 +251,14 @@ export const ComparePage: React.FC<ComparePageProps> = ({
 
         {/* Demo Merchant Selector Dropdown */}
         <div className="flex items-center gap-2.5 self-start sm:self-auto">
-          <label className="text-xs font-bold text-[#002970] flex items-center gap-1.5 whitespace-nowrap">
+          <label className="text-xs font-bold text-[#002970] dark:text-blue-100 flex items-center gap-1.5 whitespace-nowrap">
             <Store className="w-3.5 h-3.5 text-[#00BAF2]" />
             <span>Select Shop:</span>
           </label>
           <select
             value={selectedMerchantId}
             onChange={(e) => setSelectedMerchantId(e.target.value)}
-            className="text-xs font-bold bg-[#F0F8FE] border border-[#CDE5F7] rounded-xl px-3.5 py-2 text-[#002970] focus:outline-none focus:ring-2 focus:ring-[#00BAF2] transition-all shadow-2xs"
+            className="text-xs font-bold bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] rounded-xl px-3.5 py-2 text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] transition-all shadow-2xs"
           >
             {merchants.map((m) => (
               <option key={m.merchant_id} value={m.merchant_id}>
@@ -293,8 +293,8 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         <>
           {/* Small Peer Group Fallback Alert Notice */}
           {benchmark.is_fallback_group && benchmark.fallback_reason && (
-            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#FFF6E5] border border-[#FFE1A8] text-xs text-[#C27803] animate-in fade-in-50">
-              <Info className="w-4 h-4 text-[#C27803] shrink-0 mt-0.5" />
+            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#FFF6E5] dark:bg-[#FFB800]/15 border border-[#FFE1A8] dark:border-[#FFB800]/30 text-xs text-[#C27803] dark:text-[#FFCA33] animate-in fade-in-50">
+              <Info className="w-4 h-4 text-[#C27803] dark:text-[#FFCA33] shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold">Group Expansion: </span>
                 <span>{benchmark.fallback_reason}</span>
@@ -385,12 +385,12 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                 return (
                   <div
                     key={metric.name}
-                    className="bg-white rounded-2xl p-5 border-2 border-[#CDE5F7] hover:shadow-paytm transition-all duration-200 flex flex-col justify-between"
+                    className="bg-white dark:bg-[#0F1D38] rounded-2xl p-5 border-2 border-[#CDE5F7] dark:border-[#1E3A6E] hover:shadow-paytm transition-all duration-200 flex flex-col justify-between"
                   >
                     <div>
                       {/* Title & Status Badge */}
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs font-bold text-[#4F6A94] uppercase tracking-wide">
+                        <span className="text-xs font-bold text-[#4F6A94] dark:text-blue-200 uppercase tracking-wide">
                           {currentLanguage === 'hindi' && metric.label_hi ? metric.label_hi : metric.label}
                         </span>
                         <Badge variant={badgeVariant} className="text-[11px]">
@@ -401,15 +401,15 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                       {/* Metric Comparison Numbers */}
                       <div className="mt-3 flex items-baseline justify-between">
                         <div>
-                          <span className="text-xs text-[#4F6A94] block font-semibold">Your Store</span>
-                          <span className="text-2xl font-black text-[#002970]">
+                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">Your Store</span>
+                          <span className="text-2xl font-black text-[#002970] dark:text-white">
                             {metric.unit === '₹' ? `₹${Math.round(metric.you).toLocaleString('en-IN')}` : `${metric.you}${metric.unit}`}
                           </span>
                         </div>
 
                         <div className="text-right">
-                          <span className="text-xs text-[#4F6A94] block font-semibold">Peer Median</span>
-                          <span className="text-sm font-bold text-[#002970]">
+                          <span className="text-xs text-[#4F6A94] dark:text-blue-200 block font-semibold">Peer Median</span>
+                          <span className="text-sm font-bold text-[#002970] dark:text-blue-100">
                             {metric.unit === '₹' ? `₹${Math.round(metric.peer_median).toLocaleString('en-IN')}` : `${metric.peer_median}${metric.unit}`}
                           </span>
                         </div>
@@ -417,12 +417,12 @@ export const ComparePage: React.FC<ComparePageProps> = ({
 
                       {/* Visual Range Bar Component */}
                       <div className="mt-4 space-y-1.5">
-                        <div className="flex justify-between text-[10px] text-[#4F6A94] font-semibold">
+                        <div className="flex justify-between text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold">
                           <span>Min: {metric.peer_min}{metric.unit}</span>
-                          <span className="text-[#002970] font-bold">50th %ile (Median)</span>
+                          <span className="text-[#002970] dark:text-white font-bold">50th %ile (Median)</span>
                           <span>Max: {metric.peer_max}{metric.unit}</span>
                         </div>
-                        <div className="h-2.5 w-full bg-[#E8F4FD] rounded-full relative overflow-hidden">
+                        <div className="h-2.5 w-full bg-[#E8F4FD] dark:bg-[#132342] rounded-full relative overflow-hidden">
                           {/* Percentile fill */}
                           <div
                             className={`h-full rounded-full transition-all duration-500 ${
@@ -439,8 +439,8 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                     </div>
 
                     {/* Actionable Tip & Explain Button */}
-                    <div className="mt-4 pt-3 border-t border-[#E8F4FD] flex items-center justify-between text-xs">
-                      <p className="text-[11px] text-[#0F2042] font-semibold line-clamp-1 flex-1 pr-2" title={metric.action}>
+                    <div className="mt-4 pt-3 border-t border-[#E8F4FD] dark:border-[#1E3A6E] flex items-center justify-between text-xs">
+                      <p className="text-[11px] text-[#0F2042] dark:text-blue-100 font-semibold line-clamp-1 flex-1 pr-2" title={metric.action}>
                         💡 {currentLanguage === 'hindi' && metric.action_hi ? metric.action_hi : metric.action}
                       </p>
                       <button
@@ -448,7 +448,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                           setSelectedExplainMetric(metric);
                           setIsExplainModalOpen(true);
                         }}
-                        className="text-[11px] font-bold text-[#00BAF2] hover:text-[#002970] whitespace-nowrap flex items-center gap-0.5 transition-colors"
+                        className="text-[11px] font-bold text-[#00BAF2] hover:text-[#002970] dark:hover:text-white whitespace-nowrap flex items-center gap-0.5 transition-colors"
                       >
                         <span>Kaise?</span>
                         <ChevronRight className="w-3 h-3" />
@@ -460,10 +460,10 @@ export const ComparePage: React.FC<ComparePageProps> = ({
             </div>
 
             {/* Radar / Spider Chart Panel */}
-            <div className="bg-white rounded-2xl p-5 border-2 border-[#CDE5F7] shadow-paytm flex flex-col justify-between">
+            <div className="bg-white dark:bg-[#0F1D38] rounded-2xl p-5 border-2 border-[#CDE5F7] dark:border-[#1E3A6E] shadow-paytm flex flex-col justify-between transition-colors">
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-extrabold text-[#002970] flex items-center gap-1.5">
+                  <h3 className="text-sm font-extrabold text-[#002970] dark:text-white flex items-center gap-1.5">
                     <Sparkles className="w-4 h-4 text-[#00BAF2]" />
                     <span>Benchmark Spider Chart</span>
                   </h3>
@@ -477,21 +477,21 @@ export const ComparePage: React.FC<ComparePageProps> = ({
                   {renderRadarChart(benchmark.metrics)}
                 </div>
 
-                <div className="mt-3 flex items-center justify-center gap-4 text-xs text-[#4F6A94] font-semibold">
+                <div className="mt-3 flex items-center justify-center gap-4 text-xs text-[#4F6A94] dark:text-blue-200 font-semibold">
                   <div className="flex items-center gap-1.5">
                     <span className="w-3 h-2 rounded-sm bg-[#00BAF2]" />
                     <span>Your Store</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-0.5 border-t-2 border-dashed border-[#002970]" />
+                    <span className="w-3 h-0.5 border-t-2 border-dashed border-[#00BAF2]" />
                     <span>Peer Median (50%)</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick AI Ask CTA */}
-              <div className="mt-6 p-3.5 rounded-xl bg-[#F0F8FE] border border-[#CDE5F7] text-xs space-y-2">
-                <p className="font-bold text-[#002970]">
+              <div className="mt-6 p-3.5 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs space-y-2">
+                <p className="font-bold text-[#002970] dark:text-white">
                   💬 Want an audio or Hindi explanation?
                 </p>
                 <Button
@@ -507,18 +507,18 @@ export const ComparePage: React.FC<ComparePageProps> = ({
           </div>
 
           {/* What Top Performers Do Panel */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-[#CDE5F7] shadow-paytm">
+          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl p-6 border-2 border-[#CDE5F7] dark:border-[#1E3A6E] shadow-paytm transition-colors">
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-xl bg-[#E8F8F0] text-[#008A54] border border-[#B6E8D0]">
+              <div className="p-2 rounded-xl bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
                 <ShieldCheck className="w-5 h-5 text-[#00B970]" />
               </div>
               <div>
-                <h3 className="text-base font-extrabold text-[#002970]">
+                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">
                   {currentLanguage === 'hindi'
                     ? `शीर्ष 10% ${benchmark.business_type} विक्रेता क्या करते हैं?`
                     : `What Top 10% ${benchmark.business_type} Performers Do`}
                 </h3>
-                <p className="text-xs text-[#4F6A94] font-medium">
+                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
                   Category leaders ke high-impact business practices aur strategies
                 </p>
               </div>
@@ -528,7 +528,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
               {benchmark.top_performer_practices.map((practice, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F0F8FE] border border-[#CDE5F7] text-xs text-[#0F2042] font-semibold"
+                  className="flex items-start gap-3 p-3.5 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs text-[#0F2042] dark:text-blue-100 font-semibold"
                 >
                   <div className="w-6 h-6 rounded-full bg-[#00B970] text-white flex items-center justify-center font-black text-xs shrink-0 mt-0.5 shadow-2xs">
                     {idx + 1}
@@ -552,25 +552,25 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         }
       >
         {selectedExplainMetric && benchmark && (
-          <div className="space-y-4 text-sm text-[#002970]">
-            <p className="text-xs text-[#4F6A94] leading-relaxed">
+          <div className="space-y-4 text-sm text-[#002970] dark:text-white">
+            <p className="text-xs text-[#4F6A94] dark:text-blue-200 leading-relaxed">
               VyaparMitra peer benchmarking transparently computes percentiles by comparing your store against{' '}
-              <strong className="text-[#002970] font-bold">{benchmark.peer_count} verified stores</strong> in{' '}
-              <strong className="text-[#002970] font-bold">{benchmark.peer_group}</strong>.
+              <strong className="text-[#002970] dark:text-white font-bold">{benchmark.peer_count} verified stores</strong> in{' '}
+              <strong className="text-[#002970] dark:text-white font-bold">{benchmark.peer_group}</strong>.
             </p>
 
             {/* Formula & Calculation Box */}
-            <div className="rounded-xl bg-[#F0F8FE] p-4 border border-[#CDE5F7] space-y-2 text-xs">
-              <span className="font-extrabold text-[#002970] uppercase tracking-wide block">
+            <div className="rounded-xl bg-[#F0F8FE] dark:bg-[#132342] p-4 border border-[#CDE5F7] dark:border-[#1E3A6E] space-y-2 text-xs">
+              <span className="font-extrabold text-[#002970] dark:text-white uppercase tracking-wide block">
                 Calculation Breakdown
               </span>
-              <div className="grid grid-cols-2 gap-2 text-[#4F6A94] font-medium">
+              <div className="grid grid-cols-2 gap-2 text-[#4F6A94] dark:text-blue-200 font-medium">
                 <div>Your Store Value:</div>
-                <div className="font-extrabold text-[#002970]">
+                <div className="font-extrabold text-[#002970] dark:text-white">
                   {selectedExplainMetric.you} {selectedExplainMetric.unit}
                 </div>
                 <div>Peer Group Median:</div>
-                <div className="font-bold text-[#002970]">
+                <div className="font-bold text-[#002970] dark:text-white">
                   {selectedExplainMetric.peer_median} {selectedExplainMetric.unit}
                 </div>
                 <div>Peer Minimum:</div>
@@ -584,7 +584,7 @@ export const ComparePage: React.FC<ComparePageProps> = ({
               </div>
             </div>
 
-            <div className="rounded-xl bg-[#E8F8F0] p-3.5 border border-[#B6E8D0] text-xs text-[#008A54] space-y-1">
+            <div className="rounded-xl bg-[#E8F8F0] dark:bg-[#00B970]/15 p-3.5 border border-[#B6E8D0] dark:border-[#00B970]/30 text-xs text-[#008A54] dark:text-[#00E68A] space-y-1">
               <span className="font-bold block">Actionable Guidance:</span>
               <p className="font-medium">{selectedExplainMetric.action}</p>
             </div>
@@ -605,8 +605,8 @@ export const ComparePage: React.FC<ComparePageProps> = ({
         title="WhatsApp Weekly Digest Preview"
       >
         {benchmark && (
-          <div className="space-y-4 text-sm text-[#002970]">
-            <p className="text-xs text-[#4F6A94] font-medium">
+          <div className="space-y-4 text-sm text-[#002970] dark:text-white">
+            <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
               Copy and share this digest with your shop team or partners via WhatsApp:
             </p>
 
@@ -615,11 +615,11 @@ export const ComparePage: React.FC<ComparePageProps> = ({
             </pre>
 
             <div className="flex items-center justify-between pt-2">
-              <span className="text-xs text-[#4F6A94] font-semibold">
+              <span className="text-xs text-[#4F6A94] dark:text-blue-200 font-semibold">
                 {copiedWhatsApp ? '✅ Copied to clipboard!' : 'Ready to paste into WhatsApp'}
               </span>
               <div className="flex gap-2">
-                <Button variant="secondary" onClick={() => setIsWhatsAppModalOpen(false)}>
+                <Button variant="secondary" onClick={() => setIsWhatsAppModalOpen(false)} className="dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white">
                   Cancel
                 </Button>
                 <Button variant="success" onClick={handleCopyWhatsApp} className="flex items-center gap-1.5 font-bold">

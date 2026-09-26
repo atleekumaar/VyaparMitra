@@ -48,36 +48,34 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
         onClick={onClose}
       />
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white rounded-2xl shadow-xl border border-paytm-border overflow-hidden z-10 flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 duration-150`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-[#0F1D38] text-[#0F2042] dark:text-white rounded-2xl shadow-xl border border-[#CDE5F7] dark:border-[#1E3A6E] overflow-hidden z-10 flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 duration-150`}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-paytm-border flex items-start justify-between bg-slate-50/50">
+        <div className="px-6 py-4 border-b border-[#CDE5F7] dark:border-[#1E3A6E] flex items-start justify-between bg-slate-50/50 dark:bg-[#0B1528]/50">
           <div>
-            <h3 className="text-base font-bold text-paytm-dark">{title}</h3>
-            {subtitle && <p className="text-xs text-paytm-muted mt-0.5">{subtitle}</p>}
+            <h3 className="text-base font-bold text-[#002970] dark:text-white">{title}</h3>
+            {subtitle && <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 overflow-y-auto space-y-4 text-xs text-paytm-text">
-          {children}
-        </div>
+        {/* Body */}
+        <div className="px-6 py-5 overflow-y-auto flex-1">{children}</div>
 
         {/* Footer */}
         {footer && (
-          <div className="px-6 py-3.5 border-t border-paytm-border bg-slate-50/50 flex items-center justify-end gap-2.5">
+          <div className="px-6 py-3 border-t border-[#CDE5F7] dark:border-[#1E3A6E] bg-slate-50/50 dark:bg-[#0B1528]/50 flex items-center justify-end gap-2">
             {footer}
           </div>
         )}

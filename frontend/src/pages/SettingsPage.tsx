@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Settings, Shield, Store, Globe, Server, CheckCircle2, RefreshCw } from 'lucide-react';
+import { Settings, Shield, Store, Globe, Server, CheckCircle2, RefreshCw, Sun, Moon, Palette } from 'lucide-react';
 import { api } from '../api/client';
 import { HealthStatus } from '../types';
 import { Badge } from '../components/Badge';
@@ -9,11 +9,15 @@ import { CardSkeleton } from '../components/LoadingSkeleton';
 interface SettingsPageProps {
   currentLanguage: string;
   onLanguageChange: (lang: string) => void;
+  isDarkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({
   currentLanguage,
   onLanguageChange,
+  isDarkMode,
+  onToggleDarkMode,
 }) => {
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [loadingHealth, setLoadingHealth] = useState<boolean>(true);
@@ -37,20 +41,78 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   return (
     <div className="space-y-6 max-w-4xl animate-in fade-in-50 duration-200">
       <div>
-        <h2 className="text-xl font-bold text-paytm-dark">Merchant Settings & Diagnostics</h2>
-        <p className="text-xs text-paytm-muted mt-0.5">
-          Configure language preferences, store identity, and review intelligence engine status.
+        <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white">Merchant Settings &amp; Diagnostics</h2>
+        <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5 font-medium">
+          Configure theme, language preferences, store identity, and review intelligence engine status.
         </p>
       </div>
 
+      {/* Theme / Appearance Card */}
+      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
+        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
+          <Palette className="w-5 h-5 text-[#00BAF2]" />
+          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Appearance &amp; Theme</h3>
+        </div>
+
+        <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
+          Choose between Paytm Light Mode and Midnight Dark Mode.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div
+            onClick={() => {
+              if (isDarkMode) onToggleDarkMode();
+            }}
+            className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-center justify-between ${
+              !isDarkMode
+                ? 'border-[#00BAF2] bg-[#F0F8FE] shadow-sm'
+                : 'border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#132342] opacity-75 hover:opacity-100'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-white text-[#002970] flex items-center justify-center shadow-xs border border-[#CDE5F7]">
+                <Sun className="w-5 h-5 text-[#FFB800]" />
+              </div>
+              <div>
+                <span className="font-extrabold text-sm text-[#002970] dark:text-white block">Light Mode</span>
+                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Paytm Signature Ice Blue</span>
+              </div>
+            </div>
+            {!isDarkMode && <CheckCircle2 className="w-5 h-5 text-[#00BAF2]" />}
+          </div>
+
+          <div
+            onClick={() => {
+              if (!isDarkMode) onToggleDarkMode();
+            }}
+            className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-center justify-between ${
+              isDarkMode
+                ? 'border-[#00BAF2] bg-[#0B254A] shadow-sm'
+                : 'border-[#CDE5F7] bg-white hover:border-[#00BAF2] opacity-75 hover:opacity-100'
+            }`}
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-[#001D52] text-[#00BAF2] flex items-center justify-center shadow-xs border border-[#00BAF2]/30">
+                <Moon className="w-5 h-5 text-[#00BAF2]" />
+              </div>
+              <div>
+                <span className="font-extrabold text-sm text-[#002970] dark:text-white block">Dark Mode</span>
+                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Midnight Fintech Navy</span>
+              </div>
+            </div>
+            {isDarkMode && <CheckCircle2 className="w-5 h-5 text-[#00BAF2]" />}
+          </div>
+        </div>
+      </div>
+
       {/* Demo Mode Notice */}
-      <div className="bg-paytm-light rounded-xl border border-paytm-border p-5">
+      <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-paytm-blue" />
-          <h3 className="text-sm font-bold text-paytm-dark">Demo Mode Active</h3>
+          <Shield className="w-5 h-5 text-[#00BAF2]" />
+          <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Demo Mode Active</h3>
           <Badge variant="demo">Synthetic Data Foundation</Badge>
         </div>
-        <p className="text-xs text-paytm-text mt-2 leading-relaxed">
+        <p className="text-xs text-[#0F2042] dark:text-blue-100 mt-2 leading-relaxed font-medium">
           VyaparMitra is operating on a validated synthetic dataset mirroring Indian small merchant operations
           (kirana, electronics, apparel). Real telemetry, live payment rails, and production deployment are intentionally
           isolated in this release.
@@ -58,40 +120,40 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
       </div>
 
       {/* Store Identity */}
-      <div className="bg-white rounded-xl border border-paytm-border p-6 shadow-xs space-y-4">
-        <div className="flex items-center gap-2 border-b border-paytm-border pb-3">
-          <Store className="w-4 h-4 text-paytm-blue" />
-          <h3 className="text-sm font-bold text-paytm-dark">Store Profile</h3>
+      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
+        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
+          <Store className="w-5 h-5 text-[#00BAF2]" />
+          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Store Profile</h3>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
           <div>
-            <label className="text-paytm-muted font-medium">Merchant ID</label>
-            <p className="font-semibold text-paytm-dark mt-0.5">M001</p>
+            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Merchant ID</label>
+            <p className="font-black text-[#002970] dark:text-white mt-0.5 text-sm">M001</p>
           </div>
           <div>
-            <label className="text-paytm-muted font-medium">Store Legal Name</label>
-            <p className="font-semibold text-paytm-dark mt-0.5">Vyapar Kirana & General Store</p>
+            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Store Legal Name</label>
+            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">Vyapar Kirana &amp; General Store</p>
           </div>
           <div>
-            <label className="text-paytm-muted font-medium">Primary Category</label>
-            <p className="font-semibold text-paytm-dark mt-0.5">Grocery, Snacks & FMCG</p>
+            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Primary Category</label>
+            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">Grocery, Snacks &amp; FMCG</p>
           </div>
           <div>
-            <label className="text-paytm-muted font-medium">Currency & Locale</label>
-            <p className="font-semibold text-paytm-dark mt-0.5">₹ INR (Indian Rupee)</p>
+            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Currency &amp; Locale</label>
+            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">₹ INR (Indian Rupee)</p>
           </div>
         </div>
       </div>
 
       {/* Language Preference */}
-      <div className="bg-white rounded-xl border border-paytm-border p-6 shadow-xs space-y-4">
-        <div className="flex items-center gap-2 border-b border-paytm-border pb-3">
-          <Globe className="w-4 h-4 text-paytm-blue" />
-          <h3 className="text-sm font-bold text-paytm-dark">Language Preference</h3>
+      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
+        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
+          <Globe className="w-5 h-5 text-[#00BAF2]" />
+          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Language Preference</h3>
         </div>
 
-        <p className="text-xs text-paytm-muted">
+        <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
           Select the default dialect for the AI Business Copilot and morning audio/text briefings.
         </p>
 
@@ -104,32 +166,32 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             <div
               key={lang.id}
               onClick={() => onLanguageChange(lang.id)}
-              className={`p-4 rounded-xl border cursor-pointer transition-all ${
+              className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 currentLanguage === lang.id
-                  ? 'border-paytm-blue bg-paytm-light ring-2 ring-paytm-blue/20'
-                  : 'border-paytm-border bg-white hover:border-slate-300'
+                  ? 'border-[#00BAF2] bg-[#F0F8FE] dark:bg-[#0B254A] ring-2 ring-[#00BAF2]/30 shadow-xs'
+                  : 'border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#132342] hover:border-[#00BAF2]'
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-paytm-dark">{lang.label}</span>
+                <span className="font-bold text-xs text-[#002970] dark:text-white">{lang.label}</span>
                 {currentLanguage === lang.id && (
-                  <CheckCircle2 className="w-4 h-4 text-paytm-blue" />
+                  <CheckCircle2 className="w-4 h-4 text-[#00BAF2]" />
                 )}
               </div>
-              <p className="text-[11px] text-paytm-muted mt-1">{lang.desc}</p>
+              <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1">{lang.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* System Diagnostics & Backend Health */}
-      <div className="bg-white rounded-xl border border-paytm-border p-6 shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-paytm-border pb-3">
-          <div className="flex items-center gap-2">
-            <Server className="w-4 h-4 text-paytm-blue" />
-            <h3 className="text-sm font-bold text-paytm-dark">Backend Engine Health</h3>
+      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
+        <div className="flex items-center justify-between border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
+          <div className="flex items-center gap-2.5">
+            <Server className="w-5 h-5 text-[#00BAF2]" />
+            <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Backend Engine Health</h3>
           </div>
-          <Button variant="secondary" size="sm" onClick={fetchHealth}>
+          <Button variant="secondary" size="sm" onClick={fetchHealth} className="dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white">
             <RefreshCw className="w-3.5 h-3.5 mr-1" />
             Refresh
           </Button>
@@ -138,28 +200,30 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
         {loadingHealth ? (
           <CardSkeleton />
         ) : health ? (
-          <div className="space-y-3 text-xs">
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-paytm-dark font-medium">API Status</span>
-              <Badge variant="success">● {health.status.toUpperCase()}</Badge>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+            <div>
+              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Engine Status</label>
+              <p className="font-extrabold text-[#008A54] dark:text-[#00E68A] mt-0.5 uppercase tracking-wide">
+                ● {health.status}
+              </p>
             </div>
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-paytm-dark font-medium">Intelligence Artifacts (Phases 1-4)</span>
-              <Badge variant={health.artifacts_ready ? 'success' : 'critical'}>
-                {health.artifacts_ready ? 'Available & Mounted' : 'Missing Artifacts'}
-              </Badge>
+            <div>
+              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Version</label>
+              <p className="font-bold text-[#002970] dark:text-white mt-0.5">v{health.version}</p>
             </div>
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-paytm-dark font-medium">Active Copilot Sessions</span>
-              <span className="font-mono text-paytm-dark">{health.active_copilot_sessions} sessions</span>
+            <div>
+              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Environment</label>
+              <p className="font-bold text-[#002970] dark:text-white mt-0.5 capitalize">{health.app_env}</p>
             </div>
-            <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-slate-100">
-              <span className="text-paytm-dark font-medium">API Version &amp; Environment</span>
-              <span className="font-mono text-paytm-muted">{health.version} ({health.app_env})</span>
+            <div>
+              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Artifacts</label>
+              <p className="font-bold text-[#008A54] dark:text-[#00E68A] mt-0.5">
+                {health.artifacts_ready ? '✓ All Ready' : 'Pending'}
+              </p>
             </div>
           </div>
         ) : (
-          <p className="text-xs text-red-600">Could not retrieve system health from /api/health.</p>
+          <p className="text-xs text-red-500 font-medium">Could not reach backend health endpoint.</p>
         )}
       </div>
     </div>

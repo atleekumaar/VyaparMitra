@@ -8,6 +8,11 @@
     color: #0F2042;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  .dark body {
+    background-color: #070E1A;
+    color: #F1F5F9;
+  }
 }
 
 /* Custom scrollbars for data tables and copilot messages */
@@ -18,8 +23,15 @@
 ::-webkit-scrollbar-track {
   background: #E8F4FD;
 }
+.dark ::-webkit-scrollbar-track {
+  background: #0B162C;
+}
 ::-webkit-scrollbar-thumb {
   background: #9BD0F5;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #1E3A6E;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {

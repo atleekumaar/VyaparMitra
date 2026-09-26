@@ -22,6 +22,28 @@ export const App: React.FC = () => {
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
   const [copilotQuery, setCopilotQuery] = useState<string | null>(null);
 
+  // Theme Dark / Light Mode State
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('vyaparmitra_theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Apply dark mode class to root HTML
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('vyaparmitra_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('vyaparmitra_theme', 'light');
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
   // Poll health and pending actions
   useEffect(() => {
     const checkStatus = async () => {
@@ -59,7 +81,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-[#F0F6FB] dark:bg-[#070E1A] text-[#0F2042] dark:text-slate-100 flex transition-colors duration-200">
       {/* Sidebar navigation */}
       <Sidebar
         currentTab={currentTab}
@@ -80,17 +102,17 @@ export const App: React.FC = () => {
       {/* Main content wrapper */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile menu bar */}
-        <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-paytm-border">
+        <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-white dark:bg-[#0B1528] border-b border-[#CDE5F7] dark:border-[#1E3A6E] transition-colors">
           <button
             onClick={() => setIsOpenMobile(true)}
-            className="p-1.5 rounded-md text-paytm-text hover:bg-slate-100"
+            className="p-1.5 rounded-lg text-[#002970] dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
             aria-label="Open navigation menu"
           >
-            <Menu className="w-5 h-5 text-paytm-dark" />
+            <Menu className="w-5 h-5 text-[#002970] dark:text-[#00BAF2]" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="font-bold text-base text-paytm-dark">
-              Vyapar<span className="text-paytm-blue">Mitra</span>
+            <span className="font-extrabold text-base text-[#002970] dark:text-white">
+              Vyapar<span className="text-[#00BAF2]">Mitra</span>
             </span>
           </div>
           <div className="w-6" /> {/* Spacer */}
@@ -101,13 +123,15 @@ export const App: React.FC = () => {
           currentLanguage={currentLanguage}
           onLanguageChange={setCurrentLanguage}
           onOpenCopilot={() => {
-            setCurrentTab('copilot');
             setCopilotQuery(null);
+            setCurrentTab('copilot');
           }}
           isHealthy={isHealthy}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={toggleDarkMode}
         />
 
-        {/* Tab view area */}
+        {/* Main Content Area */}
         <main className="flex-1 p-4 lg:p-8 max-w-7xl w-full mx-auto">
           {currentTab === 'dashboard' && (
             <DashboardPage
@@ -134,7 +158,9 @@ export const App: React.FC = () => {
           {currentTab === 'forecasts' && <ForecastsPage />}
 
           {currentTab === 'recommendations' && (
-            <RecommendationsPage initialActionId={selectedActionId} />
+            <RecommendationsPage
+              initialActionId={selectedActionId}
+            />
           )}
 
           {currentTab === 'copilot' && (
@@ -149,6 +175,8 @@ export const App: React.FC = () => {
             <SettingsPage
               currentLanguage={currentLanguage}
               onLanguageChange={setCurrentLanguage}
+              isDarkMode={isDarkMode}
+              onToggleDarkMode={toggleDarkMode}
             />
           )}
         </main>

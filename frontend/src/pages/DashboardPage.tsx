@@ -158,15 +158,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       </div>
 
       {/* Welcome Banner */}
-      <div className="bg-white rounded-2xl border border-[#CDE5F7] p-6 shadow-paytm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
         <div>
           <div className="flex items-center gap-2.5">
-            <h2 className="text-xl lg:text-2xl font-black text-[#002970] tracking-tight">
+            <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
               Shubh Prabhat, Merchant Ji 👋
             </h2>
             <Badge variant="demo">Paytm Verified Store</Badge>
           </div>
-          <p className="text-xs text-[#4F6A94] mt-1 max-w-xl font-medium">
+          <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-1 max-w-xl font-medium">
             Aapki dukaan ka poora commercial brief tayar hai. Sabhi metrics Phase 1-4 Feature Store aur ML models se verified hain.
           </p>
         </div>
@@ -176,7 +176,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             variant="outline"
             size="sm"
             onClick={() => onQuickCopilot('Mujhe aaj ka poora business brief batao')}
-            className="text-xs font-bold"
+            className="text-xs font-bold dark:border-[#00BAF2] dark:text-[#00BAF2] dark:hover:bg-[#132342]"
           >
             <Sparkles className="w-3.5 h-3.5 mr-1.5 text-[#00BAF2]" />
             Today's Brief
@@ -222,21 +222,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         {/* Left 2 Cols: Sales Trends & Forecast */}
         <div className="lg:col-span-2 space-y-6">
           {/* Recent Sales History Chart */}
-          <div className="bg-white rounded-2xl border border-[#CDE5F7] p-6 shadow-paytm">
+          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-extrabold text-[#002970]">Daily Sales Trend (Bikri)</h3>
-                <p className="text-xs text-[#4F6A94] font-medium">Last 14 recorded business days</p>
+                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Daily Sales Trend (Bikri)</h3>
+                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">Last 14 recorded business days</p>
               </div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] text-[#008A54] border border-[#B6E8D0]">
+                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
                   Trend: {summary.sales_trend_direction}
                 </span>
               </div>
             </div>
 
             {/* Custom Bar Visualization */}
-            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD]">
+            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
               {recentDays.map((day, idx) => {
                 const heightPct = Math.max(10, (day.revenue / maxRev) * 100);
                 return (
@@ -250,25 +250,25 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     </div>
                     {/* Bar */}
                     <div
-                      className="w-full bg-gradient-to-t from-[#00BAF2] to-[#41C9F7] hover:from-[#002970] hover:to-[#001D4E] rounded-t-lg transition-all duration-150 cursor-pointer shadow-2xs"
+                      className="w-full bg-gradient-to-t from-[#00BAF2] to-[#41C9F7] hover:from-[#002970] hover:to-[#001D4E] dark:hover:from-white dark:hover:to-[#00BAF2] rounded-t-lg transition-all duration-150 cursor-pointer shadow-2xs"
                       style={{ height: `${heightPct}%` }}
                     />
                     {/* Date label */}
-                    <span className="text-[10px] text-[#4F6A94] font-semibold mt-2 truncate w-full text-center">
+                    <span className="text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold mt-2 truncate w-full text-center">
                       {day.date.split('-').slice(1).join('/')}
                     </span>
                   </div>
                 );
               })}
             </div>
-            <div className="mt-4 flex items-center justify-between text-xs text-[#4F6A94]">
+            <div className="mt-4 flex items-center justify-between text-xs text-[#4F6A94] dark:text-blue-200">
               <span className="font-semibold">
                 Peak Day Collection:{' '}
-                <strong className="text-[#002970] font-extrabold">₹{maxRev.toLocaleString()}</strong>
+                <strong className="text-[#002970] dark:text-white font-extrabold">₹{maxRev.toLocaleString()}</strong>
               </span>
               <button
                 onClick={() => onNavigateTab('analytics')}
-                className="text-[#00BAF2] hover:text-[#002970] font-bold inline-flex items-center gap-1 transition-colors"
+                className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
               >
                 Deep Analytics <ArrowRight className="w-3.5 h-3.5" />
               </button>
@@ -304,24 +304,24 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div className="space-y-6">
           {/* Peer Benchmarking Summary Card */}
           {benchmark && (
-            <div className="bg-white rounded-2xl border-2 border-[#CDE5F7] p-5 shadow-paytm relative overflow-hidden">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD]">
+            <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm relative overflow-hidden transition-colors">
+              <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] text-[#00BAF2] border border-[#B3E3FA]">
+                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] dark:from-[#0B254A] dark:to-[#0F356B] text-[#00BAF2] border border-[#B3E3FA] dark:border-[#1A4B8C]">
                     <Trophy className="w-4 h-4 text-[#00BAF2]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-extrabold text-[#002970]">Peers se tulna</h3>
-                    <p className="text-[10px] text-[#4F6A94] font-semibold">{benchmark.peer_group}</p>
+                    <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Peers se tulna</h3>
+                    <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{benchmark.peer_group}</p>
                   </div>
                 </div>
                 <span
                   className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${
                     benchmark.rank <= Math.ceil(benchmark.peer_count * 0.33)
-                      ? 'bg-[#E8F8F0] text-[#008A54] border border-[#B6E8D0]'
+                      ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30'
                       : benchmark.rank <= Math.ceil(benchmark.peer_count * 0.66)
-                      ? 'bg-[#FFF6E5] text-[#C27803] border-[#FFE1A8]'
-                      : 'bg-[#FEECEB] text-[#D92D20] border-[#FECDCA]'
+                      ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33] border border-[#FFE1A8] dark:border-[#FFB800]/30'
+                      : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30'
                   }`}
                 >
                   Rank {benchmark.rank} of {benchmark.peer_count}
@@ -333,23 +333,23 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 {benchmark.metrics.slice(0, 3).map((m) => (
                   <div
                     key={m.name}
-                    className="flex items-center justify-between py-1.5 border-b border-slate-50 last:border-none"
+                    className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-[#172E58] last:border-none"
                   >
-                    <span className="text-[#002970] font-semibold">{m.label}</span>
+                    <span className="text-[#002970] dark:text-blue-100 font-semibold">{m.label}</span>
                     <div className="flex items-center gap-2">
-                      <span className="font-black text-[#002970]">
+                      <span className="font-black text-[#002970] dark:text-white">
                         {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
                       </span>
-                      <span className="text-[10px] text-[#4F6A94]">
+                      <span className="text-[10px] text-[#4F6A94] dark:text-slate-400">
                         vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
                       </span>
                       <span
                         className={`px-1.5 py-0.5 rounded text-[10px] font-extrabold ${
                           m.status === 'green'
-                            ? 'bg-[#E8F8F0] text-[#008A54]'
+                            ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A]'
                             : m.status === 'yellow'
-                            ? 'bg-[#FFF6E5] text-[#C27803]'
-                            : 'bg-[#FEECEB] text-[#D92D20]'
+                            ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33]'
+                            : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080]'
                         }`}
                       >
                         {m.status_text}
@@ -360,21 +360,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
 
               {/* Top Action Recommendation */}
-              <div className="mt-1 p-3 rounded-xl bg-[#F0F8FE] border border-[#CDE5F7] text-xs">
-                <span className="font-extrabold text-[#002970] block text-[11px]">Recommended Action:</span>
-                <p className="text-[11px] text-[#4F6A94] mt-0.5 line-clamp-2 font-medium">
+              <div className="mt-1 p-3 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs">
+                <span className="font-extrabold text-[#002970] dark:text-white block text-[11px]">Recommended Action:</span>
+                <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-0.5 line-clamp-2 font-medium">
                   {benchmark.metrics.find((m) => m.status === 'red' || m.status === 'yellow')?.action ||
                     benchmark.metrics[0]?.action}
                 </p>
               </div>
 
               {/* Card Bottom CTA Buttons */}
-              <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#E8F4FD] text-xs">
+              <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#E8F4FD] dark:border-[#1E3A6E] text-xs">
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => onNavigateTab('recommendations')}
-                  className="text-xs py-1.5 px-3 text-[#002970] font-bold"
+                  className="text-xs py-1.5 px-3 text-[#002970] dark:text-blue-100 dark:border-[#1E3A6E] font-bold"
                 >
                   Offer bhejein
                 </Button>
@@ -392,26 +392,26 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           )}
 
           {/* Priority Actions Card */}
-          <div className="bg-white rounded-2xl border border-[#CDE5F7] p-5 shadow-paytm">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD]">
+          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm transition-colors">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#00BAF2]" />
-                <h3 className="text-sm font-extrabold text-[#002970]">Priority Actions</h3>
+                <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Priority Actions</h3>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#FEECEB] text-[#D92D20] border border-[#FECDCA]">
+              <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30">
                 {summary.critical_actions_count} Critical
               </span>
             </div>
 
-            <div className="divide-y divide-[#E8F4FD] mt-2">
+            <div className="divide-y divide-[#E8F4FD] dark:divide-[#172E58] mt-2">
               {actions.map((act) => (
                 <div
                   key={act.recommendation_id}
-                  className="py-3 hover:bg-[#F0F8FE] rounded-xl p-2.5 transition-colors cursor-pointer"
+                  className="py-3 hover:bg-[#F0F8FE] dark:hover:bg-[#132342] rounded-xl p-2.5 transition-colors cursor-pointer"
                   onClick={() => onSelectAction(act.recommendation_id)}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-xs font-bold text-[#002970] line-clamp-1">
+                    <span className="text-xs font-bold text-[#002970] dark:text-white line-clamp-1">
                       {act.title}
                     </span>
                     <Badge
@@ -426,14 +426,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       {act.priority_band}
                     </Badge>
                   </div>
-                  <p className="text-[11px] text-[#4F6A94] mt-1 line-clamp-2 font-medium">
+                  <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 line-clamp-2 font-medium">
                     {act.action}
                   </p>
                   <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <span className="font-extrabold text-[#008A54]">
+                    <span className="font-extrabold text-[#008A54] dark:text-[#00E68A]">
                       Impact: ₹{act.expected_impact.toLocaleString()}
                     </span>
-                    <span className="text-[#00BAF2] hover:text-[#002970] font-bold">
+                    <span className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold">
                       Review &rarr;
                     </span>
                   </div>
@@ -441,11 +441,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               ))}
             </div>
 
-            <div className="mt-3 pt-3 border-t border-[#E8F4FD]">
+            <div className="mt-3 pt-3 border-t border-[#E8F4FD] dark:border-[#1E3A6E]">
               <Button
                 variant="secondary"
                 size="sm"
-                className="w-full text-xs font-bold"
+                className="w-full text-xs font-bold dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white dark:hover:bg-[#1A335F]"
                 onClick={() => onNavigateTab('recommendations')}
               >
                 Open Action Center ({summary.total_actions_pending})
@@ -454,12 +454,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
 
           {/* Quick Copilot Interactive Card */}
-          <div className="bg-[#F0F8FE] rounded-2xl border-2 border-[#CDE5F7] p-5 shadow-xs">
-            <div className="flex items-center gap-2 text-xs font-black text-[#002970]">
+          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
+            <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
               <Bot className="w-4 h-4 text-[#00BAF2]" />
               <span>Ask VyaparMitra Copilot</span>
             </div>
-            <p className="text-[11px] text-[#4F6A94] mt-1 font-medium">
+            <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
               Sales, forecast, stockouts, ya Graahak ke baare mein Hindi/Hinglish me poochhein.
             </p>
 
@@ -469,7 +469,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 value={quickQuery}
                 onChange={(e) => setQuickQuery(e.target.value)}
                 placeholder="e.g. Kal kitni bikri hui thi?"
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] bg-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
               />
               <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
                 Ask Copilot
@@ -486,7 +486,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   key={i}
                   type="button"
                   onClick={() => onQuickCopilot(q)}
-                  className="text-[10px] bg-white border border-[#CDE5F7] text-[#4F6A94] hover:text-[#00BAF2] hover:border-[#00BAF2] rounded-lg px-2.5 py-1 transition-colors text-left font-semibold shadow-2xs"
+                  className="text-[10px] bg-white dark:bg-[#0F1D38] border border-[#CDE5F7] dark:border-[#1E3A6E] text-[#4F6A94] dark:text-blue-200 hover:text-[#00BAF2] hover:border-[#00BAF2] rounded-lg px-2.5 py-1 transition-colors text-left font-semibold shadow-2xs"
                 >
                   &ldquo;{q}&rdquo;
                 </button>

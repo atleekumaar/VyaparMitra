@@ -95,9 +95,9 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
   };
 
   return (
-    <div className="h-[calc(100vh-8.5rem)] flex flex-col bg-white rounded-2xl border-2 border-[#CDE5F7] shadow-paytm overflow-hidden animate-in fade-in-50 duration-200">
+    <div className="h-[calc(100vh-8.5rem)] flex flex-col bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] shadow-paytm overflow-hidden animate-in fade-in-50 duration-200 transition-colors">
       {/* Copilot Header */}
-      <div className="px-6 py-4 border-b border-[#CDE5F7] bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-[#CDE5F7] dark:border-[#1E3A6E] bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white flex items-center justify-between">
         <div className="flex items-center gap-3.5">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00BAF2] to-[#008CC4] flex items-center justify-center text-white shadow-md shadow-[#00BAF2]/30 ring-2 ring-white/20">
             <Bot className="w-5 h-5 text-white" />
@@ -132,7 +132,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-[#F0F6FB]">
+      <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-[#F0F6FB] dark:bg-[#070E1A] transition-colors">
         {messages.map((m) => {
           const isUser = m.sender === 'user';
 
@@ -157,7 +157,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                   className={`p-4 rounded-2xl text-xs leading-relaxed font-medium shadow-paytm ${
                     isUser
                       ? 'bg-gradient-to-r from-[#002970] to-[#001D52] text-white rounded-tr-xs'
-                      : 'bg-white border-2 border-[#CDE5F7] text-[#0F2042] rounded-tl-xs'
+                      : 'bg-white dark:bg-[#132342] border-2 border-[#CDE5F7] dark:border-[#1E3A6E] text-[#0F2042] dark:text-white rounded-tl-xs'
                   }`}
                 >
                   <p className="whitespace-pre-line">{m.text}</p>
@@ -165,12 +165,12 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
 
                 {/* Assistant Metadata / Citations Pill */}
                 {!isUser && m.sources && m.sources.length > 0 && (
-                  <div className="text-[11px] bg-white border border-[#CDE5F7] rounded-xl p-3 shadow-2xs space-y-1.5">
+                  <div className="text-[11px] bg-white dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] rounded-xl p-3 shadow-2xs space-y-1.5">
                     <button
                       onClick={() => toggleSource(m.id)}
-                      className="w-full flex items-center justify-between text-[#4F6A94] hover:text-[#00BAF2] font-semibold"
+                      className="w-full flex items-center justify-between text-[#4F6A94] dark:text-blue-200 hover:text-[#00BAF2] font-semibold"
                     >
-                      <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold text-[#008A54]">
+                      <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold text-[#008A54] dark:text-[#00E68A]">
                         <ShieldCheck className="w-3.5 h-3.5 text-[#00B970]" />
                         Grounded Sources ({m.sources.length} Verified Artifacts)
                       </span>
@@ -182,9 +182,9 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                     </button>
 
                     {expandedSources[m.id] && (
-                      <div className="pt-2 border-t border-[#E8F4FD] space-y-1 text-[10px]">
+                      <div className="pt-2 border-t border-[#E8F4FD] dark:border-[#1E3A6E] space-y-1 text-[10px]">
                         {m.sources.map((s, idx) => (
-                          <div key={idx} className="p-1.5 rounded-lg bg-[#F0F8FE] font-mono text-[#002970] font-semibold border border-[#CDE5F7]">
+                          <div key={idx} className="p-1.5 rounded-lg bg-[#F0F8FE] dark:bg-[#0F1D38] font-mono text-[#002970] dark:text-blue-100 font-semibold border border-[#CDE5F7] dark:border-[#1E3A6E]">
                             <span className="font-extrabold text-[#00BAF2]">{s.source}</span> &rarr; {s.artifact}
                           </div>
                         ))}
@@ -202,7 +202,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             <div className="w-9 h-9 rounded-xl bg-[#002970] text-[#00BAF2] flex items-center justify-center shrink-0 shadow-md">
               <Bot className="w-4 h-4 animate-spin text-[#00BAF2]" />
             </div>
-            <div className="bg-white border-2 border-[#CDE5F7] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#002970] font-bold flex items-center gap-2 shadow-paytm">
+            <div className="bg-white dark:bg-[#132342] border-2 border-[#CDE5F7] dark:border-[#1E3A6E] rounded-2xl rounded-tl-xs p-3.5 text-xs text-[#002970] dark:text-white font-bold flex items-center gap-2 shadow-paytm">
               <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#00BAF2] animate-ping" />
               <span>Grounded feature store se uttar tayar kiya ja raha hai...</span>
             </div>
@@ -213,8 +213,8 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="px-6 py-3 bg-[#F0F8FE] border-t border-[#CDE5F7] flex items-center gap-2 overflow-x-auto text-xs">
-        <span className="text-[10px] uppercase font-black text-[#002970] whitespace-nowrap">Suggested:</span>
+      <div className="px-6 py-3 bg-[#F0F8FE] dark:bg-[#0B1528] border-t border-[#CDE5F7] dark:border-[#1E3A6E] flex items-center gap-2 overflow-x-auto text-xs transition-colors">
+        <span className="text-[10px] uppercase font-black text-[#002970] dark:text-blue-200 whitespace-nowrap">Suggested:</span>
         {[
           'Meri dukaan dusron se kaisi hai?',
           'Kal kitni bikri hui thi?',
@@ -226,7 +226,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             key={i}
             onClick={() => handleSend(prompt)}
             disabled={loading}
-            className="px-3 py-1.5 rounded-xl bg-white border border-[#CDE5F7] text-[#002970] font-bold hover:text-white hover:bg-[#00BAF2] hover:border-[#00BAF2] transition-all whitespace-nowrap text-[11px] shadow-2xs"
+            className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-[#002970] dark:text-white font-bold hover:text-white hover:bg-[#00BAF2] hover:border-[#00BAF2] transition-all whitespace-nowrap text-[11px] shadow-2xs"
           >
             {prompt}
           </button>
@@ -234,7 +234,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       </div>
 
       {/* Input Bar */}
-      <div className="p-4 border-t border-[#CDE5F7] bg-white">
+      <div className="p-4 border-t border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] transition-colors">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -252,7 +252,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                 : 'Poochiye apni dukaan ke baare mein koi bhi sawaal (e.g. Meri dukaan dusron se kaisi hai?)...'
             }
             disabled={loading}
-            className="flex-1 px-4 py-3 text-xs rounded-xl border-2 border-[#CDE5F7] bg-[#F0F8FE] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] text-[#002970] font-semibold"
+            className="flex-1 px-4 py-3 text-xs rounded-xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] bg-[#F0F8FE] dark:bg-[#132342] focus:bg-white dark:focus:bg-[#16274A] focus:outline-none focus:ring-2 focus:ring-[#00BAF2] text-[#002970] dark:text-white font-semibold"
           />
           <Button
             type="submit"
