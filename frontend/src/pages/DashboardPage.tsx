@@ -86,7 +86,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   const handleTestSoundbox = () => {
     setSoundboxPlayed(true);
-    setTimeout(() => setSoundboxPlayed(false), 3000);
+    try {
+      const utterance = new SpeechSynthesisUtterance();
+      if (language === 'hindi') {
+        utterance.text = 'पेटीएम पर ४२५० रुपये प्राप्त हुए!';
+        utterance.lang = 'hi-IN';
+      } else {
+        utterance.text = 'Paytm par 4250 rupees prapt hue!';
+        utterance.lang = 'hi-IN'; // Using hi-IN accent works better for hinglish
+      }
+      utterance.rate = 1.0;
+      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.error('Audio playback failed', e);
+    }
+    setTimeout(() => setSoundboxPlayed(false), 4000);
   };
 
   if (loading) {
