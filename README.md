@@ -1,246 +1,224 @@
 # VyaparMitra — AI-Powered Business Assistant for Small Merchants
 
-> **Phases 1–4: Data Foundation, Business Intelligence, Predictive AI & Decision Engine**
+> **Phase 1 Completed: Data Foundation & Merchant Feature Store**
 
-VyaparMitra is an intelligent, localized decision-support system designed for small and medium retail merchants across India. This repository contains the complete implementation of:
-- **Phase 1: Data Foundation & Merchant Feature Store** — Ingestion, validation, cleaning, quarantine isolation, feature engineering, and temporal feature store.
-- **Phase 2: Business Intelligence & Analytics Engine** — Aggregations, metrics, RFM segmentation, Pareto analysis, time & payment patterns, festival/weather contextual analytics, trend classification, and executive reporting.
-- **Phase 3: Predictive AI Engine** — Machine learning models for 7-day & 30-day forward sales forecasting, SKU-level demand projections, customer churn risk scoring, and business trend direction classification.
-- **Phase 4: AI Recommendation & Decision Engine** — Prescriptive action generator providing high-impact, transparent, 6-part evidence-backed decisions across Inventory, Pricing, Customer Retention, and Product Cross-Selling with priority scoring and conflict resolution.
+VyaparMitra is an intelligent, localized decision-support system designed for small and medium retail merchants across India. This repository contains the complete implementation of **Phase 1: Data Foundation & Merchant Feature Store**, providing a modular data engineering pipeline that ingests, validates, cleans, enriches, and transforms raw transaction logs into an ML-ready feature store.
 
 ---
 
-## 1. System Architecture
+## 1. Project Overview
+
+Small merchants face inventory bottlenecks, seasonal cash-flow volatility, and demand fluctuations driven by local festivals, weather patterns, and regional economic cycles. VyaparMitra addresses these challenges by transforming daily operational data into actionable predictive insights.
+
+Phase 1 establishes the rock-solid data foundation required for all downstream modeling, including:
+* Referential integrity and data hygiene.
+* Quarantine mechanisms that prevent data corruption without silent deletion.
+* Multi-scale temporal aggregations with strict anti-leakage protections.
+* Seamless integration of external context (multi-event festival calendars and meteorological conditions).
+
+---
+
+## 2. Phase 1 Objective
+
+Build a production-ready data pipeline that converts raw merchant transaction data into a clean, validated, and ML-ready **Merchant Feature Store**.
 
 ```text
-RAW INGESTION & DATA GENERATION
-               │
-               ▼
-       DATA VALIDATION
-   (Referential Integrity & Sanity)
-          │            │
-      [Invalid]     [Valid]
-          │            │
-          ▼            ▼
-     QUARANTINE     CLEANING
-     ISOLATION         │
-                       ▼
-             FEATURE ENGINEERING
-   (Transactions, Merchants, Customers, Products, Daily)
-                       │
-                       ▼
-              PHASE 1 FEATURE STORE
-         (Parquet & CSV in data/features/)
-                       │
-         ┌─────────────┴─────────────┐
-         ▼                           ▼
-ANALYTICS ENGINE              PREDICTIVE AI ENGINE
-├── Sales & Revenue KPIs      ├── Chronological Splits (70/15/15)
-├── RFM Customer Segments     ├── Sales Forecaster (Ridge / LightGBM)
-├── Product Pareto 80/20      ├── SKU Demand Forecaster (Poisson / Tweedie)
-├── Category Margins          ├── Customer Churn Classifier
-├── Hourly & Peak Time        ├── Business Trend Predictor
-├── Payment Channels (UPI)    └── Calibrated Uncertainty
-├── Festival/Weather Context                 │
-└── Trends & IQR Anomalies                   ▼
-         │                          TRAINED ML MODELS
-         ▼                         (Saved in models/)
-PHASE 2 ANALYTICS MARTS                      │
- (data/analytics/)                           ▼
-         │                          PREDICTIONS & FORECASTS
-         │                          (data/ml/)
-         │                                   │
-         └─────────────────┬─────────────────┘
-                           │
-                           ▼
-          PHASE 4: AI RECOMMENDATION ENGINE
-          ├── Inventory Optimization (Safety Stock, ROP, Stockout Risk)
-          ├── Pricing & Margin Protection (Deadstock Discount, Surge Pricing)
-          ├── Customer Retention (Churn Prevention, VIP Loyalty Rewards)
-          ├── Product Strategies (Star Product Focus, Affinity Cross-Sell)
-          ├── Multi-Factor Priority Scoring (Impact, Urgency, Confidence)
-          ├── Deduplication & Conflict Resolution (Margin > Growth)
-          └── 6-Part Transparent Evidence Generation
-                           │
-                           ▼
-          RECOMMENDATION MARTS & ACTION PLANS
-          (data/recommendations/ in Parquet & CSV)
+Raw Transaction & External Data
+              ↓
+  Data Quality Validation
+              ↓
+ Data Cleaning & Quarantine Isolation
+              ↓
+      Feature Engineering
+              ↓
+   Merchant-Level Aggregation
+              ↓
+  External Context Integration (Festivals & Weather)
+              ↓
+ Final Feature Store (Parquet & CSV)
 ```
 
 ---
 
-## 2. Repository Structure
+## 3. Architecture & Project Structure
 
 ```text
-VyaparMitra/
+vyaparmitra/
 ├── configs/
-│   ├── config.yaml                     # Pipeline parameters, paths, thresholds, seeds
-│   └── recommendations.yaml            # Decision rules, priority weights, guardrails
+│   └── config.yaml               # Pipeline parameters, paths, thresholds, seeds
 ├── data/
-│   ├── raw/                            # Ingested dimension & fact tables
-│   ├── processed/                      # Sanitized clean tables
-│   ├── quarantine/                     # Quarantined invalid records with rejection reasons
-│   ├── quality_reports/                # Automated validation reports (JSON & Markdown)
-│   ├── features/                       # Phase 1 Feature Store (5 Parquet & CSV datasets)
-│   ├── analytics/                      # Phase 2 Business Intelligence Marts (9 domains)
-│   ├── ml/                             # Phase 3 ML Forecasts & Evaluations
-│   └── recommendations/                # Phase 4 Prescriptive Actions & Action Plans
-│       ├── all_recommendations.parquet # Unified priority-ranked recommendation table
-│       ├── inventory_recommendations.parquet # Safety stock, reorder quantities
-│       ├── pricing_recommendations.parquet   # Targeted discounts, surge prices
-│       ├── customer_recommendations.parquet  # Retention & loyalty actions
-│       ├── cross_sell_recommendations.parquet # Frequently bought together bundles
-│       ├── recommendation_evidence.parquet  # 6-part transparent audit evidence
-│       └── daily_action_plan.md        # Merchant-facing morning action briefing
+│   ├── raw/                      # Raw ingested relational CSV tables
+│   ├── processed/                # Standardized Parquet & CSV tables
+│   ├── quarantine/               # Isolated invalid records with rejection reasons
+│   ├── quality_reports/          # Validation outputs (JSON & Markdown)
+│   └── features/                 # Final Feature Store (Parquet & CSV)
 ├── docs/
-│   ├── data_dictionary.md              # Phase 1 Feature Store dictionary & leakage rules
-│   ├── analytics_architecture.md       # Phase 2 Analytics Engine architecture
-│   ├── analytics_dictionary.md         # Phase 2 Metric definitions & calculation rules
-│   └── phase4_recommendation_engine.md # Phase 4 Decision logic & priority algorithms
-├── models/                             # Phase 3 Trained ML Artifacts (.joblib & metadata.json)
+│   └── data_dictionary.md        # Comprehensive data dictionary & leakage rules
 ├── src/
-│   ├── cleaning/                       # Data sanitization & quarantine routing
-│   ├── data_generation/                # Synthetic data & enriched source normalizer
-│   ├── features/                       # Multi-scale temporal & contextual feature extractors
-│   ├── ingestion/                      # Ingestion loaders
-│   ├── validation/                     # Schema, referential integrity & range validation
-│   ├── pipeline.py                     # Phase 1 Pipeline CLI orchestrator
-│   ├── analytics/                      # Phase 2 Business Intelligence Engine
-│   ├── ml/                             # Phase 3 Predictive AI Engine
-│   ├── recommendations/                # Phase 4 AI Decision & Recommendation Engine
-│   │   ├── recommendation_engine.py    # Master engine orchestrator
-│   │   ├── config.py                   # Rule weights & threshold loaders
-│   │   ├── schemas.py                  # Pydantic schemas for actions & evidence
-│   │   ├── inventory/                  # Reorder points, safety stock & stockout logic
-│   │   ├── pricing/                    # Clearance, festival & bundle discount rules
-│   │   ├── customers/                  # Churn retention & high-value customer actions
-│   │   ├── products/                   # Star product promotions & slow-mover liquidation
-│   │   ├── cross_sell/                 # Market basket affinity & pair recommendations
-│   │   ├── scoring/                    # Multi-objective priority scoring & ranking
-│   │   ├── deduplication/              # Action deduplication and frequency limiting
-│   │   ├── conflicts/                  # Conflict resolution (Margin preservation > Volume)
-│   │   └── explanations/               # 6-part evidence generator
-│   ├── reporting/                      # Markdown & JSON report generators
-│   └── schemas/                        # Typed Pydantic schemas (analytics & ML)
-├── tests/                              # Pytest test suite (78 unit & integration tests)
-├── pytest.ini                          # Pytest configurations
-├── requirements.txt                    # Project dependencies
+│   ├── data_generation/
+│   │   ├── __init__.py
+│   │   └── generate_dataset.py   # Realistic generator and enriched source normalizer
+│   ├── ingestion/
+│   │   ├── __init__.py
+│   │   └── loader.py             # Strongly-typed data loader
+│   ├── validation/
+│   │   ├── __init__.py
+│   │   └── validator.py          # Quality checks and Markdown/JSON reporter
+│   ├── cleaning/
+│   │   ├── __init__.py
+│   │   └── cleaner.py            # Sanitizer and quarantine router
+│   ├── features/
+│   │   ├── __init__.py
+│   │   ├── transaction_features.py # Unit prices, net amounts, calendar flags
+│   │   ├── merchant_features.py    # Merchant lifetime revenue, velocity, AOV
+│   │   ├── customer_features.py    # RFM metrics, frequency, recency
+│   │   ├── product_features.py     # SKU volume sales, realized prices
+│   │   ├── time_features.py        # Daily time windows, rolling trailing averages
+│   │   ├── festival_features.py    # Multi-festival handling, days-to/after metrics
+│   │   └── weather_features.py     # Meteorological joins & graceful imputation
+│   └── pipeline.py               # End-to-end pipeline orchestrator & CLI
+├── tests/
+│   ├── __init__.py
+│   ├── test_validation.py        # Validation & referential integrity unit tests
+│   ├── test_cleaning.py          # Sanitization & quarantine unit tests
+│   ├── test_features.py          # Revenue math, aggregations, festival & weather tests
+│   └── test_pipeline_integration.py # Full end-to-end integration test
+├── pytest.ini                    # Pytest test execution configurations
+├── requirements.txt              # Production dependency specifications
 └── README.md
 ```
 
 ---
 
-## 3. Quick Start
+## 4. Dataset Schemas
 
-### Installation
+Phase 1 manages 6 relational entities:
+
+1. **Transactions (`transactions.csv`)**: 10,000+ records containing `transaction_id`, `merchant_id`, `customer_id`, `timestamp`, `product_id`, `product_category`, `quantity`, `unit_price`, `discount`, `payment_method`.
+2. **Merchants (`merchants.csv`)**: 50 merchants containing `merchant_id`, `merchant_name`, `business_type`, `city`, `state`, `pincode`, `latitude`, `longitude`.
+3. **Customers (`customers.csv`)**: 3,308 customers containing `customer_id`, `customer_name`, `customer_type`, `city`, `signup_date`.
+4. **Products (`products.csv`)**: 64 products across 32 categories containing `product_id`, `product_name`, `product_category`, `unit_cost`, `selling_price`.
+5. **Festivals (`festivals.csv`)**: Festival events supporting multiple festivals on the same date (e.g., Ambedkar Jayanti & Baisakhi), containing `date`, `festival_name`, `festival_type`, `is_festival`, `festival_intensity`.
+6. **Weather (`weather.csv`)**: 2,921 daily city observations containing `date`, `city`, `temperature`, `humidity`, `rainfall`, `weather_condition`.
+
+Full field-by-field definitions, constraints, and data types are detailed in [`docs/data_dictionary.md`](docs/data_dictionary.md).
+
+---
+
+## 5. How to Generate Data
+
+Data can be generated or normalized directly using:
 
 ```bash
-git clone https://github.com/atleekumaar/VyaparMitra.git
-cd VyaparMitra
-pip install -r requirements.txt
+python -m src.data_generation.generate_dataset
 ```
 
-### Running Phase 1 (Data Foundation & Feature Store)
+* **Enriched Normalization**: Automatically transforms `data/raw/vyaparmitra_10000_transactions_enriched.csv` into fully normalized relational entities.
+* **Pure Synthetic Generation**: If no enriched source is present, generates reproducible data with realistic shopping correlations (weekend volume bumps, evening rushes, festival demand surges, weather impacts, and Zipfian customer frequencies) using `random_seed: 42`.
+* **Controlled Anomaly Injection**: Injects test anomalies (duplicate IDs, invalid prices, out-of-bounds discounts) to verify automated quarantine handling.
+
+---
+
+## 6. How to Run the Pipeline
+
+Execute the complete Phase 1 pipeline with a single command:
+
 ```bash
 python -m src.pipeline
 ```
 
-### Running Phase 2 (Business Intelligence & Analytics Engine)
-```bash
-python -m src.analytics
-```
+Optional arguments:
+* `--config configs/config.yaml`: Use a custom configuration file.
+* `--regenerate`: Force re-normalization/re-generation of raw data tables.
 
-### Running Phase 3 (Predictive AI Engine)
-```bash
-python -m src.ml.train
-python -m src.ml.predict
-```
-
-### Running Phase 4 (AI Recommendation & Decision Engine)
-```bash
-python -m src.recommendations
-```
-
-Sample output:
+Sample execution output:
 ```text
 ============================================================
-VYAPARMITRA PHASE 4 RECOMMENDATION SUMMARY
+VYAPARMITRA PHASE 1 EXECUTION SUMMARY
 ============================================================
-Inventory Actions: 14 Restock Orders Recommended
-Pricing Actions: 8 Dynamic Discounts / Bundle Offers
-Customer Actions: 22 At-Risk Customer Interventions
-Cross-Sell Bundles: 12 High-Affinity Product Pairs
-Prioritized Actions: Top 5 Actions Ranked for Merchant M001
-Daily Action Plan: data/recommendations/daily_action_plan.md
-Status: SUCCESS
+Elapsed Time: 2.08 seconds
+Clean Transactions: 9,995
+Quarantined Records: 5
+Merchants in Feature Store: 50
+Customers in Feature Store: 3,308
+Products in Feature Store: 64
+Daily Time-Window Records: 358
+Overall Quality Status: PASS
 ============================================================
 ```
 
 ---
 
-## 4. 6-Part Transparent Evidence Framework
+## 7. Data Quality & Quarantine Pipeline
 
-Every recommendation generated by VyaparMitra is backed by a verifiable 6-part evidence trail:
+The automated validation system verifies:
+* **Missing values**: Nulls, NaNs, empty strings across critical fields.
+* **Duplicate records**: Duplicate `transaction_id`.
+* **Value sanity**: `quantity <= 0`, `unit_price < 0`, `discount < 0`, `discount > (quantity * unit_price)`.
+* **Referential integrity**: Validates foreign keys against product, merchant, and customer dimension tables.
+* **Timestamp validity**: Ensures parseable ISO timestamps within acceptable date bounds.
 
-1. **Current Metric**: Real-time KPI from Phase 2 BI (e.g., current stock: 3 units).
-2. **Context**: Operational context (e.g., festival in 4 days, lead time: 3 days).
-3. **Prediction**: Phase 3 ML forecast (e.g., predicted 7-day demand: 28 units).
-4. **Business Impact**: Quantified financial outcome (e.g., prevent ₹4,200 revenue loss).
-5. **Confidence Score**: Calibrated probability (e.g., 91% model confidence).
-6. **Action Plan**: Exact operational steps (e.g., order 25 units from Supplier S01 today).
+### Never Silently Delete Data
+Corrupt or invalid records are routed directly to:
+* `data/quarantine/quarantined_transactions.csv`
+
+Each quarantined record includes an explicit `rejection_reason` explaining why it was flagged (e.g., `DUPLICATE_TRANSACTION_ID`, `INVALID_QUANTITY`, `INVALID_UNIT_PRICE`).
+
+### Quality Reports
+Saved automatically after every pipeline run:
+* `data/quality_reports/data_quality_report.json`
+* `data/quality_reports/data_quality_report.md`
 
 ---
 
-## 5. Testing & Verification
+## 8. Final Feature Store
 
-The repository includes a comprehensive 78-test suite covering Phases 1, 2, 3, and 4:
+The feature store is persisted in `data/features/` in high-performance **Apache Parquet** format (along with companion CSV files for easy inspection):
+
+1. **`merchant_features.parquet`** (50 rows, 16 features): Total revenue, total orders, average order value, unique customers, catalog breadth, active days, revenue per day, orders per day, plus location metadata.
+2. **`customer_features.parquet`** (3,308 rows, 12 features): Total spend, order count, average order value, customer recency, purchase frequency, lifetime timestamps.
+3. **`product_features.parquet`** (64 rows, 11 features): Physical units sold, net revenue, order frequency, distinct purchasers, average quantity per basket, effective realized selling price.
+4. **`daily_features.parquet`** (358 rows, 28 features): Daily total revenue, orders, units, active merchants/customers, average order value, festival metrics, weather averages, calendar flags, and anti-leakage 7-day trailing rolling averages.
+5. **`transaction_features.parquet`** (9,995 rows, 37 features): Full transaction records enriched with calculated net amounts, temporal indicators, festival proximities, and local meteorological observations.
+
+---
+
+## 9. Testing & Verification
+
+VyaparMitra includes unit and integration tests covering validation, cleaning, feature math, festival merging, weather imputation, and end-to-end pipeline execution.
+
+Run the entire test suite:
 
 ```bash
 python -m pytest -v
 ```
 
+Output:
 ```text
-tests/test_analytics_integration.py ............ PASSED
-tests/test_category_analytics.py ............... PASSED
-tests/test_cleaning.py ......................... PASSED
-tests/test_conflicts.py ........................ PASSED
-tests/test_context_analytics.py ................ PASSED
-tests/test_cross_sell.py ....................... PASSED
-tests/test_customer_actions.py ................. PASSED
-tests/test_customer_analytics.py ............... PASSED
-tests/test_deduplication.py .................... PASSED
-tests/test_explanations.py ..................... PASSED
-tests/test_features.py ......................... PASSED
-tests/test_inventory.py ........................ PASSED
-tests/test_ml_evaluation.py .................... PASSED
-tests/test_ml_features.py ...................... PASSED
-tests/test_ml_integration.py ................... PASSED
-tests/test_ml_leakage.py ....................... PASSED
-tests/test_ml_models.py ........................ PASSED
-tests/test_ml_split.py ......................... PASSED
-tests/test_payment_analytics.py ................ PASSED
-tests/test_pipeline_integration.py ............. PASSED
-tests/test_pricing.py .......................... PASSED
-tests/test_priority.py ......................... PASSED
-tests/test_product_actions.py .................. PASSED
-tests/test_product_analytics.py ................ PASSED
-tests/test_recommendation_integration.py ....... PASSED
-tests/test_recommendation_schemas.py ........... PASSED
-tests/test_sales_analytics.py .................. PASSED
-tests/test_time_analytics.py ................... PASSED
-tests/test_trend_analytics.py .................. PASSED
-tests/test_validation.py ....................... PASSED
+tests/test_cleaning.py::test_quarantine_isolation PASSED                 [  6%]
+tests/test_cleaning.py::test_merchant_and_customer_cleaning PASSED       [ 13%]
+tests/test_features.py::test_transaction_feature_calculations PASSED     [ 20%]
+tests/test_features.py::test_merchant_feature_aggregations PASSED        [ 26%]
+tests/test_features.py::test_customer_feature_aggregations PASSED        [ 33%]
+tests/test_features.py::test_product_feature_aggregations PASSED         [ 40%]
+tests/test_features.py::test_festival_merge_and_distances PASSED         [ 46%]
+tests/test_features.py::test_weather_merge_and_graceful_imputation PASSED [ 53%]
+tests/test_features.py::test_daily_time_window_features_no_future_leakage PASSED [ 60%]
+tests/test_pipeline_integration.py::test_full_pipeline_integration PASSED [ 66%]
+tests/test_validation.py::test_clean_transactions_pass_validation PASSED [ 73%]
+tests/test_validation.py::test_duplicate_transaction_detection PASSED    [ 80%]
+tests/test_validation.py::test_invalid_prices_and_quantities PASSED      [ 86%]
+tests/test_validation.py::test_referential_integrity_violation PASSED    [ 93%]
+tests/test_validation.py::test_invalid_discounts PASSED                  [100%]
 
-===================== 78 passed, 0 failed in 13.37s =====================
+============================= 15 passed in 3.08s ==============================
 ```
 
 ---
 
-## 6. Roadmap
+## 10. Future Phase 2 Integration
 
-* **Phase 1 (Complete)**: Data Foundation & Merchant Feature Store
-* **Phase 2 (Complete)**: Business Intelligence & Analytics Engine
-* **Phase 3 (Complete)**: Predictive AI Engine
-* **Phase 4 (Complete)**: AI Recommendation & Decision Support System
-* **Phase 5 (Next)**: Multilingual Hindi/Hinglish Business Copilot
-* **Phase 6**: Merchant Command Center & Dashboard Web Application
+The Phase 1 Feature Store exposes clean, standardized interfaces for future modules:
+* **Phase 2 (Analytics & Dashboards)**: Consumes `merchant_features.parquet` and `daily_features.parquet` to display sales velocity, AOV trends, and merchant performance cohorts.
+* **Phase 3 (Predictive ML & Forecasting)**: Leverages `daily_features.parquet` (with pre-computed trailing lags, festival proximity, and weather variables) for demand forecasting without risk of data leakage.
+* **Phase 4 (Customer Recommendation & Retention)**: Uses `customer_features.parquet` and `product_features.parquet` for RFM segmentation, affinity basket analysis, and re-order reminders.

@@ -1,0 +1,24 @@
+# VyaparMitra Phase 5: Hindi AI Business Copilot Configuration
+
+copilot:
+  default_language: hinglish
+  max_context_items: 20
+  max_history_turns: 5
+
+llm:
+  provider: mock
+  model: gemini-1.5-flash
+  temperature: 0.1
+  max_tokens: 800
+
+retrieval:
+  top_k: 5
+  knowledge_dir: data/knowledge
+
+validation:
+  enabled: true
+  strict_numeric_validation: true
+  strict_entity_validation: true
+
+fallback:
+  enabled: true

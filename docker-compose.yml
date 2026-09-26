@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  vyaparmitra:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vyaparmitra:latest
+    container_name: vyaparmitra_app
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEMO_MODE=true
+      - CORS_ORIGINS=["http://localhost:5173","http://localhost:3000","http://localhost:8000"]
+    volumes:
+      # Optional: persist action statuses across container restarts
+      - ./data/recommendations:/app/data/recommendations
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
