@@ -45,6 +45,7 @@ class APIConfig:
         ).split(",") if origin.strip()
     ])
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("DATA_DIR", "data")))
+    db_path: Path = field(default_factory=lambda: Path(os.getenv("DB_PATH", "data/vyaparmitra.db")))
     config_path: Path = field(default_factory=lambda: Path(os.getenv("CONFIG_PATH", "configs/config.yaml")))
     copilot_config_path: Path = field(default_factory=lambda: Path(os.getenv("COPILOT_CONFIG_PATH", "configs/copilot.yaml")))
     demo_mode: bool = field(default_factory=lambda: os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes"))

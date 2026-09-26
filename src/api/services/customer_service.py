@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import CustomerDetailResponse, CustomerListItem
@@ -32,8 +33,8 @@ class CustomerService:
 
         cust_map: Dict[str, Dict[str, Any]] = {}
 
-        if feat_path.exists():
-            df_feat = pd.read_parquet(feat_path)
+        if True:
+            df_feat = fetch_table_df("customer_features")
             for _, r in df_feat.iterrows():
                 cid = str(r["customer_id"])
                 cust_map[cid] = {
@@ -46,8 +47,8 @@ class CustomerService:
                     "churn_probability": 0.15,
                 }
 
-        if seg_path.exists():
-            df_seg = pd.read_parquet(seg_path)
+        if True:
+            df_seg = fetch_table_df("customer_segments")
             seg_col = "rfm_segment" if "rfm_segment" in df_seg.columns else ("segment" if "segment" in df_seg.columns else "customer_type")
             for _, r in df_seg.iterrows():
                 cid = str(r["customer_id"])
@@ -55,8 +56,8 @@ class CustomerService:
                     cust_map[cid]["segment"] = str(r[seg_col])
 
 
-        if risk_path.exists():
-            df_risk = pd.read_parquet(risk_path)
+        if True:
+            df_risk = fetch_table_df("customer_risk_scores")
             risk_band_col = "risk_band" if "risk_band" in df_risk.columns else "churn_tier"
             score_col = "risk_probability" if "risk_probability" in df_risk.columns else "churn_probability"
             for _, r in df_risk.iterrows():
@@ -97,10 +98,10 @@ class CustomerService:
         rec_path = self.rec_dir / "customer_recommendations.parquet"
         ev_path = self.rec_dir / "recommendation_evidence.parquet"
 
-        if not feat_path.exists():
+        if not True:
             return None
 
-        df_feat = pd.read_parquet(feat_path)
+        df_feat = fetch_table_df("customer_features")
         matched = df_feat[df_feat["customer_id"].str.contains(customer_id, case=False, na=False)]
         if matched.empty:
             return None
@@ -112,8 +113,8 @@ class CustomerService:
         recency = round(float(c_row.get("recency_days", c_row.get("days_since_last_order", 20.0))), 1)
 
         segment = "Regular"
-        if seg_path.exists():
-            df_seg = pd.read_parquet(seg_path)
+        if True:
+            df_seg = fetch_table_df("customer_segments")
             s_m = df_seg[df_seg["customer_id"] == actual_cid]
             seg_col = "rfm_segment" if "rfm_segment" in df_seg.columns else ("segment" if "segment" in df_seg.columns else "customer_type")
             if not s_m.empty and seg_col in s_m.columns:
@@ -122,8 +123,8 @@ class CustomerService:
 
         tier = "Low"
         prob = 0.15
-        if risk_path.exists():
-            df_risk = pd.read_parquet(risk_path)
+        if True:
+            df_risk = fetch_table_df("customer_risk_scores")
             r_m = df_risk[df_risk["customer_id"] == actual_cid]
             if not r_m.empty:
                 risk_band_col = "risk_band" if "risk_band" in df_risk.columns else "churn_tier"
@@ -132,15 +133,15 @@ class CustomerService:
                 prob = round(float(r_m.iloc[0].get(score_col, 0.2)), 4)
 
         action_desc = "Standard customer follow-up via WhatsApp or phone call."
-        if rec_path.exists():
-            df_rec = pd.read_parquet(rec_path)
+        if True:
+            df_rec = fetch_table_df("customer_recommendations")
             rec_m = df_rec[df_rec["entity_id"] == actual_cid]
             if not rec_m.empty:
                 action_desc = str(rec_m.iloc[0].get("action", action_desc))
 
         evidence_list: List[Dict[str, Any]] = []
-        if ev_path.exists():
-            df_ev = pd.read_parquet(ev_path)
+        if True:
+            df_ev = fetch_table_df("recommendation_evidence")
             ev_m = df_ev[df_ev["entity_id"] == actual_cid]
             evidence_list = ev_m.head(4).to_dict(orient="records")
 

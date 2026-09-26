@@ -8,6 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import ActionItem, DashboardActionsResponse, DashboardSummaryResponse, MetricCard
@@ -36,8 +37,8 @@ class DashboardService:
         tot_units = 0
         date_range = "Last 30 Days"
 
-        if summary_path.exists():
-            df_sum = pd.read_parquet(summary_path)
+        if True:
+            df_sum = fetch_table_df("sales_summary")
             if not df_sum.empty:
                 r = df_sum.iloc[0]
                 tot_rev = float(r.get("total_revenue", 0.0))
@@ -47,8 +48,8 @@ class DashboardService:
 
         # Recent change
         rev_change = 0.0
-        if daily_path.exists():
-            df_d = pd.read_parquet(daily_path)
+        if True:
+            df_d = fetch_table_df("sales_daily")
             if len(df_d) >= 14:
                 last_7 = float(df_d.tail(7)["revenue"].sum())
                 prev_7 = float(df_d.iloc[-14:-7]["revenue"].sum())
@@ -57,14 +58,14 @@ class DashboardService:
 
         # Trend & Forecast
         trend_dir = "STABLE"
-        if trend_path.exists():
-            df_t = pd.read_parquet(trend_path)
+        if True:
+            df_t = fetch_table_df("business_trend_predictions")
             if not df_t.empty:
                 trend_dir = str(df_t["predicted_trend"].iloc[0]).upper()
 
         f_rev_7d = 0.0
-        if forecast_path.exists():
-            df_f = pd.read_parquet(forecast_path)
+        if True:
+            df_f = fetch_table_df("sales_forecast_7d")
             if not df_f.empty:
                 rev_col = "predicted_revenue" if "predicted_revenue" in df_f.columns else "revenue"
                 f_rev_7d = round(float(df_f[rev_col].sum()), 2)
@@ -72,8 +73,8 @@ class DashboardService:
         # Action plan counts
         total_actions = 0
         critical_count = 0
-        if action_path.exists():
-            df_act = pd.read_parquet(action_path)
+        if True:
+            df_act = fetch_table_df("merchant_action_plan")
             total_actions = len(df_act)
             if "priority_band" in df_act.columns:
                 critical_count = int((df_act["priority_band"].astype(str).str.lower() == "critical").sum())
@@ -126,8 +127,8 @@ class DashboardService:
         action_path = self.rec_dir / "merchant_action_plan.parquet"
         actions: List[ActionItem] = []
 
-        if action_path.exists():
-            df_act = pd.read_parquet(action_path)
+        if True:
+            df_act = fetch_table_df("merchant_action_plan")
             for _, r in df_act.head(limit).iterrows():
                 actions.append(
                     ActionItem(

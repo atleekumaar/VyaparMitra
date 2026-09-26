@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from typing import List
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import (
@@ -42,8 +43,8 @@ class AnalyticsService:
         disc = 0.0
         daily_points: List[DailySalesPoint] = []
 
-        if summary_path.exists():
-            df_sum = pd.read_parquet(summary_path)
+        if True:
+            df_sum = fetch_table_df("sales_summary")
             if not df_sum.empty:
                 r = df_sum.iloc[0]
                 tot_rev = float(r.get("total_revenue", 0.0))
@@ -51,8 +52,8 @@ class AnalyticsService:
                 aov = float(r.get("average_order_value", 0.0))
                 disc = float(r.get("discount_rate", 0.0))
 
-        if daily_path.exists():
-            df_d = pd.read_parquet(daily_path)
+        if True:
+            df_d = fetch_table_df("sales_daily")
             for _, r in df_d.iterrows():
                 daily_points.append(
                     DailySalesPoint(
@@ -82,8 +83,8 @@ class AnalyticsService:
         low_r = 0
         segments: List[CustomerSegmentSummary] = []
 
-        if seg_path.exists():
-            df_s = pd.read_parquet(seg_path)
+        if True:
+            df_s = fetch_table_df("customer_segments")
             tot_cust = len(df_s)
             seg_col = "rfm_segment" if "rfm_segment" in df_s.columns else ("segment" if "segment" in df_s.columns else "customer_type")
             if seg_col in df_s.columns:
@@ -102,8 +103,8 @@ class AnalyticsService:
                         )
                     )
 
-        if risk_path.exists():
-            df_r = pd.read_parquet(risk_path)
+        if True:
+            df_r = fetch_table_df("customer_risk_scores")
             risk_col = "risk_band" if "risk_band" in df_r.columns else "churn_tier"
             if risk_col in df_r.columns:
                 bands = df_r[risk_col].astype(str).str.lower()
@@ -127,8 +128,8 @@ class AnalyticsService:
         tot_count = 0
         pareto_ratio = 0.80
 
-        if rank_path.exists():
-            df_p = pd.read_parquet(rank_path)
+        if True:
+            df_p = fetch_table_df("product_rankings")
             tot_count = len(df_p)
             for idx, r in df_p.head(15).iterrows():
                 top_products.append(
@@ -142,8 +143,8 @@ class AnalyticsService:
                     )
                 )
 
-        if pareto_path.exists():
-            df_par = pd.read_parquet(pareto_path)
+        if True:
+            df_par = fetch_table_df("pareto_analysis")
             if not df_par.empty and "pareto_share" in df_par.columns:
                 pareto_ratio = float(df_par["pareto_share"].iloc[0])
 
@@ -157,8 +158,8 @@ class AnalyticsService:
         cat_path = self.analytics_dir / "categories" / "category_summary.parquet"
         categories: List[CategoryShareItem] = []
 
-        if cat_path.exists():
-            df_c = pd.read_parquet(cat_path)
+        if True:
+            df_c = fetch_table_df("category_summary")
             for _, r in df_c.iterrows():
                 categories.append(
                     CategoryShareItem(
@@ -176,8 +177,8 @@ class AnalyticsService:
         methods: List[PaymentMethodItem] = []
         primary_method = "UPI"
 
-        if pay_path.exists():
-            df_pay = pd.read_parquet(pay_path)
+        if True:
+            df_pay = fetch_table_df("payment_summary")
             if not df_pay.empty:
                 primary_method = str(df_pay.sort_values(by="revenue_share", ascending=False).iloc[0].get("payment_method", "UPI"))
                 for _, r in df_pay.iterrows():
@@ -204,15 +205,15 @@ class AnalyticsService:
         horizon = 7
         hist_change = 0.0
 
-        if pred_path.exists():
-            df_p = pd.read_parquet(pred_path)
+        if True:
+            df_p = fetch_table_df("business_trend_predictions")
             if not df_p.empty:
                 pred_trend = str(df_p["predicted_trend"].iloc[0]).upper()
                 conf = round(float(df_p["confidence"].iloc[0]), 2)
                 horizon = int(df_p["horizon_days"].iloc[0])
 
-        if hist_path.exists():
-            df_h = pd.read_parquet(hist_path)
+        if True:
+            df_h = fetch_table_df("trend_analysis")
             rev_pts = df_h[df_h["metric"] == "revenue"] if "metric" in df_h.columns else df_h
             if not rev_pts.empty:
                 hist_change = round(float(rev_pts.iloc[-1].get("percentage_change", 0.0)), 2)
@@ -228,8 +229,8 @@ class AnalyticsService:
         anom_path = self.analytics_dir / "trends" / "anomalies.parquet"
         items: List[AnomalyItem] = []
 
-        if anom_path.exists():
-            df_a = pd.read_parquet(anom_path)
+        if True:
+            df_a = fetch_table_df("anomalies")
             for _, r in df_a.iterrows():
                 items.append(
                     AnomalyItem(

@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from typing import List
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import (
@@ -31,8 +32,8 @@ class ForecastService:
         daily_items: List[DailySalesForecastItem] = []
         trend_dir = "STABLE"
 
-        if f_path.exists():
-            df_f = pd.read_parquet(f_path)
+        if True:
+            df_f = fetch_table_df("sales_forecast_7d")
             if not df_f.empty:
                 rev_col = "predicted_revenue" if "predicted_revenue" in df_f.columns else "revenue"
                 tot_rev = round(float(df_f[rev_col].sum()), 2)
@@ -47,8 +48,8 @@ class ForecastService:
                         )
                     )
 
-        if trend_path.exists():
-            df_t = pd.read_parquet(trend_path)
+        if True:
+            df_t = fetch_table_df("business_trend_predictions")
             if not df_t.empty:
                 trend_dir = str(df_t["predicted_trend"].iloc[0]).upper()
 
@@ -64,8 +65,8 @@ class ForecastService:
         d_path = self.ml_dir / "forecasts" / "product_demand_forecast_7d.parquet"
         sku_items: List[SKUForecastItem] = []
 
-        if d_path.exists():
-            df_d = pd.read_parquet(d_path)
+        if True:
+            df_d = fetch_table_df("product_demand_forecast_7d")
             if not df_d.empty:
                 grouped = df_d.groupby(["product_id", "product_category"]).agg(
                     units=("predicted_units", "sum")

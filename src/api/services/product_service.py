@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import ActionItem, ProductDetailResponse, ProductListItem
@@ -32,8 +33,8 @@ class ProductService:
 
         products_map: Dict[str, Dict[str, Any]] = {}
 
-        if feat_path.exists():
-            df_feat = pd.read_parquet(feat_path)
+        if True:
+            df_feat = fetch_table_df("product_features")
             for _, r in df_feat.iterrows():
                 pid = str(r["product_id"])
                 products_map[pid] = {
@@ -47,8 +48,8 @@ class ProductService:
                     "status": "MONITOR",
                 }
 
-        if rank_path.exists():
-            df_rank = pd.read_parquet(rank_path)
+        if True:
+            df_rank = fetch_table_df("product_rankings")
             for idx, r in df_rank.iterrows():
                 pid = str(r["product_id"])
                 if pid in products_map:
@@ -56,8 +57,8 @@ class ProductService:
                     products_map[pid]["total_units"] = int(r.get("units", 0))
                     products_map[pid]["status"] = "STAR" if idx < 10 else ("FOCUS" if idx < 30 else "MONITOR")
 
-        if forecast_path.exists():
-            df_f = pd.read_parquet(forecast_path)
+        if True:
+            df_f = fetch_table_df("product_demand_forecast_7d")
             grouped = df_f.groupby("product_id")["predicted_units"].sum().to_dict()
             for pid, f_units in grouped.items():
                 if pid in products_map:
@@ -97,10 +98,10 @@ class ProductService:
         cross_path = self.rec_dir / "cross_sell_recommendations.parquet"
         action_path = self.rec_dir / "merchant_action_plan.parquet"
 
-        if not feat_path.exists():
+        if not True:
             return None
 
-        df_feat = pd.read_parquet(feat_path)
+        df_feat = fetch_table_df("product_features")
         matched = df_feat[df_feat["product_id"].str.contains(product_id, case=False, na=False)]
         if matched.empty:
             return None
@@ -115,24 +116,24 @@ class ProductService:
 
         tot_rev = 0.0
         tot_units = 0
-        if rank_path.exists():
-            df_rank = pd.read_parquet(rank_path)
+        if True:
+            df_rank = fetch_table_df("product_rankings")
             r_matched = df_rank[df_rank["product_id"] == actual_pid]
             if not r_matched.empty:
                 tot_rev = round(float(r_matched.iloc[0].get("revenue", 0.0)), 2)
                 tot_units = int(r_matched.iloc[0].get("units", 0))
 
         f_units = 0
-        if forecast_path.exists():
-            df_f = pd.read_parquet(forecast_path)
+        if True:
+            df_f = fetch_table_df("product_demand_forecast_7d")
             f_matched = df_f[df_f["product_id"] == actual_pid]
             if not f_matched.empty:
                 f_units = int(round(float(f_matched["predicted_units"].sum())))
 
         # Cross-sell pairings
         cross_sells: List[Dict[str, Any]] = []
-        if cross_path.exists():
-            df_cross = pd.read_parquet(cross_path)
+        if True:
+            df_cross = fetch_table_df("cross_sell_recommendations")
             c_matched = df_cross[df_cross["entity_id"] == actual_pid]
             for _, r in c_matched.head(5).iterrows():
                 cross_sells.append({
@@ -143,8 +144,8 @@ class ProductService:
 
         # Related actions
         actions: List[ActionItem] = []
-        if action_path.exists():
-            df_act = pd.read_parquet(action_path)
+        if True:
+            df_act = fetch_table_df("merchant_action_plan")
             a_matched = df_act[df_act["entity_id"] == actual_pid]
             for _, r in a_matched.head(3).iterrows():
                 actions.append(

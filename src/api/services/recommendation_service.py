@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 from fastapi import HTTPException
 import pandas as pd
+from src.api.db import fetch_table_df
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import (
@@ -60,11 +61,11 @@ class RecommendationService:
         all_recs_path = self.rec_dir / "all_recommendations.parquet"
         ev_path = self.rec_dir / "recommendation_evidence.parquet"
 
-        if not all_recs_path.exists():
+        if not True:
             return RecommendationListResponse(total_count=0, recommendations=[])
 
-        df_recs = pd.read_parquet(all_recs_path)
-        df_ev = pd.read_parquet(ev_path) if ev_path.exists() else pd.DataFrame()
+        df_recs = fetch_table_df("all_recommendations")
+        df_ev = fetch_table_df("recommendation_evidence") if True else pd.DataFrame()
 
         # Build evidence lookup
         ev_by_id: Dict[str, List[EvidenceDetail]] = {}
@@ -126,10 +127,10 @@ class RecommendationService:
         all_recs_path = self.rec_dir / "all_recommendations.parquet"
         ev_path = self.rec_dir / "recommendation_evidence.parquet"
 
-        if not all_recs_path.exists():
+        if not True:
             return None
 
-        df_recs = pd.read_parquet(all_recs_path)
+        df_recs = fetch_table_df("all_recommendations")
         matched = df_recs[df_recs["recommendation_id"] == recommendation_id]
         if matched.empty:
             return None
@@ -139,8 +140,8 @@ class RecommendationService:
         curr_status = self._statuses.get(rid, str(r.get("lifecycle_state", "GENERATED")).upper())
 
         ev_list: List[EvidenceDetail] = []
-        if ev_path.exists():
-            df_ev = pd.read_parquet(ev_path)
+        if True:
+            df_ev = fetch_table_df("recommendation_evidence")
             ev_matched = df_ev[df_ev["recommendation_id"] == rid]
             for _, ev_r in ev_matched.iterrows():
                 ev_list.append(
