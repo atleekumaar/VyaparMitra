@@ -4,6 +4,8 @@
 
 @layer base {
   body {
+    background-color: #F0F6FB;
+    color: #0F2042;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 }
@@ -14,12 +16,26 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F3FAFD;
+  background: #E8F4FD;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C4E2F2;
+  background: #9BD0F5;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #00BAF2;
+}
+
+/* Paytm pulse animations */
+@keyframes paytmWave {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.animate-paytm-wave {
+  animation: paytmWave 1.2s ease-in-out infinite;
 }
