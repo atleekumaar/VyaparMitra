@@ -1,0 +1,2922 @@
+date,city,temperature,humidity,rainfall,weather_condition
+2025-10-01,Agra,25.6,48.0,1.0,Clear
+2025-10-01,Jaipur,31.2,40.3,0.0,Clear
+2025-10-01,Kanpur,23.7,58.2,0.0,Clear
+2025-10-01,Lucknow,26.7,55.9,1.4,Clear
+2025-10-01,Noida,28.4,50.3,1.8,Clear
+2025-10-01,Patna,31.0,55.9,1.1,Clear
+2025-10-01,Prayagraj,29.9,63.1,1.3,Clear
+2025-10-01,Varanasi,26.5,63.0,1.2,Clear
+2025-10-02,Agra,28.1,48.9,0.3,Clear
+2025-10-02,Delhi,29.9,36.0,0.0,Clear
+2025-10-02,Gorakhpur,30.7,53.2,0.0,Clear
+2025-10-02,Jaipur,31.4,44.7,0.0,Clear
+2025-10-02,Kanpur,30.1,50.2,0.0,Clear
+2025-10-02,Lucknow,29.4,52.2,0.5,Clear
+2025-10-02,Noida,31.5,41.5,0.1,Clear
+2025-10-02,Patna,25.9,52.8,0.0,Clear
+2025-10-02,Prayagraj,26.0,49.8,0.0,Clear
+2025-10-02,Varanasi,29.1,57.1,0.0,Clear
+2025-10-03,Agra,28.1,44.7,1.5,Clear
+2025-10-03,Gorakhpur,27.3,57.8,0.6,Clear
+2025-10-03,Jaipur,29.6,44.3,3.0,Clear
+2025-10-03,Kanpur,28.7,58.7,0.0,Clear
+2025-10-03,Lucknow,27.4,52.7,1.1,Clear
+2025-10-03,Noida,27.0,53.8,0.0,Clear
+2025-10-03,Prayagraj,26.6,44.0,0.4,Clear
+2025-10-03,Varanasi,29.1,56.4,0.0,Clear
+2025-10-04,Agra,33.8,41.8,0.0,Clear
+2025-10-04,Gorakhpur,30.2,63.9,1.9,Clear
+2025-10-04,Kanpur,26.6,60.6,0.6,Clear
+2025-10-04,Lucknow,27.6,53.8,0.0,Clear
+2025-10-04,Noida,27.2,53.4,0.1,Clear
+2025-10-04,Patna,28.0,72.1,1.9,Clear
+2025-10-04,Prayagraj,31.3,55.1,0.0,Clear
+2025-10-04,Varanasi,28.2,41.7,0.0,Clear
+2025-10-05,Agra,30.3,51.2,1.0,Clear
+2025-10-05,Gorakhpur,27.3,67.1,1.8,Clear
+2025-10-05,Kanpur,25.9,38.0,0.3,Clear
+2025-10-05,Lucknow,26.7,58.3,0.0,Clear
+2025-10-05,Noida,26.2,55.4,1.4,Clear
+2025-10-05,Prayagraj,31.3,56.7,0.0,Clear
+2025-10-05,Varanasi,29.0,56.2,2.1,Clear
+2025-10-06,Agra,25.7,46.9,0.0,Clear
+2025-10-06,Gorakhpur,26.9,60.8,1.0,Clear
+2025-10-06,Jaipur,28.8,42.7,0.9,Clear
+2025-10-06,Kanpur,30.4,58.5,0.0,Clear
+2025-10-06,Lucknow,26.4,59.1,0.1,Clear
+2025-10-06,Noida,31.1,52.0,0.0,Clear
+2025-10-06,Patna,30.0,65.7,0.0,Clear
+2025-10-06,Prayagraj,26.0,56.7,1.7,Clear
+2025-10-06,Varanasi,29.5,67.7,1.5,Clear
+2025-10-07,Agra,25.5,44.9,0.0,Clear
+2025-10-07,Gorakhpur,30.4,62.8,1.5,Clear
+2025-10-07,Kanpur,29.0,42.7,1.8,Clear
+2025-10-07,Lucknow,28.5,67.4,1.4,Clear
+2025-10-07,Noida,27.0,54.0,0.0,Clear
+2025-10-07,Prayagraj,27.0,53.3,1.3,Clear
+2025-10-07,Varanasi,31.4,71.0,0.0,Clear
+2025-10-08,Agra,25.0,44.1,0.0,Clear
+2025-10-08,Jaipur,30.5,38.7,0.0,Clear
+2025-10-08,Kanpur,29.8,45.5,0.9,Clear
+2025-10-08,Lucknow,24.5,55.9,1.4,Clear
+2025-10-08,Noida,24.7,32.7,1.1,Clear
+2025-10-08,Prayagraj,26.5,60.5,1.0,Clear
+2025-10-09,Agra,28.5,49.6,0.0,Clear
+2025-10-09,Gorakhpur,24.0,64.8,1.4,Clear
+2025-10-09,Jaipur,28.4,47.4,0.0,Clear
+2025-10-09,Kanpur,27.4,51.7,0.5,Clear
+2025-10-09,Lucknow,28.5,62.7,0.7,Clear
+2025-10-09,Noida,28.2,47.6,1.9,Clear
+2025-10-09,Prayagraj,30.6,58.7,1.4,Clear
+2025-10-09,Varanasi,28.6,68.3,1.1,Clear
+2025-10-10,Agra,25.8,53.9,0.3,Clear
+2025-10-10,Delhi,27.1,37.0,0.5,Clear
+2025-10-10,Gorakhpur,23.1,66.1,1.4,Clear
+2025-10-10,Jaipur,26.0,46.5,0.0,Clear
+2025-10-10,Kanpur,28.8,47.7,1.7,Clear
+2025-10-10,Lucknow,25.6,51.6,1.4,Clear
+2025-10-10,Noida,26.7,47.6,2.2,Clear
+2025-10-10,Prayagraj,24.1,57.8,0.0,Clear
+2025-10-10,Varanasi,29.5,55.2,2.6,Clear
+2025-10-11,Agra,23.9,51.8,1.0,Clear
+2025-10-11,Gorakhpur,28.8,69.6,0.0,Clear
+2025-10-11,Jaipur,26.9,49.0,0.7,Clear
+2025-10-11,Kanpur,25.9,56.3,0.0,Clear
+2025-10-11,Lucknow,26.8,50.5,1.5,Clear
+2025-10-11,Noida,27.0,39.3,1.5,Clear
+2025-10-11,Prayagraj,27.1,49.0,0.8,Clear
+2025-10-11,Varanasi,26.2,49.1,0.4,Clear
+2025-10-12,Agra,25.8,45.1,3.2,Clear
+2025-10-12,Gorakhpur,26.0,63.6,0.0,Clear
+2025-10-12,Jaipur,28.9,56.6,0.5,Clear
+2025-10-12,Kanpur,29.0,51.2,1.3,Clear
+2025-10-12,Lucknow,27.4,60.0,0.3,Clear
+2025-10-12,Noida,25.8,60.0,0.8,Clear
+2025-10-12,Prayagraj,29.1,59.6,0.0,Clear
+2025-10-12,Varanasi,27.8,54.6,2.3,Clear
+2025-10-13,Agra,29.9,54.4,0.4,Clear
+2025-10-13,Gorakhpur,26.1,68.1,0.0,Clear
+2025-10-13,Jaipur,28.5,52.1,1.1,Clear
+2025-10-13,Kanpur,25.9,55.6,1.8,Clear
+2025-10-13,Lucknow,31.2,77.0,1.7,Clear
+2025-10-13,Noida,24.7,44.7,2.2,Clear
+2025-10-13,Prayagraj,26.6,41.6,0.6,Clear
+2025-10-13,Varanasi,26.4,57.3,0.0,Clear
+2025-10-14,Agra,27.1,49.2,0.0,Clear
+2025-10-14,Gorakhpur,27.0,73.2,0.0,Clear
+2025-10-14,Jaipur,29.5,41.5,0.0,Clear
+2025-10-14,Kanpur,26.2,53.7,0.7,Clear
+2025-10-14,Lucknow,24.5,62.0,0.2,Clear
+2025-10-14,Noida,22.4,60.2,0.0,Clear
+2025-10-14,Patna,26.3,65.6,1.3,Clear
+2025-10-14,Prayagraj,27.5,54.6,0.0,Clear
+2025-10-14,Varanasi,24.4,52.0,1.2,Clear
+2025-10-15,Gorakhpur,24.9,65.2,0.0,Clear
+2025-10-15,Kanpur,26.8,44.4,0.0,Clear
+2025-10-15,Lucknow,25.1,57.1,0.2,Clear
+2025-10-15,Noida,24.3,56.0,0.0,Clear
+2025-10-15,Patna,26.3,61.2,0.0,Clear
+2025-10-15,Prayagraj,27.4,67.6,0.1,Clear
+2025-10-15,Varanasi,23.3,52.2,0.0,Clear
+2025-10-16,Agra,26.8,42.8,0.7,Clear
+2025-10-16,Delhi,28.2,47.0,1.3,Clear
+2025-10-16,Gorakhpur,24.8,77.8,0.0,Clear
+2025-10-16,Jaipur,27.8,40.5,0.0,Clear
+2025-10-16,Kanpur,25.2,48.8,0.0,Clear
+2025-10-16,Lucknow,23.5,48.2,0.0,Clear
+2025-10-16,Noida,27.7,62.7,0.5,Clear
+2025-10-16,Prayagraj,29.2,57.6,2.5,Clear
+2025-10-16,Varanasi,23.8,62.6,0.5,Clear
+2025-10-17,Agra,24.2,50.9,0.0,Clear
+2025-10-17,Gorakhpur,24.5,55.7,0.3,Clear
+2025-10-17,Kanpur,25.3,60.3,1.1,Clear
+2025-10-17,Lucknow,23.5,64.3,0.4,Clear
+2025-10-17,Noida,27.8,46.6,0.0,Clear
+2025-10-17,Prayagraj,27.3,50.8,1.2,Clear
+2025-10-18,Gorakhpur,23.3,66.7,1.2,Clear
+2025-10-18,Jaipur,26.8,58.4,0.5,Clear
+2025-10-18,Kanpur,23.6,56.6,1.3,Clear
+2025-10-18,Lucknow,22.7,56.5,0.0,Clear
+2025-10-18,Noida,25.9,48.7,0.0,Clear
+2025-10-18,Patna,26.3,52.9,1.1,Clear
+2025-10-18,Prayagraj,22.9,51.9,1.1,Clear
+2025-10-18,Varanasi,27.5,37.4,1.6,Clear
+2025-10-19,Delhi,27.6,43.8,0.6,Clear
+2025-10-19,Gorakhpur,26.0,74.0,0.7,Clear
+2025-10-19,Jaipur,30.3,40.9,0.0,Clear
+2025-10-19,Kanpur,25.3,47.9,0.7,Clear
+2025-10-19,Lucknow,29.4,51.3,1.2,Clear
+2025-10-19,Noida,27.2,40.9,0.0,Clear
+2025-10-19,Patna,22.9,64.3,0.0,Clear
+2025-10-19,Prayagraj,25.5,56.7,0.0,Clear
+2025-10-19,Varanasi,26.9,53.0,0.0,Clear
+2025-10-20,Agra,20.8,57.2,0.0,Clear
+2025-10-20,Gorakhpur,27.2,54.7,1.0,Clear
+2025-10-20,Jaipur,24.7,38.6,0.0,Clear
+2025-10-20,Kanpur,23.3,52.7,0.0,Clear
+2025-10-20,Lucknow,24.4,50.9,0.6,Clear
+2025-10-20,Noida,26.2,56.1,0.9,Clear
+2025-10-20,Prayagraj,25.7,55.2,0.9,Clear
+2025-10-20,Varanasi,27.1,63.8,0.4,Clear
+2025-10-21,Agra,25.0,59.4,0.0,Clear
+2025-10-21,Delhi,24.6,44.8,0.0,Clear
+2025-10-21,Gorakhpur,25.4,69.5,0.0,Clear
+2025-10-21,Jaipur,29.4,50.3,0.3,Clear
+2025-10-21,Kanpur,26.3,60.5,1.3,Clear
+2025-10-21,Lucknow,27.6,50.5,0.8,Clear
+2025-10-21,Noida,23.5,61.0,2.4,Clear
+2025-10-21,Prayagraj,26.0,64.9,0.0,Clear
+2025-10-21,Varanasi,28.2,63.1,0.5,Partly Cloudy
+2025-10-22,Agra,23.7,49.0,0.0,Clear
+2025-10-22,Delhi,24.1,44.8,0.0,Clear
+2025-10-22,Gorakhpur,26.2,68.2,0.0,Clear
+2025-10-22,Kanpur,25.1,51.1,1.5,Clear
+2025-10-22,Lucknow,25.1,46.9,0.0,Clear
+2025-10-22,Noida,21.5,45.8,0.2,Clear
+2025-10-22,Prayagraj,24.5,66.5,0.0,Clear
+2025-10-22,Varanasi,22.8,64.0,0.0,Clear
+2025-10-23,Agra,21.8,43.4,0.0,Clear
+2025-10-23,Delhi,23.6,36.4,0.0,Clear
+2025-10-23,Jaipur,27.6,54.4,1.7,Clear
+2025-10-23,Kanpur,25.3,41.9,0.0,Clear
+2025-10-23,Lucknow,22.5,60.4,0.0,Clear
+2025-10-23,Noida,19.1,57.1,1.5,Clear
+2025-10-23,Prayagraj,22.6,62.0,1.2,Clear
+2025-10-23,Varanasi,25.3,59.4,1.8,Clear
+2025-10-24,Gorakhpur,25.4,57.6,0.5,Clear
+2025-10-24,Kanpur,24.8,54.3,1.5,Clear
+2025-10-24,Lucknow,20.4,46.7,2.4,Clear
+2025-10-24,Noida,23.0,52.1,0.0,Clear
+2025-10-24,Prayagraj,22.0,51.7,0.0,Clear
+2025-10-24,Varanasi,29.9,53.5,0.0,Clear
+2025-10-25,Agra,26.8,57.9,0.0,Clear
+2025-10-25,Gorakhpur,24.7,54.8,0.0,Clear
+2025-10-25,Jaipur,26.8,47.8,0.9,Clear
+2025-10-25,Kanpur,21.7,45.2,0.5,Clear
+2025-10-25,Lucknow,23.0,57.5,0.0,Clear
+2025-10-25,Noida,25.8,50.4,2.2,Clear
+2025-10-25,Prayagraj,24.4,44.4,0.0,Clear
+2025-10-25,Varanasi,26.4,49.6,0.9,Clear
+2025-10-26,Agra,25.0,61.4,0.1,Clear
+2025-10-26,Gorakhpur,22.8,61.6,1.2,Clear
+2025-10-26,Kanpur,25.1,47.4,0.4,Clear
+2025-10-26,Lucknow,19.7,55.6,0.3,Clear
+2025-10-26,Noida,27.3,64.4,0.0,Clear
+2025-10-26,Prayagraj,20.4,67.6,0.1,Clear
+2025-10-26,Varanasi,27.4,57.5,0.0,Clear
+2025-10-27,Agra,24.2,61.1,1.9,Clear
+2025-10-27,Gorakhpur,24.1,62.2,0.0,Clear
+2025-10-27,Jaipur,20.5,55.4,0.0,Clear
+2025-10-27,Kanpur,24.5,61.8,0.0,Clear
+2025-10-27,Lucknow,26.2,57.3,0.8,Clear
+2025-10-27,Noida,20.2,51.0,0.6,Clear
+2025-10-27,Prayagraj,23.3,52.3,0.6,Clear
+2025-10-27,Varanasi,26.5,55.4,1.2,Clear
+2025-10-28,Gorakhpur,23.3,62.0,0.0,Clear
+2025-10-28,Jaipur,24.3,48.4,0.0,Clear
+2025-10-28,Kanpur,22.2,62.8,1.1,Clear
+2025-10-28,Lucknow,24.2,64.0,0.0,Clear
+2025-10-28,Noida,22.5,37.9,1.7,Clear
+2025-10-28,Prayagraj,22.1,62.5,0.5,Clear
+2025-10-28,Varanasi,26.9,66.4,0.0,Clear
+2025-10-29,Agra,24.2,53.8,0.0,Clear
+2025-10-29,Gorakhpur,25.4,57.8,0.0,Clear
+2025-10-29,Jaipur,25.3,40.9,0.0,Clear
+2025-10-29,Kanpur,25.9,64.5,2.5,Clear
+2025-10-29,Lucknow,23.3,51.7,2.0,Clear
+2025-10-29,Noida,22.4,44.9,0.2,Clear
+2025-10-29,Prayagraj,28.0,62.0,0.0,Clear
+2025-10-29,Varanasi,24.8,62.2,1.8,Clear
+2025-10-30,Agra,22.5,43.7,0.4,Clear
+2025-10-30,Delhi,22.8,48.7,1.2,Clear
+2025-10-30,Gorakhpur,21.6,64.1,2.6,Clear
+2025-10-30,Jaipur,30.2,37.5,0.7,Clear
+2025-10-30,Kanpur,22.4,49.4,0.3,Clear
+2025-10-30,Lucknow,20.7,61.4,1.1,Clear
+2025-10-30,Noida,23.7,48.5,1.7,Clear
+2025-10-30,Patna,23.2,61.6,0.0,Clear
+2025-10-30,Prayagraj,26.2,50.7,0.8,Clear
+2025-10-30,Varanasi,27.1,57.5,1.5,Clear
+2025-10-31,Gorakhpur,23.0,63.6,1.7,Clear
+2025-10-31,Jaipur,27.8,34.5,0.7,Clear
+2025-10-31,Kanpur,20.2,51.9,0.2,Clear
+2025-10-31,Lucknow,24.9,52.9,1.1,Clear
+2025-10-31,Noida,23.8,30.3,0.9,Clear
+2025-10-31,Prayagraj,25.2,51.1,0.6,Clear
+2025-10-31,Varanasi,25.5,50.9,0.0,Clear
+2025-11-01,Delhi,22.4,59.4,0.0,Clear
+2025-11-01,Gorakhpur,21.8,68.8,1.5,Clear
+2025-11-01,Jaipur,27.3,45.3,0.0,Clear
+2025-11-01,Kanpur,25.0,57.3,0.4,Clear
+2025-11-01,Lucknow,24.0,66.0,2.0,Clear
+2025-11-01,Noida,19.7,53.2,0.0,Clear
+2025-11-01,Prayagraj,25.6,59.7,0.0,Clear
+2025-11-02,Delhi,23.9,37.2,1.8,Clear
+2025-11-02,Gorakhpur,28.4,64.3,0.6,Clear
+2025-11-02,Lucknow,21.8,48.9,0.0,Clear
+2025-11-02,Noida,23.0,55.9,0.7,Clear
+2025-11-02,Prayagraj,18.4,63.4,1.4,Clear
+2025-11-02,Varanasi,23.2,47.3,0.0,Clear
+2025-11-03,Agra,23.1,54.1,1.6,Clear
+2025-11-03,Delhi,22.9,49.9,0.0,Clear
+2025-11-03,Gorakhpur,23.5,59.6,0.7,Clear
+2025-11-03,Jaipur,25.0,40.7,0.8,Clear
+2025-11-03,Kanpur,21.3,41.1,0.2,Clear
+2025-11-03,Lucknow,23.8,46.1,2.3,Clear
+2025-11-03,Noida,22.8,46.7,0.0,Clear
+2025-11-03,Prayagraj,21.5,55.2,0.0,Clear
+2025-11-03,Varanasi,24.1,58.5,0.5,Clear
+2025-11-04,Agra,23.2,53.9,0.0,Clear
+2025-11-04,Delhi,21.3,66.7,0.1,Clear
+2025-11-04,Gorakhpur,21.3,68.0,0.2,Clear
+2025-11-04,Jaipur,27.1,46.0,0.0,Clear
+2025-11-04,Kanpur,25.3,54.7,0.9,Clear
+2025-11-04,Lucknow,23.7,68.9,0.0,Clear
+2025-11-04,Noida,23.9,51.6,0.5,Clear
+2025-11-04,Patna,23.3,53.2,0.0,Clear
+2025-11-04,Prayagraj,24.6,60.3,1.9,Clear
+2025-11-04,Varanasi,22.1,55.9,0.0,Clear
+2025-11-05,Agra,23.6,52.2,0.0,Clear
+2025-11-05,Delhi,21.5,44.1,1.0,Clear
+2025-11-05,Gorakhpur,26.9,72.2,1.7,Clear
+2025-11-05,Kanpur,23.0,56.2,0.0,Clear
+2025-11-05,Lucknow,24.8,46.6,0.6,Clear
+2025-11-05,Noida,23.1,44.8,2.0,Clear
+2025-11-05,Prayagraj,23.2,39.0,1.1,Clear
+2025-11-05,Varanasi,25.2,63.6,1.0,Clear
+2025-11-06,Agra,24.0,52.8,2.2,Clear
+2025-11-06,Gorakhpur,22.9,62.9,0.9,Clear
+2025-11-06,Jaipur,24.1,45.0,0.6,Clear
+2025-11-06,Kanpur,23.7,57.5,1.1,Clear
+2025-11-06,Lucknow,19.7,67.4,1.4,Clear
+2025-11-06,Noida,24.7,43.0,0.1,Clear
+2025-11-06,Prayagraj,29.0,69.9,0.9,Clear
+2025-11-06,Varanasi,23.1,59.1,0.0,Clear
+2025-11-07,Agra,21.8,46.3,0.0,Clear
+2025-11-07,Gorakhpur,24.0,66.9,0.0,Clear
+2025-11-07,Jaipur,23.2,36.0,1.3,Clear
+2025-11-07,Kanpur,24.0,66.3,0.0,Clear
+2025-11-07,Lucknow,21.4,57.9,0.0,Clear
+2025-11-07,Noida,20.6,50.7,0.0,Clear
+2025-11-07,Patna,23.6,63.2,0.2,Clear
+2025-11-07,Prayagraj,21.9,49.3,0.1,Clear
+2025-11-07,Varanasi,20.5,65.1,0.7,Clear
+2025-11-08,Agra,20.8,54.0,0.4,Clear
+2025-11-08,Gorakhpur,20.0,57.6,0.8,Clear
+2025-11-08,Jaipur,25.1,50.8,0.1,Clear
+2025-11-08,Kanpur,28.4,48.5,0.6,Clear
+2025-11-08,Lucknow,21.1,50.7,0.0,Clear
+2025-11-08,Noida,22.5,54.2,0.5,Clear
+2025-11-08,Prayagraj,20.2,54.8,0.0,Clear
+2025-11-08,Varanasi,19.9,56.5,0.7,Clear
+2025-11-09,Agra,17.9,59.8,1.3,Clear
+2025-11-09,Delhi,21.3,57.6,1.3,Clear
+2025-11-09,Gorakhpur,22.7,60.8,0.6,Clear
+2025-11-09,Kanpur,21.2,58.6,0.0,Clear
+2025-11-09,Lucknow,20.2,40.9,1.3,Clear
+2025-11-09,Noida,19.1,52.8,0.0,Clear
+2025-11-09,Prayagraj,21.7,54.8,0.0,Clear
+2025-11-09,Varanasi,26.1,49.8,0.0,Clear
+2025-11-10,Agra,22.9,60.7,0.0,Clear
+2025-11-10,Gorakhpur,22.3,75.9,0.1,Clear
+2025-11-10,Jaipur,20.8,49.4,0.2,Clear
+2025-11-10,Kanpur,20.8,60.5,1.5,Clear
+2025-11-10,Lucknow,22.2,77.2,0.0,Clear
+2025-11-10,Noida,20.0,45.1,0.8,Clear
+2025-11-10,Prayagraj,21.1,40.7,1.0,Clear
+2025-11-11,Agra,21.5,62.7,2.1,Clear
+2025-11-11,Gorakhpur,22.4,62.1,0.2,Clear
+2025-11-11,Jaipur,21.8,34.1,0.2,Clear
+2025-11-11,Kanpur,21.3,57.1,0.0,Clear
+2025-11-11,Lucknow,26.1,50.4,1.4,Clear
+2025-11-11,Noida,23.9,60.7,0.0,Clear
+2025-11-11,Patna,21.6,65.4,0.7,Clear
+2025-11-11,Varanasi,21.5,53.6,1.4,Clear
+2025-11-12,Agra,22.0,43.9,0.0,Clear
+2025-11-12,Gorakhpur,21.6,78.1,0.4,Clear
+2025-11-12,Jaipur,24.5,40.3,0.7,Clear
+2025-11-12,Kanpur,19.2,50.3,0.0,Clear
+2025-11-12,Lucknow,18.9,66.7,1.0,Clear
+2025-11-12,Noida,19.8,58.1,0.4,Clear
+2025-11-12,Patna,22.9,75.7,0.0,Clear
+2025-11-12,Prayagraj,21.9,55.3,0.6,Clear
+2025-11-12,Varanasi,22.5,58.3,0.0,Clear
+2025-11-13,Agra,21.4,50.0,1.1,Clear
+2025-11-13,Jaipur,21.0,37.8,0.1,Clear
+2025-11-13,Kanpur,19.7,65.5,0.7,Clear
+2025-11-13,Lucknow,19.1,66.1,0.0,Clear
+2025-11-13,Noida,16.9,54.1,1.2,Clear
+2025-11-13,Prayagraj,19.7,68.6,0.0,Clear
+2025-11-13,Varanasi,22.8,74.3,0.0,Clear
+2025-11-14,Agra,27.0,62.7,0.0,Clear
+2025-11-14,Gorakhpur,22.0,55.1,0.0,Clear
+2025-11-14,Jaipur,21.9,49.8,0.6,Clear
+2025-11-14,Kanpur,16.7,49.2,0.0,Clear
+2025-11-14,Lucknow,23.1,54.0,2.3,Clear
+2025-11-14,Noida,21.3,51.2,0.0,Clear
+2025-11-14,Patna,21.6,63.7,0.6,Clear
+2025-11-14,Prayagraj,22.5,52.7,0.0,Clear
+2025-11-14,Varanasi,22.1,62.9,0.0,Clear
+2025-11-15,Agra,18.7,57.5,0.0,Clear
+2025-11-15,Gorakhpur,22.7,66.5,0.0,Clear
+2025-11-15,Jaipur,22.0,41.7,1.4,Clear
+2025-11-15,Kanpur,21.5,56.3,0.0,Clear
+2025-11-15,Lucknow,22.4,61.5,0.0,Clear
+2025-11-15,Noida,21.6,43.7,0.0,Clear
+2025-11-15,Patna,21.8,59.9,0.0,Clear
+2025-11-15,Prayagraj,18.9,60.8,0.5,Clear
+2025-11-15,Varanasi,21.7,53.0,1.6,Clear
+2025-11-16,Agra,20.7,53.5,0.8,Clear
+2025-11-16,Jaipur,21.4,46.4,1.0,Clear
+2025-11-16,Kanpur,22.4,55.7,1.5,Clear
+2025-11-16,Lucknow,21.5,64.9,0.4,Clear
+2025-11-16,Noida,18.2,36.8,2.3,Clear
+2025-11-16,Patna,18.8,61.8,2.6,Clear
+2025-11-16,Prayagraj,20.2,49.7,1.0,Clear
+2025-11-16,Varanasi,20.6,50.5,0.9,Clear
+2025-11-17,Agra,19.9,62.3,0.1,Clear
+2025-11-17,Lucknow,12.3,61.1,0.0,Cool
+2025-11-17,Noida,16.4,59.3,1.0,Clear
+2025-11-17,Prayagraj,21.5,42.4,0.0,Clear
+2025-11-17,Varanasi,22.7,45.5,1.2,Clear
+2025-11-18,Agra,18.8,65.0,0.0,Clear
+2025-11-18,Gorakhpur,19.8,66.1,2.4,Clear
+2025-11-18,Kanpur,21.9,51.2,0.3,Clear
+2025-11-18,Lucknow,21.2,59.1,0.0,Clear
+2025-11-18,Noida,18.8,51.3,2.8,Clear
+2025-11-18,Prayagraj,23.3,62.3,1.0,Clear
+2025-11-18,Varanasi,16.2,61.2,0.0,Clear
+2025-11-19,Agra,21.8,48.0,0.6,Partly Cloudy
+2025-11-19,Gorakhpur,20.0,65.8,1.3,Clear
+2025-11-19,Jaipur,22.5,41.9,2.8,Clear
+2025-11-19,Kanpur,20.1,57.8,0.0,Clear
+2025-11-19,Lucknow,16.6,59.9,0.5,Clear
+2025-11-19,Noida,19.1,36.4,2.0,Clear
+2025-11-19,Patna,23.3,58.1,0.0,Clear
+2025-11-19,Prayagraj,20.5,58.3,0.0,Clear
+2025-11-19,Varanasi,20.2,56.8,0.0,Clear
+2025-11-20,Agra,17.6,41.3,0.7,Clear
+2025-11-20,Gorakhpur,19.0,60.9,0.2,Clear
+2025-11-20,Jaipur,19.2,37.7,0.0,Clear
+2025-11-20,Kanpur,19.1,52.5,0.2,Clear
+2025-11-20,Lucknow,19.7,60.2,0.5,Clear
+2025-11-20,Noida,17.3,58.4,1.5,Clear
+2025-11-20,Patna,21.2,69.6,1.2,Clear
+2025-11-20,Prayagraj,16.3,60.0,0.0,Clear
+2025-11-20,Varanasi,18.5,53.9,0.4,Clear
+2025-11-21,Agra,24.1,54.2,0.0,Clear
+2025-11-21,Delhi,17.6,61.5,0.4,Clear
+2025-11-21,Gorakhpur,23.8,66.6,0.0,Clear
+2025-11-21,Jaipur,21.6,40.6,0.0,Clear
+2025-11-21,Kanpur,19.0,62.0,0.4,Clear
+2025-11-21,Lucknow,19.7,63.9,1.0,Clear
+2025-11-21,Noida,16.9,56.5,1.8,Clear
+2025-11-21,Prayagraj,19.7,65.4,0.0,Clear
+2025-11-21,Varanasi,17.5,55.1,1.6,Clear
+2025-11-22,Agra,21.6,43.4,0.0,Clear
+2025-11-22,Gorakhpur,16.5,64.9,0.0,Clear
+2025-11-22,Jaipur,20.6,51.5,0.0,Clear
+2025-11-22,Kanpur,24.9,49.0,1.1,Clear
+2025-11-22,Lucknow,20.3,58.2,0.5,Clear
+2025-11-22,Noida,21.9,56.2,0.0,Clear
+2025-11-22,Patna,23.7,69.8,0.9,Clear
+2025-11-22,Prayagraj,19.1,51.4,0.0,Clear
+2025-11-22,Varanasi,22.5,59.2,0.0,Clear
+2025-11-23,Agra,22.2,58.0,3.2,Clear
+2025-11-23,Gorakhpur,16.6,69.3,1.9,Clear
+2025-11-23,Jaipur,22.7,42.7,0.3,Clear
+2025-11-23,Kanpur,21.9,54.3,0.0,Clear
+2025-11-23,Lucknow,20.6,50.0,0.4,Clear
+2025-11-23,Noida,17.6,52.4,0.0,Clear
+2025-11-23,Prayagraj,21.7,58.3,0.4,Clear
+2025-11-23,Varanasi,20.1,46.1,0.0,Clear
+2025-11-24,Agra,19.4,66.9,1.2,Clear
+2025-11-24,Delhi,17.8,55.9,0.5,Clear
+2025-11-24,Gorakhpur,22.5,56.1,0.1,Clear
+2025-11-24,Jaipur,21.2,42.6,0.6,Clear
+2025-11-24,Kanpur,21.3,58.2,0.1,Clear
+2025-11-24,Lucknow,17.4,53.2,0.0,Clear
+2025-11-24,Noida,20.1,61.9,0.4,Clear
+2025-11-24,Prayagraj,19.9,46.5,1.4,Clear
+2025-11-24,Varanasi,18.2,60.5,1.7,Clear
+2025-11-25,Agra,22.6,60.3,0.0,Clear
+2025-11-25,Delhi,18.5,51.7,0.0,Clear
+2025-11-25,Gorakhpur,21.0,66.3,0.0,Clear
+2025-11-25,Jaipur,19.2,61.8,0.8,Clear
+2025-11-25,Kanpur,20.4,51.0,0.0,Clear
+2025-11-25,Lucknow,15.5,53.3,0.0,Clear
+2025-11-25,Noida,18.7,51.5,0.8,Clear
+2025-11-25,Patna,19.2,65.0,0.8,Clear
+2025-11-25,Prayagraj,19.8,64.8,0.9,Clear
+2025-11-25,Varanasi,20.1,55.9,0.0,Clear
+2025-11-26,Agra,17.6,43.4,0.7,Clear
+2025-11-26,Gorakhpur,16.6,53.6,1.0,Clear
+2025-11-26,Jaipur,21.0,43.1,1.2,Clear
+2025-11-26,Kanpur,18.2,53.1,0.0,Clear
+2025-11-26,Lucknow,19.2,56.3,0.0,Clear
+2025-11-26,Noida,19.8,50.9,0.0,Clear
+2025-11-26,Patna,20.0,64.6,0.0,Clear
+2025-11-26,Prayagraj,20.4,71.2,0.5,Clear
+2025-11-26,Varanasi,22.9,44.5,1.1,Clear
+2025-11-27,Agra,16.8,47.9,0.2,Clear
+2025-11-27,Gorakhpur,20.2,65.2,0.0,Clear
+2025-11-27,Jaipur,23.5,35.4,1.8,Partly Cloudy
+2025-11-27,Kanpur,22.2,76.4,0.0,Clear
+2025-11-27,Lucknow,16.1,56.3,1.9,Clear
+2025-11-27,Noida,19.8,45.7,0.0,Clear
+2025-11-27,Varanasi,18.1,56.5,0.1,Clear
+2025-11-28,Agra,19.2,49.8,0.6,Clear
+2025-11-28,Gorakhpur,20.1,59.1,0.0,Clear
+2025-11-28,Kanpur,19.8,60.1,0.0,Clear
+2025-11-28,Lucknow,21.3,68.1,0.0,Clear
+2025-11-28,Noida,17.7,49.7,0.0,Clear
+2025-11-28,Patna,19.4,65.5,1.1,Clear
+2025-11-28,Prayagraj,18.0,62.2,0.2,Clear
+2025-11-28,Varanasi,20.3,55.8,1.2,Clear
+2025-11-29,Agra,16.4,58.5,1.4,Clear
+2025-11-29,Gorakhpur,17.9,60.3,0.4,Clear
+2025-11-29,Jaipur,24.9,44.6,0.4,Clear
+2025-11-29,Kanpur,19.6,66.0,0.8,Clear
+2025-11-29,Lucknow,19.4,63.1,2.6,Clear
+2025-11-29,Noida,15.5,48.5,0.0,Clear
+2025-11-29,Prayagraj,19.6,55.7,0.6,Clear
+2025-11-29,Varanasi,17.5,65.7,0.6,Clear
+2025-11-30,Agra,20.8,42.0,0.0,Clear
+2025-11-30,Gorakhpur,18.7,66.8,0.0,Clear
+2025-11-30,Jaipur,18.3,52.3,3.4,Clear
+2025-11-30,Lucknow,23.0,64.7,0.0,Clear
+2025-11-30,Noida,16.3,52.9,1.8,Clear
+2025-11-30,Prayagraj,21.0,52.7,2.4,Clear
+2025-11-30,Varanasi,20.5,61.9,0.0,Clear
+2025-12-01,Agra,15.8,44.8,1.1,Clear
+2025-12-01,Gorakhpur,14.9,68.4,0.6,Cool
+2025-12-01,Jaipur,23.1,48.8,2.2,Clear
+2025-12-01,Lucknow,15.6,62.8,0.0,Clear
+2025-12-01,Noida,17.4,49.8,1.1,Clear
+2025-12-01,Patna,19.0,62.5,2.1,Clear
+2025-12-01,Prayagraj,20.1,48.2,0.0,Clear
+2025-12-01,Varanasi,19.2,67.5,0.0,Clear
+2025-12-02,Agra,15.0,58.0,0.3,Cool
+2025-12-02,Delhi,17.2,46.9,0.7,Clear
+2025-12-02,Gorakhpur,19.0,59.6,0.0,Clear
+2025-12-02,Jaipur,20.9,49.3,0.0,Clear
+2025-12-02,Kanpur,19.3,57.8,0.8,Clear
+2025-12-02,Lucknow,17.4,60.4,0.6,Clear
+2025-12-02,Noida,20.2,42.0,1.0,Clear
+2025-12-02,Prayagraj,15.8,57.9,1.8,Clear
+2025-12-02,Varanasi,18.7,51.6,2.1,Clear
+2025-12-03,Agra,18.6,50.8,0.0,Clear
+2025-12-03,Gorakhpur,20.1,73.3,1.6,Clear
+2025-12-03,Jaipur,18.7,50.3,0.0,Clear
+2025-12-03,Kanpur,20.7,57.8,0.6,Clear
+2025-12-03,Lucknow,17.0,58.0,0.0,Clear
+2025-12-03,Noida,19.3,34.8,1.2,Clear
+2025-12-03,Prayagraj,21.5,64.1,0.8,Clear
+2025-12-03,Varanasi,21.9,66.0,0.0,Clear
+2025-12-04,Agra,19.6,62.6,0.0,Clear
+2025-12-04,Gorakhpur,16.5,60.3,2.3,Clear
+2025-12-04,Jaipur,21.4,56.7,0.1,Clear
+2025-12-04,Kanpur,19.6,44.8,2.4,Clear
+2025-12-04,Lucknow,19.1,73.3,0.0,Clear
+2025-12-04,Noida,19.3,57.2,0.0,Clear
+2025-12-04,Patna,19.7,63.5,1.2,Clear
+2025-12-04,Prayagraj,22.1,72.5,0.4,Clear
+2025-12-04,Varanasi,17.6,62.9,0.0,Clear
+2025-12-05,Agra,16.3,54.4,0.7,Clear
+2025-12-05,Gorakhpur,18.7,77.5,1.8,Clear
+2025-12-05,Jaipur,20.6,46.2,1.6,Clear
+2025-12-05,Kanpur,18.4,61.3,0.8,Clear
+2025-12-05,Lucknow,17.5,45.7,0.7,Clear
+2025-12-05,Noida,18.5,46.7,0.0,Clear
+2025-12-05,Prayagraj,17.1,65.1,0.7,Clear
+2025-12-05,Varanasi,19.1,61.6,1.1,Clear
+2025-12-06,Gorakhpur,19.2,70.1,0.0,Clear
+2025-12-06,Jaipur,16.8,36.3,2.5,Clear
+2025-12-06,Kanpur,16.5,58.3,0.0,Clear
+2025-12-06,Lucknow,17.4,53.3,0.0,Clear
+2025-12-06,Noida,16.7,54.0,0.0,Clear
+2025-12-06,Patna,17.5,56.1,0.1,Clear
+2025-12-06,Prayagraj,17.0,61.5,0.6,Clear
+2025-12-06,Varanasi,16.4,66.5,0.2,Clear
+2025-12-07,Agra,19.2,43.4,0.0,Clear
+2025-12-07,Gorakhpur,18.8,81.5,0.0,Clear
+2025-12-07,Jaipur,20.0,35.6,0.2,Clear
+2025-12-07,Kanpur,15.9,54.7,0.0,Clear
+2025-12-07,Lucknow,17.4,58.3,2.1,Clear
+2025-12-07,Noida,18.7,43.3,0.3,Clear
+2025-12-07,Patna,22.3,68.0,0.0,Clear
+2025-12-07,Prayagraj,17.9,60.9,1.3,Clear
+2025-12-07,Varanasi,18.1,56.9,0.9,Clear
+2025-12-08,Agra,18.7,45.5,0.7,Clear
+2025-12-08,Gorakhpur,17.4,67.6,0.6,Clear
+2025-12-08,Jaipur,19.9,47.0,1.0,Clear
+2025-12-08,Kanpur,15.8,64.7,0.7,Clear
+2025-12-08,Lucknow,16.3,61.4,0.0,Clear
+2025-12-08,Noida,18.6,48.6,2.4,Partly Cloudy
+2025-12-08,Prayagraj,12.6,56.9,0.6,Cool
+2025-12-08,Varanasi,15.4,57.6,0.1,Clear
+2025-12-09,Agra,16.7,54.2,1.6,Clear
+2025-12-09,Gorakhpur,16.4,75.8,0.9,Clear
+2025-12-09,Jaipur,16.6,50.2,0.0,Clear
+2025-12-09,Kanpur,14.6,53.0,0.0,Cool
+2025-12-09,Lucknow,16.4,64.9,1.1,Clear
+2025-12-09,Noida,19.1,43.2,0.1,Clear
+2025-12-09,Prayagraj,19.7,60.2,0.0,Clear
+2025-12-09,Varanasi,17.3,47.7,1.7,Clear
+2025-12-10,Agra,19.4,54.5,1.5,Clear
+2025-12-10,Gorakhpur,16.3,68.3,0.4,Clear
+2025-12-10,Jaipur,15.5,34.5,1.5,Partly Cloudy
+2025-12-10,Kanpur,18.3,71.8,1.8,Clear
+2025-12-10,Lucknow,19.7,58.5,0.0,Clear
+2025-12-10,Noida,14.5,58.0,0.2,Cool
+2025-12-10,Prayagraj,19.4,71.5,0.8,Clear
+2025-12-11,Agra,16.4,65.5,0.0,Clear
+2025-12-11,Delhi,18.8,59.5,0.3,Clear
+2025-12-11,Gorakhpur,16.9,75.4,1.2,Clear
+2025-12-11,Jaipur,15.2,53.2,0.4,Clear
+2025-12-11,Kanpur,15.9,53.9,0.0,Clear
+2025-12-11,Lucknow,21.4,65.1,0.5,Clear
+2025-12-11,Noida,15.2,58.8,1.0,Clear
+2025-12-11,Patna,12.1,65.7,0.4,Cool
+2025-12-11,Prayagraj,18.7,55.0,0.0,Clear
+2025-12-11,Varanasi,17.2,67.7,0.8,Clear
+2025-12-12,Agra,15.5,52.2,0.0,Clear
+2025-12-12,Gorakhpur,13.0,68.9,0.0,Cool
+2025-12-12,Kanpur,18.2,44.8,1.3,Clear
+2025-12-12,Lucknow,17.5,53.7,0.0,Clear
+2025-12-12,Noida,16.8,45.4,0.5,Clear
+2025-12-12,Patna,16.5,71.9,1.8,Clear
+2025-12-12,Prayagraj,18.0,63.8,0.2,Clear
+2025-12-12,Varanasi,16.1,56.4,0.0,Clear
+2025-12-13,Agra,17.2,42.0,0.8,Clear
+2025-12-13,Gorakhpur,14.7,59.8,0.0,Cool
+2025-12-13,Jaipur,18.2,48.5,0.2,Clear
+2025-12-13,Kanpur,17.7,60.7,0.0,Clear
+2025-12-13,Lucknow,17.5,53.6,0.5,Clear
+2025-12-13,Noida,16.9,44.8,0.4,Clear
+2025-12-13,Patna,18.8,55.7,2.1,Clear
+2025-12-13,Prayagraj,18.8,56.4,0.0,Clear
+2025-12-13,Varanasi,15.7,65.9,0.0,Clear
+2025-12-14,Agra,20.1,52.4,0.0,Clear
+2025-12-14,Delhi,15.0,54.0,0.0,Cool
+2025-12-14,Gorakhpur,13.2,68.7,0.0,Cool
+2025-12-14,Jaipur,18.1,40.8,0.0,Clear
+2025-12-14,Kanpur,11.4,69.7,0.1,Cool
+2025-12-14,Lucknow,16.9,79.1,0.9,Clear
+2025-12-14,Noida,18.8,55.5,1.0,Clear
+2025-12-14,Prayagraj,18.2,52.2,0.6,Clear
+2025-12-15,Agra,24.1,53.4,0.0,Clear
+2025-12-15,Gorakhpur,17.8,59.7,0.6,Clear
+2025-12-15,Jaipur,17.3,43.0,1.1,Clear
+2025-12-15,Lucknow,16.4,51.1,2.3,Clear
+2025-12-15,Noida,17.4,51.6,0.0,Clear
+2025-12-15,Patna,19.2,62.1,1.0,Clear
+2025-12-15,Prayagraj,20.2,55.6,1.2,Clear
+2025-12-15,Varanasi,11.7,54.6,0.8,Cool
+2025-12-16,Agra,16.3,59.4,1.9,Clear
+2025-12-16,Gorakhpur,19.2,73.3,0.6,Clear
+2025-12-16,Jaipur,19.5,40.6,1.6,Clear
+2025-12-16,Kanpur,15.5,39.5,2.3,Clear
+2025-12-16,Lucknow,16.3,70.2,0.0,Clear
+2025-12-16,Noida,17.3,55.3,0.0,Clear
+2025-12-16,Prayagraj,17.6,74.9,0.4,Clear
+2025-12-16,Varanasi,18.9,64.7,0.8,Clear
+2025-12-17,Gorakhpur,17.6,68.5,0.0,Clear
+2025-12-17,Jaipur,18.3,50.0,0.0,Clear
+2025-12-17,Kanpur,13.6,62.6,0.0,Cool
+2025-12-17,Lucknow,14.8,51.1,0.9,Cool
+2025-12-17,Noida,16.4,54.3,2.6,Clear
+2025-12-17,Prayagraj,17.1,62.2,1.8,Clear
+2025-12-17,Varanasi,19.4,54.6,0.8,Clear
+2025-12-18,Agra,16.2,56.6,0.0,Clear
+2025-12-18,Gorakhpur,17.4,62.7,0.0,Clear
+2025-12-18,Jaipur,17.8,51.6,1.3,Clear
+2025-12-18,Kanpur,19.0,58.6,1.5,Clear
+2025-12-18,Lucknow,14.2,57.9,0.0,Cool
+2025-12-18,Noida,13.1,53.9,0.0,Cool
+2025-12-18,Patna,14.5,63.7,0.1,Cool
+2025-12-18,Prayagraj,18.5,53.4,0.0,Clear
+2025-12-18,Varanasi,16.1,61.0,0.2,Clear
+2025-12-19,Agra,17.4,53.2,1.9,Clear
+2025-12-19,Delhi,18.0,58.1,1.0,Clear
+2025-12-19,Gorakhpur,15.4,68.1,1.4,Clear
+2025-12-19,Jaipur,16.6,36.4,0.4,Clear
+2025-12-19,Lucknow,14.1,59.1,0.0,Cool
+2025-12-19,Noida,16.3,61.6,0.0,Clear
+2025-12-19,Prayagraj,18.3,50.1,0.0,Clear
+2025-12-19,Varanasi,16.6,62.0,0.0,Clear
+2025-12-20,Agra,14.7,59.4,0.0,Cool
+2025-12-20,Gorakhpur,19.0,59.2,1.6,Clear
+2025-12-20,Jaipur,18.9,46.5,0.0,Clear
+2025-12-20,Kanpur,17.7,53.4,0.0,Clear
+2025-12-20,Lucknow,14.4,57.6,0.0,Cool
+2025-12-20,Noida,17.1,43.6,0.0,Clear
+2025-12-20,Prayagraj,15.9,61.1,0.9,Clear
+2025-12-20,Varanasi,19.2,60.9,0.0,Clear
+2025-12-21,Gorakhpur,14.6,65.1,0.1,Cool
+2025-12-21,Jaipur,14.4,43.6,0.0,Cool
+2025-12-21,Kanpur,15.8,57.1,0.0,Clear
+2025-12-21,Lucknow,15.1,56.9,0.0,Clear
+2025-12-21,Noida,15.8,49.7,1.4,Clear
+2025-12-21,Patna,15.2,68.6,0.5,Clear
+2025-12-21,Prayagraj,17.2,52.0,0.3,Clear
+2025-12-21,Varanasi,18.7,52.2,0.0,Clear
+2025-12-22,Agra,14.9,47.5,1.5,Cool
+2025-12-22,Delhi,14.6,51.6,0.4,Cool
+2025-12-22,Gorakhpur,14.8,59.0,1.4,Cool
+2025-12-22,Jaipur,18.3,49.5,0.0,Clear
+2025-12-22,Kanpur,18.5,55.4,1.2,Clear
+2025-12-22,Lucknow,14.6,69.7,0.6,Cool
+2025-12-22,Noida,14.5,49.3,0.5,Cool
+2025-12-22,Prayagraj,17.5,54.7,0.2,Clear
+2025-12-22,Varanasi,16.0,54.3,1.5,Clear
+2025-12-23,Agra,17.5,53.3,0.0,Clear
+2025-12-23,Gorakhpur,16.3,64.9,0.6,Clear
+2025-12-23,Jaipur,17.9,58.1,0.0,Clear
+2025-12-23,Kanpur,20.1,53.7,0.3,Clear
+2025-12-23,Lucknow,16.4,50.8,0.0,Clear
+2025-12-23,Noida,10.8,57.5,0.0,Cool
+2025-12-23,Prayagraj,15.4,52.1,0.0,Clear
+2025-12-23,Varanasi,21.4,55.2,2.0,Clear
+2025-12-24,Agra,17.1,47.8,0.4,Clear
+2025-12-24,Gorakhpur,17.1,64.2,0.4,Clear
+2025-12-24,Jaipur,14.5,55.2,0.3,Cool
+2025-12-24,Kanpur,14.6,51.2,2.3,Cool
+2025-12-24,Lucknow,16.9,54.6,0.0,Clear
+2025-12-24,Noida,15.8,48.5,0.0,Clear
+2025-12-24,Patna,16.3,71.0,1.1,Clear
+2025-12-24,Prayagraj,15.3,68.9,2.2,Clear
+2025-12-24,Varanasi,14.0,62.5,0.0,Cool
+2025-12-25,Gorakhpur,15.1,76.6,0.0,Clear
+2025-12-25,Kanpur,17.9,50.6,0.0,Clear
+2025-12-25,Lucknow,14.8,60.8,0.9,Cool
+2025-12-25,Noida,18.2,47.3,1.3,Clear
+2025-12-25,Prayagraj,13.0,64.4,0.0,Cool
+2025-12-25,Varanasi,13.7,55.8,1.2,Cool
+2025-12-26,Delhi,15.2,49.1,0.0,Clear
+2025-12-26,Gorakhpur,18.5,71.9,0.0,Clear
+2025-12-26,Jaipur,15.2,59.9,0.5,Clear
+2025-12-26,Kanpur,17.7,53.9,0.0,Clear
+2025-12-26,Lucknow,14.8,57.1,0.5,Cool
+2025-12-26,Noida,12.9,46.7,0.6,Cool
+2025-12-26,Patna,17.5,63.4,1.5,Clear
+2025-12-26,Prayagraj,16.9,60.0,0.0,Clear
+2025-12-26,Varanasi,19.5,56.3,1.0,Clear
+2025-12-27,Delhi,15.2,50.5,0.0,Clear
+2025-12-27,Gorakhpur,14.9,72.3,1.6,Cool
+2025-12-27,Jaipur,18.4,41.8,1.2,Clear
+2025-12-27,Kanpur,12.3,45.4,0.0,Cool
+2025-12-27,Lucknow,10.8,65.8,1.4,Cool
+2025-12-27,Noida,16.0,51.8,0.6,Clear
+2025-12-27,Prayagraj,17.4,65.9,0.0,Clear
+2025-12-27,Varanasi,17.7,59.4,1.5,Clear
+2025-12-28,Agra,19.5,55.4,0.7,Clear
+2025-12-28,Gorakhpur,16.2,65.6,0.0,Clear
+2025-12-28,Jaipur,17.5,38.2,0.0,Clear
+2025-12-28,Kanpur,18.0,65.9,0.0,Clear
+2025-12-28,Lucknow,18.8,64.1,2.5,Clear
+2025-12-28,Noida,15.1,39.6,0.0,Clear
+2025-12-28,Prayagraj,17.6,52.4,0.7,Clear
+2025-12-28,Varanasi,17.0,48.4,0.0,Clear
+2025-12-29,Agra,15.8,59.4,0.0,Clear
+2025-12-29,Delhi,18.5,43.2,2.9,Clear
+2025-12-29,Gorakhpur,16.9,60.4,0.2,Clear
+2025-12-29,Jaipur,17.7,37.6,0.1,Clear
+2025-12-29,Kanpur,16.0,71.3,0.6,Clear
+2025-12-29,Lucknow,13.1,60.5,0.0,Cool
+2025-12-29,Noida,16.4,51.5,0.0,Clear
+2025-12-29,Patna,12.3,74.9,0.0,Cool
+2025-12-29,Prayagraj,18.2,37.6,1.2,Clear
+2025-12-29,Varanasi,13.0,66.4,0.0,Cool
+2025-12-30,Agra,18.9,52.9,0.5,Clear
+2025-12-30,Gorakhpur,15.8,65.1,0.0,Clear
+2025-12-30,Jaipur,21.4,44.6,0.0,Clear
+2025-12-30,Kanpur,13.0,51.3,0.2,Cool
+2025-12-30,Lucknow,19.3,54.7,0.4,Clear
+2025-12-30,Noida,16.3,45.8,0.0,Clear
+2025-12-30,Prayagraj,17.7,53.9,0.2,Clear
+2025-12-30,Varanasi,15.7,74.7,0.2,Clear
+2025-12-31,Agra,17.9,41.4,1.0,Clear
+2025-12-31,Gorakhpur,15.4,64.9,1.3,Clear
+2025-12-31,Jaipur,18.1,48.1,0.8,Clear
+2025-12-31,Kanpur,17.2,58.5,0.3,Clear
+2025-12-31,Lucknow,17.3,54.6,0.6,Clear
+2025-12-31,Noida,16.1,55.0,0.0,Clear
+2025-12-31,Prayagraj,18.2,58.3,0.7,Clear
+2025-12-31,Varanasi,16.9,69.9,1.6,Clear
+2026-01-01,Agra,14.4,58.4,0.6,Cool
+2026-01-01,Delhi,17.0,56.0,2.4,Clear
+2026-01-01,Gorakhpur,14.7,61.9,0.3,Cool
+2026-01-01,Jaipur,16.9,31.5,1.0,Clear
+2026-01-01,Kanpur,18.9,57.2,0.3,Clear
+2026-01-01,Lucknow,12.4,53.4,0.0,Cool
+2026-01-01,Noida,18.9,41.5,0.0,Clear
+2026-01-01,Prayagraj,16.3,53.6,3.1,Clear
+2026-01-01,Varanasi,14.3,66.9,0.0,Cool
+2026-01-02,Agra,17.8,48.4,0.0,Clear
+2026-01-02,Gorakhpur,18.7,60.3,0.0,Clear
+2026-01-02,Jaipur,20.4,51.3,0.4,Clear
+2026-01-02,Kanpur,16.3,50.1,0.0,Clear
+2026-01-02,Lucknow,14.9,71.7,0.7,Cool
+2026-01-02,Noida,16.5,47.8,1.5,Clear
+2026-01-02,Prayagraj,14.9,65.9,0.5,Cool
+2026-01-03,Agra,17.2,55.3,0.7,Clear
+2026-01-03,Delhi,15.1,58.2,0.9,Clear
+2026-01-03,Gorakhpur,17.4,69.3,0.6,Clear
+2026-01-03,Jaipur,16.3,25.6,1.2,Clear
+2026-01-03,Kanpur,16.3,54.2,0.0,Clear
+2026-01-03,Lucknow,14.7,64.9,1.4,Cool
+2026-01-03,Noida,15.7,57.7,0.0,Clear
+2026-01-03,Patna,14.1,56.9,0.0,Cool
+2026-01-03,Prayagraj,18.1,65.5,0.0,Clear
+2026-01-04,Agra,17.9,67.7,1.9,Clear
+2026-01-04,Delhi,18.4,53.7,1.2,Clear
+2026-01-04,Gorakhpur,17.3,69.1,1.7,Clear
+2026-01-04,Jaipur,17.6,43.4,0.9,Clear
+2026-01-04,Kanpur,13.3,47.2,0.0,Cool
+2026-01-04,Lucknow,17.9,51.8,0.0,Clear
+2026-01-04,Noida,16.3,65.4,2.6,Clear
+2026-01-04,Prayagraj,16.7,60.4,0.0,Clear
+2026-01-05,Agra,13.0,62.5,0.5,Cool
+2026-01-05,Gorakhpur,18.5,77.2,0.3,Clear
+2026-01-05,Kanpur,16.0,47.6,0.0,Clear
+2026-01-05,Lucknow,15.3,60.8,0.0,Clear
+2026-01-05,Noida,14.6,58.9,0.0,Cool
+2026-01-05,Patna,15.9,59.5,0.1,Clear
+2026-01-05,Prayagraj,18.5,50.8,0.0,Clear
+2026-01-05,Varanasi,17.2,63.2,0.4,Clear
+2026-01-06,Delhi,16.4,57.3,0.0,Clear
+2026-01-06,Gorakhpur,14.5,66.1,0.0,Cool
+2026-01-06,Jaipur,13.2,47.0,1.1,Cool
+2026-01-06,Kanpur,18.1,49.9,0.0,Clear
+2026-01-06,Lucknow,16.2,63.1,0.0,Clear
+2026-01-06,Noida,15.2,60.5,0.2,Clear
+2026-01-06,Prayagraj,17.4,45.2,0.3,Clear
+2026-01-06,Varanasi,14.2,71.8,1.7,Cool
+2026-01-07,Agra,16.3,59.7,0.0,Clear
+2026-01-07,Gorakhpur,16.3,67.3,0.6,Clear
+2026-01-07,Jaipur,21.5,29.2,0.2,Clear
+2026-01-07,Kanpur,16.2,54.3,0.0,Clear
+2026-01-07,Lucknow,11.8,69.1,1.3,Cool
+2026-01-07,Noida,17.2,42.4,1.8,Clear
+2026-01-07,Patna,15.4,67.1,0.0,Clear
+2026-01-07,Prayagraj,14.2,72.8,0.6,Cool
+2026-01-07,Varanasi,15.5,67.1,0.0,Clear
+2026-01-08,Delhi,18.2,53.3,0.0,Clear
+2026-01-08,Gorakhpur,18.9,66.5,0.3,Clear
+2026-01-08,Jaipur,15.5,40.2,0.9,Clear
+2026-01-08,Kanpur,14.2,57.3,0.3,Cool
+2026-01-08,Lucknow,14.5,55.5,0.0,Cool
+2026-01-08,Noida,15.3,65.9,0.1,Clear
+2026-01-08,Patna,19.7,66.8,0.9,Clear
+2026-01-08,Prayagraj,16.4,64.2,1.8,Clear
+2026-01-08,Varanasi,19.3,79.9,0.0,Clear
+2026-01-09,Agra,18.1,71.4,0.0,Clear
+2026-01-09,Delhi,16.9,60.5,0.0,Clear
+2026-01-09,Gorakhpur,17.1,72.3,0.0,Partly Cloudy
+2026-01-09,Jaipur,22.0,41.6,0.0,Clear
+2026-01-09,Kanpur,15.9,55.5,0.1,Partly Cloudy
+2026-01-09,Lucknow,12.0,51.1,1.0,Cool
+2026-01-09,Noida,16.9,54.2,0.0,Clear
+2026-01-09,Prayagraj,14.4,55.1,2.6,Cool
+2026-01-09,Varanasi,14.4,45.4,1.9,Cool
+2026-01-10,Agra,13.7,54.3,0.7,Cool
+2026-01-10,Gorakhpur,14.4,69.7,1.2,Cool
+2026-01-10,Jaipur,15.3,46.7,0.0,Clear
+2026-01-10,Kanpur,15.3,60.7,0.1,Clear
+2026-01-10,Lucknow,18.3,61.4,2.2,Clear
+2026-01-10,Patna,18.7,52.5,1.0,Clear
+2026-01-10,Prayagraj,15.1,61.7,0.0,Clear
+2026-01-10,Varanasi,18.1,54.3,0.0,Clear
+2026-01-11,Delhi,17.1,59.1,0.0,Clear
+2026-01-11,Gorakhpur,19.0,63.2,0.8,Clear
+2026-01-11,Jaipur,16.6,37.9,0.5,Clear
+2026-01-11,Kanpur,17.6,58.8,0.1,Clear
+2026-01-11,Lucknow,13.5,52.1,0.1,Cool
+2026-01-11,Noida,16.2,37.8,0.0,Clear
+2026-01-11,Patna,14.0,71.1,0.0,Cool
+2026-01-11,Prayagraj,16.6,69.3,0.3,Clear
+2026-01-11,Varanasi,18.2,64.5,0.2,Clear
+2026-01-12,Gorakhpur,19.1,64.1,0.0,Clear
+2026-01-12,Jaipur,17.0,41.4,1.5,Clear
+2026-01-12,Kanpur,15.3,70.8,1.4,Clear
+2026-01-12,Lucknow,19.0,56.4,0.3,Clear
+2026-01-12,Noida,14.1,47.1,0.0,Cool
+2026-01-12,Prayagraj,17.1,57.4,0.0,Clear
+2026-01-12,Varanasi,16.3,56.0,0.0,Clear
+2026-01-13,Agra,14.0,68.3,1.4,Cool
+2026-01-13,Gorakhpur,14.9,77.3,1.8,Cool
+2026-01-13,Jaipur,16.3,35.5,0.6,Clear
+2026-01-13,Kanpur,14.5,55.8,0.7,Cool
+2026-01-13,Lucknow,16.0,63.6,1.3,Clear
+2026-01-13,Noida,12.7,56.9,2.3,Cool
+2026-01-13,Patna,15.3,68.8,0.0,Clear
+2026-01-13,Prayagraj,15.2,54.9,0.1,Clear
+2026-01-13,Varanasi,15.5,65.2,0.1,Clear
+2026-01-14,Gorakhpur,18.9,67.2,1.8,Clear
+2026-01-14,Jaipur,19.5,54.9,1.2,Clear
+2026-01-14,Kanpur,13.4,51.0,1.8,Cool
+2026-01-14,Lucknow,13.6,69.0,0.0,Cool
+2026-01-14,Noida,13.4,48.8,0.9,Cool
+2026-01-14,Patna,13.2,72.1,2.5,Cool
+2026-01-14,Prayagraj,16.6,67.7,0.0,Clear
+2026-01-15,Agra,16.1,62.3,1.0,Clear
+2026-01-15,Delhi,20.8,44.3,1.2,Clear
+2026-01-15,Gorakhpur,17.8,78.5,0.0,Clear
+2026-01-15,Jaipur,16.9,40.5,0.7,Clear
+2026-01-15,Kanpur,16.9,52.0,0.3,Clear
+2026-01-15,Lucknow,16.0,51.3,0.0,Clear
+2026-01-15,Noida,13.2,39.3,1.0,Cool
+2026-01-15,Patna,16.6,67.0,0.0,Clear
+2026-01-15,Prayagraj,16.1,55.1,1.5,Clear
+2026-01-16,Agra,16.9,61.9,1.1,Clear
+2026-01-16,Gorakhpur,18.7,52.8,2.0,Clear
+2026-01-16,Jaipur,18.7,52.6,0.5,Clear
+2026-01-16,Kanpur,12.5,57.1,0.0,Cool
+2026-01-16,Lucknow,16.5,79.6,1.6,Clear
+2026-01-16,Noida,14.4,51.9,0.5,Cool
+2026-01-16,Patna,16.9,57.8,0.0,Clear
+2026-01-16,Prayagraj,16.7,67.3,0.4,Clear
+2026-01-16,Varanasi,15.9,52.4,0.9,Clear
+2026-01-17,Agra,12.3,58.1,0.4,Cool
+2026-01-17,Gorakhpur,13.7,59.1,1.4,Cool
+2026-01-17,Jaipur,15.7,36.0,0.3,Clear
+2026-01-17,Kanpur,14.1,60.0,0.0,Cool
+2026-01-17,Lucknow,13.2,61.5,0.7,Cool
+2026-01-17,Noida,14.2,60.2,0.4,Cool
+2026-01-17,Patna,18.1,62.3,0.8,Clear
+2026-01-17,Prayagraj,18.4,75.9,0.0,Clear
+2026-01-18,Agra,14.0,48.0,0.1,Cool
+2026-01-18,Gorakhpur,16.7,59.6,1.7,Clear
+2026-01-18,Jaipur,20.1,48.6,0.4,Clear
+2026-01-18,Kanpur,19.6,54.7,1.2,Clear
+2026-01-18,Lucknow,15.3,47.0,0.0,Clear
+2026-01-18,Noida,13.5,51.4,1.8,Cool
+2026-01-18,Patna,16.0,70.7,1.2,Clear
+2026-01-18,Prayagraj,19.2,59.6,0.5,Clear
+2026-01-18,Varanasi,16.6,65.6,0.1,Clear
+2026-01-19,Delhi,16.4,63.3,0.5,Clear
+2026-01-19,Gorakhpur,13.5,74.8,0.7,Cool
+2026-01-19,Kanpur,18.8,50.6,0.0,Clear
+2026-01-19,Lucknow,18.9,62.1,0.4,Clear
+2026-01-19,Noida,15.8,50.3,1.7,Clear
+2026-01-19,Patna,18.7,72.8,0.0,Clear
+2026-01-19,Prayagraj,16.2,60.2,0.2,Clear
+2026-01-20,Delhi,17.1,48.2,0.0,Clear
+2026-01-20,Gorakhpur,12.6,72.4,1.9,Cool
+2026-01-20,Jaipur,16.6,30.6,0.0,Clear
+2026-01-20,Kanpur,15.1,47.6,2.1,Clear
+2026-01-20,Lucknow,12.2,60.0,0.0,Cool
+2026-01-20,Noida,15.2,45.6,0.4,Clear
+2026-01-20,Prayagraj,15.1,54.1,1.1,Clear
+2026-01-20,Varanasi,16.2,63.9,0.4,Clear
+2026-01-21,Agra,14.2,48.6,3.3,Cool
+2026-01-21,Delhi,18.0,47.9,1.0,Clear
+2026-01-21,Gorakhpur,16.8,65.6,0.0,Clear
+2026-01-21,Jaipur,19.9,43.9,0.9,Clear
+2026-01-21,Kanpur,14.8,53.6,0.0,Cool
+2026-01-21,Lucknow,15.2,59.6,0.0,Clear
+2026-01-21,Noida,14.6,54.8,0.0,Cool
+2026-01-21,Prayagraj,11.0,65.8,0.0,Cool
+2026-01-22,Agra,17.6,54.0,0.6,Clear
+2026-01-22,Gorakhpur,18.3,69.7,1.0,Clear
+2026-01-22,Jaipur,15.0,51.6,0.5,Cool
+2026-01-22,Lucknow,13.2,58.8,0.0,Cool
+2026-01-22,Noida,15.6,56.9,0.1,Clear
+2026-01-22,Prayagraj,19.5,72.1,1.1,Clear
+2026-01-22,Varanasi,19.8,68.2,1.2,Clear
+2026-01-23,Agra,14.0,60.7,0.0,Cool
+2026-01-23,Jaipur,17.5,54.0,0.0,Clear
+2026-01-23,Kanpur,18.3,54.2,0.8,Clear
+2026-01-23,Lucknow,13.9,57.7,0.0,Cool
+2026-01-23,Noida,15.5,48.3,2.4,Clear
+2026-01-23,Prayagraj,15.5,55.7,0.4,Clear
+2026-01-23,Varanasi,19.6,63.1,0.0,Clear
+2026-01-24,Agra,18.7,52.5,0.1,Clear
+2026-01-24,Gorakhpur,18.1,64.7,1.0,Clear
+2026-01-24,Jaipur,14.6,34.7,0.0,Cool
+2026-01-24,Kanpur,15.0,60.4,0.6,Cool
+2026-01-24,Lucknow,19.1,61.6,0.0,Clear
+2026-01-24,Noida,19.8,37.8,0.3,Clear
+2026-01-24,Prayagraj,15.4,62.3,0.0,Clear
+2026-01-24,Varanasi,19.1,59.8,0.5,Clear
+2026-01-25,Agra,20.8,56.9,0.0,Clear
+2026-01-25,Gorakhpur,16.0,67.4,1.4,Clear
+2026-01-25,Jaipur,17.3,52.8,0.1,Clear
+2026-01-25,Kanpur,14.6,56.5,0.9,Cool
+2026-01-25,Lucknow,14.9,69.1,0.0,Cool
+2026-01-25,Noida,17.8,52.5,1.4,Clear
+2026-01-25,Prayagraj,17.9,46.3,0.0,Clear
+2026-01-25,Varanasi,17.3,55.3,0.0,Clear
+2026-01-26,Agra,19.7,44.3,0.1,Clear
+2026-01-26,Gorakhpur,18.4,49.3,1.0,Clear
+2026-01-26,Kanpur,18.7,63.0,1.6,Clear
+2026-01-26,Lucknow,12.5,59.6,0.8,Cool
+2026-01-26,Noida,16.7,41.0,0.8,Clear
+2026-01-26,Prayagraj,14.7,50.0,0.0,Cool
+2026-01-26,Varanasi,15.9,51.7,0.5,Clear
+2026-01-27,Agra,16.3,53.8,0.0,Clear
+2026-01-27,Gorakhpur,15.8,77.9,0.7,Clear
+2026-01-27,Jaipur,19.2,45.3,0.7,Clear
+2026-01-27,Kanpur,18.7,54.5,0.1,Clear
+2026-01-27,Lucknow,15.6,66.2,0.1,Clear
+2026-01-27,Noida,15.3,44.3,2.1,Clear
+2026-01-27,Patna,16.1,68.8,0.0,Clear
+2026-01-27,Prayagraj,14.6,56.8,0.0,Cool
+2026-01-27,Varanasi,16.1,62.2,0.0,Clear
+2026-01-28,Agra,14.4,44.8,1.3,Cool
+2026-01-28,Delhi,14.3,47.8,1.7,Cool
+2026-01-28,Gorakhpur,16.1,58.5,0.1,Clear
+2026-01-28,Kanpur,19.3,48.4,0.0,Clear
+2026-01-28,Lucknow,16.3,52.0,0.6,Clear
+2026-01-28,Noida,15.6,51.9,1.0,Clear
+2026-01-28,Patna,19.6,62.1,0.0,Clear
+2026-01-28,Prayagraj,17.0,60.4,1.0,Clear
+2026-01-28,Varanasi,16.1,63.7,0.0,Clear
+2026-01-29,Agra,17.0,48.1,2.4,Clear
+2026-01-29,Gorakhpur,18.2,67.3,0.0,Clear
+2026-01-29,Kanpur,15.2,64.1,1.1,Clear
+2026-01-29,Lucknow,12.6,59.9,1.3,Cool
+2026-01-29,Noida,18.5,52.2,0.0,Clear
+2026-01-29,Prayagraj,16.0,62.6,0.0,Clear
+2026-01-29,Varanasi,19.1,60.2,1.6,Clear
+2026-01-30,Agra,13.7,43.6,0.3,Cool
+2026-01-30,Gorakhpur,16.1,53.6,0.0,Clear
+2026-01-30,Jaipur,18.8,54.4,2.1,Clear
+2026-01-30,Kanpur,17.0,60.0,0.0,Clear
+2026-01-30,Lucknow,13.2,61.3,1.8,Cool
+2026-01-30,Noida,12.5,52.0,0.0,Cool
+2026-01-30,Patna,15.0,57.7,0.0,Cool
+2026-01-30,Prayagraj,16.5,51.6,2.8,Clear
+2026-01-30,Varanasi,18.9,64.6,0.0,Clear
+2026-01-31,Agra,18.3,48.4,1.1,Clear
+2026-01-31,Gorakhpur,19.4,68.1,0.8,Clear
+2026-01-31,Jaipur,16.3,45.5,0.0,Clear
+2026-01-31,Kanpur,12.5,51.8,0.4,Cool
+2026-01-31,Lucknow,14.1,50.9,0.0,Cool
+2026-01-31,Noida,14.5,50.2,0.0,Cool
+2026-01-31,Patna,16.9,78.4,0.0,Clear
+2026-01-31,Prayagraj,18.0,58.7,0.0,Clear
+2026-01-31,Varanasi,18.4,58.4,0.0,Clear
+2026-02-01,Agra,13.8,62.3,0.1,Cool
+2026-02-01,Gorakhpur,17.2,54.9,2.7,Clear
+2026-02-01,Kanpur,14.2,69.6,0.0,Cool
+2026-02-01,Lucknow,13.0,65.0,0.0,Cool
+2026-02-01,Noida,11.8,48.5,1.5,Cool
+2026-02-01,Prayagraj,16.2,52.8,1.4,Clear
+2026-02-01,Varanasi,17.1,64.0,2.6,Clear
+2026-02-02,Agra,15.8,56.7,0.0,Clear
+2026-02-02,Delhi,19.1,52.0,0.3,Clear
+2026-02-02,Gorakhpur,13.2,69.4,0.6,Cool
+2026-02-02,Jaipur,18.7,46.6,0.0,Clear
+2026-02-02,Kanpur,12.9,45.9,0.0,Cool
+2026-02-02,Lucknow,13.8,50.9,2.0,Cool
+2026-02-02,Noida,11.9,44.8,1.1,Cool
+2026-02-02,Patna,19.3,72.0,0.0,Clear
+2026-02-02,Prayagraj,15.9,63.8,0.8,Clear
+2026-02-03,Agra,19.2,51.7,1.1,Clear
+2026-02-03,Delhi,16.4,54.0,0.0,Clear
+2026-02-03,Gorakhpur,13.0,68.6,0.0,Cool
+2026-02-03,Jaipur,17.7,48.8,1.1,Clear
+2026-02-03,Kanpur,16.0,61.1,1.1,Clear
+2026-02-03,Lucknow,19.9,63.5,0.0,Clear
+2026-02-03,Patna,14.3,70.4,0.0,Cool
+2026-02-03,Prayagraj,17.5,59.8,0.0,Clear
+2026-02-03,Varanasi,14.1,61.2,0.5,Cool
+2026-02-04,Agra,16.1,53.6,0.0,Clear
+2026-02-04,Gorakhpur,12.0,54.4,1.0,Cool
+2026-02-04,Kanpur,14.1,61.7,1.4,Cool
+2026-02-04,Lucknow,13.9,62.0,0.0,Cool
+2026-02-04,Noida,17.6,39.6,0.9,Clear
+2026-02-04,Prayagraj,18.2,49.4,0.6,Clear
+2026-02-05,Delhi,17.8,55.4,0.7,Clear
+2026-02-05,Gorakhpur,15.5,65.7,0.0,Clear
+2026-02-05,Kanpur,18.4,48.2,0.3,Clear
+2026-02-05,Lucknow,17.1,65.0,3.7,Clear
+2026-02-05,Noida,13.4,63.3,2.0,Cool
+2026-02-05,Prayagraj,18.0,58.9,0.6,Clear
+2026-02-05,Varanasi,18.1,67.3,1.4,Clear
+2026-02-06,Agra,19.5,62.0,0.6,Clear
+2026-02-06,Gorakhpur,16.5,64.7,0.3,Clear
+2026-02-06,Jaipur,18.2,35.7,0.7,Clear
+2026-02-06,Lucknow,17.0,58.7,0.0,Clear
+2026-02-06,Noida,13.1,46.5,0.2,Cool
+2026-02-06,Prayagraj,17.5,58.9,0.7,Clear
+2026-02-06,Varanasi,21.9,61.3,0.0,Clear
+2026-02-07,Agra,17.7,64.8,1.4,Clear
+2026-02-07,Gorakhpur,15.9,63.7,0.0,Clear
+2026-02-07,Jaipur,18.9,24.1,2.5,Clear
+2026-02-07,Kanpur,19.1,62.2,0.0,Clear
+2026-02-07,Lucknow,13.8,61.4,0.5,Cool
+2026-02-07,Noida,18.5,48.2,1.1,Clear
+2026-02-07,Patna,17.4,68.6,0.4,Clear
+2026-02-07,Prayagraj,15.9,65.5,0.6,Clear
+2026-02-07,Varanasi,21.8,64.9,1.1,Clear
+2026-02-08,Agra,16.6,66.0,1.8,Clear
+2026-02-08,Gorakhpur,20.2,76.2,0.3,Clear
+2026-02-08,Jaipur,20.2,46.6,0.0,Clear
+2026-02-08,Lucknow,18.0,55.8,1.1,Clear
+2026-02-08,Noida,15.6,51.6,1.0,Clear
+2026-02-08,Prayagraj,12.5,50.2,0.0,Cool
+2026-02-08,Varanasi,14.0,64.0,1.3,Cool
+2026-02-09,Agra,19.4,49.1,1.1,Clear
+2026-02-09,Gorakhpur,16.8,73.9,0.0,Clear
+2026-02-09,Jaipur,19.2,34.8,0.8,Clear
+2026-02-09,Kanpur,15.5,59.1,0.0,Clear
+2026-02-09,Noida,17.6,31.1,0.0,Clear
+2026-02-09,Prayagraj,18.2,49.7,0.7,Clear
+2026-02-09,Varanasi,15.6,39.3,0.0,Clear
+2026-02-10,Agra,19.1,64.8,0.0,Clear
+2026-02-10,Delhi,17.9,50.6,1.7,Clear
+2026-02-10,Gorakhpur,18.0,70.4,0.0,Clear
+2026-02-10,Kanpur,16.3,61.2,0.0,Clear
+2026-02-10,Lucknow,20.0,58.7,1.7,Clear
+2026-02-10,Noida,16.6,50.0,0.0,Clear
+2026-02-10,Prayagraj,17.3,55.6,0.0,Clear
+2026-02-10,Varanasi,18.8,54.4,0.0,Clear
+2026-02-11,Agra,17.3,55.4,0.7,Clear
+2026-02-11,Delhi,17.9,47.2,0.3,Clear
+2026-02-11,Gorakhpur,15.2,63.0,0.0,Clear
+2026-02-11,Jaipur,15.8,54.2,1.9,Clear
+2026-02-11,Kanpur,15.7,61.2,0.4,Clear
+2026-02-11,Lucknow,12.7,63.3,0.3,Cool
+2026-02-11,Noida,15.9,64.7,0.0,Clear
+2026-02-11,Prayagraj,18.0,56.7,0.0,Clear
+2026-02-11,Varanasi,15.9,64.3,0.0,Clear
+2026-02-12,Agra,18.4,51.9,0.0,Clear
+2026-02-12,Gorakhpur,19.1,64.9,0.2,Clear
+2026-02-12,Jaipur,15.1,45.7,0.0,Clear
+2026-02-12,Kanpur,17.7,54.2,0.0,Clear
+2026-02-12,Lucknow,15.7,58.5,0.6,Clear
+2026-02-12,Noida,15.2,41.7,1.3,Clear
+2026-02-12,Patna,17.3,76.6,0.8,Clear
+2026-02-12,Prayagraj,17.9,53.5,1.4,Clear
+2026-02-13,Agra,19.1,56.2,0.8,Clear
+2026-02-13,Gorakhpur,13.4,71.3,0.0,Cool
+2026-02-13,Jaipur,20.5,40.8,1.2,Clear
+2026-02-13,Kanpur,16.9,64.0,0.7,Clear
+2026-02-13,Lucknow,15.7,48.8,0.9,Clear
+2026-02-13,Noida,18.5,45.5,0.0,Clear
+2026-02-13,Prayagraj,14.8,68.1,0.0,Cool
+2026-02-14,Agra,13.3,56.0,0.5,Cool
+2026-02-14,Delhi,20.6,39.1,0.9,Clear
+2026-02-14,Gorakhpur,16.9,73.2,1.7,Clear
+2026-02-14,Kanpur,20.0,61.5,0.3,Clear
+2026-02-14,Lucknow,20.1,59.9,1.6,Clear
+2026-02-14,Noida,15.1,55.5,1.3,Clear
+2026-02-14,Prayagraj,16.2,42.3,0.0,Clear
+2026-02-14,Varanasi,18.5,64.8,0.8,Clear
+2026-02-15,Agra,17.7,46.6,0.0,Clear
+2026-02-15,Gorakhpur,20.4,78.2,1.2,Clear
+2026-02-15,Jaipur,18.4,47.5,1.3,Clear
+2026-02-15,Kanpur,18.6,60.2,0.0,Clear
+2026-02-15,Lucknow,14.0,45.1,0.0,Cool
+2026-02-15,Noida,18.4,58.1,0.0,Clear
+2026-02-15,Prayagraj,14.4,66.1,1.0,Cool
+2026-02-16,Agra,17.4,41.3,1.0,Clear
+2026-02-16,Gorakhpur,14.3,64.1,1.2,Cool
+2026-02-16,Jaipur,21.4,37.7,1.8,Clear
+2026-02-16,Kanpur,15.4,43.9,0.7,Clear
+2026-02-16,Lucknow,16.3,47.8,0.0,Clear
+2026-02-16,Noida,18.1,42.9,0.0,Clear
+2026-02-16,Prayagraj,15.9,66.0,0.1,Clear
+2026-02-17,Agra,17.2,43.6,0.1,Clear
+2026-02-17,Gorakhpur,13.6,65.3,0.5,Cool
+2026-02-17,Jaipur,15.4,33.3,0.0,Clear
+2026-02-17,Kanpur,16.6,60.6,0.6,Clear
+2026-02-17,Lucknow,18.0,53.6,0.0,Clear
+2026-02-17,Noida,16.5,56.4,0.0,Clear
+2026-02-17,Prayagraj,16.3,58.8,0.0,Clear
+2026-02-17,Varanasi,17.5,70.0,0.0,Clear
+2026-02-18,Agra,16.0,46.1,0.7,Clear
+2026-02-18,Gorakhpur,17.1,64.5,0.2,Clear
+2026-02-18,Jaipur,15.8,39.1,0.2,Clear
+2026-02-18,Kanpur,17.1,61.7,0.0,Clear
+2026-02-18,Lucknow,23.0,61.6,0.1,Clear
+2026-02-18,Noida,16.4,56.2,0.1,Clear
+2026-02-18,Patna,14.8,75.3,0.0,Cool
+2026-02-18,Prayagraj,17.4,62.5,1.8,Clear
+2026-02-18,Varanasi,16.4,67.5,0.0,Clear
+2026-02-19,Agra,18.0,57.1,0.5,Clear
+2026-02-19,Delhi,16.2,52.9,0.0,Clear
+2026-02-19,Gorakhpur,18.9,58.8,0.7,Clear
+2026-02-19,Jaipur,18.0,52.4,0.0,Clear
+2026-02-19,Kanpur,19.7,48.9,1.6,Clear
+2026-02-19,Lucknow,22.4,59.3,1.9,Clear
+2026-02-19,Noida,15.7,44.4,1.8,Clear
+2026-02-19,Patna,19.8,70.7,0.0,Clear
+2026-02-19,Prayagraj,17.6,49.4,0.0,Clear
+2026-02-19,Varanasi,20.4,62.6,0.0,Clear
+2026-02-20,Agra,16.5,55.4,0.1,Clear
+2026-02-20,Gorakhpur,16.1,66.3,1.1,Clear
+2026-02-20,Jaipur,21.2,39.5,0.0,Clear
+2026-02-20,Kanpur,17.5,54.0,0.5,Clear
+2026-02-20,Lucknow,19.7,65.4,0.3,Clear
+2026-02-20,Noida,21.0,38.5,2.4,Clear
+2026-02-20,Patna,18.7,61.5,0.4,Clear
+2026-02-20,Prayagraj,16.5,65.1,1.3,Clear
+2026-02-20,Varanasi,18.8,52.6,0.6,Clear
+2026-02-21,Agra,15.1,54.4,1.1,Clear
+2026-02-21,Gorakhpur,19.1,59.1,0.0,Clear
+2026-02-21,Jaipur,21.2,39.7,1.7,Clear
+2026-02-21,Kanpur,18.0,65.0,0.0,Clear
+2026-02-21,Lucknow,16.9,58.8,0.0,Clear
+2026-02-21,Noida,13.8,51.7,2.1,Cool
+2026-02-21,Patna,21.4,74.9,0.3,Clear
+2026-02-21,Prayagraj,18.8,55.6,0.4,Clear
+2026-02-22,Agra,18.4,52.6,0.0,Clear
+2026-02-22,Delhi,18.2,53.5,1.6,Clear
+2026-02-22,Gorakhpur,18.6,62.6,1.5,Clear
+2026-02-22,Jaipur,21.6,42.5,0.4,Clear
+2026-02-22,Kanpur,19.9,54.9,0.0,Clear
+2026-02-22,Lucknow,17.0,57.7,0.1,Clear
+2026-02-22,Noida,20.5,51.9,2.2,Clear
+2026-02-22,Prayagraj,19.2,52.3,0.0,Clear
+2026-02-22,Varanasi,16.5,65.0,1.1,Clear
+2026-02-23,Agra,20.5,56.3,0.0,Clear
+2026-02-23,Gorakhpur,20.2,70.6,2.1,Clear
+2026-02-23,Jaipur,17.2,55.8,0.0,Clear
+2026-02-23,Kanpur,20.6,61.8,0.0,Clear
+2026-02-23,Lucknow,19.3,57.2,0.0,Clear
+2026-02-23,Noida,18.3,58.3,0.4,Clear
+2026-02-23,Patna,20.5,64.7,0.0,Clear
+2026-02-23,Prayagraj,15.5,65.6,3.2,Partly Cloudy
+2026-02-23,Varanasi,22.1,70.7,0.8,Clear
+2026-02-24,Agra,21.2,44.1,0.9,Clear
+2026-02-24,Gorakhpur,14.0,56.1,0.0,Cool
+2026-02-24,Jaipur,21.4,39.6,0.0,Clear
+2026-02-24,Kanpur,18.0,55.9,0.5,Clear
+2026-02-24,Lucknow,16.3,59.5,0.0,Clear
+2026-02-24,Noida,19.1,59.9,1.1,Clear
+2026-02-24,Patna,14.7,61.6,0.0,Cool
+2026-02-24,Prayagraj,18.9,67.3,0.0,Clear
+2026-02-24,Varanasi,21.2,55.7,0.2,Clear
+2026-02-25,Gorakhpur,20.6,64.3,0.7,Clear
+2026-02-25,Kanpur,21.6,69.9,0.2,Clear
+2026-02-25,Lucknow,19.8,52.9,1.1,Clear
+2026-02-25,Noida,20.1,61.3,1.2,Clear
+2026-02-25,Patna,18.1,74.6,0.2,Clear
+2026-02-25,Prayagraj,20.4,67.7,0.3,Clear
+2026-02-25,Varanasi,18.0,54.8,0.0,Clear
+2026-02-26,Agra,18.3,46.7,0.0,Clear
+2026-02-26,Gorakhpur,20.1,71.5,0.0,Clear
+2026-02-26,Jaipur,17.4,47.1,0.1,Clear
+2026-02-26,Kanpur,21.1,58.4,0.0,Clear
+2026-02-26,Lucknow,20.4,52.8,0.0,Clear
+2026-02-26,Noida,17.1,52.1,0.7,Clear
+2026-02-26,Patna,18.4,66.1,0.4,Clear
+2026-02-26,Prayagraj,22.6,54.1,0.0,Clear
+2026-02-26,Varanasi,15.2,66.8,1.3,Clear
+2026-02-27,Agra,18.8,51.4,1.6,Clear
+2026-02-27,Gorakhpur,18.9,66.5,0.0,Clear
+2026-02-27,Jaipur,22.7,20.0,0.6,Clear
+2026-02-27,Kanpur,18.1,58.2,0.0,Clear
+2026-02-27,Lucknow,19.8,64.1,1.6,Clear
+2026-02-27,Noida,18.6,55.3,0.0,Clear
+2026-02-27,Patna,21.3,49.2,0.0,Clear
+2026-02-27,Prayagraj,16.8,56.1,0.2,Clear
+2026-02-27,Varanasi,19.0,63.1,0.0,Clear
+2026-02-28,Agra,21.6,47.3,0.0,Clear
+2026-02-28,Gorakhpur,16.1,67.2,2.4,Partly Cloudy
+2026-02-28,Jaipur,19.6,44.0,0.3,Clear
+2026-02-28,Kanpur,19.1,69.4,0.5,Clear
+2026-02-28,Lucknow,20.2,56.8,0.0,Clear
+2026-02-28,Noida,18.8,62.6,1.8,Clear
+2026-02-28,Prayagraj,20.5,53.5,0.5,Clear
+2026-03-01,Agra,20.8,45.7,1.0,Clear
+2026-03-01,Delhi,18.2,45.9,0.7,Clear
+2026-03-01,Gorakhpur,19.4,90.3,0.0,Clear
+2026-03-01,Kanpur,21.1,60.7,0.1,Clear
+2026-03-01,Lucknow,18.0,59.4,2.4,Clear
+2026-03-01,Noida,19.5,51.6,0.7,Clear
+2026-03-01,Patna,20.2,62.2,1.3,Clear
+2026-03-01,Prayagraj,17.4,49.8,0.0,Clear
+2026-03-01,Varanasi,17.1,53.4,1.3,Clear
+2026-03-02,Agra,21.5,49.4,0.0,Clear
+2026-03-02,Delhi,18.8,50.9,2.1,Clear
+2026-03-02,Gorakhpur,18.5,68.6,0.0,Clear
+2026-03-02,Jaipur,18.4,47.8,0.2,Clear
+2026-03-02,Kanpur,22.7,50.1,1.1,Clear
+2026-03-02,Lucknow,19.2,60.1,0.0,Clear
+2026-03-02,Noida,18.8,50.3,1.4,Clear
+2026-03-02,Patna,20.4,66.6,0.6,Clear
+2026-03-02,Prayagraj,20.4,58.4,0.2,Clear
+2026-03-02,Varanasi,20.4,53.2,0.0,Clear
+2026-03-03,Agra,18.1,45.8,0.4,Clear
+2026-03-03,Gorakhpur,20.3,81.1,0.5,Clear
+2026-03-03,Kanpur,22.3,49.9,1.0,Clear
+2026-03-03,Lucknow,17.2,74.0,0.3,Clear
+2026-03-03,Noida,18.4,45.2,0.5,Clear
+2026-03-03,Patna,19.5,58.0,0.0,Clear
+2026-03-03,Prayagraj,21.1,58.2,0.0,Clear
+2026-03-03,Varanasi,20.4,54.6,1.3,Clear
+2026-03-04,Agra,18.1,59.1,0.1,Clear
+2026-03-04,Gorakhpur,19.5,70.9,1.4,Clear
+2026-03-04,Kanpur,19.7,57.5,1.8,Clear
+2026-03-04,Lucknow,21.3,62.1,0.6,Clear
+2026-03-04,Noida,19.6,49.4,0.5,Clear
+2026-03-04,Patna,22.9,61.8,0.3,Clear
+2026-03-04,Prayagraj,21.6,50.4,0.0,Clear
+2026-03-04,Varanasi,22.6,58.4,0.0,Clear
+2026-03-05,Agra,19.5,36.9,0.0,Clear
+2026-03-05,Delhi,20.5,50.6,0.0,Clear
+2026-03-05,Gorakhpur,18.8,70.5,0.0,Clear
+2026-03-05,Kanpur,21.3,60.4,0.0,Clear
+2026-03-05,Lucknow,20.5,56.2,0.6,Clear
+2026-03-05,Noida,17.2,54.0,1.1,Clear
+2026-03-05,Patna,22.6,63.1,0.0,Clear
+2026-03-05,Prayagraj,19.1,56.8,2.6,Clear
+2026-03-05,Varanasi,20.6,67.7,0.0,Clear
+2026-03-06,Agra,20.1,56.3,0.0,Clear
+2026-03-06,Gorakhpur,22.3,55.1,0.0,Clear
+2026-03-06,Jaipur,21.1,48.7,0.0,Clear
+2026-03-06,Kanpur,20.0,50.5,1.7,Clear
+2026-03-06,Lucknow,16.4,53.4,0.0,Clear
+2026-03-06,Noida,20.2,48.2,0.0,Clear
+2026-03-06,Prayagraj,18.2,65.8,1.8,Clear
+2026-03-06,Varanasi,19.3,56.3,1.0,Clear
+2026-03-07,Agra,18.7,50.1,0.0,Clear
+2026-03-07,Gorakhpur,17.9,60.3,0.3,Clear
+2026-03-07,Jaipur,21.2,48.0,0.9,Clear
+2026-03-07,Kanpur,20.2,50.9,1.7,Clear
+2026-03-07,Lucknow,20.4,64.3,0.1,Clear
+2026-03-07,Noida,20.7,49.5,0.5,Clear
+2026-03-07,Prayagraj,19.4,61.3,0.0,Clear
+2026-03-07,Varanasi,20.6,64.3,0.0,Clear
+2026-03-08,Gorakhpur,20.9,67.9,1.0,Clear
+2026-03-08,Jaipur,21.8,38.0,0.0,Clear
+2026-03-08,Kanpur,19.4,48.0,0.0,Clear
+2026-03-08,Lucknow,22.2,58.2,0.0,Clear
+2026-03-08,Noida,21.3,60.7,0.8,Clear
+2026-03-08,Prayagraj,20.6,60.2,0.4,Clear
+2026-03-08,Varanasi,20.7,52.3,0.8,Clear
+2026-03-09,Gorakhpur,19.8,60.1,0.3,Clear
+2026-03-09,Jaipur,21.6,49.5,0.8,Clear
+2026-03-09,Kanpur,23.2,65.3,0.0,Clear
+2026-03-09,Lucknow,19.2,64.2,0.4,Clear
+2026-03-09,Noida,17.8,35.9,0.7,Clear
+2026-03-09,Prayagraj,20.4,51.9,0.0,Clear
+2026-03-09,Varanasi,19.1,50.1,0.3,Clear
+2026-03-10,Agra,22.9,56.5,1.7,Clear
+2026-03-10,Gorakhpur,21.5,56.1,1.1,Clear
+2026-03-10,Jaipur,17.9,42.2,0.0,Clear
+2026-03-10,Kanpur,22.5,55.1,2.8,Clear
+2026-03-10,Lucknow,19.8,58.6,0.0,Clear
+2026-03-10,Noida,20.9,42.7,0.0,Clear
+2026-03-10,Prayagraj,17.5,62.1,0.1,Clear
+2026-03-10,Varanasi,23.1,54.6,1.6,Clear
+2026-03-11,Agra,17.4,54.1,0.0,Clear
+2026-03-11,Gorakhpur,19.9,67.7,0.0,Clear
+2026-03-11,Jaipur,18.1,46.1,0.0,Clear
+2026-03-11,Kanpur,20.6,47.0,0.9,Clear
+2026-03-11,Lucknow,18.9,47.4,0.3,Clear
+2026-03-11,Noida,18.9,58.8,0.7,Clear
+2026-03-11,Patna,16.7,67.2,0.0,Clear
+2026-03-11,Prayagraj,19.0,66.2,1.1,Clear
+2026-03-11,Varanasi,18.0,54.5,0.2,Clear
+2026-03-12,Agra,23.1,60.4,0.0,Clear
+2026-03-12,Gorakhpur,17.6,76.8,0.9,Clear
+2026-03-12,Jaipur,24.3,30.2,0.7,Clear
+2026-03-12,Kanpur,20.9,45.0,1.7,Clear
+2026-03-12,Lucknow,17.2,51.5,0.0,Clear
+2026-03-12,Noida,17.6,52.7,0.0,Clear
+2026-03-12,Prayagraj,19.9,50.3,0.9,Clear
+2026-03-12,Varanasi,19.4,46.5,0.0,Clear
+2026-03-13,Agra,15.6,65.9,0.4,Clear
+2026-03-13,Delhi,19.9,51.0,0.6,Clear
+2026-03-13,Gorakhpur,17.9,65.2,0.0,Clear
+2026-03-13,Jaipur,22.1,27.3,0.0,Clear
+2026-03-13,Kanpur,21.9,64.2,1.7,Clear
+2026-03-13,Lucknow,20.7,58.9,0.0,Clear
+2026-03-13,Noida,16.8,52.5,0.2,Clear
+2026-03-13,Prayagraj,22.5,67.9,2.0,Clear
+2026-03-13,Varanasi,22.4,60.4,0.8,Clear
+2026-03-14,Agra,21.5,62.5,0.0,Clear
+2026-03-14,Delhi,17.4,50.2,0.8,Clear
+2026-03-14,Gorakhpur,20.8,60.6,0.0,Clear
+2026-03-14,Jaipur,21.4,54.2,0.0,Clear
+2026-03-14,Kanpur,23.2,68.9,0.0,Clear
+2026-03-14,Lucknow,17.6,61.3,0.5,Clear
+2026-03-14,Noida,20.0,36.1,0.0,Clear
+2026-03-14,Prayagraj,19.3,54.5,0.2,Clear
+2026-03-14,Varanasi,20.3,65.6,0.0,Clear
+2026-03-15,Agra,19.9,48.3,0.0,Clear
+2026-03-15,Jaipur,19.3,31.8,0.8,Clear
+2026-03-15,Kanpur,23.6,59.1,0.2,Clear
+2026-03-15,Lucknow,19.3,49.8,1.6,Clear
+2026-03-15,Noida,21.4,50.9,1.1,Clear
+2026-03-15,Prayagraj,19.7,60.5,0.6,Clear
+2026-03-15,Varanasi,21.6,64.3,0.0,Clear
+2026-03-16,Agra,22.1,52.6,0.0,Clear
+2026-03-16,Gorakhpur,24.8,66.6,0.0,Clear
+2026-03-16,Kanpur,23.8,64.4,0.7,Clear
+2026-03-16,Lucknow,20.5,55.1,0.8,Clear
+2026-03-16,Noida,21.0,52.9,0.2,Clear
+2026-03-16,Patna,23.7,60.6,0.0,Clear
+2026-03-16,Prayagraj,22.4,54.8,2.8,Clear
+2026-03-16,Varanasi,23.7,54.2,0.0,Clear
+2026-03-17,Agra,19.7,56.6,1.7,Clear
+2026-03-17,Gorakhpur,24.1,61.0,0.0,Clear
+2026-03-17,Jaipur,20.8,52.2,0.0,Clear
+2026-03-17,Kanpur,23.1,56.1,0.7,Clear
+2026-03-17,Lucknow,21.1,54.9,0.0,Clear
+2026-03-17,Noida,22.1,51.5,0.0,Clear
+2026-03-17,Patna,19.8,66.3,0.0,Clear
+2026-03-17,Prayagraj,23.0,58.1,0.0,Clear
+2026-03-17,Varanasi,24.5,69.4,0.0,Clear
+2026-03-18,Agra,21.5,47.3,0.0,Clear
+2026-03-18,Gorakhpur,22.5,67.8,0.1,Clear
+2026-03-18,Jaipur,25.1,44.0,0.0,Clear
+2026-03-18,Kanpur,22.3,55.1,0.5,Clear
+2026-03-18,Lucknow,20.1,56.7,0.0,Clear
+2026-03-18,Noida,21.0,55.7,1.2,Clear
+2026-03-18,Prayagraj,20.5,52.3,0.9,Clear
+2026-03-18,Varanasi,22.0,50.0,0.9,Clear
+2026-03-19,Agra,22.2,47.9,0.2,Clear
+2026-03-19,Delhi,25.3,41.7,0.0,Clear
+2026-03-19,Gorakhpur,21.9,70.6,0.3,Clear
+2026-03-19,Jaipur,24.3,51.8,1.3,Clear
+2026-03-19,Kanpur,24.2,55.9,0.0,Clear
+2026-03-19,Lucknow,22.0,56.4,2.7,Clear
+2026-03-19,Noida,22.6,52.2,0.0,Clear
+2026-03-19,Prayagraj,25.5,47.1,2.0,Clear
+2026-03-19,Varanasi,21.4,60.3,1.2,Clear
+2026-03-20,Agra,24.1,56.1,1.3,Clear
+2026-03-20,Gorakhpur,21.6,70.6,0.3,Clear
+2026-03-20,Jaipur,23.1,32.3,0.7,Clear
+2026-03-20,Kanpur,22.5,68.0,0.0,Clear
+2026-03-20,Lucknow,21.1,59.3,0.6,Clear
+2026-03-20,Noida,22.9,51.1,0.5,Clear
+2026-03-20,Varanasi,20.6,55.3,1.0,Clear
+2026-03-21,Agra,19.2,46.7,0.4,Clear
+2026-03-21,Gorakhpur,25.2,63.3,0.0,Clear
+2026-03-21,Jaipur,24.6,43.9,1.4,Clear
+2026-03-21,Kanpur,23.4,47.7,0.0,Clear
+2026-03-21,Lucknow,21.4,59.2,0.0,Clear
+2026-03-21,Noida,22.1,41.1,1.0,Clear
+2026-03-21,Prayagraj,19.6,51.7,1.6,Clear
+2026-03-21,Varanasi,27.4,63.7,1.4,Clear
+2026-03-22,Agra,22.2,48.0,1.2,Clear
+2026-03-22,Gorakhpur,24.3,64.4,0.4,Clear
+2026-03-22,Jaipur,25.5,36.8,0.6,Clear
+2026-03-22,Kanpur,20.3,63.2,1.1,Clear
+2026-03-22,Lucknow,25.6,60.0,0.0,Clear
+2026-03-22,Noida,20.2,55.6,1.1,Clear
+2026-03-22,Prayagraj,22.6,55.0,1.0,Clear
+2026-03-22,Varanasi,21.3,65.0,0.0,Clear
+2026-03-23,Agra,25.1,52.2,0.6,Clear
+2026-03-23,Gorakhpur,24.4,71.2,0.0,Clear
+2026-03-23,Jaipur,21.0,40.1,0.0,Clear
+2026-03-23,Lucknow,22.0,49.6,1.5,Clear
+2026-03-23,Noida,22.3,59.3,1.7,Clear
+2026-03-23,Prayagraj,24.2,61.8,3.1,Clear
+2026-03-23,Varanasi,23.8,65.4,1.2,Clear
+2026-03-24,Agra,26.0,56.4,0.0,Clear
+2026-03-24,Gorakhpur,21.3,53.1,0.1,Clear
+2026-03-24,Jaipur,27.4,44.8,0.0,Clear
+2026-03-24,Kanpur,18.7,55.2,2.4,Clear
+2026-03-24,Lucknow,24.5,55.2,0.8,Clear
+2026-03-24,Noida,24.1,48.6,0.2,Clear
+2026-03-24,Patna,24.2,60.2,0.0,Clear
+2026-03-24,Prayagraj,24.4,70.1,0.0,Clear
+2026-03-24,Varanasi,23.0,57.4,1.5,Clear
+2026-03-25,Agra,26.1,53.4,1.3,Clear
+2026-03-25,Gorakhpur,22.1,74.6,0.1,Clear
+2026-03-25,Jaipur,22.3,46.4,0.0,Clear
+2026-03-25,Kanpur,25.0,56.3,0.2,Clear
+2026-03-25,Lucknow,18.1,53.2,0.7,Clear
+2026-03-25,Noida,23.4,42.5,0.0,Clear
+2026-03-25,Prayagraj,24.6,45.3,0.1,Clear
+2026-03-25,Varanasi,23.4,62.7,1.9,Clear
+2026-03-26,Agra,22.5,63.3,2.8,Partly Cloudy
+2026-03-26,Delhi,22.0,47.5,1.1,Clear
+2026-03-26,Gorakhpur,24.9,63.9,2.2,Clear
+2026-03-26,Jaipur,24.1,32.8,1.0,Clear
+2026-03-26,Kanpur,19.6,48.9,0.0,Clear
+2026-03-26,Lucknow,21.6,61.4,1.1,Clear
+2026-03-26,Noida,19.8,44.5,0.8,Clear
+2026-03-26,Prayagraj,21.0,57.0,0.1,Clear
+2026-03-26,Varanasi,25.8,64.1,0.1,Clear
+2026-03-27,Gorakhpur,24.7,57.6,0.1,Clear
+2026-03-27,Jaipur,26.0,36.9,0.6,Clear
+2026-03-27,Kanpur,25.4,53.1,0.0,Clear
+2026-03-27,Lucknow,27.1,67.1,1.8,Clear
+2026-03-27,Noida,25.6,41.4,0.7,Clear
+2026-03-27,Prayagraj,22.7,65.6,0.6,Clear
+2026-03-27,Varanasi,27.1,58.7,0.1,Clear
+2026-03-28,Agra,21.7,47.5,0.0,Clear
+2026-03-28,Gorakhpur,21.3,73.6,0.0,Clear
+2026-03-28,Jaipur,25.8,42.3,0.0,Clear
+2026-03-28,Kanpur,22.3,62.6,0.0,Clear
+2026-03-28,Lucknow,22.1,50.7,0.2,Clear
+2026-03-28,Noida,20.2,52.7,0.0,Clear
+2026-03-28,Patna,24.5,58.0,0.5,Clear
+2026-03-28,Prayagraj,24.8,51.3,2.6,Clear
+2026-03-28,Varanasi,24.5,48.9,0.0,Clear
+2026-03-29,Agra,25.9,45.7,1.7,Clear
+2026-03-29,Gorakhpur,25.3,65.0,0.5,Clear
+2026-03-29,Jaipur,23.5,38.6,0.0,Clear
+2026-03-29,Kanpur,25.9,48.9,0.5,Clear
+2026-03-29,Lucknow,26.0,50.9,0.0,Clear
+2026-03-29,Noida,24.4,38.6,0.7,Clear
+2026-03-29,Patna,26.1,55.8,1.1,Clear
+2026-03-29,Prayagraj,22.9,67.4,0.2,Clear
+2026-03-29,Varanasi,27.5,56.2,1.3,Clear
+2026-03-30,Agra,22.9,50.1,0.0,Clear
+2026-03-30,Gorakhpur,23.6,64.0,1.2,Clear
+2026-03-30,Kanpur,23.5,42.6,0.0,Clear
+2026-03-30,Lucknow,20.8,62.0,0.0,Clear
+2026-03-30,Noida,20.7,51.4,0.5,Clear
+2026-03-30,Patna,22.6,51.3,0.5,Clear
+2026-03-30,Prayagraj,23.3,58.1,1.2,Clear
+2026-03-30,Varanasi,24.3,49.2,0.7,Clear
+2026-03-31,Agra,24.9,52.4,0.0,Clear
+2026-03-31,Gorakhpur,24.5,65.8,0.6,Clear
+2026-03-31,Jaipur,24.2,41.1,0.3,Clear
+2026-03-31,Lucknow,27.4,56.4,0.1,Clear
+2026-03-31,Noida,23.0,56.8,0.7,Clear
+2026-03-31,Prayagraj,22.9,48.7,1.8,Clear
+2026-03-31,Varanasi,26.0,54.9,0.3,Clear
+2026-04-01,Agra,25.0,55.6,0.6,Clear
+2026-04-01,Gorakhpur,24.3,70.6,0.5,Clear
+2026-04-01,Kanpur,27.4,51.4,1.0,Clear
+2026-04-01,Lucknow,24.4,50.9,1.4,Clear
+2026-04-01,Noida,23.5,52.6,0.0,Clear
+2026-04-01,Patna,27.3,56.8,0.0,Clear
+2026-04-01,Prayagraj,25.9,65.9,0.0,Clear
+2026-04-01,Varanasi,24.6,62.2,0.0,Clear
+2026-04-02,Agra,21.8,44.1,0.0,Clear
+2026-04-02,Delhi,22.1,57.9,0.6,Clear
+2026-04-02,Gorakhpur,21.4,57.2,0.8,Clear
+2026-04-02,Jaipur,23.3,37.0,0.0,Clear
+2026-04-02,Kanpur,22.7,48.7,0.0,Clear
+2026-04-02,Lucknow,23.1,39.1,0.9,Clear
+2026-04-02,Noida,24.7,51.5,0.0,Clear
+2026-04-02,Patna,24.7,61.0,0.4,Clear
+2026-04-02,Prayagraj,24.0,62.8,0.0,Clear
+2026-04-02,Varanasi,23.7,63.2,0.4,Clear
+2026-04-03,Agra,21.2,51.5,1.5,Clear
+2026-04-03,Gorakhpur,22.6,70.6,0.0,Clear
+2026-04-03,Jaipur,26.6,42.6,0.7,Clear
+2026-04-03,Kanpur,27.8,61.4,0.0,Clear
+2026-04-03,Lucknow,26.2,58.3,0.0,Clear
+2026-04-03,Noida,24.4,50.8,0.0,Clear
+2026-04-03,Prayagraj,26.7,51.9,0.0,Clear
+2026-04-03,Varanasi,23.9,45.1,0.3,Clear
+2026-04-04,Agra,27.7,45.4,0.0,Clear
+2026-04-04,Gorakhpur,24.6,66.8,0.0,Clear
+2026-04-04,Kanpur,23.9,58.1,2.0,Clear
+2026-04-04,Lucknow,26.7,57.1,0.0,Clear
+2026-04-04,Noida,19.6,50.6,0.0,Clear
+2026-04-04,Patna,26.3,63.4,0.0,Clear
+2026-04-04,Prayagraj,26.2,56.5,0.3,Clear
+2026-04-04,Varanasi,23.7,51.4,0.6,Clear
+2026-04-05,Agra,21.3,52.3,0.6,Clear
+2026-04-05,Gorakhpur,24.5,58.5,1.1,Clear
+2026-04-05,Kanpur,25.9,47.1,0.0,Clear
+2026-04-05,Lucknow,26.1,57.2,1.2,Clear
+2026-04-05,Noida,25.6,62.9,0.0,Clear
+2026-04-05,Patna,26.3,66.5,0.0,Clear
+2026-04-05,Prayagraj,25.8,64.0,1.9,Clear
+2026-04-05,Varanasi,24.6,67.0,0.9,Clear
+2026-04-06,Agra,28.5,52.7,0.7,Clear
+2026-04-06,Gorakhpur,26.3,54.7,0.0,Clear
+2026-04-06,Jaipur,24.8,42.5,0.0,Clear
+2026-04-06,Kanpur,23.9,43.2,0.0,Clear
+2026-04-06,Lucknow,22.6,49.9,0.8,Clear
+2026-04-06,Noida,26.9,35.1,0.9,Clear
+2026-04-06,Patna,21.3,71.8,0.0,Clear
+2026-04-06,Prayagraj,26.0,54.5,0.8,Clear
+2026-04-06,Varanasi,28.1,49.1,1.2,Clear
+2026-04-07,Agra,27.3,56.9,0.8,Clear
+2026-04-07,Gorakhpur,29.0,67.4,0.1,Clear
+2026-04-07,Jaipur,28.8,34.3,1.1,Clear
+2026-04-07,Kanpur,24.6,66.8,0.7,Clear
+2026-04-07,Lucknow,23.5,48.0,0.6,Clear
+2026-04-07,Noida,24.4,39.3,0.1,Clear
+2026-04-07,Prayagraj,25.2,56.8,2.3,Clear
+2026-04-07,Varanasi,27.4,54.5,0.0,Clear
+2026-04-08,Gorakhpur,23.7,62.8,0.6,Clear
+2026-04-08,Jaipur,28.5,45.2,0.0,Clear
+2026-04-08,Kanpur,26.2,65.5,0.8,Clear
+2026-04-08,Lucknow,24.8,51.6,1.9,Clear
+2026-04-08,Noida,24.4,51.2,0.0,Clear
+2026-04-08,Prayagraj,28.4,65.1,0.8,Clear
+2026-04-08,Varanasi,26.9,56.8,0.5,Clear
+2026-04-09,Agra,24.1,44.8,0.1,Clear
+2026-04-09,Jaipur,24.7,45.3,0.3,Clear
+2026-04-09,Kanpur,24.4,53.3,0.0,Clear
+2026-04-09,Lucknow,23.1,54.8,1.9,Clear
+2026-04-09,Noida,21.9,55.6,0.0,Clear
+2026-04-09,Prayagraj,24.3,54.2,0.9,Clear
+2026-04-09,Varanasi,26.0,53.8,0.0,Clear
+2026-04-10,Agra,27.3,62.2,0.0,Clear
+2026-04-10,Gorakhpur,24.1,77.2,0.0,Clear
+2026-04-10,Kanpur,25.5,54.3,0.3,Clear
+2026-04-10,Lucknow,26.2,53.3,0.8,Clear
+2026-04-10,Noida,20.1,38.2,0.0,Clear
+2026-04-10,Patna,26.8,65.0,0.0,Clear
+2026-04-10,Prayagraj,21.7,53.1,1.0,Clear
+2026-04-10,Varanasi,24.0,48.1,0.8,Clear
+2026-04-11,Agra,27.1,37.6,0.2,Clear
+2026-04-11,Jaipur,30.9,37.2,1.3,Clear
+2026-04-11,Kanpur,32.1,67.4,0.1,Clear
+2026-04-11,Lucknow,25.0,66.0,0.0,Clear
+2026-04-11,Noida,25.6,50.9,2.7,Clear
+2026-04-11,Patna,26.4,59.2,1.4,Clear
+2026-04-11,Prayagraj,27.3,58.0,1.4,Clear
+2026-04-11,Varanasi,25.0,58.2,2.4,Clear
+2026-04-12,Agra,22.3,58.9,1.8,Clear
+2026-04-12,Gorakhpur,29.3,52.8,1.3,Clear
+2026-04-12,Kanpur,27.8,56.5,0.0,Clear
+2026-04-12,Lucknow,28.5,52.1,1.7,Clear
+2026-04-12,Noida,24.7,52.8,2.2,Clear
+2026-04-12,Prayagraj,28.5,64.2,0.2,Clear
+2026-04-12,Varanasi,28.4,53.6,0.0,Clear
+2026-04-13,Gorakhpur,29.8,71.8,0.3,Clear
+2026-04-13,Kanpur,24.7,64.8,3.0,Clear
+2026-04-13,Lucknow,23.1,50.8,0.1,Clear
+2026-04-13,Noida,25.2,43.7,0.5,Clear
+2026-04-13,Prayagraj,28.7,51.3,0.0,Clear
+2026-04-13,Varanasi,25.7,57.9,2.2,Clear
+2026-04-14,Agra,28.9,53.6,1.8,Clear
+2026-04-14,Gorakhpur,29.6,62.2,1.2,Clear
+2026-04-14,Kanpur,30.4,45.0,0.4,Clear
+2026-04-14,Lucknow,26.7,50.7,1.3,Clear
+2026-04-14,Noida,27.2,42.6,0.0,Clear
+2026-04-14,Patna,30.7,54.0,0.7,Clear
+2026-04-14,Prayagraj,25.5,53.9,0.0,Clear
+2026-04-14,Varanasi,24.5,52.8,1.2,Clear
+2026-04-15,Delhi,24.5,45.6,1.1,Clear
+2026-04-15,Gorakhpur,26.2,64.5,1.5,Clear
+2026-04-15,Jaipur,29.8,53.5,0.0,Clear
+2026-04-15,Kanpur,27.7,54.3,0.0,Clear
+2026-04-15,Lucknow,28.9,49.4,0.1,Clear
+2026-04-15,Noida,29.3,55.8,0.5,Clear
+2026-04-15,Patna,26.7,74.5,0.5,Clear
+2026-04-15,Prayagraj,26.1,62.0,0.5,Clear
+2026-04-15,Varanasi,26.0,44.3,1.7,Clear
+2026-04-16,Agra,28.7,48.1,0.0,Clear
+2026-04-16,Delhi,28.5,53.9,0.0,Clear
+2026-04-16,Gorakhpur,26.7,61.2,0.5,Clear
+2026-04-16,Kanpur,29.0,50.0,0.9,Clear
+2026-04-16,Lucknow,23.7,61.4,1.1,Clear
+2026-04-16,Noida,25.2,51.4,0.0,Clear
+2026-04-16,Patna,27.4,64.4,0.0,Clear
+2026-04-16,Prayagraj,25.3,55.9,0.0,Clear
+2026-04-17,Agra,29.1,50.0,1.7,Clear
+2026-04-17,Delhi,22.6,42.7,0.5,Clear
+2026-04-17,Gorakhpur,26.3,56.8,0.0,Clear
+2026-04-17,Jaipur,30.4,49.0,1.0,Clear
+2026-04-17,Kanpur,26.5,51.8,0.0,Clear
+2026-04-17,Lucknow,26.4,60.9,1.8,Clear
+2026-04-17,Noida,27.6,48.9,0.0,Clear
+2026-04-17,Prayagraj,26.6,52.2,0.0,Clear
+2026-04-17,Varanasi,27.2,53.1,0.2,Clear
+2026-04-18,Agra,28.9,55.2,0.0,Clear
+2026-04-18,Delhi,27.7,46.3,1.7,Clear
+2026-04-18,Gorakhpur,27.5,53.6,0.0,Clear
+2026-04-18,Jaipur,32.4,39.6,0.0,Clear
+2026-04-18,Kanpur,26.5,44.3,3.1,Clear
+2026-04-18,Lucknow,26.5,57.2,0.0,Clear
+2026-04-18,Noida,28.6,43.3,0.8,Clear
+2026-04-18,Prayagraj,24.4,50.9,2.1,Clear
+2026-04-18,Varanasi,23.8,48.8,0.3,Clear
+2026-04-19,Agra,28.3,51.8,0.6,Clear
+2026-04-19,Jaipur,28.2,38.8,1.8,Clear
+2026-04-19,Kanpur,25.5,62.2,0.0,Clear
+2026-04-19,Lucknow,29.0,55.0,0.9,Clear
+2026-04-19,Noida,27.2,42.2,0.0,Clear
+2026-04-19,Prayagraj,26.9,48.8,0.0,Clear
+2026-04-19,Varanasi,26.9,57.9,0.0,Clear
+2026-04-20,Gorakhpur,27.1,68.9,1.9,Clear
+2026-04-20,Jaipur,29.9,42.9,0.8,Clear
+2026-04-20,Lucknow,28.5,49.3,0.8,Clear
+2026-04-20,Noida,29.8,33.7,0.0,Clear
+2026-04-20,Patna,26.6,65.4,2.2,Clear
+2026-04-20,Prayagraj,28.5,60.0,0.7,Clear
+2026-04-20,Varanasi,29.5,50.1,0.9,Clear
+2026-04-21,Agra,22.6,50.4,0.0,Clear
+2026-04-21,Delhi,25.7,41.8,0.3,Clear
+2026-04-21,Gorakhpur,25.1,66.0,2.4,Clear
+2026-04-21,Jaipur,32.5,51.8,0.3,Clear
+2026-04-21,Kanpur,31.1,58.5,0.8,Clear
+2026-04-21,Lucknow,28.4,53.1,0.7,Clear
+2026-04-21,Noida,26.4,35.2,0.5,Clear
+2026-04-21,Prayagraj,31.9,62.1,0.0,Clear
+2026-04-21,Varanasi,28.5,36.3,0.7,Clear
+2026-04-22,Gorakhpur,27.5,59.8,1.8,Clear
+2026-04-22,Kanpur,29.3,44.6,0.6,Clear
+2026-04-22,Lucknow,23.7,48.9,1.1,Clear
+2026-04-22,Noida,29.0,54.9,0.3,Clear
+2026-04-22,Prayagraj,28.4,65.6,2.1,Clear
+2026-04-22,Varanasi,31.5,61.1,1.5,Clear
+2026-04-23,Agra,30.0,46.5,0.0,Clear
+2026-04-23,Gorakhpur,30.3,68.6,0.0,Clear
+2026-04-23,Jaipur,31.5,48.1,0.3,Clear
+2026-04-23,Kanpur,28.6,55.6,0.0,Clear
+2026-04-23,Lucknow,28.8,55.2,0.0,Clear
+2026-04-23,Noida,28.5,49.6,1.0,Clear
+2026-04-23,Patna,31.4,58.7,0.0,Clear
+2026-04-23,Prayagraj,26.6,67.3,0.0,Clear
+2026-04-23,Varanasi,30.7,64.3,0.0,Clear
+2026-04-24,Agra,27.0,46.5,2.0,Clear
+2026-04-24,Gorakhpur,27.3,53.6,0.0,Clear
+2026-04-24,Jaipur,29.8,41.7,0.7,Clear
+2026-04-24,Kanpur,31.9,40.0,0.5,Clear
+2026-04-24,Lucknow,27.6,41.9,0.6,Clear
+2026-04-24,Noida,26.4,51.5,0.0,Clear
+2026-04-24,Patna,27.7,65.9,0.0,Clear
+2026-04-24,Prayagraj,28.0,50.3,0.0,Clear
+2026-04-24,Varanasi,25.9,63.7,0.0,Clear
+2026-04-25,Agra,30.8,62.4,0.0,Clear
+2026-04-25,Delhi,29.5,49.1,1.7,Clear
+2026-04-25,Gorakhpur,28.4,58.9,2.1,Clear
+2026-04-25,Jaipur,32.6,40.3,0.8,Clear
+2026-04-25,Kanpur,28.8,54.6,0.0,Clear
+2026-04-25,Lucknow,27.8,53.8,0.0,Clear
+2026-04-25,Noida,27.6,46.7,0.9,Clear
+2026-04-25,Prayagraj,24.5,62.9,0.0,Clear
+2026-04-25,Varanasi,32.7,48.7,0.2,Clear
+2026-04-26,Agra,28.0,49.0,1.6,Clear
+2026-04-26,Kanpur,29.1,54.4,0.4,Clear
+2026-04-26,Lucknow,24.5,54.4,0.2,Clear
+2026-04-26,Noida,27.9,52.5,1.2,Clear
+2026-04-26,Patna,29.7,66.0,0.2,Clear
+2026-04-26,Prayagraj,27.8,64.0,0.9,Clear
+2026-04-26,Varanasi,28.9,63.9,0.0,Clear
+2026-04-27,Agra,28.3,46.4,1.7,Clear
+2026-04-27,Gorakhpur,25.6,66.0,0.4,Clear
+2026-04-27,Kanpur,27.7,49.0,0.7,Clear
+2026-04-27,Lucknow,27.9,47.5,0.0,Clear
+2026-04-27,Noida,30.6,52.5,0.0,Clear
+2026-04-27,Patna,28.7,47.6,0.0,Clear
+2026-04-27,Prayagraj,32.2,59.4,1.1,Clear
+2026-04-27,Varanasi,31.0,54.0,0.7,Clear
+2026-04-28,Agra,28.8,52.6,0.4,Clear
+2026-04-28,Gorakhpur,28.2,61.5,0.0,Clear
+2026-04-28,Jaipur,31.7,35.3,0.0,Clear
+2026-04-28,Kanpur,29.0,55.7,0.4,Clear
+2026-04-28,Lucknow,26.5,49.5,0.4,Clear
+2026-04-28,Noida,26.1,52.3,1.3,Clear
+2026-04-28,Prayagraj,29.5,62.0,2.0,Clear
+2026-04-28,Varanasi,30.5,56.8,0.1,Clear
+2026-04-29,Agra,30.8,53.0,0.7,Clear
+2026-04-29,Delhi,31.0,44.6,2.4,Clear
+2026-04-29,Jaipur,31.7,39.4,0.0,Clear
+2026-04-29,Kanpur,32.4,43.7,0.4,Clear
+2026-04-29,Lucknow,28.5,55.1,2.1,Clear
+2026-04-29,Noida,28.6,50.1,0.0,Clear
+2026-04-29,Prayagraj,31.5,53.2,1.9,Clear
+2026-04-29,Varanasi,27.4,61.0,0.1,Clear
+2026-04-30,Agra,31.4,42.7,0.0,Clear
+2026-04-30,Gorakhpur,27.9,74.8,0.7,Clear
+2026-04-30,Jaipur,33.1,39.7,0.0,Clear
+2026-04-30,Kanpur,34.2,49.3,1.1,Clear
+2026-04-30,Lucknow,30.3,62.7,1.3,Clear
+2026-04-30,Noida,28.4,32.5,3.4,Clear
+2026-04-30,Patna,32.4,60.2,1.3,Clear
+2026-04-30,Prayagraj,29.5,46.6,0.0,Clear
+2026-05-01,Agra,29.7,60.8,2.0,Clear
+2026-05-01,Jaipur,28.8,37.8,1.5,Clear
+2026-05-01,Kanpur,31.0,53.3,0.4,Clear
+2026-05-01,Lucknow,26.4,60.9,1.9,Clear
+2026-05-01,Noida,31.5,56.6,0.0,Clear
+2026-05-01,Prayagraj,29.8,53.0,1.2,Partly Cloudy
+2026-05-01,Varanasi,30.7,62.0,0.0,Clear
+2026-05-02,Agra,31.2,54.7,0.9,Clear
+2026-05-02,Gorakhpur,30.7,61.3,0.0,Clear
+2026-05-02,Jaipur,32.2,38.4,1.3,Clear
+2026-05-02,Kanpur,30.1,53.3,1.4,Clear
+2026-05-02,Lucknow,32.8,50.2,0.0,Clear
+2026-05-02,Patna,28.3,60.6,0.0,Clear
+2026-05-02,Prayagraj,30.8,50.1,0.0,Clear
+2026-05-02,Varanasi,30.5,54.3,1.6,Clear
+2026-05-03,Agra,29.5,45.3,0.4,Clear
+2026-05-03,Gorakhpur,30.0,62.4,0.2,Clear
+2026-05-03,Jaipur,33.3,32.5,1.6,Clear
+2026-05-03,Kanpur,30.5,50.9,0.0,Clear
+2026-05-03,Lucknow,29.4,62.7,0.9,Clear
+2026-05-03,Noida,28.6,44.9,1.2,Clear
+2026-05-03,Patna,28.0,71.5,0.0,Clear
+2026-05-03,Prayagraj,31.2,53.6,0.4,Clear
+2026-05-04,Agra,32.6,53.4,0.0,Clear
+2026-05-04,Gorakhpur,30.8,47.2,0.0,Clear
+2026-05-04,Jaipur,29.3,41.2,0.0,Clear
+2026-05-04,Kanpur,28.5,62.1,0.0,Clear
+2026-05-04,Lucknow,25.6,62.2,0.5,Clear
+2026-05-04,Noida,31.5,31.4,0.1,Clear
+2026-05-04,Prayagraj,29.8,46.7,2.1,Clear
+2026-05-04,Varanasi,32.2,65.8,0.1,Clear
+2026-05-05,Agra,26.3,40.5,1.0,Clear
+2026-05-05,Gorakhpur,31.4,62.2,0.0,Clear
+2026-05-05,Jaipur,31.1,36.0,0.1,Clear
+2026-05-05,Kanpur,30.5,62.6,0.3,Clear
+2026-05-05,Lucknow,29.7,60.2,2.2,Clear
+2026-05-05,Noida,30.0,58.8,0.4,Clear
+2026-05-05,Prayagraj,32.4,62.9,0.0,Clear
+2026-05-05,Varanasi,31.4,62.1,0.0,Clear
+2026-05-06,Agra,33.5,56.5,0.0,Clear
+2026-05-06,Gorakhpur,28.2,65.8,1.3,Clear
+2026-05-06,Jaipur,33.0,37.3,0.0,Clear
+2026-05-06,Kanpur,34.8,54.9,0.3,Clear
+2026-05-06,Lucknow,26.6,47.2,0.7,Clear
+2026-05-06,Noida,33.6,31.6,0.0,Clear
+2026-05-06,Patna,31.2,66.1,0.6,Clear
+2026-05-06,Prayagraj,29.2,57.4,0.2,Clear
+2026-05-06,Varanasi,34.6,58.4,0.7,Clear
+2026-05-07,Agra,28.7,35.6,0.0,Clear
+2026-05-07,Gorakhpur,30.3,51.0,0.0,Clear
+2026-05-07,Jaipur,34.3,40.0,0.0,Clear
+2026-05-07,Kanpur,30.5,58.2,0.6,Clear
+2026-05-07,Lucknow,26.9,70.5,1.6,Clear
+2026-05-07,Noida,28.5,38.2,1.9,Clear
+2026-05-07,Patna,34.0,53.7,1.9,Clear
+2026-05-07,Prayagraj,32.1,56.0,0.0,Clear
+2026-05-07,Varanasi,29.6,55.5,0.0,Clear
+2026-05-08,Agra,29.7,54.0,0.0,Clear
+2026-05-08,Delhi,31.1,53.8,0.0,Clear
+2026-05-08,Gorakhpur,33.4,59.5,0.3,Clear
+2026-05-08,Jaipur,33.5,33.1,0.0,Clear
+2026-05-08,Kanpur,31.3,52.2,0.0,Clear
+2026-05-08,Lucknow,28.5,54.8,0.0,Clear
+2026-05-08,Noida,27.9,54.5,0.0,Clear
+2026-05-08,Prayagraj,30.9,55.5,0.0,Clear
+2026-05-08,Varanasi,31.7,58.1,1.0,Clear
+2026-05-09,Agra,35.0,36.5,1.1,Hot
+2026-05-09,Delhi,34.6,51.1,0.0,Clear
+2026-05-09,Gorakhpur,29.1,60.0,2.2,Clear
+2026-05-09,Kanpur,34.2,48.0,0.0,Clear
+2026-05-09,Lucknow,30.2,64.3,1.4,Clear
+2026-05-09,Noida,32.7,51.1,0.3,Clear
+2026-05-09,Prayagraj,36.4,56.1,0.0,Hot
+2026-05-09,Varanasi,31.3,59.3,1.7,Clear
+2026-05-10,Agra,29.0,55.3,0.5,Clear
+2026-05-10,Gorakhpur,31.5,53.7,0.3,Clear
+2026-05-10,Jaipur,36.1,33.5,2.0,Hot
+2026-05-10,Kanpur,30.4,60.9,0.0,Clear
+2026-05-10,Lucknow,34.7,39.7,0.1,Clear
+2026-05-10,Noida,30.7,37.7,1.3,Clear
+2026-05-10,Prayagraj,33.4,55.2,0.0,Clear
+2026-05-11,Agra,34.3,53.0,0.1,Clear
+2026-05-11,Delhi,34.0,47.5,0.0,Clear
+2026-05-11,Gorakhpur,33.4,55.9,0.1,Clear
+2026-05-11,Jaipur,30.9,30.4,0.4,Clear
+2026-05-11,Kanpur,30.1,56.5,0.0,Clear
+2026-05-11,Lucknow,33.8,61.0,0.1,Clear
+2026-05-11,Noida,27.3,53.5,0.7,Clear
+2026-05-11,Patna,28.3,65.1,1.0,Clear
+2026-05-11,Prayagraj,28.0,62.9,0.8,Clear
+2026-05-11,Varanasi,33.9,63.8,0.4,Clear
+2026-05-12,Agra,35.6,36.1,1.6,Hot
+2026-05-12,Gorakhpur,31.3,57.3,2.0,Clear
+2026-05-12,Kanpur,28.8,56.9,0.0,Clear
+2026-05-12,Lucknow,32.3,60.8,0.0,Clear
+2026-05-12,Noida,28.4,60.4,1.8,Clear
+2026-05-12,Prayagraj,34.6,50.9,0.0,Clear
+2026-05-12,Varanasi,35.0,46.5,0.0,Hot
+2026-05-13,Agra,36.1,57.5,0.6,Hot
+2026-05-13,Gorakhpur,34.4,59.3,0.0,Clear
+2026-05-13,Jaipur,33.6,35.1,0.7,Clear
+2026-05-13,Kanpur,33.6,57.5,0.0,Clear
+2026-05-13,Lucknow,29.9,54.9,1.4,Clear
+2026-05-13,Noida,32.7,37.3,1.4,Clear
+2026-05-13,Patna,33.4,56.0,0.0,Clear
+2026-05-13,Prayagraj,32.2,53.0,0.3,Clear
+2026-05-13,Varanasi,38.3,56.9,1.1,Hot
+2026-05-14,Agra,33.2,54.1,1.3,Clear
+2026-05-14,Gorakhpur,28.9,64.8,1.0,Partly Cloudy
+2026-05-14,Jaipur,33.5,38.1,1.6,Clear
+2026-05-14,Kanpur,34.3,53.3,0.3,Clear
+2026-05-14,Lucknow,34.2,39.4,0.7,Clear
+2026-05-14,Noida,32.5,49.4,0.0,Clear
+2026-05-14,Prayagraj,36.7,35.6,0.0,Hot
+2026-05-14,Varanasi,31.7,59.8,1.4,Clear
+2026-05-15,Agra,32.3,46.6,0.0,Clear
+2026-05-15,Gorakhpur,32.1,51.5,0.0,Clear
+2026-05-15,Jaipur,33.7,40.2,0.0,Clear
+2026-05-15,Kanpur,33.4,44.1,1.1,Clear
+2026-05-15,Lucknow,32.2,39.8,1.1,Clear
+2026-05-15,Noida,30.9,49.7,2.8,Clear
+2026-05-15,Prayagraj,34.7,59.0,0.0,Clear
+2026-05-16,Agra,34.1,50.6,0.5,Clear
+2026-05-16,Gorakhpur,32.5,59.1,0.1,Clear
+2026-05-16,Jaipur,32.1,38.6,0.0,Clear
+2026-05-16,Kanpur,36.2,58.1,0.0,Hot
+2026-05-16,Lucknow,30.9,61.4,0.0,Clear
+2026-05-16,Noida,31.8,48.1,0.0,Clear
+2026-05-16,Patna,35.1,61.6,0.0,Hot
+2026-05-16,Prayagraj,32.4,58.9,0.6,Clear
+2026-05-16,Varanasi,32.6,46.4,0.8,Clear
+2026-05-17,Agra,30.8,61.9,1.0,Clear
+2026-05-17,Delhi,33.3,51.3,0.7,Clear
+2026-05-17,Gorakhpur,33.3,67.4,1.1,Clear
+2026-05-17,Kanpur,33.0,59.0,0.7,Clear
+2026-05-17,Lucknow,33.7,55.5,0.1,Clear
+2026-05-17,Noida,33.3,34.3,0.3,Clear
+2026-05-17,Patna,34.6,61.5,1.1,Clear
+2026-05-17,Prayagraj,33.3,58.0,1.0,Clear
+2026-05-17,Varanasi,33.0,61.6,0.0,Clear
+2026-05-18,Agra,32.6,40.6,0.0,Clear
+2026-05-18,Delhi,30.9,37.9,0.0,Clear
+2026-05-18,Gorakhpur,30.9,48.7,1.3,Clear
+2026-05-18,Kanpur,33.9,41.5,1.7,Clear
+2026-05-18,Lucknow,31.6,58.9,0.9,Clear
+2026-05-18,Noida,33.2,45.2,1.7,Clear
+2026-05-18,Patna,35.1,67.4,0.5,Hot
+2026-05-18,Prayagraj,34.7,58.3,0.5,Clear
+2026-05-18,Varanasi,31.9,62.5,2.6,Clear
+2026-05-19,Gorakhpur,34.1,54.1,0.7,Clear
+2026-05-19,Jaipur,33.8,52.6,0.0,Clear
+2026-05-19,Kanpur,32.9,54.8,1.4,Clear
+2026-05-19,Lucknow,28.1,61.4,1.7,Partly Cloudy
+2026-05-19,Noida,31.1,38.1,0.7,Clear
+2026-05-19,Patna,35.7,68.7,0.0,Hot
+2026-05-19,Prayagraj,33.2,48.2,0.0,Clear
+2026-05-19,Varanasi,33.8,57.7,0.0,Clear
+2026-05-20,Gorakhpur,34.2,56.2,0.0,Clear
+2026-05-20,Jaipur,35.9,39.1,0.2,Hot
+2026-05-20,Kanpur,33.6,47.6,0.0,Clear
+2026-05-20,Lucknow,32.3,49.0,0.0,Clear
+2026-05-20,Noida,32.9,49.6,0.0,Clear
+2026-05-20,Prayagraj,33.1,52.6,1.1,Clear
+2026-05-20,Varanasi,33.4,50.8,0.1,Clear
+2026-05-21,Delhi,31.9,39.3,0.0,Clear
+2026-05-21,Gorakhpur,35.1,72.3,0.7,Hot
+2026-05-21,Jaipur,34.5,32.2,0.7,Clear
+2026-05-21,Kanpur,32.9,56.5,1.5,Clear
+2026-05-21,Lucknow,30.9,37.8,0.1,Clear
+2026-05-21,Noida,35.9,42.2,0.0,Hot
+2026-05-21,Prayagraj,35.1,54.7,0.0,Hot
+2026-05-21,Varanasi,36.5,56.4,0.2,Hot
+2026-05-22,Agra,33.8,41.3,0.9,Clear
+2026-05-22,Gorakhpur,34.6,73.6,1.4,Clear
+2026-05-22,Jaipur,33.7,51.9,0.0,Clear
+2026-05-22,Kanpur,31.2,39.0,2.3,Clear
+2026-05-22,Lucknow,32.3,52.6,0.3,Clear
+2026-05-22,Noida,34.9,46.6,1.7,Clear
+2026-05-22,Prayagraj,34.2,55.7,0.0,Clear
+2026-05-22,Varanasi,32.3,48.5,1.6,Clear
+2026-05-23,Agra,37.7,43.0,2.1,Hot
+2026-05-23,Gorakhpur,33.7,68.2,1.6,Clear
+2026-05-23,Jaipur,36.8,43.1,1.0,Hot
+2026-05-23,Kanpur,34.2,47.5,2.0,Clear
+2026-05-23,Lucknow,30.7,51.8,0.0,Clear
+2026-05-23,Noida,27.7,39.0,0.0,Clear
+2026-05-23,Prayagraj,33.8,45.1,1.5,Clear
+2026-05-23,Varanasi,34.9,50.6,0.0,Clear
+2026-05-24,Agra,35.2,38.8,1.1,Hot
+2026-05-24,Delhi,32.8,44.2,0.0,Clear
+2026-05-24,Gorakhpur,33.1,71.4,1.2,Clear
+2026-05-24,Kanpur,31.5,48.9,0.9,Clear
+2026-05-24,Lucknow,30.6,48.4,0.4,Clear
+2026-05-24,Noida,30.4,35.5,0.2,Clear
+2026-05-24,Prayagraj,31.8,43.7,0.6,Clear
+2026-05-24,Varanasi,36.1,61.8,0.0,Hot
+2026-05-25,Agra,30.8,57.6,1.2,Clear
+2026-05-25,Gorakhpur,31.8,68.0,0.0,Clear
+2026-05-25,Jaipur,31.5,41.3,2.3,Clear
+2026-05-25,Kanpur,32.5,49.2,0.0,Clear
+2026-05-25,Lucknow,32.4,52.1,0.0,Clear
+2026-05-25,Noida,30.4,48.3,1.1,Clear
+2026-05-25,Patna,36.2,59.3,1.4,Hot
+2026-05-25,Prayagraj,37.4,43.8,1.1,Hot
+2026-05-25,Varanasi,35.2,49.4,1.9,Hot
+2026-05-26,Agra,34.9,52.4,0.0,Clear
+2026-05-26,Gorakhpur,36.6,63.2,0.4,Hot
+2026-05-26,Jaipur,36.8,36.7,1.8,Hot
+2026-05-26,Kanpur,34.9,42.2,0.0,Clear
+2026-05-26,Lucknow,33.1,46.5,0.0,Clear
+2026-05-26,Noida,31.1,48.2,0.0,Clear
+2026-05-26,Patna,33.8,51.0,2.1,Clear
+2026-05-26,Prayagraj,32.1,55.5,2.0,Clear
+2026-05-27,Agra,34.7,43.2,0.0,Clear
+2026-05-27,Gorakhpur,37.5,67.8,0.3,Hot
+2026-05-27,Jaipur,37.9,42.9,0.5,Hot
+2026-05-27,Kanpur,35.2,48.6,0.0,Hot
+2026-05-27,Lucknow,34.8,52.1,1.4,Clear
+2026-05-27,Noida,33.8,57.6,1.5,Clear
+2026-05-27,Prayagraj,35.1,50.6,0.0,Hot
+2026-05-27,Varanasi,35.0,44.8,0.6,Hot
+2026-05-28,Agra,32.7,48.2,0.0,Clear
+2026-05-28,Gorakhpur,37.7,70.8,1.1,Hot
+2026-05-28,Jaipur,32.2,35.8,0.0,Clear
+2026-05-28,Kanpur,35.0,48.0,0.4,Hot
+2026-05-28,Lucknow,32.5,58.0,0.0,Clear
+2026-05-28,Noida,36.6,38.9,0.2,Hot
+2026-05-28,Patna,36.1,66.3,0.7,Hot
+2026-05-28,Prayagraj,34.0,59.1,2.0,Clear
+2026-05-28,Varanasi,34.5,51.1,0.3,Clear
+2026-05-29,Agra,38.3,47.4,0.0,Hot
+2026-05-29,Gorakhpur,30.8,49.7,0.0,Clear
+2026-05-29,Jaipur,33.1,32.1,0.0,Clear
+2026-05-29,Kanpur,36.4,62.7,0.6,Hot
+2026-05-29,Lucknow,33.5,53.0,0.4,Clear
+2026-05-29,Noida,35.9,49.7,2.0,Hot
+2026-05-29,Patna,36.5,61.5,0.5,Hot
+2026-05-29,Prayagraj,33.0,45.5,0.4,Clear
+2026-05-30,Agra,32.5,47.4,1.5,Clear
+2026-05-30,Delhi,33.1,29.4,0.3,Clear
+2026-05-30,Gorakhpur,37.2,61.6,0.8,Hot
+2026-05-30,Kanpur,32.9,46.2,0.2,Clear
+2026-05-30,Lucknow,37.0,57.6,0.0,Hot
+2026-05-30,Noida,34.9,46.3,1.2,Clear
+2026-05-30,Prayagraj,38.1,57.4,0.0,Hot
+2026-05-30,Varanasi,32.4,50.5,1.2,Clear
+2026-05-31,Agra,34.1,48.5,0.0,Clear
+2026-05-31,Delhi,36.7,39.5,0.5,Hot
+2026-05-31,Gorakhpur,31.3,65.2,0.9,Clear
+2026-05-31,Jaipur,37.0,56.0,0.7,Hot
+2026-05-31,Kanpur,38.5,42.3,0.1,Hot
+2026-05-31,Lucknow,35.2,42.0,1.9,Hot
+2026-05-31,Noida,32.1,49.9,0.9,Clear
+2026-05-31,Patna,33.6,50.5,0.0,Clear
+2026-05-31,Prayagraj,36.6,69.6,0.0,Hot
+2026-05-31,Varanasi,31.2,63.7,0.1,Clear
+2026-06-01,Agra,36.8,47.6,2.3,Hot
+2026-06-01,Delhi,34.3,43.6,5.3,Partly Cloudy
+2026-06-01,Gorakhpur,41.3,57.4,1.2,Hot
+2026-06-01,Jaipur,37.2,35.8,0.2,Hot
+2026-06-01,Kanpur,33.7,48.9,1.1,Clear
+2026-06-01,Lucknow,33.6,62.0,2.7,Partly Cloudy
+2026-06-01,Noida,36.6,57.9,1.4,Hot
+2026-06-01,Patna,34.6,59.3,0.4,Clear
+2026-06-01,Prayagraj,32.2,50.4,0.5,Clear
+2026-06-01,Varanasi,31.3,47.0,2.9,Partly Cloudy
+2026-06-02,Agra,35.7,35.8,5.2,Partly Cloudy
+2026-06-02,Delhi,36.9,36.0,0.0,Partly Cloudy
+2026-06-02,Gorakhpur,34.0,58.3,0.0,Clear
+2026-06-02,Jaipur,32.4,41.1,1.1,Clear
+2026-06-02,Kanpur,35.0,58.2,5.8,Partly Cloudy
+2026-06-02,Lucknow,34.2,53.4,0.0,Partly Cloudy
+2026-06-02,Noida,32.8,48.0,0.4,Clear
+2026-06-02,Prayagraj,34.6,49.5,0.0,Partly Cloudy
+2026-06-02,Varanasi,35.4,51.8,0.5,Hot
+2026-06-03,Gorakhpur,34.9,48.3,0.0,Partly Cloudy
+2026-06-03,Jaipur,35.4,37.6,0.0,Hot
+2026-06-03,Kanpur,36.1,44.1,0.0,Hot
+2026-06-03,Lucknow,34.1,40.4,0.7,Clear
+2026-06-03,Noida,33.9,49.5,1.0,Clear
+2026-06-03,Patna,38.1,70.8,0.0,Hot
+2026-06-03,Varanasi,37.1,60.0,1.0,Partly Cloudy
+2026-06-04,Agra,34.2,53.2,8.9,Partly Cloudy
+2026-06-04,Delhi,35.3,32.8,1.0,Hot
+2026-06-04,Gorakhpur,35.0,62.7,3.3,Partly Cloudy
+2026-06-04,Jaipur,35.4,28.1,2.0,Hot
+2026-06-04,Kanpur,36.4,40.6,0.5,Partly Cloudy
+2026-06-04,Lucknow,30.9,43.2,3.0,Clear
+2026-06-04,Noida,37.0,53.4,0.0,Hot
+2026-06-04,Prayagraj,35.4,65.8,0.9,Partly Cloudy
+2026-06-04,Varanasi,36.3,64.9,6.6,Partly Cloudy
+2026-06-05,Agra,33.2,39.1,0.7,Clear
+2026-06-05,Delhi,38.8,56.7,1.2,Hot
+2026-06-05,Gorakhpur,34.6,63.4,1.6,Partly Cloudy
+2026-06-05,Jaipur,39.0,30.3,1.7,Hot
+2026-06-05,Kanpur,36.3,54.6,0.0,Hot
+2026-06-05,Lucknow,31.8,52.9,0.3,Clear
+2026-06-05,Noida,29.9,43.0,0.2,Partly Cloudy
+2026-06-05,Patna,34.2,67.3,1.9,Clear
+2026-06-05,Prayagraj,34.0,53.8,0.5,Clear
+2026-06-05,Varanasi,32.9,40.5,1.2,Partly Cloudy
+2026-06-06,Agra,35.5,48.0,0.4,Partly Cloudy
+2026-06-06,Gorakhpur,30.5,60.8,0.1,Clear
+2026-06-06,Jaipur,36.3,44.4,1.3,Partly Cloudy
+2026-06-06,Kanpur,36.4,54.3,0.9,Partly Cloudy
+2026-06-06,Lucknow,36.7,54.1,1.6,Partly Cloudy
+2026-06-06,Noida,37.3,38.9,6.9,Partly Cloudy
+2026-06-06,Patna,35.6,60.2,2.4,Partly Cloudy
+2026-06-06,Prayagraj,36.7,41.5,1.7,Hot
+2026-06-06,Varanasi,28.6,59.4,3.8,Partly Cloudy
+2026-06-07,Agra,37.1,38.9,0.0,Hot
+2026-06-07,Gorakhpur,36.3,65.2,1.5,Hot
+2026-06-07,Jaipur,36.2,44.3,0.1,Hot
+2026-06-07,Kanpur,35.7,63.4,1.9,Hot
+2026-06-07,Lucknow,36.0,36.8,1.0,Hot
+2026-06-07,Noida,36.6,39.7,2.7,Partly Cloudy
+2026-06-07,Patna,35.7,70.3,1.6,Hot
+2026-06-07,Prayagraj,35.7,58.6,0.7,Hot
+2026-06-07,Varanasi,36.2,43.5,10.3,Partly Cloudy
+2026-06-08,Agra,39.4,27.6,0.0,Hot
+2026-06-08,Gorakhpur,35.5,52.2,0.5,Partly Cloudy
+2026-06-08,Jaipur,37.0,39.0,1.7,Hot
+2026-06-08,Kanpur,35.4,40.3,1.7,Partly Cloudy
+2026-06-08,Lucknow,35.7,57.7,1.8,Partly Cloudy
+2026-06-08,Noida,34.7,45.3,1.3,Clear
+2026-06-08,Prayagraj,32.7,32.2,0.7,Clear
+2026-06-08,Varanasi,41.2,54.4,1.9,Hot
+2026-06-09,Agra,37.2,51.7,0.0,Hot
+2026-06-09,Gorakhpur,36.1,62.8,0.5,Hot
+2026-06-09,Jaipur,33.1,44.4,2.0,Partly Cloudy
+2026-06-09,Kanpur,37.9,44.5,0.0,Hot
+2026-06-09,Lucknow,32.7,55.0,0.9,Clear
+2026-06-09,Noida,37.6,51.5,0.3,Hot
+2026-06-09,Patna,36.5,57.2,0.9,Hot
+2026-06-09,Prayagraj,36.3,50.4,0.9,Hot
+2026-06-09,Varanasi,33.8,50.3,1.6,Partly Cloudy
+2026-06-10,Agra,33.1,40.9,2.3,Clear
+2026-06-10,Jaipur,39.0,38.7,3.3,Hot
+2026-06-10,Kanpur,37.3,56.5,0.3,Hot
+2026-06-10,Lucknow,37.8,48.4,0.0,Hot
+2026-06-10,Noida,34.2,55.7,2.3,Partly Cloudy
+2026-06-10,Patna,33.0,67.7,0.5,Clear
+2026-06-10,Prayagraj,36.4,47.1,1.2,Hot
+2026-06-10,Varanasi,35.2,53.4,0.2,Hot
+2026-06-11,Agra,37.3,55.1,0.9,Hot
+2026-06-11,Delhi,36.4,48.6,0.3,Partly Cloudy
+2026-06-11,Gorakhpur,33.2,65.1,1.9,Partly Cloudy
+2026-06-11,Jaipur,40.7,38.7,0.9,Hot
+2026-06-11,Kanpur,35.8,61.9,6.0,Partly Cloudy
+2026-06-11,Lucknow,34.7,59.2,0.7,Clear
+2026-06-11,Noida,34.3,36.2,0.4,Clear
+2026-06-11,Prayagraj,33.8,62.5,0.4,Clear
+2026-06-11,Varanasi,38.6,49.6,0.4,Hot
+2026-06-12,Agra,37.2,48.9,1.5,Hot
+2026-06-12,Gorakhpur,34.1,52.3,0.2,Clear
+2026-06-12,Jaipur,37.5,54.3,0.4,Partly Cloudy
+2026-06-12,Kanpur,36.1,47.6,0.0,Partly Cloudy
+2026-06-12,Lucknow,30.3,46.9,0.6,Partly Cloudy
+2026-06-12,Noida,38.1,33.5,2.6,Hot
+2026-06-12,Patna,35.6,63.6,0.1,Hot
+2026-06-12,Prayagraj,38.3,48.9,0.5,Hot
+2026-06-12,Varanasi,34.1,58.7,0.0,Clear
+2026-06-13,Agra,37.2,42.5,0.7,Partly Cloudy
+2026-06-13,Gorakhpur,38.8,50.5,0.0,Hot
+2026-06-13,Jaipur,36.6,38.3,0.1,Hot
+2026-06-13,Kanpur,37.5,41.6,1.8,Partly Cloudy
+2026-06-13,Lucknow,33.1,49.1,7.1,Partly Cloudy
+2026-06-13,Noida,35.6,42.6,1.4,Hot
+2026-06-13,Prayagraj,38.4,51.9,0.9,Hot
+2026-06-14,Agra,36.2,43.6,1.9,Hot
+2026-06-14,Gorakhpur,37.9,67.8,1.9,Partly Cloudy
+2026-06-14,Jaipur,38.1,34.4,1.8,Hot
+2026-06-14,Kanpur,34.8,52.2,0.0,Clear
+2026-06-14,Lucknow,38.6,56.4,2.1,Hot
+2026-06-14,Noida,35.3,39.7,2.4,Partly Cloudy
+2026-06-14,Prayagraj,39.2,43.2,3.5,Hot
+2026-06-14,Varanasi,36.7,62.7,1.8,Hot
+2026-06-15,Agra,34.1,49.9,0.2,Clear
+2026-06-15,Gorakhpur,37.7,60.2,1.3,Hot
+2026-06-15,Kanpur,35.9,45.3,8.9,Partly Cloudy
+2026-06-15,Lucknow,33.3,44.8,5.4,Partly Cloudy
+2026-06-15,Noida,32.8,47.8,0.7,Partly Cloudy
+2026-06-15,Prayagraj,36.8,57.7,0.3,Hot
+2026-06-15,Varanasi,39.1,69.6,3.6,Hot
+2026-06-16,Agra,34.3,51.5,1.2,Clear
+2026-06-16,Delhi,36.7,49.0,10.7,Partly Cloudy
+2026-06-16,Gorakhpur,36.9,58.5,0.4,Partly Cloudy
+2026-06-16,Kanpur,36.7,50.5,0.9,Partly Cloudy
+2026-06-16,Lucknow,37.5,53.1,0.0,Hot
+2026-06-16,Noida,39.5,37.1,2.3,Partly Cloudy
+2026-06-16,Patna,34.1,71.2,1.0,Clear
+2026-06-16,Prayagraj,37.0,51.4,1.5,Hot
+2026-06-16,Varanasi,39.1,65.5,1.5,Hot
+2026-06-17,Agra,37.5,57.6,5.9,Partly Cloudy
+2026-06-17,Delhi,35.9,56.9,1.4,Partly Cloudy
+2026-06-17,Gorakhpur,37.8,77.2,1.3,Hot
+2026-06-17,Jaipur,39.8,49.3,0.1,Hot
+2026-06-17,Kanpur,37.7,37.3,0.0,Hot
+2026-06-17,Lucknow,37.7,59.1,0.0,Hot
+2026-06-17,Noida,40.2,46.1,0.1,Hot
+2026-06-17,Prayagraj,36.0,56.9,2.4,Hot
+2026-06-17,Varanasi,41.5,49.9,3.0,Hot
+2026-06-18,Agra,39.0,62.5,1.9,Partly Cloudy
+2026-06-18,Gorakhpur,34.9,68.1,0.8,Clear
+2026-06-18,Kanpur,33.1,57.1,2.4,Clear
+2026-06-18,Lucknow,35.7,57.7,0.0,Hot
+2026-06-18,Noida,35.1,34.6,2.1,Hot
+2026-06-18,Patna,37.1,60.0,0.0,Partly Cloudy
+2026-06-18,Prayagraj,36.7,46.0,0.0,Partly Cloudy
+2026-06-18,Varanasi,33.0,60.9,0.7,Clear
+2026-06-19,Gorakhpur,34.6,57.9,4.7,Partly Cloudy
+2026-06-19,Jaipur,40.1,31.9,1.1,Hot
+2026-06-19,Lucknow,38.0,55.7,0.1,Hot
+2026-06-19,Noida,34.5,53.7,1.1,Clear
+2026-06-19,Patna,34.3,47.6,0.0,Clear
+2026-06-19,Prayagraj,36.4,49.8,4.2,Partly Cloudy
+2026-06-20,Agra,37.6,48.5,1.8,Hot
+2026-06-20,Delhi,36.2,50.5,0.4,Hot
+2026-06-20,Gorakhpur,38.9,62.2,0.9,Hot
+2026-06-20,Jaipur,40.9,31.1,2.2,Partly Cloudy
+2026-06-20,Kanpur,32.2,46.6,0.2,Clear
+2026-06-20,Lucknow,38.3,42.5,1.3,Hot
+2026-06-20,Noida,36.4,39.4,1.4,Partly Cloudy
+2026-06-20,Patna,38.6,55.4,0.0,Hot
+2026-06-20,Prayagraj,37.5,63.1,0.0,Hot
+2026-06-21,Agra,35.0,50.3,0.0,Hot
+2026-06-21,Delhi,39.9,42.5,1.0,Hot
+2026-06-21,Gorakhpur,36.6,68.5,0.6,Partly Cloudy
+2026-06-21,Jaipur,39.3,47.3,0.0,Hot
+2026-06-21,Lucknow,36.5,58.0,0.4,Hot
+2026-06-21,Noida,34.8,54.1,0.0,Clear
+2026-06-21,Prayagraj,35.0,41.8,0.9,Hot
+2026-06-21,Varanasi,32.9,50.1,4.4,Clear
+2026-06-22,Agra,34.4,46.5,0.8,Partly Cloudy
+2026-06-22,Delhi,34.7,40.6,1.4,Partly Cloudy
+2026-06-22,Gorakhpur,38.9,60.3,2.4,Partly Cloudy
+2026-06-22,Jaipur,36.8,34.2,0.5,Partly Cloudy
+2026-06-22,Kanpur,35.2,63.5,1.0,Partly Cloudy
+2026-06-22,Lucknow,36.8,53.8,0.0,Partly Cloudy
+2026-06-22,Noida,35.2,49.3,1.2,Hot
+2026-06-22,Patna,36.7,49.7,0.5,Hot
+2026-06-22,Prayagraj,38.0,53.2,2.8,Hot
+2026-06-22,Varanasi,37.3,43.6,0.0,Hot
+2026-06-23,Agra,37.2,50.2,1.6,Hot
+2026-06-23,Kanpur,35.7,43.5,0.8,Partly Cloudy
+2026-06-23,Lucknow,39.2,54.6,0.6,Partly Cloudy
+2026-06-23,Noida,37.7,51.4,6.7,Partly Cloudy
+2026-06-23,Prayagraj,38.0,45.7,0.4,Hot
+2026-06-24,Agra,40.4,55.0,0.0,Hot
+2026-06-24,Gorakhpur,38.0,63.3,0.5,Partly Cloudy
+2026-06-24,Jaipur,39.3,28.9,0.0,Partly Cloudy
+2026-06-24,Lucknow,36.7,60.7,1.2,Hot
+2026-06-24,Noida,37.1,39.6,0.0,Hot
+2026-06-24,Patna,38.3,54.9,1.1,Hot
+2026-06-24,Prayagraj,37.2,41.3,0.0,Partly Cloudy
+2026-06-25,Agra,41.4,55.3,4.2,Partly Cloudy
+2026-06-25,Gorakhpur,40.2,59.7,0.3,Hot
+2026-06-25,Jaipur,39.3,40.9,0.1,Hot
+2026-06-25,Kanpur,33.7,43.5,0.0,Clear
+2026-06-25,Lucknow,37.1,39.9,1.6,Hot
+2026-06-25,Noida,35.4,50.4,0.6,Hot
+2026-06-25,Patna,35.2,59.6,1.6,Hot
+2026-06-25,Prayagraj,38.4,57.5,1.4,Partly Cloudy
+2026-06-25,Varanasi,37.4,55.8,1.7,Hot
+2026-06-26,Gorakhpur,38.0,61.0,0.0,Hot
+2026-06-26,Jaipur,38.4,37.3,0.6,Hot
+2026-06-26,Kanpur,36.6,62.4,0.8,Hot
+2026-06-26,Lucknow,35.5,51.0,0.0,Hot
+2026-06-26,Noida,36.9,38.0,2.5,Partly Cloudy
+2026-06-26,Prayagraj,37.6,62.9,0.0,Partly Cloudy
+2026-06-26,Varanasi,36.0,66.8,0.0,Partly Cloudy
+2026-06-27,Agra,38.9,48.6,1.4,Hot
+2026-06-27,Gorakhpur,39.1,53.1,1.3,Hot
+2026-06-27,Jaipur,34.1,44.5,2.4,Clear
+2026-06-27,Kanpur,38.3,59.8,1.9,Partly Cloudy
+2026-06-27,Lucknow,38.1,41.8,1.0,Partly Cloudy
+2026-06-27,Noida,40.3,36.7,0.2,Hot
+2026-06-27,Prayagraj,38.8,43.9,4.9,Partly Cloudy
+2026-06-27,Varanasi,37.6,58.8,2.8,Partly Cloudy
+2026-06-28,Gorakhpur,36.7,54.8,0.0,Partly Cloudy
+2026-06-28,Jaipur,37.1,34.0,0.7,Hot
+2026-06-28,Kanpur,41.1,38.4,0.4,Hot
+2026-06-28,Lucknow,35.9,51.8,2.1,Partly Cloudy
+2026-06-28,Noida,37.0,44.6,2.1,Hot
+2026-06-28,Prayagraj,42.8,52.7,0.7,Hot
+2026-06-28,Varanasi,35.5,42.4,1.3,Partly Cloudy
+2026-06-29,Agra,35.8,60.0,0.9,Partly Cloudy
+2026-06-29,Delhi,34.8,53.8,2.4,Clear
+2026-06-29,Gorakhpur,37.7,58.8,0.4,Hot
+2026-06-29,Jaipur,40.4,42.2,0.7,Hot
+2026-06-29,Kanpur,37.4,45.6,0.7,Partly Cloudy
+2026-06-29,Lucknow,35.8,50.1,0.0,Hot
+2026-06-29,Noida,37.9,35.1,0.0,Hot
+2026-06-29,Prayagraj,39.0,55.3,2.5,Partly Cloudy
+2026-06-29,Varanasi,36.9,59.6,0.0,Hot
+2026-06-30,Agra,37.0,55.6,1.8,Hot
+2026-06-30,Gorakhpur,36.5,66.3,0.6,Partly Cloudy
+2026-06-30,Jaipur,39.0,47.0,0.8,Hot
+2026-06-30,Kanpur,36.3,53.2,0.0,Hot
+2026-06-30,Lucknow,38.6,43.6,1.1,Hot
+2026-06-30,Noida,40.2,39.4,0.8,Partly Cloudy
+2026-06-30,Patna,37.2,67.4,0.8,Hot
+2026-06-30,Prayagraj,38.8,41.4,1.0,Hot
+2026-06-30,Varanasi,35.4,58.5,0.2,Hot
+2026-07-01,Agra,39.6,44.0,5.9,Rainy
+2026-07-01,Gorakhpur,38.9,64.0,9.9,Rainy
+2026-07-01,Kanpur,35.0,49.0,6.5,Rainy
+2026-07-01,Lucknow,34.0,54.6,0.0,Partly Cloudy
+2026-07-01,Noida,35.9,32.6,2.9,Partly Cloudy
+2026-07-01,Prayagraj,38.8,43.5,3.5,Rainy
+2026-07-01,Varanasi,33.5,58.3,4.9,Partly Cloudy
+2026-07-02,Agra,38.3,49.2,0.8,Partly Cloudy
+2026-07-02,Gorakhpur,38.1,61.3,5.8,Partly Cloudy
+2026-07-02,Jaipur,37.6,23.9,2.7,Rainy
+2026-07-02,Kanpur,38.6,50.7,2.8,Partly Cloudy
+2026-07-02,Lucknow,35.6,45.3,8.0,Partly Cloudy
+2026-07-02,Noida,37.5,53.0,12.4,Rainy
+2026-07-02,Patna,38.7,50.6,6.9,Rainy
+2026-07-02,Prayagraj,39.7,57.7,5.4,Partly Cloudy
+2026-07-02,Varanasi,36.9,55.4,4.2,Partly Cloudy
+2026-07-03,Agra,38.2,45.6,5.1,Partly Cloudy
+2026-07-03,Gorakhpur,38.8,59.5,1.9,Partly Cloudy
+2026-07-03,Jaipur,38.8,37.2,5.1,Rainy
+2026-07-03,Kanpur,35.3,51.0,0.0,Rainy
+2026-07-03,Lucknow,38.2,54.5,2.5,Partly Cloudy
+2026-07-03,Noida,33.1,59.4,5.9,Rainy
+2026-07-03,Patna,38.7,45.7,1.3,Partly Cloudy
+2026-07-03,Prayagraj,40.3,52.7,0.8,Rainy
+2026-07-03,Varanasi,33.5,47.7,8.6,Rainy
+2026-07-04,Agra,37.4,48.1,2.2,Rainy
+2026-07-04,Gorakhpur,34.1,42.6,1.3,Partly Cloudy
+2026-07-04,Jaipur,38.1,47.8,7.5,Partly Cloudy
+2026-07-04,Kanpur,40.4,34.8,0.0,Partly Cloudy
+2026-07-04,Lucknow,37.0,50.7,0.0,Partly Cloudy
+2026-07-04,Noida,36.5,44.6,5.6,Rainy
+2026-07-04,Prayagraj,35.6,54.7,0.7,Partly Cloudy
+2026-07-04,Varanasi,38.8,48.3,3.5,Partly Cloudy
+2026-07-05,Agra,37.9,40.5,6.1,Partly Cloudy
+2026-07-05,Gorakhpur,38.8,61.9,2.6,Partly Cloudy
+2026-07-05,Jaipur,40.5,48.5,5.6,Rainy
+2026-07-05,Kanpur,36.3,47.3,1.2,Rainy
+2026-07-05,Lucknow,40.3,41.6,5.8,Partly Cloudy
+2026-07-05,Noida,35.2,39.1,1.4,Partly Cloudy
+2026-07-05,Prayagraj,37.8,56.4,7.7,Rainy
+2026-07-05,Varanasi,35.4,60.7,3.4,Rainy
+2026-07-06,Agra,39.0,34.6,4.4,Partly Cloudy
+2026-07-06,Delhi,38.7,52.1,3.1,Rainy
+2026-07-06,Gorakhpur,36.8,68.1,4.1,Rainy
+2026-07-06,Jaipur,41.9,34.4,3.6,Rainy
+2026-07-06,Kanpur,35.9,44.6,1.1,Partly Cloudy
+2026-07-06,Lucknow,35.3,58.2,0.3,Partly Cloudy
+2026-07-06,Noida,34.5,38.2,6.7,Rainy
+2026-07-06,Patna,30.6,54.9,4.4,Partly Cloudy
+2026-07-06,Prayagraj,35.5,49.3,2.9,Rainy
+2026-07-06,Varanasi,33.3,47.6,1.8,Partly Cloudy
+2026-07-07,Agra,32.7,43.5,2.9,Partly Cloudy
+2026-07-07,Gorakhpur,40.0,70.5,5.1,Rainy
+2026-07-07,Jaipur,40.5,44.8,10.2,Rainy
+2026-07-07,Kanpur,35.1,51.5,6.3,Partly Cloudy
+2026-07-07,Lucknow,32.1,58.1,0.5,Partly Cloudy
+2026-07-07,Noida,36.2,38.8,2.3,Partly Cloudy
+2026-07-07,Prayagraj,38.9,44.6,11.2,Partly Cloudy
+2026-07-08,Agra,33.6,43.7,0.0,Partly Cloudy
+2026-07-08,Gorakhpur,38.5,57.5,3.8,Partly Cloudy
+2026-07-08,Jaipur,40.3,23.3,0.3,Partly Cloudy
+2026-07-08,Kanpur,40.3,38.8,6.0,Rainy
+2026-07-08,Lucknow,38.4,53.2,6.0,Rainy
+2026-07-08,Noida,33.2,48.5,1.1,Partly Cloudy
+2026-07-08,Prayagraj,37.2,51.0,4.6,Rainy
+2026-07-08,Varanasi,41.4,41.2,3.9,Partly Cloudy
+2026-07-09,Agra,38.9,48.5,0.9,Rainy
+2026-07-09,Gorakhpur,37.2,61.0,6.6,Partly Cloudy
+2026-07-09,Jaipur,36.3,26.4,4.0,Partly Cloudy
+2026-07-09,Kanpur,40.4,49.1,5.5,Rainy
+2026-07-09,Lucknow,38.6,47.4,5.5,Partly Cloudy
+2026-07-09,Noida,34.0,38.4,6.5,Rainy
+2026-07-09,Patna,40.7,71.3,8.7,Partly Cloudy
+2026-07-09,Prayagraj,40.8,69.7,13.3,Partly Cloudy
+2026-07-09,Varanasi,40.9,42.0,1.3,Partly Cloudy
+2026-07-10,Gorakhpur,38.0,66.9,0.0,Rainy
+2026-07-10,Kanpur,40.5,45.5,2.2,Partly Cloudy
+2026-07-10,Lucknow,38.4,57.3,0.0,Partly Cloudy
+2026-07-10,Noida,37.3,46.6,5.9,Partly Cloudy
+2026-07-10,Patna,35.7,54.0,3.9,Partly Cloudy
+2026-07-10,Prayagraj,37.3,35.0,5.9,Rainy
+2026-07-10,Varanasi,36.2,51.7,6.1,Rainy
+2026-07-11,Agra,36.9,46.8,3.6,Rainy
+2026-07-11,Gorakhpur,38.6,56.6,0.0,Partly Cloudy
+2026-07-11,Jaipur,36.9,37.4,3.1,Partly Cloudy
+2026-07-11,Kanpur,40.6,60.4,4.3,Partly Cloudy
+2026-07-11,Lucknow,34.4,47.4,0.0,Partly Cloudy
+2026-07-11,Prayagraj,35.6,42.4,0.0,Partly Cloudy
+2026-07-11,Varanasi,40.7,49.6,5.3,Partly Cloudy
+2026-07-12,Agra,39.5,48.7,2.1,Partly Cloudy
+2026-07-12,Delhi,39.1,46.9,5.4,Partly Cloudy
+2026-07-12,Gorakhpur,40.8,62.1,5.2,Partly Cloudy
+2026-07-12,Jaipur,38.0,30.9,3.0,Rainy
+2026-07-12,Kanpur,37.8,48.2,9.4,Rainy
+2026-07-12,Lucknow,36.5,55.1,2.3,Rainy
+2026-07-12,Noida,35.9,42.4,6.0,Partly Cloudy
+2026-07-12,Prayagraj,38.1,46.8,8.4,Rainy
+2026-07-12,Varanasi,41.0,46.7,0.6,Partly Cloudy
+2026-07-13,Agra,36.4,32.3,0.0,Partly Cloudy
+2026-07-13,Delhi,36.5,42.7,1.0,Partly Cloudy
+2026-07-13,Gorakhpur,39.3,60.1,1.8,Partly Cloudy
+2026-07-13,Kanpur,39.1,46.7,4.6,Partly Cloudy
+2026-07-13,Lucknow,38.0,41.8,3.3,Partly Cloudy
+2026-07-13,Noida,35.5,47.7,0.9,Partly Cloudy
+2026-07-13,Patna,36.4,57.7,2.1,Partly Cloudy
+2026-07-13,Prayagraj,37.7,50.2,7.2,Rainy
+2026-07-13,Varanasi,38.8,42.1,2.9,Partly Cloudy
+2026-07-14,Agra,38.1,40.8,3.9,Partly Cloudy
+2026-07-14,Gorakhpur,33.2,45.8,5.7,Partly Cloudy
+2026-07-14,Jaipur,40.2,39.0,8.6,Rainy
+2026-07-14,Kanpur,38.5,57.9,5.2,Rainy
+2026-07-14,Lucknow,35.6,45.3,0.6,Partly Cloudy
+2026-07-14,Noida,37.5,39.7,7.9,Partly Cloudy
+2026-07-14,Prayagraj,35.2,53.0,4.8,Rainy
+2026-07-14,Varanasi,35.7,55.4,0.0,Partly Cloudy
+2026-07-15,Agra,33.2,44.5,4.5,Rainy
+2026-07-15,Delhi,39.2,46.7,8.0,Partly Cloudy
+2026-07-15,Gorakhpur,35.8,55.8,6.8,Partly Cloudy
+2026-07-15,Jaipur,35.1,34.3,4.7,Partly Cloudy
+2026-07-15,Kanpur,39.2,61.8,1.7,Rainy
+2026-07-15,Lucknow,37.1,50.0,6.0,Rainy
+2026-07-15,Noida,37.8,37.6,5.1,Rainy
+2026-07-15,Prayagraj,40.0,48.5,2.4,Partly Cloudy
+2026-07-15,Varanasi,36.5,60.8,5.6,Partly Cloudy
+2026-07-16,Agra,36.3,42.6,3.5,Partly Cloudy
+2026-07-16,Jaipur,39.2,41.9,1.3,Partly Cloudy
+2026-07-16,Kanpur,35.1,40.5,1.6,Partly Cloudy
+2026-07-16,Lucknow,37.1,47.2,4.6,Rainy
+2026-07-16,Noida,37.9,45.4,0.0,Partly Cloudy
+2026-07-16,Prayagraj,36.1,48.5,0.0,Partly Cloudy
+2026-07-16,Varanasi,32.4,49.4,3.2,Rainy
+2026-07-17,Gorakhpur,39.3,78.5,5.4,Partly Cloudy
+2026-07-17,Jaipur,41.6,48.0,10.4,Rainy
+2026-07-17,Kanpur,35.5,54.9,5.9,Partly Cloudy
+2026-07-17,Lucknow,35.1,51.9,0.0,Partly Cloudy
+2026-07-17,Noida,37.0,34.3,0.0,Partly Cloudy
+2026-07-17,Prayagraj,37.8,44.0,0.3,Partly Cloudy
+2026-07-17,Varanasi,39.6,56.7,6.2,Partly Cloudy
+2026-07-18,Agra,39.4,42.3,1.9,Rainy
+2026-07-18,Gorakhpur,38.7,43.6,0.0,Partly Cloudy
+2026-07-18,Jaipur,38.0,45.7,3.0,Partly Cloudy
+2026-07-18,Kanpur,39.2,51.2,0.0,Rainy
+2026-07-18,Lucknow,34.9,48.0,0.0,Partly Cloudy
+2026-07-18,Noida,36.0,44.6,4.9,Partly Cloudy
+2026-07-18,Prayagraj,35.6,57.2,4.5,Rainy
+2026-07-19,Agra,39.4,43.8,0.0,Partly Cloudy
+2026-07-19,Delhi,38.0,50.9,2.0,Partly Cloudy
+2026-07-19,Gorakhpur,39.1,51.1,2.8,Rainy
+2026-07-19,Jaipur,44.8,26.1,4.8,Partly Cloudy
+2026-07-19,Kanpur,33.0,46.1,0.0,Partly Cloudy
+2026-07-19,Lucknow,36.1,53.7,3.4,Partly Cloudy
+2026-07-19,Noida,37.1,47.7,5.7,Partly Cloudy
+2026-07-19,Prayagraj,36.8,42.7,0.4,Hot
+2026-07-19,Varanasi,38.3,55.1,1.9,Partly Cloudy
+2026-07-20,Agra,38.2,52.0,6.3,Rainy
+2026-07-20,Delhi,39.8,32.2,0.9,Partly Cloudy
+2026-07-20,Gorakhpur,37.6,71.3,2.4,Rainy
+2026-07-20,Jaipur,41.0,45.2,4.5,Partly Cloudy
+2026-07-20,Kanpur,39.2,54.1,4.3,Partly Cloudy
+2026-07-20,Lucknow,32.8,54.2,0.0,Partly Cloudy
+2026-07-20,Noida,36.1,49.5,4.3,Partly Cloudy
+2026-07-20,Patna,39.6,71.6,0.0,Partly Cloudy
+2026-07-20,Prayagraj,37.3,53.3,4.1,Rainy
+2026-07-20,Varanasi,36.6,61.8,3.6,Partly Cloudy
+2026-07-21,Agra,38.2,47.8,0.0,Rainy
+2026-07-21,Gorakhpur,35.3,60.4,2.4,Rainy
+2026-07-21,Kanpur,37.6,50.9,5.8,Partly Cloudy
+2026-07-21,Lucknow,39.0,54.0,4.9,Rainy
+2026-07-21,Noida,36.9,41.9,0.0,Rainy
+2026-07-21,Patna,36.9,54.8,0.0,Partly Cloudy
+2026-07-21,Prayagraj,38.1,46.7,5.1,Partly Cloudy
+2026-07-21,Varanasi,37.8,57.0,0.9,Partly Cloudy
+2026-07-22,Agra,40.0,46.3,3.5,Partly Cloudy
+2026-07-22,Gorakhpur,39.1,57.6,3.8,Partly Cloudy
+2026-07-22,Jaipur,38.5,42.8,3.7,Partly Cloudy
+2026-07-22,Kanpur,38.5,53.6,0.0,Partly Cloudy
+2026-07-22,Lucknow,37.5,48.0,3.4,Partly Cloudy
+2026-07-22,Noida,34.7,32.5,2.7,Rainy
+2026-07-22,Patna,38.5,60.8,4.4,Partly Cloudy
+2026-07-22,Prayagraj,36.0,50.7,0.8,Partly Cloudy
+2026-07-22,Varanasi,38.4,66.9,7.1,Rainy
+2026-07-23,Agra,34.1,51.0,0.7,Partly Cloudy
+2026-07-23,Delhi,37.2,42.3,0.0,Rainy
+2026-07-23,Gorakhpur,34.7,53.1,1.3,Partly Cloudy
+2026-07-23,Jaipur,42.0,30.7,0.7,Partly Cloudy
+2026-07-23,Kanpur,40.2,39.5,2.9,Partly Cloudy
+2026-07-23,Lucknow,35.5,49.4,2.4,Partly Cloudy
+2026-07-23,Noida,37.7,56.9,0.0,Rainy
+2026-07-23,Prayagraj,35.6,60.7,3.1,Rainy
+2026-07-24,Agra,41.1,32.2,7.3,Rainy
+2026-07-24,Gorakhpur,38.4,60.0,4.2,Partly Cloudy
+2026-07-24,Kanpur,38.2,52.1,0.0,Partly Cloudy
+2026-07-24,Lucknow,37.6,51.6,2.8,Rainy
+2026-07-24,Noida,34.7,51.4,6.6,Partly Cloudy
+2026-07-24,Prayagraj,37.7,56.7,2.8,Partly Cloudy
+2026-07-24,Varanasi,39.3,65.4,0.3,Partly Cloudy
+2026-07-25,Agra,35.3,44.1,0.0,Partly Cloudy
+2026-07-25,Gorakhpur,42.3,68.9,5.7,Partly Cloudy
+2026-07-25,Kanpur,37.1,49.2,4.5,Rainy
+2026-07-25,Lucknow,36.7,50.9,0.7,Rainy
+2026-07-25,Noida,40.6,38.9,4.8,Rainy
+2026-07-25,Patna,36.0,59.7,2.4,Rainy
+2026-07-25,Prayagraj,39.5,45.4,0.0,Partly Cloudy
+2026-07-25,Varanasi,39.5,51.5,3.0,Rainy
+2026-07-26,Agra,42.6,39.7,6.4,Partly Cloudy
+2026-07-26,Delhi,41.3,39.0,11.2,Rainy
+2026-07-26,Gorakhpur,38.2,58.4,5.1,Partly Cloudy
+2026-07-26,Jaipur,37.4,38.9,0.5,Partly Cloudy
+2026-07-26,Kanpur,39.9,55.7,2.8,Partly Cloudy
+2026-07-26,Lucknow,40.6,45.7,4.0,Partly Cloudy
+2026-07-26,Noida,36.7,49.9,5.6,Rainy
+2026-07-26,Prayagraj,37.9,50.3,5.6,Rainy
+2026-07-26,Varanasi,34.7,49.9,0.6,Rainy
+2026-07-27,Agra,37.0,41.2,3.5,Partly Cloudy
+2026-07-27,Delhi,37.2,42.5,0.5,Partly Cloudy
+2026-07-27,Gorakhpur,36.7,55.8,2.3,Rainy
+2026-07-27,Jaipur,37.0,63.9,6.5,Rainy
+2026-07-27,Kanpur,38.5,46.3,2.8,Rainy
+2026-07-27,Lucknow,37.7,50.6,7.7,Partly Cloudy
+2026-07-27,Noida,40.2,51.7,5.2,Partly Cloudy
+2026-07-27,Patna,38.1,59.3,2.5,Partly Cloudy
+2026-07-27,Varanasi,41.0,38.9,3.8,Partly Cloudy
+2026-07-28,Agra,35.6,46.7,1.6,Partly Cloudy
+2026-07-28,Gorakhpur,36.1,53.7,2.6,Partly Cloudy
+2026-07-28,Jaipur,37.9,42.0,5.0,Rainy
+2026-07-28,Kanpur,35.0,37.5,1.7,Partly Cloudy
+2026-07-28,Lucknow,41.7,53.6,3.5,Rainy
+2026-07-28,Noida,35.0,42.3,5.3,Partly Cloudy
+2026-07-28,Patna,38.1,49.3,0.7,Partly Cloudy
+2026-07-28,Prayagraj,37.7,64.9,0.0,Rainy
+2026-07-29,Agra,38.0,53.6,0.0,Partly Cloudy
+2026-07-29,Delhi,39.7,51.4,0.6,Partly Cloudy
+2026-07-29,Gorakhpur,36.5,67.7,0.0,Hot
+2026-07-29,Jaipur,36.9,37.2,2.0,Rainy
+2026-07-29,Kanpur,36.8,34.5,6.9,Partly Cloudy
+2026-07-29,Lucknow,39.8,50.0,0.6,Rainy
+2026-07-29,Noida,34.5,44.1,0.0,Partly Cloudy
+2026-07-29,Patna,38.4,63.0,2.2,Partly Cloudy
+2026-07-29,Prayagraj,37.2,54.1,7.9,Partly Cloudy
+2026-07-29,Varanasi,36.7,57.5,6.7,Partly Cloudy
+2026-07-30,Agra,37.3,49.0,4.0,Rainy
+2026-07-30,Delhi,38.4,45.0,2.9,Partly Cloudy
+2026-07-30,Gorakhpur,38.5,58.9,6.1,Partly Cloudy
+2026-07-30,Kanpur,36.2,54.3,0.6,Partly Cloudy
+2026-07-30,Lucknow,31.2,66.6,6.8,Rainy
+2026-07-30,Noida,33.2,44.2,2.5,Partly Cloudy
+2026-07-30,Prayagraj,36.8,62.9,3.3,Partly Cloudy
+2026-07-30,Varanasi,37.2,51.2,0.9,Partly Cloudy
+2026-07-31,Agra,35.4,38.5,2.5,Partly Cloudy
+2026-07-31,Gorakhpur,35.6,61.0,0.7,Partly Cloudy
+2026-07-31,Jaipur,37.2,35.5,1.6,Partly Cloudy
+2026-07-31,Kanpur,40.2,55.2,11.1,Rainy
+2026-07-31,Lucknow,34.6,39.6,3.6,Partly Cloudy
+2026-07-31,Noida,39.0,53.9,0.0,Partly Cloudy
+2026-07-31,Prayagraj,40.0,40.3,4.8,Partly Cloudy
+2026-07-31,Varanasi,36.8,42.1,3.2,Partly Cloudy
+2026-08-01,Agra,35.2,42.6,2.6,Rainy
+2026-08-01,Delhi,37.0,37.1,0.0,Rainy
+2026-08-01,Gorakhpur,35.6,60.3,7.0,Rainy
+2026-08-01,Kanpur,37.5,50.2,8.0,Partly Cloudy
+2026-08-01,Lucknow,37.8,51.0,5.3,Rainy
+2026-08-01,Noida,37.7,46.3,5.7,Rainy
+2026-08-01,Prayagraj,40.5,46.8,0.6,Rainy
+2026-08-01,Varanasi,38.8,50.4,2.6,Partly Cloudy
+2026-08-02,Agra,37.4,46.9,1.0,Partly Cloudy
+2026-08-02,Delhi,35.8,47.1,8.2,Partly Cloudy
+2026-08-02,Gorakhpur,37.9,62.3,0.0,Partly Cloudy
+2026-08-02,Jaipur,42.4,39.3,5.7,Partly Cloudy
+2026-08-02,Kanpur,39.3,44.1,4.2,Partly Cloudy
+2026-08-02,Lucknow,36.9,59.0,4.1,Partly Cloudy
+2026-08-02,Noida,38.6,47.3,3.9,Rainy
+2026-08-02,Prayagraj,38.5,62.5,2.1,Partly Cloudy
+2026-08-02,Varanasi,36.2,46.9,4.1,Rainy
+2026-08-03,Agra,38.4,37.6,6.0,Rainy
+2026-08-03,Gorakhpur,35.8,50.0,4.6,Rainy
+2026-08-03,Kanpur,38.4,53.7,3.4,Rainy
+2026-08-03,Lucknow,35.1,46.3,7.6,Rainy
+2026-08-03,Noida,34.3,45.8,0.5,Rainy
+2026-08-03,Prayagraj,40.0,56.4,7.9,Rainy
+2026-08-04,Agra,38.6,43.0,4.5,Partly Cloudy
+2026-08-04,Gorakhpur,34.8,65.8,4.3,Partly Cloudy
+2026-08-04,Jaipur,38.0,40.9,2.6,Partly Cloudy
+2026-08-04,Kanpur,38.5,54.9,0.0,Partly Cloudy
+2026-08-04,Lucknow,37.2,60.0,7.7,Partly Cloudy
+2026-08-04,Noida,40.0,51.7,1.6,Partly Cloudy
+2026-08-04,Prayagraj,37.1,58.5,3.8,Rainy
+2026-08-04,Varanasi,35.6,58.7,3.4,Partly Cloudy
+2026-08-05,Agra,41.4,52.0,0.0,Partly Cloudy
+2026-08-05,Delhi,40.7,49.7,0.4,Partly Cloudy
+2026-08-05,Gorakhpur,39.9,68.0,4.9,Partly Cloudy
+2026-08-05,Kanpur,37.7,47.6,5.0,Partly Cloudy
+2026-08-05,Lucknow,34.4,50.0,0.7,Partly Cloudy
+2026-08-05,Noida,35.4,55.6,7.3,Rainy
+2026-08-05,Patna,38.9,49.8,0.5,Rainy
+2026-08-05,Prayagraj,39.0,48.7,6.4,Rainy
+2026-08-05,Varanasi,38.9,52.8,2.0,Partly Cloudy
+2026-08-06,Agra,36.4,42.6,0.6,Partly Cloudy
+2026-08-06,Gorakhpur,39.4,71.1,4.3,Partly Cloudy
+2026-08-06,Jaipur,40.5,36.6,4.8,Rainy
+2026-08-06,Kanpur,38.0,60.2,3.8,Partly Cloudy
+2026-08-06,Lucknow,34.7,42.5,2.5,Rainy
+2026-08-06,Noida,36.6,49.4,0.3,Rainy
+2026-08-06,Patna,37.7,60.0,6.0,Partly Cloudy
+2026-08-06,Prayagraj,34.6,53.0,5.8,Partly Cloudy
+2026-08-07,Agra,39.6,41.0,6.9,Partly Cloudy
+2026-08-07,Gorakhpur,34.2,64.8,0.1,Partly Cloudy
+2026-08-07,Kanpur,34.2,60.3,6.7,Rainy
+2026-08-07,Lucknow,36.5,54.7,3.4,Partly Cloudy
+2026-08-07,Noida,36.3,43.8,6.5,Partly Cloudy
+2026-08-07,Patna,35.9,66.1,2.4,Rainy
+2026-08-07,Prayagraj,36.8,50.8,2.7,Rainy
+2026-08-08,Gorakhpur,38.3,52.1,6.4,Rainy
+2026-08-08,Jaipur,38.1,29.6,3.1,Partly Cloudy
+2026-08-08,Kanpur,36.5,50.1,1.5,Partly Cloudy
+2026-08-08,Lucknow,36.2,54.1,1.0,Rainy
+2026-08-08,Noida,35.1,35.3,5.0,Partly Cloudy
+2026-08-08,Patna,36.9,60.7,6.3,Partly Cloudy
+2026-08-08,Prayagraj,31.6,47.9,7.8,Partly Cloudy
+2026-08-08,Varanasi,35.3,52.5,5.3,Rainy
+2026-08-09,Agra,32.5,37.2,6.4,Rainy
+2026-08-09,Delhi,36.5,46.3,0.0,Partly Cloudy
+2026-08-09,Gorakhpur,38.8,53.7,13.1,Partly Cloudy
+2026-08-09,Jaipur,39.5,29.3,0.0,Partly Cloudy
+2026-08-09,Kanpur,35.4,64.5,1.7,Partly Cloudy
+2026-08-09,Lucknow,36.0,42.9,0.0,Rainy
+2026-08-09,Noida,33.4,41.0,1.3,Rainy
+2026-08-09,Prayagraj,33.7,64.0,5.0,Partly Cloudy
+2026-08-09,Varanasi,36.1,66.1,4.1,Partly Cloudy
+2026-08-10,Agra,38.6,47.6,2.8,Rainy
+2026-08-10,Gorakhpur,35.4,65.1,8.3,Rainy
+2026-08-10,Jaipur,35.4,35.0,6.4,Rainy
+2026-08-10,Kanpur,34.0,42.2,0.9,Partly Cloudy
+2026-08-10,Lucknow,36.1,48.3,5.2,Partly Cloudy
+2026-08-10,Noida,32.0,43.7,0.0,Partly Cloudy
+2026-08-10,Patna,37.8,52.0,3.6,Partly Cloudy
+2026-08-10,Prayagraj,36.5,50.4,9.3,Partly Cloudy
+2026-08-10,Varanasi,36.4,47.9,7.7,Partly Cloudy
+2026-08-11,Agra,34.3,47.9,9.5,Rainy
+2026-08-11,Gorakhpur,39.2,61.9,0.3,Partly Cloudy
+2026-08-11,Jaipur,36.3,40.1,0.3,Partly Cloudy
+2026-08-11,Kanpur,34.6,49.0,7.7,Partly Cloudy
+2026-08-11,Lucknow,36.7,44.6,4.6,Partly Cloudy
+2026-08-11,Noida,36.8,36.2,1.9,Partly Cloudy
+2026-08-11,Varanasi,36.6,62.6,3.8,Partly Cloudy
+2026-08-12,Agra,37.7,36.5,3.2,Partly Cloudy
+2026-08-12,Gorakhpur,39.6,70.1,1.1,Partly Cloudy
+2026-08-12,Jaipur,40.0,29.3,0.6,Rainy
+2026-08-12,Kanpur,35.0,45.6,2.3,Partly Cloudy
+2026-08-12,Lucknow,34.1,41.2,6.0,Rainy
+2026-08-12,Noida,36.0,45.4,0.0,Partly Cloudy
+2026-08-12,Patna,35.3,51.5,3.8,Rainy
+2026-08-12,Prayagraj,38.7,55.5,0.0,Partly Cloudy
+2026-08-13,Delhi,35.5,25.9,1.9,Partly Cloudy
+2026-08-13,Gorakhpur,36.6,62.7,6.3,Partly Cloudy
+2026-08-13,Jaipur,39.0,32.0,3.0,Partly Cloudy
+2026-08-13,Kanpur,38.2,47.3,0.5,Partly Cloudy
+2026-08-13,Lucknow,36.5,47.6,14.4,Rainy
+2026-08-13,Noida,35.0,40.4,2.7,Partly Cloudy
+2026-08-13,Patna,38.2,59.1,1.3,Partly Cloudy
+2026-08-13,Prayagraj,35.6,61.5,3.8,Rainy
+2026-08-14,Gorakhpur,35.3,63.4,2.1,Partly Cloudy
+2026-08-14,Jaipur,36.6,43.9,8.3,Rainy
+2026-08-14,Kanpur,33.3,46.8,4.0,Rainy
+2026-08-14,Lucknow,35.7,54.9,0.5,Partly Cloudy
+2026-08-14,Noida,36.9,36.8,2.9,Partly Cloudy
+2026-08-14,Patna,38.0,46.6,5.8,Rainy
+2026-08-14,Prayagraj,36.6,43.9,4.8,Partly Cloudy
+2026-08-14,Varanasi,39.3,46.4,9.0,Rainy
+2026-08-15,Agra,36.8,59.1,2.5,Partly Cloudy
+2026-08-15,Gorakhpur,35.3,69.2,5.0,Partly Cloudy
+2026-08-15,Jaipur,35.9,25.4,4.4,Rainy
+2026-08-15,Kanpur,36.1,41.6,1.9,Partly Cloudy
+2026-08-15,Lucknow,38.7,67.0,1.3,Partly Cloudy
+2026-08-15,Noida,39.6,41.0,3.2,Partly Cloudy
+2026-08-15,Prayagraj,35.1,51.0,9.1,Rainy
+2026-08-15,Varanasi,39.6,67.8,1.7,Partly Cloudy
+2026-08-16,Agra,38.0,50.6,7.7,Rainy
+2026-08-16,Delhi,38.0,51.2,1.5,Partly Cloudy
+2026-08-16,Gorakhpur,37.5,62.3,5.6,Partly Cloudy
+2026-08-16,Jaipur,37.3,46.9,1.2,Partly Cloudy
+2026-08-16,Kanpur,36.7,68.3,5.9,Partly Cloudy
+2026-08-16,Lucknow,33.3,47.1,0.0,Partly Cloudy
+2026-08-16,Noida,40.7,37.2,2.5,Partly Cloudy
+2026-08-16,Patna,37.5,51.5,1.9,Partly Cloudy
+2026-08-16,Prayagraj,40.1,70.0,0.0,Partly Cloudy
+2026-08-17,Agra,36.2,40.3,10.3,Partly Cloudy
+2026-08-17,Gorakhpur,38.8,72.9,0.1,Hot
+2026-08-17,Jaipur,38.8,46.6,2.9,Partly Cloudy
+2026-08-17,Kanpur,33.8,43.4,0.4,Partly Cloudy
+2026-08-17,Lucknow,33.6,57.8,0.9,Partly Cloudy
+2026-08-17,Noida,32.8,50.0,3.4,Partly Cloudy
+2026-08-17,Prayagraj,36.4,43.9,3.0,Rainy
+2026-08-17,Varanasi,34.6,53.3,4.5,Partly Cloudy
+2026-08-18,Agra,36.8,38.2,1.5,Partly Cloudy
+2026-08-18,Delhi,38.5,32.9,6.7,Rainy
+2026-08-18,Gorakhpur,37.7,64.8,4.5,Partly Cloudy
+2026-08-18,Jaipur,35.1,49.5,7.4,Rainy
+2026-08-18,Kanpur,38.1,50.5,2.8,Rainy
+2026-08-18,Lucknow,32.6,58.7,2.2,Partly Cloudy
+2026-08-18,Noida,34.6,51.3,5.5,Rainy
+2026-08-18,Patna,37.7,47.3,0.0,Rainy
+2026-08-18,Prayagraj,34.6,51.5,5.5,Rainy
+2026-08-18,Varanasi,32.3,56.8,0.5,Partly Cloudy
+2026-08-19,Agra,36.5,45.1,0.0,Partly Cloudy
+2026-08-19,Gorakhpur,37.0,55.5,5.2,Rainy
+2026-08-19,Jaipur,38.0,41.2,4.2,Partly Cloudy
+2026-08-19,Kanpur,38.0,46.8,9.0,Rainy
+2026-08-19,Lucknow,36.8,55.0,4.4,Partly Cloudy
+2026-08-19,Noida,33.4,46.4,4.0,Partly Cloudy
+2026-08-19,Patna,34.6,49.4,4.9,Partly Cloudy
+2026-08-19,Prayagraj,36.0,46.1,4.0,Partly Cloudy
+2026-08-19,Varanasi,37.2,56.2,0.0,Partly Cloudy
+2026-08-20,Agra,35.3,50.0,2.7,Rainy
+2026-08-20,Gorakhpur,37.1,56.2,8.5,Rainy
+2026-08-20,Jaipur,39.3,44.0,3.9,Rainy
+2026-08-20,Kanpur,35.3,41.2,2.1,Rainy
+2026-08-20,Lucknow,32.8,46.3,0.0,Partly Cloudy
+2026-08-20,Noida,34.0,44.2,3.8,Partly Cloudy
+2026-08-20,Prayagraj,35.1,45.1,4.0,Rainy
+2026-08-20,Varanasi,36.3,55.5,8.0,Partly Cloudy
+2026-08-21,Agra,38.0,32.4,0.0,Rainy
+2026-08-21,Gorakhpur,34.5,70.4,5.8,Partly Cloudy
+2026-08-21,Jaipur,34.3,40.9,2.5,Rainy
+2026-08-21,Kanpur,34.5,48.6,6.2,Rainy
+2026-08-21,Lucknow,33.7,50.7,2.9,Partly Cloudy
+2026-08-21,Noida,38.7,56.2,4.3,Partly Cloudy
+2026-08-21,Prayagraj,35.2,63.1,6.1,Partly Cloudy
+2026-08-21,Varanasi,37.5,43.6,0.2,Rainy
+2026-08-22,Agra,34.2,45.7,9.2,Partly Cloudy
+2026-08-22,Gorakhpur,36.0,64.1,3.0,Partly Cloudy
+2026-08-22,Kanpur,36.9,48.9,5.8,Partly Cloudy
+2026-08-22,Lucknow,34.9,53.3,4.9,Rainy
+2026-08-22,Noida,31.4,50.3,0.0,Rainy
+2026-08-22,Patna,38.6,61.9,2.9,Rainy
+2026-08-22,Prayagraj,35.9,55.2,6.7,Partly Cloudy
+2026-08-22,Varanasi,38.8,65.9,1.0,Rainy
+2026-08-23,Gorakhpur,34.9,66.7,0.0,Partly Cloudy
+2026-08-23,Jaipur,37.0,49.4,3.0,Partly Cloudy
+2026-08-23,Kanpur,38.8,42.1,7.3,Rainy
+2026-08-23,Lucknow,36.0,47.3,4.4,Partly Cloudy
+2026-08-23,Noida,32.0,35.3,0.8,Partly Cloudy
+2026-08-23,Prayagraj,38.6,42.9,3.7,Rainy
+2026-08-23,Varanasi,34.8,45.1,9.2,Partly Cloudy
+2026-08-24,Agra,35.5,38.4,1.2,Partly Cloudy
+2026-08-24,Delhi,35.7,50.8,5.1,Partly Cloudy
+2026-08-24,Gorakhpur,33.8,65.1,0.0,Rainy
+2026-08-24,Jaipur,40.2,49.0,6.0,Partly Cloudy
+2026-08-24,Kanpur,36.6,46.1,4.8,Partly Cloudy
+2026-08-24,Lucknow,33.8,39.6,3.8,Partly Cloudy
+2026-08-24,Noida,35.6,47.7,0.0,Partly Cloudy
+2026-08-24,Prayagraj,36.1,54.3,1.6,Partly Cloudy
+2026-08-24,Varanasi,35.7,52.5,1.0,Partly Cloudy
+2026-08-25,Agra,34.0,41.7,3.0,Partly Cloudy
+2026-08-25,Gorakhpur,35.1,45.1,10.1,Rainy
+2026-08-25,Jaipur,35.2,31.8,0.5,Rainy
+2026-08-25,Kanpur,33.9,59.3,7.9,Partly Cloudy
+2026-08-25,Lucknow,34.0,49.9,3.2,Partly Cloudy
+2026-08-25,Noida,33.5,42.9,6.0,Rainy
+2026-08-25,Patna,35.2,49.3,0.4,Partly Cloudy
+2026-08-25,Prayagraj,35.7,48.0,0.0,Rainy
+2026-08-25,Varanasi,34.2,57.9,2.3,Partly Cloudy
+2026-08-26,Agra,36.1,52.4,0.0,Partly Cloudy
+2026-08-26,Delhi,34.8,53.6,4.8,Rainy
+2026-08-26,Gorakhpur,37.4,67.3,0.0,Partly Cloudy
+2026-08-26,Jaipur,37.2,47.2,6.2,Partly Cloudy
+2026-08-26,Kanpur,32.1,41.5,1.9,Partly Cloudy
+2026-08-26,Lucknow,35.1,64.7,2.9,Partly Cloudy
+2026-08-26,Noida,37.7,29.8,7.4,Rainy
+2026-08-26,Prayagraj,34.8,61.9,0.7,Partly Cloudy
+2026-08-26,Varanasi,34.8,54.9,2.0,Partly Cloudy
+2026-08-27,Agra,33.0,42.6,0.5,Rainy
+2026-08-27,Delhi,37.0,55.1,6.7,Partly Cloudy
+2026-08-27,Gorakhpur,37.3,65.0,0.0,Partly Cloudy
+2026-08-27,Jaipur,34.1,42.2,4.8,Partly Cloudy
+2026-08-27,Kanpur,33.2,45.4,9.4,Rainy
+2026-08-27,Lucknow,34.4,59.9,6.6,Rainy
+2026-08-27,Noida,33.6,38.4,8.5,Rainy
+2026-08-27,Prayagraj,34.9,45.3,4.5,Rainy
+2026-08-27,Varanasi,34.1,57.5,2.8,Partly Cloudy
+2026-08-28,Agra,36.7,37.0,2.4,Partly Cloudy
+2026-08-28,Gorakhpur,32.3,58.0,2.1,Partly Cloudy
+2026-08-28,Jaipur,35.8,44.9,1.4,Rainy
+2026-08-28,Kanpur,33.3,60.8,3.9,Rainy
+2026-08-28,Lucknow,30.9,52.1,0.0,Partly Cloudy
+2026-08-28,Noida,35.3,52.6,2.5,Partly Cloudy
+2026-08-28,Prayagraj,34.4,57.3,1.5,Partly Cloudy
+2026-08-28,Varanasi,33.5,53.7,0.0,Rainy
+2026-08-29,Agra,35.9,54.1,1.7,Partly Cloudy
+2026-08-29,Gorakhpur,33.6,59.4,5.1,Rainy
+2026-08-29,Jaipur,37.5,50.4,0.0,Partly Cloudy
+2026-08-29,Kanpur,32.3,41.4,4.0,Partly Cloudy
+2026-08-29,Lucknow,37.2,49.6,7.1,Partly Cloudy
+2026-08-29,Noida,32.1,32.4,6.9,Partly Cloudy
+2026-08-29,Prayagraj,34.1,46.9,4.7,Partly Cloudy
+2026-08-29,Varanasi,35.1,58.8,1.8,Partly Cloudy
+2026-08-30,Agra,36.2,42.3,4.1,Partly Cloudy
+2026-08-30,Gorakhpur,33.2,58.4,5.6,Partly Cloudy
+2026-08-30,Jaipur,37.2,47.7,9.1,Partly Cloudy
+2026-08-30,Kanpur,33.2,44.3,3.8,Partly Cloudy
+2026-08-30,Lucknow,33.7,44.2,0.0,Partly Cloudy
+2026-08-30,Noida,37.6,45.7,1.7,Partly Cloudy
+2026-08-30,Patna,31.2,56.8,1.1,Rainy
+2026-08-30,Prayagraj,33.3,48.1,0.2,Rainy
+2026-08-30,Varanasi,36.5,61.2,4.4,Partly Cloudy
+2026-08-31,Agra,33.4,42.1,5.0,Rainy
+2026-08-31,Gorakhpur,33.4,81.8,0.0,Partly Cloudy
+2026-08-31,Jaipur,34.3,49.8,8.7,Rainy
+2026-08-31,Kanpur,35.8,56.4,2.4,Rainy
+2026-08-31,Lucknow,31.7,53.5,1.7,Clear
+2026-08-31,Noida,34.4,57.1,7.7,Partly Cloudy
+2026-08-31,Patna,35.9,60.2,0.4,Partly Cloudy
+2026-08-31,Prayagraj,32.8,48.5,4.1,Rainy
+2026-08-31,Varanasi,34.9,40.0,0.0,Partly Cloudy
+2026-09-01,Agra,32.1,38.2,8.5,Partly Cloudy
+2026-09-01,Delhi,32.0,55.2,0.4,Clear
+2026-09-01,Gorakhpur,33.7,61.4,3.8,Partly Cloudy
+2026-09-01,Jaipur,35.5,51.8,1.9,Hot
+2026-09-01,Kanpur,37.5,44.3,0.8,Partly Cloudy
+2026-09-01,Lucknow,33.8,58.1,1.3,Clear
+2026-09-01,Noida,34.8,48.9,1.5,Clear
+2026-09-01,Prayagraj,34.7,52.9,1.0,Clear
+2026-09-01,Varanasi,34.4,44.0,3.6,Partly Cloudy
+2026-09-02,Agra,33.9,46.1,0.7,Partly Cloudy
+2026-09-02,Gorakhpur,34.5,54.5,1.3,Clear
+2026-09-02,Jaipur,36.9,40.6,0.8,Partly Cloudy
+2026-09-02,Kanpur,31.9,46.9,2.3,Partly Cloudy
+2026-09-02,Lucknow,31.1,45.9,1.0,Clear
+2026-09-02,Noida,32.7,45.7,1.6,Clear
+2026-09-02,Prayagraj,35.9,64.4,1.5,Hot
+2026-09-03,Agra,31.4,52.4,2.2,Clear
+2026-09-03,Delhi,35.2,37.3,2.6,Partly Cloudy
+2026-09-03,Gorakhpur,36.6,49.3,1.1,Hot
+2026-09-03,Jaipur,37.7,33.3,0.0,Hot
+2026-09-03,Kanpur,34.7,30.9,0.0,Partly Cloudy
+2026-09-03,Lucknow,33.0,61.8,1.3,Clear
+2026-09-03,Noida,30.2,39.9,0.0,Partly Cloudy
+2026-09-03,Varanasi,36.1,54.8,0.2,Hot
+2026-09-04,Agra,34.3,52.9,1.3,Clear
+2026-09-04,Delhi,33.6,36.6,2.0,Partly Cloudy
+2026-09-04,Gorakhpur,34.0,57.0,0.0,Clear
+2026-09-04,Jaipur,37.2,38.2,0.9,Hot
+2026-09-04,Kanpur,37.7,53.1,2.0,Hot
+2026-09-04,Lucknow,33.5,53.6,0.0,Clear
+2026-09-04,Noida,33.8,43.1,0.6,Clear
+2026-09-04,Patna,31.2,62.3,0.0,Clear
+2026-09-04,Prayagraj,36.8,43.9,1.7,Hot
+2026-09-05,Agra,32.9,54.2,2.5,Partly Cloudy
+2026-09-05,Delhi,35.4,33.6,7.6,Partly Cloudy
+2026-09-05,Gorakhpur,32.5,78.7,0.0,Clear
+2026-09-05,Jaipur,35.3,38.8,6.2,Partly Cloudy
+2026-09-05,Kanpur,33.1,49.8,1.0,Clear
+2026-09-05,Lucknow,31.6,60.2,1.6,Clear
+2026-09-05,Noida,35.4,44.0,2.2,Partly Cloudy
+2026-09-05,Prayagraj,34.0,40.9,3.1,Clear
+2026-09-05,Varanasi,33.5,42.7,2.0,Clear
+2026-09-06,Agra,33.1,35.1,9.2,Partly Cloudy
+2026-09-06,Jaipur,33.0,25.5,3.6,Partly Cloudy
+2026-09-06,Kanpur,33.7,53.2,0.0,Clear
+2026-09-06,Lucknow,33.5,31.3,0.0,Clear
+2026-09-06,Noida,29.9,51.7,1.8,Clear
+2026-09-06,Patna,34.5,63.7,1.4,Clear
+2026-09-06,Prayagraj,36.9,58.9,1.1,Hot
+2026-09-06,Varanasi,34.3,56.0,0.0,Clear
+2026-09-07,Agra,36.0,39.1,0.1,Hot
+2026-09-07,Gorakhpur,35.8,54.4,5.7,Partly Cloudy
+2026-09-07,Kanpur,30.2,70.8,2.2,Partly Cloudy
+2026-09-07,Lucknow,31.0,49.5,0.0,Clear
+2026-09-07,Noida,31.9,50.7,2.6,Rainy
+2026-09-07,Patna,32.4,57.1,4.8,Partly Cloudy
+2026-09-07,Prayagraj,34.1,49.6,1.1,Clear
+2026-09-07,Varanasi,32.9,57.8,2.3,Partly Cloudy
+2026-09-08,Agra,33.6,45.2,0.0,Clear
+2026-09-08,Delhi,30.3,41.7,2.2,Partly Cloudy
+2026-09-08,Gorakhpur,31.4,57.3,2.6,Partly Cloudy
+2026-09-08,Jaipur,35.7,34.1,0.2,Hot
+2026-09-08,Kanpur,34.2,56.5,1.5,Clear
+2026-09-08,Lucknow,30.9,39.0,7.3,Partly Cloudy
+2026-09-08,Noida,30.1,47.0,2.9,Partly Cloudy
+2026-09-08,Prayagraj,37.5,57.2,2.2,Hot
+2026-09-08,Varanasi,34.1,59.0,2.2,Clear
+2026-09-09,Agra,33.0,54.1,0.0,Clear
+2026-09-09,Gorakhpur,33.8,51.4,1.6,Clear
+2026-09-09,Jaipur,34.0,39.5,4.4,Partly Cloudy
+2026-09-09,Kanpur,34.8,53.1,2.3,Partly Cloudy
+2026-09-09,Lucknow,33.8,52.1,3.1,Clear
+2026-09-09,Noida,35.1,44.4,0.0,Hot
+2026-09-09,Prayagraj,36.6,61.4,2.4,Hot
+2026-09-09,Varanasi,31.2,57.3,2.2,Clear
+2026-09-10,Agra,31.1,43.3,0.2,Clear
+2026-09-10,Gorakhpur,32.6,49.1,0.3,Clear
+2026-09-10,Jaipur,33.4,43.4,2.6,Clear
+2026-09-10,Kanpur,33.0,44.0,2.8,Partly Cloudy
+2026-09-10,Lucknow,30.0,62.7,0.2,Clear
+2026-09-10,Noida,30.4,45.9,7.3,Partly Cloudy
+2026-09-10,Prayagraj,34.8,44.5,0.0,Clear
+2026-09-11,Agra,37.1,43.2,1.7,Hot
+2026-09-11,Gorakhpur,31.1,57.6,1.1,Clear
+2026-09-11,Jaipur,35.5,56.4,1.0,Partly Cloudy
+2026-09-11,Kanpur,30.4,60.1,1.7,Clear
+2026-09-11,Lucknow,30.1,49.8,0.0,Clear
+2026-09-11,Noida,30.0,41.7,1.5,Clear
+2026-09-11,Prayagraj,31.3,52.7,0.8,Clear
+2026-09-11,Varanasi,34.8,66.2,1.9,Clear
+2026-09-12,Agra,32.9,41.1,0.7,Clear
+2026-09-12,Gorakhpur,35.5,70.8,0.3,Partly Cloudy
+2026-09-12,Jaipur,33.4,31.4,0.9,Clear
+2026-09-12,Kanpur,34.3,44.6,2.1,Clear
+2026-09-12,Lucknow,32.4,46.4,1.0,Partly Cloudy
+2026-09-12,Noida,32.8,36.1,1.5,Clear
+2026-09-12,Prayagraj,33.1,49.7,1.2,Partly Cloudy
+2026-09-12,Varanasi,34.2,63.5,1.5,Partly Cloudy
+2026-09-13,Agra,33.1,39.3,5.3,Partly Cloudy
+2026-09-13,Delhi,33.5,52.7,1.9,Partly Cloudy
+2026-09-13,Jaipur,35.5,35.6,1.4,Hot
+2026-09-13,Kanpur,35.3,58.2,0.9,Hot
+2026-09-13,Lucknow,31.7,53.7,0.7,Clear
+2026-09-13,Patna,34.6,63.5,0.5,Clear
+2026-09-13,Prayagraj,33.7,59.9,1.1,Partly Cloudy
+2026-09-13,Varanasi,34.9,36.7,0.1,Clear
+2026-09-14,Agra,30.8,47.1,0.8,Partly Cloudy
+2026-09-14,Gorakhpur,32.0,67.1,0.0,Clear
+2026-09-14,Kanpur,31.8,52.6,0.0,Partly Cloudy
+2026-09-14,Lucknow,31.6,69.1,0.0,Clear
+2026-09-14,Noida,32.0,39.5,0.0,Clear
+2026-09-14,Prayagraj,28.9,56.9,1.3,Clear
+2026-09-15,Agra,27.5,41.9,1.0,Partly Cloudy
+2026-09-15,Delhi,33.5,42.2,0.9,Clear
+2026-09-15,Gorakhpur,30.9,75.8,1.6,Partly Cloudy
+2026-09-15,Jaipur,33.0,40.7,0.8,Partly Cloudy
+2026-09-15,Kanpur,33.2,55.4,1.8,Clear
+2026-09-15,Lucknow,30.3,44.2,0.0,Clear
+2026-09-15,Noida,32.1,44.1,0.8,Clear
+2026-09-15,Prayagraj,34.6,60.5,6.1,Partly Cloudy
+2026-09-16,Agra,31.4,62.2,0.2,Clear
+2026-09-16,Gorakhpur,34.0,67.1,0.7,Clear
+2026-09-16,Jaipur,32.1,33.2,0.8,Partly Cloudy
+2026-09-16,Kanpur,30.8,52.6,1.2,Clear
+2026-09-16,Lucknow,30.8,49.2,0.0,Clear
+2026-09-16,Noida,29.6,38.3,0.5,Partly Cloudy
+2026-09-16,Prayagraj,30.3,44.4,0.4,Clear
+2026-09-16,Varanasi,32.2,52.7,2.8,Partly Cloudy
+2026-09-17,Agra,29.9,51.8,1.6,Clear
+2026-09-17,Gorakhpur,28.7,72.4,0.8,Partly Cloudy
+2026-09-17,Kanpur,31.2,50.1,0.0,Partly Cloudy
+2026-09-17,Lucknow,28.9,59.3,0.0,Partly Cloudy
+2026-09-17,Noida,33.4,54.2,0.0,Partly Cloudy
+2026-09-17,Prayagraj,32.8,55.9,2.0,Clear
+2026-09-17,Varanasi,33.7,50.4,0.4,Partly Cloudy
+2026-09-18,Gorakhpur,31.4,51.7,0.4,Clear
+2026-09-18,Jaipur,33.8,33.2,1.3,Clear
+2026-09-18,Kanpur,33.4,59.8,0.6,Clear
+2026-09-18,Lucknow,32.2,49.1,1.3,Clear
+2026-09-18,Noida,31.8,40.2,0.0,Partly Cloudy
+2026-09-18,Prayagraj,32.3,42.2,1.8,Clear
+2026-09-18,Varanasi,25.8,49.2,0.0,Clear
+2026-09-19,Agra,28.3,41.8,3.4,Partly Cloudy
+2026-09-19,Delhi,35.2,49.9,0.9,Hot
+2026-09-19,Gorakhpur,34.1,51.6,1.1,Clear
+2026-09-19,Jaipur,31.1,42.1,1.0,Clear
+2026-09-19,Kanpur,30.7,45.1,1.3,Clear
+2026-09-19,Lucknow,32.1,35.5,0.7,Partly Cloudy
+2026-09-19,Noida,29.9,51.2,0.4,Clear
+2026-09-19,Prayagraj,32.5,43.3,1.6,Partly Cloudy
+2026-09-19,Varanasi,32.0,64.1,1.5,Clear
+2026-09-20,Agra,32.6,38.2,3.5,Partly Cloudy
+2026-09-20,Jaipur,31.5,39.0,3.8,Clear
+2026-09-20,Kanpur,33.6,44.6,1.5,Clear
+2026-09-20,Lucknow,29.1,50.3,6.1,Partly Cloudy
+2026-09-20,Noida,30.6,45.4,1.3,Clear
+2026-09-20,Prayagraj,33.7,50.5,5.1,Partly Cloudy
+2026-09-20,Varanasi,30.8,39.4,0.4,Clear
+2026-09-21,Agra,29.6,55.5,0.0,Partly Cloudy
+2026-09-21,Delhi,29.4,50.3,0.0,Clear
+2026-09-21,Gorakhpur,31.2,67.4,1.9,Clear
+2026-09-21,Jaipur,37.7,40.8,1.1,Partly Cloudy
+2026-09-21,Kanpur,36.0,41.6,0.0,Hot
+2026-09-21,Lucknow,30.6,58.3,2.9,Partly Cloudy
+2026-09-21,Noida,27.6,63.3,4.3,Partly Cloudy
+2026-09-21,Prayagraj,30.2,50.4,4.0,Partly Cloudy
+2026-09-21,Varanasi,31.8,42.2,1.7,Clear
+2026-09-22,Agra,32.3,50.3,0.2,Clear
+2026-09-22,Delhi,30.2,59.8,1.2,Clear
+2026-09-22,Gorakhpur,31.8,52.8,2.4,Clear
+2026-09-22,Jaipur,29.7,38.8,4.6,Rainy
+2026-09-22,Kanpur,28.8,60.9,2.9,Clear
+2026-09-22,Lucknow,27.7,56.5,0.9,Partly Cloudy
+2026-09-22,Noida,28.6,53.5,0.9,Clear
+2026-09-22,Prayagraj,28.8,46.9,0.7,Clear
+2026-09-22,Varanasi,33.8,57.6,0.7,Clear
+2026-09-23,Agra,29.4,57.9,1.2,Partly Cloudy
+2026-09-23,Delhi,28.2,44.2,0.0,Clear
+2026-09-23,Gorakhpur,30.9,64.0,0.8,Clear
+2026-09-23,Jaipur,27.9,42.1,2.9,Clear
+2026-09-23,Kanpur,31.7,60.0,0.2,Partly Cloudy
+2026-09-23,Lucknow,29.2,67.9,0.0,Clear
+2026-09-23,Noida,29.4,48.2,1.9,Partly Cloudy
+2026-09-23,Prayagraj,28.3,65.8,0.0,Clear
+2026-09-23,Varanasi,27.0,42.8,1.7,Clear

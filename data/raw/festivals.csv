@@ -1,0 +1,20 @@
+date,festival_name,festival_type,is_festival,festival_intensity
+2025-10-02,Gandhi Jayanti,National,1,0.8
+2025-10-20,Dhanteras,Diwali,1,0.8
+2025-10-21,Diwali,Diwali,1,1.0
+2025-10-22,Govardhan Puja,Diwali,1,0.8
+2025-10-23,Bhai Dooj,Diwali,1,0.8
+2025-11-05,Guru Nanak Jayanti,Religious,1,0.8
+2025-12-25,Christmas,National,1,1.0
+2026-01-14,Makar Sankranti,Regional,1,0.8
+2026-01-26,Republic Day,National,1,0.8
+2026-03-04,Holi,Holi,1,1.0
+2026-03-19,Ugadi,Regional,1,0.9
+2026-03-19,Gudi Padwa,Regional,1,0.85
+2026-03-27,Ram Navami,Religious,1,0.8
+2026-03-31,Eid al-Fitr,Religious,1,1.0
+2026-04-14,Ambedkar Jayanti,National,1,0.9
+2026-04-14,Baisakhi,Regional,1,0.85
+2026-08-15,Independence Day,National,1,1.0
+2026-08-28,Janmashtami,Religious,1,0.8
+2026-09-04,Ganesh Chaturthi,Religious,1,0.8

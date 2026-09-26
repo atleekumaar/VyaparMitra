@@ -1,0 +1,21 @@
+{
+  "total_records": 10000,
+  "valid_records": 9995,
+  "invalid_records": 5,
+  "missing_values_count": 0,
+  "missing_values_pct": 0.0,
+  "duplicate_ids_count": 2,
+  "invalid_prices_count": 1,
+  "invalid_quantities_count": 1,
+  "invalid_discounts_count": 3,
+  "invalid_timestamps_count": 0,
+  "referential_integrity_status": "PASS",
+  "timestamp_validation_status": "PASS",
+  "overall_status": "PASS",
+  "issues_breakdown": {
+    "DUPLICATE_TRANSACTION_ID": 2,
+    "INVALID_QUANTITY": 1,
+    "INVALID_UNIT_PRICE": 1,
+    "INVALID_DISCOUNT_AMOUNT": 3
+  }
+}

@@ -1,0 +1,65 @@
+product_id,product_name,product_category,unit_cost,selling_price
+PRD_ACC_01,Leather Wallet,Accessories,250.0,499.0
+PRD_ACC_02,Fashion Sunglasses,Accessories,320.0,699.0
+PRD_ART_01,Acrylic Color Set 12-Pack,Art Supplies,180.0,320.0
+PRD_ART_02,Sketching Canvas Board 10x12,Art Supplies,95.0,175.0
+PRD_BABY_01,Baby Diaper Mega Pack (M),Baby Care,550.0,799.0
+PRD_BABY_02,Gentle Baby Wet Wipes 72s,Baby Care,90.0,160.0
+PRD_BEV_01,Fresh Mango Juice 1L,Beverages,65.0,110.0
+PRD_BEV_02,Cold Pressed Orange Juice 500ml,Beverages,55.0,95.0
+PRD_BRD_01,Brown Whole Wheat Bread 400g,Bread,28.0,50.0
+PRD_BRD_02,Artisanal Sourdough Bread Loaf,Bread,75.0,140.0
+PRD_CAB_01,Braided USB-C to USB-C Cable 1.5m,Cables,120.0,299.0
+PRD_CAB_02,Lightning Charging Cable 1m,Cables,140.0,349.0
+PRD_CAK_01,Dutch Chocolate Truffle Cake 500g,Cakes,280.0,550.0
+PRD_CAK_02,Eggless Pineapple Cake 500g,Cakes,220.0,450.0
+PRD_CAS_01,Shockproof Matte Phone Case,Cases,90.0,249.0
+PRD_CAS_02,Premium Leather Back Case,Cases,180.0,450.0
+PRD_CHG_01,Fast Charger 33W USB-C Adapter,Chargers,320.0,699.0
+PRD_CHG_02,Wireless Charging Pad 15W,Chargers,450.0,999.0
+PRD_COF_01,Arabica Roast Ground Coffee 250g,Coffee,210.0,380.0
+PRD_COF_02,Instant Cold Brew Premix 200g,Coffee,150.0,280.0
+PRD_ESS_01,Organic Hand Wash 500ml,Daily Essentials,75.0,145.0
+PRD_ESS_02,Antibacterial Floor Cleaner 1L,Daily Essentials,85.0,160.0
+PRD_DAI_01,Fresh Cow Milk Pouch 1L,Dairy,48.0,66.0
+PRD_DAI_02,Fresh Malai Paneer 200g,Dairy,65.0,95.0
+PRD_DES_01,Gulab Jamun Box 500g,Desserts,120.0,220.0
+PRD_DES_02,Belgian Waffle with Syrup,Desserts,90.0,180.0
+PRD_EAR_01,TWS True Wireless Earbuds,Earphones,650.0,1299.0
+PRD_EAR_02,Deep Bass Wired Earphones 3.5mm,Earphones,140.0,349.0
+PRD_ELE_01,Smart LED Desk Lamp 10W,Home Electronics,450.0,899.0
+PRD_ELE_02,Electric Kettle 1.5L Stainless Steel,Home Electronics,550.0,1099.0
+PRD_HOU_01,Microfiber Cleaning Cloth 4-Pack,Household,80.0,180.0
+PRD_HOU_02,Aromatherapy Reed Diffuser 100ml,Household,160.0,320.0
+PRD_KID_01,Kids Cotton Graphic T-Shirt,Kids,160.0,349.0
+PRD_KID_02,Children Educational Puzzle Game,Kids,130.0,275.0
+PRD_LAP_01,Laptop Stand Aluminum Ergonomic,Laptops,420.0,899.0
+PRD_LAP_02,Wireless Optical Mouse 2.4GHz,Laptops,210.0,499.0
+PRD_MEA_01,Special North Indian Thali Combo,Meals,110.0,220.0
+PRD_MEA_02,Paneer Butter Masala Meal Box,Meals,125.0,250.0
+PRD_MED_01,Paracetamol 650mg Strip of 15,Medicine,18.0,35.0
+PRD_MED_02,Multivitamin & Minerals 30 Tablets,Medicine,120.0,240.0
+PRD_MEN_01,Men Casual Slim-Fit Cotton Shirt,Men,380.0,799.0
+PRD_MEN_02,Men Comfort Stretch Denim Jeans,Men,550.0,1199.0
+PRD_MOB_01,Entry-level 4G Smartphone 32GB,Mobiles,4800.0,6499.0
+PRD_MOB_02,Budget 5G Smartphone 128GB,Mobiles,8800.0,11999.0
+PRD_NOT_01,Spiral Hardcover Journal 200 Pages,Notebooks,85.0,160.0
+PRD_NOT_02,Executive PU Leather Diary,Notebooks,130.0,260.0
+PRD_OFF_01,Heavy Duty Desktop Stapler Set,Office Supplies,90.0,175.0
+PRD_OFF_02,A4 Copier Paper Ream 500 Sheets,Office Supplies,190.0,310.0
+PRD_PAS_01,Red Velvet Pastry Slice,Pastries,45.0,95.0
+PRD_PAS_02,Choco Lava Lava Cake Single,Pastries,50.0,110.0
+PRD_PER_01,Herbal Aloe Vera Face Wash 150ml,Personal Care,80.0,155.0
+PRD_PER_02,Moisturizing Shea Body Lotion 250ml,Personal Care,120.0,235.0
+PRD_SNK_01,Spicy Masala Potato Chips 150g,Snacks,22.0,45.0
+PRD_SNK_02,Roasted Salted Almonds 200g,Snacks,130.0,225.0
+PRD_STA_01,Premium Basmati Rice 5kg,Staples,380.0,540.0
+PRD_STA_02,Sharbati Whole Wheat Atta 5kg,Staples,160.0,245.0
+PRD_TEA_01,Assam Masala CTC Chai 500g,Tea,130.0,240.0
+PRD_TEA_02,Organic Darjeeling Green Tea 100g,Tea,110.0,210.0
+PRD_WEL_01,Immunity Booster Chyawanprash 1kg,Wellness,220.0,375.0
+PRD_WEL_02,Pure Apple Cider Vinegar 500ml,Wellness,140.0,280.0
+PRD_WOM_01,Women Pure Cotton Printed Kurti,Women,310.0,699.0
+PRD_WOM_02,Embroidered Rayon Anarkali Suit,Women,650.0,1499.0
+PRD_WRI_01,Gel Roller Pen Blue Pack of 5,Writing,45.0,90.0
+PRD_WRI_02,Permanent Whiteboard Marker Set 4s,Writing,55.0,115.0

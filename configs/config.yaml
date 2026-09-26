@@ -1,0 +1,81 @@
+dataset:
+  random_seed: 42
+  transactions: 10000
+  merchants: 50
+  customers: 3308
+  products: 64
+  inject_anomalies: true
+  anomaly_count: 5
+  use_enriched_source: true
+  enriched_source_path: "data/raw/vyaparmitra_10000_transactions_enriched.csv"
+
+paths:
+  raw: "data/raw"
+  processed: "data/processed"
+  features: "data/features"
+  quarantine: "data/quarantine"
+  reports: "data/quality_reports"
+  analytics: "data/analytics"
+  ml: "data/ml"
+  models: "models"
+  recommendations: "data/recommendations"
+  knowledge: "data/knowledge"
+
+validation:
+  max_discount_rate: 0.90
+  allow_zero_unit_price: false
+  strict_referential_integrity: true
+
+weather:
+  impute_missing: true
+  default_temp: 27.0
+  default_humidity: 55.0
+  default_rainfall: 0.0
+  default_condition: "Clear"
+
+analytics:
+  trend:
+    stable_threshold_percent: 3.0
+
+  anomaly:
+    method: "iqr"
+    iqr_multiplier: 1.5
+
+  rfm:
+    score_min: 1
+    score_max: 5
+
+  cohort:
+    frequency: "monthly"
+
+  minimum_sample_size:
+    festival: 3
+    weather: 3
+
+ml:
+  random_seed: 42
+
+  split:
+    train_ratio: 0.70
+    validation_ratio: 0.15
+    test_ratio: 0.15
+
+  forecasting:
+    horizons:
+      sales: [7, 30]
+      demand: [7, 30]
+
+  churn:
+    inactivity_days: 30
+    snapshot_date: "2026-07-15"
+    risk_thresholds:
+      low: 0.30
+      medium: 0.60
+
+  trend:
+    horizon_days: 7
+    stable_threshold_percent: 3.0
+
+  evaluation:
+    primary_forecast_metric: "wape"
+    primary_classification_metric: "pr_auc"

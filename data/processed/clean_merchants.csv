@@ -1,0 +1,51 @@
+merchant_id,merchant_name,business_type,city,state,pincode,latitude,longitude
+M015,Merchant_015,Bakery,Noida,Uttar Pradesh,201301,28.5355,77.391
+M045,Merchant_045,Grocery,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M040,Merchant_040,Cafe,Noida,Uttar Pradesh,201301,28.5355,77.391
+M044,Merchant_044,Clothing,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M007,Merchant_007,Grocery,Patna,Bihar,800001,25.5941,85.1376
+M046,Merchant_046,General Store,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M023,Merchant_023,Restaurant,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M033,Merchant_033,Grocery,Agra,Uttar Pradesh,282001,27.1767,78.0081
+M021,Merchant_021,Stationery,Jaipur,Rajasthan,302001,26.9124,75.7873
+M012,Merchant_012,General Store,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M041,Merchant_041,Restaurant,Agra,Uttar Pradesh,282001,27.1767,78.0081
+M038,Merchant_038,Mobile Accessories,Agra,Uttar Pradesh,282001,27.1767,78.0081
+M047,Merchant_047,Electronics,Varanasi,Uttar Pradesh,221001,25.3176,82.9739
+M025,Merchant_025,Bakery,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M029,Merchant_029,Stationery,Noida,Uttar Pradesh,201301,28.5355,77.391
+M005,Merchant_005,Electronics,Noida,Uttar Pradesh,201301,28.5355,77.391
+M008,Merchant_008,Cafe,Varanasi,Uttar Pradesh,221001,25.3176,82.9739
+M024,Merchant_024,General Store,Noida,Uttar Pradesh,201301,28.5355,77.391
+M017,Merchant_017,Stationery,Jaipur,Rajasthan,302001,26.9124,75.7873
+M003,Merchant_003,Cafe,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M026,Merchant_026,Cafe,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M002,Merchant_002,Bakery,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M022,Merchant_022,Clothing,Varanasi,Uttar Pradesh,221001,25.3176,82.9739
+M039,Merchant_039,Pharmacy,Gorakhpur,Uttar Pradesh,273001,26.7606,83.3732
+M001,Merchant_001,Grocery,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M048,Merchant_048,Mobile Accessories,Delhi,Delhi,110001,28.6139,77.209
+M042,Merchant_042,Bakery,Agra,Uttar Pradesh,282001,27.1767,78.0081
+M010,Merchant_010,Grocery,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M049,Merchant_049,Cafe,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M006,Merchant_006,Mobile Accessories,Gorakhpur,Uttar Pradesh,273001,26.7606,83.3732
+M009,Merchant_009,Pharmacy,Varanasi,Uttar Pradesh,221001,25.3176,82.9739
+M011,Merchant_011,Stationery,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M035,Merchant_035,Mobile Accessories,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M016,Merchant_016,Bakery,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M014,Merchant_014,Bakery,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M034,Merchant_034,Stationery,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M019,Merchant_019,Mobile Accessories,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M030,Merchant_030,Electronics,Noida,Uttar Pradesh,201301,28.5355,77.391
+M004,Merchant_004,Electronics,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M043,Merchant_043,Bakery,Kanpur,Uttar Pradesh,208001,26.4499,80.3319
+M036,Merchant_036,Grocery,Noida,Uttar Pradesh,201301,28.5355,77.391
+M050,Merchant_050,Bakery,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M031,Merchant_031,Electronics,Gorakhpur,Uttar Pradesh,273001,26.7606,83.3732
+M013,Merchant_013,Bakery,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M027,Merchant_027,Electronics,Lucknow,Uttar Pradesh,226001,26.8467,80.9462
+M028,Merchant_028,Mobile Accessories,Gorakhpur,Uttar Pradesh,273001,26.7606,83.3732
+M018,Merchant_018,Restaurant,Noida,Uttar Pradesh,201301,28.5355,77.391
+M032,Merchant_032,Pharmacy,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M037,Merchant_037,Mobile Accessories,Prayagraj,Uttar Pradesh,211001,25.4358,81.8463
+M020,Merchant_020,Electronics,Jaipur,Rajasthan,302001,26.9124,75.7873
