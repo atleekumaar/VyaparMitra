@@ -1,0 +1,6 @@
+weather_condition,sample_size,avg_daily_revenue,avg_daily_orders,total_revenue
+Clear,542,18118.5,11.9,9820229.6
+Partly Cloudy,174,16305.03,10.1,2837075.71
+Rainy,64,15490.82,9.3,991412.76
+Hot,91,10246.74,6.6,932453.79
+Cool,102,9106.54,5.6,928867.48

@@ -1,0 +1,25 @@
+{
+  "period": "2026-09",
+  "total_revenue": 15510039.34,
+  "total_orders": 9995,
+  "total_units": 12656,
+  "average_order_value": 1551.78,
+  "revenue_growth_pct": -33.09,
+  "active_customers": 3308,
+  "top_revenue_category": "Laptops",
+  "top_revenue_product": "Leather Wallet",
+  "peak_weekday": "Saturday",
+  "peak_hour": 18,
+  "dominant_payment_method": "UPI",
+  "festival_day_revenue_uplift_pct": -10.96,
+  "rainy_day_revenue_uplift_pct": 37.25,
+  "key_insights": [
+    "Revenue decreased by 33.1% in 2026-09 compared with the previous month.",
+    "Saturday generated the highest observed sales volume among all weekdays.",
+    "Peak transactional activity occurred between 18:00 and 19:00.",
+    "UPI was the dominant payment channel, representing 72.5% of recorded orders.",
+    "Laptops was the highest-performing category, contributing 15.2% of total product revenue.",
+    "Observed daily revenue on festival dates was 11.0% lower than on non-festival dates.",
+    "Rainy days were associated with 37.2% higher observed revenue compared to dry days."
+  ]
+}

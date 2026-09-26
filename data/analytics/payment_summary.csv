@@ -1,0 +1,5 @@
+payment_method,payment_method_orders,payment_method_revenue,orders_share,revenue_share,payment_method_aov
+UPI,7242,11158637.59,0.7246,0.7194,1540.82
+CARD,1146,1753192.83,0.1147,0.113,1529.84
+CASH,791,1351990.27,0.0791,0.0872,1709.22
+WALLET,816,1246218.65,0.0816,0.0803,1527.23

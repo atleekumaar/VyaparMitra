@@ -1,0 +1,65 @@
+product_id,product_name,product_category,revenue,units,orders,unique_customers,rank_by_revenue,rank_by_units,rank_by_orders,rank_by_customers
+PRD_ACC_01,Leather Wallet,Accessories,1250451.81,268,217,208,1,12,11,11
+PRD_LAP_02,Wireless Optical Mouse 2.4GHz,Laptops,1188873.16,212,173,171,2,22,19,18
+PRD_LAP_01,Laptop Stand Aluminum Ergonomic,Laptops,1169206.47,222,173,170,3,17,19,19
+PRD_ELE_01,Smart LED Desk Lamp 10W,Home Electronics,1080895.51,207,162,159,4,25,25,23
+PRD_ELE_02,Electric Kettle 1.5L Stainless Steel,Home Electronics,1076812.04,222,173,167,5,17,19,21
+PRD_MOB_02,Budget 5G Smartphone 128GB,Mobiles,1054020.75,208,157,151,6,23,28,29
+PRD_MOB_01,Entry-level 4G Smartphone 32GB,Mobiles,1001767.78,185,149,148,7,35,30,30
+PRD_ACC_02,Fashion Sunglasses,Accessories,981746.59,230,184,178,8,16,16,16
+PRD_SNK_01,Spicy Masala Potato Chips 150g,Snacks,403820.34,824,649,592,9,1,1,1
+PRD_SNK_02,Roasted Salted Almonds 200g,Snacks,380894.9,789,636,584,10,2,2,2
+PRD_BEV_02,Cold Pressed Orange Juice 500ml,Beverages,246894.06,374,301,291,11,3,3,3
+PRD_CHG_02,Wireless Charging Pad 15W,Chargers,241736.1,208,164,159,12,23,23,23
+PRD_EAR_02,Deep Bass Wired Earphones 3.5mm,Earphones,237166.45,221,179,175,13,19,17,17
+PRD_BEV_01,Fresh Mango Juice 1L,Beverages,233276.13,357,284,274,14,4,4,4
+PRD_CAS_01,Shockproof Matte Phone Case,Cases,230906.14,216,166,164,15,21,22,22
+PRD_CAB_02,Lightning Charging Cable 1m,Cables,222629.92,190,156,154,16,31,29,27
+PRD_EAR_01,TWS True Wireless Earbuds,Earphones,214882.96,202,158,155,17,26,26,26
+PRD_CAS_02,Premium Leather Back Case,Cases,210168.77,187,149,144,18,34,30,34
+PRD_CHG_01,Fast Charger 33W USB-C Adapter,Chargers,209803.16,198,163,156,19,27,24,25
+PRD_CAB_01,Braided USB-C to USB-C Cable 1.5m,Cables,205547.47,195,158,154,20,30,26,27
+PRD_HOU_02,Aromatherapy Reed Diffuser 100ml,Household,181382.78,290,220,210,21,9,10,10
+PRD_HOU_01,Microfiber Cleaning Cloth 4-Pack,Household,165761.3,252,202,195,22,15,14,15
+PRD_CAK_01,Dutch Chocolate Truffle Cake 500g,Cakes,139138.12,329,262,249,23,5,5,5
+PRD_BRD_01,Brown Whole Wheat Bread 400g,Bread,132044.73,295,234,226,24,6,6,6
+PRD_MEN_02,Men Comfort Stretch Denim Jeans,Men,127503.96,73,58,57,25,54,53,53
+PRD_DAI_02,Fresh Malai Paneer 200g,Dairy,116890.05,181,147,147,26,37,34,31
+PRD_CAK_02,Eggless Pineapple Cake 500g,Cakes,115532.03,277,225,217,27,11,8,8
+PRD_PAS_01,Red Velvet Pastry Slice,Pastries,115361.08,290,229,222,28,9,7,7
+PRD_PAS_02,Choco Lava Lava Cake Single,Pastries,113494.86,291,221,215,29,7,9,9
+PRD_BRD_02,Artisanal Sourdough Bread Loaf,Bread,104966.71,268,209,204,30,12,13,13
+PRD_DAI_01,Fresh Cow Milk Pouch 1L,Dairy,104365.17,163,135,130,31,43,42,43
+PRD_MEN_01,Men Casual Slim-Fit Cotton Shirt,Men,99345.02,57,46,46,32,61,60,60
+PRD_KID_01,Kids Cotton Graphic T-Shirt,Kids,98595.32,61,41,41,33,60,62,62
+PRD_DES_02,Belgian Waffle with Syrup,Desserts,97835.53,291,213,208,34,7,12,11
+PRD_STA_01,Premium Basmati Rice 5kg,Staples,95350.83,162,126,125,35,44,44,44
+PRD_STA_02,Sharbati Whole Wheat Atta 5kg,Staples,95175.65,149,115,111,36,45,46,46
+PRD_WOM_02,Embroidered Rayon Anarkali Suit,Women,92308.76,47,37,37,37,63,63,63
+PRD_DES_01,Gulab Jamun Box 500g,Desserts,88812.45,254,201,200,38,14,15,14
+PRD_WEL_01,Immunity Booster Chyawanprash 1kg,Wellness,88683.75,91,73,73,39,47,48,48
+PRD_BABY_02,Gentle Baby Wet Wipes 72s,Baby Care,84295.15,84,66,65,40,49,49,50
+PRD_WOM_01,Women Pure Cotton Printed Kurti,Women,80642.89,55,43,43,41,62,61,61
+PRD_PER_02,Moisturizing Shea Body Lotion 250ml,Personal Care,78262.55,76,66,66,42,52,49,49
+PRD_MED_02,Multivitamin & Minerals 30 Tablets,Medicine,73575.14,67,55,55,43,59,58,58
+PRD_MED_01,Paracetamol 650mg Strip of 15,Medicine,71719.76,80,61,61,44,50,51,51
+PRD_ESS_02,Antibacterial Floor Cleaner 1L,Daily Essentials,68170.84,86,75,75,45,48,47,47
+PRD_PER_01,Herbal Aloe Vera Face Wash 150ml,Personal Care,67998.05,72,57,57,46,55,56,53
+PRD_TEA_02,Organic Darjeeling Green Tea 100g,Tea,66235.69,219,175,168,47,20,18,20
+PRD_BABY_01,Baby Diaper Mega Pack (M),Baby Care,65682.34,75,60,59,48,53,52,52
+PRD_WEL_02,Pure Apple Cider Vinegar 500ml,Wellness,65510.15,71,54,54,49,57,59,59
+PRD_ART_01,Acrylic Color Set 12-Pack,Art Supplies,64552.29,198,148,147,50,27,32,31
+PRD_KID_02,Children Educational Puzzle Game,Kids,63048.52,43,33,33,51,64,64,64
+PRD_ART_02,Sketching Canvas Board 10x12,Art Supplies,58082.06,183,137,133,52,36,39,41
+PRD_NOT_02,Executive PU Leather Diary,Notebooks,53992.71,190,148,147,53,31,32,31
+PRD_OFF_01,Heavy Duty Desktop Stapler Set,Office Supplies,53435.76,171,142,141,54,42,38,37
+PRD_ESS_01,Organic Hand Wash 500ml,Daily Essentials,53352.1,71,57,57,55,57,56,53
+PRD_TEA_01,Assam Masala CTC Chai 500g,Tea,52644.25,197,146,142,56,29,35,36
+PRD_NOT_01,Spiral Hardcover Journal 200 Pages,Notebooks,52523.1,176,146,144,57,39,35,34
+PRD_WRI_02,Permanent Whiteboard Marker Set 4s,Writing,52323.98,189,143,138,58,33,37,38
+PRD_COF_02,Instant Cold Brew Premix 200g,Coffee,51289.33,174,137,136,59,40,39,39
+PRD_COF_01,Arabica Roast Ground Coffee 250g,Coffee,51238.88,178,133,131,60,38,43,42
+PRD_OFF_02,A4 Copier Paper Ream 500 Sheets,Office Supplies,50147.18,172,136,135,61,41,41,40
+PRD_WRI_01,Gel Roller Pen Blue Pack of 5,Writing,44380.2,142,116,114,62,46,45,45
+PRD_MEA_02,Paneer Butter Masala Meal Box,Meals,36469.95,79,58,57,63,51,53,53
+PRD_MEA_01,Special North Indian Thali Combo,Meals,36417.86,72,58,57,64,55,53,53

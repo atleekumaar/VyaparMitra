@@ -1,0 +1,13 @@
+period,period_key,metric,value,moving_average,absolute_change,percentage_change,trend_classification
+monthly,2025-10,net_amount,1236054.8,1236054.8,0.0,0.0,Stable
+monthly,2025-11,net_amount,1245392.05,1240723.42,9337.25,0.76,Stable
+monthly,2025-12,net_amount,1420156.48,1300534.44,174764.43,14.03,Increasing
+monthly,2026-01,net_amount,1393779.95,1353109.49,-26376.53,-1.86,Stable
+monthly,2026-02,net_amount,1134843.57,1316260.0,-258936.38,-18.58,Decreasing
+monthly,2026-03,net_amount,1417410.07,1315344.53,282566.5,24.9,Increasing
+monthly,2026-04,net_amount,1097654.61,1216636.08,-319755.46,-22.56,Decreasing
+monthly,2026-05,net_amount,1396177.44,1303747.37,298522.83,27.2,Increasing
+monthly,2026-06,net_amount,1218705.18,1237512.41,-177472.26,-12.71,Decreasing
+monthly,2026-07,net_amount,1569889.48,1394924.03,351184.3,28.82,Increasing
+monthly,2026-08,net_amount,1425943.52,1404846.06,-143945.96,-9.17,Decreasing
+monthly,2026-09,net_amount,954032.19,1316621.73,-471911.33,-33.09,Decreasing

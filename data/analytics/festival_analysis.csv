@@ -1,0 +1,18 @@
+festival_name,sample_size,avg_daily_revenue,avg_daily_orders,total_festival_revenue,vs_non_festival_revenue_pct
+Eid al-Fitr,1,66938.95,37.0,66938.95,53.7
+Holi,1,64435.95,34.0,64435.95,47.96
+Independence Day,1,63297.92,24.0,63297.92,45.34
+Republic Day,1,57112.04,25.0,57112.04,31.14
+Gudi Padwa / Ugadi,1,50319.36,35.0,50319.36,15.54
+Janmashtami,1,45122.37,26.0,45122.37,3.61
+Ambedkar Jayanti / Baisakhi,1,42859.23,24.0,42859.23,-1.59
+Diwali,1,36840.68,37.0,36840.68,-15.41
+Gandhi Jayanti,1,30465.07,32.0,30465.07,-30.05
+Ram Navami,1,29717.23,22.0,29717.23,-31.76
+Christmas,1,28492.91,23.0,28492.91,-34.58
+Dhanteras,1,27272.78,30.0,27272.78,-37.38
+Guru Nanak Jayanti,1,26930.11,23.0,26930.11,-38.16
+Makar Sankranti,1,24441.67,25.0,24441.67,-43.88
+Bhai Dooj,1,22854.15,29.0,22854.15,-47.52
+Ganesh Chaturthi,1,21796.59,29.0,21796.59,-49.95
+Govardhan Puja,1,20301.25,25.0,20301.25,-53.38
