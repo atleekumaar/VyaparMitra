@@ -1,0 +1,8 @@
+forecast_date,predicted_revenue,lower_bound,upper_bound,model_name,model_version,generated_at
+2026-09-24,38340.83,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-25,38261.28,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-26,41177.99,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-27,48672.93,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-28,39463.73,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-29,37904.18,,,RandomForestRegressor,v1.0,2026-09-25 17:21:56
+2026-09-30,40411.52,,,RandomForestRegressor,v1.0,2026-09-25 17:21:57

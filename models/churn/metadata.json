@@ -1,0 +1,106 @@
+{
+  "model_name": "Rule-Based Recency Baseline",
+  "model_version": "v1.0",
+  "training_date": "2026-09-25 17:22:36",
+  "training_data_range": {
+    "snapshot_date": "2026-07-15",
+    "inactivity_window_days": 30
+  },
+  "feature_list": [
+    "recency",
+    "total_orders",
+    "total_spend",
+    "average_order_value",
+    "days_since_first_purchase",
+    "purchase_frequency",
+    "recent_7d_orders",
+    "recent_30d_orders",
+    "recent_90d_orders",
+    "recent_30d_spend",
+    "recent_90d_spend"
+  ],
+  "target": "is_churned",
+  "hyperparameters": {
+    "random_seed": 42,
+    "model_type": "Rule-Based Recency Baseline"
+  },
+  "validation_metrics": {
+    "accuracy": 0.5657,
+    "balanced_accuracy": 0.4685,
+    "precision": 0.772,
+    "recall": 0.6371,
+    "f1": 0.6981,
+    "roc_auc": 0.4313,
+    "pr_auc": 0.8066,
+    "confusion_matrix": [
+      [
+        30,
+        70
+      ],
+      [
+        135,
+        237
+      ]
+    ]
+  },
+  "test_metrics": {
+    "accuracy": 0.6229,
+    "balanced_accuracy": 0.5151,
+    "precision": 0.7933,
+    "recall": 0.7035,
+    "f1": 0.7457,
+    "roc_auc": 0.5211,
+    "pr_auc": 0.8445,
+    "confusion_matrix": [
+      [
+        33,
+        68
+      ],
+      [
+        110,
+        261
+      ]
+    ]
+  },
+  "baseline_comparison": {
+    "baseline_val": {
+      "accuracy": 0.5657,
+      "balanced_accuracy": 0.4685,
+      "precision": 0.772,
+      "recall": 0.6371,
+      "f1": 0.6981,
+      "roc_auc": 0.4313,
+      "pr_auc": 0.8066,
+      "confusion_matrix": [
+        [
+          30,
+          70
+        ],
+        [
+          135,
+          237
+        ]
+      ]
+    },
+    "ml_val": {
+      "accuracy": 0.5657,
+      "balanced_accuracy": 0.4685,
+      "precision": 0.772,
+      "recall": 0.6371,
+      "f1": 0.6981,
+      "roc_auc": 0.4313,
+      "pr_auc": 0.8066,
+      "confusion_matrix": [
+        [
+          30,
+          70
+        ],
+        [
+          135,
+          237
+        ]
+      ]
+    }
+  },
+  "selection_reason": "Candidate ML did not exceed baseline PR-AUC. Selected baseline Rule-Based Recency Baseline."
+}

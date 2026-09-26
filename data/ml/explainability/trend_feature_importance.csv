@@ -1,0 +1,8 @@
+feature,importance,std
+past_28d_revenue,0.0898,0.0379
+past_7d_revenue,0.0857,0.0327
+historical_7d_momentum,0.0245,0.0082
+past_14d_revenue,0.0122,0.0163
+day_of_week,0.0,0.0224
+month,0.0,0.0
+is_weekend,0.0,0.0

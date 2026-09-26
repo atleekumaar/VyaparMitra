@@ -1,0 +1,49 @@
+{
+  "model_name": "HistGradientBoostingRegressor_Demand",
+  "model_version": "v1.0",
+  "training_date": "2026-09-25 17:22:00",
+  "training_data_range": {
+    "start": "2025-10-01",
+    "end": "2026-07-31"
+  },
+  "feature_list": [
+    "lag_1_units",
+    "lag_7_units",
+    "lag_14_units",
+    "lag_28_units",
+    "rolling_7_units",
+    "rolling_14_units",
+    "rolling_28_units",
+    "day_of_week",
+    "day_of_month",
+    "month",
+    "is_weekend",
+    "selling_price",
+    "unit_cost",
+    "unit_margin"
+  ],
+  "target": "units_sold",
+  "hyperparameters": {
+    "random_seed": 42,
+    "model_type": "HistGradientBoostingRegressor_Demand"
+  },
+  "validation_metrics": {
+    "mae": 0.69,
+    "rmse": 0.95,
+    "mape": 57.17,
+    "smape": 160.02,
+    "wape": 120.5
+  },
+  "test_metrics": {
+    "mae": 0.68,
+    "rmse": 0.95,
+    "mape": 55.34,
+    "smape": 159.78,
+    "wape": 120.54
+  },
+  "baseline_comparison": {
+    "baseline_val_wape": 166.82,
+    "ml_val_wape": 120.5
+  },
+  "selection_reason": "Candidate ML model beat baseline WAPE (166.82% vs 120.50%)"
+}

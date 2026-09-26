@@ -1,0 +1,127 @@
+{
+  "model_name": "HistGradientBoostingClassifier_Trend",
+  "model_version": "v1.0",
+  "training_date": "2026-09-25 17:22:41",
+  "training_data_range": {
+    "start": "2025-10-28",
+    "end": "2026-07-30"
+  },
+  "feature_list": [
+    "past_7d_revenue",
+    "past_14d_revenue",
+    "past_28d_revenue",
+    "historical_7d_momentum",
+    "day_of_week",
+    "month",
+    "is_weekend"
+  ],
+  "target": "trend_target",
+  "hyperparameters": {
+    "random_seed": 42,
+    "horizon_days": 7,
+    "model_type": "HistGradientBoostingClassifier_Trend"
+  },
+  "validation_metrics": {
+    "accuracy": 0.5918,
+    "balanced_accuracy": 0.4516,
+    "precision_macro": 0.4696,
+    "recall_macro": 0.4516,
+    "f1_macro": 0.4186,
+    "roc_auc": 0.67,
+    "confusion_matrix": [
+      [
+        18,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ],
+      [
+        12,
+        4,
+        11
+      ]
+    ]
+  },
+  "test_metrics": {
+    "accuracy": 0.6667,
+    "balanced_accuracy": 0.5,
+    "precision_macro": 0.5018,
+    "recall_macro": 0.5,
+    "f1_macro": 0.4657,
+    "roc_auc": 0.7355,
+    "confusion_matrix": [
+      [
+        23,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        1
+      ],
+      [
+        9,
+        0,
+        9
+      ]
+    ]
+  },
+  "baseline_comparison": {
+    "baseline_val": {
+      "accuracy": 0.3878,
+      "balanced_accuracy": 0.3333,
+      "precision_macro": 0.1293,
+      "recall_macro": 0.3333,
+      "f1_macro": 0.1863,
+      "roc_auc": null,
+      "confusion_matrix": [
+        [
+          19,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          0
+        ],
+        [
+          27,
+          0,
+          0
+        ]
+      ]
+    },
+    "ml_val": {
+      "accuracy": 0.5918,
+      "balanced_accuracy": 0.4516,
+      "precision_macro": 0.4696,
+      "recall_macro": 0.4516,
+      "f1_macro": 0.4186,
+      "roc_auc": 0.67,
+      "confusion_matrix": [
+        [
+          18,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ],
+        [
+          12,
+          4,
+          11
+        ]
+      ]
+    }
+  },
+  "selection_reason": "Candidate ML model beat or matched baseline Macro F1 (0.4186 vs 0.1863)"
+}

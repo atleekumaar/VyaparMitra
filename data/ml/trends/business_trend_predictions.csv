@@ -1,0 +1,2 @@
+prediction_date,horizon_days,predicted_trend,confidence,model_name,model_version
+2026-09-16,7,DECREASING,0.8945,HistGradientBoostingClassifier_Trend,v1.0

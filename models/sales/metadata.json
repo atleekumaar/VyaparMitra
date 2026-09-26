@@ -1,0 +1,77 @@
+{
+  "model_name": "RandomForestRegressor",
+  "model_version": "v1.0",
+  "training_date": "2026-09-25 17:21:56",
+  "training_data_range": {
+    "start": "2025-10-01",
+    "end": "2026-08-01"
+  },
+  "feature_list": [
+    "lag_1d_revenue",
+    "lag_7d_revenue",
+    "lag_14d_revenue",
+    "lag_28d_revenue",
+    "rolling_7d_avg_revenue",
+    "rolling_14d_avg_revenue",
+    "rolling_28d_avg_revenue",
+    "day_of_week",
+    "day_of_month",
+    "week_of_year",
+    "month",
+    "quarter",
+    "is_weekend",
+    "is_festival",
+    "festival_intensity",
+    "temperature",
+    "rainfall",
+    "is_rainy",
+    "recent_order_count_7d",
+    "recent_aov_7d"
+  ],
+  "target": "daily_total_revenue",
+  "hyperparameters": {
+    "random_seed": 42,
+    "model_type": "rf"
+  },
+  "validation_metrics": {
+    "mae": 12717.21,
+    "rmse": 16314.79,
+    "mape": 30.62,
+    "smape": 28.03,
+    "wape": 27.25
+  },
+  "test_metrics": {
+    "mae": 11867.89,
+    "rmse": 13937.77,
+    "mape": 32.0,
+    "smape": 28.36,
+    "wape": 27.01
+  },
+  "baseline_comparison": {
+    "baselines": {
+      "naive": {
+        "mae": 17233.09,
+        "rmse": 21373.65,
+        "mape": 38.75,
+        "smape": 37.41,
+        "wape": 36.92
+      },
+      "seasonal_naive": {
+        "mae": 17483.42,
+        "rmse": 21569.8,
+        "mape": 42.14,
+        "smape": 38.31,
+        "wape": 37.46
+      },
+      "moving_average": {
+        "mae": 13682.99,
+        "rmse": 16899.0,
+        "mape": 32.99,
+        "smape": 30.04,
+        "wape": 29.32
+      }
+    },
+    "best_baseline": "moving_average"
+  },
+  "selection_reason": "Outperformed best baseline (moving_average WAPE: 29.32%) with validation WAPE: 27.25%"
+}

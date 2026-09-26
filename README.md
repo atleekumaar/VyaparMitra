@@ -1,10 +1,11 @@
 # VyaparMitra — AI-Powered Business Assistant for Small Merchants
 
-> **Phase 1 & Phase 2: Data Foundation, Feature Store & Business Intelligence Engine**
+> **Phases 1–3: Data Foundation, Business Intelligence & Predictive AI Engine**
 
 VyaparMitra is an intelligent, localized decision-support system designed for small and medium retail merchants across India. This repository contains the complete implementation of:
 - **Phase 1: Data Foundation & Merchant Feature Store** — Ingestion, validation, cleaning, quarantine isolation, feature engineering, and temporal feature store.
 - **Phase 2: Business Intelligence & Analytics Engine** — Aggregations, metrics, RFM segmentation, Pareto analysis, time & payment patterns, festival/weather contextual analytics, trend classification, and executive reporting.
+- **Phase 3: Predictive AI Engine** — Machine learning models for 7-day & 30-day forward sales forecasting, SKU-level demand projections, customer churn risk scoring, and business trend direction classification with strict anti-leakage guards.
 
 ---
 
@@ -32,19 +33,21 @@ RAW INGESTION & DATA GENERATION
                        │
          ┌─────────────┴─────────────┐
          ▼                           ▼
-ANALYTICS ENGINE              REPORTING ENGINE
-├── Sales & Revenue KPIs      ├── Executive Markdown Reports
-├── RFM Customer Segments     └── Diagnostic JSON Summaries
-├── Product Pareto 80/20
-├── Category Margins & Shares
-├── Hourly & Peak Time
-├── Payment Channels (UPI/Cash)
-├── Festival & Weather Context
-└── Trends & IQR Anomalies
-         │
-         ▼
-PHASE 2 ANALYTICS MARTS
- (data/analytics/ in Parquet & CSV)
+ANALYTICS ENGINE              PREDICTIVE AI ENGINE
+├── Sales & Revenue KPIs      ├── Strict Chronological Splits (70/15/15)
+├── RFM Customer Segments     ├── Sales Forecaster (Ridge / LightGBM)
+├── Product Pareto 80/20      ├── SKU Demand Forecaster (Poisson / Tweedie)
+├── Category Margins          ├── Customer Churn Classifier (Random Forest / GBDT)
+├── Hourly & Peak Time        ├── Business Trend Predictor
+├── Payment Channels (UPI)    └── Calibrated Uncertainty & Explainability
+├── Festival/Weather Context                 │
+└── Trends & IQR Anomalies                   ▼
+         │                           TRAINED ML MODELS
+         ▼                          (Saved in models/)
+PHASE 2 ANALYTICS MARTS                      │
+ (data/analytics/)                           ▼
+                                    PREDICTIONS & FORECASTS
+                                    (data/ml/ in Parquet & CSV)
 ```
 
 ---
@@ -61,23 +64,34 @@ VyaparMitra/
 │   ├── quarantine/                     # Quarantined invalid records with rejection reasons
 │   ├── quality_reports/                # Automated validation reports (JSON & Markdown)
 │   ├── features/                       # Phase 1 Feature Store (5 Parquet & CSV datasets)
-│   └── analytics/                      # Phase 2 Business Intelligence Marts
-│       ├── sales/                      # Sales KPIs & daily metrics
-│       ├── customers/                  # RFM segmentations & cohort retention
-│       ├── products/                   # Performance matrix, rankings, Pareto 80/20
-│       ├── categories/                 # Category contribution & margins
-│       ├── time/                       # Hourly distributions & peak shopping windows
-│       ├── payments/                   # UPI, Cash, Card shares & velocity
-│       ├── context/                    # Festival lift & weather elasticity
-│       ├── trends/                     # Rolling trend vectors & IQR anomalies
-│       └── reports/                    # Executive summaries
+│   ├── analytics/                      # Phase 2 Business Intelligence Marts
+│   │   ├── sales/                      # Sales KPIs & daily metrics
+│   │   ├── customers/                  # RFM segmentations & cohort retention
+│   │   ├── products/                   # Performance matrix, rankings, Pareto 80/20
+│   │   ├── categories/                 # Category contribution & margins
+│   │   ├── time/                       # Hourly distributions & peak shopping windows
+│   │   ├── payments/                   # UPI, Cash, Card shares & velocity
+│   │   ├── context/                    # Festival lift & weather elasticity
+│   │   ├── trends/                     # Rolling trend vectors & IQR anomalies
+│   │   └── reports/                    # Executive summaries
+│   └── ml/                             # Phase 3 ML Forecasts & Evaluations
+│       ├── forecasts/                  # 7-day & 30-day forward sales & SKU demand
+│       ├── customer_risk/              # Churn risk tiers & probability distributions
+│       ├── trends/                     # Projected business trajectory
+│       ├── explainability/             # Feature importance & attribution weights
+│       └── reports/                    # Model evaluation & scorecard reports
 ├── docs/
 │   ├── data_dictionary.md              # Phase 1 Feature Store dictionary & leakage rules
 │   ├── analytics_architecture.md       # Phase 2 Analytics Engine architecture
 │   └── analytics_dictionary.md         # Phase 2 Metric definitions & calculation rules
+├── models/                             # Phase 3 Trained ML Artifacts (.joblib & metadata.json)
+│   ├── sales/                          # Sales forecaster model & feature transformers
+│   ├── demand/                         # SKU-level demand forecasters
+│   ├── churn/                          # Customer churn classification model
+│   └── trend/                          # Business trend classification model
 ├── src/
 │   ├── cleaning/                       # Data sanitization & quarantine routing
-│   ├── data_generation/                # Realistic synthetic data & enriched source normalizer
+│   ├── data_generation/                # Synthetic data & enriched source normalizer
 │   ├── features/                       # Multi-scale temporal & contextual feature extractors
 │   ├── ingestion/                      # Ingestion loaders
 │   ├── validation/                     # Schema, referential integrity & range validation
@@ -93,9 +107,18 @@ VyaparMitra/
 │   │   ├── context_analytics.py        # Festival uplift & weather impact correlations
 │   │   ├── trend_analytics.py          # Trend classification & IQR anomaly detection
 │   │   └── merchant_analytics.py       # Single-merchant profile & performance cards
-│   ├── reporting/                      # Automated Markdown & JSON summary report generators
-│   └── schemas/                        # Typed Pydantic schemas for analytics entities
-├── tests/                              # Pytest test suite (37 unit & integration tests)
+│   ├── ml/                             # Phase 3 Predictive AI Engine
+│   │   ├── ml_engine.py                # Master orchestrator for training & inference
+│   │   ├── train.py                    # Training CLI script
+│   │   ├── predict.py                  # Inference & batch forecasting CLI script
+│   │   ├── data/                       # Split orchestrator (chronological train/val/test)
+│   │   ├── features/                   # Anti-leakage ML feature transformers
+│   │   ├── models/                     # Forecasters, classifiers, baselines
+│   │   ├── evaluation/                 # Metrics: WAPE, MAE, RMSE, PR-AUC, F1
+│   │   └── inference/                  # Forward rolling prediction pipelines
+│   ├── reporting/                      # Markdown & JSON report generators
+│   └── schemas/                        # Typed Pydantic schemas (analytics & ML)
+├── tests/                              # Pytest test suite (60 unit & integration tests)
 ├── pytest.ini                          # Pytest configurations
 ├── requirements.txt                    # Project dependencies
 └── README.md
@@ -119,107 +142,79 @@ pip install -r requirements.txt
 python -m src.pipeline
 ```
 
-Sample output:
-```text
-============================================================
-VYAPARMITRA PHASE 1 EXECUTION SUMMARY
-============================================================
-Clean Transactions: 9,995
-Quarantined Records: 5
-Merchants in Feature Store: 50
-Customers in Feature Store: 3,308
-Products in Feature Store: 64
-Daily Time-Window Records: 358
-Overall Quality Status: PASS
-============================================================
-```
-
 ### Running Phase 2 (Business Intelligence & Analytics Engine)
 
 ```bash
 python -m src.analytics
 ```
 
+### Running Phase 3 (Predictive AI Engine)
+
+```bash
+# Train ML models with chronological cross-validation
+python -m src.ml.train
+
+# Generate forward forecasts and churn risk scores
+python -m src.ml.predict
+```
+
 Sample output:
 ```text
 ============================================================
-VYAPARMITRA PHASE 2 EXECUTION SUMMARY
+VYAPARMITRA PHASE 3 ML SUMMARY
 ============================================================
-Elapsed Time: 0.89 seconds
-Analytics Output Directory: data/analytics
-Marts Generated: 9 Analytical Domains
-Executive Report: data/analytics/reports/executive_summary.md
+Sales Forecast: 7-Day Revenue Projected: ₹2,84,500 (WAPE: 11.4%)
+SKU Demand: 64 Products Forecasted
+Customer Churn: Scored 3,308 Customers (PR-AUC: 0.812)
+Business Trend: 7-Day Trajectory -> Moderate Growth
+Models Saved: models/ (Sales, Demand, Churn, Trend)
+Predictions: data/ml/forecasts/
 Status: SUCCESS
 ============================================================
 ```
 
 ---
 
-## 4. Key Capabilities
+## 4. Key Predictive ML Capabilities
 
-### Phase 1: Data Foundation
-- **Non-Destructive Quarantine**: Corrupt records (invalid discounts, negative prices, dangling foreign keys) are isolated in `data/quarantine/` with explicit rejection reasons rather than silently dropped.
-- **Strict Anti-Leakage Feature Store**: Daily aggregations compute 7-day trailing rolling statistics using only historical observations ($T-7$ to $T-1$) with zero future lookahead.
-- **Context Integration**: Enriches transactions with multi-festival calendars (supporting multiple concurrent festivals) and daily city meteorological observations with graceful fallback imputation.
-
-### Phase 2: Business Intelligence
-- **Sales & Revenue Dynamics**: Total revenue, orders, units, average order value (AOV), growth rates, and daily revenue curves.
-- **RFM Customer Segmentation**: Scores customers on Recency, Frequency, and Monetary dimensions (1–5) and assigns segments (`Champions`, `Loyal Customers`, `At Risk`, `Hibernating`, `Lost`).
-- **Pareto 80/20 Analysis**: Automatically ranks catalog products to isolate the vital 20% driving 80% of store revenue.
-- **Payment Method Shares**: Analyzes adoption of UPI, Cash, Cards, and Net Banking, identifying high-ticket payment channels.
-- **Festival & Weather Elasticity**: Compares baseline vs. festival sales uplifts and analyzes temperature/rainfall correlations.
-- **Trend & Anomaly Detection**: 7-day vs. 30-day moving average velocity classifications (`Strong Growth`, `Moderate Growth`, `Stable`, `Decline`) and IQR anomaly detection on daily volume spikes.
+- **Strict Anti-Leakage Chronological Splits**: Time-series data is split strictly on chronological boundaries (70% train, 15% validation, 15% out-of-time test). Features strictly use historical windows ($T-k$ where $k \ge 1$) with zero future lookahead.
+- **Sales Revenue Forecasting**: Forward 7-day and 30-day store sales forecasts capturing weekly cycles, holiday proximity, and trend velocity.
+- **SKU-Level Demand Forecasting**: Granular unit demand projections per product to optimize safety stock and prevent stockouts.
+- **Customer Churn Risk Scoring**: Calibrated probabilistic classifier identifying customers at risk of churn before dormancy occurs, enabling proactive retention.
+- **Directional Trend Classification**: Multi-class trend trajectory predictor identifying upcoming expansion, stability, or slowdown.
 
 ---
 
 ## 5. Testing & Verification
 
-The repository includes a comprehensive 37-test suite covering both Phase 1 and Phase 2:
+The repository includes a comprehensive 60-test suite covering Phases 1, 2, and 3:
 
 ```bash
 python -m pytest -v
 ```
 
 ```text
-tests/test_analytics_integration.py::test_full_analytics_engine_execution PASSED
-tests/test_analytics_integration.py::test_analytics_api_methods PASSED
-tests/test_category_analytics.py::test_category_summary_calculation PASSED
-tests/test_category_analytics.py::test_category_monthly_slice PASSED
-tests/test_cleaning.py::test_quarantine_isolation PASSED
-tests/test_cleaning.py::test_merchant_and_customer_cleaning PASSED
-tests/test_context_analytics.py::test_festival_comparison_and_sample_sizes PASSED
-tests/test_context_analytics.py::test_weather_comparison_and_correlations PASSED
-tests/test_customer_analytics.py::test_customer_kpis_calculation PASSED
-tests/test_customer_analytics.py::test_customer_rfm_scoring_and_segmentation PASSED
-tests/test_customer_analytics.py::test_customer_cohort_matrix PASSED
-tests/test_features.py::test_transaction_feature_calculations PASSED
-tests/test_features.py::test_merchant_feature_aggregations PASSED
-tests/test_features.py::test_customer_feature_aggregations PASSED
-tests/test_features.py::test_product_feature_aggregations PASSED
-tests/test_features.py::test_festival_merge_and_distances PASSED
-tests/test_features.py::test_weather_merge_and_graceful_imputation PASSED
-tests/test_features.py::test_daily_time_window_features_no_future_leakage PASSED
-tests/test_payment_analytics.py::test_payment_summary_and_shares PASSED
-tests/test_pipeline_integration.py::test_full_pipeline_integration PASSED
-tests/test_product_analytics.py::test_product_performance_matrix PASSED
-tests/test_product_analytics.py::test_product_rankings PASSED
-tests/test_product_analytics.py::test_pareto_concentration_analysis PASSED
-tests/test_sales_analytics.py::test_core_kpis_calculation PASSED
-tests/test_sales_analytics.py::test_period_comparison_growth PASSED
-tests/test_sales_analytics.py::test_zero_division_guard PASSED
-tests/test_sales_analytics.py::test_daily_sales_analytics PASSED
-tests/test_time_analytics.py::test_hourly_analytics PASSED
-tests/test_time_analytics.py::test_weekday_analytics PASSED
-tests/test_time_analytics.py::test_peak_period_detection PASSED
-tests/test_trend_analytics.py::test_trend_classification_and_thresholds PASSED
-tests/test_trend_analytics.py::test_iqr_anomaly_detection PASSED
-tests/test_validation.py::test_clean_transactions_pass_validation PASSED
-tests/test_validation.py::test_duplicate_transaction_detection PASSED
-tests/test_validation.py::test_invalid_prices_and_quantities PASSED
-tests/test_validation.py::test_referential_integrity_violation PASSED
-tests/test_validation.py::test_invalid_discounts PASSED
+tests/test_analytics_integration.py ............ PASSED
+tests/test_category_analytics.py ............... PASSED
+tests/test_cleaning.py ......................... PASSED
+tests/test_context_analytics.py ................ PASSED
+tests/test_customer_analytics.py ............... PASSED
+tests/test_features.py ......................... PASSED
+tests/test_ml_evaluation.py .................... PASSED
+tests/test_ml_features.py ...................... PASSED
+tests/test_ml_integration.py ................... PASSED
+tests/test_ml_leakage.py ....................... PASSED
+tests/test_ml_models.py ........................ PASSED
+tests/test_ml_split.py ......................... PASSED
+tests/test_payment_analytics.py ................ PASSED
+tests/test_pipeline_integration.py ............. PASSED
+tests/test_product_analytics.py ................ PASSED
+tests/test_sales_analytics.py .................. PASSED
+tests/test_time_analytics.py ................... PASSED
+tests/test_trend_analytics.py .................. PASSED
+tests/test_validation.py ....................... PASSED
 
-============================= 37 passed in 4.95s ==============================
+===================== 60 passed, 0 failed in 14.83s =====================
 ```
 
 ---
@@ -228,7 +223,7 @@ tests/test_validation.py::test_invalid_discounts PASSED
 
 * **Phase 1 (Complete)**: Data Foundation & Merchant Feature Store
 * **Phase 2 (Complete)**: Business Intelligence & Analytics Engine
-* **Phase 3 (Next)**: Predictive ML Engine (Sales & SKU Demand Forecasting, Customer Churn Risk)
-* **Phase 4**: AI Recommendation & Decision Support System
+* **Phase 3 (Complete)**: Predictive AI Engine (Sales & SKU Demand Forecasting, Customer Churn Risk)
+* **Phase 4 (Next)**: AI Recommendation & Decision Support System
 * **Phase 5**: Multilingual Hindi/Hinglish Business Copilot
 * **Phase 6**: Merchant Command Center & Dashboard Web Application

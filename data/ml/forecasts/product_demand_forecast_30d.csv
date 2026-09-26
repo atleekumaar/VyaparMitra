@@ -1,0 +1,1921 @@
+forecast_date,product_id,product_category,predicted_units,model_name,model_version
+2026-09-24,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BRD_01,Bread,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_COF_01,Coffee,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ESS_02,Daily Essentials,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MED_01,Medicine,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MEN_01,Men,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_MOB_02,Mobiles,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_PER_02,Personal Care,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_SNK_01,Snacks,2.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_SNK_02,Snacks,2.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-24,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ART_01,Art Supplies,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_BRD_02,Bread,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CHG_01,Chargers,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_COF_01,Coffee,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ESS_02,Daily Essentials,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_DAI_02,Dairy,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_DES_01,Desserts,0.97,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MED_01,Medicine,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MEN_01,Men,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_MOB_02,Mobiles,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_PAS_02,Pastries,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_PER_02,Personal Care,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_SNK_01,Snacks,2.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_SNK_02,Snacks,2.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_TEA_02,Tea,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-25,PRD_WRI_02,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ACC_01,Accessories,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ART_01,Art Supplies,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BEV_01,Beverages,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CHG_01,Chargers,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_COF_01,Coffee,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ESS_02,Daily Essentials,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_DAI_02,Dairy,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_HOU_02,Household,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_LAP_02,Laptops,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MED_01,Medicine,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MEN_01,Men,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_MOB_02,Mobiles,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_PAS_01,Pastries,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_PER_02,Personal Care,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_SNK_01,Snacks,2.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_SNK_02,Snacks,2.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WEL_01,Wellness,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-26,PRD_WRI_02,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ACC_01,Accessories,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ART_01,Art Supplies,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BEV_01,Beverages,0.9,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BEV_02,Beverages,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_BRD_02,Bread,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAK_02,Cakes,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CHG_01,Chargers,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_COF_01,Coffee,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ESS_02,Daily Essentials,0.45,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_DAI_02,Dairy,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_HOU_02,Household,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_LAP_02,Laptops,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MEA_01,Meals,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MED_01,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MEN_01,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_MOB_02,Mobiles,0.45,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_PAS_01,Pastries,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_PAS_02,Pastries,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_PER_02,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_SNK_01,Snacks,2.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_SNK_02,Snacks,2.31,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_TEA_02,Tea,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WEL_01,Wellness,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-27,PRD_WRI_02,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ACC_01,Accessories,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ART_01,Art Supplies,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BEV_01,Beverages,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BRD_01,Bread,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAB_01,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAB_02,Cables,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_COF_01,Coffee,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_COF_02,Coffee,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ESS_02,Daily Essentials,0.45,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_DAI_02,Dairy,0.46,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_DES_02,Desserts,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_EAR_01,Earphones,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ELE_01,Home Electronics,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_LAP_01,Laptops,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_LAP_02,Laptops,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MEA_01,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MED_01,Medicine,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MEN_01,Men,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MOB_01,Mobiles,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_MOB_02,Mobiles,0.45,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_NOT_02,Notebooks,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_OFF_01,Office Supplies,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_PER_02,Personal Care,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_SNK_01,Snacks,2.16,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_SNK_02,Snacks,2.0,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_STA_01,Staples,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_STA_02,Staples,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_TEA_01,Tea,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WEL_01,Wellness,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-28,PRD_WRI_02,Writing,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ACC_01,Accessories,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ART_01,Art Supplies,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BABY_01,Baby Care,0.22,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BEV_01,Beverages,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CHG_01,Chargers,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_COF_01,Coffee,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ESS_01,Daily Essentials,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ESS_02,Daily Essentials,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_DAI_02,Dairy,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_KID_01,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_KID_02,Kids,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_LAP_02,Laptops,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MEA_01,Meals,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MEA_02,Meals,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MED_01,Medicine,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MED_02,Medicine,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MEN_01,Men,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MEN_02,Men,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_MOB_02,Mobiles,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_PER_01,Personal Care,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_PER_02,Personal Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_SNK_01,Snacks,2.06,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_SNK_02,Snacks,1.99,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_STA_02,Staples,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WEL_01,Wellness,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WEL_02,Wellness,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WOM_01,Women,0.38,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WOM_02,Women,0.22,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WRI_01,Writing,0.62,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-29,PRD_WRI_02,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ACC_01,Accessories,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ACC_02,Accessories,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ART_01,Art Supplies,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ART_02,Art Supplies,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BABY_01,Baby Care,0.21,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BEV_01,Beverages,0.93,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAB_01,Cables,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAK_01,Cakes,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CAS_02,Cases,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CHG_01,Chargers,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_CHG_02,Chargers,0.57,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_COF_01,Coffee,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ESS_01,Daily Essentials,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ESS_02,Daily Essentials,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_DAI_01,Dairy,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_DAI_02,Dairy,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_EAR_02,Earphones,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ELE_01,Home Electronics,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_ELE_02,Home Electronics,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_HOU_01,Household,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_HOU_02,Household,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_KID_01,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_KID_02,Kids,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_LAP_01,Laptops,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_LAP_02,Laptops,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MEA_01,Meals,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MEA_02,Meals,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MED_01,Medicine,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MED_02,Medicine,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MEN_01,Men,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MEN_02,Men,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_MOB_02,Mobiles,0.43,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_NOT_01,Notebooks,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_NOT_02,Notebooks,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_OFF_01,Office Supplies,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_OFF_02,Office Supplies,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_PAS_01,Pastries,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_PER_01,Personal Care,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_PER_02,Personal Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_SNK_01,Snacks,1.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_SNK_02,Snacks,1.9,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_STA_02,Staples,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_TEA_01,Tea,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WEL_01,Wellness,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WEL_02,Wellness,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WOM_01,Women,0.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WOM_02,Women,0.21,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WRI_01,Writing,0.6,HistGradientBoostingRegressor_Demand,v1.0
+2026-09-30,PRD_WRI_02,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ACC_01,Accessories,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ACC_02,Accessories,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ART_01,Art Supplies,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BEV_02,Beverages,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BRD_01,Bread,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAB_01,Cables,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAB_02,Cables,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAK_01,Cakes,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CHG_01,Chargers,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_COF_02,Coffee,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_DES_02,Desserts,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_EAR_01,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_EAR_02,Earphones,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ELE_01,Home Electronics,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_ELE_02,Home Electronics,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_HOU_01,Household,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_LAP_01,Laptops,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_LAP_02,Laptops,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MOB_01,Mobiles,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_NOT_02,Notebooks,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_OFF_01,Office Supplies,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_SNK_01,Snacks,1.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_SNK_02,Snacks,2.24,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_STA_01,Staples,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_TEA_01,Tea,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-01,PRD_WRI_02,Writing,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ACC_01,Accessories,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ACC_02,Accessories,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ART_01,Art Supplies,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BEV_02,Beverages,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BRD_01,Bread,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAB_01,Cables,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAB_02,Cables,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAK_01,Cakes,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CHG_01,Chargers,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_COF_02,Coffee,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_DES_02,Desserts,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_EAR_01,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_EAR_02,Earphones,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ELE_01,Home Electronics,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_ELE_02,Home Electronics,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_HOU_01,Household,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_LAP_01,Laptops,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_LAP_02,Laptops,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MOB_01,Mobiles,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_NOT_02,Notebooks,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_OFF_01,Office Supplies,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_SNK_01,Snacks,1.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_SNK_02,Snacks,2.15,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_STA_01,Staples,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_TEA_01,Tea,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-02,PRD_WRI_02,Writing,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ACC_01,Accessories,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ACC_02,Accessories,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ART_01,Art Supplies,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BABY_01,Baby Care,0.34,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BEV_02,Beverages,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BRD_01,Bread,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAB_01,Cables,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAB_02,Cables,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAK_01,Cakes,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CHG_01,Chargers,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_COF_02,Coffee,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ESS_01,Daily Essentials,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_DES_02,Desserts,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_EAR_01,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_EAR_02,Earphones,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ELE_01,Home Electronics,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_ELE_02,Home Electronics,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_HOU_01,Household,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_KID_01,Kids,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_KID_02,Kids,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_LAP_01,Laptops,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_LAP_02,Laptops,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MEA_02,Meals,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MED_02,Medicine,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MEN_02,Men,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MOB_01,Mobiles,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_NOT_02,Notebooks,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_OFF_01,Office Supplies,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_PER_01,Personal Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_SNK_01,Snacks,1.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_SNK_02,Snacks,2.13,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_STA_01,Staples,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_TEA_01,Tea,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WEL_02,Wellness,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WOM_01,Women,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WOM_02,Women,0.34,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WRI_01,Writing,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-03,PRD_WRI_02,Writing,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ACC_01,Accessories,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ACC_02,Accessories,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ART_01,Art Supplies,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BABY_01,Baby Care,0.34,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BABY_02,Baby Care,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BEV_01,Beverages,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BEV_02,Beverages,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BRD_01,Bread,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_BRD_02,Bread,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAB_01,Cables,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAB_02,Cables,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAK_01,Cakes,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAK_02,Cakes,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAS_01,Cases,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CHG_01,Chargers,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_COF_02,Coffee,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ESS_01,Daily Essentials,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_DES_02,Desserts,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_EAR_01,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_EAR_02,Earphones,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ELE_01,Home Electronics,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_ELE_02,Home Electronics,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_HOU_01,Household,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_HOU_02,Household,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_KID_01,Kids,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_KID_02,Kids,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_LAP_01,Laptops,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_LAP_02,Laptops,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MEA_02,Meals,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MED_02,Medicine,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MEN_02,Men,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MOB_01,Mobiles,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_NOT_02,Notebooks,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_OFF_01,Office Supplies,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_PAS_01,Pastries,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_PAS_02,Pastries,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_PER_01,Personal Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_SNK_01,Snacks,2.16,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_SNK_02,Snacks,2.22,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_STA_01,Staples,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_TEA_01,Tea,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_TEA_02,Tea,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WEL_02,Wellness,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WOM_01,Women,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WOM_02,Women,0.34,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WRI_01,Writing,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-04,PRD_WRI_02,Writing,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ACC_01,Accessories,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ACC_02,Accessories,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ART_01,Art Supplies,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BEV_01,Beverages,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BEV_02,Beverages,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAB_01,Cables,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_DES_01,Desserts,0.97,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ELE_01,Home Electronics,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_ELE_02,Home Electronics,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_LAP_01,Laptops,0.67,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_LAP_02,Laptops,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_OFF_01,Office Supplies,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_SNK_01,Snacks,2.06,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_SNK_02,Snacks,2.26,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_STA_01,Staples,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_TEA_01,Tea,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_TEA_02,Tea,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-05,PRD_WRI_02,Writing,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ACC_01,Accessories,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ACC_02,Accessories,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ART_01,Art Supplies,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BEV_02,Beverages,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAB_01,Cables,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAK_01,Cakes,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_ELE_02,Home Electronics,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_LAP_01,Laptops,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_LAP_02,Laptops,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_OFF_01,Office Supplies,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_SNK_01,Snacks,1.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_SNK_02,Snacks,2.18,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_STA_01,Staples,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_TEA_01,Tea,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-06,PRD_WRI_02,Writing,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ACC_01,Accessories,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ACC_02,Accessories,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ART_01,Art Supplies,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BEV_02,Beverages,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAB_01,Cables,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAK_01,Cakes,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAK_02,Cakes,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_ELE_02,Home Electronics,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_LAP_01,Laptops,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_LAP_02,Laptops,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_OFF_01,Office Supplies,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_SNK_01,Snacks,1.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_SNK_02,Snacks,2.1,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_STA_01,Staples,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_TEA_01,Tea,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-07,PRD_WRI_02,Writing,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ACC_01,Accessories,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ACC_02,Accessories,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BABY_01,Baby Care,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAB_01,Cables,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ESS_01,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_ELE_02,Home Electronics,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_KID_01,Kids,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_KID_02,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_LAP_01,Laptops,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_LAP_02,Laptops,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MEA_02,Meals,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MED_02,Medicine,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MEN_02,Men,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_OFF_01,Office Supplies,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_PER_01,Personal Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_SNK_01,Snacks,1.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_SNK_02,Snacks,2.13,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_TEA_01,Tea,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WEL_02,Wellness,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WOM_01,Women,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WOM_02,Women,0.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WRI_01,Writing,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-08,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ACC_01,Accessories,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ACC_02,Accessories,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BABY_01,Baby Care,0.33,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BEV_01,Beverages,0.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAB_01,Cables,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAK_01,Cakes,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ESS_01,Daily Essentials,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_EAR_02,Earphones,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ELE_01,Home Electronics,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_ELE_02,Home Electronics,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_HOU_01,Household,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_KID_01,Kids,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_KID_02,Kids,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_LAP_01,Laptops,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_LAP_02,Laptops,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MEA_02,Meals,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MED_02,Medicine,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MEN_02,Men,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_NOT_02,Notebooks,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_OFF_01,Office Supplies,0.66,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_PER_01,Personal Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_SNK_01,Snacks,1.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_SNK_02,Snacks,2.13,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_TEA_01,Tea,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WEL_02,Wellness,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WOM_01,Women,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WOM_02,Women,0.33,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WRI_01,Writing,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-09,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BABY_02,Baby Care,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAS_01,Cases,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_SNK_01,Snacks,1.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_SNK_02,Snacks,2.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-10,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ACC_01,Accessories,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ART_01,Art Supplies,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BEV_01,Beverages,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_LAP_02,Laptops,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_SNK_01,Snacks,2.37,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_SNK_02,Snacks,2.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_TEA_02,Tea,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-11,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ACC_01,Accessories,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ART_01,Art Supplies,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BEV_01,Beverages,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BEV_02,Beverages,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BRD_01,Bread,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAB_01,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAB_02,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAK_01,Cakes,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAK_02,Cakes,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CHG_01,Chargers,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_COF_02,Coffee,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_DES_01,Desserts,0.97,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_DES_02,Desserts,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_EAR_01,Earphones,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_EAR_02,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ELE_01,Home Electronics,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_HOU_01,Household,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_HOU_02,Household,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_LAP_01,Laptops,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_LAP_02,Laptops,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MOB_01,Mobiles,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_OFF_01,Office Supplies,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_SNK_01,Snacks,2.03,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_SNK_02,Snacks,2.17,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_STA_01,Staples,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_TEA_01,Tea,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_TEA_02,Tea,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-12,PRD_WRI_02,Writing,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ELE_01,Home Electronics,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_SNK_01,Snacks,1.88,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_SNK_02,Snacks,2.17,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-13,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ELE_01,Home Electronics,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_SNK_01,Snacks,1.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_SNK_02,Snacks,2.08,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_STA_02,Staples,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-14,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_SNK_01,Snacks,1.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_SNK_02,Snacks,2.15,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-15,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MEA_01,Meals,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_SNK_01,Snacks,1.96,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_SNK_02,Snacks,2.15,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-16,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_SNK_01,Snacks,2.03,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_SNK_02,Snacks,2.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-17,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ACC_01,Accessories,0.84,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ART_01,Art Supplies,0.74,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BABY_01,Baby Care,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BABY_02,Baby Care,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BEV_01,Beverages,0.89,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BEV_02,Beverages,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAK_02,Cakes,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAS_01,Cases,0.49,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CAS_02,Cases,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ESS_01,Daily Essentials,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_DAI_01,Dairy,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_DES_01,Desserts,0.91,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_HOU_02,Household,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_KID_01,Kids,0.41,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_KID_02,Kids,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_LAP_02,Laptops,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MEA_02,Meals,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MED_02,Medicine,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MEN_02,Men,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_PAS_01,Pastries,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_PER_01,Personal Care,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_SNK_01,Snacks,2.37,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_SNK_02,Snacks,2.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_TEA_02,Tea,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WEL_02,Wellness,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WOM_01,Women,0.39,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WOM_02,Women,0.23,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WRI_01,Writing,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-18,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ACC_01,Accessories,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ART_01,Art Supplies,0.79,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BEV_01,Beverages,0.83,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BEV_02,Beverages,0.7,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_BRD_02,Bread,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAB_01,Cables,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAK_01,Cakes,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAK_02,Cakes,0.85,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_EAR_02,Earphones,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ELE_01,Home Electronics,0.72,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_HOU_01,Household,0.68,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_HOU_02,Household,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_LAP_01,Laptops,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_LAP_02,Laptops,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_OFF_01,Office Supplies,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_PAS_02,Pastries,0.75,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_SNK_01,Snacks,2.08,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_SNK_02,Snacks,2.17,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_TEA_01,Tea,0.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-19,PRD_WRI_02,Writing,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_COF_01,Coffee,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ESS_02,Daily Essentials,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ELE_01,Home Electronics,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MEA_01,Meals,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MED_01,Medicine,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MEN_01,Men,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_MOB_02,Mobiles,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_PER_02,Personal Care,0.52,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_SNK_01,Snacks,1.92,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_SNK_02,Snacks,2.17,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-20,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BRD_01,Bread,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_COF_01,Coffee,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ESS_02,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_DAI_02,Dairy,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ELE_01,Home Electronics,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MEA_01,Meals,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MED_01,Medicine,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MEN_01,Men,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_MOB_02,Mobiles,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_PAS_01,Pastries,0.8,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_PER_02,Personal Care,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_SNK_01,Snacks,1.63,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_SNK_02,Snacks,2.08,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_STA_02,Staples,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WEL_01,Wellness,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-21,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BRD_01,Bread,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_COF_01,Coffee,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ESS_02,Daily Essentials,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_DAI_02,Dairy,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MEA_01,Meals,0.56,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MED_01,Medicine,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MEN_01,Men,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_MOB_02,Mobiles,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_PER_02,Personal Care,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_SNK_01,Snacks,1.96,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_SNK_02,Snacks,2.15,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WEL_01,Wellness,0.78,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-22,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ACC_01,Accessories,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ACC_02,Accessories,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ART_01,Art Supplies,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ART_02,Art Supplies,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BABY_01,Baby Care,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BABY_02,Baby Care,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BEV_01,Beverages,0.87,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BEV_02,Beverages,0.71,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BRD_01,Bread,0.65,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_BRD_02,Bread,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAB_01,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAB_02,Cables,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAK_01,Cakes,0.73,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAK_02,Cakes,0.86,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAS_01,Cases,0.5,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CAS_02,Cases,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CHG_01,Chargers,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_CHG_02,Chargers,0.58,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_COF_01,Coffee,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_COF_02,Coffee,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ESS_01,Daily Essentials,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ESS_02,Daily Essentials,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_DAI_01,Dairy,0.53,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_DAI_02,Dairy,0.48,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_DES_01,Desserts,0.98,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_DES_02,Desserts,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_EAR_01,Earphones,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_EAR_02,Earphones,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ELE_01,Home Electronics,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_ELE_02,Home Electronics,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_HOU_01,Household,0.69,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_HOU_02,Household,0.82,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_KID_01,Kids,0.42,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_KID_02,Kids,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_LAP_01,Laptops,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_LAP_02,Laptops,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MEA_01,Meals,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MEA_02,Meals,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MED_01,Medicine,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MED_02,Medicine,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MEN_01,Men,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MEN_02,Men,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MOB_01,Mobiles,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_MOB_02,Mobiles,0.47,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_NOT_01,Notebooks,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_NOT_02,Notebooks,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_OFF_01,Office Supplies,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_OFF_02,Office Supplies,0.55,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_PAS_01,Pastries,0.81,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_PAS_02,Pastries,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_PER_01,Personal Care,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_PER_02,Personal Care,0.51,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_SNK_01,Snacks,2.35,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_SNK_02,Snacks,2.36,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_STA_01,Staples,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_STA_02,Staples,0.54,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_TEA_01,Tea,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_TEA_02,Tea,0.77,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WEL_01,Wellness,0.76,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WEL_02,Wellness,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WOM_01,Women,0.4,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WOM_02,Women,0.25,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WRI_01,Writing,0.64,HistGradientBoostingRegressor_Demand,v1.0
+2026-10-23,PRD_WRI_02,Writing,0.65,HistGradientBoostingRegressor_Demand,v1.0

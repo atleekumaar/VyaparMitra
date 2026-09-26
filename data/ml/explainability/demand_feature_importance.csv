@@ -1,0 +1,15 @@
+feature,importance,std
+rolling_28_units,0.2121,0.0122
+rolling_7_units,0.0111,0.0012
+unit_margin,0.0075,0.0024
+selling_price,0.0049,0.0008
+lag_1_units,0.0007,0.0016
+day_of_week,0.0004,0.0022
+lag_14_units,0.0002,0.0011
+is_weekend,0.0,0.0
+month,0.0,0.0
+unit_cost,-0.0009,0.0015
+day_of_month,-0.001,0.0022
+lag_7_units,-0.0019,0.0007
+lag_28_units,-0.0026,0.0008
+rolling_14_units,-0.0035,0.002
