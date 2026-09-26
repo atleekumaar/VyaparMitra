@@ -56,7 +56,7 @@ class AnalyticsService:
             for _, r in df_d.iterrows():
                 daily_points.append(
                     DailySalesPoint(
-                        date=str(r.get("period", r.get("date", ""))),
+                        date=str(r.get("period_key", r.get("date", ""))),
                         revenue=round(float(r.get("revenue", 0.0)), 2),
                         orders=int(r.get("orders", 0)),
                         units=int(r.get("units", 0)) if "units" in r else None,
