@@ -174,22 +174,32 @@ class AnalyticsService:
 
     def get_payment_analytics(self) -> PaymentAnalyticsResponse:
         pay_path = self.analytics_dir / "payments" / "payment_summary.parquet"
+        if not pay_path.exists():
+            pay_path = self.analytics_dir / "payment_summary.parquet"
+
         methods: List[PaymentMethodItem] = []
         primary_method = "UPI"
 
-        if True:
+        if pay_path.exists():
+            try:
+                df_pay = pd.read_parquet(pay_path)
+            except Exception:
+                df_pay = fetch_table_df("payment_summary")
+        else:
             df_pay = fetch_table_df("payment_summary")
-            if not df_pay.empty:
-                primary_method = str(df_pay.sort_values(by="revenue_share", ascending=False).iloc[0].get("payment_method", "UPI"))
-                for _, r in df_pay.iterrows():
-                    methods.append(
-                        PaymentMethodItem(
-                            payment_method=str(r.get("payment_method", "")),
-                            transaction_count=int(r.get("payment_method_orders", r.get("orders", r.get("transaction_count", 0)))),
-                            total_revenue=round(float(r.get("payment_method_revenue", r.get("revenue", r.get("total_revenue", 0.0)))), 2),
-                            revenue_share=round(float(r.get("revenue_share", 0.0)), 4),
-                        )
+
+        if not df_pay.empty:
+            sort_col = "revenue_share" if "revenue_share" in df_pay.columns else ("payment_method_revenue" if "payment_method_revenue" in df_pay.columns else "revenue")
+            primary_method = str(df_pay.sort_values(by=sort_col, ascending=False).iloc[0].get("payment_method", "UPI"))
+            for _, r in df_pay.iterrows():
+                methods.append(
+                    PaymentMethodItem(
+                        payment_method=str(r.get("payment_method", "")),
+                        transaction_count=int(r.get("payment_method_orders", r.get("orders", r.get("transaction_count", 0)))),
+                        total_revenue=round(float(r.get("payment_method_revenue", r.get("revenue", r.get("total_revenue", 0.0)))), 2),
+                        revenue_share=round(float(r.get("revenue_share", 0.0)), 4),
                     )
+                )
 
         return PaymentAnalyticsResponse(
             payment_methods=methods,
@@ -257,6 +267,7 @@ class AnalyticsService:
     def record_cash_sale(self, req: Any) -> Any:
         import datetime
         from src.api.schemas import CashSaleResponse
+        from src.api.db import save_table_df
 
         amount = float(req.amount)
         now = datetime.datetime.now()
@@ -265,11 +276,12 @@ class AnalyticsService:
         updated_cash_rev = 0.0
         updated_cash_orders = 0
 
-        # 1. Update payment_summary parquet tables
+        # 1. Update payment_summary parquet tables & SQLite
         pay_paths = [
             self.analytics_dir / "payments" / "payment_summary.parquet",
             self.analytics_dir / "payment_summary.parquet",
         ]
+        last_pay_df = None
         for p in pay_paths:
             if p.exists():
                 try:
@@ -277,8 +289,8 @@ class AnalyticsService:
                     if "payment_method" in df.columns:
                         mask = df["payment_method"].str.upper() == "CASH"
                         if mask.any():
-                            df.loc[mask, "payment_method_orders"] = df.loc[mask, "payment_method_orders"] + 1
-                            df.loc[mask, "payment_method_revenue"] = df.loc[mask, "payment_method_revenue"] + amount
+                            df.loc[mask, "payment_method_orders"] = df.loc[mask, "payment_method_orders"].astype(int) + 1
+                            df.loc[mask, "payment_method_revenue"] = df.loc[mask, "payment_method_revenue"].astype(float) + amount
                             updated_cash_rev = float(df.loc[mask, "payment_method_revenue"].iloc[0])
                             updated_cash_orders = int(df.loc[mask, "payment_method_orders"].iloc[0])
                         else:
@@ -294,24 +306,32 @@ class AnalyticsService:
                             updated_cash_rev = amount
                             updated_cash_orders = 1
 
-                        # Recalculate shares
+                        # Recalculate shares & AOV
                         tot_rev = df["payment_method_revenue"].sum()
                         tot_ord = df["payment_method_orders"].sum()
                         if tot_rev > 0:
                             df["revenue_share"] = (df["payment_method_revenue"] / tot_rev).round(4)
                         if tot_ord > 0:
                             df["orders_share"] = (df["payment_method_orders"] / tot_ord).round(4)
+                        if "payment_method_aov" in df.columns:
+                            df["payment_method_aov"] = (df["payment_method_revenue"] / df["payment_method_orders"]).round(2)
 
                         df.to_parquet(p, index=False)
+                        last_pay_df = df
                 except Exception as e:
-                    logger.warning(f"Could not update payment summary parquet: {e}")
+                    pass
 
-        # 2. Update daily sales summary if available
+        # Sync to SQLite db
+        if last_pay_df is not None:
+            save_table_df("payment_summary", last_pay_df)
+
+        # 2. Update daily sales and sales summary
         daily_paths = [
             self.analytics_dir / "sales" / "sales_daily.parquet",
             self.analytics_dir / "sales_daily.parquet",
         ]
         today_str = now.strftime("%Y-%m-%d")
+        last_daily_df = None
         for dp in daily_paths:
             if dp.exists():
                 try:
@@ -320,8 +340,8 @@ class AnalyticsService:
                     if date_col in df_d.columns:
                         mask_d = df_d[date_col].astype(str) == today_str
                         if mask_d.any():
-                            df_d.loc[mask_d, "revenue"] = df_d.loc[mask_d, "revenue"] + amount
-                            df_d.loc[mask_d, "orders"] = df_d.loc[mask_d, "orders"] + 1
+                            df_d.loc[mask_d, "revenue"] = df_d.loc[mask_d, "revenue"].astype(float) + amount
+                            df_d.loc[mask_d, "orders"] = df_d.loc[mask_d, "orders"].astype(int) + 1
                         else:
                             last_row = df_d.iloc[-1].to_dict() if not df_d.empty else {}
                             last_row[date_col] = today_str
@@ -329,8 +349,12 @@ class AnalyticsService:
                             last_row["orders"] = 1
                             df_d = pd.concat([df_d, pd.DataFrame([last_row])], ignore_index=True)
                         df_d.to_parquet(dp, index=False)
-                except Exception as e:
-                    logger.warning(f"Could not update daily sales parquet: {e}")
+                        last_daily_df = df_d
+                except Exception:
+                    pass
+
+        if last_daily_df is not None:
+            save_table_df("sales_daily", last_daily_df)
 
         return CashSaleResponse(
             status="SUCCESS",
@@ -341,3 +365,4 @@ class AnalyticsService:
             updated_cash_orders=updated_cash_orders,
             timestamp=now.isoformat(),
         )
+
