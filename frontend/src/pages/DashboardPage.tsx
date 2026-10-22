@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   TrendingUp,
+  TrendingDown,
   Sparkles,
   Bot,
-  AlertTriangle,
   ArrowRight,
   ShoppingBag,
   DollarSign,
-  Users,
   Package,
-  Calendar,
-  CheckCircle2,
   Trophy,
   Volume2,
   ShieldCheck,
   Zap,
+  Activity,
+  Calendar,
 } from 'lucide-react';
 import { api } from '../api/client';
-import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics } from '../types';
+import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics, DailySalesPoint } from '../types';
 import { MetricCard } from '../components/MetricCard';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -46,6 +45,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [quickQuery, setQuickQuery] = useState<string>('');
   const [soundboxPlayed, setSoundboxPlayed] = useState<boolean>(false);
+  const [timeRange, setTimeRange] = useState<'7D' | '14D'>('7D');
+  const [activeDayIndex, setActiveDayIndex] = useState<number | null>(null);
 
   const loadData = async () => {
     setLoading(true);
@@ -93,7 +94,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         utterance.lang = 'hi-IN';
       } else {
         utterance.text = '4250 rupees prapt hue!';
-        utterance.lang = 'hi-IN'; // Using hi-IN accent works better for hinglish
+        utterance.lang = 'hi-IN';
       }
       utterance.rate = 1.0;
       window.speechSynthesis.speak(utterance);
@@ -103,19 +104,60 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     setTimeout(() => setSoundboxPlayed(false), 4000);
   };
 
+  // Slice historical days based on selected time range (7D / 14D)
+  const daysToDisplay = useMemo<DailySalesPoint[]>(() => {
+    const series = salesAnalytics?.daily_series || [];
+    const count = timeRange === '7D' ? 7 : 14;
+    return series.slice(-count);
+  }, [salesAnalytics, timeRange]);
+
+  // Derived statistics for the chart
+  const { periodTotal, periodOrders, periodAvg, maxRev } = useMemo(() => {
+    const total = daysToDisplay.reduce((sum, d) => sum + (d.revenue || 0), 0);
+    const orders = daysToDisplay.reduce((sum, d) => sum + (d.orders || 0), 0);
+    const avg = daysToDisplay.length > 0 ? total / daysToDisplay.length : 0;
+    const max = Math.max(...daysToDisplay.map((d) => d.revenue || 0), 1000);
+    return { periodTotal: total, periodOrders: orders, periodAvg: avg, maxRev: max };
+  }, [daysToDisplay]);
+
+  // Daily Run-Rate Calculations
+  const { projectedDailyRunRate, recentDailyRunRate, runRateDiffPct } = useMemo(() => {
+    const proj = summary?.forecast_7d_total_revenue ? summary.forecast_7d_total_revenue / 7 : 0;
+    const recent7 = (salesAnalytics?.daily_series || []).slice(-7);
+    const recentTotal = recent7.reduce((sum, d) => sum + (d.revenue || 0), 0);
+    const actual = recent7.length > 0 ? recentTotal / recent7.length : 0;
+    const diff = actual > 0 ? ((proj - actual) / actual) * 100 : 0;
+    return {
+      projectedDailyRunRate: proj,
+      recentDailyRunRate: actual,
+      runRateDiffPct: diff,
+    };
+  }, [summary, salesAnalytics]);
+
   if (loading) {
     return (
       <div className="space-y-6">
+        {/* Banner Skeleton */}
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 animate-pulse">
+          <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/4 mb-2.5" />
+          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/2" />
+        </div>
+
+        {/* KPI Grid Skeletons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <CardSkeleton key={i} />
           ))}
         </div>
+
+        {/* Content Skeletons */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-6">
             <ChartSkeleton />
+            <CardSkeleton />
           </div>
-          <div>
+          <div className="space-y-6">
+            <CardSkeleton />
             <CardSkeleton />
           </div>
         </div>
@@ -131,28 +173,25 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     );
   }
 
-  // Slice last 14 days of sales for chart
-  const recentDays = salesAnalytics?.daily_series?.slice(-14) || [];
-  const maxRev = Math.max(...recentDays.map((d) => d.revenue), 1000);
-
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
-      {/* Paytm Soundbox 4.0 Live Notification Banner */}
-      <div className="bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white rounded-2xl p-4 shadow-soundbox border border-[#00BAF2]/30 flex flex-col sm:flex-row items-center justify-between gap-3">
+      {/* Smart Soundbox Hardware Live Banner */}
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 transition-colors">
         <div className="flex items-center gap-3.5 w-full sm:w-auto">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00BAF2] to-[#008CC4] flex items-center justify-center text-white shrink-0 shadow-md shadow-[#00BAF2]/30 ring-2 ring-white/20">
-            <Volume2 className={`w-5 h-5 ${soundboxPlayed ? 'animate-bounce text-white' : 'text-white'}`} />
+          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60 flex items-center justify-center shrink-0">
+            <Volume2 className={`w-5 h-5 ${soundboxPlayed ? 'animate-bounce text-blue-600 dark:text-blue-400' : ''}`} />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black tracking-wider uppercase text-[#00BAF2]">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                 {t('soundbox_banner_title', 'Smart Soundbox Live')}
               </span>
-              <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-[#00B970] text-white">
-                Audio Active
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Online &bull; 4G
               </span>
             </div>
-            <p className="text-sm font-bold text-white mt-0.5">
+            <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-0.5">
               {soundboxPlayed
                 ? (language === 'hindi' ? '🔊 "₹4,250 प्राप्त हुए!"' : '🔊 "₹4,250 prapt hue!"')
                 : t('soundbox_banner_text')}
@@ -160,49 +199,54 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
-          <button
+        <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={handleTestSoundbox}
-            className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
+            className="text-xs"
           >
-            <Zap className="w-3.5 h-3.5 text-[#00BAF2]" />
+            <Zap className="w-3.5 h-3.5 mr-1 text-blue-600 dark:text-blue-400" />
             <span>{t('test_audio', 'Test Audio')}</span>
-          </button>
-          <span className="text-xs text-blue-200 font-medium hidden md:inline">
+          </Button>
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden md:inline">
             {t('instant_settlement', '100% Instant Bank Settlement')}
           </span>
         </div>
       </div>
 
-      {/* Welcome Banner */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
+      {/* Welcome Header */}
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <h2 className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
               {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
             </h2>
-            <Badge variant="demo">{t('verified_merchant', 'Verified Store')}</Badge>
+            <Badge variant="success">
+              <ShieldCheck className="w-3 h-3 mr-1 text-emerald-600 dark:text-emerald-400" />
+              {t('verified_merchant', 'Verified Store')}
+            </Badge>
           </div>
-          <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-1 max-w-xl font-medium">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-xl font-normal">
             {t('welcome_subtext')}
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 shrink-0">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
-            className="text-xs font-bold dark:border-[#00BAF2] dark:text-[#00BAF2] dark:hover:bg-[#132342]"
+            className="text-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-[#00BAF2]" />
+            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-purple-600 dark:text-purple-400" />
             {t('todays_brief', "Today's Brief")}
           </Button>
           <Button
             variant="primary"
             size="sm"
             onClick={() => onNavigateTab('recommendations')}
-            className="text-xs font-bold"
+            className="text-xs"
           >
             <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -210,12 +254,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
       </div>
 
-      {/* KPI Cards Grid with Paytm Accents */}
+      {/* Primary KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           card={summary.kpis.revenue}
           icon={<DollarSign className="w-5 h-5" />}
-          accentColor="cyan"
+          accentColor="blue"
         />
         <MetricCard
           card={summary.kpis.orders}
@@ -234,19 +278,65 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         />
       </div>
 
-      {/* Main Grid: Left Charts + Right Action Center */}
+      {/* Main Grid: Left Trend & Run-rate + Right Benchmark & Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left 2 Cols: Sales Trends & Forecast */}
+        {/* Left 2 Cols: Revenue Trend & Daily Run-rate */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          {/* Recent Sales History Chart */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
-            <div className="flex items-center justify-between mb-4">
+          {/* Revenue Trend Chart (7-Day / 14-Day) */}
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
+            {/* Header: Title, Range Toggle, Trend Status */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
               <div>
-                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">{t('daily_sales_trend', 'Daily Sales Trend (Bikri)')}</h3>
-                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">{t('last_14_days', 'Last 14 recorded business days')}</p>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <span>
+                    {timeRange === '7D'
+                      ? t('trend_7d', '7-Day Revenue Trend')
+                      : t('trend_14d', '14-Day Revenue Trend')}
+                  </span>
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                  {timeRange === '7D'
+                    ? 'Recent 7 recorded store business days'
+                    : t('last_14_days', 'Last 14 recorded business days')}
+                </p>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
+
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                {/* 7D / 14D Segmented Toggle */}
+                <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-0.5 text-xs">
+                  <button
+                    onClick={() => setTimeRange('7D')}
+                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors ${
+                      timeRange === '7D'
+                        ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    7D
+                  </button>
+                  <button
+                    onClick={() => setTimeRange('14D')}
+                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors ${
+                      timeRange === '14D'
+                        ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs'
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    }`}
+                  >
+                    14D
+                  </button>
+                </div>
+
+                {/* Trend Badge */}
+                <span
+                  className={`px-2.5 py-1 rounded-full text-xs font-semibold border ${
+                    summary.sales_trend_direction === 'DECREASING'
+                      ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                      : summary.sales_trend_direction === 'INCREASING'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                  }`}
+                >
                   {summary.sales_trend_direction === 'DECREASING'
                     ? t('trend_decreasing', 'Trend: DECREASING')
                     : summary.sales_trend_direction === 'INCREASING'
@@ -256,102 +346,243 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
             </div>
 
-            {/* Custom Bar Visualization */}
-            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
-              {recentDays.map((day, idx) => {
-                const heightPct = Math.max(10, (day.revenue / maxRev) * 100);
-                return (
-                  <div
-                    key={idx}
-                    className="flex-1 flex flex-col items-center group relative h-full justify-end"
-                  >
-                    {/* Tooltip on hover */}
-                    <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-[#002970] text-white text-[10px] font-bold rounded-lg px-2.5 py-1.5 pointer-events-none whitespace-nowrap z-20 shadow-lg border border-[#00BAF2]/40">
-                      {day.date}: ₹{day.revenue.toLocaleString()} ({day.orders} orders)
-                    </div>
-                    {/* Bar */}
-                    <div
-                      className="w-full bg-gradient-to-t from-[#00BAF2] to-[#41C9F7] hover:from-[#002970] hover:to-[#001D4E] dark:hover:from-white dark:hover:to-[#00BAF2] rounded-t-lg transition-all duration-150 cursor-pointer shadow-2xs"
-                      style={{ height: `${heightPct}%` }}
-                    />
-                    {/* Date label — Day name + date */}
-                    <span className="text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold mt-2 truncate w-full text-center leading-tight">
-                      {(() => {
-                        const d = new Date(day.date);
-                        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                        return (
-                          <>
-                            <span className="block text-[9px] font-bold text-[#002970] dark:text-blue-200">{dayNames[d.getDay()]}</span>
-                            <span className="block">{d.getDate()}/{d.getMonth() + 1}</span>
-                          </>
-                        );
-                      })()}
-                    </span>
-                  </div>
-                );
-              })}
+            {/* Metric Summary Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 mb-5 bg-slate-50 dark:bg-slate-850 rounded-lg border border-slate-200/80 dark:border-slate-800 text-xs">
+              <div>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                  {t('period_total_label', 'Period Total:')}
+                </span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
+                  ₹{periodTotal.toLocaleString('en-IN')}
+                </span>
+              </div>
+              <div>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                  {t('daily_avg_label', 'Daily Average:')}
+                </span>
+                <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                  ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day
+                </span>
+              </div>
+              <div>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                  Total Orders:
+                </span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white">
+                  {periodOrders.toLocaleString('en-IN')}
+                </span>
+              </div>
+              <div>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                  Peak Collection:
+                </span>
+                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                  ₹{maxRev.toLocaleString('en-IN')}
+                </span>
+              </div>
             </div>
-            <div className="mt-4 flex items-center justify-between text-xs text-[#4F6A94] dark:text-blue-200">
-              <span className="font-semibold">
+
+            {/* Custom Bar Visualization with Gridlines and Tooltip */}
+            <div className="relative pt-6 pb-2">
+              {/* Subtle Horizontal Gridlines */}
+              <div className="absolute inset-x-0 top-6 bottom-10 flex flex-col justify-between pointer-events-none opacity-40">
+                <div className="border-b border-dashed border-slate-200 dark:border-slate-800 w-full" />
+                <div className="border-b border-dashed border-slate-200 dark:border-slate-800 w-full" />
+                <div className="border-b border-dashed border-slate-200 dark:border-slate-800 w-full" />
+                <div className="border-b border-slate-200 dark:border-slate-800 w-full" />
+              </div>
+
+              {/* Bars Container */}
+              <div className="h-56 flex items-end justify-between gap-1.5 sm:gap-2.5 relative z-10">
+                {daysToDisplay.map((day, idx) => {
+                  const heightPct = Math.max(8, (day.revenue / maxRev) * 100);
+                  const isHovered = activeDayIndex === idx;
+
+                  const dateObj = new Date(day.date);
+                  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                  const dayOfWeek = dayNames[dateObj.getDay()] || '';
+                  const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
+
+                  return (
+                    <div
+                      key={day.date || idx}
+                      className="flex-1 flex flex-col items-center group relative h-full justify-end cursor-pointer"
+                      onMouseEnter={() => setActiveDayIndex(idx)}
+                      onMouseLeave={() => setActiveDayIndex(null)}
+                      onClick={() => setActiveDayIndex(activeDayIndex === idx ? null : idx)}
+                    >
+                      {/* Floating Theme-Aware Tooltip */}
+                      {isHovered && (
+                        <div className="absolute -top-12 z-30 pointer-events-none whitespace-nowrap bg-slate-900 dark:bg-slate-800 text-white border border-slate-700/80 rounded-lg px-2.5 py-1.5 shadow-xl text-center text-xs animate-in fade-in-50 duration-150">
+                          <div className="font-semibold text-[11px] text-slate-300">
+                            {dayOfWeek}, {day.date}
+                          </div>
+                          <div className="font-bold text-white text-xs mt-0.5">
+                            ₹{day.revenue.toLocaleString('en-IN')} &bull; {day.orders} orders
+                          </div>
+                          {day.orders > 0 && (
+                            <div className="text-[10px] text-blue-300">
+                              AOV: ₹{Math.round(day.revenue / day.orders).toLocaleString('en-IN')}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Bar Pillar */}
+                      <div
+                        className={`w-full rounded-t-md transition-all duration-150 ${
+                          isHovered
+                            ? 'bg-blue-600 dark:bg-blue-400 shadow-md ring-2 ring-blue-500/20'
+                            : 'bg-blue-500 hover:bg-blue-600 dark:bg-blue-600/80 dark:hover:bg-blue-500'
+                        }`}
+                        style={{ height: `${heightPct}%` }}
+                      />
+
+                      {/* X-Axis Date Labels */}
+                      <div className="mt-2 text-center w-full truncate leading-tight">
+                        <span className="block text-[10px] font-bold text-slate-700 dark:text-slate-300">
+                          {dayOfWeek}
+                        </span>
+                        <span className="block text-[9px] text-slate-400 dark:text-slate-500">
+                          {formattedDate}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Chart Footer Link */}
+            <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+              <span className="font-medium">
                 {t('peak_collection', 'Peak Day Collection:')}{' '}
-                <strong className="text-[#002970] dark:text-white font-extrabold">₹{maxRev.toLocaleString()}</strong>
+                <strong className="text-slate-900 dark:text-white font-bold">
+                  ₹{maxRev.toLocaleString('en-IN')}
+                </strong>
               </span>
               <button
                 onClick={() => onNavigateTab('analytics')}
-                className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
+                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-semibold inline-flex items-center gap-1 transition-colors"
               >
-                {t('deep_analytics', 'Deep Analytics')} <ArrowRight className="w-3.5 h-3.5" />
+                <span>{t('deep_analytics', 'Deep Analytics')}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          {/* 7-Day Forward Forecast Banner with Paytm Royalty */}
-          <div className="bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white rounded-2xl p-6 shadow-soundbox border border-[#00BAF2]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-black text-[#00BAF2] uppercase tracking-wider">
-                <TrendingUp className="w-4 h-4 text-[#00BAF2]" />
-                <span>{t('forecast_7d_title', 'Predictive AI • 7-Day Forecast')}</span>
+          {/* Daily Sales Run-Rate & 7-Day Forward Forecast Module */}
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    {t('forecast_7d_title', 'Sales Forecast • 7-Day Revenue Projection')}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                    {t('forecast_7d_subtext')}
+                  </p>
+                </div>
               </div>
-              <p className="text-3xl font-black mt-1 text-white tracking-tight">
-                ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-              </p>
-              <p className="text-xs text-blue-100 mt-1 max-w-md font-medium">
-                {t('forecast_7d_subtext')}
-              </p>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => onNavigateTab('forecasts')}
+                className="text-xs shrink-0 hidden sm:inline-flex"
+              >
+                {t('view_sku_forecasts', 'View SKU Forecasts')}
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Button>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => onNavigateTab('forecasts')}
-              className="border-white/40 text-white hover:bg-white/10 shrink-0 font-bold"
-            >
-              {t('view_sku_forecasts', 'View SKU Forecasts')}
-            </Button>
+
+            {/* Split KPIs: 7-Day Projected Total & Daily Sales Run-Rate */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              {/* 7-Day Total Projection */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                  7-Day Projected Revenue
+                </span>
+                <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
+                  ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                  <span>Cumulative forward prediction</span>
+                </p>
+              </div>
+
+              {/* Daily Sales Run-Rate */}
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    {t('daily_run_rate_label', 'Daily Sales Run-Rate')}
+                  </span>
+                  <span
+                    className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold border ${
+                      runRateDiffPct >= 0
+                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
+                        : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                    }`}
+                  >
+                    {runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(1)}% vs recent pace
+                  </span>
+                </div>
+                <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">
+                  ₹{projectedDailyRunRate.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  <span className="text-xs font-normal text-slate-500 dark:text-slate-400 ml-1">/ day</span>
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span>{t('daily_run_rate_sub', 'Required daily pace to meet projected 7-day total')}</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Mobile SKU Forecasts Button */}
+            <div className="mt-4 sm:hidden">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => onNavigateTab('forecasts')}
+                className="w-full text-xs"
+              >
+                {t('view_sku_forecasts', 'View SKU Forecasts')}
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Right 1 Col: Priority Action Center & Quick Ask */}
+        {/* Right 1 Col: Peer Benchmarking, Actions & Quick Copilot */}
         <div className="flex flex-col gap-6">
           {/* Peer Benchmarking Summary Card */}
           {benchmark && (
-            <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm relative overflow-hidden transition-colors">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs transition-colors">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] dark:from-[#0B254A] dark:to-[#0F356B] text-[#00BAF2] border border-[#B3E3FA] dark:border-[#1A4B8C]">
-                    <Trophy className="w-4 h-4 text-[#00BAF2]" />
+                  <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60">
+                    <Trophy className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('peers_comparison', 'Peers se tulna')}</h3>
-                    <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{localizeDynamicText(benchmark.peer_group, language)}</p>
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                      {t('peers_comparison', 'Peers se tulna')}
+                    </h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                      {localizeDynamicText(benchmark.peer_group, language)}
+                    </p>
                   </div>
                 </div>
+
                 <span
-                  className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${
+                  className={`px-2.5 py-0.5 rounded-full text-xs font-bold border ${
                     benchmark.rank <= Math.ceil(benchmark.peer_count * 0.33)
-                      ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
                       : benchmark.rank <= Math.ceil(benchmark.peer_count * 0.66)
-                      ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33] border border-[#FFE1A8] dark:border-[#FFB800]/30'
-                      : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30'
+                      ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                      : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900/60'
                   }`}
                 >
                   {language === 'hindi'
@@ -362,28 +593,30 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </span>
               </div>
 
-              {/* Metrics Highlights Table */}
-              <div className="py-3 space-y-2 text-xs">
+              {/* Metrics Highlights */}
+              <div className="py-2.5 space-y-2 text-xs">
                 {benchmark.metrics.slice(0, 3).map((m) => (
                   <div
                     key={m.name}
-                    className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-[#172E58] last:border-none"
+                    className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-slate-800/60 last:border-none"
                   >
-                    <span className="text-[#002970] dark:text-blue-100 font-semibold">{localizeDynamicText(m.label, language)}</span>
+                    <span className="text-slate-700 dark:text-slate-300 font-medium">
+                      {localizeDynamicText(m.label, language)}
+                    </span>
                     <div className="flex items-center gap-2">
-                      <span className="font-black text-[#002970] dark:text-white">
+                      <span className="font-bold text-slate-900 dark:text-white">
                         {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
                       </span>
-                      <span className="text-[10px] text-[#4F6A94] dark:text-slate-400">
+                      <span className="text-[10px] text-slate-400">
                         vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
                       </span>
                       <span
-                        className={`px-1.5 py-0.5 rounded text-[10px] font-extrabold ${
+                        className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
                           m.status === 'green'
-                            ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A]'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
                             : m.status === 'yellow'
-                            ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33]'
-                            : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080]'
+                            ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
+                            : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300'
                         }`}
                       >
                         {localizeDynamicText(m.status_text, language)}
@@ -394,9 +627,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
 
               {/* Top Action Recommendation */}
-              <div className="mt-1 p-3 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs">
-                <span className="font-extrabold text-[#002970] dark:text-white block text-[11px]">{t('recommended_action', 'Recommended Action:')}</span>
-                <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-0.5 line-clamp-2 font-medium">
+              <div className="mt-1 p-3 rounded-lg bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-xs">
+                <span className="font-bold text-slate-900 dark:text-white block text-[11px]">
+                  {t('recommended_action', 'Recommended Action:')}
+                </span>
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5 line-clamp-2 font-normal">
                   {localizeDynamicText(
                     benchmark.metrics.find((m) => m.status === 'red' || m.status === 'yellow')?.action ||
                     benchmark.metrics[0]?.action,
@@ -405,13 +640,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </p>
               </div>
 
-              {/* Card Bottom CTA Buttons */}
-              <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#E8F4FD] dark:border-[#1E3A6E] text-xs">
+              {/* Bottom CTAs */}
+              <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-slate-100 dark:border-slate-800 text-xs gap-2">
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   onClick={() => onNavigateTab('recommendations')}
-                  className="text-xs py-1.5 px-3 text-[#002970] dark:text-blue-100 dark:border-[#1E3A6E] font-bold"
+                  className="text-xs"
                 >
                   {t('send_offer', 'Offer bhejein')}
                 </Button>
@@ -419,36 +654,38 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   variant="primary"
                   size="sm"
                   onClick={() => onNavigateTab('compare')}
-                  className="text-xs py-1.5 px-3.5 flex items-center gap-1 font-bold"
+                  className="text-xs"
                 >
                   <span>{t('view_details', 'Details dekhein')}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
                 </Button>
               </div>
             </div>
           )}
 
           {/* Priority Actions Card */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm transition-colors">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs transition-colors">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#00BAF2]" />
-                <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('priority_actions_title', 'Priority Actions')}</h3>
+                <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                  {t('priority_actions_title', 'Priority Actions')}
+                </h3>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30">
+              <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/60">
                 {summary.critical_actions_count} {t('critical_badge', 'Critical')}
               </span>
             </div>
 
-            <div className="divide-y divide-[#E8F4FD] dark:divide-[#172E58] mt-2">
+            <div className="divide-y divide-slate-100 dark:divide-slate-800 mt-1">
               {actions.map((act) => (
                 <div
                   key={act.recommendation_id}
-                  className="py-3 hover:bg-[#F0F8FE] dark:hover:bg-[#132342] rounded-xl p-2.5 transition-colors cursor-pointer"
+                  className="py-2.5 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-lg p-2 transition-colors cursor-pointer"
                   onClick={() => onSelectAction(act.recommendation_id)}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <span className="text-xs font-bold text-[#002970] dark:text-white line-clamp-1">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">
                       {act.title}
                     </span>
                     <Badge
@@ -463,14 +700,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       {localizeDynamicText(act.priority_band, language)}
                     </Badge>
                   </div>
-                  <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 line-clamp-2 font-medium">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 font-normal">
                     {act.action}
                   </p>
-                  <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <span className="font-extrabold text-[#008A54] dark:text-[#00E68A]">
+                  <div className="mt-1.5 flex items-center justify-between text-[11px]">
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
                       {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
                     </span>
-                    <span className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold">
+                    <span className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-semibold">
                       {t('review_btn', 'Review →')}
                     </span>
                   </div>
@@ -478,11 +715,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               ))}
             </div>
 
-            <div className="mt-3 pt-3 border-t border-[#E8F4FD] dark:border-[#1E3A6E]">
+            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
               <Button
                 variant="secondary"
                 size="sm"
-                className="w-full text-xs font-bold dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white dark:hover:bg-[#1A335F]"
+                className="w-full text-xs font-semibold"
                 onClick={() => onNavigateTab('recommendations')}
               >
                 {t('open_action_center_btn', 'Open Action Center')} ({summary.total_actions_pending})
@@ -490,14 +727,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
           </div>
 
-          {/* Quick Copilot Interactive Card */}
-          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
+          {/* Quick Copilot Interactive Card (Purple AI Accent) */}
+          <div className="bg-purple-50/40 dark:bg-purple-950/20 rounded-xl border border-purple-200 dark:border-purple-900/40 p-5 shadow-xs transition-colors">
             <div>
-              <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
-                <Bot className="w-4 h-4 text-[#00BAF2]" />
+              <div className="flex items-center gap-2 text-xs font-bold text-purple-900 dark:text-purple-200">
+                <Bot className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                 <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
               </div>
-              <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
+              <p className="text-[11px] text-purple-700/80 dark:text-purple-300/80 mt-1 font-normal">
                 {t('ask_copilot_box_sub')}
               </p>
 
@@ -507,9 +744,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   value={quickQuery}
                   onChange={(e) => setQuickQuery(e.target.value)}
                   placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600 font-medium transition-colors"
                 />
-                <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
+                <Button type="submit" variant="ai" size="sm" className="w-full text-xs font-semibold">
                   {t('ask_btn', 'Ask Copilot')}
                 </Button>
               </form>
@@ -532,7 +769,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   key={i}
                   type="button"
                   onClick={() => onQuickCopilot(q)}
-                  className="text-[10px] bg-white dark:bg-[#0F1D38] border border-[#CDE5F7] dark:border-[#1E3A6E] text-[#4F6A94] dark:text-blue-200 hover:text-[#00BAF2] hover:border-[#00BAF2] rounded-lg px-2.5 py-1 transition-colors text-left font-semibold shadow-2xs"
+                  className="text-[10px] bg-white dark:bg-slate-900 border border-purple-200 dark:border-purple-800/50 text-purple-800 dark:text-purple-300 hover:border-purple-400 rounded-md px-2 py-1 transition-colors text-left font-medium shadow-2xs"
                 >
                   &ldquo;{q}&rdquo;
                 </button>

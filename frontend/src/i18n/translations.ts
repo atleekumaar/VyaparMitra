@@ -131,6 +131,36 @@ export const translations: Record<string, Record<Language, string>> = {
     hindi: 'पिछले 14 दिनों का रिकॉर्ड',
     english: 'Last 14 recorded business days',
   },
+  trend_7d: {
+    hinglish: '7-Day Trend',
+    hindi: '7-दिवसीय रुझान',
+    english: '7-Day Trend',
+  },
+  trend_14d: {
+    hinglish: '14-Day Trend',
+    hindi: '14-दिवसीय रुझान',
+    english: '14-Day Trend',
+  },
+  daily_run_rate_label: {
+    hinglish: 'Daily Sales Run-Rate',
+    hindi: 'दैनिक बिक्री औसत (Run-Rate)',
+    english: 'Daily Sales Run-Rate',
+  },
+  daily_run_rate_sub: {
+    hinglish: '7-day target tak pahunchne ke liye anumanit daily pace',
+    hindi: '7-दिवसीय लक्ष्य तक पहुँचने हेतु आवश्यक दैनिक गति',
+    english: 'Required daily pace to meet projected 7-day total',
+  },
+  period_total_label: {
+    hinglish: 'Period Total:',
+    hindi: 'अवधि का कुल योग:',
+    english: 'Period Total:',
+  },
+  daily_avg_label: {
+    hinglish: 'Daily Average:',
+    hindi: 'दैनिक औसत:',
+    english: 'Daily Average:',
+  },
   peak_collection: {
     hinglish: 'Peak Day Collection:',
     hindi: 'सर्वाधिक बिक्री का दिन:',
