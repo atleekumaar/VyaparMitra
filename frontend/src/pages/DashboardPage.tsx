@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import {
   TrendingUp,
-  TrendingDown,
   Sparkles,
   Bot,
   ArrowRight,
@@ -14,6 +13,7 @@ import {
   Zap,
   Activity,
   Calendar,
+  CheckCircle2,
 } from 'lucide-react';
 import { api } from '../api/client';
 import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics, DailySalesPoint } from '../types';
@@ -137,20 +137,20 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   if (loading) {
     return (
       <div className="space-y-6">
-        {/* Banner Skeleton */}
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 animate-pulse">
-          <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/4 mb-2.5" />
-          <div className="h-6 bg-slate-200 dark:bg-slate-800 rounded w-1/2" />
+        {/* Header Skeleton */}
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-6 animate-pulse">
+          <div className="h-5 bg-slate-200 dark:bg-slate-800 rounded w-1/4 mb-2.5" />
+          <div className="h-3.5 bg-slate-200 dark:bg-slate-800 rounded w-1/3" />
         </div>
 
         {/* KPI Grid Skeletons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {Array.from({ length: 4 }).map((_, i) => (
             <CardSkeleton key={i} />
           ))}
         </div>
 
-        {/* Content Skeletons */}
+        {/* Main Content Skeletons */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <ChartSkeleton />
@@ -175,126 +175,125 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
-      {/* Smart Soundbox Hardware Live Banner */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4 shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 transition-colors">
-        <div className="flex items-center gap-3.5 w-full sm:w-auto">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/60 flex items-center justify-center shrink-0">
-            <Volume2 className={`w-5 h-5 ${soundboxPlayed ? 'animate-bounce text-blue-600 dark:text-blue-400' : ''}`} />
-          </div>
+      {/* Unified Executive Header */}
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          {/* Left: Merchant Greeting & Store Meta */}
           <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
-                {t('soundbox_banner_title', 'Smart Soundbox Live')}
-              </span>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Online &bull; 4G
-              </span>
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
+              </h1>
+              <Badge variant="success">
+                <ShieldCheck className="w-3.5 h-3.5 mr-1 text-emerald-600 dark:text-emerald-400" />
+                {t('verified_merchant', 'Verified Store')}
+              </Badge>
             </div>
-            <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 mt-0.5">
-              {soundboxPlayed
-                ? (language === 'hindi' ? '🔊 "₹4,250 प्राप्त हुए!"' : '🔊 "₹4,250 prapt hue!"')
-                : t('soundbox_banner_text')}
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal flex items-center gap-2 flex-wrap">
+              <span>{t('store_name', 'Vyapar Store')} &bull; ID: M001</span>
+              <span>&bull;</span>
+              <span>Lucknow FMCG & Retail</span>
+              <span>&bull;</span>
+              <span className="text-slate-400 dark:text-slate-500">
+                {t('last_14_days', 'Last 14 recorded business days')}
+              </span>
             </p>
           </div>
-        </div>
 
-        <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleTestSoundbox}
-            className="text-xs"
-          >
-            <Zap className="w-3.5 h-3.5 mr-1 text-blue-600 dark:text-blue-400" />
-            <span>{t('test_audio', 'Test Audio')}</span>
-          </Button>
-          <span className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden md:inline">
-            {t('instant_settlement', '100% Instant Bank Settlement')}
-          </span>
-        </div>
-      </div>
+          {/* Right: Soundbox Status Widget & Action CTAs */}
+          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 shrink-0">
+            {/* Integrated Smart Soundbox Mini Widget */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-xs">
+              <div className="w-6 h-6 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                <Volume2 className={`w-3.5 h-3.5 ${soundboxPlayed ? 'animate-bounce text-blue-600 dark:text-blue-400' : ''}`} />
+              </div>
+              <div className="text-[11px] leading-tight">
+                <div className="flex items-center gap-1 font-bold text-slate-800 dark:text-slate-200">
+                  <span>Smart Soundbox</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                  {soundboxPlayed
+                    ? (language === 'hindi' ? '🔊 "₹4,250 प्राप्त हुए!"' : '🔊 "₹4,250 prapt hue!"')
+                    : '100% Instant Audio'}
+                </div>
+              </div>
+              <button
+                onClick={handleTestSoundbox}
+                className="ml-1 p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-blue-600 dark:text-blue-400 transition-colors"
+                title="Test Audio Announcement"
+                aria-label="Test Audio Announcement"
+              >
+                <Zap className="w-3.5 h-3.5" />
+              </button>
+            </div>
 
-      {/* Welcome Header */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
-        <div>
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <h2 className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
-              {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
-            </h2>
-            <Badge variant="success">
-              <ShieldCheck className="w-3 h-3 mr-1 text-emerald-600 dark:text-emerald-400" />
-              {t('verified_merchant', 'Verified Store')}
-            </Badge>
+            {/* Quick Brief Button */}
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
+              className="text-xs"
+            >
+              <Sparkles className="w-3.5 h-3.5 mr-1.5 text-purple-600 dark:text-purple-400" />
+              {t('todays_brief', "Today's Brief")}
+            </Button>
+
+            {/* Priority Actions Button */}
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => onNavigateTab('recommendations')}
+              className="text-xs"
+            >
+              <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
+              <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            </Button>
           </div>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-xl font-normal">
-            {t('welcome_subtext')}
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2.5 shrink-0">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
-            className="text-xs"
-          >
-            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-purple-600 dark:text-purple-400" />
-            {t('todays_brief', "Today's Brief")}
-          </Button>
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={() => onNavigateTab('recommendations')}
-            className="text-xs"
-          >
-            <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
-            <ArrowRight className="w-3.5 h-3.5 ml-1" />
-          </Button>
         </div>
       </div>
 
       {/* Primary KPI Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         <MetricCard
           card={summary.kpis.revenue}
-          icon={<DollarSign className="w-5 h-5" />}
+          icon={<DollarSign className="w-4 h-4" />}
           accentColor="blue"
         />
         <MetricCard
           card={summary.kpis.orders}
-          icon={<ShoppingBag className="w-5 h-5" />}
+          icon={<ShoppingBag className="w-4 h-4" />}
           accentColor="navy"
         />
         <MetricCard
           card={summary.kpis.aov}
-          icon={<TrendingUp className="w-5 h-5" />}
+          icon={<TrendingUp className="w-4 h-4" />}
           accentColor="green"
         />
         <MetricCard
           card={summary.kpis.units}
-          icon={<Package className="w-5 h-5" />}
+          icon={<Package className="w-4 h-4" />}
           accentColor="orange"
         />
       </div>
 
-      {/* Main Grid: Left Trend & Run-rate + Right Benchmark & Actions */}
+      {/* Main Grid: Left Charts & Forecast + Right Benchmarking & Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Revenue Trend & Daily Run-rate */}
         <div className="lg:col-span-2 flex flex-col gap-6">
-          {/* Revenue Trend Chart (7-Day / 14-Day) */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
+          {/* Revenue Trend Chart Card */}
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
             {/* Header: Title, Range Toggle, Trend Status */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
               <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                   <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span>
                     {timeRange === '7D'
                       ? t('trend_7d', '7-Day Revenue Trend')
                       : t('trend_14d', '14-Day Revenue Trend')}
                   </span>
-                </h3>
+                </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                   {timeRange === '7D'
                     ? 'Recent 7 recorded store business days'
@@ -304,10 +303,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
               <div className="flex items-center gap-2 self-start sm:self-auto">
                 {/* 7D / 14D Segmented Toggle */}
-                <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-0.5 text-xs">
+                <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 rounded-lg p-0.5 text-xs">
                   <button
                     onClick={() => setTimeRange('7D')}
-                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors ${
+                    className={`px-2.5 py-1 rounded-md font-bold transition-colors ${
                       timeRange === '7D'
                         ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs'
                         : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -317,7 +316,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </button>
                   <button
                     onClick={() => setTimeRange('14D')}
-                    className={`px-2.5 py-1 rounded-md font-semibold transition-colors ${
+                    className={`px-2.5 py-1 rounded-md font-bold transition-colors ${
                       timeRange === '14D'
                         ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs'
                         : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -347,12 +346,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
 
             {/* Metric Summary Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3 mb-5 bg-slate-50 dark:bg-slate-850 rounded-lg border border-slate-200/80 dark:border-slate-800 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 mb-5 bg-slate-50 dark:bg-slate-850 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs">
               <div>
                 <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
                   {t('period_total_label', 'Period Total:')}
                 </span>
-                <span className="text-sm font-bold text-slate-900 dark:text-white">
+                <span className="text-sm font-bold text-slate-900 dark:text-white tabular-nums">
                   ₹{periodTotal.toLocaleString('en-IN')}
                 </span>
               </div>
@@ -360,7 +359,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
                   {t('daily_avg_label', 'Daily Average:')}
                 </span>
-                <span className="text-sm font-bold text-blue-600 dark:text-blue-400">
+                <span className="text-sm font-bold text-blue-600 dark:text-blue-400 tabular-nums">
                   ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day
                 </span>
               </div>
@@ -368,7 +367,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
                   Total Orders:
                 </span>
-                <span className="text-sm font-bold text-slate-900 dark:text-white">
+                <span className="text-sm font-bold text-slate-900 dark:text-white tabular-nums">
                   {periodOrders.toLocaleString('en-IN')}
                 </span>
               </div>
@@ -376,7 +375,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
                   Peak Collection:
                 </span>
-                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">
                   ₹{maxRev.toLocaleString('en-IN')}
                 </span>
               </div>
@@ -413,15 +412,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     >
                       {/* Floating Theme-Aware Tooltip */}
                       {isHovered && (
-                        <div className="absolute -top-12 z-30 pointer-events-none whitespace-nowrap bg-slate-900 dark:bg-slate-800 text-white border border-slate-700/80 rounded-lg px-2.5 py-1.5 shadow-xl text-center text-xs animate-in fade-in-50 duration-150">
+                        <div className="absolute -top-14 z-30 pointer-events-none whitespace-nowrap bg-slate-900 dark:bg-slate-800 text-white border border-slate-700/80 rounded-lg px-3 py-1.5 shadow-xl text-center text-xs animate-in fade-in-50 duration-150">
                           <div className="font-semibold text-[11px] text-slate-300">
                             {dayOfWeek}, {day.date}
                           </div>
-                          <div className="font-bold text-white text-xs mt-0.5">
+                          <div className="font-bold text-white text-xs mt-0.5 tabular-nums">
                             ₹{day.revenue.toLocaleString('en-IN')} &bull; {day.orders} orders
                           </div>
                           {day.orders > 0 && (
-                            <div className="text-[10px] text-blue-300">
+                            <div className="text-[10px] text-blue-300 tabular-nums">
                               AOV: ₹{Math.round(day.revenue / day.orders).toLocaleString('en-IN')}
                             </div>
                           )}
@@ -457,13 +456,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
               <span className="font-medium">
                 {t('peak_collection', 'Peak Day Collection:')}{' '}
-                <strong className="text-slate-900 dark:text-white font-bold">
+                <strong className="text-slate-900 dark:text-white font-bold tabular-nums">
                   ₹{maxRev.toLocaleString('en-IN')}
                 </strong>
               </span>
               <button
                 onClick={() => onNavigateTab('analytics')}
-                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-semibold inline-flex items-center gap-1 transition-colors"
+                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-bold inline-flex items-center gap-1 transition-colors"
               >
                 <span>{t('deep_analytics', 'Deep Analytics')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -471,17 +470,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
           </div>
 
-          {/* Daily Sales Run-Rate & 7-Day Forward Forecast Module */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
+          {/* Daily Sales Run-Rate & AI Forecast Module */}
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60 flex items-center justify-center font-bold">
                   <TrendingUp className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                     {t('forecast_7d_title', 'Sales Forecast • 7-Day Revenue Projection')}
-                  </h3>
+                  </h2>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                     {t('forecast_7d_subtext')}
                   </p>
@@ -498,45 +497,49 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </Button>
             </div>
 
-            {/* Split KPIs: 7-Day Projected Total & Daily Sales Run-Rate */}
+            {/* Split Metric Cards: 7-Day Cumulative Total & Daily Sales Run-Rate */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
               {/* 7-Day Total Projection */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
-                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                  7-Day Projected Revenue
-                </span>
-                <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                  <span>Cumulative forward prediction</span>
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                <div>
+                  <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    7-Day Projected Total
+                  </span>
+                  <p className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1 tabular-nums">
+                    ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </p>
+                </div>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 flex items-center gap-1.5 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                  <span>Cumulative forward ML revenue prediction</span>
                 </p>
               </div>
 
               {/* Daily Sales Run-Rate */}
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-                    {t('daily_run_rate_label', 'Daily Sales Run-Rate')}
-                  </span>
-                  <span
-                    className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold border ${
-                      runRateDiffPct >= 0
-                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
-                        : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
-                    }`}
-                  >
-                    {runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(1)}% vs recent pace
-                  </span>
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block truncate">
+                      {t('daily_run_rate_label', 'Daily Sales Run-Rate')}
+                    </span>
+                    <span
+                      className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-bold border shrink-0 ${
+                        runRateDiffPct >= 0
+                          ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
+                          : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                      }`}
+                    >
+                      {runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(1)}% vs recent pace
+                    </span>
+                  </div>
+                  <p className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 mt-1 tabular-nums">
+                    ₹{projectedDailyRunRate.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">/ day</span>
+                  </p>
                 </div>
-                <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-1">
-                  ₹{projectedDailyRunRate.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                  <span className="text-xs font-normal text-slate-500 dark:text-slate-400 ml-1">/ day</span>
-                </p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  <span>{t('daily_run_rate_sub', 'Required daily pace to meet projected 7-day total')}</span>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 flex items-center gap-1.5 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                  <span className="truncate">{t('daily_run_rate_sub', 'Required daily pace to meet projected 7-day total')}</span>
                 </p>
               </div>
             </div>
@@ -560,16 +563,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div className="flex flex-col gap-6">
           {/* Peer Benchmarking Summary Card */}
           {benchmark && (
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs transition-colors">
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-xs transition-colors">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800/60">
+                  <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/60">
                     <Trophy className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                       {t('peers_comparison', 'Peers se tulna')}
-                    </h3>
+                    </h2>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                       {localizeDynamicText(benchmark.peer_group, language)}
                     </p>
@@ -604,14 +607,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       {localizeDynamicText(m.label, language)}
                     </span>
                     <div className="flex items-center gap-2">
-                      <span className="font-bold text-slate-900 dark:text-white">
+                      <span className="font-bold text-slate-900 dark:text-white tabular-nums">
                         {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
                       </span>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-slate-400 tabular-nums">
                         vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
                       </span>
                       <span
-                        className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                        className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                           m.status === 'green'
                             ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
                             : m.status === 'yellow'
@@ -627,7 +630,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
 
               {/* Top Action Recommendation */}
-              <div className="mt-1 p-3 rounded-lg bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-xs">
+              <div className="mt-1 p-3 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800 text-xs">
                 <span className="font-bold text-slate-900 dark:text-white block text-[11px]">
                   {t('recommended_action', 'Recommended Action:')}
                 </span>
@@ -664,15 +667,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           )}
 
           {/* Priority Actions Card */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs transition-colors">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-xs transition-colors">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                   {t('priority_actions_title', 'Priority Actions')}
-                </h3>
+                </h2>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/60">
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/60">
                 {summary.critical_actions_count} {t('critical_badge', 'Critical')}
               </span>
             </div>
@@ -704,10 +707,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     {act.action}
                   </p>
                   <div className="mt-1.5 flex items-center justify-between text-[11px]">
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">
                       {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
                     </span>
-                    <span className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-semibold">
+                    <span className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-bold">
                       {t('review_btn', 'Review →')}
                     </span>
                   </div>
@@ -719,7 +722,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <Button
                 variant="secondary"
                 size="sm"
-                className="w-full text-xs font-semibold"
+                className="w-full text-xs font-bold"
                 onClick={() => onNavigateTab('recommendations')}
               >
                 {t('open_action_center_btn', 'Open Action Center')} ({summary.total_actions_pending})
@@ -746,7 +749,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
                   className="w-full px-3 py-2 text-xs rounded-lg border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600 font-medium transition-colors"
                 />
-                <Button type="submit" variant="ai" size="sm" className="w-full text-xs font-semibold">
+                <Button type="submit" variant="ai" size="sm" className="w-full text-xs font-bold">
                   {t('ask_btn', 'Ask Copilot')}
                 </Button>
               </form>
