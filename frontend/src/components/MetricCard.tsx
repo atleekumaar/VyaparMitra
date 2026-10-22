@@ -8,9 +8,15 @@ interface MetricCardProps {
   card: MetricCardData;
   icon?: React.ReactNode;
   accentColor?: 'cyan' | 'navy' | 'green' | 'orange' | 'blue' | 'purple';
+  isHero?: boolean;
 }
 
-export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor = 'blue' }) => {
+export const MetricCard: React.FC<MetricCardProps> = ({
+  card,
+  icon,
+  accentColor = 'blue',
+  isHero = false,
+}) => {
   const { language } = useLanguage();
   const isPositive = card.change_pct && card.change_pct > 0;
   const isNegative = card.change_pct && card.change_pct < 0;
@@ -30,12 +36,25 @@ export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor 
   const iconClass = iconColors[accentColor] || iconColors.blue;
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm transition-all duration-150 flex flex-col justify-between min-h-[142px]">
+    <div
+      className={`bg-white dark:bg-slate-900 rounded-xl border p-5 shadow-xs transition-all duration-150 flex flex-col justify-between min-h-[142px] ${
+        isHero
+          ? 'border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 dark:border-l-blue-500 hover:border-slate-300 dark:hover:border-slate-700'
+          : 'border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+      }`}
+    >
       <div>
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
-            {displayLabel}
-          </span>
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
+              {displayLabel}
+            </span>
+            {isHero && (
+              <span className="inline-flex px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60">
+                Primary
+              </span>
+            )}
+          </div>
           {icon && (
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${iconClass}`}>
               {icon}
