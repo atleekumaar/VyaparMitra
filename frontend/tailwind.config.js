@@ -58,6 +58,7 @@ export default {
       fontFamily: {
         sans: [
           'Inter',
+          'Noto Sans Devanagari',
           '-apple-system',
           'BlinkMacSystemFont',
           'Segoe UI',

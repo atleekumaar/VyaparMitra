@@ -85,7 +85,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   const renderSectionHeader = (title: string) => (
-    <div className="px-3 pt-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+    <div className="px-3.5 pt-4 pb-1.5 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
       {title}
     </div>
   );
@@ -159,7 +159,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     onTabChange(item.id);
                     if (isOpenMobile) onToggleMobile();
                   }}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors group relative ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors group relative ${
                     isActive
                       ? item.isCopilot
                         ? 'bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-semibold'
@@ -188,17 +188,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                   <div className="flex items-center gap-1.5">
                     {item.badge && (
-                      <span className="px-2 py-0.5 text-[11px] font-bold rounded-full bg-blue-600 text-white shadow-2xs">
+                      <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-600 text-white shadow-2xs">
                         {item.badge}
                       </span>
                     )}
                     {item.isCopilot && !item.badge && (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300">
+                      <span className="px-1.5 py-0.5 text-[11px] font-semibold rounded bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300">
                         AI
                       </span>
                     )}
                     {item.isNew && (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">
+                      <span className="px-1.5 py-0.5 text-[11px] font-semibold rounded bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">
                         New
                       </span>
                     )}

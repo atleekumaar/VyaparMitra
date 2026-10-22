@@ -37,20 +37,20 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 
   return (
     <div
-      className={`bg-white dark:bg-slate-900 rounded-xl border p-5 shadow-xs transition-all duration-150 flex flex-col justify-between min-h-[142px] ${
+      className={`bg-white dark:bg-slate-900 rounded-xl border p-5 sm:p-6 shadow-xs transition-all duration-150 flex flex-col justify-between min-h-[156px] ${
         isHero
           ? 'border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 dark:border-l-blue-500 hover:border-slate-300 dark:hover:border-slate-700'
           : 'border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
       }`}
     >
       <div>
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-[13px] font-medium text-slate-500 dark:text-slate-400 leading-normal truncate">
               {displayLabel}
             </span>
             {isHero && (
-              <span className="inline-flex px-1.5 py-0.2 rounded text-[9px] font-extrabold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60">
+              <span className="inline-flex px-1.5 py-0.5 rounded-md text-[11px] font-medium bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 shrink-0">
                 Primary
               </span>
             )}
@@ -62,18 +62,18 @@ export const MetricCard: React.FC<MetricCardProps> = ({
           )}
         </div>
 
-        <div className="mt-2.5">
-          <span className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white tabular-nums block">
+        <div className="mt-3 sm:mt-4">
+          <span className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white tabular-nums leading-none block">
             {card.formatted_value}
           </span>
         </div>
       </div>
 
       {((card.change_pct !== null && card.change_pct !== undefined) || card.subtext) && (
-        <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800/60 flex items-center flex-wrap gap-2 text-xs">
+        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center flex-wrap gap-2 text-xs">
           {card.change_pct !== null && card.change_pct !== undefined && (
             <span
-              className={`inline-flex items-center px-1.5 py-0.5 rounded-full font-bold text-[11px] border ${
+              className={`inline-flex items-center px-1.5 py-0.5 rounded-md font-medium text-xs border tabular-nums ${
                 isPositive
                   ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/50'
                   : isNegative
@@ -88,7 +88,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
             </span>
           )}
           {displaySubtext && (
-            <span className="truncate font-medium text-slate-500 dark:text-slate-400 text-xs">
+            <span className="truncate font-normal text-slate-500 dark:text-slate-400 text-xs leading-normal">
               {displaySubtext}
             </span>
           )}
