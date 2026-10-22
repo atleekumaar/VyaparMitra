@@ -89,10 +89,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     try {
       const utterance = new SpeechSynthesisUtterance();
       if (language === 'hindi') {
-        utterance.text = 'पेटीएम पर ४२५० रुपये प्राप्त हुए!';
+        utterance.text = '४२५० रुपये प्राप्त हुए!';
         utterance.lang = 'hi-IN';
       } else {
-        utterance.text = 'Paytm par 4250 rupees prapt hue!';
+        utterance.text = '4250 rupees prapt hue!';
         utterance.lang = 'hi-IN'; // Using hi-IN accent works better for hinglish
       }
       utterance.rate = 1.0;
@@ -146,7 +146,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-black tracking-wider uppercase text-[#00BAF2]">
-                {t('soundbox_banner_title', 'Paytm Soundbox 4.0 Live')}
+                {t('soundbox_banner_title', 'Smart Soundbox Live')}
               </span>
               <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-[#00B970] text-white">
                 Audio Active
@@ -154,7 +154,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
             <p className="text-sm font-bold text-white mt-0.5">
               {soundboxPlayed
-                ? (language === 'hindi' ? '🔊 "पेटीएम पर ₹4,250 प्राप्त हुए!"' : '🔊 "Paytm par ₹4,250 prapt hue!"')
+                ? (language === 'hindi' ? '🔊 "₹4,250 प्राप्त हुए!"' : '🔊 "₹4,250 prapt hue!"')
                 : t('soundbox_banner_text')}
             </p>
           </div>
@@ -181,7 +181,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
               {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
             </h2>
-            <Badge variant="demo">{t('verified_merchant', 'Paytm Verified Store')}</Badge>
+            <Badge variant="demo">{t('verified_merchant', 'Verified Store')}</Badge>
           </div>
           <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-1 max-w-xl font-medium">
             {t('welcome_subtext')}

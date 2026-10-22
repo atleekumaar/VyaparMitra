@@ -80,7 +80,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F6FB] dark:bg-[#070E1A] text-[#0F2042] dark:text-slate-100 flex transition-colors duration-200">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex transition-colors duration-200">
       {/* Sidebar navigation */}
       <Sidebar
         currentTab={currentTab}
@@ -100,18 +100,18 @@ export const App: React.FC = () => {
 
       {/* Main content wrapper */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile menu bar */}
-        <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-white dark:bg-[#0B1528] border-b border-[#CDE5F7] dark:border-[#1E3A6E] transition-colors">
+        {/* Mobile topbar */}
+        <div className="lg:hidden flex items-center justify-between px-4 py-2.5 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
           <button
             onClick={() => setIsOpenMobile(true)}
-            className="p-1.5 rounded-lg text-[#002970] dark:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="p-1.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
             aria-label="Open navigation menu"
           >
-            <Menu className="w-5 h-5 text-[#002970] dark:text-[#00BAF2]" />
+            <Menu className="w-5 h-5 text-slate-700 dark:text-slate-200" />
           </button>
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-base text-[#002970] dark:text-white">
-              Vyapar<span className="text-[#00BAF2]">Mitra</span>
+            <span className="font-bold text-base text-slate-900 dark:text-white">
+              Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
             </span>
           </div>
           <div className="w-6" /> {/* Spacer */}

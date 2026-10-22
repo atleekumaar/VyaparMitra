@@ -60,9 +60,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'FMCG & Retail • Lucknow',
   },
   verified_merchant: {
-    hinglish: 'Paytm Verified',
-    hindi: 'पेटीएम सत्यापित',
-    english: 'Paytm Verified',
+    hinglish: 'Verified Store',
+    hindi: 'सत्यापित स्टोर',
+    english: 'Verified Store',
   },
   soundbox_ready: {
     hinglish: 'Soundbox Ready:',
@@ -82,14 +82,14 @@ export const translations: Record<string, Record<Language, string>> = {
 
   // Dashboard Page
   soundbox_banner_title: {
-    hinglish: 'Paytm Soundbox 4.0 Live',
-    hindi: 'पेटीएम साउंडबॉक्स 4.0 लाइव',
-    english: 'Paytm Soundbox 4.0 Live',
+    hinglish: 'Smart Soundbox Live',
+    hindi: 'स्मार्ट साउंडबॉक्स लाइव',
+    english: 'Smart Soundbox Live',
   },
   soundbox_banner_text: {
-    hinglish: '🔊 "Paytm par ₹4,250 prapt hue" • Aaj ka Total Collection: ₹45,280 (128 transactions)',
-    hindi: '🔊 "पेटीएम पर ₹4,250 प्राप्त हुए" • आज का कुल कलेक्शन: ₹45,280 (128 लेनदेन)',
-    english: '🔊 "Received ₹4,250 on Paytm" • Today\'s Total Collection: ₹45,280 (128 transactions)',
+    hinglish: '🔊 "₹4,250 prapt hue" • Aaj ka Total Collection: ₹45,280 (128 transactions)',
+    hindi: '🔊 "₹4,250 प्राप्त हुए" • आज का कुल कलेक्शन: ₹45,280 (128 लेनदेन)',
+    english: '🔊 "Received ₹4,250" • Today\'s Total Collection: ₹45,280 (128 transactions)',
   },
   test_audio: {
     hinglish: 'Test Audio',
@@ -544,3 +544,4 @@ export function localizeDynamicText(text: string | null | undefined, language: L
 
   return text;
 }
+

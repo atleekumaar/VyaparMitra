@@ -7,10 +7,10 @@ import { localizeDynamicText } from '../i18n/translations';
 interface MetricCardProps {
   card: MetricCardData;
   icon?: React.ReactNode;
-  accentColor?: 'cyan' | 'navy' | 'green' | 'orange';
+  accentColor?: 'cyan' | 'navy' | 'green' | 'orange' | 'blue' | 'purple';
 }
 
-export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor = 'cyan' }) => {
+export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor = 'blue' }) => {
   const { language } = useLanguage();
   const isPositive = card.change_pct && card.change_pct > 0;
   const isNegative = card.change_pct && card.change_pct < 0;
@@ -18,51 +18,46 @@ export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor 
   const displayLabel = localizeDynamicText(card.label, language);
   const displaySubtext = localizeDynamicText(card.subtext, language);
 
-  const topBorderColors = {
-    cyan: 'border-t-4 border-t-[#00BAF2]',
-    navy: 'border-t-4 border-t-[#002970] dark:border-t-[#00BAF2]',
-    green: 'border-t-4 border-t-[#00B970]',
-    orange: 'border-t-4 border-t-[#FF7A00]',
+  const iconColors: Record<string, string> = {
+    cyan: 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400',
+    blue: 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400',
+    navy: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
+    green: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400',
+    orange: 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400',
+    purple: 'bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400',
   };
 
-  const iconBgColors = {
-    cyan: 'bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] dark:from-[#0B254A] dark:to-[#0F356B] text-[#00BAF2] border border-[#B3E3FA] dark:border-[#1A4B8C]',
-    navy: 'bg-gradient-to-br from-[#E8F0FC] to-[#D5E5FA] dark:from-[#112447] dark:to-[#173263] text-[#002970] dark:text-[#00BAF2] border border-[#B8D5F8] dark:border-[#224685]',
-    green: 'bg-gradient-to-br from-[#E8F8F0] to-[#CEF2DE] dark:from-[#0B3320] dark:to-[#104A2E] text-[#008A54] dark:text-[#00B970] border border-[#A7E5C0] dark:border-[#1B633F]',
-    orange: 'bg-gradient-to-br from-[#FFF2E5] to-[#FFE0C4] dark:from-[#3D2005] dark:to-[#572E07] text-[#E06000] dark:text-[#FF9433] border border-[#FFCE9E] dark:border-[#7A410B]',
-  };
+  const iconClass = iconColors[accentColor] || iconColors.blue;
 
   return (
-    <div
-      className={`bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs hover:shadow-paytm transition-all duration-200 ${topBorderColors[accentColor]}`}
-    >
+    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-150">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold uppercase tracking-wider text-[#4F6A94] dark:text-blue-200">
+        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
           {displayLabel}
         </span>
         {icon && (
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-xs ${iconBgColors[accentColor]}`}>
+          <div className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors ${iconClass}`}>
             {icon}
           </div>
         )}
       </div>
 
       <div className="mt-3 flex items-baseline gap-2">
-        <span className="text-2xl lg:text-3xl font-black tracking-tight text-[#002970] dark:text-white">
+        <span className="text-2xl lg:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
           {card.formatted_value}
         </span>
       </div>
 
       {((card.change_pct !== null && card.change_pct !== undefined) || card.subtext) && (
-        <div className="mt-3 flex items-center flex-wrap gap-1.5 text-xs text-[#4F6A94] dark:text-slate-400">
+        <div className="mt-3 flex items-center flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
           {card.change_pct !== null && card.change_pct !== undefined && (
             <span
-              className={`inline-flex items-center px-2 py-0.5 rounded-md font-bold text-xs ${
+              className={`inline-flex items-center px-1.5 py-0.5 rounded font-semibold text-xs border ${
                 isPositive
-                  ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30'
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/50'
                   : isNegative
-                  ? 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30'
-                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
+                  ? 'bg-red-50 text-red-700 border-red-200/80 dark:bg-red-950/40 dark:text-red-300 dark:border-red-800/50'
+                  : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700'
               }`}
             >
               {isPositive && <ArrowUpRight className="w-3.5 h-3.5 mr-0.5" />}
@@ -71,7 +66,11 @@ export const MetricCard: React.FC<MetricCardProps> = ({ card, icon, accentColor 
               {Math.abs(card.change_pct)}%
             </span>
           )}
-          {displaySubtext && <span className="truncate font-medium text-slate-500 dark:text-slate-400">{displaySubtext}</span>}
+          {displaySubtext && (
+            <span className="truncate font-medium text-slate-500 dark:text-slate-400">
+              {displaySubtext}
+            </span>
+          )}
         </div>
       )}
     </div>
