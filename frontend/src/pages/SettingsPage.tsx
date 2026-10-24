@@ -56,7 +56,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
         </div>
 
         <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
-          Choose between Paytm Light Mode and Midnight Dark Mode.
+          Choose between Light Mode and Midnight Dark Mode.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -76,7 +76,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
               </div>
               <div>
                 <span className="font-extrabold text-sm text-[#002970] dark:text-white block">Light Mode</span>
-                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Paytm Signature Ice Blue</span>
+                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Fintech Light Surface</span>
               </div>
             </div>
             {!isDarkMode && <CheckCircle2 className="w-5 h-5 text-[#00BAF2]" />}
@@ -233,3 +233,4 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     </div>
   );
 };
+

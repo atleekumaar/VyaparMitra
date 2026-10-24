@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   TrendingUp,
   Sparkles,
   Bot,
-  AlertTriangle,
   ArrowRight,
   ShoppingBag,
   DollarSign,
-  Users,
   Package,
-  Calendar,
-  CheckCircle2,
   Trophy,
   Volume2,
-  ShieldCheck,
-  Zap,
+  Activity,
 } from 'lucide-react';
 import { api } from '../api/client';
-import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics } from '../types';
+import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics, DailySalesPoint } from '../types';
 import { MetricCard } from '../components/MetricCard';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
@@ -46,6 +41,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [quickQuery, setQuickQuery] = useState<string>('');
   const [soundboxPlayed, setSoundboxPlayed] = useState<boolean>(false);
+  const [timeRange, setTimeRange] = useState<'7D' | '14D'>('7D');
+  const [activeDayIndex, setActiveDayIndex] = useState<number | null>(null);
 
   const loadData = async () => {
     setLoading(true);
@@ -89,11 +86,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     try {
       const utterance = new SpeechSynthesisUtterance();
       if (language === 'hindi') {
-        utterance.text = 'पेटीएम पर ४२५० रुपये प्राप्त हुए!';
+        utterance.text = '४२५० रुपये प्राप्त हुए!';
         utterance.lang = 'hi-IN';
       } else {
-        utterance.text = 'Paytm par 4250 rupees prapt hue!';
-        utterance.lang = 'hi-IN'; // Using hi-IN accent works better for hinglish
+        utterance.text = '4250 rupees prapt hue!';
+        utterance.lang = 'hi-IN';
       }
       utterance.rate = 1.0;
       window.speechSynthesis.speak(utterance);
@@ -103,19 +100,59 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     setTimeout(() => setSoundboxPlayed(false), 4000);
   };
 
+  // Slice historical days based on selected time range (7D / 14D)
+  const daysToDisplay = useMemo<DailySalesPoint[]>(() => {
+    const series = salesAnalytics?.daily_series || [];
+    const count = timeRange === '7D' ? 7 : 14;
+    return series.slice(-count);
+  }, [salesAnalytics, timeRange]);
+
+  // Derived statistics for the chart
+  const { periodTotal, periodOrders, periodAvg, maxRev } = useMemo(() => {
+    const total = daysToDisplay.reduce((sum, d) => sum + (d.revenue || 0), 0);
+    const orders = daysToDisplay.reduce((sum, d) => sum + (d.orders || 0), 0);
+    const avg = daysToDisplay.length > 0 ? total / daysToDisplay.length : 0;
+    const max = Math.max(...daysToDisplay.map((d) => d.revenue || 0), 1000);
+    return { periodTotal: total, periodOrders: orders, periodAvg: avg, maxRev: max };
+  }, [daysToDisplay]);
+
+  // Daily Run-Rate Calculations
+  const { projectedDailyRunRate, recentDailyRunRate, runRateDiffPct } = useMemo(() => {
+    const proj = summary?.forecast_7d_total_revenue ? summary.forecast_7d_total_revenue / 7 : 0;
+    const recent7 = (salesAnalytics?.daily_series || []).slice(-7);
+    const recentTotal = recent7.reduce((sum, d) => sum + (d.revenue || 0), 0);
+    const actual = recent7.length > 0 ? recentTotal / recent7.length : 0;
+    const diff = actual > 0 ? ((proj - actual) / actual) * 100 : 0;
+    return {
+      projectedDailyRunRate: proj,
+      recentDailyRunRate: actual,
+      runRateDiffPct: diff,
+    };
+  }, [summary, salesAnalytics]);
+
   if (loading) {
     return (
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-150">
+        {/* Header Skeleton */}
+        <div className="py-1">
+          <div className="h-7 bg-slate-200 dark:bg-slate-800 rounded-lg w-1/3 mb-2 animate-pulse" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/4 animate-pulse" />
+        </div>
+
+        {/* KPI Grid Skeletons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {Array.from({ length: 4 }).map((_, i) => (
             <CardSkeleton key={i} />
           ))}
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
+
+        {/* Main Content Skeletons */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <div className="lg:col-span-7 xl:col-span-8">
             <ChartSkeleton />
           </div>
-          <div>
+          <div className="lg:col-span-5 xl:col-span-4 space-y-6">
+            <CardSkeleton />
             <CardSkeleton />
           </div>
         </div>
@@ -125,84 +162,66 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   if (error || !summary) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-6">
         <ErrorBanner message={error || 'Could not load dashboard.'} onRetry={loadData} />
       </div>
     );
   }
 
-  // Slice last 14 days of sales for chart
-  const recentDays = salesAnalytics?.daily_series?.slice(-14) || [];
-  const maxRev = Math.max(...recentDays.map((d) => d.revenue), 1000);
-
   return (
-    <div className="space-y-6 animate-in fade-in-50 duration-200">
-      {/* Paytm Soundbox 4.0 Live Notification Banner */}
-      <div className="bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white rounded-2xl p-4 shadow-soundbox border border-[#00BAF2]/30 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <div className="flex items-center gap-3.5 w-full sm:w-auto">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00BAF2] to-[#008CC4] flex items-center justify-center text-white shrink-0 shadow-md shadow-[#00BAF2]/30 ring-2 ring-white/20">
-            <Volume2 className={`w-5 h-5 ${soundboxPlayed ? 'animate-bounce text-white' : 'text-white'}`} />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-black tracking-wider uppercase text-[#00BAF2]">
-                {t('soundbox_banner_title', 'Paytm Soundbox 4.0 Live')}
-              </span>
-              <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-[#00B970] text-white">
-                Audio Active
-              </span>
-            </div>
-            <p className="text-sm font-bold text-white mt-0.5">
-              {soundboxPlayed
-                ? (language === 'hindi' ? '🔊 "पेटीएम पर ₹4,250 प्राप्त हुए!"' : '🔊 "Paytm par ₹4,250 prapt hue!"')
-                : t('soundbox_banner_text')}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
-          <button
-            onClick={handleTestSoundbox}
-            className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all flex items-center gap-1.5"
-          >
-            <Zap className="w-3.5 h-3.5 text-[#00BAF2]" />
-            <span>{t('test_audio', 'Test Audio')}</span>
-          </button>
-          <span className="text-xs text-blue-200 font-medium hidden md:inline">
-            {t('instant_settlement', '100% Instant Bank Settlement')}
-          </span>
-        </div>
-      </div>
-
-      {/* Welcome Banner */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors">
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-150">
+      {/* Executive Page Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
         <div>
-          <div className="flex items-center gap-2.5">
-            <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white tracking-tight">
-              {t('greeting', 'Shubh Prabhat, Merchant Ji 👋')}
-            </h2>
-            <Badge variant="demo">{t('verified_merchant', 'Paytm Verified Store')}</Badge>
-          </div>
-          <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-1 max-w-xl font-medium">
+          <h1 className="text-2xl sm:text-[28px] font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
+            {t('greeting', 'Good Morning, Merchant 👋')}
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal leading-normal max-w-xl">
             {t('welcome_subtext')}
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        {/* Header Action Tools */}
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 flex-wrap">
+          {/* Soundbox Live Indicator & Voice Trigger */}
+          <div className="inline-flex items-center rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-0.5 shadow-2xs">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-medium hidden md:inline">Soundbox 4G</span>
+              <span className="font-medium md:hidden">Live</span>
+            </div>
+            <button
+              onClick={handleTestSoundbox}
+              className="h-7 px-2.5 rounded-md bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 transition-colors inline-flex items-center gap-1.5"
+              title="Test Voice Payment Alert"
+              aria-label="Test Voice Payment Alert"
+            >
+              <Volume2 className={`w-3.5 h-3.5 text-blue-600 dark:text-blue-400 ${soundboxPlayed ? 'animate-bounce' : ''}`} />
+              <span>
+                {soundboxPlayed
+                  ? (language === 'hindi' ? '₹4,250 प्राप्त हुए!' : '₹4,250 prapt hue!')
+                  : t('test_audio', 'Test Audio')}
+              </span>
+            </button>
+          </div>
+
+          {/* Today's Brief Copilot Shortcut */}
           <Button
-            variant="outline"
-            size="sm"
+            variant="secondary"
+            size="md"
             onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
-            className="text-xs font-bold dark:border-[#00BAF2] dark:text-[#00BAF2] dark:hover:bg-[#132342]"
+            className="h-8.5 px-3 text-xs font-medium"
           >
-            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-[#00BAF2]" />
+            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-purple-600 dark:text-purple-400" />
             {t('todays_brief', "Today's Brief")}
           </Button>
+
+          {/* Priority Actions CTA Button */}
           <Button
             variant="primary"
-            size="sm"
+            size="md"
             onClick={() => onNavigateTab('recommendations')}
-            className="text-xs font-bold"
+            className="h-8.5 px-3.5 text-xs font-medium"
           >
             <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
             <ArrowRight className="w-3.5 h-3.5 ml-1" />
@@ -210,279 +229,315 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
       </div>
 
-      {/* KPI Cards Grid with Paytm Accents */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Primary KPI Metric Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
         <MetricCard
           card={summary.kpis.revenue}
-          icon={<DollarSign className="w-5 h-5" />}
-          accentColor="cyan"
+          icon={<DollarSign className="w-4 h-4" />}
+          accentColor="blue"
+          isHero={true}
         />
         <MetricCard
           card={summary.kpis.orders}
-          icon={<ShoppingBag className="w-5 h-5" />}
+          icon={<ShoppingBag className="w-4 h-4" />}
           accentColor="navy"
         />
         <MetricCard
           card={summary.kpis.aov}
-          icon={<TrendingUp className="w-5 h-5" />}
+          icon={<TrendingUp className="w-4 h-4" />}
           accentColor="green"
         />
         <MetricCard
           card={summary.kpis.units}
-          icon={<Package className="w-5 h-5" />}
+          icon={<Package className="w-4 h-4" />}
           accentColor="orange"
         />
       </div>
 
-      {/* Main Grid: Left Charts + Right Action Center */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left 2 Cols: Sales Trends & Forecast */}
-        <div className="lg:col-span-2 flex flex-col gap-6">
-          {/* Recent Sales History Chart */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm transition-colors">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-base font-extrabold text-[#002970] dark:text-white">{t('daily_sales_trend', 'Daily Sales Trend (Bikri)')}</h3>
-                <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">{t('last_14_days', 'Last 14 recorded business days')}</p>
+      {/* Primary Content Region: 2:1 Proportional Grid for Chart and Operations */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        {/* Left Column (8 cols): Revenue Velocity & Momentum Center */}
+        <div className="lg:col-span-7 xl:col-span-8">
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors overflow-hidden">
+            {/* Chart Header: Title & Controls */}
+            <div className="p-5 sm:p-6 pb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2 tracking-tight">
+                    <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    <span>
+                      {timeRange === '7D'
+                        ? t('trend_7d', '7-Day Revenue Trend')
+                        : t('trend_14d', '14-Day Revenue Trend')}
+                    </span>
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal leading-normal">
+                    Daily store collection momentum compared to weekly predictive run-rate target
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                  {/* Segmented Range Controls */}
+                  <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 rounded-lg p-0.5 text-xs font-medium">
+                    <button
+                      onClick={() => setTimeRange('7D')}
+                      className={`px-3 py-1 rounded-md transition-colors ${
+                        timeRange === '7D'
+                          ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs font-semibold'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      7D
+                    </button>
+                    <button
+                      onClick={() => setTimeRange('14D')}
+                      className={`px-3 py-1 rounded-md transition-colors ${
+                        timeRange === '14D'
+                          ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs font-semibold'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                      }`}
+                    >
+                      14D
+                    </button>
+                  </div>
+
+                  {/* Trend Indicator Badge */}
+                  <span
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
+                      summary.sales_trend_direction === 'DECREASING'
+                        ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                        : summary.sales_trend_direction === 'INCREASING'
+                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                    }`}
+                  >
+                    {summary.sales_trend_direction === 'DECREASING'
+                      ? t('trend_decreasing', 'Trend: Decreasing')
+                      : summary.sales_trend_direction === 'INCREASING'
+                      ? t('trend_increasing', 'Trend: Increasing')
+                      : t('trend_stable', 'Trend: Stable')}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30">
-                  {summary.sales_trend_direction === 'DECREASING'
-                    ? t('trend_decreasing', 'Trend: DECREASING')
-                    : summary.sales_trend_direction === 'INCREASING'
-                    ? t('trend_increasing', 'Trend: INCREASING')
-                    : t('trend_stable', 'Trend: STABLE')}
+            </div>
+
+            {/* Embedded Financial Metrics Strip */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 px-5 sm:px-6 py-3.5 bg-slate-50/70 dark:bg-slate-850/60 border-y border-slate-100 dark:border-slate-800 text-xs">
+              <div>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
+                  {t('period_total_label', 'Period Total:')}
+                </span>
+                <span className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white tabular-nums tracking-tight">
+                  ₹{periodTotal.toLocaleString('en-IN')}
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
+                  {t('daily_avg_label', 'Daily Average:')}
+                </span>
+                <span className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 tabular-nums tracking-tight">
+                  ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day
+                </span>
+              </div>
+              <div>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block truncate">
+                    Target Run-Rate:
+                  </span>
+                  <span
+                    className={`inline-flex px-1.5 py-0.2 rounded text-[11px] font-medium ${
+                      runRateDiffPct >= 0
+                        ? 'text-emerald-600 dark:text-emerald-400'
+                        : 'text-amber-600 dark:text-amber-400'
+                    }`}
+                  >
+                    {runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(0)}%
+                  </span>
+                </div>
+                <span className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white tabular-nums tracking-tight">
+                  ₹{projectedDailyRunRate.toLocaleString('en-IN', { maximumFractionDigits: 0 })}/day
+                </span>
+              </div>
+              <div>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
+                  {t('peak_collection', 'Peak Collection:')}
+                </span>
+                <span className="text-base sm:text-lg font-semibold text-emerald-600 dark:text-emerald-400 tabular-nums tracking-tight">
+                  ₹{maxRev.toLocaleString('en-IN')}
                 </span>
               </div>
             </div>
 
-            {/* Custom Bar Visualization */}
-            <div className="h-56 flex items-end justify-between gap-1.5 pt-6 pb-2 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
-              {recentDays.map((day, idx) => {
-                const heightPct = Math.max(10, (day.revenue / maxRev) * 100);
-                return (
-                  <div
-                    key={idx}
-                    className="flex-1 flex flex-col items-center group relative h-full justify-end"
-                  >
-                    {/* Tooltip on hover */}
-                    <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-[#002970] text-white text-[10px] font-bold rounded-lg px-2.5 py-1.5 pointer-events-none whitespace-nowrap z-20 shadow-lg border border-[#00BAF2]/40">
-                      {day.date}: ₹{day.revenue.toLocaleString()} ({day.orders} orders)
-                    </div>
-                    {/* Bar */}
-                    <div
-                      className="w-full bg-gradient-to-t from-[#00BAF2] to-[#41C9F7] hover:from-[#002970] hover:to-[#001D4E] dark:hover:from-white dark:hover:to-[#00BAF2] rounded-t-lg transition-all duration-150 cursor-pointer shadow-2xs"
-                      style={{ height: `${heightPct}%` }}
-                    />
-                    {/* Date label — Day name + date */}
-                    <span className="text-[10px] text-[#4F6A94] dark:text-slate-400 font-semibold mt-2 truncate w-full text-center leading-tight">
-                      {(() => {
-                        const d = new Date(day.date);
-                        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                        return (
-                          <>
-                            <span className="block text-[9px] font-bold text-[#002970] dark:text-blue-200">{dayNames[d.getDay()]}</span>
-                            <span className="block">{d.getDate()}/{d.getMonth() + 1}</span>
-                          </>
-                        );
-                      })()}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="mt-4 flex items-center justify-between text-xs text-[#4F6A94] dark:text-blue-200">
-              <span className="font-semibold">
-                {t('peak_collection', 'Peak Day Collection:')}{' '}
-                <strong className="text-[#002970] dark:text-white font-extrabold">₹{maxRev.toLocaleString()}</strong>
-              </span>
-              <button
-                onClick={() => onNavigateTab('analytics')}
-                className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
-              >
-                {t('deep_analytics', 'Deep Analytics')} <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-
-          {/* 7-Day Forward Forecast Banner with Paytm Royalty */}
-          <div className="bg-gradient-to-r from-[#002970] via-[#00388F] to-[#001D4E] text-white rounded-2xl p-6 shadow-soundbox border border-[#00BAF2]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-black text-[#00BAF2] uppercase tracking-wider">
-                <TrendingUp className="w-4 h-4 text-[#00BAF2]" />
-                <span>{t('forecast_7d_title', 'Predictive AI • 7-Day Forecast')}</span>
+            {/* Structured Bar Chart */}
+            <div className="p-5 sm:p-6 pb-4 relative">
+              {/* Subtle Horizontal Reference Gridlines */}
+              <div className="absolute inset-x-6 top-8 bottom-14 flex flex-col justify-between pointer-events-none opacity-25">
+                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
+                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
+                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
+                <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
               </div>
-              <p className="text-3xl font-black mt-1 text-white tracking-tight">
-                ₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
-              </p>
-              <p className="text-xs text-blue-100 mt-1 max-w-md font-medium">
-                {t('forecast_7d_subtext')}
-              </p>
+
+              {/* Bar Canvas */}
+              <div className="h-60 flex items-end justify-between gap-1.5 sm:gap-3 relative z-10">
+                {daysToDisplay.map((day, idx) => {
+                  const heightPct = Math.max(8, (day.revenue / maxRev) * 100);
+                  const isHovered = activeDayIndex === idx;
+
+                  const dateObj = new Date(day.date);
+                  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                  const dayOfWeek = dayNames[dateObj.getDay()] || '';
+                  const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
+
+                  return (
+                    <div
+                      key={day.date || idx}
+                      className="flex-1 flex flex-col items-center group relative h-full justify-end cursor-pointer"
+                      onMouseEnter={() => setActiveDayIndex(idx)}
+                      onMouseLeave={() => setActiveDayIndex(null)}
+                      onClick={() => setActiveDayIndex(activeDayIndex === idx ? null : idx)}
+                    >
+                      {/* Theme-Aware Tooltip */}
+                      {isHovered && (
+                        <div className="absolute -top-16 z-30 pointer-events-none whitespace-nowrap bg-slate-900 dark:bg-slate-800 text-white border border-slate-700/80 rounded-lg px-3 py-1.5 shadow-xl text-center text-xs animate-in fade-in-50 duration-150">
+                          <div className="font-medium text-xs text-slate-300">
+                            {dayOfWeek}, {day.date}
+                          </div>
+                          <div className="font-semibold text-white text-xs mt-0.5 tabular-nums">
+                            ₹{day.revenue.toLocaleString('en-IN')} &bull; {day.orders} orders
+                          </div>
+                          {day.orders > 0 && (
+                            <div className="text-[11px] text-blue-300 tabular-nums mt-0.5">
+                              AOV: ₹{Math.round(day.revenue / day.orders).toLocaleString('en-IN')}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Bar Pillar */}
+                      <div
+                        className={`w-full rounded-t-[4px] transition-all duration-150 ${
+                          isHovered
+                            ? 'bg-blue-600 dark:bg-blue-400 shadow-sm'
+                            : 'bg-blue-500/90 hover:bg-blue-600 dark:bg-blue-600/80 dark:hover:bg-blue-500'
+                        }`}
+                        style={{ height: `${heightPct}%` }}
+                      />
+
+                      {/* X-Axis Date Labels */}
+                      <div className="mt-2.5 text-center w-full truncate leading-tight">
+                        <span className="block text-xs font-medium text-slate-600 dark:text-slate-400">
+                          {dayOfWeek}
+                        </span>
+                        <span className="block text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
+                          {formattedDate}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => onNavigateTab('forecasts')}
-              className="border-white/40 text-white hover:bg-white/10 shrink-0 font-bold"
-            >
-              {t('view_sku_forecasts', 'View SKU Forecasts')}
-            </Button>
+
+            {/* Integrated Forecasting Velocity Footer */}
+            <div className="p-4 sm:px-6 sm:py-4 bg-slate-50/50 dark:bg-slate-850/40 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs sm:text-sm">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-200/60 dark:border-blue-800/60">
+                  <TrendingUp className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">
+                    7-Day ML Target: <strong className="text-slate-900 dark:text-white font-semibold tabular-nums">₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</strong>
+                  </span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-xs mt-0.5 font-normal">
+                    Current collection pace is ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day ({runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(1)}% vs target)
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3 shrink-0">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => onNavigateTab('forecasts')}
+                  className="h-8 px-3 text-xs font-medium"
+                >
+                  {t('view_sku_forecasts', 'View SKU Forecasts')}
+                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                </Button>
+                <button
+                  onClick={() => onNavigateTab('analytics')}
+                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-xs sm:text-sm font-medium inline-flex items-center gap-1 transition-colors"
+                >
+                  <span>{t('deep_analytics', 'Analytics')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Right 1 Col: Priority Action Center & Quick Ask */}
-        <div className="flex flex-col gap-6">
-          {/* Peer Benchmarking Summary Card */}
-          {benchmark && (
-            <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm relative overflow-hidden transition-colors">
-              <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-gradient-to-br from-[#E0F4FD] to-[#C9EDFC] dark:from-[#0B254A] dark:to-[#0F356B] text-[#00BAF2] border border-[#B3E3FA] dark:border-[#1A4B8C]">
-                    <Trophy className="w-4 h-4 text-[#00BAF2]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('peers_comparison', 'Peers se tulna')}</h3>
-                    <p className="text-[10px] text-[#4F6A94] dark:text-blue-200 font-semibold">{localizeDynamicText(benchmark.peer_group, language)}</p>
-                  </div>
+        {/* Right Column (4 cols): Priority Decisions & Market Standing (Balanced Heights!) */}
+        <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6">
+          {/* Priority Decisions Feed */}
+          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-slate-800">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <h2 className="text-base font-semibold text-slate-900 dark:text-white">
+                    {t('priority_actions_title', 'Priority Actions')}
+                  </h2>
                 </div>
-                <span
-                  className={`px-2.5 py-0.5 rounded-full text-xs font-extrabold ${
-                    benchmark.rank <= Math.ceil(benchmark.peer_count * 0.33)
-                      ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A] border border-[#B6E8D0] dark:border-[#00B970]/30'
-                      : benchmark.rank <= Math.ceil(benchmark.peer_count * 0.66)
-                      ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33] border border-[#FFE1A8] dark:border-[#FFB800]/30'
-                      : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30'
-                  }`}
-                >
-                  {language === 'hindi'
-                    ? `रैंक: ${benchmark.peer_count} में से ${benchmark.rank}`
-                    : language === 'hinglish'
-                    ? `Rank: ${benchmark.peer_count} me se ${benchmark.rank}`
-                    : `Rank ${benchmark.rank} of ${benchmark.peer_count}`}
+                <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/60">
+                  {summary.critical_actions_count} {t('critical_badge', 'Critical')}
                 </span>
               </div>
 
-              {/* Metrics Highlights Table */}
-              <div className="py-3 space-y-2 text-xs">
-                {benchmark.metrics.slice(0, 3).map((m) => (
+              <div className="divide-y divide-slate-100 dark:divide-slate-800 mt-1">
+                {actions.slice(0, 2).map((act) => (
                   <div
-                    key={m.name}
-                    className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-[#172E58] last:border-none"
+                    key={act.recommendation_id}
+                    className="py-3 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-lg p-2 transition-colors cursor-pointer"
+                    onClick={() => onSelectAction(act.recommendation_id)}
                   >
-                    <span className="text-[#002970] dark:text-blue-100 font-semibold">{localizeDynamicText(m.label, language)}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="font-black text-[#002970] dark:text-white">
-                        {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="text-sm font-medium text-slate-900 dark:text-white line-clamp-1">
+                        {act.title}
                       </span>
-                      <span className="text-[10px] text-[#4F6A94] dark:text-slate-400">
-                        vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
-                      </span>
-                      <span
-                        className={`px-1.5 py-0.5 rounded text-[10px] font-extrabold ${
-                          m.status === 'green'
-                            ? 'bg-[#E8F8F0] dark:bg-[#00B970]/20 text-[#008A54] dark:text-[#00E68A]'
-                            : m.status === 'yellow'
-                            ? 'bg-[#FFF6E5] dark:bg-[#FFB800]/20 text-[#C27803] dark:text-[#FFCA33]'
-                            : 'bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080]'
-                        }`}
+                      <Badge
+                        variant={
+                          act.priority_band === 'CRITICAL'
+                            ? 'critical'
+                            : act.priority_band === 'HIGH'
+                            ? 'high'
+                            : 'medium'
+                        }
                       >
-                        {localizeDynamicText(m.status_text, language)}
+                        {localizeDynamicText(act.priority_band, language)}
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 font-normal leading-relaxed">
+                      {act.action}
+                    </p>
+                    <div className="mt-2 flex items-center justify-between text-xs">
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400 tabular-nums">
+                        {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
+                      </span>
+                      <span className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium inline-flex items-center gap-1">
+                        {t('review_btn', 'Review →')}
                       </span>
                     </div>
                   </div>
                 ))}
               </div>
-
-              {/* Top Action Recommendation */}
-              <div className="mt-1 p-3 rounded-xl bg-[#F0F8FE] dark:bg-[#132342] border border-[#CDE5F7] dark:border-[#1E3A6E] text-xs">
-                <span className="font-extrabold text-[#002970] dark:text-white block text-[11px]">{t('recommended_action', 'Recommended Action:')}</span>
-                <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-0.5 line-clamp-2 font-medium">
-                  {localizeDynamicText(
-                    benchmark.metrics.find((m) => m.status === 'red' || m.status === 'yellow')?.action ||
-                    benchmark.metrics[0]?.action,
-                    language
-                  )}
-                </p>
-              </div>
-
-              {/* Card Bottom CTA Buttons */}
-              <div className="mt-3.5 flex items-center justify-between pt-2.5 border-t border-[#E8F4FD] dark:border-[#1E3A6E] text-xs">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => onNavigateTab('recommendations')}
-                  className="text-xs py-1.5 px-3 text-[#002970] dark:text-blue-100 dark:border-[#1E3A6E] font-bold"
-                >
-                  {t('send_offer', 'Offer bhejein')}
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  onClick={() => onNavigateTab('compare')}
-                  className="text-xs py-1.5 px-3.5 flex items-center gap-1 font-bold"
-                >
-                  <span>{t('view_details', 'Details dekhein')}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {/* Priority Actions Card */}
-          <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-paytm transition-colors">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8F4FD] dark:border-[#1E3A6E]">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#00BAF2]" />
-                <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">{t('priority_actions_title', 'Priority Actions')}</h3>
-              </div>
-              <span className="px-2 py-0.5 rounded-full text-xs font-extrabold bg-[#FEECEB] dark:bg-[#FF4D4D]/20 text-[#D92D20] dark:text-[#FF8080] border border-[#FECDCA] dark:border-[#FF4D4D]/30">
-                {summary.critical_actions_count} {t('critical_badge', 'Critical')}
-              </span>
             </div>
 
-            <div className="divide-y divide-[#E8F4FD] dark:divide-[#172E58] mt-2">
-              {actions.map((act) => (
-                <div
-                  key={act.recommendation_id}
-                  className="py-3 hover:bg-[#F0F8FE] dark:hover:bg-[#132342] rounded-xl p-2.5 transition-colors cursor-pointer"
-                  onClick={() => onSelectAction(act.recommendation_id)}
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-xs font-bold text-[#002970] dark:text-white line-clamp-1">
-                      {act.title}
-                    </span>
-                    <Badge
-                      variant={
-                        act.priority_band === 'CRITICAL'
-                          ? 'critical'
-                          : act.priority_band === 'HIGH'
-                          ? 'high'
-                          : 'medium'
-                      }
-                    >
-                      {localizeDynamicText(act.priority_band, language)}
-                    </Badge>
-                  </div>
-                  <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 line-clamp-2 font-medium">
-                    {act.action}
-                  </p>
-                  <div className="mt-2 flex items-center justify-between text-[11px]">
-                    <span className="font-extrabold text-[#008A54] dark:text-[#00E68A]">
-                      {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
-                    </span>
-                    <span className="text-[#00BAF2] hover:text-[#002970] dark:hover:text-white font-bold">
-                      {t('review_btn', 'Review →')}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-3 pt-3 border-t border-[#E8F4FD] dark:border-[#1E3A6E]">
+            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
               <Button
                 variant="secondary"
                 size="sm"
-                className="w-full text-xs font-bold dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white dark:hover:bg-[#1A335F]"
+                className="w-full h-8 text-xs font-medium"
                 onClick={() => onNavigateTab('recommendations')}
               >
                 {t('open_action_center_btn', 'Open Action Center')} ({summary.total_actions_pending})
@@ -490,55 +545,142 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
           </div>
 
-          {/* Quick Copilot Interactive Card */}
-          <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-black text-[#002970] dark:text-white">
-                <Bot className="w-4 h-4 text-[#00BAF2]" />
-                <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
+          {/* Market Standing (Peer Benchmarking) */}
+          {benchmark && (
+            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/60 flex items-center justify-center shrink-0">
+                      <Trophy className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h2 className="text-base font-semibold text-slate-900 dark:text-white">
+                        Market Standing
+                      </h2>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-normal mt-0.5">
+                        {localizeDynamicText(benchmark.peer_group, language)}
+                      </p>
+                    </div>
+                  </div>
+
+                  <span
+                    className={`px-2.5 py-0.5 rounded-full text-xs font-medium border tabular-nums ${
+                      benchmark.rank <= Math.ceil(benchmark.peer_count * 0.33)
+                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
+                        : benchmark.rank <= Math.ceil(benchmark.peer_count * 0.66)
+                        ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
+                        : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900/60'
+                    }`}
+                  >
+                    Rank {benchmark.rank} of {benchmark.peer_count}
+                  </span>
+                </div>
+
+                {/* Metrics Highlights */}
+                <div className="py-2.5 space-y-2 text-xs">
+                  {benchmark.metrics.slice(0, 2).map((m) => (
+                    <div
+                      key={m.name}
+                      className="flex items-center justify-between py-1 border-b border-slate-50 dark:border-slate-800/60 last:border-none"
+                    >
+                      <span className="text-slate-600 dark:text-slate-300 font-normal">
+                        {localizeDynamicText(m.label, language)}
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-slate-900 dark:text-white tabular-nums">
+                          {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
+                        </span>
+                        <span className="text-xs text-slate-400 tabular-nums">
+                          vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
+                        </span>
+                        <span
+                          className={`px-1.5 py-0.5 rounded text-[11px] font-medium ${
+                            m.status === 'green'
+                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
+                              : m.status === 'yellow'
+                              ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
+                              : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300'
+                          }`}
+                        >
+                          {localizeDynamicText(m.status_text, language)}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1 font-medium">
-                {t('ask_copilot_box_sub')}
-              </p>
 
-              <form onSubmit={handleQuickAsk} className="mt-3 space-y-2">
-                <input
-                  type="text"
-                  value={quickQuery}
-                  onChange={(e) => setQuickQuery(e.target.value)}
-                  placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#0B1528] text-[#002970] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#00BAF2] font-medium"
-                />
-                <Button type="submit" variant="primary" size="sm" className="w-full text-xs font-bold">
-                  {t('ask_btn', 'Ask Copilot')}
-                </Button>
-              </form>
-            </div>
-
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {(language === 'hindi'
-                ? [
-                    'अगले हफ्ते बिक्री कितनी होगी?',
-                    'कौन सा सामान रीस्टॉक करें?',
-                    'मेरी दुकान दूसरों से कैसी है?',
-                  ]
-                : [
-                    'Agle hafte sales kitni hogi?',
-                    'Kaunsa maal restock karein?',
-                    'Meri dukaan dusron se kaisi hai?',
-                  ]
-              ).map((q, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => onQuickCopilot(q)}
-                  className="text-[10px] bg-white dark:bg-[#0F1D38] border border-[#CDE5F7] dark:border-[#1E3A6E] text-[#4F6A94] dark:text-blue-200 hover:text-[#00BAF2] hover:border-[#00BAF2] rounded-lg px-2.5 py-1 transition-colors text-left font-semibold shadow-2xs"
+              {/* Bottom CTA */}
+              <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => onNavigateTab('compare')}
+                  className="w-full h-8 text-xs font-medium"
                 >
-                  &ldquo;{q}&rdquo;
-                </button>
-              ))}
+                  <span>{t('view_details', 'Compare with Peers')}</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                </Button>
+              </div>
             </div>
+          )}
+        </div>
+      </div>
+
+      {/* Dedicated Intelligence Center: AI Merchant Copilot Command Panel */}
+      <div className="bg-purple-50/40 dark:bg-purple-950/20 rounded-xl border border-purple-200/60 dark:border-purple-900/40 p-5 sm:p-6 shadow-xs transition-colors">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-2 text-sm font-semibold text-purple-950 dark:text-purple-200">
+              <Bot className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
+            </div>
+            <p className="text-xs sm:text-sm text-purple-800/80 dark:text-purple-300/80 mt-1 font-normal leading-relaxed">
+              {t('ask_copilot_box_sub')}
+            </p>
           </div>
+
+          <form onSubmit={handleQuickAsk} className="flex-1 max-w-lg flex items-center gap-2">
+            <input
+              type="text"
+              value={quickQuery}
+              onChange={(e) => setQuickQuery(e.target.value)}
+              placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
+              className="flex-1 h-9 px-3.5 text-xs sm:text-sm rounded-lg border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600 font-normal transition-colors"
+            />
+            <Button type="submit" variant="ai" size="sm" className="h-9 px-4 text-xs font-medium shrink-0">
+              {t('ask_btn', 'Ask Copilot')}
+            </Button>
+          </form>
+        </div>
+
+        {/* Quick Suggestion Chips */}
+        <div className="mt-3 pt-3 border-t border-purple-200/40 dark:border-purple-900/30 flex items-center gap-2 flex-wrap text-xs">
+          <span className="text-purple-700/70 dark:text-purple-400/70 text-xs font-medium hidden sm:inline">
+            Suggested:
+          </span>
+          {(language === 'hindi'
+            ? [
+                'अगले हफ्ते बिक्री कितनी होगी?',
+                'कौन सा सामान रीस्टॉक करें?',
+                'मेरी दुकान दूसरों से कैसी है?',
+              ]
+            : [
+                'Agle hafte sales kitni hogi?',
+                'Kaunsa maal restock karein?',
+                'Meri dukaan dusron se kaisi hai?',
+              ]
+          ).map((q, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onQuickCopilot(q)}
+              className="text-xs bg-white dark:bg-slate-900 border border-purple-200/80 dark:border-purple-800/50 text-purple-800 dark:text-purple-300 hover:border-purple-300 rounded-md px-2.5 py-1 transition-colors text-left font-normal shadow-2xs"
+            >
+              &ldquo;{q}&rdquo;
+            </button>
+          ))}
         </div>
       </div>
     </div>
