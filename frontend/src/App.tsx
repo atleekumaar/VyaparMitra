@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Sidebar, NavTab } from './components/Sidebar';
 import { Navbar } from './components/Navbar';
+import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ComparePage } from './pages/ComparePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
@@ -12,6 +13,7 @@ import { CopilotPage } from './pages/CopilotPage';
 import { SettingsPage } from './pages/SettingsPage';
 import { api } from './api/client';
 import { Menu } from 'lucide-react';
+import { UserProfile } from './types';
 
 export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
@@ -20,6 +22,19 @@ export const App: React.FC = () => {
   const [pendingActionsCount, setPendingActionsCount] = useState<number>(0);
   const [selectedActionId, setSelectedActionId] = useState<string | null>(null);
   const [copilotQuery, setCopilotQuery] = useState<string | null>(null);
+
+  // Authenticated User Profile State
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => {
+    const saved = localStorage.getItem('vyaparmitra_user');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  });
 
   // Theme Dark / Light Mode State
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
@@ -41,6 +56,16 @@ export const App: React.FC = () => {
 
   const toggleDarkMode = () => {
     setIsDarkMode((prev) => !prev);
+  };
+
+  const handleLogin = (profile: UserProfile) => {
+    setCurrentUser(profile);
+    localStorage.setItem('vyaparmitra_user', JSON.stringify(profile));
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('vyaparmitra_user');
   };
 
   // Poll health and pending actions
@@ -78,6 +103,17 @@ export const App: React.FC = () => {
     setCopilotQuery(query);
     setCurrentTab('copilot');
   };
+
+  // Render Login Page if not logged in
+  if (!currentUser) {
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={toggleDarkMode}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex transition-colors duration-200">
@@ -126,6 +162,8 @@ export const App: React.FC = () => {
           isHealthy={isHealthy}
           isDarkMode={isDarkMode}
           onToggleDarkMode={toggleDarkMode}
+          userProfile={currentUser}
+          onLogout={handleLogout}
         />
 
         {/* Main Content Area */}

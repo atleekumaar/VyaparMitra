@@ -1,12 +1,15 @@
 import React from 'react';
-import { Bot, Store, Sun, Moon } from 'lucide-react';
+import { Bot, Store, Sun, Moon, LogOut } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { UserProfile } from '../types';
 
 interface NavbarProps {
   onOpenCopilot: () => void;
   isHealthy?: boolean;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
+  userProfile?: UserProfile | null;
+  onLogout?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -14,6 +17,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   isHealthy = true,
   isDarkMode,
   onToggleDarkMode,
+  userProfile,
+  onLogout,
 }) => {
   const { language, setLanguage, t } = useLanguage();
 
@@ -23,17 +28,28 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Left: Merchant Store Identity */}
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/60 flex items-center justify-center font-bold text-xs shrink-0 select-none">
-            VK
+            {userProfile?.avatarInitials || 'VM'}
           </div>
           <div className="min-w-0">
-            <h1 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight truncate leading-tight">
-              {t('store_name', 'Vyapar Store')}
-            </h1>
+            <div className="flex items-center gap-2">
+              <h1 className="text-sm font-semibold text-slate-900 dark:text-white tracking-tight truncate leading-tight">
+                {userProfile?.storeName || t('store_name', 'Vyapar Store')}
+              </h1>
+              {userProfile?.categoryLabel && (
+                <span className="hidden sm:inline-flex px-1.5 py-0.2 rounded text-[10px] font-medium bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/60 truncate">
+                  {userProfile.categoryLabel}
+                </span>
+              )}
+            </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 mt-0.5 truncate leading-none">
               <Store className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-              <span className="font-medium text-slate-600 dark:text-slate-300">ID: M001</span>
+              <span className="font-medium text-slate-600 dark:text-slate-300">
+                ID: {userProfile?.id || 'M001'}
+              </span>
               <span>&bull;</span>
-              <span className="truncate">{t('store_category', 'FMCG & Retail • Lucknow')}</span>
+              <span className="truncate">
+                {userProfile?.city || t('store_category', 'FMCG & Retail • Lucknow')}
+              </span>
             </p>
           </div>
         </div>
@@ -96,6 +112,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Bot className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">{t('ask_copilot', 'Ask Copilot')}</span>
           </button>
+
+          {/* Switch Account / Logout Button */}
+          {onLogout && (
+            <button
+              onClick={onLogout}
+              className="h-8.5 px-2.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200/80 dark:border-slate-700/80 text-xs font-medium inline-flex items-center gap-1.5 transition-colors"
+              title={t('switch_account', 'Switch Account / Logout')}
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">{t('switch_account', 'Switch Account')}</span>
+            </button>
+          )}
         </div>
       </div>
     </header>
