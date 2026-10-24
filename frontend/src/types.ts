@@ -283,6 +283,7 @@ export type UserCategory = 'small_merchant' | 'wholesaler' | 'billing_staff' | '
 export interface UserProfile {
   id: string;
   name: string;
+  email?: string;
   storeName: string;
   category: UserCategory;
   categoryLabel: string;

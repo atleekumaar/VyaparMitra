@@ -146,6 +146,16 @@ export const translations: Record<string, Record<Language, string>> = {
     hindi: 'स्टोर आईडी व पिन',
     english: 'Store ID & Quick PIN',
   },
+  name_input_label: {
+    hinglish: 'Merchant Full Name',
+    hindi: 'व्यापारी का पूरा नाम',
+    english: 'Merchant Full Name',
+  },
+  email_input_label: {
+    hinglish: 'Business Email Address',
+    hindi: 'व्यापारिक ईमेल पता',
+    english: 'Business Email Address',
+  },
   mobile_input_label: {
     hinglish: 'Registered Mobile Number',
     hindi: 'पंजीकृत मोबाइल नंबर',
@@ -155,6 +165,11 @@ export const translations: Record<string, Record<Language, string>> = {
     hinglish: '10-digit mobile number daalein',
     hindi: '10 अंकों का मोबाइल नंबर दर्ज करें',
     english: 'Enter 10-digit mobile number',
+  },
+  btn_send_otp: {
+    hinglish: 'Get Verification OTP',
+    hindi: 'सत्यापन ओटीपी प्राप्त करें',
+    english: 'Send Verification OTP',
   },
   otp_input_label: {
     hinglish: '6-Digit Verification Code (OTP)',
