@@ -1,7 +1,7 @@
 {
   "model_name": "RandomForestRegressor",
   "model_version": "v1.0",
-  "training_date": "2026-09-25 17:21:56",
+  "training_date": "2026-11-08 23:47:15",
   "training_data_range": {
     "start": "2025-10-01",
     "end": "2026-08-01"
@@ -34,18 +34,18 @@
     "model_type": "rf"
   },
   "validation_metrics": {
-    "mae": 12717.21,
-    "rmse": 16314.79,
-    "mape": 30.62,
-    "smape": 28.03,
-    "wape": 27.25
+    "mae": 12543.23,
+    "rmse": 16002.81,
+    "mape": 30.99,
+    "smape": 27.62,
+    "wape": 26.87
   },
   "test_metrics": {
-    "mae": 11867.89,
-    "rmse": 13937.77,
-    "mape": 32.0,
-    "smape": 28.36,
-    "wape": 27.01
+    "mae": 12016.58,
+    "rmse": 14148.37,
+    "mape": 33.03,
+    "smape": 28.62,
+    "wape": 27.35
   },
   "baseline_comparison": {
     "baselines": {
@@ -73,5 +73,5 @@
     },
     "best_baseline": "moving_average"
   },
-  "selection_reason": "Outperformed best baseline (moving_average WAPE: 29.32%) with validation WAPE: 27.25%"
+  "selection_reason": "Outperformed best baseline (moving_average WAPE: 29.32%) with validation WAPE: 26.87%"
 }
