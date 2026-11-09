@@ -62,6 +62,8 @@ class DataCleaner:
         clean_df["customer_id"] = clean_df["customer_id"].astype(str).str.strip()
         clean_df["product_id"] = clean_df["product_id"].astype(str).str.strip()
         clean_df["product_category"] = clean_df["product_category"].astype(str).str.strip()
+        if "product_name" in clean_df.columns:
+            clean_df["product_name"] = clean_df["product_name"].astype(str).apply(normalize_product_string)
         clean_df["payment_method"] = clean_df["payment_method"].astype(str).str.strip().str.upper()
 
         # Standardize timestamps

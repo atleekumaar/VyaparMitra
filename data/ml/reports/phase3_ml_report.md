@@ -23,11 +23,11 @@ Phase 3 transforms historical merchant and transaction data into four production
 
 | Feature | Importance Score | Standard Deviation |
 |---|---|---|
-| `day_of_week` | 0.0249 | 0.0153 |
-| `rainfall` | 0.0209 | 0.0088 |
-| `lag_1d_revenue` | 0.0175 | 0.0168 |
-| `lag_28d_revenue` | 0.0161 | 0.0060 |
-| `rolling_7d_avg_revenue` | 0.0028 | 0.0165 |
+| `day_of_week` | 0.0405 | 0.0227 |
+| `rainfall` | 0.0345 | 0.0111 |
+| `lag_28d_revenue` | 0.0298 | 0.0132 |
+| `rolling_7d_avg_revenue` | 0.0065 | 0.0185 |
+| `lag_1d_revenue` | 0.0011 | 0.0084 |
 
 ### Top Drivers: Product Demand Forecaster
 
@@ -43,11 +43,11 @@ Phase 3 transforms historical merchant and transaction data into four production
 
 | Feature | Importance Score | Standard Deviation |
 |---|---|---|
-| `recent_30d_orders` | 0.0093 | 0.0049 |
-| `recent_7d_orders` | 0.0004 | 0.0025 |
-| `total_orders` | -0.0085 | 0.0093 |
-| `days_since_first_purchase` | -0.0119 | 0.0081 |
-| `recent_90d_orders` | -0.0131 | 0.0045 |
+| `recent_90d_orders` | 0.0085 | 0.0055 |
+| `recent_7d_orders` | 0.0000 | 0.0000 |
+| `recent_30d_orders` | 0.0000 | 0.0000 |
+| `total_orders` | -0.0051 | 0.0061 |
+| `recent_30d_spend` | -0.0097 | 0.0078 |
 
 ### Top Drivers: Business Trend Classifier
 

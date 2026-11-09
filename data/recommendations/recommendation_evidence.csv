@@ -1,504 +1,504 @@
 recommendation_id,entity_id,metric,value,source,description
-REC_CUST_C03388,C03388,churn_risk_probability,0.6958,Phase 3 Churn Model,Inactivity likelihood within next 30 days (69.6%)
-REC_CUST_C03388,C03388,customer_recency_days,112.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03388,C03388,customer_total_spend,16767.84,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03388,C03388,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03388,C03388,average_order_value,5589.28,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01719,C01719,churn_risk_probability,0.6781,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.8%)
-REC_CUST_C01719,C01719,customer_recency_days,77.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01719,C01719,customer_total_spend,7575.64,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01719,C01719,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01719,C01719,average_order_value,3787.82,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01750,C01750,churn_risk_probability,0.6746,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.5%)
-REC_CUST_C01750,C01750,customer_recency_days,152.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01750,C01750,customer_total_spend,12311.86,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01750,C01750,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01750,C01750,average_order_value,3077.96,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02719,C02719,churn_risk_probability,0.6716,Phase 3 Churn Model,Inactivity likelihood within next 30 days (67.2%)
-REC_CUST_C02719,C02719,customer_recency_days,32.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02719,C02719,customer_total_spend,12387.47,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02719,C02719,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02719,C02719,average_order_value,3096.87,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03457,C03457,churn_risk_probability,0.6692,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.9%)
-REC_CUST_C03457,C03457,customer_recency_days,17.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03457,C03457,customer_total_spend,29573.55,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03457,C03457,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03457,C03457,average_order_value,4928.92,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02004,C02004,churn_risk_probability,0.6682,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.8%)
-REC_CUST_C02004,C02004,customer_recency_days,98.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02004,C02004,customer_total_spend,9413.47,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02004,C02004,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02004,C02004,average_order_value,3137.82,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02137,C02137,churn_risk_probability,0.6651,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.5%)
-REC_CUST_C02137,C02137,customer_recency_days,97.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02137,C02137,customer_total_spend,16991.95,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02137,C02137,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02137,C02137,average_order_value,2831.99,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02312,C02312,churn_risk_probability,0.662,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.2%)
-REC_CUST_C02312,C02312,customer_recency_days,83.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02312,C02312,customer_total_spend,17306.04,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02312,C02312,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02312,C02312,average_order_value,5768.68,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00617,C00617,churn_risk_probability,0.6585,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.8%)
-REC_CUST_C00617,C00617,customer_recency_days,74.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00617,C00617,customer_total_spend,15425.43,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00617,C00617,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00617,C00617,average_order_value,7712.72,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00305,C00305,churn_risk_probability,0.6582,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.8%)
-REC_CUST_C00305,C00305,customer_recency_days,155.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00305,C00305,customer_total_spend,13112.03,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00305,C00305,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00305,C00305,average_order_value,6556.02,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02142,C02142,churn_risk_probability,0.6689,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.9%)
-REC_CUST_C02142,C02142,customer_recency_days,73.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02142,C02142,customer_total_spend,10549.19,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02142,C02142,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02142,C02142,average_order_value,2637.3,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01225,C01225,churn_risk_probability,0.6568,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.7%)
-REC_CUST_C01225,C01225,customer_recency_days,90.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01225,C01225,customer_total_spend,10798.26,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01225,C01225,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01225,C01225,average_order_value,2699.56,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03276,C03276,churn_risk_probability,0.6564,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.6%)
-REC_CUST_C03276,C03276,customer_recency_days,165.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03276,C03276,customer_total_spend,7384.11,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03276,C03276,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03276,C03276,average_order_value,3692.06,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02038,C02038,churn_risk_probability,0.654,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.4%)
-REC_CUST_C02038,C02038,customer_recency_days,145.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02038,C02038,customer_total_spend,14661.69,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02038,C02038,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02038,C02038,average_order_value,3665.42,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03372,C03372,churn_risk_probability,0.6536,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.4%)
-REC_CUST_C03372,C03372,customer_recency_days,4.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03372,C03372,customer_total_spend,15230.88,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03372,C03372,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03372,C03372,average_order_value,3807.72,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02795,C02795,churn_risk_probability,0.6525,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.2%)
-REC_CUST_C02795,C02795,customer_recency_days,98.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02795,C02795,customer_total_spend,18887.56,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02795,C02795,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02795,C02795,average_order_value,2698.22,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00035,C00035,churn_risk_probability,0.6507,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.1%)
-REC_CUST_C00035,C00035,customer_recency_days,312.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00035,C00035,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00035,C00035,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00035,C00035,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01204,C01204,churn_risk_probability,0.6505,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.0%)
-REC_CUST_C01204,C01204,customer_recency_days,75.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01204,C01204,customer_total_spend,6690.58,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01204,C01204,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01204,C01204,average_order_value,3345.29,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02701,C02701,churn_risk_probability,0.6507,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.1%)
-REC_CUST_C02701,C02701,customer_recency_days,312.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02701,C02701,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02701,C02701,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02701,C02701,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03212,C03212,churn_risk_probability,0.6477,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.8%)
-REC_CUST_C03212,C03212,customer_recency_days,276.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03212,C03212,customer_total_spend,11827.88,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03212,C03212,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03212,C03212,average_order_value,2956.97,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01545,C01545,churn_risk_probability,0.6471,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
-REC_CUST_C01545,C01545,customer_recency_days,97.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01545,C01545,customer_total_spend,7685.19,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01545,C01545,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01545,C01545,average_order_value,3842.6,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00971,C00971,churn_risk_probability,0.6468,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
-REC_CUST_C00971,C00971,customer_recency_days,58.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00971,C00971,customer_total_spend,21119.35,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00971,C00971,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00971,C00971,average_order_value,3017.05,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02546,C02546,churn_risk_probability,0.6466,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
-REC_CUST_C02546,C02546,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02546,C02546,customer_total_spend,19467.39,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02546,C02546,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02546,C02546,average_order_value,3244.56,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02078,C02078,churn_risk_probability,0.6412,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.1%)
-REC_CUST_C02078,C02078,customer_recency_days,143.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02078,C02078,customer_total_spend,14580.24,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02078,C02078,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02078,C02078,average_order_value,3645.06,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00548,C00548,churn_risk_probability,0.6397,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.0%)
-REC_CUST_C00548,C00548,customer_recency_days,29.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00548,C00548,customer_total_spend,26934.81,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00548,C00548,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00548,C00548,average_order_value,8978.27,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02528,C02528,churn_risk_probability,0.6394,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.9%)
-REC_CUST_C02528,C02528,customer_recency_days,15.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02528,C02528,customer_total_spend,8174.23,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02528,C02528,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02528,C02528,average_order_value,4087.12,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01296,C01296,churn_risk_probability,0.6383,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.8%)
-REC_CUST_C01296,C01296,customer_recency_days,41.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01296,C01296,customer_total_spend,14810.5,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01296,C01296,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01296,C01296,average_order_value,2962.1,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00472,C00472,churn_risk_probability,0.6377,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.8%)
-REC_CUST_C00472,C00472,customer_recency_days,84.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00472,C00472,customer_total_spend,8659.31,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00472,C00472,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00472,C00472,average_order_value,2886.44,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00724,C00724,churn_risk_probability,0.6366,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.7%)
-REC_CUST_C00724,C00724,customer_recency_days,172.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00724,C00724,customer_total_spend,9080.17,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00724,C00724,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00724,C00724,average_order_value,3026.72,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00012,C00012,churn_risk_probability,0.6602,Phase 3 Churn Model,Inactivity likelihood within next 30 days (66.0%)
-REC_CUST_C00012,C00012,customer_recency_days,58.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00012,C00012,customer_total_spend,7661.75,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00012,C00012,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00012,C00012,average_order_value,2553.92,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02566,C02566,churn_risk_probability,0.6354,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.5%)
-REC_CUST_C02566,C02566,customer_recency_days,25.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02566,C02566,customer_total_spend,14241.53,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02566,C02566,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02566,C02566,average_order_value,2848.31,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01279,C01279,churn_risk_probability,0.6345,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
-REC_CUST_C01279,C01279,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01279,C01279,customer_total_spend,20478.75,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01279,C01279,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01279,C01279,average_order_value,6826.25,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02441,C02441,churn_risk_probability,0.6343,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
-REC_CUST_C02441,C02441,customer_recency_days,86.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02441,C02441,customer_total_spend,17662.96,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02441,C02441,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02441,C02441,average_order_value,8831.48,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03100,C03100,churn_risk_probability,0.6338,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.4%)
-REC_CUST_C03100,C03100,customer_recency_days,162.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03100,C03100,customer_total_spend,12168.01,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03100,C03100,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03100,C03100,average_order_value,3042.0,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00463,C00463,churn_risk_probability,0.6325,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.2%)
-REC_CUST_C00463,C00463,customer_recency_days,86.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00463,C00463,customer_total_spend,7503.84,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00463,C00463,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00463,C00463,average_order_value,3751.92,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01846,C01846,churn_risk_probability,0.6323,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.2%)
-REC_CUST_C01846,C01846,customer_recency_days,0.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01846,C01846,customer_total_spend,13903.75,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01846,C01846,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01846,C01846,average_order_value,3475.94,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02720,C02720,churn_risk_probability,0.6328,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.3%)
-REC_CUST_C02720,C02720,customer_recency_days,295.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02720,C02720,customer_total_spend,15900.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02720,C02720,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02720,C02720,average_order_value,15900.0,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00727,C00727,churn_risk_probability,0.631,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.1%)
-REC_CUST_C00727,C00727,customer_recency_days,28.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00727,C00727,customer_total_spend,14555.58,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00727,C00727,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00727,C00727,average_order_value,3638.89,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00516,C00516,churn_risk_probability,0.6305,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.0%)
-REC_CUST_C00516,C00516,customer_recency_days,232.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00516,C00516,customer_total_spend,19030.17,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00516,C00516,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00516,C00516,average_order_value,9515.08,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01950,C01950,churn_risk_probability,0.6301,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.0%)
-REC_CUST_C01950,C01950,customer_recency_days,47.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01950,C01950,customer_total_spend,15130.95,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01950,C01950,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01950,C01950,average_order_value,5043.65,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00740,C00740,churn_risk_probability,0.629,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.9%)
-REC_CUST_C00740,C00740,customer_recency_days,28.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00740,C00740,customer_total_spend,11001.96,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00740,C00740,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00740,C00740,average_order_value,3667.32,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00148,C00148,churn_risk_probability,0.6284,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
-REC_CUST_C00148,C00148,customer_recency_days,76.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00148,C00148,customer_total_spend,10172.04,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00148,C00148,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00148,C00148,average_order_value,3390.68,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02642,C02642,churn_risk_probability,0.6282,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
-REC_CUST_C02642,C02642,customer_recency_days,40.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02642,C02642,customer_total_spend,24782.17,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02642,C02642,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02642,C02642,average_order_value,4956.43,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02549,C02549,churn_risk_probability,0.6276,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
-REC_CUST_C02549,C02549,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02549,C02549,customer_total_spend,13214.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02549,C02549,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02549,C02549,average_order_value,4404.67,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00369,C00369,churn_risk_probability,0.6825,Phase 3 Churn Model,Inactivity likelihood within next 30 days (68.2%)
-REC_CUST_C00369,C00369,customer_recency_days,26.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00369,C00369,customer_total_spend,16643.32,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00369,C00369,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00369,C00369,average_order_value,2377.62,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01745,C01745,churn_risk_probability,0.6262,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.6%)
-REC_CUST_C01745,C01745,customer_recency_days,79.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01745,C01745,customer_total_spend,10852.04,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01745,C01745,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01745,C01745,average_order_value,5426.02,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02132,C02132,churn_risk_probability,0.6254,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.5%)
-REC_CUST_C02132,C02132,customer_recency_days,227.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02132,C02132,customer_total_spend,11356.84,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02132,C02132,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02132,C02132,average_order_value,5678.42,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01126,C01126,churn_risk_probability,0.6276,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.8%)
-REC_CUST_C01126,C01126,customer_recency_days,90.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01126,C01126,customer_total_spend,10728.87,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01126,C01126,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01126,C01126,average_order_value,2682.22,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00591,C00591,churn_risk_probability,0.6239,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.4%)
-REC_CUST_C00591,C00591,customer_recency_days,36.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00591,C00591,customer_total_spend,17308.23,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00591,C00591,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00591,C00591,average_order_value,5769.41,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01157,C01157,churn_risk_probability,0.6235,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.4%)
-REC_CUST_C01157,C01157,customer_recency_days,95.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01157,C01157,customer_total_spend,14442.29,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01157,C01157,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01157,C01157,average_order_value,2888.46,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01651,C01651,churn_risk_probability,0.6229,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.3%)
-REC_CUST_C01651,C01651,customer_recency_days,13.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01651,C01651,customer_total_spend,9029.6,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01651,C01651,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01651,C01651,average_order_value,3009.87,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00713,C00713,churn_risk_probability,0.6219,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.2%)
-REC_CUST_C00713,C00713,customer_recency_days,240.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00713,C00713,customer_total_spend,11885.88,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00713,C00713,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00713,C00713,average_order_value,5942.94,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00289,C00289,churn_risk_probability,0.6212,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.1%)
-REC_CUST_C00289,C00289,customer_recency_days,10.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00289,C00289,customer_total_spend,12423.53,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00289,C00289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00289,C00289,average_order_value,4141.18,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00450,C00450,churn_risk_probability,0.6205,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.1%)
-REC_CUST_C00450,C00450,customer_recency_days,91.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00450,C00450,customer_total_spend,11348.98,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00450,C00450,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00450,C00450,average_order_value,2837.24,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01328,C01328,churn_risk_probability,0.6471,Phase 3 Churn Model,Inactivity likelihood within next 30 days (64.7%)
-REC_CUST_C01328,C01328,customer_recency_days,56.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01328,C01328,customer_total_spend,12711.98,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01328,C01328,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01328,C01328,average_order_value,2542.4,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02917,C02917,churn_risk_probability,0.6203,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.0%)
-REC_CUST_C02917,C02917,customer_recency_days,99.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02917,C02917,customer_total_spend,6830.77,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02917,C02917,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02917,C02917,average_order_value,6830.77,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03289,C03289,churn_risk_probability,0.62,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.0%)
-REC_CUST_C03289,C03289,customer_recency_days,82.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03289,C03289,customer_total_spend,8511.25,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03289,C03289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03289,C03289,average_order_value,2837.08,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01554,C01554,churn_risk_probability,0.6192,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
-REC_CUST_C01554,C01554,customer_recency_days,64.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01554,C01554,customer_total_spend,15815.15,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01554,C01554,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01554,C01554,average_order_value,3163.03,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00567,C00567,churn_risk_probability,0.6187,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
-REC_CUST_C00567,C00567,customer_recency_days,78.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00567,C00567,customer_total_spend,12595.46,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00567,C00567,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00567,C00567,average_order_value,3148.86,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00058,C00058,churn_risk_probability,0.6181,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.8%)
-REC_CUST_C00058,C00058,customer_recency_days,170.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00058,C00058,customer_total_spend,17105.42,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00058,C00058,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00058,C00058,average_order_value,4276.35,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02429,C02429,churn_risk_probability,0.6185,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.9%)
-REC_CUST_C02429,C02429,customer_recency_days,26.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02429,C02429,customer_total_spend,13525.64,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02429,C02429,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02429,C02429,average_order_value,3381.41,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00955,C00955,churn_risk_probability,0.6174,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
-REC_CUST_C00955,C00955,customer_recency_days,277.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00955,C00955,customer_total_spend,18368.68,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00955,C00955,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00955,C00955,average_order_value,9184.34,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01998,C01998,churn_risk_probability,0.6177,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.8%)
-REC_CUST_C01998,C01998,customer_recency_days,19.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01998,C01998,customer_total_spend,12138.39,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01998,C01998,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01998,C01998,average_order_value,4046.13,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02848,C02848,churn_risk_probability,0.6173,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
-REC_CUST_C02848,C02848,customer_recency_days,99.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02848,C02848,customer_total_spend,9512.78,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02848,C02848,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02848,C02848,average_order_value,4756.39,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03199,C03199,churn_risk_probability,0.6168,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
-REC_CUST_C03199,C03199,customer_recency_days,140.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03199,C03199,customer_total_spend,13590.05,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03199,C03199,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03199,C03199,average_order_value,2718.01,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01707,C01707,churn_risk_probability,0.6165,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.7%)
-REC_CUST_C01707,C01707,customer_recency_days,121.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01707,C01707,customer_total_spend,11623.61,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01707,C01707,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01707,C01707,average_order_value,3874.54,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01588,C01588,churn_risk_probability,0.6253,Phase 3 Churn Model,Inactivity likelihood within next 30 days (62.5%)
-REC_CUST_C01588,C01588,customer_recency_days,12.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01588,C01588,customer_total_spend,13215.61,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01588,C01588,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01588,C01588,average_order_value,2643.12,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00949,C00949,churn_risk_probability,0.6151,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
-REC_CUST_C00949,C00949,customer_recency_days,148.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00949,C00949,customer_total_spend,16282.38,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00949,C00949,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00949,C00949,average_order_value,4070.6,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02922,C02922,churn_risk_probability,0.6147,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
-REC_CUST_C02922,C02922,customer_recency_days,319.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02922,C02922,customer_total_spend,16500.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02922,C02922,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02922,C02922,average_order_value,16500.0,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03139,C03139,churn_risk_probability,0.6147,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
-REC_CUST_C03139,C03139,customer_recency_days,130.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03139,C03139,customer_total_spend,13713.51,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03139,C03139,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03139,C03139,average_order_value,6856.76,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03279,C03279,churn_risk_probability,0.6145,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.5%)
-REC_CUST_C03279,C03279,customer_recency_days,152.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03279,C03279,customer_total_spend,7072.57,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03279,C03279,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03279,C03279,average_order_value,7072.57,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03375,C03375,churn_risk_probability,0.6141,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
-REC_CUST_C03375,C03375,customer_recency_days,115.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03375,C03375,customer_total_spend,13842.4,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03375,C03375,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03375,C03375,average_order_value,2768.48,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01160,C01160,churn_risk_probability,0.6138,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
-REC_CUST_C01160,C01160,customer_recency_days,215.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01160,C01160,customer_total_spend,11457.48,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01160,C01160,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01160,C01160,average_order_value,5728.74,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01679,C01679,churn_risk_probability,0.6136,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
-REC_CUST_C01679,C01679,customer_recency_days,75.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01679,C01679,customer_total_spend,24728.52,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01679,C01679,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01679,C01679,average_order_value,4945.7,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C03410,C03410,churn_risk_probability,0.6137,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.4%)
-REC_CUST_C03410,C03410,customer_recency_days,265.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C03410,C03410,customer_total_spend,10055.15,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C03410,C03410,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C03410,C03410,average_order_value,5027.58,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00671,C00671,churn_risk_probability,0.6124,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.2%)
-REC_CUST_C00671,C00671,customer_recency_days,155.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00671,C00671,customer_total_spend,10281.83,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00671,C00671,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00671,C00671,average_order_value,3427.28,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01891,C01891,churn_risk_probability,0.6125,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.3%)
+REC_CUST_C01891,C01891,churn_risk_probability,0.9639,Phase 3 Churn Model,Inactivity likelihood within next 30 days (96.4%)
 REC_CUST_C01891,C01891,customer_recency_days,300.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
 REC_CUST_C01891,C01891,customer_total_spend,12038.32,Phase 1 Feature Store,Lifetime gross spend
 REC_CUST_C01891,C01891,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
 REC_CUST_C01891,C01891,average_order_value,4012.77,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01099,C01099,churn_risk_probability,0.611,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
-REC_CUST_C01099,C01099,customer_recency_days,162.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01099,C01099,customer_total_spend,15078.1,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01099,C01099,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01099,C01099,average_order_value,7539.05,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02332,C02332,churn_risk_probability,0.6112,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
-REC_CUST_C02332,C02332,customer_recency_days,159.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02332,C02332,customer_total_spend,11572.49,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02332,C02332,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02332,C02332,average_order_value,2893.12,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01070,C01070,churn_risk_probability,0.6108,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
-REC_CUST_C01070,C01070,customer_recency_days,208.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01070,C01070,customer_total_spend,17067.6,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01070,C01070,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01070,C01070,average_order_value,4266.9,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02770,C02770,churn_risk_probability,0.6107,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.1%)
-REC_CUST_C02770,C02770,customer_recency_days,102.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02770,C02770,customer_total_spend,12801.74,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02770,C02770,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02770,C02770,average_order_value,3200.44,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00475,C00475,churn_risk_probability,0.6102,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
-REC_CUST_C00475,C00475,customer_recency_days,306.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00475,C00475,customer_total_spend,17693.31,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00475,C00475,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00475,C00475,average_order_value,8846.66,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02705,C02705,churn_risk_probability,0.6103,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
-REC_CUST_C02705,C02705,customer_recency_days,125.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02705,C02705,customer_total_spend,9019.4,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02705,C02705,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02705,C02705,average_order_value,4509.7,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01370,C01370,churn_risk_probability,0.6099,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
-REC_CUST_C01370,C01370,customer_recency_days,116.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01370,C01370,customer_total_spend,14739.47,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01370,C01370,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01370,C01370,average_order_value,2947.89,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01812,C01812,churn_risk_probability,0.6098,Phase 3 Churn Model,Inactivity likelihood within next 30 days (61.0%)
-REC_CUST_C01812,C01812,customer_recency_days,90.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01812,C01812,customer_total_spend,8130.83,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01812,C01812,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01812,C01812,average_order_value,4065.42,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00436,C00436,churn_risk_probability,0.6094,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
-REC_CUST_C00436,C00436,customer_recency_days,8.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00436,C00436,customer_total_spend,18375.99,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00436,C00436,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00436,C00436,average_order_value,3062.66,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00550,C00550,churn_risk_probability,0.6326,Phase 3 Churn Model,Inactivity likelihood within next 30 days (63.3%)
-REC_CUST_C00550,C00550,customer_recency_days,170.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00550,C00550,customer_total_spend,12806.59,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00550,C00550,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00550,C00550,average_order_value,2561.32,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01300,C01300,churn_risk_probability,0.6519,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.2%)
-REC_CUST_C01300,C01300,customer_recency_days,113.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01300,C01300,customer_total_spend,14672.81,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01300,C01300,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01300,C01300,average_order_value,2445.47,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01576,C01576,churn_risk_probability,0.6087,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
-REC_CUST_C01576,C01576,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01576,C01576,customer_total_spend,17145.62,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01576,C01576,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01576,C01576,average_order_value,2857.6,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01743,C01743,churn_risk_probability,0.6089,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
-REC_CUST_C01743,C01743,customer_recency_days,246.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01743,C01743,customer_total_spend,17689.4,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01743,C01743,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01743,C01743,average_order_value,4422.35,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02892,C02892,churn_risk_probability,0.6086,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.9%)
-REC_CUST_C02892,C02892,customer_recency_days,184.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02892,C02892,customer_total_spend,16871.32,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02892,C02892,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02892,C02892,average_order_value,8435.66,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01309,C01309,churn_risk_probability,0.6554,Phase 3 Churn Model,Inactivity likelihood within next 30 days (65.5%)
-REC_CUST_C01309,C01309,customer_recency_days,90.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01309,C01309,customer_total_spend,7262.58,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01309,C01309,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01309,C01309,average_order_value,2420.86,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01454,C01454,churn_risk_probability,0.6077,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.8%)
-REC_CUST_C01454,C01454,customer_recency_days,140.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01454,C01454,customer_total_spend,9224.4,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01454,C01454,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01454,C01454,average_order_value,4612.2,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02190,C02190,churn_risk_probability,0.608,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.8%)
-REC_CUST_C02190,C02190,customer_recency_days,237.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02190,C02190,customer_total_spend,15724.34,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02190,C02190,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02190,C02190,average_order_value,3931.08,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00420,C00420,churn_risk_probability,0.6071,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.7%)
-REC_CUST_C00420,C00420,customer_recency_days,214.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C00420,C00420,customer_total_spend,11754.3,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C00420,C00420,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C00420,C00420,average_order_value,3918.1,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C02952,C02952,churn_risk_probability,0.6071,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.7%)
-REC_CUST_C02952,C02952,customer_recency_days,100.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C02952,C02952,customer_total_spend,15444.38,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C02952,C02952,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C02952,C02952,average_order_value,7722.19,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01584,C01584,churn_risk_probability,0.606,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
-REC_CUST_C01584,C01584,customer_recency_days,265.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01584,C01584,customer_total_spend,16663.0,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01584,C01584,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01584,C01584,average_order_value,8331.5,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01841,C01841,churn_risk_probability,0.6061,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
-REC_CUST_C01841,C01841,customer_recency_days,3.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01841,C01841,customer_total_spend,12901.89,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01841,C01841,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01841,C01841,average_order_value,3225.47,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C00797,C00797,churn_risk_probability,0.6058,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
+REC_CUST_C00797,C00797,churn_risk_probability,0.9412,Phase 3 Churn Model,Inactivity likelihood within next 30 days (94.1%)
 REC_CUST_C00797,C00797,customer_recency_days,278.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
 REC_CUST_C00797,C00797,customer_total_spend,17266.01,Phase 1 Feature Store,Lifetime gross spend
 REC_CUST_C00797,C00797,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
 REC_CUST_C00797,C00797,average_order_value,5755.34,Phase 1 Feature Store,Average transaction basket value
-REC_CUST_C01067,C01067,churn_risk_probability,0.6055,Phase 3 Churn Model,Inactivity likelihood within next 30 days (60.6%)
-REC_CUST_C01067,C01067,customer_recency_days,11.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
-REC_CUST_C01067,C01067,customer_total_spend,17477.37,Phase 1 Feature Store,Lifetime gross spend
-REC_CUST_C01067,C01067,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
-REC_CUST_C01067,C01067,average_order_value,3495.47,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02132,C02132,churn_risk_probability,0.914,Phase 3 Churn Model,Inactivity likelihood within next 30 days (91.4%)
+REC_CUST_C02132,C02132,customer_recency_days,227.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02132,C02132,customer_total_spend,11356.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02132,C02132,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02132,C02132,average_order_value,5678.42,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00818,C00818,churn_risk_probability,0.9109,Phase 3 Churn Model,Inactivity likelihood within next 30 days (91.1%)
+REC_CUST_C00818,C00818,customer_recency_days,262.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00818,C00818,customer_total_spend,18432.59,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00818,C00818,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00818,C00818,average_order_value,6144.2,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01864,C01864,churn_risk_probability,0.9068,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.7%)
+REC_CUST_C01864,C01864,customer_recency_days,71.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01864,C01864,customer_total_spend,28155.83,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01864,C01864,customer_order_count,10,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01864,C01864,average_order_value,2815.58,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00022,C00022,churn_risk_probability,0.9011,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.1%)
+REC_CUST_C00022,C00022,customer_recency_days,14.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00022,C00022,customer_total_spend,37715.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00022,C00022,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00022,C00022,average_order_value,6285.96,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01781,C01781,churn_risk_probability,0.9007,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.1%)
+REC_CUST_C01781,C01781,customer_recency_days,209.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01781,C01781,customer_total_spend,13629.67,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01781,C01781,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01781,C01781,average_order_value,4543.22,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03276,C03276,churn_risk_probability,0.8998,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.0%)
+REC_CUST_C03276,C03276,customer_recency_days,165.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03276,C03276,customer_total_spend,7384.11,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03276,C03276,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03276,C03276,average_order_value,3692.06,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03397,C03397,churn_risk_probability,0.8992,Phase 3 Churn Model,Inactivity likelihood within next 30 days (89.9%)
+REC_CUST_C03397,C03397,customer_recency_days,61.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03397,C03397,customer_total_spend,16379.37,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03397,C03397,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03397,C03397,average_order_value,5459.79,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02528,C02528,churn_risk_probability,0.892,Phase 3 Churn Model,Inactivity likelihood within next 30 days (89.2%)
+REC_CUST_C02528,C02528,customer_recency_days,15.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02528,C02528,customer_total_spend,8174.23,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02528,C02528,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02528,C02528,average_order_value,4087.12,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02137,C02137,churn_risk_probability,0.8902,Phase 3 Churn Model,Inactivity likelihood within next 30 days (89.0%)
+REC_CUST_C02137,C02137,customer_recency_days,97.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02137,C02137,customer_total_spend,16991.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02137,C02137,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02137,C02137,average_order_value,2831.99,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02517,C02517,churn_risk_probability,0.8893,Phase 3 Churn Model,Inactivity likelihood within next 30 days (88.9%)
+REC_CUST_C02517,C02517,customer_recency_days,340.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02517,C02517,customer_total_spend,7113.3,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02517,C02517,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02517,C02517,average_order_value,3556.65,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01743,C01743,churn_risk_probability,0.8887,Phase 3 Churn Model,Inactivity likelihood within next 30 days (88.9%)
+REC_CUST_C01743,C01743,customer_recency_days,246.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01743,C01743,customer_total_spend,17689.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01743,C01743,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01743,C01743,average_order_value,4422.35,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02917,C02917,churn_risk_probability,0.8847,Phase 3 Churn Model,Inactivity likelihood within next 30 days (88.5%)
+REC_CUST_C02917,C02917,customer_recency_days,99.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02917,C02917,customer_total_spend,6830.77,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02917,C02917,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02917,C02917,average_order_value,6830.77,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03005,C03005,churn_risk_probability,0.8812,Phase 3 Churn Model,Inactivity likelihood within next 30 days (88.1%)
+REC_CUST_C03005,C03005,customer_recency_days,341.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03005,C03005,customer_total_spend,6423.06,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03005,C03005,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03005,C03005,average_order_value,3211.53,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00724,C00724,churn_risk_probability,0.8788,Phase 3 Churn Model,Inactivity likelihood within next 30 days (87.9%)
+REC_CUST_C00724,C00724,customer_recency_days,172.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00724,C00724,customer_total_spend,9080.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00724,C00724,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00724,C00724,average_order_value,3026.72,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00740,C00740,churn_risk_probability,0.8755,Phase 3 Churn Model,Inactivity likelihood within next 30 days (87.5%)
+REC_CUST_C00740,C00740,customer_recency_days,28.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00740,C00740,customer_total_spend,11001.96,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00740,C00740,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00740,C00740,average_order_value,3667.32,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00103,C00103,churn_risk_probability,0.87,Phase 3 Churn Model,Inactivity likelihood within next 30 days (87.0%)
+REC_CUST_C00103,C00103,customer_recency_days,147.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00103,C00103,customer_total_spend,10381.45,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00103,C00103,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00103,C00103,average_order_value,3460.48,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00251,C00251,churn_risk_probability,0.8701,Phase 3 Churn Model,Inactivity likelihood within next 30 days (87.0%)
+REC_CUST_C00251,C00251,customer_recency_days,137.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00251,C00251,customer_total_spend,19085.62,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00251,C00251,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00251,C00251,average_order_value,6361.87,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02546,C02546,churn_risk_probability,0.869,Phase 3 Churn Model,Inactivity likelihood within next 30 days (86.9%)
+REC_CUST_C02546,C02546,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02546,C02546,customer_total_spend,19467.39,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02546,C02546,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02546,C02546,average_order_value,3244.56,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00475,C00475,churn_risk_probability,0.8648,Phase 3 Churn Model,Inactivity likelihood within next 30 days (86.5%)
+REC_CUST_C00475,C00475,customer_recency_days,306.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00475,C00475,customer_total_spend,17693.31,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00475,C00475,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00475,C00475,average_order_value,8846.66,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03375,C03375,churn_risk_probability,0.8647,Phase 3 Churn Model,Inactivity likelihood within next 30 days (86.5%)
+REC_CUST_C03375,C03375,customer_recency_days,115.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03375,C03375,customer_total_spend,13842.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03375,C03375,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03375,C03375,average_order_value,2768.48,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03450,C03450,churn_risk_probability,0.863,Phase 3 Churn Model,Inactivity likelihood within next 30 days (86.3%)
+REC_CUST_C03450,C03450,customer_recency_days,129.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03450,C03450,customer_total_spend,14507.51,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03450,C03450,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03450,C03450,average_order_value,2901.5,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01289,C01289,churn_risk_probability,0.8612,Phase 3 Churn Model,Inactivity likelihood within next 30 days (86.1%)
+REC_CUST_C01289,C01289,customer_recency_days,9.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01289,C01289,customer_total_spend,17256.09,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01289,C01289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01289,C01289,average_order_value,5752.03,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00656,C00656,churn_risk_probability,0.8587,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.9%)
+REC_CUST_C00656,C00656,customer_recency_days,164.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00656,C00656,customer_total_spend,14619.72,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00656,C00656,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00656,C00656,average_order_value,4873.24,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00353,C00353,churn_risk_probability,0.8918,Phase 3 Churn Model,Inactivity likelihood within next 30 days (89.2%)
+REC_CUST_C00353,C00353,customer_recency_days,35.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00353,C00353,customer_total_spend,12552.54,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00353,C00353,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00353,C00353,average_order_value,2510.51,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00735,C00735,churn_risk_probability,0.8579,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.8%)
+REC_CUST_C00735,C00735,customer_recency_days,13.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00735,C00735,customer_total_spend,13827.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00735,C00735,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00735,C00735,average_order_value,3456.9,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02332,C02332,churn_risk_probability,0.8581,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.8%)
+REC_CUST_C02332,C02332,customer_recency_days,159.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02332,C02332,customer_total_spend,11572.49,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02332,C02332,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02332,C02332,average_order_value,2893.12,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00671,C00671,churn_risk_probability,0.8528,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.3%)
+REC_CUST_C00671,C00671,customer_recency_days,155.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00671,C00671,customer_total_spend,10281.83,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00671,C00671,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00671,C00671,average_order_value,3427.28,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00567,C00567,churn_risk_probability,0.8498,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.0%)
+REC_CUST_C00567,C00567,customer_recency_days,78.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00567,C00567,customer_total_spend,12595.46,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00567,C00567,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00567,C00567,average_order_value,3148.86,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02889,C02889,churn_risk_probability,0.85,Phase 3 Churn Model,Inactivity likelihood within next 30 days (85.0%)
+REC_CUST_C02889,C02889,customer_recency_days,151.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02889,C02889,customer_total_spend,12279.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02889,C02889,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02889,C02889,average_order_value,4093.19,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01296,C01296,churn_risk_probability,0.8473,Phase 3 Churn Model,Inactivity likelihood within next 30 days (84.7%)
+REC_CUST_C01296,C01296,customer_recency_days,41.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01296,C01296,customer_total_spend,14810.5,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01296,C01296,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01296,C01296,average_order_value,2962.1,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02380,C02380,churn_risk_probability,0.8474,Phase 3 Churn Model,Inactivity likelihood within next 30 days (84.7%)
+REC_CUST_C02380,C02380,customer_recency_days,126.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02380,C02380,customer_total_spend,14139.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02380,C02380,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02380,C02380,average_order_value,2827.92,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02384,C02384,churn_risk_probability,0.8427,Phase 3 Churn Model,Inactivity likelihood within next 30 days (84.3%)
+REC_CUST_C02384,C02384,customer_recency_days,156.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02384,C02384,customer_total_spend,12862.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02384,C02384,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02384,C02384,average_order_value,4287.61,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03457,C03457,churn_risk_probability,0.8402,Phase 3 Churn Model,Inactivity likelihood within next 30 days (84.0%)
+REC_CUST_C03457,C03457,customer_recency_days,17.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03457,C03457,customer_total_spend,29573.55,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03457,C03457,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03457,C03457,average_order_value,4928.92,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01053,C01053,churn_risk_probability,0.8391,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.9%)
+REC_CUST_C01053,C01053,customer_recency_days,73.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01053,C01053,customer_total_spend,6785.06,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01053,C01053,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01053,C01053,average_order_value,3392.53,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03388,C03388,churn_risk_probability,0.8362,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.6%)
+REC_CUST_C03388,C03388,customer_recency_days,112.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03388,C03388,customer_total_spend,16767.84,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03388,C03388,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03388,C03388,average_order_value,5589.28,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00955,C00955,churn_risk_probability,0.8358,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.6%)
+REC_CUST_C00955,C00955,customer_recency_days,277.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00955,C00955,customer_total_spend,18368.68,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00955,C00955,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00955,C00955,average_order_value,9184.34,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00786,C00786,churn_risk_probability,0.8347,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.5%)
+REC_CUST_C00786,C00786,customer_recency_days,92.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00786,C00786,customer_total_spend,19006.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00786,C00786,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00786,C00786,average_order_value,3801.35,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01304,C01304,churn_risk_probability,0.904,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.4%)
+REC_CUST_C01304,C01304,customer_recency_days,58.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01304,C01304,customer_total_spend,11555.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01304,C01304,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01304,C01304,average_order_value,2311.03,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01665,C01665,churn_risk_probability,0.832,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.2%)
+REC_CUST_C01665,C01665,customer_recency_days,0.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01665,C01665,customer_total_spend,9969.65,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01665,C01665,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01665,C01665,average_order_value,3323.22,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02665,C02665,churn_risk_probability,0.8318,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.2%)
+REC_CUST_C02665,C02665,customer_recency_days,42.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02665,C02665,customer_total_spend,14258.8,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02665,C02665,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02665,C02665,average_order_value,4752.93,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02429,C02429,churn_risk_probability,0.8313,Phase 3 Churn Model,Inactivity likelihood within next 30 days (83.1%)
+REC_CUST_C02429,C02429,customer_recency_days,26.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02429,C02429,customer_total_spend,13525.64,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02429,C02429,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02429,C02429,average_order_value,3381.41,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01404,C01404,churn_risk_probability,0.8276,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.8%)
+REC_CUST_C01404,C01404,customer_recency_days,179.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01404,C01404,customer_total_spend,17550.23,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01404,C01404,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01404,C01404,average_order_value,5850.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03246,C03246,churn_risk_probability,0.8257,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.6%)
+REC_CUST_C03246,C03246,customer_recency_days,37.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03246,C03246,customer_total_spend,13327.42,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03246,C03246,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03246,C03246,average_order_value,3331.86,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02062,C02062,churn_risk_probability,0.8234,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.3%)
+REC_CUST_C02062,C02062,customer_recency_days,143.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02062,C02062,customer_total_spend,24339.13,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02062,C02062,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02062,C02062,average_order_value,6084.78,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02190,C02190,churn_risk_probability,0.8235,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.3%)
+REC_CUST_C02190,C02190,customer_recency_days,237.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02190,C02190,customer_total_spend,15724.34,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02190,C02190,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02190,C02190,average_order_value,3931.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01527,C01527,churn_risk_probability,0.8223,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.2%)
+REC_CUST_C01527,C01527,customer_recency_days,193.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01527,C01527,customer_total_spend,13172.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01527,C01527,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01527,C01527,average_order_value,4390.98,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03382,C03382,churn_risk_probability,0.8225,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.2%)
+REC_CUST_C03382,C03382,customer_recency_days,189.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03382,C03382,customer_total_spend,16324.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03382,C03382,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03382,C03382,average_order_value,8162.29,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02947,C02947,churn_risk_probability,0.8213,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.1%)
+REC_CUST_C02947,C02947,customer_recency_days,84.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02947,C02947,customer_total_spend,17428.44,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02947,C02947,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02947,C02947,average_order_value,4357.11,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00971,C00971,churn_risk_probability,0.8209,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.1%)
+REC_CUST_C00971,C00971,customer_recency_days,58.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00971,C00971,customer_total_spend,21119.35,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00971,C00971,customer_order_count,7,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00971,C00971,average_order_value,3017.05,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00548,C00548,churn_risk_probability,0.8204,Phase 3 Churn Model,Inactivity likelihood within next 30 days (82.0%)
+REC_CUST_C00548,C00548,customer_recency_days,29.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00548,C00548,customer_total_spend,26934.81,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00548,C00548,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00548,C00548,average_order_value,8978.27,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00550,C00550,churn_risk_probability,0.8449,Phase 3 Churn Model,Inactivity likelihood within next 30 days (84.5%)
+REC_CUST_C00550,C00550,customer_recency_days,170.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00550,C00550,customer_total_spend,12806.59,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00550,C00550,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00550,C00550,average_order_value,2561.32,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00436,C00436,churn_risk_probability,0.8185,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.8%)
+REC_CUST_C00436,C00436,customer_recency_days,8.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00436,C00436,customer_total_spend,18375.99,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00436,C00436,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00436,C00436,average_order_value,3062.66,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02705,C02705,churn_risk_probability,0.8185,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.8%)
+REC_CUST_C02705,C02705,customer_recency_days,125.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02705,C02705,customer_total_spend,9019.4,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02705,C02705,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02705,C02705,average_order_value,4509.7,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00065,C00065,churn_risk_probability,0.8179,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.8%)
+REC_CUST_C00065,C00065,customer_recency_days,32.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00065,C00065,customer_total_spend,12322.22,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00065,C00065,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00065,C00065,average_order_value,3080.56,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02288,C02288,churn_risk_probability,0.818,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.8%)
+REC_CUST_C02288,C02288,customer_recency_days,108.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02288,C02288,customer_total_spend,33642.48,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02288,C02288,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02288,C02288,average_order_value,6728.5,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01890,C01890,churn_risk_probability,0.8159,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.6%)
+REC_CUST_C01890,C01890,customer_recency_days,24.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01890,C01890,customer_total_spend,7535.67,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01890,C01890,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01890,C01890,average_order_value,3767.84,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03184,C03184,churn_risk_probability,0.8156,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.6%)
+REC_CUST_C03184,C03184,customer_recency_days,88.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03184,C03184,customer_total_spend,15649.54,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03184,C03184,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03184,C03184,average_order_value,3129.91,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01651,C01651,churn_risk_probability,0.8146,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.5%)
+REC_CUST_C01651,C01651,customer_recency_days,13.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01651,C01651,customer_total_spend,9029.6,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01651,C01651,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01651,C01651,average_order_value,3009.87,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01584,C01584,churn_risk_probability,0.8138,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.4%)
+REC_CUST_C01584,C01584,customer_recency_days,265.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01584,C01584,customer_total_spend,16663.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01584,C01584,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01584,C01584,average_order_value,8331.5,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02340,C02340,churn_risk_probability,0.813,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.3%)
+REC_CUST_C02340,C02340,customer_recency_days,160.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02340,C02340,customer_total_spend,15900.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02340,C02340,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02340,C02340,average_order_value,7950.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01829,C01829,churn_risk_probability,0.8106,Phase 3 Churn Model,Inactivity likelihood within next 30 days (81.1%)
+REC_CUST_C01829,C01829,customer_recency_days,77.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01829,C01829,customer_total_spend,14467.3,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01829,C01829,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01829,C01829,average_order_value,4822.43,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00713,C00713,churn_risk_probability,0.808,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.8%)
+REC_CUST_C00713,C00713,customer_recency_days,240.5,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00713,C00713,customer_total_spend,11885.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00713,C00713,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00713,C00713,average_order_value,5942.94,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02549,C02549,churn_risk_probability,0.8081,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.8%)
+REC_CUST_C02549,C02549,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02549,C02549,customer_total_spend,13214.0,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02549,C02549,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02549,C02549,average_order_value,4404.67,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02749,C02749,churn_risk_probability,0.8071,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.7%)
+REC_CUST_C02749,C02749,customer_recency_days,69.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02749,C02749,customer_total_spend,8660.34,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02749,C02749,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02749,C02749,average_order_value,2886.78,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01160,C01160,churn_risk_probability,0.8067,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.7%)
+REC_CUST_C01160,C01160,customer_recency_days,215.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01160,C01160,customer_total_spend,11457.48,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01160,C01160,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01160,C01160,average_order_value,5728.74,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01576,C01576,churn_risk_probability,0.8047,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.5%)
+REC_CUST_C01576,C01576,customer_recency_days,19.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01576,C01576,customer_total_spend,17145.62,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01576,C01576,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01576,C01576,average_order_value,2857.6,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01279,C01279,churn_risk_probability,0.8037,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.4%)
+REC_CUST_C01279,C01279,customer_recency_days,27.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01279,C01279,customer_total_spend,20478.75,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01279,C01279,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01279,C01279,average_order_value,6826.25,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03372,C03372,churn_risk_probability,0.8035,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.3%)
+REC_CUST_C03372,C03372,customer_recency_days,4.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03372,C03372,customer_total_spend,15230.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03372,C03372,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03372,C03372,average_order_value,3807.72,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00706,C00706,churn_risk_probability,0.8033,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.3%)
+REC_CUST_C00706,C00706,customer_recency_days,54.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00706,C00706,customer_total_spend,14620.36,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00706,C00706,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00706,C00706,average_order_value,2924.07,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01238,C01238,churn_risk_probability,0.8017,Phase 3 Churn Model,Inactivity likelihood within next 30 days (80.2%)
+REC_CUST_C01238,C01238,customer_recency_days,23.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01238,C01238,customer_total_spend,24502.56,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01238,C01238,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01238,C01238,average_order_value,6125.64,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01841,C01841,churn_risk_probability,0.7983,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.8%)
+REC_CUST_C01841,C01841,customer_recency_days,3.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01841,C01841,customer_total_spend,12901.89,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01841,C01841,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01841,C01841,average_order_value,3225.47,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03212,C03212,churn_risk_probability,0.7984,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.8%)
+REC_CUST_C03212,C03212,customer_recency_days,276.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03212,C03212,customer_total_spend,11827.88,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03212,C03212,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03212,C03212,average_order_value,2956.97,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02820,C02820,churn_risk_probability,0.7966,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.7%)
+REC_CUST_C02820,C02820,customer_recency_days,63.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02820,C02820,customer_total_spend,19163.58,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02820,C02820,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02820,C02820,average_order_value,9581.79,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01954,C01954,churn_risk_probability,0.7958,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.6%)
+REC_CUST_C01954,C01954,customer_recency_days,8.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01954,C01954,customer_total_spend,19877.89,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01954,C01954,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01954,C01954,average_order_value,6625.96,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00218,C00218,churn_risk_probability,0.794,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.4%)
+REC_CUST_C00218,C00218,customer_recency_days,102.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00218,C00218,customer_total_spend,18842.77,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00218,C00218,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00218,C00218,average_order_value,4710.69,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00986,C00986,churn_risk_probability,0.793,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.3%)
+REC_CUST_C00986,C00986,customer_recency_days,138.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00986,C00986,customer_total_spend,12837.78,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00986,C00986,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00986,C00986,average_order_value,6418.89,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03199,C03199,churn_risk_probability,0.7929,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.3%)
+REC_CUST_C03199,C03199,customer_recency_days,140.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03199,C03199,customer_total_spend,13590.05,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03199,C03199,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03199,C03199,average_order_value,2718.01,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01554,C01554,churn_risk_probability,0.792,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.2%)
+REC_CUST_C01554,C01554,customer_recency_days,64.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01554,C01554,customer_total_spend,15815.15,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01554,C01554,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01554,C01554,average_order_value,3163.03,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02724,C02724,churn_risk_probability,0.7924,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.2%)
+REC_CUST_C02724,C02724,customer_recency_days,80.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02724,C02724,customer_total_spend,20363.82,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02724,C02724,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02724,C02724,average_order_value,5090.96,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00723,C00723,churn_risk_probability,0.7905,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.0%)
+REC_CUST_C00723,C00723,customer_recency_days,14.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00723,C00723,customer_total_spend,13155.2,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00723,C00723,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00723,C00723,average_order_value,3288.8,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03279,C03279,churn_risk_probability,0.7906,Phase 3 Churn Model,Inactivity likelihood within next 30 days (79.1%)
+REC_CUST_C03279,C03279,customer_recency_days,152.6,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03279,C03279,customer_total_spend,7072.57,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03279,C03279,customer_order_count,1,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03279,C03279,average_order_value,7072.57,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02729,C02729,churn_risk_probability,0.889,Phase 3 Churn Model,Inactivity likelihood within next 30 days (88.9%)
+REC_CUST_C02729,C02729,customer_recency_days,121.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02729,C02729,customer_total_spend,10737.41,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02729,C02729,customer_order_count,5,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02729,C02729,average_order_value,2147.48,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00305,C00305,churn_risk_probability,0.788,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.8%)
+REC_CUST_C00305,C00305,customer_recency_days,155.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00305,C00305,customer_total_spend,13112.03,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00305,C00305,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00305,C00305,average_order_value,6556.02,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01950,C01950,churn_risk_probability,0.7876,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.8%)
+REC_CUST_C01950,C01950,customer_recency_days,47.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01950,C01950,customer_total_spend,15130.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01950,C01950,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01950,C01950,average_order_value,5043.65,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02799,C02799,churn_risk_probability,0.7868,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.7%)
+REC_CUST_C02799,C02799,customer_recency_days,122.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02799,C02799,customer_total_spend,13166.92,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02799,C02799,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02799,C02799,average_order_value,4388.97,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00188,C00188,churn_risk_probability,0.7862,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.6%)
+REC_CUST_C00188,C00188,customer_recency_days,141.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00188,C00188,customer_total_spend,19296.95,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00188,C00188,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00188,C00188,average_order_value,4824.24,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03289,C03289,churn_risk_probability,0.7833,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.3%)
+REC_CUST_C03289,C03289,customer_recency_days,82.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03289,C03289,customer_total_spend,8511.25,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03289,C03289,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03289,C03289,average_order_value,2837.08,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01013,C01013,churn_risk_probability,0.7823,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.2%)
+REC_CUST_C01013,C01013,customer_recency_days,25.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01013,C01013,customer_total_spend,8725.87,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01013,C01013,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01013,C01013,average_order_value,4362.94,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C03100,C03100,churn_risk_probability,0.7821,Phase 3 Churn Model,Inactivity likelihood within next 30 days (78.2%)
+REC_CUST_C03100,C03100,customer_recency_days,162.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C03100,C03100,customer_total_spend,12168.01,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C03100,C03100,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C03100,C03100,average_order_value,3042.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01099,C01099,churn_risk_probability,0.7788,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.9%)
+REC_CUST_C01099,C01099,customer_recency_days,162.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01099,C01099,customer_total_spend,15078.1,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01099,C01099,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01099,C01099,average_order_value,7539.05,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02898,C02898,churn_risk_probability,0.7779,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.8%)
+REC_CUST_C02898,C02898,customer_recency_days,72.0,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02898,C02898,customer_total_spend,8432.69,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02898,C02898,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02898,C02898,average_order_value,2810.9,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02367,C02367,churn_risk_probability,0.7767,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.7%)
+REC_CUST_C02367,C02367,customer_recency_days,16.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02367,C02367,customer_total_spend,24113.8,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02367,C02367,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02367,C02367,average_order_value,4018.97,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C02687,C02687,churn_risk_probability,0.7764,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.6%)
+REC_CUST_C02687,C02687,customer_recency_days,82.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C02687,C02687,customer_total_spend,14812.02,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C02687,C02687,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C02687,C02687,average_order_value,3703.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00066,C00066,churn_risk_probability,0.903,Phase 3 Churn Model,Inactivity likelihood within next 30 days (90.3%)
+REC_CUST_C00066,C00066,customer_recency_days,26.3,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00066,C00066,customer_total_spend,12026.71,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00066,C00066,customer_order_count,6,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00066,C00066,average_order_value,2004.45,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01278,C01278,churn_risk_probability,0.7753,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.5%)
+REC_CUST_C01278,C01278,customer_recency_days,32.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01278,C01278,customer_total_spend,12717.43,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01278,C01278,customer_order_count,4,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01278,C01278,average_order_value,3179.36,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C01648,C01648,churn_risk_probability,0.7753,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.5%)
+REC_CUST_C01648,C01648,customer_recency_days,199.4,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C01648,C01648,customer_total_spend,12318.82,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C01648,C01648,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C01648,C01648,average_order_value,4106.27,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00806,C00806,churn_risk_probability,0.7711,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.1%)
+REC_CUST_C00806,C00806,customer_recency_days,60.1,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00806,C00806,customer_total_spend,17912.99,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00806,C00806,customer_order_count,3,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00806,C00806,average_order_value,5971.0,Phase 1 Feature Store,Average transaction basket value
+REC_CUST_C00516,C00516,churn_risk_probability,0.7703,Phase 3 Churn Model,Inactivity likelihood within next 30 days (77.0%)
+REC_CUST_C00516,C00516,customer_recency_days,232.2,Phase 2 Customer Analytics,Elapsed days since last recorded purchase
+REC_CUST_C00516,C00516,customer_total_spend,19030.17,Phase 1 Feature Store,Lifetime gross spend
+REC_CUST_C00516,C00516,customer_order_count,2,Phase 1 Feature Store,Total historical transactions placed
+REC_CUST_C00516,C00516,average_order_value,9515.08,Phase 1 Feature Store,Average transaction basket value
 REC_SALES_PRD_LAP_02,PRD_LAP_02,forecast_7d_units,5.8,Phase 3 Demand Model,Expected 7-day unit demand
 REC_SALES_PRD_LAP_02,PRD_LAP_02,product_revenue,1188873.16,Phase 1 Feature Store,Historical total revenue
 REC_SALES_PRD_LAP_02,PRD_LAP_02,unit_margin,289.0,Product Catalog,Profit margin ₹289.00 (57.9%)
