@@ -11,7 +11,7 @@ def test_normalize_product_string():
 def test_fuzzy_matcher_close_match():
     catalog = ["Surf Excel Quick Wash 500g", "Aashirvaad Superior MP Sharbati Atta 5kg", "Fortune Sunlite Oil 1l"]
     matcher = ProductFuzzyMatcher(catalog, cutoff=0.75)
-    
+
     # Slight typos or spacing variations
     assert matcher.match("Surf Excel Quick Wash 500 gm") == "Surf Excel Quick Wash 500g"
     assert matcher.match("Fortune Sunlite 1l") == "Fortune Sunlite Oil 1l"

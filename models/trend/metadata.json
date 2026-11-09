@@ -1,7 +1,7 @@
 {
   "model_name": "HistGradientBoostingClassifier_Trend",
   "model_version": "v1.0",
-  "training_date": "2026-11-08 23:47:38",
+  "training_date": "2026-11-09 03:24:02",
   "training_data_range": {
     "start": "2025-10-28",
     "end": "2026-07-30"

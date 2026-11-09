@@ -12,18 +12,18 @@ def normalize_product_string(name: str) -> str:
     """Cleans punctuation, extra spacing, and standardizes retail unit notations."""
     if not isinstance(name, str):
         return ""
-    
+
     text = name.strip().lower()
     # Normalize unit variations (e.g., 500 gm -> 500g, 1 kg -> 1kg, 1 ltr -> 1l)
     text = re.sub(r'(\d+)\s*(gm|grms|grams)\b', r'\1g', text)
     text = re.sub(r'(\d+)\s*(kg|kgs|kilo|kilograms)\b', r'\1kg', text)
     text = re.sub(r'(\d+)\s*(ml|milliliters)\b', r'\1ml', text)
     text = re.sub(r'(\d+)\s*(l|ltr|liters|litre)\b', r'\1l', text)
-    
+
     # Strip non-alphanumeric punctuation (keep letters, digits, whitespace)
     text = re.sub(r'[^a-z0-9\s]', ' ', text)
     tokens = [tok for tok in text.split() if tok]
-    
+
     # Capitalize brand/product words while preserving unit casing (e.g., 500g, 1kg)
     formatted_tokens = []
     for tok in tokens:
@@ -31,7 +31,7 @@ def normalize_product_string(name: str) -> str:
             formatted_tokens.append(tok)
         else:
             formatted_tokens.append(tok.capitalize())
-            
+
     return " ".join(formatted_tokens)
 
 
@@ -49,19 +49,19 @@ class ProductFuzzyMatcher:
         cleaned_query = normalize_product_string(query)
         if not cleaned_query:
             return query
-        
+
         # Exact normalized match
         if cleaned_query in self.normalized_map:
             return self.normalized_map[cleaned_query]
 
         # Fuzzy lookup using SequenceMatcher
         matches = difflib.get_close_matches(
-            cleaned_query, 
-            list(self.normalized_map.keys()), 
-            n=1, 
+            cleaned_query,
+            list(self.normalized_map.keys()),
+            n=1,
             cutoff=self.cutoff
         )
         if matches:
             return self.normalized_map[matches[0]]
-        
+
         return cleaned_query
