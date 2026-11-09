@@ -111,16 +111,18 @@ def create_app() -> FastAPI:
             return FileResponse(dist_dir / "index.html")
 
     
-    # Mount production frontend build if dist exists
+    
+
+    
+    # Serve SPA static files cleanly without overriding /api
     dist_dir = Path(__file__).resolve().parents[3] / "frontend" / "dist"
     if dist_dir.exists():
-        app.mount("/assets", StaticFiles(directory=str(dist_dir / "assets")), name="assets")
+        assets_dir = dist_dir / "assets"
+        if assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
 
-        @app.get("/{full_path:path}")
-        async def serve_spa(full_path: str):
-            file_path = dist_dir / full_path
-            if file_path.exists() and file_path.is_file():
-                return FileResponse(file_path)
+        @app.get("/")
+        async def serve_root():
             return FileResponse(dist_dir / "index.html")
 
     return app
