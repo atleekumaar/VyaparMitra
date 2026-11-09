@@ -86,6 +86,30 @@ def create_app() -> FastAPI:
                 "demo_mode": config.demo_mode,
             }
 
+    
+    
+
+    
+    
+    # Serve SPA static files with client-side routing fallback
+    dist_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+    if dist_dir.exists():
+        assets_dir = dist_dir / "assets"
+        if assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+
+        @app.get("/{full_path:path}")
+        async def serve_spa_app(full_path: str):
+            # API requests ko bypass rakhein
+            if full_path.startswith("api/") or full_path == "api":
+                from fastapi import HTTPException
+                raise HTTPException(status_code=404, detail="API route not found")
+            
+            candidate_file = dist_dir / full_path
+            if full_path and candidate_file.exists() and candidate_file.is_file():
+                return FileResponse(candidate_file)
+            return FileResponse(dist_dir / "index.html")
+
     return app
 
 

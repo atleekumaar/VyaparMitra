@@ -278,3 +278,18 @@ export interface MerchantInfo {
   state: string;
 }
 
+export type UserCategory = 'small_merchant' | 'wholesaler' | 'billing_staff' | 'enterprise';
+
+export interface UserProfile {
+  id: string;
+  name: string;
+  email?: string;
+  storeName: string;
+  category: UserCategory;
+  categoryLabel: string;
+  phone: string;
+  city: string;
+  role: string;
+  avatarInitials: string;
+}
+

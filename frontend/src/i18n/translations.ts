@@ -60,9 +60,9 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'FMCG & Retail • Lucknow',
   },
   verified_merchant: {
-    hinglish: 'Paytm Verified',
-    hindi: 'पेटीएम सत्यापित',
-    english: 'Paytm Verified',
+    hinglish: 'Verified Store',
+    hindi: 'सत्यापित स्टोर',
+    english: 'Verified Store',
   },
   soundbox_ready: {
     hinglish: 'Soundbox Ready:',
@@ -80,16 +80,143 @@ export const translations: Record<string, Record<Language, string>> = {
     english: 'Ask Copilot',
   },
 
+  // Authentication & Login Page
+  login_title: {
+    hinglish: 'VyaparMitra me Login Karein',
+    hindi: 'व्यापारमित्र में लॉगिन करें',
+    english: 'Sign In to VyaparMitra',
+  },
+  login_subtitle: {
+    hinglish: 'Apna business category chunein aur dashboard me pravesh karein',
+    hindi: 'अपनी व्यापार श्रेणी चुनें और सुरक्षित डैशबोर्ड में प्रवेश करें',
+    english: 'Select your business category to access your financial dashboard',
+  },
+  login_category_label: {
+    hinglish: 'Aapka Vyapar Kaunsa Hai?',
+    hindi: 'आपकी व्यापार श्रेणी क्या है?',
+    english: 'Who is Logging In?',
+  },
+  category_kirana_title: {
+    hinglish: 'Kirana & Retail Store',
+    hindi: 'किराना व खुदरा दुकान',
+    english: 'Kirana & Retail Store',
+  },
+  category_kirana_sub: {
+    hinglish: 'Dukandaar / Single Store POS & Soundbox',
+    hindi: 'दुकानदार / सिंगल स्टोर पीओएस व साउंडबॉक्स',
+    english: 'Small Merchant / Daily POS & Audio alerts',
+  },
+  category_wholesaler_title: {
+    hinglish: 'Wholesale & Distributor',
+    hindi: 'थोक व्यापारी व वितरक',
+    english: 'Wholesale & Distributor',
+  },
+  category_wholesaler_sub: {
+    hinglish: 'B2B Supplies, Bulk Orders & Credit Khata',
+    hindi: 'थोक आपूर्ति, बड़ी खरीदारी व उधारी बहीखाता',
+    english: 'Bulk Distribution, Invoicing & Supplier Khata',
+  },
+  category_cashier_title: {
+    hinglish: 'Billing Operator / Staff',
+    hindi: 'बिलिंग ऑपरेटर व स्टाफ',
+    english: 'Billing Operator / Cashier',
+  },
+  category_cashier_sub: {
+    hinglish: 'Counter QR billing & shift cash tally',
+    hindi: 'काउंटर क्यूआर बिलिंग व दैनिक कैश मिलान',
+    english: 'Fast POS counter billing & daily shift tally',
+  },
+  category_enterprise_title: {
+    hinglish: 'Multi-Store Enterprise',
+    hindi: 'मल्टी-स्टोर व व्यापार समूह',
+    english: 'Multi-Store Enterprise',
+  },
+  category_enterprise_sub: {
+    hinglish: 'Multiple branch owner & super admin',
+    hindi: 'एकाधिक शाखाओं के मालिक व सुपर एडमिन',
+    english: 'Multi-outlet chain owner & central admin',
+  },
+  auth_tab_otp: {
+    hinglish: 'Mobile OTP',
+    hindi: 'मोबाइल ओटीपी',
+    english: 'Mobile OTP',
+  },
+  auth_tab_pin: {
+    hinglish: 'Store ID & Quick PIN',
+    hindi: 'स्टोर आईडी व पिन',
+    english: 'Store ID & Quick PIN',
+  },
+  name_input_label: {
+    hinglish: 'Merchant Full Name',
+    hindi: 'व्यापारी का पूरा नाम',
+    english: 'Merchant Full Name',
+  },
+  email_input_label: {
+    hinglish: 'Business Email Address',
+    hindi: 'व्यापारिक ईमेल पता',
+    english: 'Business Email Address',
+  },
+  mobile_input_label: {
+    hinglish: 'Registered Mobile Number',
+    hindi: 'पंजीकृत मोबाइल नंबर',
+    english: 'Registered Mobile Number',
+  },
+  mobile_input_placeholder: {
+    hinglish: '10-digit mobile number daalein',
+    hindi: '10 अंकों का मोबाइल नंबर दर्ज करें',
+    english: 'Enter 10-digit mobile number',
+  },
+  btn_send_otp: {
+    hinglish: 'Get Verification OTP',
+    hindi: 'सत्यापन ओटीपी प्राप्त करें',
+    english: 'Send Verification OTP',
+  },
+  otp_input_label: {
+    hinglish: '6-Digit Verification Code (OTP)',
+    hindi: '6-अंकों का सत्यापन कोड (ओटीपी)',
+    english: '6-Digit Verification Code (OTP)',
+  },
+  store_id_label: {
+    hinglish: 'Merchant Store ID',
+    hindi: 'मर्चेंट स्टोर आईडी',
+    english: 'Merchant Store ID',
+  },
+  quick_pin_label: {
+    hinglish: '4-Digit Security PIN',
+    hindi: '4-अंकों का सुरक्षा पिन',
+    english: '4-Digit Security PIN',
+  },
+  btn_verify_enter: {
+    hinglish: 'Verify karke Dashboard Kholein',
+    hindi: 'सत्यापित करें और डैशबोर्ड खोलें',
+    english: 'Verify & Enter Dashboard',
+  },
+  btn_autofill_demo: {
+    hinglish: 'Auto-fill Demo OTP',
+    hindi: 'डेमो ओटीपी स्वतः भरें',
+    english: 'Auto-fill Demo OTP',
+  },
+  soundbox_announce_toggle: {
+    hinglish: 'Login par Soundbox audio welcome play karein',
+    hindi: 'लॉगिन पर साउंडबॉक्स स्वागत संदेश बजाएं',
+    english: 'Play Soundbox audio welcome on login',
+  },
+  switch_account: {
+    hinglish: 'Switch Account / Logout',
+    hindi: 'खाता बदलें / लॉगआउट',
+    english: 'Switch Account / Logout',
+  },
+
   // Dashboard Page
   soundbox_banner_title: {
-    hinglish: 'Paytm Soundbox 4.0 Live',
-    hindi: 'पेटीएम साउंडबॉक्स 4.0 लाइव',
-    english: 'Paytm Soundbox 4.0 Live',
+    hinglish: 'Smart Soundbox Live',
+    hindi: 'स्मार्ट साउंडबॉक्स लाइव',
+    english: 'Smart Soundbox Live',
   },
   soundbox_banner_text: {
-    hinglish: '🔊 "Paytm par ₹4,250 prapt hue" • Aaj ka Total Collection: ₹45,280 (128 transactions)',
-    hindi: '🔊 "पेटीएम पर ₹4,250 प्राप्त हुए" • आज का कुल कलेक्शन: ₹45,280 (128 लेनदेन)',
-    english: '🔊 "Received ₹4,250 on Paytm" • Today\'s Total Collection: ₹45,280 (128 transactions)',
+    hinglish: '🔊 "₹4,250 prapt hue" • Aaj ka Total Collection: ₹45,280 (128 transactions)',
+    hindi: '🔊 "₹4,250 प्राप्त हुए" • आज का कुल कलेक्शन: ₹45,280 (128 लेनदेन)',
+    english: '🔊 "Received ₹4,250" • Today\'s Total Collection: ₹45,280 (128 transactions)',
   },
   test_audio: {
     hinglish: 'Test Audio',
@@ -130,6 +257,36 @@ export const translations: Record<string, Record<Language, string>> = {
     hinglish: 'Last 14 recorded business days',
     hindi: 'पिछले 14 दिनों का रिकॉर्ड',
     english: 'Last 14 recorded business days',
+  },
+  trend_7d: {
+    hinglish: '7-Day Trend',
+    hindi: '7-दिवसीय रुझान',
+    english: '7-Day Trend',
+  },
+  trend_14d: {
+    hinglish: '14-Day Trend',
+    hindi: '14-दिवसीय रुझान',
+    english: '14-Day Trend',
+  },
+  daily_run_rate_label: {
+    hinglish: 'Daily Sales Run-Rate',
+    hindi: 'दैनिक बिक्री औसत (Run-Rate)',
+    english: 'Daily Sales Run-Rate',
+  },
+  daily_run_rate_sub: {
+    hinglish: '7-day target tak pahunchne ke liye anumanit daily pace',
+    hindi: '7-दिवसीय लक्ष्य तक पहुँचने हेतु आवश्यक दैनिक गति',
+    english: 'Required daily pace to meet projected 7-day total',
+  },
+  period_total_label: {
+    hinglish: 'Period Total:',
+    hindi: 'अवधि का कुल योग:',
+    english: 'Period Total:',
+  },
+  daily_avg_label: {
+    hinglish: 'Daily Average:',
+    hindi: 'दैनिक औसत:',
+    english: 'Daily Average:',
   },
   peak_collection: {
     hinglish: 'Peak Day Collection:',
@@ -544,3 +701,4 @@ export function localizeDynamicText(text: string | null | undefined, language: L
 
   return text;
 }
+

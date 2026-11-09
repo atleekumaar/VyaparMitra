@@ -9,9 +9,9 @@ This document tracks candidate model performance against mandatory baselines acr
 | naive | Baseline | 17233.09 | 21373.65 | 36.92% | - | - | - | Benchmark |
 | seasonal_naive | Baseline | 17483.42 | 21569.80 | 37.46% | - | - | - | Benchmark |
 | moving_average | Baseline | 13682.99 | 16899.00 | 29.32% | - | - | - | Benchmark |
-| **RandomForestRegressor** | Champion ML | **12717.21** | **16314.79** | **27.25%** | **11867.89** | **13937.77** | **27.01%** | **SELECTED** |
+| **RandomForestRegressor** | Champion ML | **12543.23** | **16002.81** | **26.87%** | **12016.58** | **14148.37** | **27.35%** | **SELECTED** |
 
-**Selection Justification**: Outperformed best baseline (moving_average WAPE: 29.32%) with validation WAPE: 27.25%
+**Selection Justification**: Outperformed best baseline (moving_average WAPE: 29.32%) with validation WAPE: 26.87%
 
 ## 2. Product Demand Forecasting (System 2)
 

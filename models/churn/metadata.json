@@ -1,7 +1,7 @@
 {
   "model_name": "Rule-Based Recency Baseline",
   "model_version": "v1.0",
-  "training_date": "2026-09-25 17:22:36",
+  "training_date": "2026-11-08 23:47:36",
   "training_data_range": {
     "snapshot_date": "2026-07-15",
     "inactivity_window_days": 30
