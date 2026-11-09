@@ -48,3 +48,6 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# Scratch and temporary directories
+scratch/
