@@ -10,6 +10,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple
 import pandas as pd
+from src.cleaning.normalizer import normalize_product_string, ProductFuzzyMatcher
 
 logger = logging.getLogger(__name__)
 
@@ -113,15 +114,14 @@ class DataCleaner:
         return df
 
     def clean_products(self, products: pd.DataFrame) -> pd.DataFrame:
-        """Clean and standardize product master records."""
+        """Clean and standardize product master records with string normalization."""
         df = products.drop_duplicates(subset=["product_id"]).copy()
         df["product_id"] = df["product_id"].astype(str).str.strip()
-        df["product_name"] = df["product_name"].astype(str).str.strip()
-        df["product_category"] = df["product_category"].astype(str).str.strip()
+        df["product_name"] = df["product_name"].astype(str).apply(normalize_product_string)
+        df["product_category"] = df["product_category"].astype(str).str.strip().str.title()
         df["unit_cost"] = df["unit_cost"].astype(float).round(2)
         df["selling_price"] = df["selling_price"].astype(float).round(2)
         df.reset_index(drop=True, inplace=True)
-
         df.to_parquet(self.processed_dir / "clean_products.parquet", index=False)
         df.to_csv(self.processed_dir / "clean_products.csv", index=False)
         return df
