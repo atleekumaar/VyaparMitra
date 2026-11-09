@@ -1,8 +1,8 @@
 forecast_date,predicted_revenue,lower_bound,upper_bound,model_name,model_version,generated_at
-2026-09-24,39397.03,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-25,38582.72,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-26,41513.38,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-27,46819.88,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-28,37925.89,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-29,39406.7,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
-2026-09-30,39662.72,,,RandomForestRegressor,v1.0,2026-11-09 03:23:42
+2026-09-24,39397.03,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-25,38582.72,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-26,41513.38,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-27,46819.88,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-28,37925.89,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-29,39406.7,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
+2026-09-30,39662.72,,,RandomForestRegressor,v1.0,2026-11-09 09:45:48
