@@ -497,3 +497,23 @@ class AuditLogOutput(BaseModel):
 class AuditLogListResponse(BaseModel):
     total_logs: int
     logs: List[AuditLogOutput]
+
+
+# ============================================================================
+# 9. CSV BULK IMPORT SCHEMAS
+# ============================================================================
+
+class ImportErrorItem(BaseModel):
+    row_number: int
+    error: str
+    row_data: Optional[Dict[str, Any]] = None
+
+
+class CSVImportResponse(BaseModel):
+    entity_type: str
+    filename: str
+    total_rows: int
+    inserted_rows: int
+    failed_rows: int
+    errors: List[ImportErrorItem] = Field(default_factory=list)
+    message: str

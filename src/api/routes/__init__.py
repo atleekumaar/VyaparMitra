@@ -14,6 +14,7 @@ from src.api.routes.dashboard import router as dashboard_router
 from src.api.routes.finance import router as finance_router
 from src.api.routes.forecasts import router as forecasts_router
 from src.api.routes.health import router as health_router
+from src.api.routes.import_data import router as import_router
 from src.api.routes.inventory import router as inventory_router
 from src.api.routes.merchants import router as merchants_router
 from src.api.routes.notifications import router as notifications_router
@@ -33,6 +34,7 @@ api_router.include_router(customer_ops_router)
 api_router.include_router(suppliers_router)
 api_router.include_router(finance_router)
 api_router.include_router(audit_logs_router)
+api_router.include_router(import_router)
 
 # Analytics, Copilot & Intelligence Routes
 api_router.include_router(health_router)

@@ -18,3 +18,4 @@ echo "Initializing SQLite operational database..."
 python -c "from src.api.db import init_db; init_db()"
 
 echo "Build complete and ready for deployment!"
+
