@@ -531,3 +531,4 @@ def refund_sale(
         restored_items_count=len(items_rows),
         message=f"Sale {sale['invoice_number']} successfully refunded. Stock restored.",
     )
+

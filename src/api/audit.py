@@ -68,3 +68,4 @@ def record_audit_log(
         logger.error(f"Failed to record audit log {log_id}: {exc}", exc_info=True)
 
     return log_id
+

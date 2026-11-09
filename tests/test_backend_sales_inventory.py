@@ -173,3 +173,4 @@ def test_refund_sale_restores_stock():
     inv_check = client.get("/api/inventory?branch_id=BR_M015_MAIN", headers={"Authorization": f"Bearer {staff_token}"})
     curr_item = [x for x in inv_check.json()["items"] if x["product_id"] == prod_id][0]
     assert curr_item["current_stock"] == initial_stock
+

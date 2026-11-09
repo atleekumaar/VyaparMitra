@@ -317,3 +317,4 @@ def get_cashflow_summary(
         net_cashflow=round(total_inflow - total_outflow, 2),
         daily_breakdown=daily_points,
     )
+

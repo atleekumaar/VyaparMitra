@@ -177,3 +177,4 @@ def get_branch(
         is_main=bool(row["is_main"]),
         created_at=row["created_at"],
     )
+

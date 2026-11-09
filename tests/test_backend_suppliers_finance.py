@@ -121,3 +121,4 @@ def test_expenses_and_finance_summary():
     cf_res = client.get("/api/finance/cashflow", headers={"Authorization": f"Bearer {owner_token}"})
     assert cf_res.status_code == 200
     assert "daily_breakdown" in cf_res.json()
+

@@ -103,3 +103,4 @@ def test_audit_logs_rbac_and_content():
     assert "user_name" in first_log
     assert "user_role" in first_log
     assert "timestamp" in first_log
+

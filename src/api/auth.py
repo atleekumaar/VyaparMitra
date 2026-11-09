@@ -287,3 +287,4 @@ def enforce_branch_isolation(user: CurrentUser, target_branch_id: Optional[str] 
 
     # Owner / Admin can target any branch or query across all branches
     return target_branch_id
+

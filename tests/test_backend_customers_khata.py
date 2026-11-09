@@ -132,3 +132,4 @@ def test_credit_sale_limit_breach_rejection():
     )
     assert sale_res.status_code == 400
     assert "Credit limit exceeded" in sale_res.json()["error"]["message"]
+

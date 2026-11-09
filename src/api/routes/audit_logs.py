@@ -74,3 +74,4 @@ def get_audit_logs(
     ]
 
     return AuditLogListResponse(total_logs=total_count, logs=logs)
+

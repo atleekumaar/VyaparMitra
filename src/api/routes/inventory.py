@@ -424,3 +424,4 @@ def update_inventory_item(
         is_low_stock=(c_stock <= min_thresh),
         updated_at=now_str,
     )
+

@@ -378,3 +378,4 @@ def record_khata_payment(
     )
 
     return get_customer_ledger(customer_id=customer_id, current_user=current_user, db=db)
+
