@@ -7,9 +7,9 @@ lag_1d_revenue,0.0011,0.0084
 week_of_year,0.0003,0.0003
 quarter,0.0001,0.0001
 month,0.0001,0.0001
-festival_intensity,0.0,0.0
-is_rainy,0.0,0.0
-is_festival,-0.0,0.0
+festival_intensity,-0.0,0.0
+is_rainy,-0.0,0.0
+is_festival,0.0,0.0
 temperature,-0.0017,0.0027
 day_of_month,-0.0017,0.0245
 lag_7d_revenue,-0.0018,0.0222
