@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from src.api.config import get_api_config
+from src.api.db import init_db
 from src.api.middleware import RequestLoggingMiddleware, register_error_handlers
 from src.api.routes import api_router
 
@@ -21,6 +22,12 @@ logger = logging.getLogger("vyaparmitra.api")
 def create_app() -> FastAPI:
     """Creates and configures the production-ready FastAPI application."""
     config = get_api_config()
+
+    # Initialize operational SQLite schema & seed baseline roles
+    try:
+        init_db()
+    except Exception as exc:
+        logger.error(f"Error initializing SQLite database: {exc}", exc_info=True)
 
     logging.basicConfig(
         level=getattr(logging, config.log_level.upper(), logging.INFO),

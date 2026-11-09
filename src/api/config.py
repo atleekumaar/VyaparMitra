@@ -59,6 +59,11 @@ class APIConfig:
     twilio_whatsapp_from: str = field(default_factory=lambda: os.getenv("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886"))
     twilio_sms_from: str = field(default_factory=lambda: os.getenv("TWILIO_SMS_FROM", "+14155238886"))
 
+    # Authentication & Security
+    jwt_secret_key: str = field(default_factory=lambda: os.getenv("JWT_SECRET_KEY", "vyaparmitra-production-jwt-secret-key-32bytes-secure-2026"))
+    jwt_algorithm: str = field(default_factory=lambda: os.getenv("JWT_ALGORITHM", "HS256"))
+    jwt_expire_minutes: int = field(default_factory=lambda: int(os.getenv("JWT_EXPIRE_MINUTES", "1440")))
+
 
 _config_instance: APIConfig | None = None
 
