@@ -1,6 +1,8 @@
 # VyaparMitra Production Requirements
 fastapi>=0.110.0
 uvicorn>=0.28.0
+gunicorn>=21.2.0
+pyjwt>=2.8.0
 pandas>=2.0.0
 numpy>=1.24.0
 pyarrow>=12.0.0

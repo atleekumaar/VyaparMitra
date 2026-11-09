@@ -32,12 +32,30 @@ def _load_env_file():
 _load_env_file()
 
 
+def _resolve_db_path() -> Path:
+    explicit = os.getenv("DB_PATH")
+    if explicit:
+        return Path(explicit)
+    if os.getenv("VERCEL"):
+        import shutil
+        tmp_db = Path("/tmp/vyaparmitra.db")
+        if not tmp_db.exists():
+            orig_db = Path("data/vyaparmitra.db")
+            if orig_db.exists():
+                try:
+                    shutil.copy(orig_db, tmp_db)
+                except Exception:
+                    pass
+        return tmp_db
+    return Path("data/vyaparmitra.db")
+
+
 @dataclass
 class APIConfig:
     """Production-ready API settings loaded from environment or defaults."""
     app_env: str = field(default_factory=lambda: os.getenv("APP_ENV", "development"))
     api_host: str = field(default_factory=lambda: os.getenv("API_HOST", "0.0.0.0"))
-    api_port: int = field(default_factory=lambda: int(os.getenv("API_PORT", "8000")))
+    api_port: int = field(default_factory=lambda: int(os.getenv("PORT", os.getenv("API_PORT", "8000"))))
     cors_origins: List[str] = field(default_factory=lambda: [
         origin.strip() for origin in os.getenv(
             "CORS_ORIGINS",
@@ -45,7 +63,7 @@ class APIConfig:
         ).split(",") if origin.strip()
     ])
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("DATA_DIR", "data")))
-    db_path: Path = field(default_factory=lambda: Path(os.getenv("DB_PATH", "data/vyaparmitra.db")))
+    db_path: Path = field(default_factory=_resolve_db_path)
     config_path: Path = field(default_factory=lambda: Path(os.getenv("CONFIG_PATH", "configs/config.yaml")))
     copilot_config_path: Path = field(default_factory=lambda: Path(os.getenv("COPILOT_CONFIG_PATH", "configs/copilot.yaml")))
     demo_mode: bool = field(default_factory=lambda: os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes"))

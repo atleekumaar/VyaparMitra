@@ -61,16 +61,18 @@ def create_app() -> FastAPI:
     app.include_router(api_router)
 
     # 5. Static Frontend Serving (if built in frontend/dist)
-    dist_dir = Path("frontend/dist")
+    dist_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
     if dist_dir.exists() and (dist_dir / "index.html").exists():
-        app.mount("/assets", StaticFiles(directory=str(dist_dir / "assets")), name="assets")
+        assets_dir = dist_dir / "assets"
+        if assets_dir.exists():
+            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
 
         @app.get("/{full_path:path}", include_in_schema=False)
         async def serve_spa(full_path: str):
             if full_path.startswith("api/") or full_path == "api":
-                raise HTTPException(status_code=404, detail="API endpoint not found")
+                raise HTTPException(status_code=404, detail="API route not found")
             file_candidate = dist_dir / full_path
-            if file_candidate.is_file():
+            if full_path and file_candidate.exists() and file_candidate.is_file():
                 return FileResponse(file_candidate)
             return FileResponse(dist_dir / "index.html")
     else:
@@ -85,30 +87,6 @@ def create_app() -> FastAPI:
                 "health": "/api/health",
                 "demo_mode": config.demo_mode,
             }
-
-    
-    
-
-    
-    
-    # Serve SPA static files with client-side routing fallback
-    dist_dir = Path(__file__).resolve().parents[2] / "frontend" / "dist"
-    if dist_dir.exists():
-        assets_dir = dist_dir / "assets"
-        if assets_dir.exists():
-            app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
-
-        @app.get("/{full_path:path}")
-        async def serve_spa_app(full_path: str):
-            # API requests ko bypass rakhein
-            if full_path.startswith("api/") or full_path == "api":
-                from fastapi import HTTPException
-                raise HTTPException(status_code=404, detail="API route not found")
-            
-            candidate_file = dist_dir / full_path
-            if full_path and candidate_file.exists() and candidate_file.is_file():
-                return FileResponse(candidate_file)
-            return FileResponse(dist_dir / "index.html")
 
     return app
 
