@@ -313,6 +313,32 @@ def init_db() -> None:
         )
     """)
 
+
+    # 13. Agent Approvals (L3 Trust Ladder Persistent Workflow)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS agent_approvals (
+            id TEXT PRIMARY KEY,
+            business_id TEXT NOT NULL,
+            branch_id TEXT,
+            action_type TEXT NOT NULL DEFAULT 'PURCHASE_REORDER',
+            sku TEXT NOT NULL,
+            product_name TEXT,
+            quantity INTEGER NOT NULL,
+            unit_cost REAL NOT NULL DEFAULT 0.0,
+            estimated_cost REAL NOT NULL DEFAULT 0.0,
+            vendor TEXT DEFAULT 'Standard Supplier',
+            status TEXT NOT NULL DEFAULT 'PENDING_APPROVAL',
+            requested_by TEXT NOT NULL,
+            requested_by_role TEXT NOT NULL,
+            reviewed_by TEXT,
+            review_notes TEXT,
+            created_at TEXT NOT NULL,
+            reviewed_at TEXT,
+            FOREIGN KEY(business_id) REFERENCES businesses(id) ON DELETE CASCADE
+        )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_agent_approvals_lookup ON agent_approvals(business_id, status)")
+
     # Create indices for high-frequency queries
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_business ON users(business_id)")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_username ON users(username)")

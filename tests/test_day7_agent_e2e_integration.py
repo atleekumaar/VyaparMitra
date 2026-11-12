@@ -29,7 +29,21 @@ def test_e2e_tenant_isolation_boundary_enforcement(orchestrator):
         FinanceAgentTools.get_financial_health_summary(context={"role": "OWNER"})
 
 def test_e2e_cross_tenant_branch_scoping(orchestrator):
-    # Ensure inventory responses isolate branch metadata
+    from datetime import datetime, timezone
+    from src.api.db import init_db, get_db_connection
+    init_db()
+    conn = get_db_connection()
+    now = datetime.now(timezone.utc).isoformat()
+    conn.execute("INSERT OR IGNORE INTO businesses (id, name, created_at) VALUES ('merchant_lucknow_01', 'Lucknow Store', ?)", (now,))
+    conn.execute("INSERT OR IGNORE INTO branches (id, business_id, name, created_at) VALUES ('hazratganj_hub', 'merchant_lucknow_01', 'Hazratganj', ?)", (now,))
+    conn.execute(
+        """INSERT OR REPLACE INTO inventory (id, business_id, branch_id, product_id, product_name, category, current_stock, min_stock_threshold, unit_cost, selling_price, updated_at)
+           VALUES ('inv_lko_01', 'merchant_lucknow_01', 'hazratganj_hub', 'SKU-LKO-01', 'Basmati Rice 5kg', 'Grains', 2, 10, 350.0, 420.0, ?)""",
+        (now,),
+    )
+    conn.commit()
+    conn.close()
+
     state_branch_a: AgentState = {
         "tenant_id": "merchant_lucknow_01",
         "user_id": "sup_01",
@@ -44,6 +58,7 @@ def test_e2e_cross_tenant_branch_scoping(orchestrator):
     res = orchestrator.route_and_execute(state_branch_a)
     assert res["intent"] == "INVENTORY_QUERY"
     assert "Low stock alert" in res["final_response"]
+    assert "Basmati Rice 5kg" in res["final_response"]
 
 def test_e2e_l3_approval_gating_audit_trail(orchestrator):
     # Ensure draft orders capture full audit context

@@ -18,6 +18,19 @@ def test_staff_finance_denial():
         FinanceAgentTools.get_financial_health_summary(context=ctx)
 
 def test_owner_finance_access():
+    from datetime import datetime, timezone
+    from src.api.db import init_db, get_db_connection
+    init_db()
+    conn = get_db_connection()
+    now = datetime.now(timezone.utc).isoformat()
+    conn.execute("INSERT OR IGNORE INTO businesses (id, name, created_at) VALUES ('tenant_123', 'Demo Store', ?)", (now,))
+    conn.execute(
+        "INSERT OR REPLACE INTO customers (id, business_id, name, current_balance, created_at) VALUES ('cust_123', 'tenant_123', 'Amit Kumar', 18900.00, ?)",
+        (now,),
+    )
+    conn.commit()
+    conn.close()
+
     ctx = {"tenant_id": "tenant_123", "role": "OWNER", "user_id": "owner_u1"}
     res = FinanceAgentTools.get_financial_health_summary(context=ctx)
     assert res["working_capital_status"] == "HEALTHY"
