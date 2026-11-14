@@ -21,6 +21,13 @@ from src.ml.features.demand_features import extract_demand_forecasting_features
 from src.ml.features.sales_features import extract_sales_forecasting_features
 from src.ml.features.trend_features import extract_trend_forecasting_features
 
+from src.ml.models.baselines import (
+    MovingAverageSalesBaseline,
+    ProductDemandBaseline,
+    RuleBasedChurnBaseline,
+    MajorityTrendBaseline,
+)
+
 logger = logging.getLogger(__name__)
 
 
@@ -45,33 +52,49 @@ class Predictor:
     def get_sales_model(self) -> Any:
         if self._sales_model is None:
             path = self.models_dir / "sales" / "selected_model.joblib"
-            if not path.exists():
-                raise FileNotFoundError(f"Trained sales model not found at {path}. Run training first.")
-            self._sales_model = joblib.load(path)
+            try:
+                if not path.exists():
+                    raise FileNotFoundError(f"Trained sales model not found at {path}.")
+                self._sales_model = joblib.load(path)
+            except Exception as exc:
+                logger.warning(f"Error loading sales model from {path}: {exc}. Using defensive MovingAverage baseline.")
+                self._sales_model = MovingAverageSalesBaseline()
         return self._sales_model
 
     def get_demand_model(self) -> Any:
         if self._demand_model is None:
             path = self.models_dir / "demand" / "selected_model.joblib"
-            if not path.exists():
-                raise FileNotFoundError(f"Trained demand model not found at {path}. Run training first.")
-            self._demand_model = joblib.load(path)
+            try:
+                if not path.exists():
+                    raise FileNotFoundError(f"Trained demand model not found at {path}.")
+                self._demand_model = joblib.load(path)
+            except Exception as exc:
+                logger.warning(f"Error loading demand model from {path}: {exc}. Using defensive ProductDemand baseline.")
+                self._demand_model = ProductDemandBaseline()
         return self._demand_model
 
     def get_churn_model(self) -> Any:
         if self._churn_model is None:
             path = self.models_dir / "churn" / "selected_model.joblib"
-            if not path.exists():
-                raise FileNotFoundError(f"Trained churn model not found at {path}. Run training first.")
-            self._churn_model = joblib.load(path)
+            try:
+                if not path.exists():
+                    raise FileNotFoundError(f"Trained churn model not found at {path}.")
+                self._churn_model = joblib.load(path)
+            except Exception as exc:
+                logger.warning(f"Error loading churn model from {path}: {exc}. Using defensive RuleBasedChurn baseline.")
+                self._churn_model = RuleBasedChurnBaseline()
         return self._churn_model
 
     def get_trend_model(self) -> Any:
         if self._trend_model is None:
             path = self.models_dir / "trend" / "selected_model.joblib"
-            if not path.exists():
-                raise FileNotFoundError(f"Trained trend model not found at {path}. Run training first.")
-            self._trend_model = joblib.load(path)
+            try:
+                if not path.exists():
+                    raise FileNotFoundError(f"Trained trend model not found at {path}.")
+                self._trend_model = joblib.load(path)
+            except Exception as exc:
+                logger.warning(f"Error loading trend model from {path}: {exc}. Using defensive MajorityTrend baseline.")
+                self._trend_model = MajorityTrendBaseline()
         return self._trend_model
 
     def predict_sales(self, horizon_days: int = 7) -> pd.DataFrame:

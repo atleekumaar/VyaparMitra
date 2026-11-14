@@ -1,7 +1,7 @@
 {
   "model_name": "HistGradientBoostingRegressor_Demand",
   "model_version": "v1.0",
-  "training_date": "2026-11-08 23:47:19",
+  "training_date": "2026-11-14 17:48:34",
   "training_data_range": {
     "start": "2025-10-01",
     "end": "2026-07-31"
