@@ -86,37 +86,16 @@ class Predictor:
             raise
 
     def _build_sales_baseline_fallback(self) -> Any:
-        baseline = NaiveSalesBaseline()
-        daily_file = self.features_dir / "daily_features.parquet"
-        if daily_file.exists():
-            daily_df = build_daily_sales_dataset(pd.read_parquet(daily_file))
-            feat_df, cols = extract_sales_forecasting_features(daily_df)
-            baseline.fit(feat_df[cols], feat_df["target_revenue"])
-        return baseline
+        return NaiveSalesBaseline()
 
     def _build_demand_baseline_fallback(self) -> Any:
-        baseline = ProductDemandBaseline()
-        tx_file = self.processed_dir / "clean_transactions.parquet"
-        if not tx_file.exists():
-            tx_file = self.processed_dir / "cleaned_transactions.parquet"
-        prod_file = self.features_dir / "product_features.parquet"
-        if tx_file.exists() and prod_file.exists():
-            panel_df = build_product_demand_panel(pd.read_parquet(tx_file), pd.read_parquet(prod_file))
-            feat_df, cols = extract_demand_forecasting_features(panel_df)
-            baseline.fit(feat_df[cols], feat_df["target_units"])
-        return baseline
+        return ProductDemandBaseline()
 
     def _build_churn_baseline_fallback(self) -> Any:
         return RuleBasedChurnBaseline()
 
     def _build_trend_baseline_fallback(self) -> Any:
-        baseline = MajorityTrendBaseline()
-        daily_file = self.features_dir / "daily_features.parquet"
-        if daily_file.exists():
-            daily_df = build_daily_sales_dataset(pd.read_parquet(daily_file))
-            feat_df, cols = extract_trend_forecasting_features(daily_df)
-            baseline.fit(feat_df[cols], feat_df["target_trend"])
-        return baseline
+        return MajorityTrendBaseline()
 
     def get_sales_model(self) -> Any:
         if self._sales_model is None:
