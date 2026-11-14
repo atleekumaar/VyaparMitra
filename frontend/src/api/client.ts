@@ -72,6 +72,16 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   const response = await fetch(url, { ...options, headers });
 
   if (!response.ok) {
+    if (response.status === 401 && !endpoint.includes('/auth/')) {
+      try {
+        localStorage.removeItem('vyaparmitra_token');
+        localStorage.removeItem('vyaparmitra_user');
+        window.dispatchEvent(new Event('vyaparmitra:unauthorized'));
+      } catch {
+        // Ignored
+      }
+    }
+
     let errorMsg = `HTTP Error ${response.status}: ${response.statusText}`;
     try {
       const errJson = await response.json();

@@ -421,19 +421,23 @@ def verify_otp(
 
     now_str = now_utc.isoformat()
     if not user_row:
-        # Auto-provision merchant profile
         user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
-        business_id = None
+        base_username = clean_email.split("@")[0].replace(".", "_")
+        username = base_username
+        suffix = 1
+        while db.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone():
+            username = f"{base_username}_{suffix}"
+            suffix += 1
 
-        # If an explicit store_id is provided and already exists (e.g. demo selection M001 or M015), attach to it
-        if req.store_id:
-            biz_exists = db.execute("SELECT id FROM businesses WHERE id = ?", (req.store_id.strip(),)).fetchone()
-            if biz_exists:
-                business_id = biz_exists["id"]
-                branch_id = f"BR_{business_id}_MAIN"
+        full_name = req.name.strip() if req.name else username.replace("_", " ").title()
+        role = UserRole.OWNER.value
 
-        # Otherwise, provision a brand-new isolated business with 0 seeded data
-        if not business_id:
+        # Check if an existing business was requested (e.g. staff invite or demo persona)
+        business_id = req.store_id.strip() if req.store_id else None
+        biz_row = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone() if business_id else None
+
+        if not biz_row:
+            # Provision dedicated isolated business for this merchant with clean 0 data
             biz_id = f"BIZ_{uuid.uuid4().hex[:8].upper()}"
             branch_id = f"BR_{biz_id}_MAIN"
             clean_name = req.name.strip() if req.name and req.name.strip() else clean_email.split("@")[0].replace(".", " ").title()
@@ -459,16 +463,10 @@ def verify_otp(
                 now_str,
             ))
             business_id = biz_id
-
-        base_username = clean_email.split("@")[0].replace(".", "_")
-        username = base_username
-        suffix = 1
-        while db.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone():
-            username = f"{base_username}_{suffix}"
-            suffix += 1
-
-        full_name = req.name.strip() if req.name else username.replace("_", " ").title()
-        role = UserRole.OWNER.value
+        else:
+            business_id = biz_row["id"]
+            main_branch = db.execute("SELECT id FROM branches WHERE business_id = ? ORDER BY is_main DESC LIMIT 1", (business_id,)).fetchone()
+            branch_id = main_branch["id"] if main_branch else f"BR_{business_id}_MAIN"
 
         db.execute(
             """
