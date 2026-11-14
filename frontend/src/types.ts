@@ -282,6 +282,8 @@ export type UserCategory = 'small_merchant' | 'wholesaler' | 'billing_staff' | '
 
 export interface UserProfile {
   id: string;
+  business_id?: string;
+  merchant_id?: string;
   name: string;
   email?: string;
   storeName: string;
@@ -291,7 +293,44 @@ export interface UserProfile {
   city: string;
   role: string;
   avatarInitials: string;
+  token?: string;
+  is_demo?: boolean;
 }
+
+export interface InventoryItem {
+  id: string;
+  business_id: string;
+  branch_id: string;
+  product_id: string;
+  product_name: string;
+  category: string;
+  current_stock: number;
+  min_stock_threshold: number;
+  unit_cost: number;
+  selling_price: number;
+  barcode?: string | null;
+  unit?: string;
+  updated_at: string;
+}
+
+export interface CreateSaleItemRequest {
+  product_id: string;
+  product_name: string;
+  quantity: number;
+  unit_price: number;
+  unit_cost?: number;
+  discount?: number;
+}
+
+export interface CreateSaleRequest {
+  branch_id?: string;
+  customer_id?: string;
+  customer_name?: string;
+  payment_method: 'CASH' | 'UPI' | 'CARD' | 'CREDIT';
+  items: CreateSaleItemRequest[];
+  notes?: string;
+}
+
 
 export interface RequestOtpResponse {
   success: boolean;
