@@ -128,11 +128,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<UserCategory>('small_merchant');
   const [authMethod, setAuthMethod] = useState<'otp' | 'pin'>('otp');
 
-  // Input states
-  const [merchantName, setMerchantName] = useState<string>(personas[0].name);
-  const [merchantEmail, setMerchantEmail] = useState<string>(personas[0].email);
-  const [mobileNumber, setMobileNumber] = useState<string>('9876543210');
-  const [storeId, setStoreId] = useState<string>('M001');
+  // Input states (initialized empty so placeholders show and users can type immediately without deleting pre-filled values)
+  const [merchantName, setMerchantName] = useState<string>('');
+  const [merchantEmail, setMerchantEmail] = useState<string>('');
+  const [mobileNumber, setMobileNumber] = useState<string>('');
+  const [storeId, setStoreId] = useState<string>('');
   const [pinCode, setPinCode] = useState<string>('');
 
   // OTP flow states - OTP is NOT sent and NOT shown on initial load
@@ -150,17 +150,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   // Active persona object
   const activePersona = personas.find((p) => p.category === selectedCategory) || personas[0];
 
-  // When persona changes, update Name, Email, Phone, and reset OTP flow
+  // When persona changes, update selected category and storeId without overwriting user's typed input
   const handleSelectPersona = (p: PersonaConfig) => {
     setSelectedCategory(p.category);
-    setMerchantName(p.name);
-    setMerchantEmail(p.email);
-    setMobileNumber(p.phone.replace(/\s+/g, ''));
     setStoreId(p.id);
     setOtpSent(false);
     setOtpCode(['', '', '', '', '', '']);
     setAuthError(null);
     setOtpNotification(null);
+  };
+
+  // Explicit demo auto-fill for convenience
+  const handleFillDemoCredentials = () => {
+    setMerchantName(activePersona.name);
+    setMerchantEmail(activePersona.email);
+    setMobileNumber(activePersona.phone.replace(/\s+/g, ''));
+    setStoreId(activePersona.id);
+    setAuthError(null);
   };
 
   // OTP Timer countdown
@@ -634,38 +640,51 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
               {/* Authentication Mode Tabs (OTP vs PIN) */}
               <div className="mt-5">
-                <div className="flex items-center border-b border-slate-200/80 dark:border-slate-800 pb-2 gap-4">
+                <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2">
+                  <div className="flex items-center gap-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAuthMethod('otp');
+                        setOtpSent(false);
+                        setOtpCode(['', '', '', '', '', '']);
+                      }}
+                      className={`text-xs font-semibold pb-1.5 relative transition-colors ${
+                        authMethod === 'otp'
+                          ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                      }`}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <Smartphone className="w-3.5 h-3.5" />
+                        {t('auth_tab_otp', 'Mobile OTP')}
+                      </span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAuthMethod('pin')}
+                      className={`text-xs font-semibold pb-1.5 relative transition-colors ${
+                        authMethod === 'pin'
+                          ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
+                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
+                      }`}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <KeyRound className="w-3.5 h-3.5" />
+                        {t('auth_tab_pin', 'Store ID & Quick PIN')}
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* Quick Fill Demo Credentials */}
                   <button
                     type="button"
-                    onClick={() => {
-                      setAuthMethod('otp');
-                      setOtpSent(false);
-                      setOtpCode(['', '', '', '', '', '']);
-                    }}
-                    className={`text-xs font-semibold pb-1.5 relative transition-colors ${
-                      authMethod === 'otp'
-                        ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                    }`}
+                    onClick={handleFillDemoCredentials}
+                    className="text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors pb-1.5"
+                    title="Fill demo credentials for testing"
                   >
-                    <span className="flex items-center gap-1.5">
-                      <Smartphone className="w-3.5 h-3.5" />
-                      {t('auth_tab_otp', 'Mobile OTP')}
-                    </span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAuthMethod('pin')}
-                    className={`text-xs font-semibold pb-1.5 relative transition-colors ${
-                      authMethod === 'pin'
-                        ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                        : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                    }`}
-                  >
-                    <span className="flex items-center gap-1.5">
-                      <KeyRound className="w-3.5 h-3.5" />
-                      {t('auth_tab_pin', 'Store ID & Quick PIN')}
-                    </span>
+                    <Sparkles className="w-3 h-3 text-blue-500" />
+                    <span className="hidden sm:inline">Fill demo info</span>
                   </button>
                 </div>
 
@@ -695,8 +714,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                               required
                               value={merchantName}
                               onChange={(e) => setMerchantName(e.target.value)}
-                              placeholder="e.g. Rajesh Sharma"
-                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
+                              placeholder={`e.g. ${activePersona.name}`}
+                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
                             />
                           </div>
                         </div>
@@ -713,8 +732,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                               required
                               value={merchantEmail}
                               onChange={(e) => setMerchantEmail(e.target.value)}
-                              placeholder="e.g. rajesh.kirana@gmail.com"
-                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
+                              placeholder={`e.g. ${activePersona.email}`}
+                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
                             />
                           </div>
                         </div>
@@ -734,8 +753,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                               maxLength={10}
                               value={mobileNumber}
                               onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ''))}
-                              placeholder={t('mobile_input_placeholder', 'Enter 10-digit mobile number')}
-                              className="flex-1 h-9 px-3 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none tabular-nums font-medium"
+                              placeholder="9876543210"
+                              className="flex-1 h-9 px-3 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none tabular-nums font-medium"
                             />
                           </div>
                         </div>
@@ -906,8 +925,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                             required
                             value={merchantName}
                             onChange={(e) => setMerchantName(e.target.value)}
-                            placeholder="e.g. Rajesh Sharma"
-                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
+                            placeholder={`e.g. ${activePersona.name}`}
+                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
                           />
                         </div>
                       </div>
@@ -924,8 +943,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                             required
                             value={merchantEmail}
                             onChange={(e) => setMerchantEmail(e.target.value)}
-                            placeholder="e.g. rajesh.kirana@gmail.com"
-                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
+                            placeholder={`e.g. ${activePersona.email}`}
+                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
                           />
                         </div>
                       </div>
@@ -940,8 +959,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                           required
                           value={storeId}
                           onChange={(e) => setStoreId(e.target.value)}
-                          placeholder="e.g. M001 or OP-04"
-                          className="w-full h-9 px-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
+                          placeholder={`e.g. ${activePersona.id}`}
+                          className="w-full h-9 px-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
                         />
                       </div>
 
