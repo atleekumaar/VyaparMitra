@@ -8,6 +8,9 @@ interface EmptyStateProps {
   icon?: React.ReactNode;
   actionText?: string;
   onAction?: () => void;
+  secondaryActionText?: string;
+  onSecondaryAction?: () => void;
+  className?: string;
 }
 
 export const EmptyState: React.FC<EmptyStateProps> = ({
@@ -16,19 +19,32 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   icon,
   actionText,
   onAction,
+  secondaryActionText,
+  onSecondaryAction,
+  className = '',
 }) => {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 text-center flex flex-col items-center justify-center transition-colors">
-      <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 flex items-center justify-center mb-3">
-        {icon || <Inbox className="w-6 h-6" />}
+    <div
+      className={`bg-surface-card rounded-2xl border border-border p-8 sm:p-12 text-center flex flex-col items-center justify-center transition-colors shadow-fintech ${className}`}
+    >
+      <div className="w-14 h-14 rounded-2xl bg-brand-soft text-brand flex items-center justify-center mb-4 border border-brand/20">
+        {icon || <Inbox className="w-7 h-7" />}
       </div>
-      <h3 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h3>
-      <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mt-1">{message}</p>
-      {actionText && onAction && (
-        <div className="mt-4">
-          <Button variant="secondary" size="sm" onClick={onAction}>
-            {actionText}
-          </Button>
+      <h3 className="text-base font-bold text-text">{title}</h3>
+      <p className="text-xs text-text-muted max-w-md mt-1 leading-relaxed">{message}</p>
+
+      {(onAction || onSecondaryAction) && (
+        <div className="mt-5 flex items-center gap-3 flex-wrap justify-center">
+          {actionText && onAction && (
+            <Button variant="primary" size="sm" onClick={onAction}>
+              {actionText}
+            </Button>
+          )}
+          {secondaryActionText && onSecondaryAction && (
+            <Button variant="secondary" size="sm" onClick={onSecondaryAction}>
+              {secondaryActionText}
+            </Button>
+          )}
         </div>
       )}
     </div>
@@ -38,18 +54,21 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 interface ErrorBannerProps {
   message: string;
   onRetry?: () => void;
+  className?: string;
 }
 
-export const ErrorBanner: React.FC<ErrorBannerProps> = ({ message, onRetry }) => {
+export const ErrorBanner: React.FC<ErrorBannerProps> = ({ message, onRetry, className = '' }) => {
   return (
-    <div className="rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-4 text-red-900 dark:text-red-200 flex items-start gap-3 transition-colors">
-      <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
+    <div
+      className={`rounded-2xl border border-danger/30 bg-danger-soft p-4 text-danger flex items-start gap-3 transition-colors shadow-2xs ${className}`}
+    >
+      <AlertCircle className="w-5 h-5 text-danger shrink-0 mt-0.5" />
       <div className="flex-1 text-xs">
-        <p className="font-semibold text-sm text-red-900 dark:text-red-100">We couldn't load this information</p>
-        <p className="mt-0.5 text-red-700 dark:text-red-300">{message}</p>
+        <p className="font-bold text-sm text-text">We couldn't load this information</p>
+        <p className="mt-0.5 text-danger/90 leading-normal">{message}</p>
       </div>
       {onRetry && (
-        <Button variant="secondary" size="sm" onClick={onRetry} className="shrink-0 bg-white dark:bg-slate-800">
+        <Button variant="secondary" size="sm" onClick={onRetry} className="shrink-0">
           <RefreshCw className="w-3.5 h-3.5 mr-1" />
           Retry
         </Button>
