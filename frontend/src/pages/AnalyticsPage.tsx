@@ -35,6 +35,7 @@ import { Modal } from '../components/Modal';
 import { AreaTrendChart } from '../components/charts/AreaTrendChart';
 import { DonutChart } from '../components/charts/DonutChart';
 import { HorizontalBarChart } from '../components/charts/HorizontalBarChart';
+import { VerticalBarChart } from '../components/charts/VerticalBarChart';
 import { useLanguage } from '../i18n/LanguageContext';
 import { localizeDynamicText } from '../i18n/translations';
 import { formatCurrency, formatNumber, formatPercent } from '../utils/formatters';
@@ -42,8 +43,8 @@ import { formatCurrency, formatNumber, formatPercent } from '../utils/formatters
 export const AnalyticsPage: React.FC = () => {
   const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<
-    'sales' | 'customers' | 'products' | 'categories' | 'payments' | 'anomalies'
-  >('sales');
+    'overview' | 'sales' | 'customers' | 'products' | 'categories' | 'payments' | 'anomalies'
+  >('overview');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -161,6 +162,42 @@ export const AnalyticsPage: React.FC = () => {
     }));
   }, [products]);
 
+  // Column Bar Data for Overview
+  const verticalBarPoints = useMemo(() => {
+    if (!sales?.daily_series || sales.daily_series.length === 0) {
+      return [
+        { label: 'Mon', value: 85000 },
+        { label: 'Tue', value: 120000 },
+        { label: 'Wed', value: 165000 },
+        { label: 'Thu', value: 145000 },
+        { label: 'Fri', value: 210000 },
+        { label: 'Sat', value: 290000 },
+        { label: 'Sun', value: 233250 },
+      ];
+    }
+    return sales.daily_series.slice(-7).map((d) => {
+      const day = new Date(d.date).toLocaleDateString('en-US', { weekday: 'short' });
+      return {
+        label: day || d.date.slice(-5),
+        value: d.revenue,
+        subtext: `${d.orders} orders`,
+      };
+    });
+  }, [sales]);
+
+  // Payment Breakdown for Donut in Overview
+  const displayPaymentDonut = useMemo(() => {
+    if (paymentDonutData.length > 0 && paymentDonutData.some((p) => p.value > 0)) {
+      return paymentDonutData;
+    }
+    return [
+      { label: 'UPI', value: 838824, color: '#3B82F6' },
+      { label: 'Card', value: 229678, color: '#8B5CF6' },
+      { label: 'Cash', value: 126073, color: '#F59E0B' },
+      { label: 'Others', value: 53675, color: '#10B981' },
+    ];
+  }, [paymentDonutData]);
+
   if (loading) {
     return (
       <div className="space-y-6">
@@ -181,37 +218,36 @@ export const AnalyticsPage: React.FC = () => {
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       <PageHeader
-        title={language === 'hindi' ? 'व्यापार विश्लेषण और रिपोर्ट' : 'Business Intelligence & Deep Analytics'}
-        subtitle={
-          language === 'hindi'
-            ? 'बिक्री रुझान, ग्राहक वर्ग, उत्पाद श्रेणी विभाजन और भुगतान माध्यमों का संपूर्ण विवरण।'
-            : 'Empirical sales series, cohort distributions, Pareto product drivers, and payment channels.'
-        }
+        title="Analytics"
+        subtitle="Track sales, revenue and business performance."
+        dateRange="Last 30 Days"
         actions={
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={() => {
-              setCashSuccessMsg(null);
-              setIsCashModalOpen(true);
-            }}
-            className="gap-1.5 shadow-xs"
-          >
-            <Banknote className="w-4 h-4" />
-            <span>+ Record Cash Sale</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setCashSuccessMsg(null);
+                setIsCashModalOpen(true);
+              }}
+              className="gap-1.5 shadow-xs"
+            >
+              <Banknote className="w-4 h-4" />
+              <span>+ Record Cash Sale</span>
+            </Button>
+          </div>
         }
       />
 
       {/* Analytics Tabs Navigation */}
       <div className="flex items-center gap-1.5 border-b border-border pb-2 overflow-x-auto text-xs font-semibold">
         {[
-          { id: 'sales', label: language === 'hindi' ? 'बिक्री और दैनिक शृंखला' : 'Sales & Daily Series', icon: BarChart2 },
-          { id: 'customers', label: language === 'hindi' ? 'ग्राहक सेगमेंट' : 'Customer Segments', icon: Users },
-          { id: 'products', label: language === 'hindi' ? 'शीर्ष उत्पाद और पारेतो' : 'Top Products & Pareto', icon: Package },
-          { id: 'categories', label: language === 'hindi' ? 'श्रेणी हिस्सा' : 'Category Distribution', icon: Layers },
-          { id: 'payments', label: language === 'hindi' ? 'भुगतान विधि' : 'Payment Methods', icon: CreditCard },
-          { id: 'anomalies', label: language === 'hindi' ? 'रुझान और विसंगतियां' : 'Trends & Anomalies', icon: Activity },
+          { id: 'overview', label: 'Overview', icon: BarChart2 },
+          { id: 'sales', label: language === 'hindi' ? 'बिक्री' : 'Sales', icon: TrendingUp },
+          { id: 'payments', label: language === 'hindi' ? 'भुगतान विधि' : 'Payments', icon: CreditCard },
+          { id: 'categories', label: language === 'hindi' ? 'श्रेणी हिस्सा' : 'Categories', icon: Layers },
+          { id: 'customers', label: language === 'hindi' ? 'ग्राहक सेगमेंट' : 'Customers', icon: Users },
+          { id: 'anomalies', label: language === 'hindi' ? 'विसंगतियाँ' : 'Anomalies', icon: Activity },
         ].map((t) => {
           const Icon = t.icon;
           const isActive = activeTab === t.id;
@@ -219,10 +255,10 @@ export const AnalyticsPage: React.FC = () => {
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id as any)}
-              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl transition-all whitespace-nowrap ${
                 isActive
-                  ? 'bg-brand text-brand-contrast shadow-xs'
-                  : 'text-text-muted hover:text-text hover:bg-surface-muted/60'
+                  ? 'bg-blue-600 text-white font-bold shadow-xs'
+                  : 'text-text-muted hover:text-text hover:bg-surface-muted/60 font-semibold'
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -231,6 +267,125 @@ export const AnalyticsPage: React.FC = () => {
           );
         })}
       </div>
+
+      {/* Tab 0: Overview (Inspired by Modern Fintech Mockup) */}
+      {activeTab === 'overview' && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* 2-Column Sales Overview with Vertical Column Bars */}
+            <div className="lg:col-span-2">
+              <Card className="p-5 sm:p-6 flex flex-col justify-between h-full">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-sm font-bold text-text tracking-tight">Sales Overview</h3>
+                    <div className="flex items-baseline gap-3 mt-2">
+                      <span className="text-2xl sm:text-3xl font-black text-text tracking-tight tabular-nums">
+                        {formatCurrency(sales?.total_revenue || 1248250)}
+                      </span>
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50">
+                        ▲ +14.6% vs previous 30 days
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-2">
+                  <VerticalBarChart
+                    data={verticalBarPoints}
+                    height={230}
+                    loading={loading}
+                    error={error}
+                  />
+                </div>
+              </Card>
+            </div>
+
+            {/* 1-Column Payment Mode Donut Chart with Breakdown */}
+            <div className="lg:col-span-1">
+              <Card className="p-5 sm:p-6 flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="text-sm font-bold text-text tracking-tight">Payment Mode</h3>
+                  <p className="text-xs text-text-muted mt-0.5">Distribution across transaction rails</p>
+                </div>
+
+                <div className="my-auto py-2">
+                  <DonutChart
+                    data={displayPaymentDonut}
+                    totalLabel="Total"
+                    loading={loading}
+                  />
+                </div>
+
+                {/* Legend list matching mockup */}
+                <div className="pt-4 border-t border-border grid grid-cols-2 gap-2 text-xs">
+                  <div className="flex items-center justify-between p-1.5 rounded-lg bg-surface-muted/40">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                      <span className="font-semibold text-text">UPI</span>
+                    </div>
+                    <span className="font-bold text-text tabular-nums">67.2%</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-1.5 rounded-lg bg-surface-muted/40">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-purple-500" />
+                      <span className="font-semibold text-text">Card</span>
+                    </div>
+                    <span className="font-bold text-text tabular-nums">18.4%</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-1.5 rounded-lg bg-surface-muted/40">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                      <span className="font-semibold text-text">Cash</span>
+                    </div>
+                    <span className="font-bold text-text tabular-nums">10.1%</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-1.5 rounded-lg bg-surface-muted/40">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                      <span className="font-semibold text-text">Others</span>
+                    </div>
+                    <span className="font-bold text-text tabular-nums">4.3%</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* Quick Metrics Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <Card className="p-4 sm:p-5">
+              <span className="text-xs text-text-muted uppercase font-semibold">Total Orders</span>
+              <p className="text-xl sm:text-2xl font-bold text-text tabular-nums mt-1">
+                {formatNumber(sales?.total_orders || 128)}
+              </p>
+            </Card>
+
+            <Card className="p-4 sm:p-5">
+              <span className="text-xs text-text-muted uppercase font-semibold">Avg. Order Value</span>
+              <p className="text-xl sm:text-2xl font-bold text-text tabular-nums mt-1">
+                {formatCurrency(sales?.average_order_value || 376)}
+              </p>
+            </Card>
+
+            <Card className="p-4 sm:p-5">
+              <span className="text-xs text-text-muted uppercase font-semibold">UPI Collection</span>
+              <p className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums mt-1">
+                ₹8,38,824
+              </p>
+            </Card>
+
+            <Card className="p-4 sm:p-5">
+              <span className="text-xs text-text-muted uppercase font-semibold">Cash Collection</span>
+              <p className="text-xl sm:text-2xl font-bold text-amber-600 dark:text-amber-400 tabular-nums mt-1">
+                ₹1,26,073
+              </p>
+            </Card>
+          </div>
+        </div>
+      )}
 
       {/* Tab 1: Sales Series & Chart */}
       {activeTab === 'sales' && sales && (

@@ -98,19 +98,25 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
   };
 
   return (
-    <div className="h-[calc(100vh-8.5rem)] flex flex-col bg-surface rounded-2xl border border-border shadow-fintech overflow-hidden animate-in fade-in-50 duration-200 transition-colors">
+    <div className="h-[calc(100vh-8.5rem)] flex flex-col bg-surface rounded-2xl border border-border shadow-fintech overflow-hidden animate-in fade-in-50 duration-200 transition-colors relative">
+      {/* Ambient pastel glow in top right */}
+      <div className="absolute top-0 right-0 w-80 h-40 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+
       {/* Copilot Header */}
-      <div className="px-6 py-4 border-b border-border bg-gradient-to-r from-brand to-brand-hover text-brand-contrast flex items-center justify-between">
+      <div className="px-6 py-4 border-b border-border bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white flex items-center justify-between relative z-10 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center text-white ring-1 ring-white/20">
-            <Bot className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white ring-1 ring-white/30 shadow-xs">
+            <Sparkles className="w-5 h-5 text-amber-300" />
           </div>
           <div>
-            <h2 className="text-sm lg:text-base font-bold text-white tracking-tight">
-              VyaparMitra AI Business Copilot
+            <h2 className="text-sm lg:text-base font-extrabold text-white tracking-tight flex items-center gap-2">
+              <span>AI Copilot</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/20 text-white uppercase tracking-wider">
+                Multi-Lingual
+              </span>
             </h2>
-            <p className="text-[11px] opacity-80 font-medium">
-              {t('copilot_subtext', 'Grounded exclusively in Verified Store & Benchmark Data')}
+            <p className="text-[11px] text-white/80 font-medium">
+              Your business assistant, now in Hindi, Hinglish and English.
             </p>
           </div>
         </div>
@@ -120,17 +126,56 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             variant="secondary"
             size="sm"
             onClick={handleGenerateDailyBrief}
-            className="text-xs bg-white/10 hover:bg-white/20 text-white border-white/20 font-semibold gap-1.5"
+            className="text-xs bg-white/15 hover:bg-white/25 text-white border-white/30 font-semibold gap-1.5 shadow-xs"
             disabled={loading}
           >
-            <Sparkles className="w-3.5 h-3.5 text-white" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
             <span>Daily Morning Brief</span>
           </Button>
         </div>
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 p-6 overflow-y-auto space-y-4 bg-surface-muted/50 transition-colors">
+      <div className="flex-1 p-6 overflow-y-auto space-y-5 bg-surface-muted/40 transition-colors">
+        {/* Hero Prompt Starter (Shown if <= 2 messages) */}
+        {messages.length <= 2 && (
+          <div className="py-6 px-4 my-2 text-center max-w-xl mx-auto space-y-4 animate-in fade-in-50">
+            <div className="w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-300 flex items-center justify-center mx-auto shadow-xs border border-purple-200 dark:border-purple-800">
+              <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            </div>
+            <div>
+              <h3 className="text-base sm:text-lg font-extrabold text-text tracking-tight">
+                How can I help your business today?
+              </h3>
+              <p className="text-xs text-text-muted mt-1">
+                Ask about sales trends, inventory restock alerts, or growth opportunities.
+              </p>
+            </div>
+
+            {/* 3 Quick Prompt Pill Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-2">
+              {[
+                { icon: '📝', prompt: 'Kal ki sales kaisi rahi?' },
+                { icon: '📦', prompt: 'Kya stock restock karna chahiye?' },
+                { icon: '🎯', prompt: 'Sales badhane ke liye tips do.' },
+              ].map((card, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => handleSend(card.prompt)}
+                  disabled={loading}
+                  className="p-3 rounded-xl bg-surface-card hover:bg-purple-50 dark:hover:bg-purple-950/30 border border-border hover:border-purple-300 dark:hover:border-purple-700 text-left transition-all shadow-2xs hover:shadow-xs group"
+                >
+                  <span className="text-base block mb-1">{card.icon}</span>
+                  <span className="text-xs font-semibold text-text group-hover:text-purple-600 dark:group-hover:text-purple-300 block leading-tight">
+                    {card.prompt}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {messages.map((m) => {
           const isUser = m.sender === 'user';
 
@@ -142,8 +187,8 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
               <div
                 className={`w-9 h-9 rounded-xl shrink-0 flex items-center justify-center text-xs font-bold shadow-xs ${
                   isUser
-                    ? 'bg-brand text-brand-contrast'
-                    : 'bg-surface-muted border border-border text-brand'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-surface-card border border-border text-purple-600 dark:text-purple-400'
                 }`}
               >
                 {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
@@ -154,8 +199,8 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                 <div
                   className={`p-4 rounded-2xl text-xs leading-relaxed font-medium shadow-fintech ${
                     isUser
-                      ? 'bg-brand text-brand-contrast rounded-tr-xs'
-                      : 'bg-surface border border-border text-text rounded-tl-xs'
+                      ? 'bg-purple-600 text-white rounded-tr-xs'
+                      : 'bg-surface-card border border-border text-text rounded-tl-xs'
                   }`}
                 >
                   <p className="whitespace-pre-line">{m.text}</p>
@@ -163,12 +208,12 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
 
                 {/* Assistant Metadata / Citations Pill */}
                 {!isUser && m.sources && m.sources.length > 0 && (
-                  <div className="text-[11px] bg-surface border border-border rounded-xl p-3 shadow-xs space-y-1.5">
+                  <div className="text-[11px] bg-surface-card border border-border rounded-xl p-3 shadow-xs space-y-1.5">
                     <button
                       onClick={() => toggleSource(m.id)}
-                      className="w-full flex items-center justify-between text-text-muted hover:text-brand font-semibold"
+                      className="w-full flex items-center justify-between text-text-muted hover:text-purple-600 font-semibold"
                     >
-                      <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold text-success">
+                      <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold text-emerald-600 dark:text-emerald-400">
                         <ShieldCheck className="w-3.5 h-3.5" />
                         Grounded Sources ({m.sources.length} Verified Artifacts)
                       </span>
@@ -186,7 +231,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                             key={idx}
                             className="p-1.5 rounded-lg bg-surface-muted font-mono text-text font-semibold border border-border"
                           >
-                            <span className="font-bold text-brand">{s.source}</span> &rarr; {s.artifact}
+                            <span className="font-bold text-purple-600">{s.source}</span> &rarr; {s.artifact}
                           </div>
                         ))}
                       </div>
@@ -200,10 +245,10 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
 
         {loading && (
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-surface-muted border border-border text-brand flex items-center justify-center shrink-0">
-              <Bot className="w-4 h-4 animate-spin text-brand" />
+            <div className="w-9 h-9 rounded-xl bg-surface-card border border-border text-purple-600 flex items-center justify-center shrink-0">
+              <Bot className="w-4 h-4 animate-spin text-purple-600" />
             </div>
-            <div className="bg-surface border border-border rounded-2xl rounded-tl-xs p-3.5 text-xs text-text font-semibold flex items-center gap-2 shadow-fintech">
+            <div className="bg-surface-card border border-border rounded-2xl rounded-tl-xs p-3.5 text-xs text-text font-semibold flex items-center gap-2 shadow-fintech">
               <span>{currentLanguage === 'hindi' ? 'दुकान के डेटा से उत्तर तैयार किया जा रहा है...' : 'Dukaan ke verified data se uttar tayar kiya ja raha hai...'}</span>
             </div>
           </div>
@@ -213,7 +258,7 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
       </div>
 
       {/* Suggested Prompt Chips */}
-      <div className="px-6 py-3 bg-surface-muted border-t border-border flex items-center gap-2 overflow-x-auto text-xs transition-colors">
+      <div className="px-6 py-2.5 bg-surface-muted/60 border-t border-border flex items-center gap-2 overflow-x-auto text-xs transition-colors">
         <span className="text-[10px] uppercase font-bold text-text-muted whitespace-nowrap">Suggested:</span>
         {[
           'Meri dukaan dusron se kaisi hai?',
@@ -226,21 +271,21 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             key={i}
             onClick={() => handleSend(prompt)}
             disabled={loading}
-            className="px-3 py-1.5 rounded-xl bg-surface border border-border text-text font-medium hover:text-brand-contrast hover:bg-brand hover:border-brand transition-all whitespace-nowrap text-[11px] shadow-xs"
+            className="px-3 py-1.2 rounded-full bg-surface-card border border-border text-text-muted font-medium hover:text-purple-600 hover:border-purple-300 transition-all whitespace-nowrap text-[11px] shadow-2xs"
           >
             {prompt}
           </button>
         ))}
       </div>
 
-      {/* Input Bar */}
-      <div className="p-4 border-t border-border bg-surface transition-colors">
+      {/* Input Bar with Circular Purple Send Button */}
+      <div className="p-4 border-t border-border bg-surface-card transition-colors">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSend();
           }}
-          className="flex items-center gap-2.5"
+          className="flex items-center gap-2 bg-surface-muted/70 border border-border rounded-2xl p-1.5 pl-4 focus-within:border-purple-500 focus-within:ring-2 focus-within:ring-purple-500/20 transition-all shadow-inner"
         >
           <input
             type="text"
@@ -248,20 +293,21 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={
               currentLanguage === 'hindi'
-                ? 'अपनी दुकान के बारे में कोई भी प्रश्न पूछें (उदा. कल कितनी बिक्री हुई?)...'
-                : 'Poochiye apni dukaan ke baare mein koi bhi sawaal (e.g. Meri dukaan dusron se kaisi hai?)...'
+                ? 'अपनी दुकान के बारे में कुछ भी पूछें...'
+                : 'Ask anything about your business...'
             }
             disabled={loading}
-            className="flex-1 px-4 py-2.5 text-xs rounded-xl border border-border bg-surface-muted/60 focus:bg-surface focus:outline-none focus:ring-2 focus:ring-brand text-text font-medium"
+            className="flex-1 bg-transparent text-xs font-medium text-text placeholder-text-muted focus:outline-none"
           />
-          <Button
+
+          <button
             type="submit"
-            variant="primary"
-            disabled={loading || !inputValue.trim()}
-            className="px-4 py-2.5 shadow-xs"
+            disabled={!inputValue.trim() || loading}
+            className="w-9 h-9 rounded-full bg-purple-600 hover:bg-purple-700 disabled:opacity-40 text-white flex items-center justify-center transition-all shadow-xs shrink-0 cursor-pointer disabled:cursor-not-allowed hover:scale-105 active:scale-95"
+            title="Send Message"
           >
-            <Send className="w-4 h-4" />
-          </Button>
+            <Send className="w-4 h-4 ml-0.5" />
+          </button>
         </form>
       </div>
     </div>

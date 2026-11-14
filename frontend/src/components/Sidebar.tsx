@@ -116,13 +116,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Brand Header */}
         <div className="h-16 flex items-center justify-between px-5 border-b border-border/80">
           <div className="flex items-center gap-2.5">
-            <div className="w-8.5 h-8.5 rounded-xl bg-brand text-white flex items-center justify-center font-black text-sm shadow-xs select-none">
-              VM
+            <div className="w-8.5 h-8.5 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs select-none">
+              <Store className="w-4 h-4 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-1">
                 <span className="font-extrabold text-base text-text tracking-tight">
-                  Vyapar<span className="text-brand">Mitra</span>
+                  Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
                 </span>
                 {userProfile?.is_demo && (
                   <span className="px-1.5 py-0.2 rounded-full text-[9px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/30">
@@ -134,7 +134,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="text-[10px] font-medium text-text-muted">
                   Fintech Merchant OS
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </div>
             </div>
           </div>
@@ -174,27 +174,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all group relative ${
                     isActive
                       ? item.isCopilot
-                        ? 'bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-bold'
-                        : 'bg-brand-soft text-brand font-bold shadow-2xs'
+                        ? 'bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-bold shadow-2xs'
+                        : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-bold shadow-2xs'
                       : 'text-text-muted hover:bg-surface-muted hover:text-text'
                   }`}
                 >
-                  {/* Left Active Indicator Bar */}
-                  {isActive && (
-                    <span
-                      className={`absolute left-0 top-1.5 bottom-1.5 w-1 rounded-r-full ${
-                        item.isCopilot ? 'bg-purple-600' : 'bg-brand'
-                      }`}
-                    />
-                  )}
-
                   <div className="flex items-center gap-2.5 min-w-0">
                     <Icon
                       className={`w-4 h-4 shrink-0 transition-colors ${
                         isActive
                           ? item.isCopilot
                             ? 'text-purple-600 dark:text-purple-400'
-                            : 'text-brand'
+                            : 'text-blue-600 dark:text-blue-400'
                           : 'text-text-subtle group-hover:text-text'
                       }`}
                     />
@@ -202,7 +193,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   </div>
 
                   {item.badge && (
-                    <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-brand text-white shrink-0">
+                    <span className="px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-blue-600 text-white shrink-0">
                       {item.badge}
                     </span>
                   )}

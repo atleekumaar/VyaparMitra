@@ -11,7 +11,7 @@ interface MetricCardProps {
   isHero?: boolean;
   loading?: boolean;
   sparklineData?: number[];
-  accentColor?: string;
+  variant?: 'blue' | 'purple' | 'amber' | 'emerald' | 'default';
   onClick?: () => void;
 }
 
@@ -21,9 +21,18 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   isHero = false,
   loading = false,
   sparklineData,
+  variant = 'default',
   onClick,
 }) => {
   const { language } = useLanguage();
+
+  const variantStyles = {
+    blue: 'bg-blue-50 text-blue-600 dark:bg-blue-950/50 dark:text-blue-400 border border-blue-200/50 dark:border-blue-900/50',
+    purple: 'bg-purple-50 text-purple-600 dark:bg-purple-950/50 dark:text-purple-400 border border-purple-200/50 dark:border-purple-900/50',
+    amber: 'bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400 border border-amber-200/50 dark:border-amber-900/50',
+    emerald: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400 border border-emerald-200/50 dark:border-emerald-900/50',
+    default: 'bg-surface-muted text-text-muted border border-border/60',
+  };
 
   if (loading) {
     return (
@@ -73,7 +82,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
             )}
           </div>
           {icon && (
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 bg-surface-muted text-text-muted group-hover:text-brand group-hover:bg-brand-soft transition-colors border border-border/60">
+            <div className={`w-8.5 h-8.5 rounded-xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-2xs ${variantStyles[variant]}`}>
               {icon}
             </div>
           )}

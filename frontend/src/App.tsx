@@ -161,7 +161,7 @@ export const App: React.FC = () => {
 
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-surface-muted dark:bg-surface text-text flex transition-colors duration-200">
+      <div className="min-h-screen bg-surface-muted dark:bg-surface bg-ambient-mesh text-text flex transition-colors duration-200">
         {/* Sidebar navigation */}
         <Sidebar
           currentTab={currentTab}

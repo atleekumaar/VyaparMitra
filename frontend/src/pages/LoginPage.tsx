@@ -207,19 +207,27 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-surface flex flex-col justify-between transition-colors">
+    <div className="min-h-screen bg-surface bg-ambient-mesh flex flex-col justify-between transition-colors">
       {/* Top microbar */}
-      <header className="px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-brand text-white flex items-center justify-center font-black text-xs select-none">
-            VM
+      <header className="px-6 py-4 flex items-center justify-between border-b border-border/40 bg-surface/80 backdrop-blur-sm sticky top-0 z-30">
+        <div className="flex items-center gap-3">
+          <div className="w-8.5 h-8.5 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs select-none">
+            <Store className="w-4 h-4 text-white" />
           </div>
-          <span className="font-extrabold text-sm text-text tracking-tight">
-            Vyapar<span className="text-brand">Mitra</span>
+          <span className="font-extrabold text-base text-text tracking-tight">
+            Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Center Nav Links */}
+        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-text-muted">
+          <span className="text-text hover:text-blue-600 cursor-pointer transition-colors">Home</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">Features</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">For Merchants</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">Pricing</span>
+        </nav>
+
+        <div className="flex items-center gap-3">
           {/* Language Selector */}
           <div className="flex items-center bg-surface-muted border border-border rounded-xl p-0.5 text-xs font-semibold">
             {(['hinglish', 'hindi', 'english'] as const).map((lang) => (
@@ -246,6 +254,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             title="Toggle Theme"
           >
             {isDarkMode ? <Sun className="w-4 h-4 text-warning" /> : <Moon className="w-4 h-4 text-text-muted" />}
+          </button>
+
+          {/* Action CTA */}
+          <button
+            type="button"
+            onClick={() => setDemoModalOpen(true)}
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs"
+          >
+            <span>Get Started</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       </header>

@@ -128,6 +128,19 @@
   animation: soundboxPulse 1.2s ease-in-out infinite;
 }
 
+/* Atmospheric Ambient Mesh Glow for Modern Fintech Aesthetic */
+.bg-ambient-mesh {
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(232, 121, 249, 0.14) 0px, transparent 45%),
+    radial-gradient(at 85% 25%, rgba(147, 197, 253, 0.20) 0px, transparent 50%),
+    radial-gradient(at 0% 10%, rgba(199, 210, 254, 0.15) 0px, transparent 40%);
+}
+.dark .bg-ambient-mesh {
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+    radial-gradient(at 85% 25%, rgba(59, 130, 246, 0.12) 0px, transparent 50%);
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

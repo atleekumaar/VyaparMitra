@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   Sparkles,
   Filter,
@@ -9,6 +9,10 @@ import {
   ArrowRight,
   TrendingUp,
   Info,
+  Package,
+  Tag,
+  Users,
+  Zap,
 } from 'lucide-react';
 import { api } from '../api/client';
 import { RecommendationDetail } from '../types';
@@ -42,6 +46,19 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
 
   const [selectedRec, setSelectedRec] = useState<RecommendationDetail | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+
+  const inventoryCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'INVENTORY').length,
+    [recommendations]
+  );
+  const pricingCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'PRICING' || r.type === 'MARGIN').length,
+    [recommendations]
+  );
+  const customersCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'RETENTION' || r.type === 'CROSS_SELL').length,
+    [recommendations]
+  );
 
   const loadRecommendations = async () => {
     setLoading(true);
@@ -93,83 +110,53 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
       <PageHeader
-        title={language === 'hindi' ? 'व्यापारी एक्शन सेंटर' : 'Merchant Action Center'}
-        subtitle={
-          language === 'hindi'
-            ? 'इन्वेंट्री, चर्न शमन और बंडलिंग के आधार पर व्यापारिक निर्णय।'
-            : 'Evidence-backed business interventions synthesized across restock alerts, churn risk, and cross-sell combos.'
-        }
+        title="⚡ Action Center"
+        subtitle="AI-powered, high-impact recommendations for your business."
         actions={
-          <Badge variant="info">
-            <span className="flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-bold text-xs border border-purple-200/50 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
               <span>{recommendations.length} Actions Available</span>
             </span>
-          </Badge>
+          </div>
         }
       />
 
+      {/* Category Segmented Tabs Inspired by Mockup */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold">
+        {[
+          { id: 'ALL', label: `All (${recommendations.length})` },
+          { id: 'INVENTORY', label: `Inventory (${inventoryCount})` },
+          { id: 'PRICING', label: `Pricing (${pricingCount})` },
+          { id: 'RETENTION', label: `Customers (${customersCount})` },
+        ].map((tab) => {
+          const isActive = filterType === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setFilterType(tab.id)}
+              className={`px-4 py-2 rounded-xl transition-all whitespace-nowrap ${
+                isActive
+                  ? 'bg-blue-600 text-white font-bold shadow-xs'
+                  : 'bg-surface-card hover:bg-surface-muted text-text-muted hover:text-text border border-border'
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Governance & Safeguard Notice */}
-      <Card className="bg-brand/5 border-brand/20 p-4">
+      <div className="rounded-2xl bg-blue-500/5 border border-blue-500/20 p-4">
         <div className="flex items-start gap-3">
-          <Info className="w-4 h-4 text-brand shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
           <p className="text-xs text-text leading-relaxed">
             <span className="font-bold text-text">Commercial Safety Boundary: </span>
             VyaparMitra surfaces evidence-backed recommendations for your consideration. The system will never execute purchases, adjust prices, or dispatch customer messages without your explicit approval.
           </p>
         </div>
-      </Card>
-
-      {/* Filter Row */}
-      <Card className="p-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <Filter className="w-4 h-4 text-brand shrink-0" />
-
-          {/* Type Filter */}
-          <select
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-brand font-medium"
-          >
-            <option value="ALL">All Subsystems</option>
-            <option value="INVENTORY">Inventory Restock</option>
-            <option value="RETENTION">Customer Retention</option>
-            <option value="CROSS_SELL">Cross-Sell &amp; Bundling</option>
-            <option value="PRICING">Pricing &amp; Margin</option>
-          </select>
-
-          {/* Priority Filter */}
-          <select
-            value={filterPriority}
-            onChange={(e) => setFilterPriority(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-brand font-medium"
-          >
-            <option value="ALL">All Priorities</option>
-            <option value="CRITICAL">🔴 Critical Priority</option>
-            <option value="HIGH">🟠 High Priority</option>
-            <option value="MEDIUM">🟡 Medium Priority</option>
-            <option value="LOW">🟢 Low Priority</option>
-          </select>
-
-          {/* Status Filter */}
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 text-xs rounded-xl border border-border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-brand font-medium"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="GENERATED">Generated</option>
-            <option value="VIEWED">Viewed</option>
-            <option value="ACCEPTED">Accepted</option>
-            <option value="REJECTED">Rejected</option>
-            <option value="EXECUTED">Executed</option>
-          </select>
-
-          <Button variant="secondary" size="sm" onClick={loadRecommendations}>
-            Apply Filter
-          </Button>
-        </div>
-      </Card>
+      </div>
 
       {/* Recommendations List */}
       {loading ? (
@@ -193,111 +180,127 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         <div className="space-y-3">
           {recommendations.map((rec) => {
             const isAccepted = rec.status === 'ACCEPTED';
-            const isRejected = rec.status === 'REJECTED';
             const isExecuted = rec.status === 'EXECUTED';
+            const isInventory = rec.type === 'INVENTORY';
+            const isPricing = rec.type === 'PRICING' || rec.type === 'MARGIN';
+            const isCustomer = rec.type === 'RETENTION' || rec.type === 'CROSS_SELL';
+
+            const impactLabel =
+              rec.priority_band === 'CRITICAL' || rec.priority_band === 'HIGH'
+                ? 'High Impact'
+                : rec.priority_band === 'MEDIUM'
+                ? 'Medium'
+                : 'Low Impact';
 
             return (
-              <Card
+              <div
                 key={rec.recommendation_id}
-                className="p-5 hover:border-brand/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                className="bg-surface-card rounded-2xl border border-border p-5 hover:border-blue-300 dark:hover:border-blue-700 shadow-fintech transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
-                <div className="space-y-1.5 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge
-                      variant={
-                        rec.priority_band === 'CRITICAL'
-                          ? 'danger'
-                          : rec.priority_band === 'HIGH'
-                          ? 'warning'
-                          : rec.priority_band === 'MEDIUM'
-                          ? 'neutral'
-                          : 'success'
-                      }
-                    >
-                      {rec.priority_band}
-                    </Badge>
-                    <span className="text-[11px] font-mono uppercase text-text-muted">
-                      [{rec.type}]
-                    </span>
-                    <span className="text-[11px] font-mono text-text-muted">
-                      ID: {rec.recommendation_id}
-                    </span>
-                    <Badge
-                      variant={
-                        isAccepted
-                          ? 'info'
-                          : isExecuted
-                          ? 'success'
-                          : isRejected
-                          ? 'danger'
-                          : 'neutral'
-                      }
-                    >
-                      Status: {localizeDynamicText(rec.status, language)}
-                    </Badge>
+                {/* Left: Icon and Details */}
+                <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-2xs mt-0.5 ${
+                      isInventory
+                        ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/50'
+                        : isPricing
+                        ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50'
+                        : isCustomer
+                        ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50'
+                        : 'bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50'
+                    }`}
+                  >
+                    {isInventory ? (
+                      <Package className="w-5 h-5" />
+                    ) : isPricing ? (
+                      <Tag className="w-5 h-5" />
+                    ) : isCustomer ? (
+                      <Users className="w-5 h-5" />
+                    ) : (
+                      <Zap className="w-5 h-5" />
+                    )}
                   </div>
 
-                  <h3 className="text-sm font-bold text-text">{localizeDynamicText(rec.title, language)}</h3>
-                  <p className="text-xs text-text font-medium">{localizeDynamicText(rec.action, language)}</p>
-                  <p className="text-xs text-text-muted">{localizeDynamicText(rec.reason, language)}</p>
-
-                  <div className="flex items-center gap-4 text-xs pt-1">
-                    <span className="font-bold text-success tabular-nums">
-                      Expected Impact: {formatCurrency(rec.expected_impact)}
-                    </span>
-                    {rec.entity_id && (
-                      <span className="text-text-muted font-mono text-[11px]">
-                        Target: {rec.entity_id}
-                      </span>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-bold text-text truncate">
+                        {localizeDynamicText(rec.title, language)}
+                      </h3>
+                      {rec.entity_id && (
+                        <span className="text-[10px] text-text-muted font-mono bg-surface-muted px-1.5 py-0.5 rounded border border-border">
+                          {rec.entity_id}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-text-muted leading-relaxed line-clamp-2">
+                      {localizeDynamicText(rec.reason || rec.action, language)}
+                    </p>
+                    {rec.expected_impact > 0 && (
+                      <div className="pt-0.5">
+                        <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                          Expected Impact: +{formatCurrency(rec.expected_impact)}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-border">
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => setSelectedRec(rec)}
+                {/* Right: Impact Pill & Action Button */}
+                <div className="flex items-center gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-border justify-between md:justify-end">
+                  {/* Impact badge */}
+                  <span
+                    className={`inline-flex px-3 py-1 rounded-full text-xs font-bold border ${
+                      impactLabel === 'High Impact'
+                        ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border-rose-200/50'
+                        : impactLabel === 'Medium'
+                        ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200/50'
+                        : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200/50'
+                    }`}
                   >
-                    View Rationale
-                  </Button>
+                    {impactLabel}
+                  </span>
 
-                  {!isAccepted && !isExecuted && (
+                  {/* Primary Action Button matching mockup */}
+                  {isInventory ? (
                     <Button
                       variant="primary"
                       size="sm"
                       isLoading={updatingId === rec.recommendation_id}
                       onClick={() => handleStatusChange(rec.recommendation_id, 'ACCEPTED')}
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-xs"
                     >
-                      Accept
+                      Take Action
                     </Button>
-                  )}
-
-                  {isAccepted && !isExecuted && (
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                      isLoading={updatingId === rec.recommendation_id}
-                      onClick={() => handleStatusChange(rec.recommendation_id, 'EXECUTED')}
-                    >
-                      Mark Executed
-                    </Button>
-                  )}
-
-                  {!isRejected && (
+                  ) : isPricing ? (
                     <Button
                       variant="secondary"
                       size="sm"
-                      isLoading={updatingId === rec.recommendation_id}
-                      onClick={() => handleStatusChange(rec.recommendation_id, 'REJECTED')}
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
                     >
-                      Dismiss
+                      Review
+                    </Button>
+                  ) : isCustomer ? (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
+                    >
+                      Start Campaign
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
+                    >
+                      Details
                     </Button>
                   )}
                 </div>
-              </Card>
+              </div>
             );
           })}
         </div>
