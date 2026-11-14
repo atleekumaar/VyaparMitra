@@ -135,3 +135,4 @@ export const VerticalBarChart: React.FC<VerticalBarChartProps> = ({
     </div>
   );
 };
+

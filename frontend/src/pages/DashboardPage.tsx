@@ -17,6 +17,7 @@ import {
   CreditCard,
   X,
   Upload,
+  Download,
 } from 'lucide-react';
 import { api } from '../api/client';
 import {
@@ -133,23 +134,42 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     return firstName ? `${timeGreeting}, ${firstName} ☀️` : `${timeGreeting} ☀️`;
   }, [currentUser]);
 
+  // Check if current merchant is the preloaded demo persona (Rajesh Sharma / M001)
+  const isDemo = Boolean(
+    currentUser?.is_demo ||
+    summary?.demo_mode ||
+    currentUser?.merchant_id === 'M001' ||
+    currentUser?.business_id === 'M001' ||
+    currentUser?.id === 'M001'
+  );
+
   // UPI / Digital collection calculation for KPI card
   const upiStats = useMemo(() => {
+    const totalRev = Number(summary?.kpis?.revenue?.value || 0);
     const upiItem = paymentAnalytics?.payment_methods?.find(
       (p) => p.payment_method?.toUpperCase().includes('UPI')
     );
-    const upiRev = upiItem ? upiItem.total_revenue : 32400;
-    const totalRev =
-      paymentAnalytics?.payment_methods?.reduce((acc, p) => acc + p.total_revenue, 0) ||
-      (summary?.kpis?.revenue?.value as number) ||
-      48250;
-    const pct = totalRev > 0 ? Math.round((upiRev / totalRev) * 100) : 67;
+
+    // Non-demo users with 0 sales must strictly show 0
+    if (!isDemo && totalRev === 0) {
+      return {
+        value: 0,
+        formatted_value: '₹0.00',
+        subtext: 'No sales recorded yet',
+      };
+    }
+
+    const upiRev = upiItem ? upiItem.total_revenue : (isDemo ? 32400 : 0);
+    const totalPaymentMethods =
+      paymentAnalytics?.payment_methods?.reduce((acc, p) => acc + p.total_revenue, 0) || totalRev;
+    const pct = totalPaymentMethods > 0 ? Math.round((upiRev / totalPaymentMethods) * 100) : (isDemo ? 67 : 0);
+
     return {
       value: upiRev,
       formatted_value: formatCurrency(upiRev),
-      subtext: `${pct}% of sales`,
+      subtext: totalPaymentMethods > 0 ? `${pct}% of sales` : 'No sales recorded yet',
     };
-  }, [paymentAnalytics, summary]);
+  }, [paymentAnalytics, summary, isDemo]);
 
   // Check onboarding progress
   const totalOrders = summary?.kpis?.orders?.value ? Number(summary.kpis.orders.value) : 0;
@@ -210,6 +230,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         product_name: newProductName.trim(),
         category: newProductCategory,
         selling_price: price,
+        unit_cost: Math.round(price * 0.8 * 100) / 100,
         current_stock: isNaN(stock) ? 50 : stock,
       });
       setIsAddProductOpen(false);
@@ -403,10 +424,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           card={
             summary?.kpis?.revenue || {
               label: 'Revenue',
-              value: 48250,
-              formatted_value: '₹48,250',
-              change_pct: 12.8,
-              subtext: '+12.8% vs last week',
+              value: isDemo ? 48250 : 0,
+              formatted_value: isDemo ? '₹48,250' : '₹0.00',
+              change_pct: isDemo ? 12.8 : null,
+              subtext: isDemo ? '+12.8% vs last week' : 'No sales recorded yet',
             }
           }
           icon={<ShoppingBag className="w-4 h-4 text-blue-600 dark:text-blue-400" />}
@@ -419,10 +440,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           card={
             summary?.kpis?.orders || {
               label: 'Orders',
-              value: 128,
-              formatted_value: '128',
-              change_pct: 6.2,
-              subtext: '+6.2% vs last week',
+              value: isDemo ? 128 : 0,
+              formatted_value: isDemo ? '128' : '0',
+              change_pct: isDemo ? 6.2 : null,
+              subtext: isDemo ? '+6.2% vs last week' : 'Awaiting first transaction',
             }
           }
           icon={<Package className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
@@ -434,10 +455,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           card={
             summary?.kpis?.aov || {
               label: 'Avg. Order Value',
-              value: 376,
-              formatted_value: '₹376',
-              change_pct: 4.1,
-              subtext: '+4.1% vs last week',
+              value: isDemo ? 376 : 0,
+              formatted_value: isDemo ? '₹376' : '₹0.00',
+              change_pct: isDemo ? 4.1 : null,
+              subtext: isDemo ? '+4.1% vs last week' : 'Calculated after first sale',
             }
           }
           icon={<TrendingUp className="w-4 h-4 text-amber-600 dark:text-amber-400" />}
@@ -494,7 +515,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <p className="text-xs text-text-muted leading-relaxed mt-2 font-medium">
                 {actions.length > 0
                   ? `${actions[0].title}: ${actions[0].reason}`
-                  : "Demand for packaged goods is increasing. Consider restocking top 3 items to maximize weekend margins."}
+                  : isDemo
+                  ? "Demand for packaged goods is increasing. Consider restocking top 3 items to maximize weekend margins."
+                  : "Welcome to your digital store! Add items to inventory and record transactions to generate live AI insights."}
               </p>
 
               {actions.length > 0 && actions[0].expected_impact > 0 && (
@@ -842,13 +865,46 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
             </div>
 
+            <div className="flex items-center justify-between px-3 py-2 bg-brand/5 border border-brand/20 rounded-xl text-xs">
+              <span className="text-text-muted text-[11px]">
+                {csvEntityType === 'inventory' && 'Products, categories, price & stock'}
+                {csvEntityType === 'customers' && 'Customer names, phone & credit limits'}
+                {csvEntityType === 'sales' && 'Product sales, quantities & payment mode'}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  let content = '';
+                  let filename = `sample_${csvEntityType}.csv`;
+                  if (csvEntityType === 'inventory') {
+                    content = `product_id,product_name,category,selling_price,unit_cost,current_stock,min_stock_threshold,barcode,unit\nPRD_TATA_SALT,Tata Salt 1kg,Groceries,28,22,85,15,8901030381029,pkt\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,Edible Oils,165,138,42,10,8906007281014,btl\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,Staples,245,210,30,8,8901030012345,bag\nPRD_AMUL_BUTTER,Amul Butter 500g,Dairy,280,248,24,6,8901262010053,pkt\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,Snacks & Bakery,30,24,120,25,8901719101019,pkt\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,Instant Foods,56,45,95,20,8901058852372,pkt\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,Personal Care,58,46,60,12,8901396312450,pcs\n`;
+                  } else if (csvEntityType === 'sales') {
+                    content = `product_id,product_name,quantity,unit_price,payment_method,customer_name,discount\nPRD_TATA_SALT,Tata Salt 1kg,2,28,UPI,Ramesh Kumar,0\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,1,165,UPI,Sunita Verma,0\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,1,245,CASH,Walk-in Customer,0\nPRD_AMUL_BUTTER,Amul Butter 500g,2,280,UPI,Vijay Agarwal,10\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,5,30,CASH,Walk-in Customer,0\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,4,56,UPI,Priya Patel,0\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,2,58,CASH,Mohammad Farhan,0\n`;
+                  } else {
+                    content = `name,phone,email,address,city,credit_limit\nRamesh Kumar Sharma,+919811223344,ramesh.sharma@example.com,Shop 4 Market Complex,Gurugram,10000\nSunita Verma,+919822334455,sunita.verma@example.com,B-12 Civil Lines,Jaipur,8000\nVijay Agarwal,+919833445566,vijay.agarwal@example.com,14 MG Road,Indore,15000\nPriya Patel,+919844556677,priya.patel@example.com,Navrangpura,Ahmedabad,12000\n`;
+                  }
+                  const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = filename;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(url);
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Template
+              </button>
+            </div>
+
             <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
               <Upload className="w-8 h-8 text-brand mx-auto" />
               <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
               <p className="text-[11px] text-text-muted">
-                {csvEntityType === 'inventory' && 'Requires: product_name, selling_price (e.g. sample_inventory.csv)'}
-                {csvEntityType === 'customers' && 'Requires: name, phone or credit_limit (e.g. sample_customers.csv)'}
-                {csvEntityType === 'sales' && 'Requires: product_id, quantity (items must exist in inventory)'}
+                Select your <code>.csv</code> file or use the template above.
               </p>
               <input
                 type="file"
@@ -859,20 +915,31 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   const file = e.target.files?.[0];
                   if (!file) return;
                   try {
-                    // Auto-detect entity type from header if needed
-                    const slice = await file.slice(0, 1024).text();
-                    const firstLine = slice.split('\n')[0].toLowerCase();
+                    // Auto-detect entity type from header
+                    const slice = await file.slice(0, 2048).text();
+                    const firstLine = slice.split(/[\r\n]+/)[0].toLowerCase().trim();
                     let targetType = csvEntityType;
-                    if (firstLine.includes('product_name') && firstLine.includes('selling_price')) {
+
+                    const hasStock = firstLine.includes('current_stock') || firstLine.includes('min_stock') || firstLine.includes('barcode');
+                    const hasSales = firstLine.includes('quantity') || firstLine.includes('qty') || firstLine.includes('payment') || firstLine.includes('discount');
+                    const hasCust = firstLine.includes('credit_limit') || ((firstLine.includes('phone') || firstLine.includes('email')) && firstLine.includes('name'));
+
+                    if (hasStock && !hasSales) {
                       targetType = 'inventory';
-                    } else if (firstLine.includes('name') && (firstLine.includes('credit_limit') || firstLine.includes('phone') || firstLine.includes('email'))) {
+                    } else if (hasCust && !hasSales && !hasStock) {
                       targetType = 'customers';
-                    } else if (firstLine.includes('product_id') && firstLine.includes('quantity')) {
+                    } else if (hasSales) {
                       targetType = 'sales';
+                    } else if (firstLine.includes('selling_price') && (firstLine.includes('product') || firstLine.includes('item'))) {
+                      targetType = 'inventory';
                     }
 
                     const res = await api.uploadCsv(file, targetType);
-                    alert(`CSV processed successfully! ${res.inserted_rows || 0} rows imported into ${targetType}.`);
+                    if (res.failed_rows > 0) {
+                      alert(`Import completed with warnings: ${res.inserted_rows} rows imported, ${res.failed_rows} skipped.`);
+                    } else {
+                      alert(`CSV processed successfully! ${res.inserted_rows || 0} rows imported into ${targetType}.`);
+                    }
                     setIsImportCsvOpen(false);
                     await loadDashboardData();
                   } catch (err: any) {

@@ -262,6 +262,12 @@ def adjust_stock(
 
 
 @router.post(
+    "",
+    response_model=InventoryItemOutput,
+    status_code=status.HTTP_201_CREATED,
+    summary="Add a new SKU to inventory",
+)
+@router.post(
     "/items",
     response_model=InventoryItemOutput,
     status_code=status.HTTP_201_CREATED,
@@ -293,6 +299,8 @@ def create_inventory_item(
 
     now_str = datetime.now(timezone.utc).isoformat()
     inv_id = f"INV_{target_branch}_{req.product_id.strip()}"
+    u_cost = float(req.unit_cost) if req.unit_cost is not None else round(float(req.selling_price) * 0.8, 2)
+    s_price = float(req.selling_price)
 
     db.execute("""
         INSERT INTO inventory (
@@ -309,8 +317,8 @@ def create_inventory_item(
         req.category.strip(),
         req.current_stock,
         req.min_stock_threshold,
-        float(req.unit_cost),
-        float(req.selling_price),
+        u_cost,
+        s_price,
         req.barcode.strip() if req.barcode else None,
         req.unit.strip(),
         now_str,

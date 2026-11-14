@@ -232,7 +232,7 @@ export const App: React.FC = () => {
               />
             )}
 
-            {currentTab === 'analytics' && <AnalyticsPage />}
+            {currentTab === 'analytics' && <AnalyticsPage currentUser={currentUser} />}
 
             {currentTab === 'products' && <ProductsPage />}
 

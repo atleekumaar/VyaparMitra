@@ -39,9 +39,19 @@ import { VerticalBarChart } from '../components/charts/VerticalBarChart';
 import { useLanguage } from '../i18n/LanguageContext';
 import { localizeDynamicText } from '../i18n/translations';
 import { formatCurrency, formatNumber, formatPercent } from '../utils/formatters';
+import { UserProfile } from '../types';
 
-export const AnalyticsPage: React.FC = () => {
+interface AnalyticsPageProps {
+  currentUser?: UserProfile | null;
+}
+
+export const AnalyticsPage: React.FC<AnalyticsPageProps> = ({ currentUser }) => {
   const { t, language } = useLanguage();
+  const isDemo = Boolean(
+    currentUser?.is_demo ||
+    currentUser?.merchant_id === 'M001' ||
+    currentUser?.business_id === 'M001'
+  );
   const [activeTab, setActiveTab] = useState<
     'overview' | 'sales' | 'customers' | 'products' | 'categories' | 'payments' | 'anomalies'
   >('overview');
@@ -165,7 +175,7 @@ export const AnalyticsPage: React.FC = () => {
   // Column Bar Data for Overview
   const verticalBarPoints = useMemo(() => {
     if (!sales?.daily_series || sales.daily_series.length === 0) {
-      return [
+      return isDemo ? [
         { label: 'Mon', value: 85000 },
         { label: 'Tue', value: 120000 },
         { label: 'Wed', value: 165000 },
@@ -173,7 +183,7 @@ export const AnalyticsPage: React.FC = () => {
         { label: 'Fri', value: 210000 },
         { label: 'Sat', value: 290000 },
         { label: 'Sun', value: 233250 },
-      ];
+      ] : [];
     }
     return sales.daily_series.slice(-7).map((d) => {
       const day = new Date(d.date).toLocaleDateString('en-US', { weekday: 'short' });
@@ -183,20 +193,20 @@ export const AnalyticsPage: React.FC = () => {
         subtext: `${d.orders} orders`,
       };
     });
-  }, [sales]);
+  }, [sales, isDemo]);
 
   // Payment Breakdown for Donut in Overview
   const displayPaymentDonut = useMemo(() => {
     if (paymentDonutData.length > 0 && paymentDonutData.some((p) => p.value > 0)) {
       return paymentDonutData;
     }
-    return [
+    return isDemo ? [
       { label: 'UPI', value: 838824, color: '#3B82F6' },
       { label: 'Card', value: 229678, color: '#8B5CF6' },
       { label: 'Cash', value: 126073, color: '#F59E0B' },
       { label: 'Others', value: 53675, color: '#10B981' },
-    ];
-  }, [paymentDonutData]);
+    ] : [];
+  }, [paymentDonutData, isDemo]);
 
   if (loading) {
     return (
@@ -280,11 +290,21 @@ export const AnalyticsPage: React.FC = () => {
                     <h3 className="text-sm font-bold text-text tracking-tight">Sales Overview</h3>
                     <div className="flex items-baseline gap-3 mt-2">
                       <span className="text-2xl sm:text-3xl font-black text-text tracking-tight tabular-nums">
-                        {formatCurrency(sales?.total_revenue || 1248250)}
+                        {formatCurrency(sales?.total_revenue || (isDemo ? 1248250 : 0))}
                       </span>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50">
-                        ▲ +14.6% vs previous 30 days
-                      </span>
+                      {sales?.total_revenue && sales.total_revenue > 0 ? (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50">
+                          ▲ +14.6% vs previous 30 days
+                        </span>
+                      ) : isDemo ? (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50">
+                          ▲ +14.6% vs previous 30 days
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-surface-muted text-text-muted border border-border">
+                          No sales recorded yet
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -359,28 +379,34 @@ export const AnalyticsPage: React.FC = () => {
             <Card className="p-4 sm:p-5">
               <span className="text-xs text-text-muted uppercase font-semibold">Total Orders</span>
               <p className="text-xl sm:text-2xl font-bold text-text tabular-nums mt-1">
-                {formatNumber(sales?.total_orders || 128)}
+                {formatNumber(sales?.total_orders || (isDemo ? 128 : 0))}
               </p>
             </Card>
 
             <Card className="p-4 sm:p-5">
               <span className="text-xs text-text-muted uppercase font-semibold">Avg. Order Value</span>
               <p className="text-xl sm:text-2xl font-bold text-text tabular-nums mt-1">
-                {formatCurrency(sales?.average_order_value || 376)}
+                {formatCurrency(sales?.average_order_value || (isDemo ? 376 : 0))}
               </p>
             </Card>
 
             <Card className="p-4 sm:p-5">
               <span className="text-xs text-text-muted uppercase font-semibold">UPI Collection</span>
               <p className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums mt-1">
-                ₹8,38,824
+                {formatCurrency(
+                  payments?.payment_methods?.find((p) => p.payment_method?.toUpperCase().includes('UPI'))?.total_revenue ||
+                  (isDemo ? 838824 : 0)
+                )}
               </p>
             </Card>
 
             <Card className="p-4 sm:p-5">
               <span className="text-xs text-text-muted uppercase font-semibold">Cash Collection</span>
               <p className="text-xl sm:text-2xl font-bold text-amber-600 dark:text-amber-400 tabular-nums mt-1">
-                ₹1,26,073
+                {formatCurrency(
+                  payments?.payment_methods?.find((p) => p.payment_method?.toUpperCase().includes('CASH'))?.total_revenue ||
+                  (isDemo ? 126073 : 0)
+                )}
               </p>
             </Card>
           </div>
