@@ -87,6 +87,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   // Chart range state
   const [chartRange, setChartRange] = useState<'7D' | '30D' | '90D'>('7D');
   const [quickQuery, setQuickQuery] = useState('');
+  const [csvEntityType, setCsvEntityType] = useState<'inventory' | 'customers' | 'sales'>('inventory');
 
   const loadDashboardData = async () => {
     setLoading(true);
@@ -757,11 +758,38 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </button>
             </div>
 
-            <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer">
+            {/* Entity Selector */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-text block">Data Type to Import:</label>
+              <div className="grid grid-cols-3 gap-1.5 p-1 rounded-xl bg-surface-muted border border-border text-xs">
+                {[
+                  { id: 'inventory', label: 'Inventory / SKUs' },
+                  { id: 'customers', label: 'Customers' },
+                  { id: 'sales', label: 'Sales Records' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setCsvEntityType(tab.id as any)}
+                    className={`py-1.5 px-2 rounded-lg text-[11px] font-semibold transition-all ${
+                      csvEntityType === tab.id
+                        ? 'bg-brand text-white shadow-xs'
+                        : 'text-text-muted hover:text-text'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
               <Upload className="w-8 h-8 text-brand mx-auto" />
               <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
               <p className="text-[11px] text-text-muted">
-                Supports Tally, Vyapar, Khatabook, or custom POS CSV export.
+                {csvEntityType === 'inventory' && 'Requires: product_name, selling_price (e.g. sample_inventory.csv)'}
+                {csvEntityType === 'customers' && 'Requires: name, phone or credit_limit (e.g. sample_customers.csv)'}
+                {csvEntityType === 'sales' && 'Requires: product_id, quantity (items must exist in inventory)'}
               </p>
               <input
                 type="file"
@@ -772,8 +800,20 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   const file = e.target.files?.[0];
                   if (!file) return;
                   try {
-                    await api.uploadCsv(file, 'sales');
-                    alert('CSV processed and imported successfully!');
+                    // Auto-detect entity type from header if needed
+                    const slice = await file.slice(0, 1024).text();
+                    const firstLine = slice.split('\n')[0].toLowerCase();
+                    let targetType = csvEntityType;
+                    if (firstLine.includes('product_name') && firstLine.includes('selling_price')) {
+                      targetType = 'inventory';
+                    } else if (firstLine.includes('name') && (firstLine.includes('credit_limit') || firstLine.includes('phone') || firstLine.includes('email'))) {
+                      targetType = 'customers';
+                    } else if (firstLine.includes('product_id') && firstLine.includes('quantity')) {
+                      targetType = 'sales';
+                    }
+
+                    const res = await api.uploadCsv(file, targetType);
+                    alert(`CSV processed successfully! ${res.inserted_rows || 0} rows imported into ${targetType}.`);
                     setIsImportCsvOpen(false);
                     await loadDashboardData();
                   } catch (err: any) {
@@ -783,7 +823,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               />
               <label
                 htmlFor="csv-file-upload"
-                className="inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover"
+                className="inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs"
               >
                 Browse File
               </label>

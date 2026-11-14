@@ -105,6 +105,15 @@ async def import_csv(
         )
 
     cleaned_fieldnames = [f.strip().lower() for f in reader.fieldnames if f]
+
+    # Smart header auto-detection: if file schema matches another valid type, auto-switch to prevent false rejections
+    if "product_name" in cleaned_fieldnames and "selling_price" in cleaned_fieldnames:
+        normalized_type = "inventory"
+    elif "name" in cleaned_fieldnames and ("phone" in cleaned_fieldnames or "credit_limit" in cleaned_fieldnames or "email" in cleaned_fieldnames):
+        normalized_type = "customers"
+    elif "product_id" in cleaned_fieldnames and "quantity" in cleaned_fieldnames:
+        normalized_type = "sales"
+
     required_cols = REQUIRED_COLUMNS[normalized_type]
 
     missing_cols = [col for col in required_cols if col not in cleaned_fieldnames]
