@@ -7,6 +7,7 @@ or dynamic operational tables for non-demo merchants.
 from __future__ import annotations
 
 import datetime
+import uuid
 from pathlib import Path
 from typing import Any, List
 import pandas as pd
@@ -179,7 +180,7 @@ class AnalyticsService:
                 )
 
         df_r = fetch_table_df("customer_risk_scores")
-        risk_col = "risk_band" if "risk_band" in df_risk.columns else "churn_tier"
+        risk_col = "risk_band" if "risk_band" in df_r.columns else "churn_tier"
         if risk_col in df_r.columns:
             bands = df_r[risk_col].astype(str).str.lower()
             high_r = int((bands == "high").sum())
@@ -443,7 +444,7 @@ class AnalyticsService:
     def record_cash_sale(self, req: Any, merchant_id: str | None = None) -> Any:
         amount = float(req.amount)
         now = datetime.datetime.now()
-        txn_id = f"CASH_{int(now.timestamp())}"
+        txn_id = f"CASH_{int(now.timestamp())}_{uuid.uuid4().hex[:6]}"
         is_explicit_non_demo = merchant_id is not None and merchant_id not in ("M001", "M015")
 
         if is_explicit_non_demo:
