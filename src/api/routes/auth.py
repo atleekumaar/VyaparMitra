@@ -421,18 +421,7 @@ def verify_otp(
 
     now_str = now_utc.isoformat()
     if not user_row:
-        # Auto-provision merchant profile
         user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
-        business_id = req.store_id or "M015"
-        branch_id = f"BR_{business_id}_MAIN"
-
-        # Verify business exists or fallback
-        biz_exists = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone()
-        if not biz_exists:
-            first_biz = db.execute("SELECT id FROM businesses LIMIT 1").fetchone()
-            business_id = first_biz["id"] if first_biz else "M015"
-            branch_id = f"BR_{business_id}_MAIN"
-
         base_username = clean_email.split("@")[0].replace(".", "_")
         username = base_username
         suffix = 1
@@ -442,6 +431,49 @@ def verify_otp(
 
         full_name = req.name.strip() if req.name else username.replace("_", " ").title()
         role = UserRole.OWNER.value
+
+        # Check if an existing business was requested (e.g. staff invite or demo persona)
+        business_id = req.store_id.strip() if req.store_id else None
+        biz_row = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone() if business_id else None
+
+        if not biz_row:
+            # Provision dedicated isolated business for this merchant
+            biz_id = f"BIZ_{uuid.uuid4().hex[:8].upper()}"
+            branch_id = f"BR_{biz_id}_MAIN"
+            store_title = f"{full_name}'s Store"
+
+            db.execute("""
+                INSERT INTO businesses (id, name, business_type, phone, email, city, state, created_at)
+                VALUES (?, ?, 'Retail', ?, ?, 'Noida', 'Uttar Pradesh', ?)
+            """, (biz_id, store_title, req.phone or "+919876543210", clean_email, now_str))
+
+            db.execute("""
+                INSERT INTO branches (id, business_id, name, code, city, state, is_main, created_at)
+                VALUES (?, ?, ?, 'MAIN', 'Noida', 'Uttar Pradesh', 1, ?)
+            """, (branch_id, biz_id, f"{store_title} - Main", now_str))
+
+            # Seed initial catalog so new merchant immediately has products to manage
+            try:
+                prod_rows = db.execute(
+                    "SELECT product_id, product_name, product_category, unit_cost, selling_price FROM clean_products LIMIT 25"
+                ).fetchall()
+                for prod in prod_rows:
+                    p_id, p_name, p_cat, u_cost, s_price = prod[0], prod[1], prod[2], prod[3], prod[4]
+                    inv_id = f"INV_{branch_id}_{p_id}"
+                    db.execute("""
+                        INSERT OR IGNORE INTO inventory (
+                            id, business_id, branch_id, product_id, product_name, category,
+                            current_stock, min_stock_threshold, unit_cost, selling_price, updated_at
+                        ) VALUES (?, ?, ?, ?, ?, ?, 50, 10, ?, ?, ?)
+                    """, (inv_id, biz_id, branch_id, p_id, p_name, p_cat, float(u_cost), float(s_price), now_str))
+            except Exception as seed_err:
+                logger.warning(f"Initial starter catalog seed notice: {seed_err}")
+
+            business_id = biz_id
+        else:
+            business_id = biz_row["id"]
+            main_branch = db.execute("SELECT id FROM branches WHERE business_id = ? ORDER BY is_main DESC LIMIT 1", (business_id,)).fetchone()
+            branch_id = main_branch["id"] if main_branch else f"BR_{business_id}_MAIN"
 
         db.execute(
             """
