@@ -72,7 +72,8 @@ def register_error_handlers(app: FastAPI) -> None:
                     "code": error_code,
                     "message": str(exc.detail),
                     "request_id": req_id,
-                }
+                },
+                "detail": str(exc.detail),
             },
             headers={"X-Request-ID": req_id},
         )
