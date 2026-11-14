@@ -95,6 +95,49 @@ export const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Synchronize dynamic document.title with active tab
+  useEffect(() => {
+    const titles: Record<NavTab, string> = {
+      dashboard: 'Dashboard | VyaparMitra',
+      compare: 'Peer Benchmarks | VyaparMitra',
+      analytics: 'Analytics & Insights | VyaparMitra',
+      products: 'Products & Inventory | VyaparMitra',
+      customers: 'Customers & Khata | VyaparMitra',
+      forecasts: 'Sales & Demand Forecasts | VyaparMitra',
+      recommendations: 'Action Center | VyaparMitra',
+      copilot: 'AI Business Copilot | VyaparMitra',
+      settings: 'Merchant Settings | VyaparMitra',
+    };
+    document.title = titles[currentTab] || 'VyaparMitra';
+  }, [currentTab]);
+
+  // Global Keyboard Shortcuts: / to search, Cmd/Ctrl+K for copilot
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      const isInput =
+        activeEl instanceof HTMLInputElement ||
+        activeEl instanceof HTMLTextAreaElement ||
+        (activeEl as HTMLElement)?.isContentEditable;
+
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setCurrentTab((prev) => (prev === 'copilot' ? 'dashboard' : 'copilot'));
+      } else if (e.key === '/' && !isInput) {
+        e.preventDefault();
+        const searchInput = document.querySelector<HTMLInputElement>(
+          'input[type="text"][placeholder*="Search"], input[type="text"][placeholder*="Khojein"]'
+        );
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleSelectAction = (actionId: string) => {
     setSelectedActionId(actionId);
     setCurrentTab('recommendations');
