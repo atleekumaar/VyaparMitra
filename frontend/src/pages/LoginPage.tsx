@@ -21,9 +21,12 @@ import {
   User,
   ArrowLeft,
   Check,
+  AlertCircle,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { UserCategory, UserProfile } from '../types';
+import { api } from '../api/client';
+
 
 interface LoginPageProps {
   onLogin: (profile: UserProfile) => void;
@@ -140,6 +143,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
   const [soundboxWelcome, setSoundboxWelcome] = useState<boolean>(true);
   const [soundboxSimPlaying, setSoundboxSimPlaying] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [otpNotification, setOtpNotification] = useState<string | null>(null);
+  const [deliveryInfo, setDeliveryInfo] = useState<{ destination: string; mode: string } | null>(null);
 
   // Active persona object
   const activePersona = personas.find((p) => p.category === selectedCategory) || personas[0];
@@ -153,6 +159,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setStoreId(p.id);
     setOtpSent(false);
     setOtpCode(['', '', '', '', '', '']);
+    setAuthError(null);
+    setOtpNotification(null);
   };
 
   // OTP Timer countdown
@@ -163,23 +171,88 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
   }, [otpSent, countdown]);
 
-  // Handle Send OTP
-  const handleRequestOtp = (e: React.FormEvent) => {
+  // Handle Send OTP via Brevo SMTP
+  const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!mobileNumber || mobileNumber.length < 10) return;
+    if (!merchantEmail || !merchantEmail.includes('@')) {
+      setAuthError('Please enter a valid email address to receive your OTP.');
+      return;
+    }
 
     setIsSendingOtp(true);
-    setTimeout(() => {
+    setAuthError(null);
+    setOtpNotification(null);
+
+    try {
+      const res = await api.requestOtp({
+        email: merchantEmail,
+        phone: mobileNumber,
+        name: merchantName || activePersona.name,
+      });
+
       setIsSendingOtp(false);
       setOtpSent(true);
-      setCountdown(30);
+      setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
       setOtpCode(['', '', '', '', '', '']);
-    }, 600);
+      setOtpNotification(res.message);
+      setDeliveryInfo({ destination: res.destination, mode: res.delivery_mode });
+
+      // If demo mode returned a demo OTP, prefill for convenience
+      if (res.demo_otp && res.delivery_mode === 'simulation') {
+        const digits = res.demo_otp.split('');
+        if (digits.length === 6) {
+          setOtpCode(digits);
+        }
+      }
+    } catch (err: any) {
+      setIsSendingOtp(false);
+      setAuthError(err.message || 'Failed to send verification code. Please check your network and Brevo SMTP settings.');
+    }
   };
 
-  // Auto-fill Demo OTP on demand (option provided without directly showing on initial render)
+  // Auto-fill Demo OTP on demand
   const handleAutoFillDemo = () => {
     setOtpCode(['4', '2', '5', '0', '2', '6']);
+    setAuthError(null);
+  };
+
+  // Handle OTP paste (e.g. from clipboard email copy)
+  const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    if (!pastedData) return;
+    const digits = pastedData.split('');
+    const newCode = ['', '', '', '', '', ''];
+    digits.forEach((d, i) => {
+      if (i < 6) newCode[i] = d;
+    });
+    setOtpCode(newCode);
+    if (authError) setAuthError(null);
+    const nextIdx = Math.min(digits.length, 5);
+    const targetInput = document.getElementById(`otp-input-${nextIdx}`);
+    targetInput?.focus();
+  };
+
+  // Handle Resend OTP via Brevo SMTP
+  const handleResendOtp = async () => {
+    if (isSendingOtp) return;
+    setIsSendingOtp(true);
+    setAuthError(null);
+    try {
+      const res = await api.requestOtp({
+        email: merchantEmail,
+        phone: mobileNumber,
+        name: merchantName || activePersona.name,
+      });
+      setIsSendingOtp(false);
+      setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
+      setOtpCode(['', '', '', '', '', '']);
+      setOtpNotification(res.message);
+      setDeliveryInfo({ destination: res.destination, mode: res.delivery_mode });
+    } catch (err: any) {
+      setIsSendingOtp(false);
+      setAuthError(err.message || 'Failed to resend verification code. Please check your network.');
+    }
   };
 
   // Handle OTP digit changes
@@ -190,6 +263,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     const updated = [...otpCode];
     updated[index] = value;
     setOtpCode(updated);
+    if (authError) setAuthError(null);
 
     // Auto-advance
     if (value && index < 5) {
@@ -224,42 +298,87 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setTimeout(() => setSoundboxSimPlaying(false), 3500);
   };
 
-  // Final verification & Login
-  const handleFinalVerifyAndLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsAuthenticating(true);
-
-    if (soundboxWelcome) {
-      try {
-        const welcomeUtterance = new SpeechSynthesisUtterance();
-        if (language === 'hindi') {
-          welcomeUtterance.text = `नमस्ते ${merchantName || activePersona.name} जी, व्यापारमित्र में आपका स्वागत है!`;
-          welcomeUtterance.lang = 'hi-IN';
-        } else {
-          welcomeUtterance.text = `Namaste ${merchantName || activePersona.name} ji, VyaparMitra me aapka swagat hai!`;
-          welcomeUtterance.lang = 'hi-IN';
-        }
-        window.speechSynthesis.speak(welcomeUtterance);
-      } catch {
-        // Speech synthesis fallback
+  const playWelcomeVoice = () => {
+    if (!soundboxWelcome) return;
+    try {
+      const welcomeUtterance = new SpeechSynthesisUtterance();
+      if (language === 'hindi') {
+        welcomeUtterance.text = `नमस्ते ${merchantName || activePersona.name} जी, व्यापारमित्र में आपका स्वागत है!`;
+        welcomeUtterance.lang = 'hi-IN';
+      } else {
+        welcomeUtterance.text = `Namaste ${merchantName || activePersona.name} ji, VyaparMitra me aapka swagat hai!`;
+        welcomeUtterance.lang = 'hi-IN';
       }
+      window.speechSynthesis.speak(welcomeUtterance);
+    } catch {
+      // Speech synthesis fallback
+    }
+  };
+
+  // Final verification & Login
+  const handleFinalVerifyAndLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const enteredOtp = authMethod === 'otp' ? otpCode.join('') : pinCode;
+    if (authMethod === 'otp' && enteredOtp.length < 6) {
+      setAuthError('Please enter all 6 digits of your verification code.');
+      return;
     }
 
-    setTimeout(() => {
+    setIsAuthenticating(true);
+    setAuthError(null);
+
+    try {
+      if (authMethod === 'otp') {
+        const tokenRes = await api.verifyOtp({
+          email: merchantEmail,
+          otp: enteredOtp,
+          phone: mobileNumber,
+          name: merchantName || activePersona.name,
+          store_id: storeId || activePersona.id,
+        });
+
+        // Save session JWT token & permissions
+        localStorage.setItem('vyaparmitra_token', tokenRes.access_token);
+        localStorage.setItem('vyaparmitra_permissions', JSON.stringify(tokenRes.permissions));
+
+        playWelcomeVoice();
+        setIsAuthenticating(false);
+
+        onLogin({
+          id: tokenRes.user.business_id || storeId || activePersona.id,
+          name: tokenRes.user.full_name || merchantName || activePersona.name,
+          email: tokenRes.user.email || merchantEmail,
+          storeName: activePersona.storeName,
+          category: activePersona.category,
+          categoryLabel: t(activePersona.titleKey, activePersona.defaultTitle),
+          phone: tokenRes.user.phone || mobileNumber || activePersona.phone,
+          city: activePersona.city,
+          role: tokenRes.user.role || activePersona.role,
+          avatarInitials: (tokenRes.user.full_name || activePersona.name).substring(0, 2).toUpperCase(),
+        });
+      } else {
+        // PIN mode (demo / offline fallback)
+        playWelcomeVoice();
+        setTimeout(() => {
+          setIsAuthenticating(false);
+          onLogin({
+            id: storeId || activePersona.id,
+            name: merchantName || activePersona.name,
+            email: merchantEmail || activePersona.email,
+            storeName: activePersona.storeName,
+            category: activePersona.category,
+            categoryLabel: t(activePersona.titleKey, activePersona.defaultTitle),
+            phone: mobileNumber || activePersona.phone,
+            city: activePersona.city,
+            role: activePersona.role,
+            avatarInitials: activePersona.avatarInitials,
+          });
+        }, 600);
+      }
+    } catch (err: any) {
       setIsAuthenticating(false);
-      onLogin({
-        id: storeId || activePersona.id,
-        name: merchantName || activePersona.name,
-        email: merchantEmail || activePersona.email,
-        storeName: activePersona.storeName,
-        category: activePersona.category,
-        categoryLabel: t(activePersona.titleKey, activePersona.defaultTitle),
-        phone: mobileNumber || activePersona.phone,
-        city: activePersona.city,
-        role: activePersona.role,
-        avatarInitials: activePersona.avatarInitials,
-      });
-    }, 700);
+      setAuthError(err.message || 'Verification failed. Please check your OTP and try again.');
+    }
   };
 
   return (
@@ -552,6 +671,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
                 {/* Form Body */}
                 <div className="mt-4">
+                  {/* Global Authentication Error Alert */}
+                  {authError && (
+                    <div className="mb-3.5 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 flex items-start gap-2.5 text-xs text-rose-800 dark:text-rose-300 animate-in fade-in-50 duration-200">
+                      <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                      <div className="flex-1 font-medium leading-relaxed">{authError}</div>
+                    </div>
+                  )}
+
                   {authMethod === 'otp' ? (
                     !otpSent ? (
                       /* STEP A: Enter Name, Email & Phone -> Request OTP */
@@ -577,7 +704,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                         {/* Email Field */}
                         <div>
                           <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                            {t('email_input_label', 'Business Email Address')}
+                            {t('email_input_label', 'Business Email Address (Receives Brevo OTP)')}
                           </label>
                           <div className="relative">
                             <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
@@ -617,13 +744,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                         <div className="pt-2">
                           <button
                             type="submit"
-                            disabled={isSendingOtp || mobileNumber.length < 10}
+                            disabled={isSendingOtp || !merchantEmail.includes('@')}
                             className="w-full h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
                           >
                             {isSendingOtp ? (
                               <>
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                <span>Generating 6-Digit OTP...</span>
+                                <span>Sending OTP via Brevo SMTP...</span>
                               </>
                             ) : (
                               <>
@@ -632,6 +759,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                               </>
                             )}
                           </button>
+                          <p className="mt-2 text-[11px] text-center text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5">
+                            <Mail className="w-3 h-3 text-blue-500" />
+                            <span>Verification code is dispatched to your email via Brevo SMTP relay.</span>
+                          </p>
                         </div>
                       </form>
                     ) : (
@@ -641,20 +772,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                         <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between text-xs">
                           <div className="flex items-center gap-2 min-w-0">
                             <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                            <span className="text-emerald-800 dark:text-emerald-300 truncate">
-                              OTP sent to <strong>+91 {mobileNumber}</strong>
-                            </span>
+                            <div className="text-emerald-800 dark:text-emerald-300 truncate text-[11px]">
+                              <span>OTP sent to <strong>{merchantEmail}</strong></span>
+                              {deliveryInfo?.mode === 'simulation' && (
+                                <span className="block text-[10px] text-amber-700 dark:text-amber-400 font-semibold mt-0.5">
+                                  Demo simulation active (Click Auto-fill Demo OTP)
+                                </span>
+                              )}
+                            </div>
                           </div>
                           <button
                             type="button"
                             onClick={() => {
                               setOtpSent(false);
                               setOtpCode(['', '', '', '', '', '']);
+                              setAuthError(null);
                             }}
-                            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline shrink-0 text-[11px] inline-flex items-center gap-1"
+                            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline shrink-0 text-[11px] inline-flex items-center gap-1 ml-2"
                           >
                             <ArrowLeft className="w-3 h-3" />
-                            Edit Number
+                            Edit
                           </button>
                         </div>
 
@@ -680,11 +817,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                                 key={idx}
                                 id={`otp-input-${idx}`}
                                 type="text"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 maxLength={1}
                                 autoFocus={idx === 0}
                                 value={digit}
                                 onChange={(e) => handleOtpChange(idx, e.target.value)}
                                 onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                                onPaste={handleOtpPaste}
                                 placeholder="•"
                                 className="w-10 h-10 sm:w-11 sm:h-11 text-center font-bold text-base sm:text-lg rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 tabular-nums transition-all"
                               />
@@ -700,10 +840,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                               ) : (
                                 <button
                                   type="button"
-                                  onClick={() => setCountdown(30)}
-                                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium"
+                                  disabled={isSendingOtp}
+                                  onClick={handleResendOtp}
+                                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium disabled:opacity-50 inline-flex items-center gap-1"
                                 >
-                                  Resend OTP
+                                  {isSendingOtp ? (
+                                    <>
+                                      <div className="w-3 h-3 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
+                                      <span>Resending...</span>
+                                    </>
+                                  ) : (
+                                    'Resend OTP'
+                                  )}
                                 </button>
                               )}
                             </span>

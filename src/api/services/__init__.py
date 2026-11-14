@@ -1,19 +1,26 @@
 """Services package for VyaparMitra Phase 6 API."""
 
-from src.api.services.analytics_service import AnalyticsService
-from src.api.services.copilot_service_adapter import CopilotServiceAdapter
-from src.api.services.customer_service import CustomerService
-from src.api.services.dashboard_service import DashboardService
-from src.api.services.forecast_service import ForecastService
-from src.api.services.product_service import ProductService
-from src.api.services.recommendation_service import RecommendationService
+_SERVICE_MAP = {
+    "DashboardService": "src.api.services.dashboard_service",
+    "AnalyticsService": "src.api.services.analytics_service",
+    "ProductService": "src.api.services.product_service",
+    "CustomerService": "src.api.services.customer_service",
+    "ForecastService": "src.api.services.forecast_service",
+    "RecommendationService": "src.api.services.recommendation_service",
+    "CopilotServiceAdapter": "src.api.services.copilot_service_adapter",
+    "BrevoEmailService": "src.api.services.email_service",
+    "get_email_service": "src.api.services.email_service",
+}
 
-__all__ = [
-    "DashboardService",
-    "AnalyticsService",
-    "ProductService",
-    "CustomerService",
-    "ForecastService",
-    "RecommendationService",
-    "CopilotServiceAdapter",
-]
+
+def __getattr__(name: str):
+    if name in _SERVICE_MAP:
+        import importlib
+        mod = importlib.import_module(_SERVICE_MAP[name])
+        return getattr(mod, name)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+__all__ = list(_SERVICE_MAP.keys())
+
+

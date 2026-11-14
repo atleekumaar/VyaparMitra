@@ -6,9 +6,10 @@ Provides user registration, login, role enforcement, and user administration.
 from __future__ import annotations
 
 import logging
+import secrets
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 
@@ -27,12 +28,17 @@ from src.api.backend_schemas import (
     CreateUserRequest,
     LoginRequest,
     RegisterBusinessRequest,
+    RequestOtpRequest,
+    RequestOtpResponse,
     RoleInfoItem,
     RolesListResponse,
     TokenResponse,
     UserResponse,
+    VerifyOtpRequest,
 )
+from src.api.config import get_api_config
 from src.api.db import get_db
+from src.api.services.email_service import get_email_service
 
 logger = logging.getLogger("vyaparmitra.api.auth")
 router = APIRouter(prefix="/auth", tags=["Authentication & Access Control"])
@@ -237,6 +243,268 @@ def login(
         user=user_resp,
         permissions=ROLE_PERMISSIONS.get(role, []),
     )
+
+
+@router.post(
+    "/otp/send",
+    response_model=RequestOtpResponse,
+    summary="Generate and send a 6-digit OTP via Brevo SMTP relay",
+)
+@router.post("/otp/request", response_model=RequestOtpResponse, include_in_schema=False)
+def request_otp(
+    req: RequestOtpRequest,
+    request: Request,
+    db: sqlite3.Connection = Depends(get_db),
+) -> RequestOtpResponse:
+    """
+    Generates a secure 6-digit OTP, invalidates prior active codes, persists to SQLite,
+    and delivers via Brevo SMTP relay.
+    """
+    clean_email = req.email.strip().lower()
+    if "@" not in clean_email or "." not in clean_email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A valid email address is required to receive your verification code.",
+        )
+
+    config = get_api_config()
+    now_utc = datetime.now(timezone.utc)
+    expiry_utc = now_utc + timedelta(minutes=config.otp_expiry_minutes)
+    now_str = now_utc.isoformat()
+    expiry_str = expiry_utc.isoformat()
+
+    # Generate secure 6-digit numeric OTP
+    otp_code = f"{secrets.randbelow(900000) + 100000}"
+    otp_id = f"OTP_{uuid.uuid4().hex[:10].upper()}"
+
+    # Invalidate previous unused OTPs for this identifier
+    db.execute(
+        "UPDATE otps SET is_used = 1 WHERE identifier = ? AND is_used = 0",
+        (clean_email,),
+    )
+
+    # Store fresh OTP record
+    db.execute(
+        """
+        INSERT INTO otps (id, identifier, otp_code, purpose, expires_at, attempts, is_used, created_at)
+        VALUES (?, ?, ?, 'LOGIN', ?, 0, 0, ?)
+        """,
+        (otp_id, clean_email, otp_code, expiry_str, now_str),
+    )
+
+    # Dispatch email via Brevo SMTP Service
+    email_service = get_email_service()
+    delivery_result = email_service.send_otp_email(
+        to_email=clean_email,
+        otp_code=otp_code,
+        merchant_name=req.name,
+    )
+
+    # In demo mode, or when running in simulation, provide demo_otp so testing is seamless
+    is_simulated = delivery_result.get("mode") == "simulation" or config.demo_mode
+    demo_otp = otp_code if is_simulated else None
+
+    # Audit logging
+    record_audit_log(
+        db=db,
+        business_id="M015",
+        branch_id="BR_M015_MAIN",
+        user_id="SYSTEM",
+        user_name=req.name or "Merchant User",
+        user_role="GUEST",
+        action="REQUEST_OTP",
+        resource="auth",
+        resource_id=otp_id,
+        details={
+            "email": clean_email,
+            "status": delivery_result.get("status"),
+            "delivery_mode": delivery_result.get("mode", "live"),
+        },
+        ip_address=request.client.host if request.client else "127.0.0.1",
+    )
+
+    return RequestOtpResponse(
+        success=delivery_result.get("success", True),
+        status=delivery_result.get("status", "sent"),
+        message=delivery_result.get("message", f"Verification code sent to {clean_email}."),
+        destination=clean_email,
+        expires_in_seconds=config.otp_expiry_minutes * 60,
+        demo_otp=demo_otp,
+        delivery_mode=delivery_result.get("mode", "live"),
+    )
+
+
+@router.post(
+    "/otp/verify",
+    response_model=TokenResponse,
+    summary="Verify 6-digit OTP and issue JWT access token",
+)
+def verify_otp(
+    req: VerifyOtpRequest,
+    request: Request,
+    db: sqlite3.Connection = Depends(get_db),
+) -> TokenResponse:
+    """
+    Validates a 6-digit OTP against SQLite store with expiry check and attempt lockout.
+    Upon successful verification, loads or auto-provisions merchant account and returns signed JWT.
+    """
+    clean_email = req.email.strip().lower()
+    clean_otp = req.otp.strip()
+    config = get_api_config()
+    now_utc = datetime.now(timezone.utc)
+
+    # Check for demo bypass code if demo_mode is enabled
+    is_demo_bypass = config.demo_mode and clean_otp == "425026"
+
+    if not is_demo_bypass:
+        otp_row = db.execute(
+            """
+            SELECT * FROM otps 
+            WHERE identifier = ? AND is_used = 0 
+            ORDER BY created_at DESC LIMIT 1
+            """,
+            (clean_email,),
+        ).fetchone()
+
+        if not otp_row:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="No active verification code found for this email. Please request a new OTP.",
+            )
+
+        # Check maximum retry attempts (locks after 5 failures)
+        if otp_row["attempts"] >= 5:
+            db.execute("UPDATE otps SET is_used = 1 WHERE id = ?", (otp_row["id"],))
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Too many invalid attempts. This verification code has been locked. Please request a new one.",
+            )
+
+        # Check expiration
+        try:
+            expires_at = datetime.fromisoformat(otp_row["expires_at"])
+            if expires_at.tzinfo is None:
+                expires_at = expires_at.replace(tzinfo=timezone.utc)
+        except Exception:
+            expires_at = now_utc
+
+        if now_utc > expires_at:
+            db.execute("UPDATE otps SET is_used = 1 WHERE id = ?", (otp_row["id"],))
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Verification code has expired. Please request a new code.",
+            )
+
+        # Check code match
+        if otp_row["otp_code"] != clean_otp:
+            db.execute(
+                "UPDATE otps SET attempts = attempts + 1 WHERE id = ?",
+                (otp_row["id"],),
+            )
+            attempts_left = 4 - otp_row["attempts"]
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=f"Invalid verification code. {max(0, attempts_left)} attempts remaining.",
+            )
+
+        # Mark OTP as successfully used
+        db.execute("UPDATE otps SET is_used = 1 WHERE id = ?", (otp_row["id"],))
+
+    # Lookup existing user or auto-provision active merchant
+    user_row = db.execute(
+        "SELECT * FROM users WHERE LOWER(email) = ?",
+        (clean_email,),
+    ).fetchone()
+
+    now_str = now_utc.isoformat()
+    if not user_row:
+        # Auto-provision merchant profile
+        user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
+        business_id = req.store_id or "M015"
+        branch_id = f"BR_{business_id}_MAIN"
+
+        # Verify business exists or fallback
+        biz_exists = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone()
+        if not biz_exists:
+            first_biz = db.execute("SELECT id FROM businesses LIMIT 1").fetchone()
+            business_id = first_biz["id"] if first_biz else "M015"
+            branch_id = f"BR_{business_id}_MAIN"
+
+        base_username = clean_email.split("@")[0].replace(".", "_")
+        username = base_username
+        suffix = 1
+        while db.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone():
+            username = f"{base_username}_{suffix}"
+            suffix += 1
+
+        full_name = req.name.strip() if req.name else username.replace("_", " ").title()
+        role = UserRole.OWNER.value
+
+        db.execute(
+            """
+            INSERT INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, phone, is_active, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+            """,
+            (
+                user_id,
+                business_id,
+                branch_id,
+                username,
+                clean_email,
+                full_name,
+                hash_password(secrets.token_urlsafe(16)),
+                role,
+                req.phone.strip() if req.phone else None,
+                now_str,
+            ),
+        )
+        user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+
+    role = user_row["role"]
+    token_payload = {
+        "sub": user_row["id"],
+        "username": user_row["username"],
+        "email": user_row["email"],
+        "business_id": user_row["business_id"],
+        "branch_id": user_row["branch_id"],
+        "role": role,
+    }
+    access_token = create_access_token(token_payload)
+
+    # Record login audit log
+    record_audit_log(
+        db=db,
+        business_id=user_row["business_id"],
+        branch_id=user_row["branch_id"],
+        user_id=user_row["id"],
+        user_name=user_row["full_name"],
+        user_role=role,
+        action="LOGIN_OTP",
+        resource="auth",
+        resource_id=user_row["id"],
+        details={"email": clean_email, "auth_method": "brevo_otp"},
+        ip_address=request.client.host if request.client else "127.0.0.1",
+    )
+
+    user_resp = UserResponse(
+        id=user_row["id"],
+        business_id=user_row["business_id"],
+        branch_id=user_row["branch_id"],
+        username=user_row["username"],
+        email=user_row["email"],
+        full_name=user_row["full_name"],
+        role=role,
+        phone=user_row["phone"],
+        is_active=bool(user_row["is_active"]),
+        created_at=user_row["created_at"],
+    )
+
+    return TokenResponse(
+        access_token=access_token,
+        user=user_resp,
+        permissions=ROLE_PERMISSIONS.get(role, []),
+    )
+
 
 
 @router.get(

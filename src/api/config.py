@@ -112,6 +112,15 @@ class APIConfig:
     jwt_algorithm: str = field(default_factory=lambda: os.getenv("JWT_ALGORITHM", "HS256"))
     jwt_expire_minutes: int = field(default_factory=lambda: int(os.getenv("JWT_EXPIRE_MINUTES", "1440")))
 
+    # Brevo SMTP Configuration for Email & OTP Delivery
+    brevo_smtp_host: str = field(default_factory=lambda: os.getenv("BREVO_SMTP_HOST", "smtp-relay.brevo.com"))
+    brevo_smtp_port: int = field(default_factory=lambda: int(os.getenv("BREVO_SMTP_PORT", "587")))
+    brevo_smtp_user: str = field(default_factory=lambda: os.getenv("BREVO_SMTP_USER", ""))
+    brevo_smtp_password: str = field(default_factory=lambda: os.getenv("BREVO_SMTP_PASSWORD", ""))
+    brevo_sender_email: str = field(default_factory=lambda: os.getenv("BREVO_SENDER_EMAIL", "no-reply@vyaparmitra.com"))
+    brevo_sender_name: str = field(default_factory=lambda: os.getenv("BREVO_SENDER_NAME", "VyaparMitra Security"))
+    otp_expiry_minutes: int = field(default_factory=lambda: int(os.getenv("OTP_EXPIRY_MINUTES", "10")))
+
 
 _config_instance: APIConfig | None = None
 

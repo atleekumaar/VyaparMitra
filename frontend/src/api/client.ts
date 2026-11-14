@@ -22,6 +22,8 @@ import {
   TrendAnalytics,
   BenchmarkData,
   MerchantInfo,
+  RequestOtpResponse,
+  AuthTokenResponse,
 } from '../types';
 
 const BASE_URL = ((import.meta as any).env?.VITE_API_URL as string) || '';
@@ -221,4 +223,17 @@ export const api = {
       api_key_sid?: string;
       mode: string;
     }>('/api/notifications/status'),
+
+  // OTP Authentication (Brevo SMTP & Mobile OTP)
+  requestOtp: (data: { email: string; phone?: string; name?: string }) =>
+    request<RequestOtpResponse>('/api/auth/otp/send', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  verifyOtp: (data: { email: string; otp: string; phone?: string; name?: string; store_id?: string }) =>
+    request<AuthTokenResponse>('/api/auth/otp/verify', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 };
+

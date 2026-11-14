@@ -73,6 +73,31 @@ class RolesListResponse(BaseModel):
     roles: List[RoleInfoItem]
 
 
+class RequestOtpRequest(BaseModel):
+    email: str = Field(..., min_length=3, max_length=120, description="Recipient email address for OTP delivery")
+    phone: Optional[str] = Field(None, max_length=20, description="Merchant phone number")
+    name: Optional[str] = Field(None, max_length=100, description="Merchant full name")
+
+
+class RequestOtpResponse(BaseModel):
+    success: bool
+    status: str
+    message: str
+    destination: str
+    expires_in_seconds: int
+    demo_otp: Optional[str] = None
+    delivery_mode: str = "live"
+
+
+class VerifyOtpRequest(BaseModel):
+    email: str = Field(..., min_length=3, max_length=120, description="Merchant email address")
+    otp: str = Field(..., min_length=4, max_length=8, description="Verification code")
+    phone: Optional[str] = Field(None, max_length=20, description="Merchant phone number")
+    name: Optional[str] = Field(None, max_length=100, description="Merchant full name")
+    store_id: Optional[str] = Field(None, max_length=50, description="Store or Branch ID")
+
+
+
 # ============================================================================
 # 2. MULTI-BRANCH SCHEMAS
 # ============================================================================

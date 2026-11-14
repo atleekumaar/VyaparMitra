@@ -293,3 +293,32 @@ export interface UserProfile {
   avatarInitials: string;
 }
 
+export interface RequestOtpResponse {
+  success: boolean;
+  status: string;
+  message: string;
+  destination: string;
+  expires_in_seconds: number;
+  demo_otp?: string | null;
+  delivery_mode: string;
+}
+
+export interface AuthTokenResponse {
+  access_token: string;
+  token_type: string;
+  user: {
+    id: string;
+    business_id: string;
+    branch_id?: string | null;
+    username: string;
+    email: string;
+    full_name: string;
+    role: string;
+    phone?: string | null;
+    is_active: boolean;
+    created_at: string;
+  };
+  permissions: string[];
+}
+
+

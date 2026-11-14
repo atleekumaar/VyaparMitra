@@ -11,7 +11,6 @@ import secrets
 import sqlite3
 from datetime import datetime, timezone
 from typing import Generator
-import pandas as pd
 from src.api.config import get_api_config
 
 logger = logging.getLogger("vyaparmitra.api.db")
@@ -47,8 +46,13 @@ def get_db() -> Generator[sqlite3.Connection, None, None]:
         conn.close()
 
 
-def fetch_table_df(table_name: str) -> pd.DataFrame:
+def fetch_table_df(table_name: str):
     """Utility function to load a table into a pandas DataFrame."""
+    try:
+        import pandas as pd
+    except ImportError:
+        logger.warning("pandas is not installed; returning None")
+        return None
     conn = get_db_connection()
     try:
         df = pd.read_sql(f"SELECT * FROM {table_name}", conn)
@@ -59,8 +63,13 @@ def fetch_table_df(table_name: str) -> pd.DataFrame:
         conn.close()
 
 
-def save_table_df(table_name: str, df: pd.DataFrame) -> None:
+def save_table_df(table_name: str, df) -> None:
     """Utility function to save a pandas DataFrame into SQLite table."""
+    try:
+        import pandas as pd
+    except ImportError:
+        logger.warning("pandas is not installed; cannot save DataFrame")
+        return
     conn = get_db_connection()
     try:
         df.to_sql(table_name, conn, if_exists="replace", index=False)
@@ -338,6 +347,21 @@ def init_db() -> None:
         )
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_agent_approvals_lookup ON agent_approvals(business_id, status)")
+
+    # 11. OTP Verification Store (Brevo SMTP & Mobile OTP)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS otps (
+            id TEXT PRIMARY KEY,
+            identifier TEXT NOT NULL,
+            otp_code TEXT NOT NULL,
+            purpose TEXT DEFAULT 'LOGIN',
+            expires_at TEXT NOT NULL,
+            attempts INTEGER DEFAULT 0,
+            is_used INTEGER DEFAULT 0,
+            created_at TEXT NOT NULL
+        )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_otps_lookup ON otps(identifier, is_used, expires_at)")
 
     # Create indices for high-frequency queries
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_business ON users(business_id)")
