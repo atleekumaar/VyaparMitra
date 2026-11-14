@@ -243,7 +243,7 @@ class InventoryCreateRequest(BaseModel):
     category: str
     current_stock: int = Field(default=0, ge=0)
     min_stock_threshold: int = Field(default=10, ge=0)
-    unit_cost: float = Field(..., ge=0.0)
+    unit_cost: Optional[float] = Field(default=None, ge=0.0)
     selling_price: float = Field(..., ge=0.0)
     barcode: Optional[str] = None
     unit: str = "pcs"
@@ -397,7 +397,7 @@ class SupplierListResponse(BaseModel):
 class SupplierInvoiceItem(BaseModel):
     product_id: str
     quantity: int = Field(..., gt=0)
-    unit_cost: float = Field(..., ge=0.0)
+    unit_cost: Optional[float] = Field(default=None, ge=0.0)
 
 
 class SupplierInvoiceRequest(BaseModel):

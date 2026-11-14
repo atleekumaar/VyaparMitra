@@ -1,0 +1,16 @@
+product_id,product_name,category,selling_price,unit_cost,current_stock,min_stock_threshold,barcode,unit
+PRD_TATA_SALT,Tata Salt 1kg,Groceries,28,22,85,15,8901030381029,pkt
+PRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,Edible Oils,165,138,42,10,8906007281014,btl
+PRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,Staples,245,210,30,8,8901030012345,bag
+PRD_AMUL_BUTTER,Amul Butter 500g,Dairy,280,248,24,6,8901262010053,pkt
+PRD_PARLE_G,Parle-G Glucose Biscuits 250g,Snacks & Bakery,30,24,120,25,8901719101019,pkt
+PRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,Instant Foods,56,45,95,20,8901058852372,pkt
+PRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,Personal Care,58,46,60,12,8901396312450,pcs
+PRD_SURF_EXCEL,Surf Excel Easy Wash Detergent 1kg,Household,145,122,38,10,8901030825318,pkt
+PRD_TAJ_TEA,Taj Mahal Tea 500g,Beverages,365,310,28,8,8901030382026,box
+PRD_DAIRY_MILK,Cadbury Dairy Milk Silk 60g,Chocolates,85,68,55,15,7622201138241,bar
+PRD_BHUJIA,Haldiram's Nagpur Bhujia Sev 400g,Snacks & Bakery,115,92,48,12,8904004401201,pkt
+PRD_COLGATE,Colgate Strong Teeth Toothpaste 200g,Personal Care,112,89,65,15,8901314010512,pcs
+PRD_NESCAFE,Nescafe Classic Instant Coffee 50g,Beverages,195,160,32,8,8901058863415,jar
+PRD_GOOD_DAY,Good Day Butter Cookies 200g,Snacks & Bakery,45,36,80,20,8901063012013,pkt
+PRD_SAFFOLA_OIL,Saffola Gold Blended Oil 1L,Edible Oils,180,152,36,10,8901088001012,btl

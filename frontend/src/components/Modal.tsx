@@ -54,17 +54,18 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Dialog */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-white dark:bg-[#0F1D38] text-[#0F2042] dark:text-white rounded-2xl shadow-xl border border-[#CDE5F7] dark:border-[#1E3A6E] overflow-hidden z-10 flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 duration-150`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-surface text-text rounded-2xl shadow-fintech-lg border border-border overflow-hidden z-10 flex flex-col max-h-[90vh] animate-in fade-in-0 zoom-in-95 duration-150`}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#CDE5F7] dark:border-[#1E3A6E] flex items-start justify-between bg-slate-50/50 dark:bg-[#0B1528]/50">
+        <div className="px-6 py-4 border-b border-border flex items-start justify-between bg-surface-muted/50">
           <div>
-            <h3 className="text-base font-bold text-[#002970] dark:text-white">{title}</h3>
-            {subtitle && <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5">{subtitle}</p>}
+            <h3 className="text-base font-bold text-text">{title}</h3>
+            {subtitle && <p className="text-xs text-text-muted mt-0.5">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            aria-label="Close dialog"
+            className="p-1 rounded-lg text-text-muted hover:text-text hover:bg-surface-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
           >
             <X className="w-5 h-5" />
           </button>
@@ -75,7 +76,7 @@ export const Modal: React.FC<ModalProps> = ({
 
         {/* Footer */}
         {footer && (
-          <div className="px-6 py-3 border-t border-[#CDE5F7] dark:border-[#1E3A6E] bg-slate-50/50 dark:bg-[#0B1528]/50 flex items-center justify-end gap-2">
+          <div className="px-6 py-3 border-t border-border bg-surface-muted/50 flex items-center justify-end gap-2">
             {footer}
           </div>
         )}

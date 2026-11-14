@@ -3,16 +3,73 @@
 @tailwind utilities;
 
 @layer base {
-  *, ::before, ::after {
-    border-color: #E2E8F0;
+  :root {
+    /* Light Mode Semantic Color Tokens (RGB triplets) */
+    --surface: 248 250 252;          /* #F8FAFC - Main page background */
+    --surface-muted: 241 245 249;    /* #F1F5F9 - Subdued background / input fill */
+    --surface-card: 255 255 255;     /* #FFFFFF - Card & modal surface */
+    --surface-elevated: 255 255 255; /* #FFFFFF - Elevated menus, popovers */
+
+    --border: 226 232 240;           /* #E2E8F0 - Default border */
+    --border-subtle: 241 245 249;    /* #F1F5F9 - Light hairline dividers */
+    --border-strong: 203 213 225;    /* #CBD5E1 - Active/hover borders */
+
+    --text: 15 23 42;                /* #0F172A - Primary heading & body */
+    --text-muted: 100 116 139;       /* #64748B - Secondary / subtext */
+    --text-subtle: 148 163 184;      /* #94A3B8 - Placeholders & disabled */
+
+    --brand: 37 99 235;              /* #2563EB - Primary Brand Blue */
+    --brand-hover: 29 78 216;        /* #1D4ED8 */
+    --brand-soft: 239 246 255;       /* #EFF6FF */
+    --brand-border: 191 219 254;     /* #BFDBFE */
+
+    --success: 22 163 74;            /* #16A34A - Positive / Profit / Up */
+    --success-soft: 240 253 244;     /* #F0FDF4 */
+    --warning: 217 119 6;            /* #D97706 - Warning / Attention */
+    --warning-soft: 255 251 235;     /* #FFFBEB */
+    --danger: 220 38 38;             /* #DC2626 - Loss / Alert / Down */
+    --danger-soft: 254 242 242;      /* #FEF2F2 */
+    --info: 14 165 233;              /* #0EA5E9 - Information */
+    --info-soft: 240 249 255;        /* #F0F9FF */
   }
-  .dark *, .dark ::before, .dark ::after {
-    border-color: #1E293B;
+
+  .dark {
+    /* Dark Mode Semantic Color Tokens (Midnight Fintech Palette) */
+    --surface: 11 15 25;             /* #0B0F19 - Main dark background */
+    --surface-muted: 17 24 39;       /* #111827 - Subdued dark section */
+    --surface-card: 17 24 39;        /* #111827 - Dark card surface */
+    --surface-elevated: 30 41 59;    /* #1E293B - Elevated dark modals */
+
+    --border: 30 41 59;              /* #1E293B - Default dark border */
+    --border-subtle: 23 32 48;       /* #172030 */
+    --border-strong: 51 65 85;       /* #334155 - Hover border */
+
+    --text: 248 250 252;             /* #F8FAFC - Dark mode primary text */
+    --text-muted: 148 163 184;       /* #94A3B8 - Dark mode secondary text */
+    --text-subtle: 100 116 139;      /* #64748B - Disabled text */
+
+    --brand: 59 130 246;             /* #3B82F6 - Brighter blue for dark mode */
+    --brand-hover: 96 165 250;       /* #60A5FA */
+    --brand-soft: 30 58 138;         /* #1E3A8A / bg-blue-950/40 */
+    --brand-border: 37 99 235;       /* #2563EB */
+
+    --success: 34 197 94;            /* #22C55E */
+    --success-soft: 20 83 45;        /* #14532D */
+    --warning: 245 158 11;           /* #F59E0B */
+    --warning-soft: 120 53 15;       /* #78350F */
+    --danger: 239 68 68;             /* #EF4444 */
+    --danger-soft: 127 29 29;        /* #7F1D1D */
+    --info: 56 189 248;              /* #38BDF8 */
+    --info-soft: 12 74 110;          /* #0C4A6E */
+  }
+
+  *, ::before, ::after {
+    border-color: rgb(var(--border));
   }
 
   body {
-    background-color: #F8FAFC;
-    color: #0F172A;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--text));
     font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
     -webkit-font-smoothing: antialiased;
@@ -21,13 +78,15 @@
     letter-spacing: -0.011em;
   }
 
-  .dark body {
-    background-color: #0B0F19;
-    color: #F8FAFC;
-  }
-
   h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
+    color: rgb(var(--text));
+  }
+
+  /* Accessible focus outlines */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
   }
 }
 
@@ -46,21 +105,14 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 9999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: rgb(var(--border-strong));
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: rgb(var(--text-muted));
 }
 
-/* Soundbox pulse animation */
+/* Pulse and wave animations */
 @keyframes soundboxPulse {
   0%, 100% {
     transform: scaleY(0.4);
@@ -74,6 +126,19 @@
 
 .animate-soundbox-wave {
   animation: soundboxPulse 1.2s ease-in-out infinite;
+}
+
+/* Atmospheric Ambient Mesh Glow for Modern Fintech Aesthetic */
+.bg-ambient-mesh {
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(232, 121, 249, 0.14) 0px, transparent 45%),
+    radial-gradient(at 85% 25%, rgba(147, 197, 253, 0.20) 0px, transparent 50%),
+    radial-gradient(at 0% 10%, rgba(199, 210, 254, 0.15) 0px, transparent 40%);
+}
+.dark .bg-ambient-mesh {
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+    radial-gradient(at 85% 25%, rgba(59, 130, 246, 0.12) 0px, transparent 50%);
 }
 
 /* Reduced motion support */

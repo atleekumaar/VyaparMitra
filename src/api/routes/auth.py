@@ -437,38 +437,31 @@ def verify_otp(
         biz_row = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone() if business_id else None
 
         if not biz_row:
-            # Provision dedicated isolated business for this merchant
+            # Provision dedicated isolated business for this merchant with clean 0 data
             biz_id = f"BIZ_{uuid.uuid4().hex[:8].upper()}"
             branch_id = f"BR_{biz_id}_MAIN"
-            store_title = f"{full_name}'s Store"
+            clean_name = req.name.strip() if req.name and req.name.strip() else clean_email.split("@")[0].replace(".", " ").title()
+            biz_name = f"{clean_name}'s Store"
 
             db.execute("""
                 INSERT INTO businesses (id, name, business_type, phone, email, city, state, created_at)
-                VALUES (?, ?, 'Retail', ?, ?, 'Noida', 'Uttar Pradesh', ?)
-            """, (biz_id, store_title, req.phone or "+919876543210", clean_email, now_str))
-
+                VALUES (?, ?, 'Retail & FMCG', ?, ?, 'India', 'India', ?)
+            """, (
+                biz_id,
+                biz_name,
+                req.phone.strip() if req.phone else "+919000000000",
+                clean_email,
+                now_str,
+            ))
             db.execute("""
-                INSERT INTO branches (id, business_id, name, code, city, state, is_main, created_at)
-                VALUES (?, ?, ?, 'MAIN', 'Noida', 'Uttar Pradesh', 1, ?)
-            """, (branch_id, biz_id, f"{store_title} - Main", now_str))
-
-            # Seed initial catalog so new merchant immediately has products to manage
-            try:
-                prod_rows = db.execute(
-                    "SELECT product_id, product_name, product_category, unit_cost, selling_price FROM clean_products LIMIT 25"
-                ).fetchall()
-                for prod in prod_rows:
-                    p_id, p_name, p_cat, u_cost, s_price = prod[0], prod[1], prod[2], prod[3], prod[4]
-                    inv_id = f"INV_{branch_id}_{p_id}"
-                    db.execute("""
-                        INSERT OR IGNORE INTO inventory (
-                            id, business_id, branch_id, product_id, product_name, category,
-                            current_stock, min_stock_threshold, unit_cost, selling_price, updated_at
-                        ) VALUES (?, ?, ?, ?, ?, ?, 50, 10, ?, ?, ?)
-                    """, (inv_id, biz_id, branch_id, p_id, p_name, p_cat, float(u_cost), float(s_price), now_str))
-            except Exception as seed_err:
-                logger.warning(f"Initial starter catalog seed notice: {seed_err}")
-
+                INSERT INTO branches (id, business_id, name, code, is_main, created_at)
+                VALUES (?, ?, ?, 'MAIN', 1, ?)
+            """, (
+                branch_id,
+                biz_id,
+                f"{biz_name} - Main Branch",
+                now_str,
+            ))
             business_id = biz_id
         else:
             business_id = biz_row["id"]

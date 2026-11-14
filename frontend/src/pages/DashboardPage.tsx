@@ -10,70 +10,181 @@ import {
   Trophy,
   Volume2,
   Activity,
+  PlusCircle,
+  FileSpreadsheet,
+  CheckCircle2,
+  AlertTriangle,
+  CreditCard,
+  X,
+  Upload,
+  Download,
 } from 'lucide-react';
 import { api } from '../api/client';
-import { ActionItem, BenchmarkData, DashboardSummary, SalesAnalytics, DailySalesPoint } from '../types';
+import {
+  ActionItem,
+  BenchmarkData,
+  DashboardSummary,
+  SalesAnalytics,
+  ProductRank,
+  CategoryShare,
+  PaymentAnalytics,
+  UserProfile,
+} from '../types';
 import { MetricCard } from '../components/MetricCard';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
-import { CardSkeleton, ChartSkeleton } from '../components/LoadingSkeleton';
-import { ErrorBanner } from '../components/EmptyState';
+import { AreaTrendChart } from '../components/charts/AreaTrendChart';
+import { DonutChart } from '../components/charts/DonutChart';
+import { HorizontalBarChart } from '../components/charts/HorizontalBarChart';
+import { Card } from '../components/Card';
+import { PageHeader } from '../components/PageHeader';
+import { SectionHeader } from '../components/SectionHeader';
 import { useLanguage } from '../i18n/LanguageContext';
 import { localizeDynamicText } from '../i18n/translations';
+import { formatCurrency, formatNumber } from '../utils/formatters';
 
 interface DashboardPageProps {
   onNavigateTab: (tab: any) => void;
   onSelectAction: (actionId: string) => void;
   onQuickCopilot: (query: string) => void;
+  currentUser?: UserProfile | null;
 }
 
 export const DashboardPage: React.FC<DashboardPageProps> = ({
   onNavigateTab,
   onSelectAction,
   onQuickCopilot,
+  currentUser,
 }) => {
   const { t, language } = useLanguage();
+
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [actions, setActions] = useState<ActionItem[]>([]);
   const [salesAnalytics, setSalesAnalytics] = useState<SalesAnalytics | null>(null);
   const [benchmark, setBenchmark] = useState<BenchmarkData | null>(null);
+  const [topProducts, setTopProducts] = useState<any[]>([]);
+  const [paymentAnalytics, setPaymentAnalytics] = useState<PaymentAnalytics | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [quickQuery, setQuickQuery] = useState<string>('');
-  const [soundboxPlayed, setSoundboxPlayed] = useState<boolean>(false);
-  const [timeRange, setTimeRange] = useState<'7D' | '14D'>('7D');
-  const [activeDayIndex, setActiveDayIndex] = useState<number | null>(null);
 
-  const loadData = async () => {
+  // Quick Action Modals
+  const [isRecordSaleOpen, setIsRecordSaleOpen] = useState(false);
+  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
+  const [isImportCsvOpen, setIsImportCsvOpen] = useState(false);
+
+  // Record Sale Form state
+  const [saleAmount, setSaleAmount] = useState('');
+  const [saleProductName, setSaleProductName] = useState('');
+  const [salePaymentMethod, setSalePaymentMethod] = useState<'CASH' | 'UPI' | 'CARD'>('CASH');
+  const [isSubmittingSale, setIsSubmittingSale] = useState(false);
+
+  // Add Product Form state
+  const [newProductName, setNewProductName] = useState('');
+  const [newProductCategory, setNewProductCategory] = useState('Groceries');
+  const [newProductPrice, setNewProductPrice] = useState('');
+  const [newProductStock, setNewProductStock] = useState('50');
+  const [isSubmittingProduct, setIsSubmittingProduct] = useState(false);
+
+  // Chart range state
+  const [chartRange, setChartRange] = useState<'7D' | '30D' | '90D'>('7D');
+  const [quickQuery, setQuickQuery] = useState('');
+  const [csvEntityType, setCsvEntityType] = useState<'inventory' | 'customers' | 'sales'>('inventory');
+
+  const loadDashboardData = async () => {
     setLoading(true);
     setError(null);
     try {
-      const [sumRes, actRes, salesRes] = await Promise.all([
+      const [sumRes, actRes, salesRes, prodRes, payRes] = await Promise.all([
         api.getDashboardSummary(),
         api.getDashboardActions(5),
         api.getSalesAnalytics(),
+        api.getProductAnalytics().catch(() => ({ top_performers: [] })),
+        api.getPaymentAnalytics().catch(() => null),
       ]);
+
       setSummary(sumRes);
       setActions(actRes.actions || []);
       setSalesAnalytics(salesRes);
+      setTopProducts(prodRes?.top_performers || []);
+      setPaymentAnalytics(payRes);
 
       try {
-        const benchRes = await api.getMerchantBenchmark(sumRes.merchant_id || 'M015');
+        const benchRes = await api.getMerchantBenchmark(sumRes.merchant_id);
         setBenchmark(benchRes);
       } catch {
         // Fallback silently if benchmark not yet computed
       }
     } catch (err: any) {
-      setError(err?.message || 'Failed to load dashboard data.');
+      setError(err?.message || 'Failed to load dashboard metrics.');
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadData();
+    loadDashboardData();
   }, []);
 
+  // Greeting
+  const greeting = useMemo(() => {
+    const hour = new Date().getHours();
+    const timeGreeting =
+      hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+    const firstName = currentUser?.name ? currentUser.name.split(' ')[0] : null;
+    return firstName ? `${timeGreeting}, ${firstName} ☀️` : `${timeGreeting} ☀️`;
+  }, [currentUser]);
+
+  // Check if current merchant is the preloaded demo persona (Rajesh Sharma / M001)
+  const isDemo = Boolean(
+    currentUser?.is_demo ||
+    summary?.demo_mode ||
+    currentUser?.merchant_id === 'M001' ||
+    currentUser?.business_id === 'M001' ||
+    currentUser?.id === 'M001'
+  );
+
+  // UPI / Digital collection calculation for KPI card
+  const upiStats = useMemo(() => {
+    const totalRev = Number(summary?.kpis?.revenue?.value || 0);
+    const upiItem = paymentAnalytics?.payment_methods?.find(
+      (p) => p.payment_method?.toUpperCase().includes('UPI')
+    );
+
+    // Non-demo users with 0 sales must strictly show 0
+    if (!isDemo && totalRev === 0) {
+      return {
+        value: 0,
+        formatted_value: '₹0.00',
+        subtext: 'No sales recorded yet',
+      };
+    }
+
+    const upiRev = upiItem ? upiItem.total_revenue : (isDemo ? 32400 : 0);
+    const totalPaymentMethods =
+      paymentAnalytics?.payment_methods?.reduce((acc, p) => acc + p.total_revenue, 0) || totalRev;
+    const pct = totalPaymentMethods > 0 ? Math.round((upiRev / totalPaymentMethods) * 100) : (isDemo ? 67 : 0);
+
+    return {
+      value: upiRev,
+      formatted_value: formatCurrency(upiRev),
+      subtext: totalPaymentMethods > 0 ? `${pct}% of sales` : 'No sales recorded yet',
+    };
+  }, [paymentAnalytics, summary, isDemo]);
+
+  // Check onboarding progress
+  const totalOrders = summary?.kpis?.orders?.value ? Number(summary.kpis.orders.value) : 0;
+  const hasProducts = topProducts.length > 0;
+  const hasSales = totalOrders > 0;
+  const onboardingCompletedCount = 1 + (hasProducts ? 1 : 0) + (hasSales ? 1 : 0);
+  const showOnboarding = onboardingCompletedCount < 3 && !summary?.demo_mode;
+
+  // Sparkline data from daily series
+  const sparklineSeries = useMemo(() => {
+    if (!salesAnalytics?.daily_series) return [];
+    return salesAnalytics.daily_series.slice(-7).map((d) => d.revenue);
+  }, [salesAnalytics]);
+
+  // Handle Quick Ask
   const handleQuickAsk = (e: React.FormEvent) => {
     e.preventDefault();
     if (quickQuery.trim()) {
@@ -81,428 +192,414 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     }
   };
 
-  const handleTestSoundbox = () => {
-    setSoundboxPlayed(true);
+  // Submit Quick Sale
+  const handleRecordSaleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const amt = parseFloat(saleAmount);
+    if (isNaN(amt) || amt <= 0) return;
+
+    setIsSubmittingSale(true);
     try {
-      const utterance = new SpeechSynthesisUtterance();
-      if (language === 'hindi') {
-        utterance.text = '४२५० रुपये प्राप्त हुए!';
-        utterance.lang = 'hi-IN';
-      } else {
-        utterance.text = '4250 rupees prapt hue!';
-        utterance.lang = 'hi-IN';
-      }
-      utterance.rate = 1.0;
-      window.speechSynthesis.speak(utterance);
-    } catch (e) {
-      console.error('Audio playback failed', e);
+      await api.recordCashSale({
+        amount: amt,
+        product_name: saleProductName || 'Direct Counter Sale',
+      });
+      setIsRecordSaleOpen(false);
+      setSaleAmount('');
+      setSaleProductName('');
+      await loadDashboardData();
+    } catch (err: any) {
+      alert(`Error recording sale: ${err?.message}`);
+    } finally {
+      setIsSubmittingSale(false);
     }
-    setTimeout(() => setSoundboxPlayed(false), 4000);
   };
 
-  // Slice historical days based on selected time range (7D / 14D)
-  const daysToDisplay = useMemo<DailySalesPoint[]>(() => {
-    const series = salesAnalytics?.daily_series || [];
-    const count = timeRange === '7D' ? 7 : 14;
-    return series.slice(-count);
-  }, [salesAnalytics, timeRange]);
+  // Submit Quick Product
+  const handleAddProductSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const price = parseFloat(newProductPrice);
+    const stock = parseInt(newProductStock, 10);
+    if (!newProductName.trim() || isNaN(price) || price <= 0) return;
 
-  // Derived statistics for the chart
-  const { periodTotal, periodOrders, periodAvg, maxRev } = useMemo(() => {
-    const total = daysToDisplay.reduce((sum, d) => sum + (d.revenue || 0), 0);
-    const orders = daysToDisplay.reduce((sum, d) => sum + (d.orders || 0), 0);
-    const avg = daysToDisplay.length > 0 ? total / daysToDisplay.length : 0;
-    const max = Math.max(...daysToDisplay.map((d) => d.revenue || 0), 1000);
-    return { periodTotal: total, periodOrders: orders, periodAvg: avg, maxRev: max };
-  }, [daysToDisplay]);
+    setIsSubmittingProduct(true);
+    try {
+      const pid = `SKU_${Date.now().toString().slice(-6)}`;
+      await api.createInventoryItem({
+        product_id: pid,
+        product_name: newProductName.trim(),
+        category: newProductCategory,
+        selling_price: price,
+        unit_cost: Math.round(price * 0.8 * 100) / 100,
+        current_stock: isNaN(stock) ? 50 : stock,
+      });
+      setIsAddProductOpen(false);
+      setNewProductName('');
+      setNewProductPrice('');
+      await loadDashboardData();
+    } catch (err: any) {
+      alert(`Error adding product: ${err?.message}`);
+    } finally {
+      setIsSubmittingProduct(false);
+    }
+  };
 
-  // Daily Run-Rate Calculations
-  const { projectedDailyRunRate, recentDailyRunRate, runRateDiffPct } = useMemo(() => {
-    const proj = summary?.forecast_7d_total_revenue ? summary.forecast_7d_total_revenue / 7 : 0;
-    const recent7 = (salesAnalytics?.daily_series || []).slice(-7);
-    const recentTotal = recent7.reduce((sum, d) => sum + (d.revenue || 0), 0);
-    const actual = recent7.length > 0 ? recentTotal / recent7.length : 0;
-    const diff = actual > 0 ? ((proj - actual) / actual) * 100 : 0;
-    return {
-      projectedDailyRunRate: proj,
-      recentDailyRunRate: actual,
-      runRateDiffPct: diff,
-    };
-  }, [summary, salesAnalytics]);
+  // Trend data formatted for AreaTrendChart
+  const trendPoints = useMemo(() => {
+    if (!salesAnalytics?.daily_series) return [];
+    return salesAnalytics.daily_series.map((d) => ({
+      date: d.date,
+      revenue: d.revenue,
+      orders: d.orders,
+    }));
+  }, [salesAnalytics]);
 
-  if (loading) {
-    return (
-      <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-150">
-        {/* Header Skeleton */}
-        <div className="py-1">
-          <div className="h-7 bg-slate-200 dark:bg-slate-800 rounded-lg w-1/3 mb-2 animate-pulse" />
-          <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded w-1/4 animate-pulse" />
-        </div>
+  // Donut data for Payment methods
+  const paymentDonutData = useMemo(() => {
+    if (!paymentAnalytics?.payment_methods) return [];
+    return paymentAnalytics.payment_methods.map((p) => ({
+      label: p.payment_method,
+      value: p.total_revenue,
+      subtext: `${p.transaction_count} txns`,
+    }));
+  }, [paymentAnalytics]);
 
-        {/* KPI Grid Skeletons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <CardSkeleton key={i} />
-          ))}
-        </div>
-
-        {/* Main Content Skeletons */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          <div className="lg:col-span-7 xl:col-span-8">
-            <ChartSkeleton />
-          </div>
-          <div className="lg:col-span-5 xl:col-span-4 space-y-6">
-            <CardSkeleton />
-            <CardSkeleton />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error || !summary) {
-    return (
-      <div className="space-y-6">
-        <ErrorBanner message={error || 'Could not load dashboard.'} onRetry={loadData} />
-      </div>
-    );
-  }
+  // Horizontal bar data for Top Products
+  const topProductsBarData = useMemo(() => {
+    return topProducts.map((p) => ({
+      id: p.product_id,
+      label: p.product_name,
+      value: p.revenue,
+      category: p.category,
+      subtext: `${p.units || 0} units`,
+    }));
+  }, [topProducts]);
 
   return (
-    <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-150">
-      {/* Executive Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
-        <div>
-          <h1 className="text-2xl sm:text-[28px] font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
-            {t('greeting', 'Good Morning, Merchant 👋')}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal leading-normal max-w-xl">
-            {t('welcome_subtext')}
-          </p>
-        </div>
-
-        {/* Header Action Tools */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 flex-wrap">
-          {/* Soundbox Live Indicator & Voice Trigger */}
-          <div className="inline-flex items-center rounded-lg bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-0.5 shadow-2xs">
-            <div className="flex items-center gap-1.5 px-2.5 py-1 text-xs text-slate-600 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-medium hidden md:inline">Soundbox 4G</span>
-              <span className="font-medium md:hidden">Live</span>
-            </div>
-            <button
-              onClick={handleTestSoundbox}
-              className="h-7 px-2.5 rounded-md bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 transition-colors inline-flex items-center gap-1.5"
-              title="Test Voice Payment Alert"
-              aria-label="Test Voice Payment Alert"
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-200">
+      {/* Top Header with Greeting & Quick Action Buttons */}
+      <PageHeader
+        title={greeting}
+        subtitle="Here's how your business is performing today."
+        badge={
+          summary?.demo_mode ? (
+            <Badge variant="demo" dot>
+              Demo Simulation
+            </Badge>
+          ) : (
+            <Badge variant="success" dot>
+              Live Store
+            </Badge>
+          )
+        }
+        dateRange={summary?.date_range || 'Last 30 Days'}
+        actions={
+          <div className="flex items-center gap-2 flex-wrap">
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setIsAddProductOpen(true)}
+              className="gap-1.5"
             >
-              <Volume2 className={`w-3.5 h-3.5 text-blue-600 dark:text-blue-400 ${soundboxPlayed ? 'animate-bounce' : ''}`} />
-              <span>
-                {soundboxPlayed
-                  ? (language === 'hindi' ? '₹4,250 प्राप्त हुए!' : '₹4,250 prapt hue!')
-                  : t('test_audio', 'Test Audio')}
-              </span>
-            </button>
+              <Package className="w-3.5 h-3.5 text-brand" />
+              <span>Add Product</span>
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => setIsImportCsvOpen(true)}
+              className="gap-1.5"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5 text-brand" />
+              <span>Import CSV</span>
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={() => setIsRecordSaleOpen(true)}
+              className="gap-1.5 shadow-fintech"
+            >
+              <PlusCircle className="w-3.5 h-3.5" />
+              <span>Record Sale</span>
+            </Button>
           </div>
+        }
+      />
 
-          {/* Today's Brief Copilot Shortcut */}
+      {/* Demo Simulation Alert Banner (only when in demo mode) */}
+      {summary?.demo_mode && (
+        <div className="rounded-2xl border border-purple-500/20 bg-purple-500/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold text-text">Demo Simulation Active</span>
+                <span className="text-[10px] text-purple-600 dark:text-purple-300 font-semibold px-2 py-0.5 rounded-full bg-purple-500/10">
+                  Pre-loaded Data
+                </span>
+              </div>
+              <p className="text-xs text-text-muted mt-0.5">
+                VyaparMitra is showing simulated kirana benchmarks. Add a product or record a sale to switch seamlessly to your own live store books.
+              </p>
+            </div>
+          </div>
           <Button
             variant="secondary"
-            size="md"
-            onClick={() => onQuickCopilot(language === 'hindi' ? 'मुझे आज का पूरा व्यापार सारांश बताओ' : 'Mujhe aaj ka poora business brief batao')}
-            className="h-8.5 px-3 text-xs font-medium"
+            size="sm"
+            onClick={() => setIsRecordSaleOpen(true)}
+            className="shrink-0"
           >
-            <Sparkles className="w-3.5 h-3.5 mr-1.5 text-purple-600 dark:text-purple-400" />
-            {t('todays_brief', "Today's Brief")}
-          </Button>
-
-          {/* Priority Actions CTA Button */}
-          <Button
-            variant="primary"
-            size="md"
-            onClick={() => onNavigateTab('recommendations')}
-            className="h-8.5 px-3.5 text-xs font-medium"
-          >
-            <span>{summary.total_actions_pending} {t('priority_actions_btn', 'Priority Actions')}</span>
-            <ArrowRight className="w-3.5 h-3.5 ml-1" />
+            Record Your Real Sale
           </Button>
         </div>
-      </div>
+      )}
 
-      {/* Primary KPI Metric Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-        <MetricCard
-          card={summary.kpis.revenue}
-          icon={<DollarSign className="w-4 h-4" />}
-          accentColor="blue"
-          isHero={true}
-        />
-        <MetricCard
-          card={summary.kpis.orders}
-          icon={<ShoppingBag className="w-4 h-4" />}
-          accentColor="navy"
-        />
-        <MetricCard
-          card={summary.kpis.aov}
-          icon={<TrendingUp className="w-4 h-4" />}
-          accentColor="green"
-        />
-        <MetricCard
-          card={summary.kpis.units}
-          icon={<Package className="w-4 h-4" />}
-          accentColor="orange"
-        />
-      </div>
-
-      {/* Primary Content Region: 2:1 Proportional Grid for Chart and Operations */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-        {/* Left Column (8 cols): Revenue Velocity & Momentum Center */}
-        <div className="lg:col-span-7 xl:col-span-8">
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs transition-colors overflow-hidden">
-            {/* Chart Header: Title & Controls */}
-            <div className="p-5 sm:p-6 pb-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2 tracking-tight">
-                    <Activity className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                    <span>
-                      {timeRange === '7D'
-                        ? t('trend_7d', '7-Day Revenue Trend')
-                        : t('trend_14d', '14-Day Revenue Trend')}
-                    </span>
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal leading-normal">
-                    Daily store collection momentum compared to weekly predictive run-rate target
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 self-start sm:self-auto">
-                  {/* Segmented Range Controls */}
-                  <div className="flex items-center bg-slate-100 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 rounded-lg p-0.5 text-xs font-medium">
-                    <button
-                      onClick={() => setTimeRange('7D')}
-                      className={`px-3 py-1 rounded-md transition-colors ${
-                        timeRange === '7D'
-                          ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs font-semibold'
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                      }`}
-                    >
-                      7D
-                    </button>
-                    <button
-                      onClick={() => setTimeRange('14D')}
-                      className={`px-3 py-1 rounded-md transition-colors ${
-                        timeRange === '14D'
-                          ? 'bg-white dark:bg-slate-700 text-blue-600 dark:text-blue-300 shadow-2xs font-semibold'
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                      }`}
-                    >
-                      14D
-                    </button>
-                  </div>
-
-                  {/* Trend Indicator Badge */}
-                  <span
-                    className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
-                      summary.sales_trend_direction === 'DECREASING'
-                        ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
-                        : summary.sales_trend_direction === 'INCREASING'
-                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
-                    }`}
-                  >
-                    {summary.sales_trend_direction === 'DECREASING'
-                      ? t('trend_decreasing', 'Trend: Decreasing')
-                      : summary.sales_trend_direction === 'INCREASING'
-                      ? t('trend_increasing', 'Trend: Increasing')
-                      : t('trend_stable', 'Trend: Stable')}
-                  </span>
-                </div>
+      {/* 3-Step Onboarding Checklist for New Merchants */}
+      {showOnboarding && (
+        <Card className="border-brand/30 bg-gradient-to-r from-brand-soft/40 via-surface-card to-surface-card">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-wider text-brand">
+                  Quick Store Setup
+                </span>
+                <span className="px-2 py-0.2 rounded-full text-[10px] font-bold bg-brand text-white">
+                  {onboardingCompletedCount} of 3 completed
+                </span>
               </div>
+              <h3 className="text-sm font-bold text-text">Complete setup to unlock AI Copilot forecasts</h3>
+              <p className="text-xs text-text-muted">
+                Add your items and record your first transaction to initialize automated inventory alerts.
+              </p>
             </div>
 
-            {/* Embedded Financial Metrics Strip */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 px-5 sm:px-6 py-3.5 bg-slate-50/70 dark:bg-slate-850/60 border-y border-slate-100 dark:border-slate-800 text-xs">
-              <div>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
-                  {t('period_total_label', 'Period Total:')}
-                </span>
-                <span className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white tabular-nums tracking-tight">
-                  ₹{periodTotal.toLocaleString('en-IN')}
-                </span>
-              </div>
-              <div>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
-                  {t('daily_avg_label', 'Daily Average:')}
-                </span>
-                <span className="text-base sm:text-lg font-semibold text-blue-600 dark:text-blue-400 tabular-nums tracking-tight">
-                  ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day
-                </span>
-              </div>
-              <div>
-                <div className="flex items-center gap-1.5 mb-1">
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block truncate">
-                    Target Run-Rate:
-                  </span>
-                  <span
-                    className={`inline-flex px-1.5 py-0.2 rounded text-[11px] font-medium ${
-                      runRateDiffPct >= 0
-                        ? 'text-emerald-600 dark:text-emerald-400'
-                        : 'text-amber-600 dark:text-amber-400'
-                    }`}
-                  >
-                    {runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(0)}%
-                  </span>
-                </div>
-                <span className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white tabular-nums tracking-tight">
-                  ₹{projectedDailyRunRate.toLocaleString('en-IN', { maximumFractionDigits: 0 })}/day
-                </span>
-              </div>
-              <div>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium block mb-1">
-                  {t('peak_collection', 'Peak Collection:')}
-                </span>
-                <span className="text-base sm:text-lg font-semibold text-emerald-600 dark:text-emerald-400 tabular-nums tracking-tight">
-                  ₹{maxRev.toLocaleString('en-IN')}
-                </span>
-              </div>
-            </div>
-
-            {/* Structured Bar Chart */}
-            <div className="p-5 sm:p-6 pb-4 relative">
-              {/* Subtle Horizontal Reference Gridlines */}
-              <div className="absolute inset-x-6 top-8 bottom-14 flex flex-col justify-between pointer-events-none opacity-25">
-                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
-                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
-                <div className="border-b border-dashed border-slate-300 dark:border-slate-700 w-full" />
-                <div className="border-b border-slate-300 dark:border-slate-700 w-full" />
+            {/* Checklist items */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-surface-card border border-border">
+                <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                <span className="text-xs font-semibold text-text">1. Store Initialized</span>
               </div>
 
-              {/* Bar Canvas */}
-              <div className="h-60 flex items-end justify-between gap-1.5 sm:gap-3 relative z-10">
-                {daysToDisplay.map((day, idx) => {
-                  const heightPct = Math.max(8, (day.revenue / maxRev) * 100);
-                  const isHovered = activeDayIndex === idx;
-
-                  const dateObj = new Date(day.date);
-                  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                  const dayOfWeek = dayNames[dateObj.getDay()] || '';
-                  const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
-
-                  return (
-                    <div
-                      key={day.date || idx}
-                      className="flex-1 flex flex-col items-center group relative h-full justify-end cursor-pointer"
-                      onMouseEnter={() => setActiveDayIndex(idx)}
-                      onMouseLeave={() => setActiveDayIndex(null)}
-                      onClick={() => setActiveDayIndex(activeDayIndex === idx ? null : idx)}
-                    >
-                      {/* Theme-Aware Tooltip */}
-                      {isHovered && (
-                        <div className="absolute -top-16 z-30 pointer-events-none whitespace-nowrap bg-slate-900 dark:bg-slate-800 text-white border border-slate-700/80 rounded-lg px-3 py-1.5 shadow-xl text-center text-xs animate-in fade-in-50 duration-150">
-                          <div className="font-medium text-xs text-slate-300">
-                            {dayOfWeek}, {day.date}
-                          </div>
-                          <div className="font-semibold text-white text-xs mt-0.5 tabular-nums">
-                            ₹{day.revenue.toLocaleString('en-IN')} &bull; {day.orders} orders
-                          </div>
-                          {day.orders > 0 && (
-                            <div className="text-[11px] text-blue-300 tabular-nums mt-0.5">
-                              AOV: ₹{Math.round(day.revenue / day.orders).toLocaleString('en-IN')}
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Bar Pillar */}
-                      <div
-                        className={`w-full rounded-t-[4px] transition-all duration-150 ${
-                          isHovered
-                            ? 'bg-blue-600 dark:bg-blue-400 shadow-sm'
-                            : 'bg-blue-500/90 hover:bg-blue-600 dark:bg-blue-600/80 dark:hover:bg-blue-500'
-                        }`}
-                        style={{ height: `${heightPct}%` }}
-                      />
-
-                      {/* X-Axis Date Labels */}
-                      <div className="mt-2.5 text-center w-full truncate leading-tight">
-                        <span className="block text-xs font-medium text-slate-600 dark:text-slate-400">
-                          {dayOfWeek}
-                        </span>
-                        <span className="block text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
-                          {formattedDate}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Integrated Forecasting Velocity Footer */}
-            <div className="p-4 sm:px-6 sm:py-4 bg-slate-50/50 dark:bg-slate-850/40 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs sm:text-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-200/60 dark:border-blue-800/60">
-                  <TrendingUp className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="font-medium text-slate-700 dark:text-slate-300">
-                    7-Day ML Target: <strong className="text-slate-900 dark:text-white font-semibold tabular-nums">₹{summary.forecast_7d_total_revenue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</strong>
-                  </span>
-                  <span className="text-slate-500 dark:text-slate-400 block text-xs mt-0.5 font-normal">
-                    Current collection pace is ₹{Math.round(periodAvg).toLocaleString('en-IN')}/day ({runRateDiffPct >= 0 ? '+' : ''}{runRateDiffPct.toFixed(1)}% vs target)
-                  </span>
-                </div>
+              <div
+                onClick={() => setIsAddProductOpen(true)}
+                className={`flex items-center gap-2 p-2.5 rounded-xl border cursor-pointer transition-all ${
+                  hasProducts
+                    ? 'bg-surface-card border-border'
+                    : 'bg-brand-soft/50 border-brand text-brand hover:bg-brand-soft'
+                }`}
+              >
+                {hasProducts ? (
+                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                ) : (
+                  <Package className="w-4 h-4 text-brand shrink-0" />
+                )}
+                <span className="text-xs font-semibold">2. Add First SKU</span>
               </div>
 
-              <div className="flex items-center gap-3 shrink-0">
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => onNavigateTab('forecasts')}
-                  className="h-8 px-3 text-xs font-medium"
-                >
-                  {t('view_sku_forecasts', 'View SKU Forecasts')}
-                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                </Button>
-                <button
-                  onClick={() => onNavigateTab('analytics')}
-                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-xs sm:text-sm font-medium inline-flex items-center gap-1 transition-colors"
-                >
-                  <span>{t('deep_analytics', 'Analytics')}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+              <div
+                onClick={() => setIsRecordSaleOpen(true)}
+                className={`flex items-center gap-2 p-2.5 rounded-xl border cursor-pointer transition-all ${
+                  hasSales
+                    ? 'bg-surface-card border-border'
+                    : 'bg-brand-soft/50 border-brand text-brand hover:bg-brand-soft'
+                }`}
+              >
+                {hasSales ? (
+                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                ) : (
+                  <PlusCircle className="w-4 h-4 text-brand shrink-0" />
+                )}
+                <span className="text-xs font-semibold">3. Record First Sale</span>
               </div>
             </div>
           </div>
+        </Card>
+      )}
+
+      {/* KPI Cards Row (Revenue, Orders, AOV, UPI Collection) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <MetricCard
+          card={
+            summary?.kpis?.revenue || {
+              label: 'Revenue',
+              value: isDemo ? 48250 : 0,
+              formatted_value: isDemo ? '₹48,250' : '₹0.00',
+              change_pct: isDemo ? 12.8 : null,
+              subtext: isDemo ? '+12.8% vs last week' : 'No sales recorded yet',
+            }
+          }
+          icon={<ShoppingBag className="w-4 h-4 text-blue-600 dark:text-blue-400" />}
+          variant="blue"
+          isHero
+          loading={loading}
+          sparklineData={sparklineSeries}
+        />
+        <MetricCard
+          card={
+            summary?.kpis?.orders || {
+              label: 'Orders',
+              value: isDemo ? 128 : 0,
+              formatted_value: isDemo ? '128' : '0',
+              change_pct: isDemo ? 6.2 : null,
+              subtext: isDemo ? '+6.2% vs last week' : 'Awaiting first transaction',
+            }
+          }
+          icon={<Package className="w-4 h-4 text-purple-600 dark:text-purple-400" />}
+          variant="purple"
+          loading={loading}
+          sparklineData={sparklineSeries}
+        />
+        <MetricCard
+          card={
+            summary?.kpis?.aov || {
+              label: 'Avg. Order Value',
+              value: isDemo ? 376 : 0,
+              formatted_value: isDemo ? '₹376' : '₹0.00',
+              change_pct: isDemo ? 4.1 : null,
+              subtext: isDemo ? '+4.1% vs last week' : 'Calculated after first sale',
+            }
+          }
+          icon={<TrendingUp className="w-4 h-4 text-amber-600 dark:text-amber-400" />}
+          variant="amber"
+          loading={loading}
+        />
+        <MetricCard
+          card={{
+            label: 'UPI Collection',
+            value: upiStats.value,
+            formatted_value: upiStats.formatted_value,
+            change_pct: null,
+            subtext: upiStats.subtext,
+          }}
+          icon={<CreditCard className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
+          variant="emerald"
+          loading={loading}
+        />
+      </div>
+
+      {/* Sales Trend & AI Insight Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main 2-column Area Trend Chart */}
+        <div className="lg:col-span-2">
+          <AreaTrendChart
+            data={trendPoints}
+            title="Sales Trend"
+            subtitle="Historical sales velocity and real-time transaction updates"
+            range={chartRange}
+            onRangeChange={setChartRange}
+            loading={loading}
+            error={error}
+            onRetry={loadDashboardData}
+            onEmptyAction={() => setIsRecordSaleOpen(true)}
+            emptyActionLabel="Record Your First Sale"
+          />
         </div>
 
-        {/* Right Column (4 cols): Priority Decisions & Market Standing (Balanced Heights!) */}
-        <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6">
-          {/* Priority Decisions Feed */}
-          <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors flex flex-col justify-between">
+        {/* 1-column AI Insight Card */}
+        <div className="lg:col-span-1 flex flex-col">
+          <div className="bg-gradient-to-br from-purple-500/10 via-surface-card to-indigo-500/5 rounded-2xl border border-purple-500/20 p-5 sm:p-6 shadow-fintech flex flex-col justify-between h-full relative overflow-hidden group">
+            <div className="absolute -top-10 -right-10 w-36 h-36 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+
             <div>
-              <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                  <h2 className="text-base font-semibold text-slate-900 dark:text-white">
-                    {t('priority_actions_title', 'Priority Actions')}
-                  </h2>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-900/60">
-                  {summary.critical_actions_count} {t('critical_badge', 'Critical')}
-                </span>
+                <h3 className="text-sm font-bold text-text tracking-tight flex items-center gap-1.5">
+                  AI Insight
+                </h3>
               </div>
 
-              <div className="divide-y divide-slate-100 dark:divide-slate-800 mt-1">
-                {actions.slice(0, 2).map((act) => (
+              <p className="text-xs text-text-muted leading-relaxed mt-2 font-medium">
+                {actions.length > 0
+                  ? `${actions[0].title}: ${actions[0].reason}`
+                  : isDemo
+                  ? "Demand for packaged goods is increasing. Consider restocking top 3 items to maximize weekend margins."
+                  : "Welcome to your digital store! Add items to inventory and record transactions to generate live AI insights."}
+              </p>
+
+              {actions.length > 0 && actions[0].expected_impact > 0 && (
+                <div className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
+                  <span>Est. Impact: +{formatCurrency(actions[0].expected_impact)}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="pt-4 mt-4 border-t border-purple-500/15 flex items-center justify-between">
+              <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-400">
+                Action Recommended
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  if (actions.length > 0) {
+                    onSelectAction(actions[0].recommendation_id);
+                  } else {
+                    onNavigateTab('recommendations');
+                  }
+                }}
+                className="w-8.5 h-8.5 rounded-full bg-purple-600 hover:bg-purple-700 text-white flex items-center justify-center transition-all shadow-xs hover:scale-105"
+                title="View in Action Center"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Top Products & Action Center Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Top Performing Products */}
+        <div className="lg:col-span-2">
+          <HorizontalBarChart
+            data={topProductsBarData}
+            title="Top Performing Products"
+            subtitle="Ranked by cumulative revenue"
+            loading={loading}
+            emptyMessage="No product sales recorded yet"
+          />
+        </div>
+
+        {/* Action Center & Copilot Quick Prompt Preview */}
+        <div className="lg:col-span-1 space-y-6">
+          {/* Action Center Card */}
+          <Card
+            title="Commercial Action Center"
+            subtitle="AI prioritized reorders & opportunities"
+            action={
+              actions.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => onNavigateTab('recommendations')}
+                  className="text-xs font-semibold text-brand hover:underline inline-flex items-center gap-1"
+                >
+                  View All ({actions.length})
+                  <ArrowRight className="w-3 h-3" />
+                </button>
+              ) : null
+            }
+          >
+            {actions.length === 0 ? (
+              <div className="py-6 text-center space-y-1">
+                <CheckCircle2 className="w-8 h-8 text-success mx-auto mb-2" />
+                <h4 className="text-xs font-bold text-text">Sab kuch badhiya hai!</h4>
+                <p className="text-[11px] text-text-muted">
+                  Abhi koi pending commercial risk ya stock-out alert nahi hai.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {actions.slice(0, 3).map((act) => (
                   <div
                     key={act.recommendation_id}
-                    className="py-3 hover:bg-slate-50 dark:hover:bg-slate-850 rounded-lg p-2 transition-colors cursor-pointer"
                     onClick={() => onSelectAction(act.recommendation_id)}
+                    className="p-3 rounded-xl border border-border hover:border-brand bg-surface-muted/30 hover:bg-surface-card cursor-pointer transition-all space-y-1"
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <span className="text-sm font-medium text-slate-900 dark:text-white line-clamp-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-bold text-text truncate max-w-[180px]">
                         {act.title}
                       </span>
                       <Badge
@@ -514,175 +611,352 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             : 'medium'
                         }
                       >
-                        {localizeDynamicText(act.priority_band, language)}
+                        {act.priority_band}
                       </Badge>
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 font-normal leading-relaxed">
+                    <p className="text-[11px] text-text-muted line-clamp-1">
                       {act.action}
                     </p>
-                    <div className="mt-2 flex items-center justify-between text-xs">
-                      <span className="font-semibold text-emerald-600 dark:text-emerald-400 tabular-nums">
-                        {t('expected_impact_label', 'Impact:')} ₹{act.expected_impact.toLocaleString()}
-                      </span>
-                      <span className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium inline-flex items-center gap-1">
-                        {t('review_btn', 'Review →')}
-                      </span>
-                    </div>
                   </div>
                 ))}
               </div>
-            </div>
+            )}
+          </Card>
 
-            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="w-full h-8 text-xs font-medium"
-                onClick={() => onNavigateTab('recommendations')}
-              >
-                {t('open_action_center_btn', 'Open Action Center')} ({summary.total_actions_pending})
-              </Button>
-            </div>
-          </div>
-
-          {/* Market Standing (Peer Benchmarking) */}
-          {benchmark && (
-            <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 p-5 sm:p-6 shadow-xs transition-colors flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 dark:border-slate-800">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200/60 dark:border-amber-800/60 flex items-center justify-center shrink-0">
-                      <Trophy className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h2 className="text-base font-semibold text-slate-900 dark:text-white">
-                        Market Standing
-                      </h2>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 font-normal mt-0.5">
-                        {localizeDynamicText(benchmark.peer_group, language)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <span
-                    className={`px-2.5 py-0.5 rounded-full text-xs font-medium border tabular-nums ${
-                      benchmark.rank <= Math.ceil(benchmark.peer_count * 0.33)
-                        ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60'
-                        : benchmark.rank <= Math.ceil(benchmark.peer_count * 0.66)
-                        ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60'
-                        : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 border-red-200 dark:border-red-900/60'
-                    }`}
+          {/* Copilot Quick Ask Card */}
+          <Card
+            title="Ask VyaparMitra Copilot"
+            subtitle="Hinglish / Hindi AI business assistance"
+          >
+            <form onSubmit={handleQuickAsk} className="space-y-2.5">
+              <div className="relative">
+                <Bot className="w-4 h-4 text-brand absolute left-3 top-3" />
+                <input
+                  type="text"
+                  value={quickQuery}
+                  onChange={(e) => setQuickQuery(e.target.value)}
+                  placeholder="e.g. Aaj ki sabse zyada bikne wali item?"
+                  className="w-full pl-9 pr-3 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand"
+                />
+              </div>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {[
+                  'Top 5 sales?',
+                  'Low stock items?',
+                  'Customer Udhaar summary?',
+                ].map((prompt, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => onQuickCopilot(prompt)}
+                    className="px-2 py-1 text-[10px] font-semibold rounded-lg bg-surface-muted text-text-muted hover:text-text hover:bg-surface-muted/80 border border-border"
                   >
-                    Rank {benchmark.rank} of {benchmark.peer_count}
-                  </span>
-                </div>
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            </form>
+          </Card>
+        </div>
+      </div>
 
-                {/* Metrics Highlights */}
-                <div className="py-2.5 space-y-2 text-xs">
-                  {benchmark.metrics.slice(0, 2).map((m) => (
-                    <div
-                      key={m.name}
-                      className="flex items-center justify-between py-1 border-b border-slate-50 dark:border-slate-800/60 last:border-none"
+      {/* Record Sale Modal */}
+      {isRecordSaleOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in-50">
+          <div className="w-full max-w-md bg-surface-card rounded-2xl border border-border shadow-fintech-lg p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <div className="flex items-center gap-2">
+                <PlusCircle className="w-5 h-5 text-brand" />
+                <h3 className="text-sm font-bold text-text">Record POS Sale</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsRecordSaleOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleRecordSaleSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-text">Sale Amount (₹)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  required
+                  autoFocus
+                  value={saleAmount}
+                  onChange={(e) => setSaleAmount(e.target.value)}
+                  placeholder="e.g. 1500"
+                  className="w-full px-3.5 py-2.5 text-sm font-bold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-text">Product / Description</label>
+                <input
+                  type="text"
+                  value={saleProductName}
+                  onChange={(e) => setSaleProductName(e.target.value)}
+                  placeholder="e.g. Fortune Sunflower Oil 1L"
+                  className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-text">Payment Method</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['CASH', 'UPI', 'CARD'] as const).map((method) => (
+                    <button
+                      key={method}
+                      type="button"
+                      onClick={() => setSalePaymentMethod(method)}
+                      className={`py-2 rounded-xl text-xs font-bold border transition-all ${
+                        salePaymentMethod === method
+                          ? 'border-brand bg-brand-soft text-brand shadow-xs'
+                          : 'border-border text-text-muted hover:text-text'
+                      }`}
                     >
-                      <span className="text-slate-600 dark:text-slate-300 font-normal">
-                        {localizeDynamicText(m.label, language)}
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-slate-900 dark:text-white tabular-nums">
-                          {m.unit === '₹' ? `₹${Math.round(m.you)}` : `${m.you}${m.unit}`}
-                        </span>
-                        <span className="text-xs text-slate-400 tabular-nums">
-                          vs {m.unit === '₹' ? `₹${Math.round(m.peer_median)}` : `${m.peer_median}${m.unit}`}
-                        </span>
-                        <span
-                          className={`px-1.5 py-0.5 rounded text-[11px] font-medium ${
-                            m.status === 'green'
-                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
-                              : m.status === 'yellow'
-                              ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300'
-                              : 'bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300'
-                          }`}
-                        >
-                          {localizeDynamicText(m.status_text, language)}
-                        </span>
-                      </div>
-                    </div>
+                      {method}
+                    </button>
                   ))}
                 </div>
               </div>
 
-              {/* Bottom CTA */}
-              <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => onNavigateTab('compare')}
-                  className="w-full h-8 text-xs font-medium"
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full py-2.5 justify-center font-bold"
+                disabled={isSubmittingSale}
+              >
+                {isSubmittingSale ? 'Saving...' : 'Confirm & Record Sale'}
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Add Product Modal */}
+      {isAddProductOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in-50">
+          <div className="w-full max-w-md bg-surface-card rounded-2xl border border-border shadow-fintech-lg p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Package className="w-5 h-5 text-brand" />
+                <h3 className="text-sm font-bold text-text">Add Product to Catalog</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsAddProductOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddProductSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-text">Product Name</label>
+                <input
+                  type="text"
+                  required
+                  autoFocus
+                  value={newProductName}
+                  onChange={(e) => setNewProductName(e.target.value)}
+                  placeholder="e.g. Tata Salt 1kg"
+                  className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text">Selling Price (₹)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    required
+                    value={newProductPrice}
+                    onChange={(e) => setNewProductPrice(e.target.value)}
+                    placeholder="28"
+                    className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text">Initial Stock</label>
+                  <input
+                    type="number"
+                    value={newProductStock}
+                    onChange={(e) => setNewProductStock(e.target.value)}
+                    placeholder="50"
+                    className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-text">Category</label>
+                <select
+                  value={newProductCategory}
+                  onChange={(e) => setNewProductCategory(e.target.value)}
+                  className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand"
                 >
-                  <span>{t('view_details', 'Compare with Peers')}</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
-                </Button>
+                  <option value="Groceries">Groceries &amp; Staples</option>
+                  <option value="Snacks & Beverages">Snacks &amp; Beverages</option>
+                  <option value="Personal Care">Personal Care</option>
+                  <option value="Dairy & Bakery">Dairy &amp; Bakery</option>
+                  <option value="Household">Household &amp; Cleaning</option>
+                </select>
+              </div>
+
+              <Button
+                type="submit"
+                variant="primary"
+                className="w-full py-2.5 justify-center font-bold"
+                disabled={isSubmittingProduct}
+              >
+                {isSubmittingProduct ? 'Saving...' : 'Add Product'}
+              </Button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Import CSV Modal */}
+      {isImportCsvOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in-50">
+          <div className="w-full max-w-md bg-surface-card rounded-2xl border border-border shadow-fintech-lg p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-border">
+              <div className="flex items-center gap-2">
+                <FileSpreadsheet className="w-5 h-5 text-brand" />
+                <h3 className="text-sm font-bold text-text">Import Store Data via CSV</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsImportCsvOpen(false)}
+                className="p-1 rounded-lg text-text-muted hover:text-text"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Entity Selector */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-text block">Data Type to Import:</label>
+              <div className="grid grid-cols-3 gap-1.5 p-1 rounded-xl bg-surface-muted border border-border text-xs">
+                {[
+                  { id: 'inventory', label: 'Inventory / SKUs' },
+                  { id: 'customers', label: 'Customers' },
+                  { id: 'sales', label: 'Sales Records' },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setCsvEntityType(tab.id as any)}
+                    className={`py-1.5 px-2 rounded-lg text-[11px] font-semibold transition-all ${
+                      csvEntityType === tab.id
+                        ? 'bg-brand text-white shadow-xs'
+                        : 'text-text-muted hover:text-text'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
               </div>
             </div>
-          )}
-        </div>
-      </div>
 
-      {/* Dedicated Intelligence Center: AI Merchant Copilot Command Panel */}
-      <div className="bg-purple-50/40 dark:bg-purple-950/20 rounded-xl border border-purple-200/60 dark:border-purple-900/40 p-5 sm:p-6 shadow-xs transition-colors">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-2 text-sm font-semibold text-purple-950 dark:text-purple-200">
-              <Bot className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <span>{t('ask_copilot_box_title', 'Ask VyaparMitra Copilot')}</span>
+            <div className="flex items-center justify-between px-3 py-2 bg-brand/5 border border-brand/20 rounded-xl text-xs">
+              <span className="text-text-muted text-[11px]">
+                {csvEntityType === 'inventory' && 'Products, categories, price & stock'}
+                {csvEntityType === 'customers' && 'Customer names, phone & credit limits'}
+                {csvEntityType === 'sales' && 'Product sales, quantities & payment mode'}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  let content = '';
+                  let filename = `sample_${csvEntityType}.csv`;
+                  if (csvEntityType === 'inventory') {
+                    content = `product_id,product_name,category,selling_price,unit_cost,current_stock,min_stock_threshold,barcode,unit\nPRD_TATA_SALT,Tata Salt 1kg,Groceries,28,22,85,15,8901030381029,pkt\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,Edible Oils,165,138,42,10,8906007281014,btl\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,Staples,245,210,30,8,8901030012345,bag\nPRD_AMUL_BUTTER,Amul Butter 500g,Dairy,280,248,24,6,8901262010053,pkt\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,Snacks & Bakery,30,24,120,25,8901719101019,pkt\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,Instant Foods,56,45,95,20,8901058852372,pkt\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,Personal Care,58,46,60,12,8901396312450,pcs\n`;
+                  } else if (csvEntityType === 'sales') {
+                    content = `product_id,product_name,quantity,unit_price,payment_method,customer_name,discount\nPRD_TATA_SALT,Tata Salt 1kg,2,28,UPI,Ramesh Kumar,0\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,1,165,UPI,Sunita Verma,0\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,1,245,CASH,Walk-in Customer,0\nPRD_AMUL_BUTTER,Amul Butter 500g,2,280,UPI,Vijay Agarwal,10\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,5,30,CASH,Walk-in Customer,0\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,4,56,UPI,Priya Patel,0\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,2,58,CASH,Mohammad Farhan,0\n`;
+                  } else {
+                    content = `name,phone,email,address,city,credit_limit\nRamesh Kumar Sharma,+919811223344,ramesh.sharma@example.com,Shop 4 Market Complex,Gurugram,10000\nSunita Verma,+919822334455,sunita.verma@example.com,B-12 Civil Lines,Jaipur,8000\nVijay Agarwal,+919833445566,vijay.agarwal@example.com,14 MG Road,Indore,15000\nPriya Patel,+919844556677,priya.patel@example.com,Navrangpura,Ahmedabad,12000\n`;
+                  }
+                  const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = filename;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(url);
+                }}
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
+              >
+                <Download className="w-3.5 h-3.5" />
+                Template
+              </button>
             </div>
-            <p className="text-xs sm:text-sm text-purple-800/80 dark:text-purple-300/80 mt-1 font-normal leading-relaxed">
-              {t('ask_copilot_box_sub')}
-            </p>
+
+            <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
+              <Upload className="w-8 h-8 text-brand mx-auto" />
+              <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
+              <p className="text-[11px] text-text-muted">
+                Select your <code>.csv</code> file or use the template above.
+              </p>
+              <input
+                type="file"
+                accept=".csv"
+                className="hidden"
+                id="csv-file-upload"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+                  try {
+                    // Auto-detect entity type from header
+                    const slice = await file.slice(0, 2048).text();
+                    const firstLine = slice.split(/[\r\n]+/)[0].toLowerCase().trim();
+                    let targetType = csvEntityType;
+
+                    const hasStock = firstLine.includes('current_stock') || firstLine.includes('min_stock') || firstLine.includes('barcode');
+                    const hasSales = firstLine.includes('quantity') || firstLine.includes('qty') || firstLine.includes('payment') || firstLine.includes('discount');
+                    const hasCust = firstLine.includes('credit_limit') || ((firstLine.includes('phone') || firstLine.includes('email')) && firstLine.includes('name'));
+
+                    if (hasStock && !hasSales) {
+                      targetType = 'inventory';
+                    } else if (hasCust && !hasSales && !hasStock) {
+                      targetType = 'customers';
+                    } else if (hasSales) {
+                      targetType = 'sales';
+                    } else if (firstLine.includes('selling_price') && (firstLine.includes('product') || firstLine.includes('item'))) {
+                      targetType = 'inventory';
+                    }
+
+                    const res = await api.uploadCsv(file, targetType);
+                    if (res.failed_rows > 0) {
+                      alert(`Import completed with warnings: ${res.inserted_rows} rows imported, ${res.failed_rows} skipped.`);
+                    } else {
+                      alert(`CSV processed successfully! ${res.inserted_rows || 0} rows imported into ${targetType}.`);
+                    }
+                    setIsImportCsvOpen(false);
+                    await loadDashboardData();
+                  } catch (err: any) {
+                    alert(`Import failed: ${err?.message}`);
+                  }
+                }}
+              />
+              <label
+                htmlFor="csv-file-upload"
+                className="inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs"
+              >
+                Browse File
+              </label>
+            </div>
           </div>
-
-          <form onSubmit={handleQuickAsk} className="flex-1 max-w-lg flex items-center gap-2">
-            <input
-              type="text"
-              value={quickQuery}
-              onChange={(e) => setQuickQuery(e.target.value)}
-              placeholder={t('quick_ask_placeholder', 'e.g. Kal kitni bikri hui thi?')}
-              className="flex-1 h-9 px-3.5 text-xs sm:text-sm rounded-lg border border-purple-200 dark:border-purple-800/60 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600 font-normal transition-colors"
-            />
-            <Button type="submit" variant="ai" size="sm" className="h-9 px-4 text-xs font-medium shrink-0">
-              {t('ask_btn', 'Ask Copilot')}
-            </Button>
-          </form>
         </div>
-
-        {/* Quick Suggestion Chips */}
-        <div className="mt-3 pt-3 border-t border-purple-200/40 dark:border-purple-900/30 flex items-center gap-2 flex-wrap text-xs">
-          <span className="text-purple-700/70 dark:text-purple-400/70 text-xs font-medium hidden sm:inline">
-            Suggested:
-          </span>
-          {(language === 'hindi'
-            ? [
-                'अगले हफ्ते बिक्री कितनी होगी?',
-                'कौन सा सामान रीस्टॉक करें?',
-                'मेरी दुकान दूसरों से कैसी है?',
-              ]
-            : [
-                'Agle hafte sales kitni hogi?',
-                'Kaunsa maal restock karein?',
-                'Meri dukaan dusron se kaisi hai?',
-              ]
-          ).map((q, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => onQuickCopilot(q)}
-              className="text-xs bg-white dark:bg-slate-900 border border-purple-200/80 dark:border-purple-800/50 text-purple-800 dark:text-purple-300 hover:border-purple-300 rounded-md px-2.5 py-1 transition-colors text-left font-normal shadow-2xs"
-            >
-              &ldquo;{q}&rdquo;
-            </button>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

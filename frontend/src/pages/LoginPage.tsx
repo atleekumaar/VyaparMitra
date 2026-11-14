@@ -1,54 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import {
   Store,
-  Boxes,
-  CreditCard,
-  Building2,
-  ShieldCheck,
-  Volume2,
-  Smartphone,
-  CheckCircle2,
-  KeyRound,
   ArrowRight,
   Sun,
   Moon,
   Sparkles,
-  TrendingUp,
-  Award,
-  Wifi,
-  Play,
   Mail,
   User,
-  ArrowLeft,
-  Check,
+  Smartphone,
+  CheckCircle2,
   AlertCircle,
+  Volume2,
+  Lock,
+  ArrowLeft,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { UserCategory, UserProfile } from '../types';
 import { api } from '../api/client';
-
+import { LoginBrandPanel } from '../components/auth/LoginBrandPanel';
+import { OtpInput } from '../components/auth/OtpInput';
+import { DemoProfilesModal, DemoPersona } from '../components/auth/DemoProfilesModal';
+import { Button } from '../components/Button';
+import { Badge } from '../components/Badge';
 
 interface LoginPageProps {
   onLogin: (profile: UserProfile) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
-}
-
-interface PersonaConfig {
-  category: UserCategory;
-  id: string;
-  name: string;
-  email: string;
-  storeName: string;
-  role: string;
-  phone: string;
-  city: string;
-  avatarInitials: string;
-  titleKey: string;
-  defaultTitle: string;
-  subKey: string;
-  defaultSub: string;
-  icon: React.ComponentType<{ className?: string }>;
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({
@@ -58,118 +36,29 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 }) => {
   const { t, language, setLanguage } = useLanguage();
 
-  const personas: PersonaConfig[] = [
-    {
-      category: 'small_merchant',
-      id: 'M001',
-      name: 'Rajesh Sharma',
-      email: 'rajesh.kirana@gmail.com',
-      storeName: 'Shree Ganesh Kirana & General Store',
-      role: 'Store Owner',
-      phone: '98765 43210',
-      city: 'Lucknow, UP',
-      avatarInitials: 'RS',
-      titleKey: 'category_kirana_title',
-      defaultTitle: 'Kirana & Retail Store',
-      subKey: 'category_kirana_sub',
-      defaultSub: 'Small Merchant / Daily POS & Audio alerts',
-      icon: Store,
-    },
-    {
-      category: 'wholesaler',
-      id: 'M015',
-      name: 'Amit Agarwal',
-      email: 'agarwal.fmcg@gmail.com',
-      storeName: 'Agarwal Wholesale FMCG Distributors',
-      role: 'Wholesale Partner',
-      phone: '98123 45678',
-      city: 'Kanpur, UP',
-      avatarInitials: 'AA',
-      titleKey: 'category_wholesaler_title',
-      defaultTitle: 'Wholesale & Distributor',
-      subKey: 'category_wholesaler_sub',
-      defaultSub: 'Bulk Distribution, Invoicing & Supplier Khata',
-      icon: Boxes,
-    },
-    {
-      category: 'billing_staff',
-      id: 'OP-04',
-      name: 'Pooja Verma',
-      email: 'pooja.verma@superstore.in',
-      storeName: 'Counter Terminal #01 (SuperStore)',
-      role: 'Billing Operator',
-      phone: '98345 67890',
-      city: 'Lucknow, UP',
-      avatarInitials: 'PV',
-      titleKey: 'category_cashier_title',
-      defaultTitle: 'Billing Operator / Staff',
-      subKey: 'category_cashier_sub',
-      defaultSub: 'Fast POS counter billing & daily shift tally',
-      icon: CreditCard,
-    },
-    {
-      category: 'enterprise',
-      id: 'GRP-09',
-      name: 'Vikram Malhotra',
-      email: 'vikram@malhotragroup.in',
-      storeName: 'Malhotra Retail Chain (4 Outlets)',
-      role: 'Managing Director',
-      phone: '98999 11223',
-      city: 'Uttar Pradesh Region',
-      avatarInitials: 'VM',
-      titleKey: 'category_enterprise_title',
-      defaultTitle: 'Multi-Store Enterprise',
-      subKey: 'category_enterprise_sub',
-      defaultSub: 'Multi-outlet chain owner & central admin',
-      icon: Building2,
-    },
-  ];
-
-  const [selectedCategory, setSelectedCategory] = useState<UserCategory>('small_merchant');
-  const [authMethod, setAuthMethod] = useState<'otp' | 'pin'>('otp');
-
-  // Input states (initialized empty so placeholders show and users can type immediately without deleting pre-filled values)
-  const [merchantName, setMerchantName] = useState<string>('');
-  const [merchantEmail, setMerchantEmail] = useState<string>('');
+  // Input states - BLANK BY DEFAULT as requested
+  const [fullName, setFullName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const [storeId, setStoreId] = useState<string>('');
-  const [pinCode, setPinCode] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<UserCategory>('small_merchant');
+  const [selectedDemoPersona, setSelectedDemoPersona] = useState<DemoPersona | null>(null);
 
-  // OTP flow states - OTP is NOT sent and NOT shown on initial load
+  // Flow & State
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [otpCode, setOtpCode] = useState<string[]>(['', '', '', '', '', '']);
   const [countdown, setCountdown] = useState<number>(30);
   const [isSendingOtp, setIsSendingOtp] = useState<boolean>(false);
-  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
+  const [isVerifying, setIsVerifying] = useState<boolean>(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [notificationMsg, setNotificationMsg] = useState<string | null>(null);
+  const [demoModalOpen, setDemoModalOpen] = useState<boolean>(false);
+
+  // Soundbox Welcome audio toggle
   const [soundboxWelcome, setSoundboxWelcome] = useState<boolean>(true);
   const [soundboxSimPlaying, setSoundboxSimPlaying] = useState<boolean>(false);
-  const [authError, setAuthError] = useState<string | null>(null);
-  const [otpNotification, setOtpNotification] = useState<string | null>(null);
-  const [deliveryInfo, setDeliveryInfo] = useState<{ destination: string; mode: string } | null>(null);
 
-  // Active persona object
-  const activePersona = personas.find((p) => p.category === selectedCategory) || personas[0];
-
-  // When persona changes, update selected category and storeId without overwriting user's typed input
-  const handleSelectPersona = (p: PersonaConfig) => {
-    setSelectedCategory(p.category);
-    setStoreId(p.id);
-    setOtpSent(false);
-    setOtpCode(['', '', '', '', '', '']);
-    setAuthError(null);
-    setOtpNotification(null);
-  };
-
-  // Explicit demo auto-fill for convenience
-  const handleFillDemoCredentials = () => {
-    setMerchantName(activePersona.name);
-    setMerchantEmail(activePersona.email);
-    setMobileNumber(activePersona.phone.replace(/\s+/g, ''));
-    setStoreId(activePersona.id);
-    setAuthError(null);
-  };
-
-  // OTP Timer countdown
+  // Resend Countdown Timer
   useEffect(() => {
     if (otpSent && countdown > 0) {
       const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
@@ -177,888 +66,428 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
   }, [otpSent, countdown]);
 
-  // Handle Send OTP via Brevo SMTP
+  // Request OTP from Brevo SMTP / backend relay
   const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!merchantEmail || !merchantEmail.includes('@')) {
-      setAuthError('Please enter a valid email address to receive your OTP.');
+    setAuthError(null);
+    setNotificationMsg(null);
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      setAuthError('Please enter a valid email address to receive your verification code.');
       return;
     }
 
     setIsSendingOtp(true);
-    setAuthError(null);
-    setOtpNotification(null);
 
     try {
       const res = await api.requestOtp({
-        email: merchantEmail,
-        phone: mobileNumber,
-        name: merchantName || activePersona.name,
+        email: cleanEmail,
+        phone: mobileNumber.trim() || undefined,
+        name: fullName.trim() || undefined,
       });
 
       setIsSendingOtp(false);
       setOtpSent(true);
       setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
       setOtpCode(['', '', '', '', '', '']);
-      setOtpNotification(res.message);
-      setDeliveryInfo({ destination: res.destination, mode: res.delivery_mode });
+      setNotificationMsg(res.message || `Verification code sent to ${cleanEmail}`);
 
-      // If demo mode returned a demo OTP, prefill for convenience
-      if (res.demo_otp && res.delivery_mode === 'simulation') {
-        const digits = res.demo_otp.split('');
-        if (digits.length === 6) {
-          setOtpCode(digits);
-        }
+      // Auto-fill demo OTP only in DEV environment
+      const isDev = Boolean((import.meta as any).env?.DEV);
+      if (isDev && res.demo_otp && res.demo_otp.length === 6) {
+        setOtpCode(res.demo_otp.split(''));
       }
     } catch (err: any) {
       setIsSendingOtp(false);
-      setAuthError(err.message || 'Failed to send verification code. Please check your network and Brevo SMTP settings.');
+      setAuthError(err?.message || 'Failed to send OTP code. Please try again.');
     }
   };
 
-  // Auto-fill Demo OTP on demand
-  const handleAutoFillDemo = () => {
-    setOtpCode(['4', '2', '5', '0', '2', '6']);
+  // Verify OTP and complete sign-in
+  const handleVerifyOtp = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setAuthError(null);
-  };
 
-  // Handle OTP paste (e.g. from clipboard email copy)
-  const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    const pastedData = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
-    if (!pastedData) return;
-    const digits = pastedData.split('');
-    const newCode = ['', '', '', '', '', ''];
-    digits.forEach((d, i) => {
-      if (i < 6) newCode[i] = d;
-    });
-    setOtpCode(newCode);
-    if (authError) setAuthError(null);
-    const nextIdx = Math.min(digits.length, 5);
-    const targetInput = document.getElementById(`otp-input-${nextIdx}`);
-    targetInput?.focus();
-  };
-
-  // Handle Resend OTP via Brevo SMTP
-  const handleResendOtp = async () => {
-    if (isSendingOtp) return;
-    setIsSendingOtp(true);
-    setAuthError(null);
-    try {
-      const res = await api.requestOtp({
-        email: merchantEmail,
-        phone: mobileNumber,
-        name: merchantName || activePersona.name,
-      });
-      setIsSendingOtp(false);
-      setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
-      setOtpCode(['', '', '', '', '', '']);
-      setOtpNotification(res.message);
-      setDeliveryInfo({ destination: res.destination, mode: res.delivery_mode });
-    } catch (err: any) {
-      setIsSendingOtp(false);
-      setAuthError(err.message || 'Failed to resend verification code. Please check your network.');
-    }
-  };
-
-  // Handle OTP digit changes
-  const handleOtpChange = (index: number, value: string) => {
-    if (value.length > 1) {
-      value = value.slice(-1);
-    }
-    const updated = [...otpCode];
-    updated[index] = value;
-    setOtpCode(updated);
-    if (authError) setAuthError(null);
-
-    // Auto-advance
-    if (value && index < 5) {
-      const nextInput = document.getElementById(`otp-input-${index + 1}`);
-      nextInput?.focus();
-    }
-  };
-
-  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && !otpCode[index] && index > 0) {
-      const prevInput = document.getElementById(`otp-input-${index - 1}`);
-      prevInput?.focus();
-    }
-  };
-
-  // Soundbox preview
-  const handlePlayVoicePreview = () => {
-    setSoundboxSimPlaying(true);
-    try {
-      const utterance = new SpeechSynthesisUtterance();
-      if (language === 'hindi') {
-        utterance.text = 'व्यापारमित्र साउंडबॉक्स चालू है। चार हज़ार दो सौ पचास रुपये प्राप्त हुए!';
-        utterance.lang = 'hi-IN';
-      } else {
-        utterance.text = 'VyaparMitra Soundbox live hai. 4250 rupees prapt hue!';
-        utterance.lang = 'hi-IN';
-      }
-      window.speechSynthesis.speak(utterance);
-    } catch {
-      // Speech synthesis fallback
-    }
-    setTimeout(() => setSoundboxSimPlaying(false), 3500);
-  };
-
-  const playWelcomeVoice = () => {
-    if (!soundboxWelcome) return;
-    try {
-      const welcomeUtterance = new SpeechSynthesisUtterance();
-      if (language === 'hindi') {
-        welcomeUtterance.text = `नमस्ते ${merchantName || activePersona.name} जी, व्यापारमित्र में आपका स्वागत है!`;
-        welcomeUtterance.lang = 'hi-IN';
-      } else {
-        welcomeUtterance.text = `Namaste ${merchantName || activePersona.name} ji, VyaparMitra me aapka swagat hai!`;
-        welcomeUtterance.lang = 'hi-IN';
-      }
-      window.speechSynthesis.speak(welcomeUtterance);
-    } catch {
-      // Speech synthesis fallback
-    }
-  };
-
-  // Final verification & Login
-  const handleFinalVerifyAndLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const enteredOtp = authMethod === 'otp' ? otpCode.join('') : pinCode;
-    if (authMethod === 'otp' && enteredOtp.length < 6) {
-      setAuthError('Please enter all 6 digits of your verification code.');
+    const fullCode = otpCode.join('').trim();
+    if (fullCode.length !== 6) {
+      setAuthError('Please enter all 6 digits of the verification code.');
       return;
     }
 
-    setIsAuthenticating(true);
-    setAuthError(null);
+    setIsVerifying(true);
 
     try {
-      if (authMethod === 'otp') {
-        const tokenRes = await api.verifyOtp({
-          email: merchantEmail,
-          otp: enteredOtp,
-          phone: mobileNumber,
-          name: merchantName || activePersona.name,
-          store_id: storeId || activePersona.id,
-        });
+      const res = await api.verifyOtp({
+        email: email.trim().toLowerCase(),
+        otp: fullCode,
+        phone: mobileNumber.trim() || undefined,
+        name: fullName.trim() || undefined,
+        store_id: storeId.trim() || undefined,
+      });
 
-        // Save session JWT token & permissions
-        localStorage.setItem('vyaparmitra_token', tokenRes.access_token);
-        localStorage.setItem('vyaparmitra_permissions', JSON.stringify(tokenRes.permissions));
+      setIsVerifying(false);
 
-        playWelcomeVoice();
-        setIsAuthenticating(false);
-
-        onLogin({
-          id: tokenRes.user.business_id || storeId || activePersona.id,
-          name: tokenRes.user.full_name || merchantName || activePersona.name,
-          email: tokenRes.user.email || merchantEmail,
-          storeName: activePersona.storeName,
-          category: activePersona.category,
-          categoryLabel: t(activePersona.titleKey, activePersona.defaultTitle),
-          phone: tokenRes.user.phone || mobileNumber || activePersona.phone,
-          city: activePersona.city,
-          role: tokenRes.user.role || activePersona.role,
-          avatarInitials: (tokenRes.user.full_name || activePersona.name).substring(0, 2).toUpperCase(),
-        });
-      } else {
-        // PIN mode (demo / offline fallback)
-        playWelcomeVoice();
-        setTimeout(() => {
-          setIsAuthenticating(false);
-          onLogin({
-            id: storeId || activePersona.id,
-            name: merchantName || activePersona.name,
-            email: merchantEmail || activePersona.email,
-            storeName: activePersona.storeName,
-            category: activePersona.category,
-            categoryLabel: t(activePersona.titleKey, activePersona.defaultTitle),
-            phone: mobileNumber || activePersona.phone,
-            city: activePersona.city,
-            role: activePersona.role,
-            avatarInitials: activePersona.avatarInitials,
-          });
-        }, 600);
+      // Persist access token
+      if (res.access_token) {
+        localStorage.setItem('vyaparmitra_token', res.access_token);
       }
+
+      // Play Soundbox welcome greeting if enabled
+      if (soundboxWelcome) {
+        try {
+          const utterance = new SpeechSynthesisUtterance();
+          if (language === 'hindi') {
+            utterance.text = 'व्यापार मित्र में आपका स्वागत है!';
+            utterance.lang = 'hi-IN';
+          } else {
+            utterance.text = 'VyaparMitra me aapka swagat hai!';
+            utterance.lang = 'hi-IN';
+          }
+          utterance.rate = 1.0;
+          window.speechSynthesis.speak(utterance);
+        } catch {
+          // Ignore audio errors
+        }
+      }
+
+      // Build UserProfile
+      const initials = (res.user.full_name || fullName || 'VM')
+        .split(' ')
+        .map((w) => w[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+
+      const profile: UserProfile = {
+        id: res.user.business_id,
+        business_id: res.user.business_id,
+        merchant_id: res.user.business_id,
+        name: res.user.full_name || fullName || 'Merchant Partner',
+        email: res.user.email,
+        storeName:
+          selectedDemoPersona?.storeName ||
+          (fullName ? `${fullName}'s Store` : 'My Retail Store'),
+        category: selectedCategory,
+        categoryLabel:
+          selectedCategory === 'wholesaler'
+            ? 'Wholesaler & Distributor'
+            : selectedCategory === 'billing_staff'
+            ? 'Billing Counter Staff'
+            : selectedCategory === 'enterprise'
+            ? 'Enterprise Retail Chain'
+            : 'Kirana & Retail Store',
+        phone: res.user.phone || mobileNumber || '+919876543210',
+        city: selectedDemoPersona?.city || 'India',
+        role: res.user.role || 'owner',
+        avatarInitials: initials,
+        token: res.access_token,
+        is_demo: Boolean(selectedDemoPersona),
+      };
+
+      onLogin(profile);
     } catch (err: any) {
-      setIsAuthenticating(false);
-      setAuthError(err.message || 'Verification failed. Please check your OTP and try again.');
+      setIsVerifying(false);
+      setAuthError(err?.message || 'Invalid or expired OTP. Please try again.');
     }
   };
 
+  // When user selects a demo persona
+  const handleSelectDemoPersona = (p: DemoPersona) => {
+    setSelectedDemoPersona(p);
+    setSelectedCategory(p.category);
+    setFullName(p.name);
+    setEmail(p.email);
+    setMobileNumber(p.phone);
+    setStoreId(p.id);
+    setOtpSent(false);
+    setOtpCode(['', '', '', '', '', '']);
+    setAuthError(null);
+    setNotificationMsg(`Demo persona loaded: ${p.name} (${p.id})`);
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex flex-col justify-between transition-colors duration-200">
-      {/* Top Floating App Bar */}
-      <header className="px-4 sm:px-8 py-3.5 border-b border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          {/* Logo Branding */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-8.5 h-8.5 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-xs select-none">
-              VM
-            </div>
-            <div>
-              <span className="font-bold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight leading-none block">
-                Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
-              </span>
-              <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 mt-0.5 block">
-                Merchant Command Center
-              </span>
-            </div>
+    <div className="min-h-screen bg-surface bg-ambient-mesh flex flex-col justify-between transition-colors">
+      {/* Top microbar */}
+      <header className="px-6 py-4 flex items-center justify-between border-b border-border/40 bg-surface/80 backdrop-blur-sm sticky top-0 z-30">
+        <div className="flex items-center gap-3">
+          <div className="w-8.5 h-8.5 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs select-none">
+            <Store className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-extrabold text-base text-text tracking-tight">
+            Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
+          </span>
+        </div>
+
+        {/* Center Nav Links */}
+        <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-text-muted">
+          <span className="text-text hover:text-blue-600 cursor-pointer transition-colors">Home</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">Features</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">For Merchants</span>
+          <span className="hover:text-blue-600 cursor-pointer transition-colors">Pricing</span>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          {/* Language Selector */}
+          <div className="flex items-center bg-surface-muted border border-border rounded-xl p-0.5 text-xs font-semibold">
+            {(['hinglish', 'hindi', 'english'] as const).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => setLanguage(lang)}
+                className={`px-2.5 py-1 rounded-lg transition-all ${
+                  language === lang
+                    ? 'bg-surface-card text-text shadow-2xs font-bold'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                {lang === 'hinglish' ? 'Hinglish' : lang === 'hindi' ? 'हिंदी' : 'EN'}
+              </button>
+            ))}
           </div>
 
-          {/* Right Header Controls (Language & Theme) */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Theme Toggle */}
-            <button
-              onClick={onToggleDarkMode}
-              className="w-8.5 h-8.5 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 text-slate-600 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-              aria-label="Toggle Dark/Light Mode"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
-            </button>
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={onToggleDarkMode}
+            className="w-8.5 h-8.5 rounded-xl bg-surface-card border border-border text-text-muted hover:text-text flex items-center justify-center transition-colors"
+            title="Toggle Theme"
+          >
+            {isDarkMode ? <Sun className="w-4 h-4 text-warning" /> : <Moon className="w-4 h-4 text-text-muted" />}
+          </button>
 
-            {/* Language Selector */}
-            <div className="flex items-center bg-slate-100 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 rounded-lg p-0.5 text-xs font-medium">
-              <button
-                onClick={() => setLanguage('hinglish')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
-                  language === 'hinglish'
-                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                Hinglish
-              </button>
-              <button
-                onClick={() => setLanguage('hindi')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
-                  language === 'hindi'
-                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                हिंदी
-              </button>
-              <button
-                onClick={() => setLanguage('english')}
-                className={`px-2.5 py-1 rounded-md transition-colors ${
-                  language === 'english'
-                    ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                }`}
-              >
-                English
-              </button>
-            </div>
-          </div>
+          {/* Action CTA */}
+          <button
+            type="button"
+            onClick={() => setDemoModalOpen(true)}
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs"
+          >
+            <span>Get Started</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
       </header>
 
-      {/* Main Form Center with Comfortable Breathing Room */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 flex items-center justify-center">
-        <div className="w-full bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[640px]">
-          {/* Left Panel: Visual Story & Live Soundbox Showcase (5 cols) */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white p-6 sm:p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden">
-            {/* Ambient Background Glows */}
-            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-blue-600/20 blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 rounded-full bg-purple-600/20 blur-3xl pointer-events-none" />
+      {/* Main Split Grid */}
+      <main className="flex-1 grid grid-cols-1 lg:grid-cols-2 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 items-center gap-8">
+        {/* Left: Brand showcase panel */}
+        <LoginBrandPanel />
 
-            <div className="relative z-10 space-y-6">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-300 border border-blue-500/20">
-                <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                <span>Next-Gen Bharat Merchant Intelligence</span>
-              </div>
-
-              {/* Title & Tagline */}
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
-                  Empowering Indian Retail with Voice POS & AI
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-300 mt-2 font-normal leading-relaxed">
-                  Real-time UPI audio reconciliation, 7-day predictive stocking, and regional peer benchmarking in one platform.
-                </p>
-              </div>
-
-              {/* Live Interactive Soundbox Simulator Widget */}
-              <div className="rounded-xl p-4 bg-slate-900/90 border border-slate-700/80 shadow-lg text-slate-100 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 text-blue-400 flex items-center justify-center">
-                      <Volume2 className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold text-white block leading-tight">
-                        Smart Soundbox Live
-                      </span>
-                      <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        Online &bull; 4G SIM Connected
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                    <Wifi className="w-3.5 h-3.5 text-blue-400" />
-                    <span className="text-[11px]">Syncing</span>
-                  </div>
-                </div>
-
-                {/* Animated Waveform & Audio Announcement */}
-                <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-0.5 h-4">
-                      <span className="w-1 bg-blue-400 h-2.5 rounded-full animate-soundbox-wave" />
-                      <span className="w-1 bg-blue-400 h-4 rounded-full animate-soundbox-wave [animation-delay:0.2s]" />
-                      <span className="w-1 bg-blue-400 h-3 rounded-full animate-soundbox-wave [animation-delay:0.4s]" />
-                      <span className="w-1 bg-blue-400 h-1.5 rounded-full animate-soundbox-wave [animation-delay:0.1s]" />
-                    </div>
-                    <span className="text-xs font-semibold text-white tabular-nums">
-                      &ldquo;₹4,250 prapt hue!&rdquo;
-                    </span>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handlePlayVoicePreview}
-                    className="px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-medium flex items-center gap-1 transition-colors shadow-2xs"
-                  >
-                    <Play className="w-3 h-3 fill-white" />
-                    <span>{soundboxSimPlaying ? 'Playing...' : 'Play Audio'}</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Feature Highlights */}
-              <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-semibold text-white">Instant UPI Settlement Alert</h3>
-                    <p className="text-[11px] text-slate-400">100% verified voice announcements for every QR & cash payment.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
-                    <TrendingUp className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-semibold text-white">Machine Learning Inventory Run-Rate</h3>
-                    <p className="text-[11px] text-slate-400">Know which items to restock before weekend surges.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 rounded bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
-                    <Award className="w-3.5 h-3.5" />
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-semibold text-white">Hyper-Local Peer Benchmarks</h3>
-                    <p className="text-[11px] text-slate-400">Compare bill size, margins, and repeat rates with nearby stores.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Security Trust Banner */}
-            <div className="relative z-10 pt-6 mt-6 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Bank-Grade 256-Bit SSL</span>
-              </div>
-              <span>RBI Guidelines Compliant</span>
-            </div>
-          </div>
-
-          {/* Right Panel: Interactive Multi-Persona Login (7 cols) */}
-          <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+        {/* Right: Auth Card */}
+        <div className="w-full max-w-md mx-auto">
+          <div className="bg-surface-card rounded-3xl border border-border p-6 sm:p-8 shadow-fintech-lg transition-all space-y-6">
+            {/* Header */}
             <div>
-              {/* Form Header with Breathing Room */}
-              <div className="pb-3 pt-1">
-                <h1 className="text-2xl sm:text-[26px] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
-                  {t('login_title', 'Sign In to VyaparMitra')}
-                </h1>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-normal leading-normal">
-                  {t('login_subtitle', 'Select your business category to access your financial dashboard')}
-                </p>
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl sm:text-2xl font-black text-text tracking-tight">
+                  {otpSent ? 'Enter Verification Code' : 'Sign in to VyaparMitra'}
+                </h2>
+                {selectedDemoPersona && (
+                  <Badge variant="demo" dot>
+                    Demo: {selectedDemoPersona.id}
+                  </Badge>
+                )}
               </div>
-
-              {/* STEP 1: Select Category / Role (Interactive Cards) */}
-              <div className="mt-4">
-                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-2">
-                  {t('login_category_label', 'Who is Logging In?')}
-                </label>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {personas.map((p) => {
-                    const Icon = p.icon;
-                    const isSelected = selectedCategory === p.category;
-                    return (
-                      <button
-                        key={p.category}
-                        type="button"
-                        onClick={() => handleSelectPersona(p)}
-                        className={`p-3 rounded-xl border text-left transition-all relative flex items-start gap-3 ${
-                          isSelected
-                            ? 'bg-blue-50/70 dark:bg-blue-950/40 border-blue-600 dark:border-blue-500 ring-2 ring-blue-500/20 shadow-xs'
-                            : 'bg-white dark:bg-slate-850 border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
-                        }`}
-                      >
-                        <div
-                          className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
-                            isSelected
-                              ? 'bg-blue-600 text-white border-blue-600'
-                              : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200/60 dark:border-slate-700'
-                          }`}
-                        >
-                          <Icon className="w-4 h-4" />
-                        </div>
-
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="text-xs font-semibold text-slate-900 dark:text-white truncate">
-                              {t(p.titleKey, p.defaultTitle)}
-                            </span>
-                            {isSelected && (
-                              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
-                            )}
-                          </div>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                            {t(p.subKey, p.defaultSub)}
-                          </p>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Authentication Mode Tabs (OTP vs PIN) */}
-              <div className="mt-5">
-                <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2">
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAuthMethod('otp');
-                        setOtpSent(false);
-                        setOtpCode(['', '', '', '', '', '']);
-                      }}
-                      className={`text-xs font-semibold pb-1.5 relative transition-colors ${
-                        authMethod === 'otp'
-                          ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                      }`}
-                    >
-                      <span className="flex items-center gap-1.5">
-                        <Smartphone className="w-3.5 h-3.5" />
-                        {t('auth_tab_otp', 'Mobile OTP')}
-                      </span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAuthMethod('pin')}
-                      className={`text-xs font-semibold pb-1.5 relative transition-colors ${
-                        authMethod === 'pin'
-                          ? 'text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400'
-                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200'
-                      }`}
-                    >
-                      <span className="flex items-center gap-1.5">
-                        <KeyRound className="w-3.5 h-3.5" />
-                        {t('auth_tab_pin', 'Store ID & Quick PIN')}
-                      </span>
-                    </button>
-                  </div>
-
-                  {/* Quick Fill Demo Credentials */}
-                  <button
-                    type="button"
-                    onClick={handleFillDemoCredentials}
-                    className="text-[11px] font-medium text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors pb-1.5"
-                    title="Fill demo credentials for testing"
-                  >
-                    <Sparkles className="w-3 h-3 text-blue-500" />
-                    <span className="hidden sm:inline">Fill demo info</span>
-                  </button>
-                </div>
-
-                {/* Form Body */}
-                <div className="mt-4">
-                  {/* Global Authentication Error Alert */}
-                  {authError && (
-                    <div className="mb-3.5 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/60 flex items-start gap-2.5 text-xs text-rose-800 dark:text-rose-300 animate-in fade-in-50 duration-200">
-                      <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
-                      <div className="flex-1 font-medium leading-relaxed">{authError}</div>
-                    </div>
-                  )}
-
-                  {authMethod === 'otp' ? (
-                    !otpSent ? (
-                      /* STEP A: Enter Name, Email & Phone -> Request OTP */
-                      <form onSubmit={handleRequestOtp} className="space-y-3.5">
-                        {/* Name Field */}
-                        <div>
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                            {t('name_input_label', 'Merchant Full Name')}
-                          </label>
-                          <div className="relative">
-                            <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                            <input
-                              type="text"
-                              required
-                              value={merchantName}
-                              onChange={(e) => setMerchantName(e.target.value)}
-                              placeholder={`e.g. ${activePersona.name}`}
-                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Email Field */}
-                        <div>
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                            {t('email_input_label', 'Business Email Address (Receives Brevo OTP)')}
-                          </label>
-                          <div className="relative">
-                            <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                            <input
-                              type="email"
-                              required
-                              value={merchantEmail}
-                              onChange={(e) => setMerchantEmail(e.target.value)}
-                              placeholder={`e.g. ${activePersona.email}`}
-                              className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Mobile Number Field */}
-                        <div>
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                            {t('mobile_input_label', 'Registered Mobile Number')}
-                          </label>
-                          <div className="flex rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-900 focus-within:ring-2 focus-within:ring-blue-600 focus-within:border-blue-600 transition-all">
-                            <span className="inline-flex items-center px-3 text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-r border-slate-200 dark:border-slate-700 select-none">
-                              +91 (IND)
-                            </span>
-                            <input
-                              type="tel"
-                              required
-                              maxLength={10}
-                              value={mobileNumber}
-                              onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ''))}
-                              placeholder="9876543210"
-                              className="flex-1 h-9 px-3 text-xs sm:text-sm bg-transparent text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none tabular-nums font-medium"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Send OTP Action Button */}
-                        <div className="pt-2">
-                          <button
-                            type="submit"
-                            disabled={isSendingOtp || !merchantEmail.includes('@')}
-                            className="w-full h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-                          >
-                            {isSendingOtp ? (
-                              <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                <span>Sending OTP via Brevo SMTP...</span>
-                              </>
-                            ) : (
-                              <>
-                                <span>{t('btn_send_otp', 'Send Verification OTP')}</span>
-                                <ArrowRight className="w-4 h-4" />
-                              </>
-                            )}
-                          </button>
-                          <p className="mt-2 text-[11px] text-center text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5">
-                            <Mail className="w-3 h-3 text-blue-500" />
-                            <span>Verification code is dispatched to your email via Brevo SMTP relay.</span>
-                          </p>
-                        </div>
-                      </form>
-                    ) : (
-                      /* STEP B: Enter OTP (Only visible after clicking Send OTP) */
-                      <form onSubmit={handleFinalVerifyAndLogin} className="space-y-4 animate-in fade-in-50 duration-200">
-                        {/* Status notification banner */}
-                        <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-between text-xs">
-                          <div className="flex items-center gap-2 min-w-0">
-                            <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                            <div className="text-emerald-800 dark:text-emerald-300 truncate text-[11px]">
-                              <span>OTP sent to <strong>{merchantEmail}</strong></span>
-                              {deliveryInfo?.mode === 'simulation' && (
-                                <span className="block text-[10px] text-amber-700 dark:text-amber-400 font-semibold mt-0.5">
-                                  Demo simulation active (Click Auto-fill Demo OTP)
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setOtpSent(false);
-                              setOtpCode(['', '', '', '', '', '']);
-                              setAuthError(null);
-                            }}
-                            className="text-blue-600 dark:text-blue-400 font-semibold hover:underline shrink-0 text-[11px] inline-flex items-center gap-1 ml-2"
-                          >
-                            <ArrowLeft className="w-3 h-3" />
-                            Edit
-                          </button>
-                        </div>
-
-                        {/* 6-Digit OTP Inputs */}
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <label className="text-xs font-medium text-slate-700 dark:text-slate-300">
-                              {t('otp_input_label', '6-Digit Verification Code (OTP)')}
-                            </label>
-                            <button
-                              type="button"
-                              onClick={handleAutoFillDemo}
-                              className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium hover:underline inline-flex items-center gap-1"
-                            >
-                              <Sparkles className="w-3 h-3" />
-                              {t('btn_autofill_demo', 'Auto-fill Demo OTP')}
-                            </button>
-                          </div>
-
-                          <div className="flex items-center justify-between gap-2">
-                            {otpCode.map((digit, idx) => (
-                              <input
-                                key={idx}
-                                id={`otp-input-${idx}`}
-                                type="text"
-                                inputMode="numeric"
-                                pattern="[0-9]*"
-                                maxLength={1}
-                                autoFocus={idx === 0}
-                                value={digit}
-                                onChange={(e) => handleOtpChange(idx, e.target.value)}
-                                onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                                onPaste={handleOtpPaste}
-                                placeholder="•"
-                                className="w-10 h-10 sm:w-11 sm:h-11 text-center font-bold text-base sm:text-lg rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 tabular-nums transition-all"
-                              />
-                            ))}
-                          </div>
-
-                          {/* Countdown / Resend */}
-                          <div className="mt-2.5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                            <span>Didn&apos;t receive code?</span>
-                            <span>
-                              {countdown > 0 ? (
-                                <span>Resend in {countdown}s</span>
-                              ) : (
-                                <button
-                                  type="button"
-                                  disabled={isSendingOtp}
-                                  onClick={handleResendOtp}
-                                  className="text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium disabled:opacity-50 inline-flex items-center gap-1"
-                                >
-                                  {isSendingOtp ? (
-                                    <>
-                                      <div className="w-3 h-3 border-2 border-blue-600/30 border-t-blue-600 rounded-full animate-spin" />
-                                      <span>Resending...</span>
-                                    </>
-                                  ) : (
-                                    'Resend OTP'
-                                  )}
-                                </button>
-                              )}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* Soundbox Welcome Toggle */}
-                        <div className="pt-1 flex items-center justify-between text-xs">
-                          <label className="flex items-center gap-2 cursor-pointer text-slate-600 dark:text-slate-300">
-                            <input
-                              type="checkbox"
-                              checked={soundboxWelcome}
-                              onChange={(e) => setSoundboxWelcome(e.target.checked)}
-                              className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4"
-                            />
-                            <span>{t('soundbox_announce_toggle', 'Play Soundbox audio welcome on login')}</span>
-                          </label>
-                        </div>
-
-                        {/* Primary Verify Button */}
-                        <button
-                          type="submit"
-                          disabled={isAuthenticating || otpCode.some((d) => !d)}
-                          className="w-full h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-                        >
-                          {isAuthenticating ? (
-                            <>
-                              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              <span>Verifying Credentials...</span>
-                            </>
-                          ) : (
-                            <>
-                              <span>{t('btn_verify_enter', 'Verify & Enter Dashboard')}</span>
-                              <ArrowRight className="w-4 h-4" />
-                            </>
-                          )}
-                        </button>
-                      </form>
-                    )
-                  ) : (
-                    /* Alternative: Store ID & PIN mode */
-                    <form onSubmit={handleFinalVerifyAndLogin} className="space-y-3.5">
-                      {/* Name Field */}
-                      <div>
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                          {t('name_input_label', 'Merchant Full Name')}
-                        </label>
-                        <div className="relative">
-                          <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                          <input
-                            type="text"
-                            required
-                            value={merchantName}
-                            onChange={(e) => setMerchantName(e.target.value)}
-                            placeholder={`e.g. ${activePersona.name}`}
-                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Email Field */}
-                      <div>
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                          {t('email_input_label', 'Business Email Address')}
-                        </label>
-                        <div className="relative">
-                          <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
-                          <input
-                            type="email"
-                            required
-                            value={merchantEmail}
-                            onChange={(e) => setMerchantEmail(e.target.value)}
-                            placeholder={`e.g. ${activePersona.email}`}
-                            className="w-full h-9 pl-9 pr-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Store ID Field */}
-                      <div>
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-300 block mb-1">
-                          {t('store_id_label', 'Merchant Store ID')}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={storeId}
-                          onChange={(e) => setStoreId(e.target.value)}
-                          placeholder={`e.g. ${activePersona.id}`}
-                          className="w-full h-9 px-3 text-xs sm:text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 font-medium transition-all"
-                        />
-                      </div>
-
-                      {/* PIN Field */}
-                      <div>
-                        <div className="flex items-center justify-between mb-1">
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-300">
-                            {t('quick_pin_label', '4-Digit Security PIN')}
-                          </label>
-                          <button
-                            type="button"
-                            onClick={() => setPinCode('4250')}
-                            className="text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400 font-medium hover:underline inline-flex items-center gap-1"
-                          >
-                            <Sparkles className="w-3 h-3" />
-                            Auto-fill PIN (4250)
-                          </button>
-                        </div>
-                        <input
-                          type="password"
-                          required
-                          maxLength={4}
-                          value={pinCode}
-                          onChange={(e) => setPinCode(e.target.value.replace(/\D/g, ''))}
-                          placeholder="••••"
-                          className="w-full h-9 px-3 text-center text-lg tracking-widest rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 tabular-nums font-bold transition-all"
-                        />
-                      </div>
-
-                      {/* Submit */}
-                      <button
-                        type="submit"
-                        disabled={isAuthenticating || pinCode.length < 4}
-                        className="w-full h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold text-xs sm:text-sm shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-                      >
-                        {isAuthenticating ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            <span>Verifying Credentials...</span>
-                          </>
-                        ) : (
-                          <>
-                            <span>{t('btn_verify_enter', 'Verify & Enter Dashboard')}</span>
-                            <ArrowRight className="w-4 h-4" />
-                          </>
-                        )}
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
+              <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                {otpSent
+                  ? `Enter the 6-digit OTP code sent to ${email}.`
+                  : 'Enter your business credentials to access your merchant dashboard.'}
+              </p>
             </div>
 
-            {/* Fast 1-Click Persona Switcher Footer */}
-            <div className="mt-6 pt-4 border-t border-slate-200/80 dark:border-slate-800">
-              <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-2">
-                1-Click Quick Demo Profiles:
-              </span>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                {personas.map((p) => (
+            {/* Error banner */}
+            {authError && (
+              <div className="p-3 rounded-xl bg-danger-soft border border-danger/30 text-danger text-xs flex items-start gap-2 animate-in fade-in-50">
+                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                <span className="leading-normal font-medium">{authError}</span>
+              </div>
+            )}
+
+            {/* Success notification */}
+            {notificationMsg && (
+              <div className="p-3 rounded-xl bg-success-soft border border-success/30 text-success text-xs flex items-start gap-2 animate-in fade-in-50">
+                <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5" />
+                <span className="leading-normal font-medium">{notificationMsg}</span>
+              </div>
+            )}
+
+            {!otpSent ? (
+              // Step 1: Input Details (Blank by default!)
+              <form onSubmit={handleRequestOtp} className="space-y-4">
+                {/* Full Name */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Full Name</span>
+                    <span className="text-[11px] text-text-subtle font-normal">Optional</span>
+                  </label>
+                  <div className="relative">
+                    <User className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Your full name"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                  </div>
+                </div>
+
+                {/* Email Address */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Email Address</span>
+                    <span className="text-[11px] text-brand font-medium">OTP delivery</span>
+                  </label>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                  </div>
+                </div>
+
+                {/* Mobile Number */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Mobile Number</span>
+                    <span className="text-[11px] text-text-subtle font-normal">SMS / WhatsApp</span>
+                  </label>
+                  <div className="relative">
+                    <Smartphone className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="tel"
+                      value={mobileNumber}
+                      onChange={(e) => setMobileNumber(e.target.value)}
+                      placeholder="10-digit mobile"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand tabular-nums"
+                    />
+                  </div>
+                </div>
+
+                {/* Soundbox toggle */}
+                <div className="pt-1 flex items-center justify-between">
+                  <label className="text-xs font-medium text-text-muted flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={soundboxWelcome}
+                      onChange={(e) => setSoundboxWelcome(e.target.checked)}
+                      className="rounded text-brand focus:ring-brand"
+                    />
+                    <span>Play Audio Soundbox welcome</span>
+                  </label>
+                  <Volume2 className="w-4 h-4 text-brand" />
+                </div>
+
+                {/* Submit button */}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
+                  disabled={isSendingOtp}
+                >
+                  {isSendingOtp ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending OTP...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Get Verification Code
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  )}
+                </Button>
+              </form>
+            ) : (
+              // Step 2: 6-Box OTP Verification
+              <form onSubmit={handleVerifyOtp} className="space-y-5">
+                <OtpInput
+                  value={otpCode}
+                  onChange={setOtpCode}
+                  disabled={isVerifying}
+                />
+
+                <div className="flex items-center justify-between text-xs pt-1">
                   <button
-                    key={p.category}
                     type="button"
                     onClick={() => {
-                      handleSelectPersona(p);
-                      onLogin({
-                        id: p.id,
-                        name: p.name,
-                        email: p.email,
-                        storeName: p.storeName,
-                        category: p.category,
-                        categoryLabel: t(p.titleKey, p.defaultTitle),
-                        phone: p.phone,
-                        city: p.city,
-                        role: p.role,
-                        avatarInitials: p.avatarInitials,
-                      });
+                      setOtpSent(false);
+                      setAuthError(null);
                     }}
-                    className="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/40 border border-slate-200/80 dark:border-slate-700/80 text-left transition-colors text-xs group"
+                    className="inline-flex items-center gap-1 font-semibold text-text-muted hover:text-text"
                   >
-                    <span className="font-semibold text-slate-900 dark:text-white block truncate group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                      {p.name.split(' ')[0]}
-                    </span>
-                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block truncate">
-                      {p.role}
-                    </span>
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    Change Email
                   </button>
-                ))}
-              </div>
+
+                  {countdown > 0 ? (
+                    <span className="text-text-muted tabular-nums font-medium">
+                      Resend in {countdown}s
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleRequestOtp}
+                      disabled={isSendingOtp}
+                      className="font-bold text-brand hover:underline"
+                    >
+                      Resend Code
+                    </button>
+                  )}
+                </div>
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
+                  disabled={isVerifying || otpCode.join('').length !== 6}
+                >
+                  {isVerifying ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Verifying &amp; Logging in...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Verify &amp; Launch Dashboard
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  )}
+                </Button>
+              </form>
+            )}
+
+            {/* Try demo account link */}
+            <div className="pt-4 border-t border-border/80 text-center">
+              <button
+                type="button"
+                onClick={() => setDemoModalOpen(true)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:underline"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-brand" />
+                <span>Try demo account (Pre-loaded personas)</span>
+              </button>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="py-4 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200/60 dark:border-slate-800/60">
-        VyaparMitra &copy; 2026 &bull; Certified by National Unified Payments Architecture &bull; Made with pride for Bharat 🇮🇳
+      <footer className="px-6 py-4 text-center text-xs text-text-subtle">
+        VyaparMitra AI Merchant OS &bull; ISO Bank Grade Security &bull; Powered by DeepMind Agentic AI
       </footer>
+
+      {/* Demo Profiles Modal */}
+      <DemoProfilesModal
+        isOpen={demoModalOpen}
+        onClose={() => setDemoModalOpen(false)}
+        onSelect={handleSelectDemoPersona}
+      />
     </div>
   );
 };

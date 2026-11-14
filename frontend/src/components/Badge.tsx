@@ -11,47 +11,83 @@ export type BadgeVariant =
   | 'demo'
   | 'warning'
   | 'danger'
+  | 'brand'
   | 'ai';
 
 interface BadgeProps {
   children: React.ReactNode;
   variant?: BadgeVariant;
+  dot?: boolean;
   className?: string;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ children, variant = 'neutral', className = '' }) => {
-  const styles: Record<BadgeVariant, string> = {
-    critical:
-      'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/60 font-semibold',
-    danger:
-      'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/60 font-semibold',
-    high:
-      'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/60 font-semibold',
-    warning:
-      'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-900/60 font-semibold',
-    medium:
-      'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-900/60 font-medium',
-    low:
-      'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 font-medium',
-    success:
-      'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900/60 font-semibold',
-    info:
-      'bg-sky-50 text-sky-700 border-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-900/60 font-medium',
-    neutral:
-      'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700 font-medium',
-    demo:
-      'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-900/60 font-bold tracking-wide uppercase',
-    ai:
-      'bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-900/60 font-semibold',
+export const Badge: React.FC<BadgeProps> = ({
+  children,
+  variant = 'neutral',
+  dot = false,
+  className = '',
+}) => {
+  const styles: Record<BadgeVariant, { badge: string; dot: string }> = {
+    critical: {
+      badge: 'bg-danger-soft text-danger border-danger/30 font-bold',
+      dot: 'bg-danger',
+    },
+    danger: {
+      badge: 'bg-danger-soft text-danger border-danger/30 font-bold',
+      dot: 'bg-danger',
+    },
+    high: {
+      badge: 'bg-warning-soft text-warning border-warning/30 font-bold',
+      dot: 'bg-warning',
+    },
+    warning: {
+      badge: 'bg-warning-soft text-warning border-warning/30 font-bold',
+      dot: 'bg-warning',
+    },
+    medium: {
+      badge: 'bg-brand-soft text-brand border-brand/20 font-semibold',
+      dot: 'bg-brand',
+    },
+    brand: {
+      badge: 'bg-brand-soft text-brand border-brand/20 font-semibold',
+      dot: 'bg-brand',
+    },
+    low: {
+      badge: 'bg-surface-muted text-text-muted border-border font-medium',
+      dot: 'bg-text-subtle',
+    },
+    success: {
+      badge: 'bg-success-soft text-success border-success/30 font-bold',
+      dot: 'bg-success',
+    },
+    info: {
+      badge: 'bg-info-soft text-info border-info/30 font-medium',
+      dot: 'bg-info',
+    },
+    neutral: {
+      badge: 'bg-surface-muted text-text-muted border-border font-medium',
+      dot: 'bg-text-subtle',
+    },
+    demo: {
+      badge: 'bg-purple-500/10 text-purple-600 dark:text-purple-300 border-purple-500/30 font-bold uppercase tracking-wider',
+      dot: 'bg-purple-500',
+    },
+    ai: {
+      badge: 'bg-purple-500/10 text-purple-600 dark:text-purple-300 border-purple-500/30 font-semibold',
+      dot: 'bg-purple-500',
+    },
   };
+
+  const current = styles[variant] || styles.neutral;
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs border shadow-2xs transition-colors ${
-        styles[variant] || styles.neutral
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs border shadow-2xs transition-colors select-none ${
+        current.badge
       } ${className}`}
     >
-      {children}
+      {dot && <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${current.dot}`} />}
+      <span>{children}</span>
     </span>
   );
 };

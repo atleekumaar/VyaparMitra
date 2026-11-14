@@ -1,5 +1,7 @@
 /**
  * Centralized API client for VyaparMitra Command Center.
+ * Automatically injects tenant authentication and merchant context
+ * (Authorization: Bearer <token> & X-Merchant-Id: <id>) on all requests.
  */
 
 import {
@@ -24,9 +26,31 @@ import {
   MerchantInfo,
   RequestOtpResponse,
   AuthTokenResponse,
+  InventoryItem,
+  CreateSaleRequest,
+  UserProfile,
 } from '../types';
 
 const BASE_URL = ((import.meta as any).env?.VITE_API_URL as string) || '';
+
+/**
+ * Retrieve active auth token and merchant id from localStorage.
+ */
+export function getStoredAuthContext(): { token: string | null; merchantId: string | null } {
+  try {
+    const rawUser = localStorage.getItem('vyaparmitra_user');
+    const directToken = localStorage.getItem('vyaparmitra_token');
+    if (rawUser) {
+      const parsed: UserProfile = JSON.parse(rawUser);
+      const mId = parsed.business_id || parsed.merchant_id || parsed.id || null;
+      const tok = parsed.token || directToken || null;
+      return { token: tok, merchantId: mId };
+    }
+    return { token: directToken, merchantId: null };
+  } catch {
+    return { token: null, merchantId: null };
+  }
+}
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const url = `${BASE_URL}${endpoint}`;
@@ -36,14 +60,13 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers.set('Content-Type', 'application/json');
   }
 
-  // Inject authenticated merchant JWT token if present
-  try {
-    const token = localStorage.getItem('vyaparmitra_token');
-    if (token && !headers.has('Authorization')) {
-      headers.set('Authorization', `Bearer ${token}`);
-    }
-  } catch {
-    // LocalStorage unavailable
+  // Inject tenant context headers
+  const { token, merchantId } = getStoredAuthContext();
+  if (token && !headers.has('Authorization')) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+  if (merchantId && !headers.has('X-Merchant-Id')) {
+    headers.set('X-Merchant-Id', merchantId);
   }
 
   const response = await fetch(url, { ...options, headers });
@@ -81,19 +104,39 @@ export const api = {
   getHealth: () => request<HealthStatus>('/api/health'),
 
   // Dashboard
-  getDashboardSummary: () => request<DashboardSummary>('/api/dashboard/summary'),
-  getDashboardActions: (limit: number = 5) =>
-    request<{ merchant_id: string; total_actions: number; actions: any[] }>(
-      `/api/dashboard/actions?limit=${limit}`
-    ),
+  getDashboardSummary: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<DashboardSummary>(`/api/dashboard/summary${q}`);
+  },
+  getDashboardActions: (limit: number = 5, merchantId?: string) => {
+    const params = new URLSearchParams({ limit: String(limit) });
+    if (merchantId) params.set('merchant_id', merchantId);
+    return request<{ merchant_id: string; total_actions: number; actions: any[] }>(
+      `/api/dashboard/actions?${params.toString()}`
+    );
+  },
 
   // Analytics
-  getSalesAnalytics: () => request<SalesAnalytics>('/api/analytics/sales'),
-  getCustomerAnalytics: () => request<CustomerAnalytics>('/api/analytics/customers'),
-  getProductAnalytics: () => request<ProductAnalytics>('/api/analytics/products'),
-  getCategoryAnalytics: () =>
-    request<{ categories: CategoryShare[] }>('/api/analytics/categories'),
-  getPaymentAnalytics: () => request<PaymentAnalytics>('/api/analytics/payments'),
+  getSalesAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<SalesAnalytics>(`/api/analytics/sales${q}`);
+  },
+  getCustomerAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<CustomerAnalytics>(`/api/analytics/customers${q}`);
+  },
+  getProductAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<ProductAnalytics>(`/api/analytics/products${q}`);
+  },
+  getCategoryAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<{ categories: CategoryShare[] }>(`/api/analytics/categories${q}`);
+  },
+  getPaymentAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<PaymentAnalytics>(`/api/analytics/payments${q}`);
+  },
   recordCashSale: (data: { amount: number; product_name?: string; category?: string }) =>
     request<{
       status: string;
@@ -107,40 +150,113 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-  getTrendAnalytics: () => request<TrendAnalytics>('/api/analytics/trends'),
-  getAnomalyAnalytics: () =>
-    request<{ total_anomalies_detected: number; anomalies: AnomalyItem[] }>(
-      '/api/analytics/anomalies'
-    ),
+  getTrendAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<TrendAnalytics>(`/api/analytics/trends${q}`);
+  },
+  getAnomalyAnalytics: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<{ total_anomalies_detected: number; anomalies: AnomalyItem[] }>(
+      `/api/analytics/anomalies${q}`
+    );
+  },
 
   // Products
-  getProducts: (params?: { category?: string; search?: string; limit?: number }) => {
+  getProducts: (params?: { category?: string; search?: string; limit?: number; merchantId?: string }) => {
     const q = new URLSearchParams();
     if (params?.category) q.set('category', params.category);
     if (params?.search) q.set('search', params.search);
     if (params?.limit) q.set('limit', String(params.limit));
+    if (params?.merchantId) q.set('merchant_id', params.merchantId);
     return request<ProductListItem[]>(`/api/products?${q.toString()}`);
   },
-  getProductDetail: (productId: string) =>
-    request<ProductDetail>(`/api/products/${encodeURIComponent(productId)}`),
+  getProductDetail: (productId: string, merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<ProductDetail>(`/api/products/${encodeURIComponent(productId)}${q}`);
+  },
+
+  // Operational Inventory
+  getInventory: (params?: { category?: string; search?: string; low_stock_only?: boolean; limit?: number }) => {
+    const q = new URLSearchParams();
+    if (params?.category) q.set('category', params.category);
+    if (params?.search) q.set('search', params.search);
+    if (params?.low_stock_only) q.set('low_stock_only', 'true');
+    if (params?.limit) q.set('limit', String(params.limit));
+    return request<{ total: number; low_stock_count: number; total_valuation: number; items: InventoryItem[] }>(
+      `/api/inventory?${q.toString()}`
+    );
+  },
+  createInventoryItem: (data: {
+    product_id: string;
+    product_name: string;
+    category: string;
+    selling_price: number;
+    unit_cost?: number;
+    current_stock?: number;
+    min_stock_threshold?: number;
+    barcode?: string;
+    unit?: string;
+  }) =>
+    request<InventoryItem>('/api/inventory', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  // Operational POS Sales
+  createSale: (data: CreateSaleRequest) =>
+    request<any>('/api/sales', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  // Data Import (CSV upload)
+  uploadCsv: async (file: File, entityType: 'sales' | 'inventory' | 'customers' = 'inventory') => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const { token, merchantId } = getStoredAuthContext();
+    const headers: Record<string, string> = {};
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (merchantId) headers['X-Merchant-Id'] = merchantId;
+
+    const res = await fetch(`${BASE_URL}/api/import/csv?entity_type=${encodeURIComponent(entityType)}`, {
+      method: 'POST',
+      headers,
+      body: formData,
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || err.detail || err.message || `CSV import failed (${res.status})`);
+    }
+    return res.json();
+  },
 
   // Customers
-  getCustomers: (params?: { segment?: string; risk_tier?: string; limit?: number }) => {
+  getCustomers: (params?: { segment?: string; risk_tier?: string; limit?: number; merchantId?: string }) => {
     const q = new URLSearchParams();
     if (params?.segment) q.set('segment', params.segment);
     if (params?.risk_tier) q.set('risk_tier', params.risk_tier);
     if (params?.limit) q.set('limit', String(params.limit));
+    if (params?.merchantId) q.set('merchant_id', params.merchantId);
     return request<CustomerListItem[]>(`/api/customers?${q.toString()}`);
   },
-  getCustomerDetail: (customerId: string) =>
-    request<CustomerDetail>(`/api/customers/${encodeURIComponent(customerId)}`),
+  getCustomerDetail: (customerId: string, merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<CustomerDetail>(`/api/customers/${encodeURIComponent(customerId)}${q}`);
+  },
 
   // Forecasts
-  getSalesForecast: () => request<SalesForecast>('/api/forecasts/sales'),
-  getDemandForecast: (limit: number = 30) =>
-    request<{ horizon_days: number; top_demand_skus: SKUForecastItem[] }>(
-      `/api/forecasts/demand?limit=${limit}`
-    ),
+  getSalesForecast: (merchantId?: string) => {
+    const q = merchantId ? `?merchant_id=${encodeURIComponent(merchantId)}` : '';
+    return request<SalesForecast>(`/api/forecasts/sales${q}`);
+  },
+  getDemandForecast: (limit: number = 30, merchantId?: string) => {
+    const q = new URLSearchParams({ limit: String(limit) });
+    if (merchantId) q.set('merchant_id', merchantId);
+    return request<{ horizon_days: number; top_demand_skus: SKUForecastItem[] }>(
+      `/api/forecasts/demand?${q.toString()}`
+    );
+  },
 
   // Recommendations / Action Center
   getRecommendations: (params?: {
@@ -179,12 +295,13 @@ export const api = {
     sessionId: string = 'merchant_session_1',
     language: string = 'hinglish'
   ): Promise<CopilotMessage> => {
+    const { merchantId } = getStoredAuthContext();
     const res = await request<any>('/api/copilot/ask', {
       method: 'POST',
       body: JSON.stringify({
         query,
         session_id: sessionId,
-        merchant_id: 'M001',
+        merchant_id: merchantId || 'M001',
         language,
       }),
     });
@@ -223,8 +340,11 @@ export const api = {
 
   // Benchmarking & Merchants
   getMerchants: () => request<{ total: number; merchants: MerchantInfo[] }>('/api/merchants'),
-  getMerchantBenchmark: (merchantId: string = 'M015') =>
-    request<BenchmarkData>(`/api/merchants/${merchantId}/benchmark`),
+  getMerchantBenchmark: (merchantId?: string) => {
+    const { merchantId: currentMId } = getStoredAuthContext();
+    const targetId = merchantId || currentMId || 'M001';
+    return request<BenchmarkData>(`/api/merchants/${encodeURIComponent(targetId)}/benchmark`);
+  },
 
   // Notifications (Twilio WhatsApp & SMS)
   sendWhatsAppDigest: (phone: string, message: string, merchantId?: string) =>
@@ -258,4 +378,3 @@ export const api = {
       body: JSON.stringify(data),
     }),
 };
-

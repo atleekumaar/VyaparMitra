@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Settings, Shield, Store, Globe, Server, CheckCircle2, RefreshCw, Sun, Moon, Palette } from 'lucide-react';
+import { Settings, Shield, Store, Globe, Server, CheckCircle2, RefreshCw, Sun, Moon, Palette, User, Phone, Mail } from 'lucide-react';
 import { api } from '../api/client';
-import { HealthStatus } from '../types';
+import { HealthStatus, UserProfile } from '../types';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
+import { PageHeader } from '../components/PageHeader';
+import { SectionHeader } from '../components/SectionHeader';
 import { CardSkeleton } from '../components/LoadingSkeleton';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -12,14 +15,16 @@ interface SettingsPageProps {
   onLanguageChange?: (lang: string) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
+  currentUser?: UserProfile | null;
 }
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({
   isDarkMode,
   onToggleDarkMode,
   onLanguageChange,
+  currentUser,
 }) => {
-  const { language: currentLanguage, setLanguage, t } = useLanguage();
+  const { language: currentLanguage, setLanguage } = useLanguage();
   const [health, setHealth] = useState<HealthStatus | null>(null);
   const [loadingHealth, setLoadingHealth] = useState<boolean>(true);
 
@@ -39,25 +44,119 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     fetchHealth();
   }, []);
 
-  return (
-    <div className="space-y-6 max-w-4xl animate-in fade-in-50 duration-200">
-      <div>
-        <h2 className="text-xl lg:text-2xl font-black text-[#002970] dark:text-white">Merchant Settings &amp; Diagnostics</h2>
-        <p className="text-xs text-[#4F6A94] dark:text-blue-200 mt-0.5 font-medium">
-          Configure theme, language preferences, store identity, and review intelligence engine status.
-        </p>
-      </div>
+  const isDemo = currentUser?.is_demo ?? true;
+  const merchantId = currentUser?.merchant_id || currentUser?.business_id || 'M001';
+  const storeName = currentUser?.storeName || (isDemo ? 'Vyapar Kirana & General Store' : 'My Vyapar Store');
+  const ownerName = currentUser?.name || (isDemo ? 'Demo Merchant' : 'Store Owner');
+  const phone = currentUser?.phone || '—';
+  const email = currentUser?.email || '—';
 
-      {/* Theme / Appearance Card */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
-        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
-          <Palette className="w-5 h-5 text-[#00BAF2]" />
-          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Appearance &amp; Theme</h3>
+  return (
+    <div className="space-y-6 max-w-5xl animate-in fade-in-50 duration-200">
+      <PageHeader
+        title="Merchant Settings & Diagnostics"
+        subtitle="Manage appearance, dialect preferences, store profile, and intelligence telemetry status."
+      />
+
+      {/* Account / Tenant Status Notice */}
+      <Card
+        className={
+          isDemo
+            ? 'bg-amber-500/5 border-amber-500/20'
+            : 'bg-emerald-500/5 border-emerald-500/20'
+        }
+      >
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div
+              className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                isDemo
+                  ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
+                  : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+              }`}
+            >
+              <Shield className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-bold text-text">
+                  {isDemo ? 'Demo Mode Active' : 'Dedicated Tenant Workspace'}
+                </h3>
+                <Badge variant={isDemo ? 'demo' : 'success'}>
+                  {isDemo ? 'Simulated Dataset' : 'Active Merchant'}
+                </Badge>
+              </div>
+              <p className="text-xs text-text-muted mt-0.5">
+                {isDemo
+                  ? 'Operating on benchmark retail kirana data. Switch to a personal login for isolated tenant records.'
+                  : `Authenticated tenant (${merchantId}). Operational data is scoped to your merchant account.`}
+              </p>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Store Identity & Profile */}
+      <Card>
+        <div className="flex items-center gap-2 mb-4">
+          <Store className="w-4 h-4 text-brand" />
+          <SectionHeader
+            title="Store Profile & Identity"
+            subtitle="Registered merchant information used for invoice headers, customer ledger and tax receipts."
+          />
         </div>
 
-        <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
-          Choose between Light Mode and Midnight Dark Mode.
-        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Merchant ID / Business ID</label>
+            <p className="font-bold text-text mt-1 text-sm font-mono tracking-tight">{merchantId}</p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Store Legal Name</label>
+            <p className="font-bold text-text mt-1 text-sm">{storeName}</p>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Owner / Authorized Name</label>
+            <div className="flex items-center gap-1.5 mt-1">
+              <User className="w-3.5 h-3.5 text-text-muted" />
+              <p className="font-bold text-text text-sm">{ownerName}</p>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Contact Number</label>
+            <div className="flex items-center gap-1.5 mt-1">
+              <Phone className="w-3.5 h-3.5 text-text-muted" />
+              <p className="font-semibold text-text text-sm">{phone}</p>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Email Address</label>
+            <div className="flex items-center gap-1.5 mt-1">
+              <Mail className="w-3.5 h-3.5 text-text-muted" />
+              <p className="font-semibold text-text text-sm truncate">{email}</p>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border/50">
+            <label className="text-text-muted font-medium block">Currency &amp; Accounting</label>
+            <p className="font-semibold text-text mt-1 text-sm">₹ INR (Indian Rupee) • FY 2026-27</p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Theme / Appearance Card */}
+      <Card>
+        <div className="flex items-center gap-2 mb-4">
+          <Palette className="w-4 h-4 text-brand" />
+          <SectionHeader
+            title="Appearance & Theme"
+            subtitle="Choose between Day Light Mode and Midnight Fintech Dark Mode."
+          />
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div
@@ -66,20 +165,20 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             }}
             className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-center justify-between ${
               !isDarkMode
-                ? 'border-[#00BAF2] bg-[#F0F8FE] shadow-sm'
-                : 'border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#132342] opacity-75 hover:opacity-100'
+                ? 'border-brand bg-brand-soft/40 shadow-xs ring-1 ring-brand/30'
+                : 'border-border bg-surface-muted/40 hover:border-brand/50'
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-white text-[#002970] flex items-center justify-center shadow-xs border border-[#CDE5F7]">
-                <Sun className="w-5 h-5 text-[#FFB800]" />
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center border border-amber-500/20">
+                <Sun className="w-5 h-5" />
               </div>
               <div>
-                <span className="font-extrabold text-sm text-[#002970] dark:text-white block">Light Mode</span>
-                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Fintech Light Surface</span>
+                <span className="font-bold text-sm text-text block">Light Mode</span>
+                <span className="text-xs text-text-muted">Fintech White &amp; Neutral Slate</span>
               </div>
             </div>
-            {!isDarkMode && <CheckCircle2 className="w-5 h-5 text-[#00BAF2]" />}
+            {!isDarkMode && <CheckCircle2 className="w-5 h-5 text-brand" />}
           </div>
 
           <div
@@ -88,81 +187,39 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
             }}
             className={`p-4 rounded-xl border-2 cursor-pointer transition-all flex items-center justify-between ${
               isDarkMode
-                ? 'border-[#00BAF2] bg-[#0B254A] shadow-sm'
-                : 'border-[#CDE5F7] bg-white hover:border-[#00BAF2] opacity-75 hover:opacity-100'
+                ? 'border-brand bg-brand-soft/40 shadow-xs ring-1 ring-brand/30'
+                : 'border-border bg-surface-muted/40 hover:border-brand/50'
             }`}
           >
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-[#001D52] text-[#00BAF2] flex items-center justify-center shadow-xs border border-[#00BAF2]/30">
-                <Moon className="w-5 h-5 text-[#00BAF2]" />
+              <div className="w-10 h-10 rounded-xl bg-brand/10 text-brand flex items-center justify-center border border-brand/20">
+                <Moon className="w-5 h-5" />
               </div>
               <div>
-                <span className="font-extrabold text-sm text-[#002970] dark:text-white block">Dark Mode</span>
-                <span className="text-[11px] text-[#4F6A94] dark:text-blue-200">Midnight Fintech Navy</span>
+                <span className="font-bold text-sm text-text block">Dark Mode</span>
+                <span className="text-xs text-text-muted">Midnight Deep Navy</span>
               </div>
             </div>
-            {isDarkMode && <CheckCircle2 className="w-5 h-5 text-[#00BAF2]" />}
+            {isDarkMode && <CheckCircle2 className="w-5 h-5 text-brand" />}
           </div>
         </div>
-      </div>
-
-      {/* Demo Mode Notice */}
-      <div className="bg-[#F0F8FE] dark:bg-[#132342] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-5 shadow-xs transition-colors">
-        <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-[#00BAF2]" />
-          <h3 className="text-sm font-extrabold text-[#002970] dark:text-white">Demo Mode Active</h3>
-          <Badge variant="demo">Synthetic Data Foundation</Badge>
-        </div>
-        <p className="text-xs text-[#0F2042] dark:text-blue-100 mt-2 leading-relaxed font-medium">
-          VyaparMitra is operating on a validated synthetic dataset mirroring Indian small merchant operations
-          (kirana, electronics, apparel). Real telemetry, live payment rails, and production deployment are intentionally
-          isolated in this release.
-        </p>
-      </div>
-
-      {/* Store Identity */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
-        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
-          <Store className="w-5 h-5 text-[#00BAF2]" />
-          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Store Profile</h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-          <div>
-            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Merchant ID</label>
-            <p className="font-black text-[#002970] dark:text-white mt-0.5 text-sm">M001</p>
-          </div>
-          <div>
-            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Store Legal Name</label>
-            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">Vyapar Kirana &amp; General Store</p>
-          </div>
-          <div>
-            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Primary Category</label>
-            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">Grocery, Snacks &amp; FMCG</p>
-          </div>
-          <div>
-            <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Currency &amp; Locale</label>
-            <p className="font-bold text-[#002970] dark:text-white mt-0.5 text-sm">₹ INR (Indian Rupee)</p>
-          </div>
-        </div>
-      </div>
+      </Card>
 
       {/* Language Preference */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
-        <div className="flex items-center gap-2.5 border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
-          <Globe className="w-5 h-5 text-[#00BAF2]" />
-          <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Language Preference</h3>
+      <Card>
+        <div className="flex items-center gap-2 mb-4">
+          <Globe className="w-4 h-4 text-brand" />
+          <SectionHeader
+            title="Language & Dialect Preference"
+            subtitle="Select dialect for AI Business Copilot answers and morning voice briefings."
+          />
         </div>
 
-        <p className="text-xs text-[#4F6A94] dark:text-blue-200 font-medium">
-          Select the default dialect for the AI Business Copilot and morning audio/text briefings.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
-            { id: 'hinglish', label: 'Hinglish (Default)', desc: 'Natural Latin Hindi mix for retail merchants' },
-            { id: 'hindi', label: 'हिंदी (Devanagari)', desc: 'Pure Devanagari script responses' },
-            { id: 'english', label: 'English', desc: 'Standard business English' },
+            { id: 'hinglish', label: 'Hinglish (Recommended)', desc: 'Natural Hindi-English mix spoken by retail shop owners' },
+            { id: 'hindi', label: 'हिंदी (Devanagari)', desc: 'Pure Devanagari script and terminology' },
+            { id: 'english', label: 'English', desc: 'Standard business English syntax' },
           ].map((lang) => (
             <div
               key={lang.id}
@@ -172,30 +229,34 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
               }}
               className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                 currentLanguage === lang.id
-                  ? 'border-[#00BAF2] bg-[#F0F8FE] dark:bg-[#0B254A] ring-2 ring-[#00BAF2]/30 shadow-xs'
-                  : 'border-[#CDE5F7] dark:border-[#1E3A6E] bg-white dark:bg-[#132342] hover:border-[#00BAF2]'
+                  ? 'border-brand bg-brand-soft/40 ring-1 ring-brand/30 shadow-xs'
+                  : 'border-border bg-surface-muted/40 hover:border-brand/50'
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="font-bold text-xs text-[#002970] dark:text-white">{lang.label}</span>
+                <span className="font-bold text-sm text-text">{lang.label}</span>
                 {currentLanguage === lang.id && (
-                  <CheckCircle2 className="w-4 h-4 text-[#00BAF2]" />
+                  <CheckCircle2 className="w-4 h-4 text-brand" />
                 )}
               </div>
-              <p className="text-[11px] text-[#4F6A94] dark:text-blue-200 mt-1">{lang.desc}</p>
+              <p className="text-xs text-text-muted mt-1.5 leading-relaxed">{lang.desc}</p>
             </div>
           ))}
         </div>
-      </div>
+      </Card>
 
       {/* System Diagnostics & Backend Health */}
-      <div className="bg-white dark:bg-[#0F1D38] rounded-2xl border-2 border-[#CDE5F7] dark:border-[#1E3A6E] p-6 shadow-paytm space-y-4 transition-colors">
-        <div className="flex items-center justify-between border-b border-[#E8F4FD] dark:border-[#1E3A6E] pb-3">
-          <div className="flex items-center gap-2.5">
-            <Server className="w-5 h-5 text-[#00BAF2]" />
-            <h3 className="text-base font-extrabold text-[#002970] dark:text-white">Backend Engine Health</h3>
+      <Card>
+        <div className="flex items-center justify-between border-b border-border pb-4 mb-4">
+          <div className="flex items-center gap-2">
+            <Server className="w-4 h-4 text-brand" />
+            <SectionHeader
+              title="Backend Engine Health"
+              subtitle="Real-time telemetry from FastAPI and ML pipeline components."
+              className="mb-0"
+            />
           </div>
-          <Button variant="secondary" size="sm" onClick={fetchHealth} className="dark:bg-[#132342] dark:border-[#1E3A6E] dark:text-white">
+          <Button variant="secondary" size="sm" onClick={fetchHealth}>
             <RefreshCw className="w-3.5 h-3.5 mr-1" />
             Refresh
           </Button>
@@ -205,32 +266,32 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           <CardSkeleton />
         ) : health ? (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-            <div>
-              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Engine Status</label>
-              <p className="font-extrabold text-[#008A54] dark:text-[#00E68A] mt-0.5 uppercase tracking-wide">
-                ● {health.status}
+            <div className="p-3 rounded-xl bg-surface-muted/50 border border-border/50">
+              <label className="text-text-muted font-medium block">Engine Status</label>
+              <p className="font-bold text-success mt-1 uppercase tracking-wide flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-success inline-block animate-pulse" />
+                {health.status}
               </p>
             </div>
-            <div>
-              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Version</label>
-              <p className="font-bold text-[#002970] dark:text-white mt-0.5">v{health.version}</p>
+            <div className="p-3 rounded-xl bg-surface-muted/50 border border-border/50">
+              <label className="text-text-muted font-medium block">Core Version</label>
+              <p className="font-bold text-text mt-1">v{health.version}</p>
             </div>
-            <div>
-              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Environment</label>
-              <p className="font-bold text-[#002970] dark:text-white mt-0.5 capitalize">{health.app_env}</p>
+            <div className="p-3 rounded-xl bg-surface-muted/50 border border-border/50">
+              <label className="text-text-muted font-medium block">Environment</label>
+              <p className="font-bold text-text mt-1 capitalize">{health.app_env}</p>
             </div>
-            <div>
-              <label className="text-[#4F6A94] dark:text-blue-200 font-semibold">Artifacts</label>
-              <p className="font-bold text-[#008A54] dark:text-[#00E68A] mt-0.5">
-                {health.artifacts_ready ? '✓ All Ready' : 'Pending'}
+            <div className="p-3 rounded-xl bg-surface-muted/50 border border-border/50">
+              <label className="text-text-muted font-medium block">Pipeline Artifacts</label>
+              <p className="font-bold text-success mt-1">
+                {health.artifacts_ready ? '✓ All Loaded' : 'Pending Sync'}
               </p>
             </div>
           </div>
         ) : (
-          <p className="text-xs text-red-500 font-medium">Could not reach backend health endpoint.</p>
+          <p className="text-xs text-danger font-medium">Could not reach backend health endpoint.</p>
         )}
-      </div>
+      </Card>
     </div>
   );
 };
-

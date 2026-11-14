@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   Sparkles,
   Filter,
@@ -9,16 +9,24 @@ import {
   ArrowRight,
   TrendingUp,
   Info,
+  Package,
+  Tag,
+  Users,
+  Zap,
 } from 'lucide-react';
 import { api } from '../api/client';
 import { RecommendationDetail } from '../types';
 import { Badge } from '../components/Badge';
 import { Button } from '../components/Button';
+import { Card } from '../components/Card';
+import { PageHeader } from '../components/PageHeader';
+import { SectionHeader } from '../components/SectionHeader';
 import { Modal } from '../components/Modal';
 import { TableSkeleton } from '../components/LoadingSkeleton';
 import { ErrorBanner, EmptyState } from '../components/EmptyState';
 import { useLanguage } from '../i18n/LanguageContext';
 import { localizeDynamicText } from '../i18n/translations';
+import { formatCurrency } from '../utils/formatters';
 
 interface RecommendationsPageProps {
   initialActionId?: string | null;
@@ -39,6 +47,19 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
   const [selectedRec, setSelectedRec] = useState<RecommendationDetail | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
+  const inventoryCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'INVENTORY').length,
+    [recommendations]
+  );
+  const pricingCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'PRICING' || r.type === 'MARGIN').length,
+    [recommendations]
+  );
+  const customersCount = useMemo(
+    () => recommendations.filter((r) => r.type === 'RETENTION' || r.type === 'CROSS_SELL').length,
+    [recommendations]
+  );
+
   const loadRecommendations = async () => {
     setLoading(true);
     setError(null);
@@ -52,7 +73,7 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
       setRecommendations(res.recommendations || []);
 
       if (initialActionId) {
-        const found = res.recommendations.find((r) => r.recommendation_id === initialActionId);
+        const found = (res.recommendations || []).find((r: any) => r.recommendation_id === initialActionId);
         if (found) setSelectedRec(found);
       }
     } catch (err: any) {
@@ -71,7 +92,6 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
     setUpdatingId(recId);
     try {
       await api.updateActionStatus(recId, newStatus);
-      // Update locally
       setRecommendations((prev) =>
         prev.map((r) =>
           r.recommendation_id === recId ? { ...r, status: newStatus } : r
@@ -89,75 +109,53 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
 
   return (
     <div className="space-y-6 animate-in fade-in-50 duration-200">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+      <PageHeader
+        title="⚡ Action Center"
+        subtitle="AI-powered, high-impact recommendations for your business."
+        actions={
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-paytm-blue" />
-            <h2 className="text-xl font-bold text-paytm-dark">{language === 'hindi' ? 'व्यापारी एक्शन सेंटर' : language === 'hinglish' ? 'Merchant Action Center' : 'Merchant Action Center'}</h2>
+            <span className="px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 font-bold text-xs border border-purple-200/50 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-purple-600" />
+              <span>{recommendations.length} Actions Available</span>
+            </span>
           </div>
-          <p className="text-xs text-paytm-muted mt-0.5">
-            {language === 'hindi' ? 'इन्वेंट्री, चर्न शमन और बंडलिंग के आधार पर व्यापारिक निर्णय।' : 'Prioritized business decisions synthesized across inventory restock, churn mitigation, and bundling.'}
-          </p>
-        </div>
-        <Badge variant="info">{language === 'hindi' ? 'कुल कार्य:' : 'Total Actions:'} {recommendations.length}</Badge>
+        }
+      />
+
+      {/* Category Segmented Tabs Inspired by Mockup */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold">
+        {[
+          { id: 'ALL', label: `All (${recommendations.length})` },
+          { id: 'INVENTORY', label: `Inventory (${inventoryCount})` },
+          { id: 'PRICING', label: `Pricing (${pricingCount})` },
+          { id: 'RETENTION', label: `Customers (${customersCount})` },
+        ].map((tab) => {
+          const isActive = filterType === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setFilterType(tab.id)}
+              className={`px-4 py-2 rounded-xl transition-all whitespace-nowrap ${
+                isActive
+                  ? 'bg-blue-600 text-white font-bold shadow-xs'
+                  : 'bg-surface-card hover:bg-surface-muted text-text-muted hover:text-text border border-border'
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* Governance & Safeguard Notice */}
-      <div className="bg-paytm-light rounded-xl border border-paytm-border p-4 text-xs text-paytm-dark flex items-start gap-3">
-        <Info className="w-4 h-4 text-paytm-blue shrink-0 mt-0.5" />
-        <p>
-          <span className="font-semibold text-paytm-dark">{language === 'hindi' ? 'व्यापार सुरक्षा सीमा:' : 'Commercial Safety Boundary:'}</span> {language === 'hindi' ? 'व्यापारमित्र साक्ष्य-समर्थित सुझाव देता है। सिस्टम आपकी स्पष्ट सहमति के बिना कोई भी कार्य निष्पादित नहीं करेगा।' : 'VyaparMitra surfaces evidence-backed recommendations for your consideration. The system will never execute purchases, adjust prices, or dispatch customer messages without your explicit confirmation.'}
-        </p>
-      </div>
-
-      {/* Filter Row */}
-      <div className="bg-white rounded-xl border border-paytm-border p-4 flex flex-wrap items-center gap-3 shadow-xs">
-        <Filter className="w-4 h-4 text-slate-400" />
-        
-        {/* Type Filter */}
-        <select
-          value={filterType}
-          onChange={(e) => setFilterType(e.target.value)}
-          className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
-        >
-          <option value="ALL">{language === 'hindi' ? 'सभी उपप्रणालियाँ' : 'All Subsystems'}</option>
-          <option value="INVENTORY">{language === 'hindi' ? 'इन्वेंट्री रेस्टॉक' : 'Inventory Restock'}</option>
-          <option value="RETENTION">{language === 'hindi' ? 'ग्राहक प्रतिधारण' : 'Customer Retention'}</option>
-          <option value="CROSS_SELL">{language === 'hindi' ? 'क्रॉस-सेल और बंडलिंग' : 'Cross-Sell & Bundling'}</option>
-          <option value="PRICING">{language === 'hindi' ? 'मूल्य और मार्जिन' : 'Pricing & Margin'}</option>
-        </select>
-
-        {/* Priority Filter */}
-        <select
-          value={filterPriority}
-          onChange={(e) => setFilterPriority(e.target.value)}
-          className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
-        >
-          <option value="ALL">{language === 'hindi' ? 'सभी प्राथमिकताएं' : 'All Priorities'}</option>
-          <option value="CRITICAL">🔴 {language === 'hindi' ? 'अति-महत्वपूर्ण' : 'Critical Priority'}</option>
-          <option value="HIGH">🟠 {language === 'hindi' ? 'उच्च प्राथमिकता' : 'High Priority'}</option>
-          <option value="MEDIUM">🟡 {language === 'hindi' ? 'मध्यम प्राथमिकता' : 'Medium Priority'}</option>
-          <option value="LOW">🟢 {language === 'hindi' ? 'कम प्राथमिकता' : 'Low Priority'}</option>
-        </select>
-
-        {/* Status Filter */}
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          className="px-3 py-2 text-xs rounded-lg border border-paytm-border bg-white text-paytm-text focus:outline-none focus:ring-2 focus:ring-paytm-blue"
-        >
-          <option value="ALL">{language === 'hindi' ? 'सभी स्थितियाँ' : 'All Statuses'}</option>
-          <option value="GENERATED">{language === 'hindi' ? 'उत्पन्न' : 'Generated'}</option>
-          <option value="VIEWED">{language === 'hindi' ? 'देखा गया' : 'Viewed'}</option>
-          <option value="ACCEPTED">{language === 'hindi' ? 'स्वीकृत' : 'Accepted'}</option>
-          <option value="REJECTED">{language === 'hindi' ? 'अस्वीकृत' : 'Rejected'}</option>
-          <option value="EXECUTED">{language === 'hindi' ? 'निष्पादित' : 'Executed'}</option>
-        </select>
-
-        <Button variant="secondary" size="sm" onClick={loadRecommendations}>
-          {language === 'hindi' ? 'फ़िल्टर' : 'Filter'}
-        </Button>
+      <div className="rounded-2xl bg-blue-500/5 border border-blue-500/20 p-4">
+        <div className="flex items-start gap-3">
+          <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+          <p className="text-xs text-text leading-relaxed">
+            <span className="font-bold text-text">Commercial Safety Boundary: </span>
+            VyaparMitra surfaces evidence-backed recommendations for your consideration. The system will never execute purchases, adjust prices, or dispatch customer messages without your explicit approval.
+          </p>
+        </div>
       </div>
 
       {/* Recommendations List */}
@@ -166,120 +164,139 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
       ) : error ? (
         <ErrorBanner message={error} onRetry={loadRecommendations} />
       ) : recommendations.length === 0 ? (
-        <EmptyState
-          title={language === 'hindi' ? "कोई कार्य मेल नहीं खाता" : "No Actions Matching Criteria"}
-          message={language === 'hindi' ? "सभी स्पष्ट! कोई लंबित सुझाव आपके चयनित फ़िल्टर से मेल नहीं खाता।" : "All clear! No pending recommendations match your selected filters."}
-          actionText={language === 'hindi' ? "फ़िल्टर रीसेट करें" : "Reset Filters"}
-          onAction={() => {
-            setFilterType('ALL');
-            setFilterPriority('ALL');
-            setFilterStatus('ALL');
-          }}
-        />
+        <Card className="p-8">
+          <EmptyState
+            title="All Clear — No Pending Interventions"
+            message="Your business metrics are operating within normal baseline boundaries. As new patterns emerge, actionable prompts will appear here."
+            actionText="Reset Filters"
+            onAction={() => {
+              setFilterType('ALL');
+              setFilterPriority('ALL');
+              setFilterStatus('ALL');
+            }}
+          />
+        </Card>
       ) : (
         <div className="space-y-3">
           {recommendations.map((rec) => {
             const isAccepted = rec.status === 'ACCEPTED';
-            const isRejected = rec.status === 'REJECTED';
             const isExecuted = rec.status === 'EXECUTED';
+            const isInventory = rec.type === 'INVENTORY';
+            const isPricing = rec.type === 'PRICING' || rec.type === 'MARGIN';
+            const isCustomer = rec.type === 'RETENTION' || rec.type === 'CROSS_SELL';
+
+            const impactLabel =
+              rec.priority_band === 'CRITICAL' || rec.priority_band === 'HIGH'
+                ? 'High Impact'
+                : rec.priority_band === 'MEDIUM'
+                ? 'Medium'
+                : 'Low Impact';
 
             return (
               <div
                 key={rec.recommendation_id}
-                className="bg-white rounded-xl border border-paytm-border p-5 shadow-xs hover:border-paytm-blue/60 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                className="bg-surface-card rounded-2xl border border-border p-5 hover:border-blue-300 dark:hover:border-blue-700 shadow-fintech transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
               >
-                <div className="space-y-1.5 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge
-                      variant={
-                        rec.priority_band === 'CRITICAL'
-                          ? 'critical'
-                          : rec.priority_band === 'HIGH'
-                          ? 'high'
-                          : rec.priority_band === 'MEDIUM'
-                          ? 'medium'
-                          : 'low'
-                      }
-                    >
-                      {rec.priority_band}
-                    </Badge>
-                    <span className="text-[11px] font-mono uppercase text-slate-400">
-                      [{rec.type}]
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-400">
-                      ID: {rec.recommendation_id}
-                    </span>
-                    <Badge
-                      variant={
-                        isAccepted
-                          ? 'info'
-                          : isExecuted
-                          ? 'success'
-                          : isRejected
-                          ? 'critical'
-                          : 'neutral'
-                      }
-                    >
-                      {language === 'hindi' ? 'स्थिति:' : 'Status:'} {localizeDynamicText(rec.status, language)}
-                    </Badge>
+                {/* Left: Icon and Details */}
+                <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-2xs mt-0.5 ${
+                      isInventory
+                        ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/50'
+                        : isPricing
+                        ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200/50'
+                        : isCustomer
+                        ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/50'
+                        : 'bg-purple-50 text-purple-600 dark:bg-purple-950/40 dark:text-purple-400 border border-purple-200/50'
+                    }`}
+                  >
+                    {isInventory ? (
+                      <Package className="w-5 h-5" />
+                    ) : isPricing ? (
+                      <Tag className="w-5 h-5" />
+                    ) : isCustomer ? (
+                      <Users className="w-5 h-5" />
+                    ) : (
+                      <Zap className="w-5 h-5" />
+                    )}
                   </div>
 
-                  <h3 className="text-sm font-bold text-paytm-dark">{localizeDynamicText(rec.title, language)}</h3>
-                  <p className="text-xs text-paytm-text font-medium">{localizeDynamicText(rec.action, language)}</p>
-                  <p className="text-xs text-paytm-muted">{localizeDynamicText(rec.reason, language)}</p>
-
-                  <div className="flex items-center gap-4 text-xs pt-1">
-                    <span className="font-semibold text-emerald-700">
-                      {language === 'hindi' ? 'अपेक्षित प्रभाव:' : 'Expected Impact:'} ₹{rec.expected_impact.toLocaleString()}
-                    </span>
-                    {rec.entity_id && (
-                      <span className="text-paytm-muted font-mono">
-                        {language === 'hindi' ? 'लक्ष्य:' : 'Target:'} {rec.entity_id}
-                      </span>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-bold text-text truncate">
+                        {localizeDynamicText(rec.title, language)}
+                      </h3>
+                      {rec.entity_id && (
+                        <span className="text-[10px] text-text-muted font-mono bg-surface-muted px-1.5 py-0.5 rounded border border-border">
+                          {rec.entity_id}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-text-muted leading-relaxed line-clamp-2">
+                      {localizeDynamicText(rec.reason || rec.action, language)}
+                    </p>
+                    {rec.expected_impact > 0 && (
+                      <div className="pt-0.5">
+                        <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                          Expected Impact: +{formatCurrency(rec.expected_impact)}
+                        </span>
+                      </div>
                     )}
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex items-center gap-2 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setSelectedRec(rec)}
+                {/* Right: Impact Pill & Action Button */}
+                <div className="flex items-center gap-3 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-border justify-between md:justify-end">
+                  {/* Impact badge */}
+                  <span
+                    className={`inline-flex px-3 py-1 rounded-full text-xs font-bold border ${
+                      impactLabel === 'High Impact'
+                        ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400 border-rose-200/50'
+                        : impactLabel === 'Medium'
+                        ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200/50'
+                        : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200/50'
+                    }`}
                   >
-                    {language === 'hindi' ? 'कारण व साक्ष्य देखें' : 'View Why & Evidence'}
-                  </Button>
+                    {impactLabel}
+                  </span>
 
-                  {!isAccepted && !isExecuted && (
+                  {/* Primary Action Button matching mockup */}
+                  {isInventory ? (
                     <Button
                       variant="primary"
                       size="sm"
                       isLoading={updatingId === rec.recommendation_id}
                       onClick={() => handleStatusChange(rec.recommendation_id, 'ACCEPTED')}
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-xs"
                     >
-                      {language === 'hindi' ? 'स्वीकार करें' : 'Accept'}
+                      Take Action
                     </Button>
-                  )}
-
-                  {isAccepted && !isExecuted && (
-                    <Button
-                      variant="success"
-                      size="sm"
-                      isLoading={updatingId === rec.recommendation_id}
-                      onClick={() => handleStatusChange(rec.recommendation_id, 'EXECUTED')}
-                    >
-                      {language === 'hindi' ? 'निष्पादित करें' : 'Mark Executed'}
-                    </Button>
-                  )}
-
-                  {!isRejected && (
+                  ) : isPricing ? (
                     <Button
                       variant="secondary"
                       size="sm"
-                      isLoading={updatingId === rec.recommendation_id}
-                      onClick={() => handleStatusChange(rec.recommendation_id, 'REJECTED')}
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
                     >
-                      {language === 'hindi' ? 'रद्द करें' : 'Dismiss'}
+                      Review
+                    </Button>
+                  ) : isCustomer ? (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
+                    >
+                      Start Campaign
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => setSelectedRec(rec)}
+                      className="font-bold text-xs px-4 py-2 rounded-xl shadow-2xs"
+                    >
+                      Details
                     </Button>
                   )}
                 </div>
@@ -294,64 +311,64 @@ export const RecommendationsPage: React.FC<RecommendationsPageProps> = ({
         <Modal
           isOpen={true}
           onClose={() => setSelectedRec(null)}
-          title={`${language === 'hindi' ? 'सुझाव का कारण:' : 'Recommendation Rationale:'} ${localizeDynamicText(selectedRec.title, language)}`}
-          subtitle={`${language === 'hindi' ? 'प्राथमिकता बैंड:' : 'Priority Band:'} ${localizeDynamicText(selectedRec.priority_band, language)} • ${language === 'hindi' ? 'प्राथमिकता स्कोर:' : 'Priority Score:'} ${selectedRec.priority_score.toFixed(4)}`}
-          footer={
-            <div className="flex items-center gap-2">
+          title={`Recommendation: ${localizeDynamicText(selectedRec.title, language)}`}
+          subtitle={`Priority Band: ${localizeDynamicText(selectedRec.priority_band, language)} • Score: ${selectedRec.priority_score.toFixed(4)}`}
+        >
+          <div className="space-y-4 text-xs text-text">
+            <div className="p-3.5 rounded-xl bg-surface-muted/60 border border-border">
+              <span className="text-[10px] uppercase font-bold text-brand">Recommended Intervention</span>
+              <p className="text-sm font-semibold text-text mt-1">{localizeDynamicText(selectedRec.action, language)}</p>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-text mb-1">Underlying Rationale</h4>
+              <p className="text-text-muted leading-relaxed">{localizeDynamicText(selectedRec.reason, language)}</p>
+            </div>
+
+            {/* Evidence List */}
+            <div className="pt-2 border-t border-border">
+              <h4 className="font-bold text-text mb-2">Auditable Data Evidence ({selectedRec.evidence.length} Indicators)</h4>
+              {selectedRec.evidence.length === 0 ? (
+                <p className="text-text-muted">Evidence record compiled from verified store sales.</p>
+              ) : (
+                <div className="space-y-2">
+                  {selectedRec.evidence.map((ev, i) => (
+                    <div key={i} className="p-2.5 rounded-xl bg-surface-muted/50 border border-border text-xs">
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold text-text">{localizeDynamicText(ev.metric, language)}</span>
+                        <span className="font-bold text-success">{String(ev.value)}</span>
+                      </div>
+                      {ev.description && <p className="text-[11px] text-text-muted mt-0.5">{localizeDynamicText(ev.description, language)}</p>}
+                      <div className="mt-1 text-[10px] text-text-muted font-mono">Source: {localizeDynamicText(ev.source, language)}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-border">
               {selectedRec.status !== 'ACCEPTED' && selectedRec.status !== 'EXECUTED' && (
                 <Button
                   variant="primary"
                   size="sm"
                   onClick={() => handleStatusChange(selectedRec.recommendation_id, 'ACCEPTED')}
                 >
-                  {language === 'hindi' ? 'कार्य स्वीकार करें' : 'Accept Action'}
+                  Accept Action
                 </Button>
               )}
               {selectedRec.status === 'ACCEPTED' && (
                 <Button
-                  variant="success"
+                  variant="primary"
                   size="sm"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white"
                   onClick={() => handleStatusChange(selectedRec.recommendation_id, 'EXECUTED')}
                 >
-                  {language === 'hindi' ? 'निष्पादन की पुष्टि करें' : 'Confirm Execution'}
+                  Confirm Execution
                 </Button>
               )}
               <Button variant="secondary" size="sm" onClick={() => setSelectedRec(null)}>
-                {language === 'hindi' ? 'बंद करें' : 'Close'}
+                Close
               </Button>
-            </div>
-          }
-        >
-          <div className="space-y-4">
-            <div className="p-3.5 rounded-xl bg-paytm-light border border-paytm-border">
-              <span className="text-[10px] uppercase font-bold text-paytm-blue">{language === 'hindi' ? 'सुझाए गए व्यापारिक कार्य' : 'Recommended Business Action'}</span>
-              <p className="text-sm font-semibold text-paytm-dark mt-1">{localizeDynamicText(selectedRec.action, language)}</p>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-bold text-paytm-dark mb-1">{language === 'hindi' ? 'अंतर्निहित कारण' : 'Underlying Rationale'}</h4>
-              <p className="text-xs text-paytm-text leading-relaxed">{localizeDynamicText(selectedRec.reason, language)}</p>
-            </div>
-
-            {/* 6-Part Auditable Evidence */}
-            <div className="pt-2 border-t border-slate-100">
-              <h4 className="text-xs font-bold text-paytm-dark mb-2">{language === 'hindi' ? 'ऑडिट योग्य डेटा साक्ष्य' : 'Auditable Data Evidence'} ({selectedRec.evidence.length} {language === 'hindi' ? 'संकेतक' : 'Indicators'})</h4>
-              {selectedRec.evidence.length === 0 ? (
-                <p className="text-xs text-paytm-muted">{language === 'hindi' ? 'साक्ष्य रिकॉर्ड दुकान की वास्तविक बिक्री से संकलित है।' : 'Evidence record compiled from verified store sales.'}</p>
-              ) : (
-                <div className="space-y-2">
-                  {selectedRec.evidence.map((ev, i) => (
-                    <div key={i} className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-paytm-dark">{localizeDynamicText(ev.metric, language)}</span>
-                        <span className="font-bold text-emerald-700">{String(ev.value)}</span>
-                      </div>
-                      {ev.description && <p className="text-[11px] text-paytm-muted mt-0.5">{localizeDynamicText(ev.description, language)}</p>}
-                      <div className="mt-1 text-[10px] text-slate-400 font-mono">{language === 'hindi' ? 'स्रोत:' : 'Source:'} {localizeDynamicText(ev.source, language)}</div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </Modal>
