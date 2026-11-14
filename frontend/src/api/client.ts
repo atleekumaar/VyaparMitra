@@ -200,24 +200,23 @@ export const api = {
     }),
 
   // Data Import (CSV upload)
-  uploadCsv: async (file: File, entityType: 'sales' | 'inventory' | 'customers') => {
+  uploadCsv: async (file: File, entityType: 'sales' | 'inventory' | 'customers' = 'inventory') => {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('entity_type', entityType);
 
     const { token, merchantId } = getStoredAuthContext();
     const headers: Record<string, string> = {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
     if (merchantId) headers['X-Merchant-Id'] = merchantId;
 
-    const res = await fetch(`${BASE_URL}/api/import-data/csv`, {
+    const res = await fetch(`${BASE_URL}/api/import/csv?entity_type=${encodeURIComponent(entityType)}`, {
       method: 'POST',
       headers,
       body: formData,
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      throw new Error(err.detail || err.message || `CSV import failed (${res.status})`);
+      throw new Error(err.error?.message || err.detail || err.message || `CSV import failed (${res.status})`);
     }
     return res.json();
   },
