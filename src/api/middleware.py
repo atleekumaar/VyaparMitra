@@ -72,7 +72,8 @@ def register_error_handlers(app: FastAPI) -> None:
                     "code": error_code,
                     "message": str(exc.detail),
                     "request_id": req_id,
-                }
+                },
+                "detail": str(exc.detail),
             },
             headers={"X-Request-ID": req_id},
         )
@@ -81,7 +82,7 @@ def register_error_handlers(app: FastAPI) -> None:
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
         req_id = getattr(request.state, "request_id", str(uuid.uuid4()))
         return JSONResponse(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=getattr(status, "HTTP_422_UNPROCESSABLE_CONTENT", 422),
             content={
                 "error": {
                     "code": "VALIDATION_ERROR",

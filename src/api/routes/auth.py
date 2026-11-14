@@ -375,6 +375,7 @@ def verify_otp(
         # Check maximum retry attempts (locks after 5 failures)
         if otp_row["attempts"] >= 5:
             db.execute("UPDATE otps SET is_used = 1 WHERE id = ?", (otp_row["id"],))
+            db.commit()
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Too many invalid attempts. This verification code has been locked. Please request a new one.",
@@ -390,6 +391,7 @@ def verify_otp(
 
         if now_utc > expires_at:
             db.execute("UPDATE otps SET is_used = 1 WHERE id = ?", (otp_row["id"],))
+            db.commit()
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Verification code has expired. Please request a new code.",
@@ -401,6 +403,7 @@ def verify_otp(
                 "UPDATE otps SET attempts = attempts + 1 WHERE id = ?",
                 (otp_row["id"],),
             )
+            db.commit()
             attempts_left = 4 - otp_row["attempts"]
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,

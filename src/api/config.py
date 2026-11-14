@@ -50,23 +50,53 @@ def _resolve_db_path() -> Path:
     return Path("data/vyaparmitra.db")
 
 
+def _resolve_cors_origins() -> List[str]:
+    explicit = os.getenv("CORS_ORIGINS")
+    if explicit:
+        origins = [o.strip() for o in explicit.split(",") if o.strip()]
+        # Wildcard * cannot be used with credentials in standard browser CORS
+        return [o for o in origins if o != "*"]
+    return [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:5173",
+        "https://vyaparmitra.onrender.com",
+        "https://atleekumaar.github.io",
+    ]
+
+
+def _resolve_demo_mode() -> bool:
+    env_val = os.getenv("DEMO_MODE")
+    if env_val is not None:
+        return env_val.lower() in ("true", "1", "yes")
+    app_env = os.getenv("APP_ENV", "development").lower()
+    return app_env != "production"
+
+
+def _resolve_jwt_secret() -> str:
+    secret = os.getenv("JWT_SECRET_KEY")
+    if secret:
+        return secret
+    app_env = os.getenv("APP_ENV", "development").lower()
+    if app_env == "production":
+        import secrets
+        return secrets.token_hex(32)
+    return "vyaparmitra-production-jwt-secret-key-32bytes-secure-2026"
+
+
 @dataclass
 class APIConfig:
     """Production-ready API settings loaded from environment or defaults."""
     app_env: str = field(default_factory=lambda: os.getenv("APP_ENV", "development"))
     api_host: str = field(default_factory=lambda: os.getenv("API_HOST", "0.0.0.0"))
     api_port: int = field(default_factory=lambda: int(os.getenv("PORT", os.getenv("API_PORT", "8000"))))
-    cors_origins: List[str] = field(default_factory=lambda: [
-        origin.strip() for origin in os.getenv(
-            "CORS_ORIGINS",
-            "http://localhost:3000,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:5173,*"
-        ).split(",") if origin.strip()
-    ])
+    cors_origins: List[str] = field(default_factory=_resolve_cors_origins)
     data_dir: Path = field(default_factory=lambda: Path(os.getenv("DATA_DIR", "data")))
     db_path: Path = field(default_factory=_resolve_db_path)
     config_path: Path = field(default_factory=lambda: Path(os.getenv("CONFIG_PATH", "configs/config.yaml")))
     copilot_config_path: Path = field(default_factory=lambda: Path(os.getenv("COPILOT_CONFIG_PATH", "configs/copilot.yaml")))
-    demo_mode: bool = field(default_factory=lambda: os.getenv("DEMO_MODE", "true").lower() in ("true", "1", "yes"))
+    demo_mode: bool = field(default_factory=_resolve_demo_mode)
     default_merchant_id: str = field(default_factory=lambda: os.getenv("DEFAULT_MERCHANT_ID", "M001"))
     log_level: str = field(default_factory=lambda: os.getenv("LOG_LEVEL", "INFO"))
 
@@ -78,7 +108,7 @@ class APIConfig:
     twilio_sms_from: str = field(default_factory=lambda: os.getenv("TWILIO_SMS_FROM", "+14155238886"))
 
     # Authentication & Security
-    jwt_secret_key: str = field(default_factory=lambda: os.getenv("JWT_SECRET_KEY", "vyaparmitra-production-jwt-secret-key-32bytes-secure-2026"))
+    jwt_secret_key: str = field(default_factory=_resolve_jwt_secret)
     jwt_algorithm: str = field(default_factory=lambda: os.getenv("JWT_ALGORITHM", "HS256"))
     jwt_expire_minutes: int = field(default_factory=lambda: int(os.getenv("JWT_EXPIRE_MINUTES", "1440")))
 
