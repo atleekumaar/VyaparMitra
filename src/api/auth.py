@@ -288,3 +288,44 @@ def enforce_branch_isolation(user: CurrentUser, target_branch_id: Optional[str] 
     # Owner / Admin can target any branch or query across all branches
     return target_branch_id
 
+
+def resolve_merchant_id(
+    merchant_id: Optional[str] = None,
+    x_merchant_id: Optional[str] = None,
+    authorization: Optional[str] = None,
+) -> Optional[str]:
+    """
+    Extracts the active merchant/business context with priority:
+    1. Explicit merchant_id query param
+    2. X-Merchant-Id header
+    3. Bearer token business_id claim
+    """
+    if merchant_id and merchant_id.strip():
+        return merchant_id.strip()
+    if x_merchant_id and x_merchant_id.strip():
+        return x_merchant_id.strip()
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.split(" ")[1].strip()
+        try:
+            payload = decode_access_token(token)
+            biz_id = payload.get("business_id")
+            if biz_id:
+                return str(biz_id).strip()
+        except Exception:
+            pass
+    return None
+
+
+def get_request_merchant_id(
+    merchant_id: Optional[str] = None,
+    x_merchant_id: Optional[str] = Header(None),
+    authorization: Optional[str] = Header(None),
+) -> Optional[str]:
+    """FastAPI dependency for auto-extracting tenant merchant context."""
+    return resolve_merchant_id(
+        merchant_id=merchant_id,
+        x_merchant_id=x_merchant_id,
+        authorization=authorization,
+    )
+
+

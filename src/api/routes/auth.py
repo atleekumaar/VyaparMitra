@@ -420,15 +420,42 @@ def verify_otp(
     if not user_row:
         # Auto-provision merchant profile
         user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
-        business_id = req.store_id or "M015"
-        branch_id = f"BR_{business_id}_MAIN"
+        business_id = None
 
-        # Verify business exists or fallback
-        biz_exists = db.execute("SELECT id FROM businesses WHERE id = ?", (business_id,)).fetchone()
-        if not biz_exists:
-            first_biz = db.execute("SELECT id FROM businesses LIMIT 1").fetchone()
-            business_id = first_biz["id"] if first_biz else "M015"
-            branch_id = f"BR_{business_id}_MAIN"
+        # If an explicit store_id is provided and already exists (e.g. demo selection M001 or M015), attach to it
+        if req.store_id:
+            biz_exists = db.execute("SELECT id FROM businesses WHERE id = ?", (req.store_id.strip(),)).fetchone()
+            if biz_exists:
+                business_id = biz_exists["id"]
+                branch_id = f"BR_{business_id}_MAIN"
+
+        # Otherwise, provision a brand-new isolated business with 0 seeded data
+        if not business_id:
+            biz_id = f"BIZ_{uuid.uuid4().hex[:8].upper()}"
+            branch_id = f"BR_{biz_id}_MAIN"
+            clean_name = req.name.strip() if req.name and req.name.strip() else clean_email.split("@")[0].replace(".", " ").title()
+            biz_name = f"{clean_name}'s Store"
+
+            db.execute("""
+                INSERT INTO businesses (id, name, business_type, phone, email, city, state, created_at)
+                VALUES (?, ?, 'Retail & FMCG', ?, ?, 'India', 'India', ?)
+            """, (
+                biz_id,
+                biz_name,
+                req.phone.strip() if req.phone else "+919000000000",
+                clean_email,
+                now_str,
+            ))
+            db.execute("""
+                INSERT INTO branches (id, business_id, name, code, is_main, created_at)
+                VALUES (?, ?, ?, 'MAIN', 1, ?)
+            """, (
+                branch_id,
+                biz_id,
+                f"{biz_name} - Main Branch",
+                now_str,
+            ))
+            business_id = biz_id
 
         base_username = clean_email.split("@")[0].replace(".", "_")
         username = base_username
