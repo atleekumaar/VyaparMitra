@@ -14,6 +14,7 @@ import { SettingsPage } from './pages/SettingsPage';
 import { api } from './api/client';
 import { Menu } from 'lucide-react';
 import { UserProfile } from './types';
+import { ToastProvider } from './components/Toast';
 
 export const App: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
@@ -116,102 +117,108 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 flex transition-colors duration-200">
-      {/* Sidebar navigation */}
-      <Sidebar
-        currentTab={currentTab}
-        onTabChange={(tab) => {
-          setCurrentTab(tab);
-          if (tab !== 'recommendations') {
-            setSelectedActionId(null);
-          }
-          if (tab !== 'copilot') {
-            setCopilotQuery(null);
-          }
-        }}
-        pendingActionsCount={pendingActionsCount}
-        isOpenMobile={isOpenMobile}
-        onToggleMobile={() => setIsOpenMobile((prev) => !prev)}
-      />
-
-      {/* Main content wrapper */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile topbar */}
-        <div className="lg:hidden flex items-center justify-between px-4 py-2.5 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
-          <button
-            onClick={() => setIsOpenMobile(true)}
-            className="p-1.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
-            aria-label="Open navigation menu"
-          >
-            <Menu className="w-5 h-5 text-slate-700 dark:text-slate-200" />
-          </button>
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-base text-slate-900 dark:text-white">
-              Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
-            </span>
-          </div>
-          <div className="w-6" /> {/* Spacer */}
-        </div>
-
-        {/* Global top navigation bar */}
-        <Navbar
-          onOpenCopilot={() => {
-            setCopilotQuery(null);
-            setCurrentTab('copilot');
+    <ToastProvider>
+      <div className="min-h-screen bg-surface-muted dark:bg-surface text-text flex transition-colors duration-200">
+        {/* Sidebar navigation */}
+        <Sidebar
+          currentTab={currentTab}
+          onTabChange={(tab) => {
+            setCurrentTab(tab);
+            if (tab !== 'recommendations') {
+              setSelectedActionId(null);
+            }
+            if (tab !== 'copilot') {
+              setCopilotQuery(null);
+            }
           }}
-          isHealthy={isHealthy}
-          isDarkMode={isDarkMode}
-          onToggleDarkMode={toggleDarkMode}
+          pendingActionsCount={pendingActionsCount}
+          isOpenMobile={isOpenMobile}
+          onToggleMobile={() => setIsOpenMobile((prev) => !prev)}
           userProfile={currentUser}
           onLogout={handleLogout}
         />
 
-        {/* Main Content Area */}
-        <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl w-full mx-auto">
-          {currentTab === 'dashboard' && (
-            <DashboardPage
-              onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
-              onSelectAction={handleSelectAction}
-              onQuickCopilot={handleQuickCopilot}
-            />
-          )}
+        {/* Main content wrapper */}
+        <div className="flex-1 flex flex-col min-w-0">
+          {/* Mobile topbar */}
+          <div className="lg:hidden flex items-center justify-between px-4 py-2.5 bg-surface border-b border-border transition-colors">
+            <button
+              onClick={() => setIsOpenMobile(true)}
+              className="p-1.5 rounded-lg text-text-muted hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+              aria-label="Open navigation menu"
+            >
+              <Menu className="w-5 h-5 text-text" />
+            </button>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-base text-text">
+                Vyapar<span className="text-brand">Mitra</span>
+              </span>
+            </div>
+            <div className="w-6" /> {/* Spacer */}
+          </div>
 
-          {currentTab === 'compare' && (
-            <ComparePage
-              onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
-              onQuickCopilot={handleQuickCopilot}
-            />
-          )}
+          {/* Global top navigation bar */}
+          <Navbar
+            onOpenCopilot={() => {
+              setCopilotQuery(null);
+              setCurrentTab('copilot');
+            }}
+            isHealthy={isHealthy}
+            isDarkMode={isDarkMode}
+            onToggleDarkMode={toggleDarkMode}
+            userProfile={currentUser}
+            onLogout={handleLogout}
+          />
 
-          {currentTab === 'analytics' && <AnalyticsPage />}
+          {/* Main Content Area */}
+          <main className="flex-1 px-4 sm:px-6 lg:px-8 py-6 lg:py-8 max-w-7xl w-full mx-auto">
+            {currentTab === 'dashboard' && (
+              <DashboardPage
+                onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
+                onSelectAction={handleSelectAction}
+                onQuickCopilot={handleQuickCopilot}
+                currentUser={currentUser}
+              />
+            )}
 
-          {currentTab === 'products' && <ProductsPage />}
+            {currentTab === 'compare' && (
+              <ComparePage
+                onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
+                onQuickCopilot={handleQuickCopilot}
+              />
+            )}
 
-          {currentTab === 'customers' && <CustomersPage />}
+            {currentTab === 'analytics' && <AnalyticsPage />}
 
-          {currentTab === 'forecasts' && <ForecastsPage />}
+            {currentTab === 'products' && <ProductsPage />}
 
-          {currentTab === 'recommendations' && (
-            <RecommendationsPage
-              initialActionId={selectedActionId}
-            />
-          )}
+            {currentTab === 'customers' && <CustomersPage />}
 
-          {currentTab === 'copilot' && (
-            <CopilotPage
-              initialQuery={copilotQuery}
-            />
-          )}
+            {currentTab === 'forecasts' && <ForecastsPage />}
 
-          {currentTab === 'settings' && (
-            <SettingsPage
-              isDarkMode={isDarkMode}
-              onToggleDarkMode={toggleDarkMode}
-            />
-          )}
-        </main>
+            {currentTab === 'recommendations' && (
+              <RecommendationsPage
+                initialActionId={selectedActionId}
+              />
+            )}
+
+            {currentTab === 'copilot' && (
+              <CopilotPage
+                initialQuery={copilotQuery}
+              />
+            )}
+
+            {currentTab === 'settings' && (
+              <SettingsPage
+                isDarkMode={isDarkMode}
+                onToggleDarkMode={toggleDarkMode}
+                currentUser={currentUser}
+              />
+            )}
+          </main>
+        </div>
       </div>
-    </div>
+    </ToastProvider>
   );
 };
 
