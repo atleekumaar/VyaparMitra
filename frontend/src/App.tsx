@@ -185,6 +185,7 @@ export const App: React.FC = () => {
               <ComparePage
                 onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
                 onQuickCopilot={handleQuickCopilot}
+                currentUser={currentUser}
               />
             )}
 
@@ -194,7 +195,11 @@ export const App: React.FC = () => {
 
             {currentTab === 'customers' && <CustomersPage />}
 
-            {currentTab === 'forecasts' && <ForecastsPage />}
+            {currentTab === 'forecasts' && (
+              <ForecastsPage
+                onNavigateTab={(tab) => setCurrentTab(tab as NavTab)}
+              />
+            )}
 
             {currentTab === 'recommendations' && (
               <RecommendationsPage
