@@ -1,0 +1,101 @@
+product_id,product_name,category,brand,barcode,selling_price,unit_cost,current_stock,min_stock_threshold,availability
+PRD_EXT_56,Compact Printer Air Advanced Digital,Books & Stationery,"Garner, Boyle and Flynn",2091465262179,22260.0,16695.0,774,154,pre_order
+PRD_EXT_29,Tablet,Shoes & Footwear,Mueller Inc,5286196620740,42168.0,31626.0,81,16,in_stock
+PRD_EXT_70,Smart Blender Cooker,Kitchen Appliances,"Lawson, Keller and Winters",1282898648918,19068.0,14301.0,726,145,in_stock
+PRD_EXT_31,Advanced Router Rechargeable,Kitchen Appliances,Gallagher and Sons,3879177514583,10164.0,7623.0,896,179,discontinued
+PRD_EXT_10,Portable Mouse Monitor Phone,Kids' Clothing,Irwin LLC,9055773261265,84.0,63.0,925,185,discontinued
+PRD_EXT_60,Radio,Skincare,"Benjamin, Nelson and Hancock",1150028980156,35784.0,26838.0,549,109,pre_order
+PRD_EXT_86,Ultra Projector Oven Thermostat Prime Advanced,Laptops & Computers,"Mccoy, Waters and Rose",5029747624534,5712.0,4284.0,870,174,discontinued
+PRD_EXT_50,Webcam Stove Grill,Automotive,Morrow and Sons,9883725074294,13356.0,10017.0,584,116,pre_order
+PRD_EXT_88,Eco Radio,Skincare,"Edwards, Odonnell and Conley",1773215338624,38136.0,28602.0,499,99,pre_order
+PRD_EXT_88,Ultra Powerbank Brush Charger Max,Fitness Equipment,"Brennan, Archer and Rosales",4877111475333,70980.0,53235.0,564,112,discontinued
+PRD_EXT_30,Wireless Dock,Health & Wellness,Russo-West,9680811891595,21588.0,16191.0,168,33,pre_order
+PRD_EXT_32,Fast Camera Router Fan Smart,Cleaning Supplies,Vazquez and Sons,8567222480604,18564.0,13923.0,672,134,pre_order
+PRD_EXT_57,Heater Radio,Cycling,Delgado-Blackwell,5686660235911,57876.0,43407.0,156,31,pre_order
+PRD_EXT_66,Smart Trimmer Webcam Heater,Automotive,Contreras PLC,1941032767914,23436.0,17577.0,818,163,pre_order
+PRD_EXT_88,Webcam Dock Heater,Cleaning Supplies,"Juarez, Powell and Travis",1438856474369,8484.0,6363.0,159,31,pre_order
+PRD_EXT_44,Automatic Watch Lite Sense,Team Sports,"Reid, Chase and Ballard",3500722785805,26544.0,19908.0,329,65,limited_stock
+PRD_EXT_79,Eco Iron Monitor Air,Automotive,Barker-Murphy,7887280730963,82488.0,61866.0,47,10,out_of_stock
+PRD_EXT_87,Digital Tablet Router Printer Lite,Health & Wellness,Vazquez-Smith,4170125892616,252.0,189.0,732,146,backorder
+PRD_EXT_21,Eco Freezer Powerbank Watch,Cleaning Supplies,"Pruitt, Higgins and Barnett",6340907128242,28560.0,21420.0,618,123,limited_stock
+PRD_EXT_22,Cooler Fan,Smartphones,Bray LLC,267078141619,44436.0,33327.0,844,168,backorder
+PRD_EXT_96,Portable Camera Plus Air Ultra,Women's Clothing,Wang-Valenzuela,963840013930,16548.0,12411.0,163,32,in_stock
+PRD_EXT_90,Wireless Powerbank 360 Advanced Ultra,Bedding & Bath,Carney Ltd,3918763032312,56868.0,42651.0,418,83,out_of_stock
+PRD_EXT_26,Rechargeable Lamp Speakerphone Headphones,Skincare,"Gallegos, Osborne and Carpenter",1824359393441,55776.0,41832.0,577,115,pre_order
+PRD_EXT_55,Mini Scooter Microphone,Grooming Tools,"Douglas, Thornton and Soto",9839666739792,65856.0,49392.0,510,102,backorder
+PRD_EXT_47,Rechargeable Webcam Stove Grill,Health & Wellness,Horn-Pope,6501687247749,75600.0,56700.0,623,124,out_of_stock
+PRD_EXT_93,Mini Iron Drone Wireless Pro,Cycling,Khan-Parrish,9496081864722,76356.0,57267.0,797,159,limited_stock
+PRD_EXT_61,Portable Freezer Phone Automatic Smart,Automotive,Burton PLC,3486711401836,29400.0,22050.0,756,151,pre_order
+PRD_EXT_43,Wireless Webcam Stove Grill,Clothing & Apparel,Henry Group,7097613907430,72072.0,54054.0,912,182,limited_stock
+PRD_EXT_40,Clock Brush,Furniture,Larson-Spence,8301096575048,82740.0,62055.0,180,36,in_stock
+PRD_EXT_40,Keyboard Toaster Monitor,Kids' Clothing,Bonilla-Spears,6639325474032,48384.0,36288.0,988,197,pre_order
+PRD_EXT_14,Silent Printer Fan Shaver,Sports & Outdoors,Love LLC,5564792899662,8568.0,6426.0,669,133,limited_stock
+PRD_EXT_84,Wireless Scooter Clean Mini,Fragrances,Terry-Oliver,9921752342730,23772.0,17829.0,343,68,pre_order
+PRD_EXT_86,Advanced Microphone Cooler Eco,Smartphones,"Morales, Weaver and Fernandez",7107438924403,75936.0,56952.0,532,106,limited_stock
+PRD_EXT_65,Automatic Brush Fast Eco,Kids' Clothing,Newman Ltd,2327483415120,34188.0,25641.0,285,57,out_of_stock
+PRD_EXT_78,Premium Bicycle Microphone,Shoes & Footwear,"Novak, Archer and Walton",6209821998907,40320.0,30240.0,364,72,discontinued
+PRD_EXT_74,Smart Phone Scooter Clean,Women's Clothing,Marshall-Dougherty,7883295446066,53340.0,40005.0,727,145,backorder
+PRD_EXT_48,Bicycle,Smartphones,Hays-Cunningham,7670612815694,19656.0,14742.0,394,78,backorder
+PRD_EXT_96,Ultra Dock Trimmer Automatic Edge,Kids' Clothing,Barnes-Glass,2837107354495,53760.0,40320.0,780,156,discontinued
+PRD_EXT_69,Wireless Tablet Router Printer Wireless Premium Air,Sports & Outdoors,Meyers-Hess,8247903213713,65604.0,49203.0,947,189,out_of_stock
+PRD_EXT_77,Clean Printer Advanced Premium Sense,Haircare,Williamson PLC,5234087663802,76692.0,57519.0,820,164,discontinued
+PRD_EXT_12,Silent Dock Fast,Fishing & Hunting,"May, Hendrix and Robbins",938364240247,8400.0,6300.0,802,160,limited_stock
+PRD_EXT_23,Ultra Speakerphone Oven Go Smart X,Office Supplies,"Zimmerman, Barr and Davis",450118214736,83916.0,62937.0,853,170,pre_order
+PRD_EXT_52,Rechargeable Projector Pro,Home Decor,"Levine, Martin and Mccann",655296358115,78540.0,58905.0,55,11,limited_stock
+PRD_EXT_45,Eco Vacuum,Health & Wellness,Werner PLC,8611986118980,21756.0,16317.0,668,133,in_stock
+PRD_EXT_62,Smart Grill Tablet Fridge Go Smart Smart,Fitness Equipment,"Huff, Cameron and Stephenson",9005775281402,40992.0,30744.0,966,193,out_of_stock
+PRD_EXT_9,Digital Stove Silent Pro,Health & Wellness,"Suarez, Riddle and Sanders",5367012957872,13524.0,10143.0,349,69,limited_stock
+PRD_EXT_17,Portable Powerbank X Air,Camping & Hiking,Hanson-Schultz,6854117854742,50316.0,37737.0,263,52,discontinued
+PRD_EXT_55,Clock,Team Sports,"Malone, Jacobson and Hudson",1382809012286,61404.0,46053.0,664,132,limited_stock
+PRD_EXT_14,Radio Treadmill,Office Supplies,Barron-Little,5461960384619,42924.0,32193.0,395,79,discontinued
+PRD_EXT_33,Ultra Cooler Treadmill Touch Pro Ultra,Fragrances,Bonilla-Oconnell,3625664059934,17976.0,13482.0,574,114,pre_order
+PRD_EXT_16,Mini Fridge Camera,Fitness Equipment,Decker and Sons,4894233116968,65268.0,48951.0,832,166,in_stock
+PRD_EXT_19,Rechargeable Tablet Plus Portable Mini,Fragrances,Mooney-Gonzales,8183922928019,68880.0,51660.0,535,107,in_stock
+PRD_EXT_34,Tablet,Beauty & Personal Care,"Blake, Weiss and Montgomery",8183313115592,34272.0,25704.0,922,184,backorder
+PRD_EXT_64,Wireless Light Toaster Lite Touch Eco,Bedding & Bath,Singleton PLC,3057639268476,66444.0,49833.0,827,165,in_stock
+PRD_EXT_46,Scooter,Cameras & Accessories,Rivas Group,1974896712011,31080.0,23310.0,601,120,backorder
+PRD_EXT_56,Advanced Camera Heater Webcam X Ultra Prime,Office Supplies,Cervantes Ltd,983367163970,18816.0,14112.0,372,74,discontinued
+PRD_EXT_19,Ultra Keyboard Compact Eco,Books & Stationery,Pace-Hodges,8481605893389,43176.0,32382.0,491,98,backorder
+PRD_EXT_94,Portable Scale Speaker Powerbank Clean,Women's Clothing,Morris LLC,5175038823985,57876.0,43407.0,332,66,backorder
+PRD_EXT_99,Oven Speaker Fan,Men's Clothing,Schwartz Ltd,2567562782853,41076.0,30807.0,423,84,pre_order
+PRD_EXT_61,Automatic Speaker Router Lamp Prime,Grooming Tools,"Sexton, Dickerson and Blair",6744198567221,52164.0,39123.0,667,133,in_stock
+PRD_EXT_3,Smart Webcam Projector Lock,Men's Clothing,Stokes Inc,4811928042234,36960.0,27720.0,973,194,in_stock
+PRD_EXT_70,Fast Fan,Cleaning Supplies,Ali-Oliver,3388615003133,82488.0,61866.0,804,160,backorder
+PRD_EXT_83,Automatic Cooler Edge,Beauty & Personal Care,"Odonnell, Boyle and Oconnor",6261793125392,10416.0,7812.0,513,102,pre_order
+PRD_EXT_48,Advanced Freezer Advanced Advanced,Office Supplies,Gill LLC,6474143371206,41076.0,30807.0,561,112,pre_order
+PRD_EXT_76,Silent Trimmer Shaver Fast,Smartphones,Munoz Group,4089415274929,10920.0,8190.0,876,175,in_stock
+PRD_EXT_70,Treadmill,Women's Clothing,"Frost, Christensen and Burnett",4598541150958,61404.0,46053.0,744,148,out_of_stock
+PRD_EXT_81,Mini Charger Lock Oven Sense Sense,Haircare,"Burton, Gross and Giles",9282813513019,63000.0,47250.0,623,124,in_stock
+PRD_EXT_6,Thermostat Trimmer,"Accessories (Bags, Hats, Belts)","Hester, Love and Lynch",8282848236311,17304.0,12978.0,677,135,discontinued
+PRD_EXT_5,Clean Iron Premium Air Wireless,Beauty & Personal Care,"Shepherd, Greene and House",7935749142557,24612.0,18459.0,700,140,out_of_stock
+PRD_EXT_79,Compact Mouse Mouse Router Mini,Smartwatches,Barry PLC,252926529077,420.0,315.0,247,49,limited_stock
+PRD_EXT_40,Premium Lock Mini Advanced,Automotive,"Elliott, Mcfarland and Duran",3997003361528,1008.0,756.0,439,87,pre_order
+PRD_EXT_29,Silent Webcam Webcam Treadmill Sense Portable Advanced,Makeup,George-Day,6908065460286,12432.0,9324.0,650,130,backorder
+PRD_EXT_36,Compact Thermostat Oven,Home & Kitchen,Hull Inc,7695934105636,57540.0,43155.0,747,149,in_stock
+PRD_EXT_31,Wireless Watch Tablet Printer Automatic Eco Sense,Smartwatches,Fleming Inc,1089969929675,4956.0,3717.0,169,33,out_of_stock
+PRD_EXT_4,Automatic Blender,Home Decor,Mahoney-Bryan,310774792552,52920.0,39690.0,438,87,backorder
+PRD_EXT_66,Rechargeable Webcam Dock Heater,Cycling,Kennedy-Gordon,1340784358003,67200.0,50400.0,151,30,in_stock
+PRD_EXT_40,Clean Toaster Oven Air Touch,Kids' Clothing,Olsen-Sawyer,7806787405877,30660.0,22995.0,71,14,pre_order
+PRD_EXT_42,Brush,Bedding & Bath,"Lowe, Mosley and Rivera",168419438521,22932.0,17199.0,623,124,in_stock
+PRD_EXT_25,Portable Kettle,Home & Kitchen,Sampson-Leon,445370808496,4200.0,3150.0,413,82,pre_order
+PRD_EXT_81,Rechargeable Brush Compact,Automotive,Castro-Mccarty,6855062072649,62832.0,47124.0,326,65,out_of_stock
+PRD_EXT_15,Fast Heater Cooker Compact Silent,Makeup,"Decker, Montes and Logan",3868467036959,30828.0,23121.0,19,10,in_stock
+PRD_EXT_12,Mini Drone X Portable,Books & Stationery,Whitney Group,9437200314292,29568.0,22176.0,123,24,backorder
+PRD_EXT_72,Heater Keyboard,Office Supplies,Brooks and Sons,5328785590239,8652.0,6489.0,208,41,backorder
+PRD_EXT_81,Wireless Fan Thermostat Max Automatic Max,Books & Stationery,Kaiser-Banks,1396411470228,35532.0,26649.0,759,151,in_stock
+PRD_EXT_64,Fast Keyboard,Camping & Hiking,Lewis Ltd,3163238295239,83832.0,62874.0,10,10,limited_stock
+PRD_EXT_88,Ultra Mixer Toaster Toaster Smart,Women's Clothing,Galloway and Sons,4862330962177,28728.0,21546.0,221,44,pre_order
+PRD_EXT_20,Silent Speakerphone Scanner Monitor,Fragrances,Cowan Inc,1710131812265,49812.0,37359.0,580,116,discontinued
+PRD_EXT_60,Silent Scanner Monitor Treadmill,Health & Wellness,"Nichols, Howe and Miller",1287056757693,2520.0,1890.0,728,145,pre_order
+PRD_EXT_5,Fast Vacuum Cooler,Sports & Outdoors,Blair-Russell,4874329354658,25788.0,19341.0,320,64,limited_stock
+PRD_EXT_31,Digital Trimmer,Laptops & Computers,Christian-Tanner,4147810179628,45444.0,34083.0,488,97,pre_order
+PRD_EXT_85,Automatic Trimmer Sense,Kitchen Appliances,Harrington-Valentine,524638185,34020.0,25515.0,950,190,in_stock
+PRD_EXT_36,Portable Scooter Wireless Digital,Cameras & Accessories,Bauer Inc,4564280934296,43596.0,32697.0,495,99,in_stock
+PRD_EXT_80,Fridge Cooker,Furniture,Jackson Group,1861389468671,33012.0,24759.0,499,99,in_stock
+PRD_EXT_8,Scanner,Cleaning Supplies,"Wang, Ayala and Bowen",7794860625802,39648.0,29736.0,63,12,backorder
+PRD_EXT_48,Ultra Radio Radio,Haircare,Maldonado-Ritter,3611080124547,32088.0,24066.0,639,127,pre_order
+PRD_EXT_55,Router,Laptops & Computers,Atkinson Inc,3330396409604,31500.0,23625.0,703,140,limited_stock
+PRD_EXT_25,Fast Thermostat Microphone Scooter,Beauty & Personal Care,Shea Ltd,9265397743935,24276.0,18207.0,727,145,backorder
+PRD_EXT_20,Eco Heater Toaster Stove Silent Sense,Cleaning Supplies,West Ltd,5505866454530,19488.0,14616.0,998,199,limited_stock
+PRD_EXT_5,Clean Blender Scale Lite,Camping & Hiking,"Bell, Gamble and Barrett",3893594435450,20244.0,15183.0,391,78,limited_stock
+PRD_EXT_3,Smart Lamp,Bedding & Bath,"Hebert, Hughes and Trujillo",8264263605712,5964.0,4473.0,518,103,limited_stock
