@@ -43,6 +43,8 @@ SYNONYM_MAP: Dict[str, str] = {
     "sku": "product_id",
     "code": "product_id",
     "product_code": "product_id",
+    "internal_id": "product_id",
+    "ean": "barcode",
     # Pricing
     "selling_price": "selling_price",
     "price": "selling_price",
@@ -78,6 +80,8 @@ SYNONYM_MAP: Dict[str, str] = {
     "phone": "phone",
     "mobile": "phone",
     "contact": "phone",
+    "phone_1": "phone",
+    "customer_id": "customer_id",
     "credit_limit": "credit_limit",
     "credit": "credit_limit",
     "category": "category",
