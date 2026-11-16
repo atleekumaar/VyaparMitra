@@ -232,6 +232,18 @@ export const api = {
   },
 
   // Customers
+  createCustomer: (data: {
+    name: string;
+    phone?: string;
+    email?: string;
+    address?: string;
+    city?: string;
+    credit_limit?: number;
+  }) =>
+    request<any>('/api/customer-ops', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   getCustomers: (params?: { segment?: string; risk_tier?: string; limit?: number; merchantId?: string }) => {
     const q = new URLSearchParams();
     if (params?.segment) q.set('segment', params.segment);

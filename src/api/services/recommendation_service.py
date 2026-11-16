@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 from fastapi import HTTPException
 import pandas as pd
-from src.api.db import fetch_table_df
+from src.api.db import fetch_table_df, get_db_connection
 
 from src.api.config import APIConfig, get_api_config
 from src.api.schemas import (
@@ -35,13 +35,24 @@ class RecommendationService:
         self._statuses: Dict[str, str] = self._load_statuses()
 
     def _load_statuses(self) -> Dict[str, str]:
+        statuses: Dict[str, str] = {}
         if self.status_file.exists():
             try:
                 with open(self.status_file, "r", encoding="utf-8") as f:
-                    return json.load(f)
+                    statuses.update(json.load(f))
             except Exception as e:
-                logger.warning(f"Could not load action statuses: {e}")
-        return {}
+                logger.warning(f"Could not load action statuses from file: {e}")
+        try:
+            conn = get_db_connection()
+            try:
+                rows = conn.execute("SELECT recommendation_id, status FROM merchant_action_statuses").fetchall()
+                for r in rows:
+                    statuses[str(r["recommendation_id"])] = str(r["status"]).upper()
+            finally:
+                conn.close()
+        except Exception as e:
+            logger.debug(f"Could not load merchant_action_statuses from SQLite: {e}")
+        return statuses
 
     def _save_statuses(self) -> None:
         try:
@@ -168,7 +179,7 @@ class RecommendationService:
             generated_at=str(r.get("created_at", datetime.now(timezone.utc).isoformat())),
         )
 
-    def update_status(self, recommendation_id: str, new_status: str) -> ActionStatusUpdateResponse:
+    def update_status(self, recommendation_id: str, new_status: str, business_id: str = "M001") -> ActionStatusUpdateResponse:
         norm_status = new_status.upper().strip()
         if norm_status not in VALID_STATUSES:
             raise HTTPException(
@@ -189,6 +200,22 @@ class RecommendationService:
         self._save_statuses()
 
         now_str = datetime.now(timezone.utc).isoformat()
+        try:
+            conn = get_db_connection()
+            try:
+                conn.execute("""
+                    INSERT INTO merchant_action_statuses (business_id, recommendation_id, status, updated_at)
+                    VALUES (?, ?, ?, ?)
+                    ON CONFLICT(business_id, recommendation_id) DO UPDATE SET
+                        status = excluded.status,
+                        updated_at = excluded.updated_at
+                """, (business_id, recommendation_id, norm_status, now_str))
+                conn.commit()
+            finally:
+                conn.close()
+        except Exception as e:
+            logger.warning(f"Failed to upsert merchant_action_statuses in SQLite: {e}")
+
         return ActionStatusUpdateResponse(
             recommendation_id=recommendation_id,
             previous_status=prev_status,

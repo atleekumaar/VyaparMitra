@@ -5,7 +5,8 @@ Recommendation and Action Center routes for VyaparMitra Phase 6 API.
 from __future__ import annotations
 
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
+from src.api.auth import get_request_merchant_id
 from src.api.schemas import (
     ActionStatusUpdateRequest,
     ActionStatusUpdateResponse,
@@ -45,6 +46,11 @@ def get_recommendation_detail(recommendation_id: str) -> RecommendationDetailRes
 def update_action_status(
     recommendation_id: str,
     payload: ActionStatusUpdateRequest,
+    merchant_id: Optional[str] = Depends(get_request_merchant_id),
 ) -> ActionStatusUpdateResponse:
     """Updates the action status (ACCEPTED, REJECTED, EXECUTED, VIEWED)."""
-    return service.update_status(recommendation_id=recommendation_id, new_status=payload.status)
+    return service.update_status(
+        recommendation_id=recommendation_id,
+        new_status=payload.status,
+        business_id=merchant_id or "M001",
+    )

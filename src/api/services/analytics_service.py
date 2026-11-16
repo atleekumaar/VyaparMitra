@@ -136,11 +136,16 @@ class AnalyticsService:
                     (merchant_id,)
                 ).fetchall()
                 tot_cust = len(cust_rows)
+                spend_row = conn.execute(
+                    "SELECT COALESCE(SUM(total_amount), 0.0) as tot_spend FROM sales WHERE business_id = ? AND status != 'CANCELLED'",
+                    (merchant_id,)
+                ).fetchone()
+                tot_spend = round(float(spend_row["tot_spend"]), 2) if spend_row else 0.0
                 segments = [
                     CustomerSegmentSummary(
                         segment_name="Active Customers",
                         customer_count=tot_cust,
-                        total_revenue=round(sum(float(r["current_balance"]) for r in cust_rows), 2) if tot_cust > 0 else 0.0,
+                        total_revenue=tot_spend,
                         revenue_share=1.0 if tot_cust > 0 else 0.0,
                     )
                 ] if tot_cust > 0 else []

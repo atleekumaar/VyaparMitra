@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
+import { CheckCircle2, AlertCircle, AlertTriangle, Info, X } from 'lucide-react';
 
-export type ToastType = 'success' | 'error' | 'info';
+export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 interface ToastItem {
   id: string;
@@ -43,6 +43,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {toasts.map((toast) => {
           const isSuccess = toast.type === 'success';
           const isError = toast.type === 'error';
+          const isWarning = toast.type === 'warning';
           return (
             <div
               key={toast.id}
@@ -51,13 +52,16 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                   ? 'bg-surface-card border-success/30 text-success'
                   : isError
                   ? 'bg-surface-card border-danger/30 text-danger'
+                  : isWarning
+                  ? 'bg-surface-card border-amber-500/30 text-amber-600 dark:text-amber-400'
                   : 'bg-surface-card border-border text-text'
               }`}
             >
               <div className="flex items-center gap-2 min-w-0">
                 {isSuccess && <CheckCircle2 className="w-4 h-4 text-success shrink-0" />}
                 {isError && <AlertCircle className="w-4 h-4 text-danger shrink-0" />}
-                {!isSuccess && !isError && <Info className="w-4 h-4 text-brand shrink-0" />}
+                {isWarning && <AlertTriangle className="w-4 h-4 text-amber-500 shrink-0" />}
+                {!isSuccess && !isError && !isWarning && <Info className="w-4 h-4 text-brand shrink-0" />}
                 <span className="text-text truncate">{toast.message}</span>
               </div>
               <button

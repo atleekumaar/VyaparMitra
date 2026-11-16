@@ -34,21 +34,25 @@ class CustomerService:
         if is_explicit_non_demo:
             conn = get_db_connection()
             try:
-                query = "SELECT id, name, city, current_balance, credit_limit FROM customers WHERE business_id = ?"
-                params: List[Any] = [merchant_id]
-                if segment:
-                    query += " AND 1=1"
-                query += " LIMIT ?"
-                params.append(limit)
-
-                rows = conn.execute(query, params).fetchall()
+                query = """
+                    SELECT c.id, c.name, c.city, c.current_balance, c.credit_limit,
+                           COALESCE(SUM(s.total_amount), 0.0) as actual_spend,
+                           COUNT(s.id) as actual_orders
+                    FROM customers c
+                    LEFT JOIN sales s ON s.customer_id = c.id AND s.status != 'CANCELLED'
+                    WHERE c.business_id = ?
+                    GROUP BY c.id
+                    ORDER BY actual_spend DESC, c.name ASC
+                    LIMIT ?
+                """
+                rows = conn.execute(query, (merchant_id, limit)).fetchall()
                 items = [
                     CustomerListItem(
-                        customer_id=r["id"],
-                        segment="Regular",
-                        lifetime_spend=float(r["current_balance"]),
-                        total_orders=1,
-                        recency_days=5.0,
+                        customer_id=f"{r['name']} ({r['id']})" if r["name"] else r["id"],
+                        segment="Loyal" if float(r["actual_spend"]) > 5000 else ("Regular" if float(r["actual_spend"]) > 0 else "New Lead"),
+                        lifetime_spend=round(float(r["actual_spend"]), 2),
+                        total_orders=int(r["actual_orders"]),
+                        recency_days=3.0 if float(r["actual_spend"]) > 0 else 0.0,
                         churn_risk_tier="Low",
                         churn_probability=0.10,
                     )
@@ -120,17 +124,32 @@ class CustomerService:
         if is_explicit_non_demo:
             conn = get_db_connection()
             try:
-                row = conn.execute("SELECT * FROM customers WHERE id = ? AND business_id = ?", (customer_id, merchant_id)).fetchone()
+                clean_id = customer_id.split("(")[-1].rstrip(")") if "(" in customer_id else customer_id
+                row = conn.execute(
+                    "SELECT * FROM customers WHERE (id = ? OR id = ? OR LOWER(name) = LOWER(?)) AND business_id = ?",
+                    (customer_id, clean_id, customer_id, merchant_id)
+                ).fetchone()
                 if row:
+                    spend_row = conn.execute(
+                        "SELECT COALESCE(SUM(total_amount), 0.0) as actual_spend, COUNT(id) as actual_orders FROM sales WHERE customer_id = ? AND status != 'CANCELLED'",
+                        (row["id"],)
+                    ).fetchone()
+                    tot_spend = round(float(spend_row["actual_spend"]), 2) if spend_row else 0.0
+                    tot_orders = int(spend_row["actual_orders"]) if spend_row else 0
                     return CustomerDetailResponse(
                         customer_id=row["id"],
-                        segment="Regular",
-                        lifetime_spend=float(row["current_balance"]),
-                        total_orders=1,
-                        recency_days=5.0,
+                        segment="Loyal" if tot_spend > 5000 else ("Regular" if tot_spend > 0 else "New"),
+                        lifetime_spend=tot_spend,
+                        total_orders=tot_orders,
+                        recency_days=3.0 if tot_spend > 0 else 0.0,
                         churn_risk_tier="Low",
                         churn_probability=0.10,
-                        recommended_action=None,
+                        suggested_retention_action="Offer personalized discounts on frequent items.",
+                        evidence=[
+                            {"metric": "Credit Limit", "value": f"₹{float(row['credit_limit']):,.2f}", "source": "customers.credit_limit"},
+                            {"metric": "Current Khata Balance", "value": f"₹{float(row['current_balance']):,.2f}", "source": "customers.current_balance"},
+                            {"metric": "Contact", "value": str(row["phone"] or "Not provided"), "source": "customers.phone"},
+                        ],
                     )
             finally:
                 conn.close()

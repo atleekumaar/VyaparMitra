@@ -25,11 +25,14 @@ def hash_password(password: str) -> str:
 
 
 def get_db_connection() -> sqlite3.Connection:
-    """Creates a raw SQLite connection with Row factory and multi-thread safety."""
+    """Creates a raw SQLite connection with Row factory, WAL concurrency, and multi-thread safety."""
     config = get_api_config()
-    conn = sqlite3.connect(str(config.db_path), check_same_thread=False)
+    conn = sqlite3.connect(str(config.db_path), check_same_thread=False, timeout=10.0)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
+    conn.execute("PRAGMA journal_mode = WAL")
+    conn.execute("PRAGMA synchronous = NORMAL")
+    conn.execute("PRAGMA busy_timeout = 5000")
     return conn
 
 
@@ -347,6 +350,18 @@ def init_db() -> None:
         )
     """)
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_agent_approvals_lookup ON agent_approvals(business_id, status)")
+
+    # 14. Merchant Action Statuses (Multi-Tenant Recommendation Lifecycle)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS merchant_action_statuses (
+            business_id TEXT NOT NULL,
+            recommendation_id TEXT NOT NULL,
+            status TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            PRIMARY KEY (business_id, recommendation_id)
+        )
+    """)
+    cursor.execute("CREATE INDEX IF NOT EXISTS idx_merchant_action_statuses ON merchant_action_statuses(business_id, recommendation_id)")
 
     # 11. OTP Verification Store (Brevo SMTP & Mobile OTP)
     cursor.execute("""
