@@ -32,6 +32,7 @@ from src.api.backend_schemas import (
     RequestOtpResponse,
     RoleInfoItem,
     RolesListResponse,
+    SignupRequest,
     TokenResponse,
     UserResponse,
     VerifyOtpRequest,
@@ -167,6 +168,143 @@ def register_business(
         access_token=access_token,
         user=user_resp,
         permissions=ROLE_PERMISSIONS.get(UserRole.OWNER.value, []),
+    )
+
+
+@router.post(
+    "/signup",
+    response_model=TokenResponse,
+    status_code=status.HTTP_201_CREATED,
+    summary="Sign up with email and password",
+)
+def signup(
+    req: SignupRequest,
+    request: Request,
+    db: sqlite3.Connection = Depends(get_db),
+) -> TokenResponse:
+    """Creates a new merchant business and owner account with email and password."""
+    clean_email = req.email.strip().lower()
+    if "@" not in clean_email or "." not in clean_email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Please provide a valid email address.",
+        )
+    if len(req.password.strip()) < 4:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Password must be at least 4 characters long.",
+        )
+
+    # Check if email already registered
+    existing_user = db.execute(
+        "SELECT id FROM users WHERE LOWER(email) = ?",
+        (clean_email,),
+    ).fetchone()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="An account with this email already exists. Please log in using your password.",
+        )
+
+    now_utc = datetime.now(timezone.utc)
+    now_str = now_utc.isoformat()
+    user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
+    base_username = clean_email.split("@")[0].replace(".", "_")
+    username = base_username
+    suffix = 1
+    while db.execute("SELECT id FROM users WHERE username = ?", (username,)).fetchone():
+        username = f"{base_username}_{suffix}"
+        suffix += 1
+
+    full_name = req.full_name.strip() if (req.full_name and req.full_name.strip()) else username.replace("_", " ").title()
+    biz_name = req.business_name.strip() if (req.business_name and req.business_name.strip()) else f"{full_name}'s Store"
+
+    biz_id = f"BIZ_{uuid.uuid4().hex[:8].upper()}"
+    branch_id = f"BR_{biz_id}_MAIN"
+
+    # Create business
+    db.execute("""
+        INSERT INTO businesses (id, name, business_type, phone, email, city, state, created_at)
+        VALUES (?, ?, 'Retail & FMCG', ?, ?, 'India', 'India', ?)
+    """, (
+        biz_id,
+        biz_name,
+        req.phone.strip() if req.phone else "+919000000000",
+        clean_email,
+        now_str,
+    ))
+
+    # Create main branch
+    db.execute("""
+        INSERT INTO branches (id, business_id, name, code, is_main, created_at)
+        VALUES (?, ?, ?, 'MAIN', 1, ?)
+    """, (
+        branch_id,
+        biz_id,
+        f"{biz_name} - Main Branch",
+        now_str,
+    ))
+
+    # Create user with hashed password
+    hashed = hash_password(req.password.strip())
+    role = UserRole.OWNER.value
+    db.execute("""
+        INSERT INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, phone, is_active, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+    """, (
+        user_id,
+        biz_id,
+        branch_id,
+        username,
+        clean_email,
+        full_name,
+        hashed,
+        role,
+        req.phone.strip() if req.phone else None,
+        now_str,
+    ))
+    db.commit()
+
+    token_payload = {
+        "sub": user_id,
+        "username": username,
+        "email": clean_email,
+        "business_id": biz_id,
+        "branch_id": branch_id,
+        "role": role,
+    }
+    access_token = create_access_token(token_payload)
+
+    record_audit_log(
+        db=db,
+        business_id=biz_id,
+        branch_id=branch_id,
+        user_id=user_id,
+        user_name=full_name,
+        user_role=role,
+        action="SIGNUP",
+        resource="auth",
+        resource_id=user_id,
+        details={"username": username, "email": clean_email},
+        ip_address=request.client.host if request.client else "127.0.0.1",
+    )
+
+    return TokenResponse(
+        access_token=access_token,
+        token_type="bearer",
+        user=UserResponse(
+            id=user_id,
+            business_id=biz_id,
+            branch_id=branch_id,
+            username=username,
+            email=clean_email,
+            full_name=full_name,
+            role=role,
+            phone=req.phone.strip() if req.phone else None,
+            is_active=True,
+            created_at=now_str,
+        ),
+        permissions=ROLE_PERMISSIONS.get(role, []),
     )
 
 
@@ -468,6 +606,9 @@ def verify_otp(
             main_branch = db.execute("SELECT id FROM branches WHERE business_id = ? ORDER BY is_main DESC LIMIT 1", (business_id,)).fetchone()
             branch_id = main_branch["id"] if main_branch else f"BR_{business_id}_MAIN"
 
+        pwd_val = req.password.strip() if (req.password and req.password.strip()) else secrets.token_urlsafe(16)
+        pwd_hash = hash_password(pwd_val)
+
         db.execute(
             """
             INSERT INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, phone, is_active, created_at)
@@ -480,13 +621,22 @@ def verify_otp(
                 username,
                 clean_email,
                 full_name,
-                hash_password(secrets.token_urlsafe(16)),
+                pwd_hash,
                 role,
                 req.phone.strip() if req.phone else None,
                 now_str,
             ),
         )
         user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+    else:
+        # If existing user provided a password during OTP verification, save it so they can log in with password later
+        if req.password and req.password.strip():
+            db.execute(
+                "UPDATE users SET password_hash = ? WHERE id = ?",
+                (hash_password(req.password.strip()), user_row["id"]),
+            )
+            db.commit()
+            user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_row["id"],)).fetchone()
 
     role = user_row["role"]
     token_payload = {
