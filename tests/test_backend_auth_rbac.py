@@ -3,6 +3,7 @@ Tests for Backend Authentication, Authorization and Role-Based Access Control (R
 Validates Owner/Admin, Manager, and Staff roles and permissions.
 """
 
+import secrets
 import uuid
 from fastapi.testclient import TestClient
 from src.api.main import app
@@ -160,3 +161,73 @@ def test_roles_directory():
     assert "owner" in role_names
     assert "manager" in role_names
     assert "staff" in role_names
+
+
+def test_signup_and_email_password_login():
+    """Validates that a merchant can sign up with email and password and subsequently log in."""
+    email = f"merchant_{secrets.token_hex(4)}@example.com"
+    password = "SecureMerchantPassword123!"
+
+    # 1. Signup with email & password
+    res = client.post(
+        "/api/auth/signup",
+        json={
+            "email": email,
+            "password": password,
+            "full_name": "Test Signer",
+            "phone": "+919876500000",
+            "business_name": "Signer Store",
+        },
+    )
+    assert res.status_code == 201
+    data = res.json()
+    assert "access_token" in data
+    assert data["user"]["email"] == email
+
+    # 2. Login using the newly created credentials
+    login_res = client.post(
+        "/api/auth/login",
+        json={
+            "username_or_email": email,
+            "password": password,
+        },
+    )
+    assert login_res.status_code == 200
+    login_data = login_res.json()
+    assert "access_token" in login_data
+    assert login_data["user"]["email"] == email
+
+
+def test_otp_verify_with_password_creation():
+    """Validates that setting a password during OTP verification allows password login later."""
+    email = f"otp_pwd_{secrets.token_hex(4)}@example.com"
+    password = "MyOtpCreatedPassword456!"
+
+    # 1. Send OTP
+    send_res = client.post("/api/auth/otp/send", json={"email": email, "purpose": "LOGIN"})
+    assert send_res.status_code == 200
+    otp = send_res.json().get("demo_otp") or "123456"
+
+    # 2. Verify OTP and pass password to create account with password
+    verify_res = client.post(
+        "/api/auth/otp/verify",
+        json={
+            "email": email,
+            "otp": otp,
+            "password": password,
+            "name": "OTP User",
+        },
+    )
+    assert verify_res.status_code == 200
+
+    # 3. Login using email and the password created during OTP verification
+    login_res = client.post(
+        "/api/auth/login",
+        json={
+            "username_or_email": email,
+            "password": password,
+        },
+    )
+    assert login_res.status_code == 200
+    assert login_res.json()["user"]["email"] == email
+

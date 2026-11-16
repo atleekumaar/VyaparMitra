@@ -13,6 +13,10 @@ import {
   Volume2,
   Lock,
   ArrowLeft,
+  Eye,
+  EyeOff,
+  KeyRound,
+  ShieldCheck,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { UserCategory, UserProfile } from '../types';
@@ -36,9 +40,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 }) => {
   const { t, language, setLanguage } = useLanguage();
 
+  // Auth Mode: 'login' (Email & Password), 'signup' (Create Account with Password), 'otp_login' (One-Time Password)
+  const [authMode, setAuthMode] = useState<'login' | 'signup' | 'otp_login'>('login');
+
   // Input states - BLANK BY DEFAULT as requested
   const [fullName, setFullName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const [storeId, setStoreId] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<UserCategory>('small_merchant');
@@ -48,15 +57,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [otpCode, setOtpCode] = useState<string[]>(['', '', '', '', '', '']);
   const [countdown, setCountdown] = useState<number>(30);
-  const [isSendingOtp, setIsSendingOtp] = useState<boolean>(false);
-  const [isVerifying, setIsVerifying] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [notificationMsg, setNotificationMsg] = useState<string | null>(null);
   const [demoModalOpen, setDemoModalOpen] = useState<boolean>(false);
 
   // Soundbox Welcome audio toggle
   const [soundboxWelcome, setSoundboxWelcome] = useState<boolean>(true);
-  const [soundboxSimPlaying, setSoundboxSimPlaying] = useState<boolean>(false);
 
   // Resend Countdown Timer
   useEffect(() => {
@@ -66,7 +73,92 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
   }, [otpSent, countdown]);
 
-  // Request OTP from Brevo SMTP / backend relay
+  const playWelcomeAudio = () => {
+    if (!soundboxWelcome) return;
+    try {
+      const utterance = new SpeechSynthesisUtterance();
+      if (language === 'hindi') {
+        utterance.text = 'व्यापार मित्र में आपका स्वागत है!';
+        utterance.lang = 'hi-IN';
+      } else {
+        utterance.text = 'VyaparMitra me aapka swagat hai!';
+        utterance.lang = 'hi-IN';
+      }
+      utterance.rate = 1.0;
+      window.speechSynthesis.speak(utterance);
+    } catch {
+      // Ignore audio failure
+    }
+  };
+
+  // 1. Password Login Handler (Email + Password)
+  const handlePasswordLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthError(null);
+    setNotificationMsg(null);
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      setAuthError('Please enter a valid email address.');
+      return;
+    }
+    if (!password || password.trim().length < 4) {
+      setAuthError('Please enter your account password.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await api.login({
+        username_or_email: cleanEmail,
+        password: password.trim(),
+      });
+
+      setIsSubmitting(false);
+
+      if (res.access_token) {
+        localStorage.setItem('vyaparmitra_token', res.access_token);
+        localStorage.setItem('vyaparmitra_merchant_id', res.user.business_id);
+      }
+
+      playWelcomeAudio();
+
+      const initials = (res.user.full_name || cleanEmail)
+        .split(' ')
+        .map((w) => w[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+
+      const profile: UserProfile = {
+        id: res.user.business_id,
+        business_id: res.user.business_id,
+        merchant_id: res.user.business_id,
+        name: res.user.full_name || 'Merchant Partner',
+        email: res.user.email,
+        storeName: `${res.user.full_name || 'Merchant'}'s Store`,
+        category: 'small_merchant',
+        categoryLabel: 'Kirana & Retail Store',
+        phone: res.user.phone || '+919876543210',
+        city: 'India',
+        role: res.user.role || 'owner',
+        avatarInitials: initials,
+        token: res.access_token,
+        is_demo: false,
+      };
+
+      onLogin(profile);
+    } catch (err: any) {
+      setIsSubmitting(false);
+      setAuthError(
+        err?.message ||
+          'Invalid credentials. Please check your email and password, or use OTP login below.'
+      );
+    }
+  };
+
+  // 2. Request OTP (Sign up with password or OTP Login)
   const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError(null);
@@ -78,7 +170,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       return;
     }
 
-    setIsSendingOtp(true);
+    if (authMode === 'signup') {
+      if (!password || password.trim().length < 6) {
+        setAuthError('Please create a secure password (minimum 6 characters) for your new account.');
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
 
     try {
       const res = await api.requestOtp({
@@ -87,7 +186,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         name: fullName.trim() || undefined,
       });
 
-      setIsSendingOtp(false);
+      setIsSubmitting(false);
       setOtpSent(true);
       setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
       setOtpCode(['', '', '', '', '', '']);
@@ -99,12 +198,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         setOtpCode(res.demo_otp.split(''));
       }
     } catch (err: any) {
-      setIsSendingOtp(false);
-      setAuthError(err?.message || 'Failed to send OTP code. Please try again.');
+      setIsSubmitting(false);
+      setAuthError(err?.message || 'Failed to send verification code. Please try again.');
     }
   };
 
-  // Verify OTP and complete sign-in
+  // 3. Verify OTP (Commits created password & provisions account)
   const handleVerifyOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     setAuthError(null);
@@ -115,7 +214,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       return;
     }
 
-    setIsVerifying(true);
+    setIsSubmitting(true);
 
     try {
       const res = await api.verifyOtp({
@@ -124,34 +223,18 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         phone: mobileNumber.trim() || undefined,
         name: fullName.trim() || undefined,
         store_id: storeId.trim() || undefined,
+        password: password.trim() || undefined,
       });
 
-      setIsVerifying(false);
+      setIsSubmitting(false);
 
-      // Persist access token
       if (res.access_token) {
         localStorage.setItem('vyaparmitra_token', res.access_token);
+        localStorage.setItem('vyaparmitra_merchant_id', res.user.business_id);
       }
 
-      // Play Soundbox welcome greeting if enabled
-      if (soundboxWelcome) {
-        try {
-          const utterance = new SpeechSynthesisUtterance();
-          if (language === 'hindi') {
-            utterance.text = 'व्यापार मित्र में आपका स्वागत है!';
-            utterance.lang = 'hi-IN';
-          } else {
-            utterance.text = 'VyaparMitra me aapka swagat hai!';
-            utterance.lang = 'hi-IN';
-          }
-          utterance.rate = 1.0;
-          window.speechSynthesis.speak(utterance);
-        } catch {
-          // Ignore audio errors
-        }
-      }
+      playWelcomeAudio();
 
-      // Build UserProfile
       const initials = (res.user.full_name || fullName || 'VM')
         .split(' ')
         .map((w) => w[0])
@@ -187,7 +270,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
       onLogin(profile);
     } catch (err: any) {
-      setIsVerifying(false);
+      setIsSubmitting(false);
       setAuthError(err?.message || 'Invalid or expired OTP. Please try again.');
     }
   };
@@ -198,6 +281,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setSelectedCategory(p.category);
     setFullName(p.name);
     setEmail(p.email);
+    setPassword('DemoPassword123!');
     setMobileNumber(p.phone);
     setStoreId(p.id);
     setOtpSent(false);
@@ -208,26 +292,26 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
   return (
     <div className="min-h-screen bg-surface bg-ambient-mesh flex flex-col justify-between transition-colors">
-      {/* Top microbar */}
+      {/* Top Navigation Bar */}
       <header className="px-6 py-4 flex items-center justify-between border-b border-border/40 bg-surface/80 backdrop-blur-sm sticky top-0 z-30">
         <div className="flex items-center gap-3">
-          <div className="w-8.5 h-8.5 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-xs select-none">
+          <div className="w-8.5 h-8.5 rounded-xl bg-brand text-brand-contrast flex items-center justify-center shadow-xs select-none">
             <Store className="w-4 h-4 text-white" />
           </div>
           <span className="font-extrabold text-base text-text tracking-tight">
-            Vyapar<span className="text-blue-600 dark:text-blue-400">Mitra</span>
+            Vyapar<span className="text-brand">Mitra</span>
           </span>
         </div>
 
         {/* Center Nav Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-text-muted">
-          <span className="text-text hover:text-blue-600 cursor-pointer transition-colors">Home</span>
-          <span className="hover:text-blue-600 cursor-pointer transition-colors">Features</span>
-          <span className="hover:text-blue-600 cursor-pointer transition-colors">For Merchants</span>
-          <span className="hover:text-blue-600 cursor-pointer transition-colors">Pricing</span>
+          <span className="text-text hover:text-brand cursor-pointer transition-colors">Home</span>
+          <span className="hover:text-brand cursor-pointer transition-colors">Features</span>
+          <span className="hover:text-brand cursor-pointer transition-colors">For Merchants</span>
+          <span className="hover:text-brand cursor-pointer transition-colors">Pricing</span>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           {/* Language Selector */}
           <div className="flex items-center bg-surface-muted border border-border rounded-xl p-0.5 text-xs font-semibold">
             {(['hinglish', 'hindi', 'english'] as const).map((lang) => (
@@ -235,7 +319,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                 key={lang}
                 type="button"
                 onClick={() => setLanguage(lang)}
-                className={`px-2.5 py-1 rounded-lg transition-all ${
+                className={`px-2 sm:px-2.5 py-1 rounded-lg transition-all text-[11px] sm:text-xs ${
                   language === lang
                     ? 'bg-surface-card text-text shadow-2xs font-bold'
                     : 'text-text-muted hover:text-text'
@@ -256,11 +340,38 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             {isDarkMode ? <Sun className="w-4 h-4 text-warning" /> : <Moon className="w-4 h-4 text-text-muted" />}
           </button>
 
-          {/* Action CTA */}
+          {/* Dedicated Log In Button */}
           <button
             type="button"
-            onClick={() => setDemoModalOpen(true)}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-xs"
+            onClick={() => {
+              setAuthMode('login');
+              setOtpSent(false);
+              setAuthError(null);
+              setNotificationMsg(null);
+            }}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+              authMode === 'login'
+                ? 'bg-brand/10 border-brand text-brand font-extrabold shadow-2xs'
+                : 'border-border text-text hover:bg-surface-muted'
+            }`}
+          >
+            Log In
+          </button>
+
+          {/* Get Started (Sign Up) Button */}
+          <button
+            type="button"
+            onClick={() => {
+              setAuthMode('signup');
+              setOtpSent(false);
+              setAuthError(null);
+              setNotificationMsg(null);
+            }}
+            className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
+              authMode === 'signup'
+                ? 'bg-brand text-white shadow-brand/20 ring-2 ring-brand/30'
+                : 'bg-brand text-white hover:bg-brand-hover'
+            }`}
           >
             <span>Get Started</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -275,12 +386,55 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
         {/* Right: Auth Card */}
         <div className="w-full max-w-md mx-auto">
-          <div className="bg-surface-card rounded-3xl border border-border p-6 sm:p-8 shadow-fintech-lg transition-all space-y-6">
-            {/* Header */}
+          <div className="bg-surface-card rounded-3xl border border-border p-6 sm:p-8 shadow-fintech-lg transition-all space-y-5">
+            
+            {/* Top Auth Mode Tabs (Log In vs Create Account) */}
+            <div className="grid grid-cols-2 p-1 bg-surface-muted border border-border rounded-2xl gap-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('login');
+                  setOtpSent(false);
+                  setAuthError(null);
+                  setNotificationMsg(null);
+                }}
+                className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                  authMode === 'login'
+                    ? 'bg-surface-card text-text shadow-xs border border-border/80'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                Log In
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('signup');
+                  setOtpSent(false);
+                  setAuthError(null);
+                  setNotificationMsg(null);
+                }}
+                className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                  authMode === 'signup'
+                    ? 'bg-brand text-white shadow-xs'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                Create Account
+              </button>
+            </div>
+
+            {/* Card Header */}
             <div>
               <div className="flex items-center justify-between">
                 <h2 className="text-xl sm:text-2xl font-black text-text tracking-tight">
-                  {otpSent ? 'Enter Verification Code' : 'Sign in to VyaparMitra'}
+                  {otpSent
+                    ? 'Enter Verification Code'
+                    : authMode === 'login'
+                    ? 'Sign in with Password'
+                    : authMode === 'signup'
+                    ? 'Create Merchant Account'
+                    : 'Sign in with OTP'}
                 </h2>
                 {selectedDemoPersona && (
                   <Badge variant="demo" dot>
@@ -291,7 +445,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <p className="text-xs text-text-muted mt-1 leading-relaxed">
                 {otpSent
                   ? `Enter the 6-digit OTP code sent to ${email}.`
-                  : 'Enter your business credentials to access your merchant dashboard.'}
+                  : authMode === 'login'
+                  ? 'Enter your registered email and password to access your dashboard.'
+                  : authMode === 'signup'
+                  ? 'Set up your store name, credentials, and password.'
+                  : 'Enter your email to receive a secure 6-digit login code.'}
               </p>
             </div>
 
@@ -311,14 +469,123 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               </div>
             )}
 
-            {!otpSent ? (
-              // Step 1: Input Details (Blank by default!)
-              <form onSubmit={handleRequestOtp} className="space-y-4">
+            {/* MODE 1: Email & Password Login */}
+            {authMode === 'login' && !otpSent && (
+              <form onSubmit={handlePasswordLogin} className="space-y-4">
+                {/* Email Address */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Email Address</span>
+                    <span className="text-[11px] text-text-subtle font-normal">Registered email</span>
+                  </label>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                  </div>
+                </div>
+
+                {/* Password Input with Show/Hide Toggle */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Password</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAuthMode('otp_login');
+                        setAuthError(null);
+                      }}
+                      className="text-[11px] font-semibold text-brand hover:underline"
+                    >
+                      Login via OTP instead?
+                    </button>
+                  </label>
+                  <div className="relative">
+                    <Lock className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your password"
+                      className="w-full pl-10 pr-10 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-3.5 text-text-subtle hover:text-text cursor-pointer"
+                      title={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Soundbox toggle */}
+                <div className="pt-0.5 flex items-center justify-between">
+                  <label className="text-xs font-medium text-text-muted flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={soundboxWelcome}
+                      onChange={(e) => setSoundboxWelcome(e.target.checked)}
+                      className="rounded text-brand focus:ring-brand"
+                    />
+                    <span>Play Audio Soundbox welcome</span>
+                  </label>
+                  <Volume2 className="w-4 h-4 text-brand" />
+                </div>
+
+                {/* Submit button */}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Logging in...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Log In to Dashboard
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  )}
+                </Button>
+
+                {/* Switch to Signup Link */}
+                <div className="pt-2 text-center text-xs text-text-muted">
+                  Don't have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('signup');
+                      setAuthError(null);
+                    }}
+                    className="font-bold text-brand hover:underline"
+                  >
+                    Create Account
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* MODE 2: Sign Up (Create Account & Set Password) */}
+            {authMode === 'signup' && !otpSent && (
+              <form onSubmit={handleRequestOtp} className="space-y-3.5">
                 {/* Full Name */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-text flex items-center justify-between">
                     <span>Full Name</span>
-                    <span className="text-[11px] text-text-subtle font-normal">Optional</span>
+                    <span className="text-[11px] text-text-subtle font-normal">Store Owner</span>
                   </label>
                   <div className="relative">
                     <User className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
@@ -332,6 +599,124 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   </div>
                 </div>
 
+                {/* Email Address */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Email Address</span>
+                    <span className="text-[11px] text-brand font-medium">OTP verification</span>
+                  </label>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@example.com"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                  </div>
+                </div>
+
+                {/* Create Password Input */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Create Password</span>
+                    <span className="text-[11px] text-brand font-medium">For future logins</span>
+                  </label>
+                  <div className="relative">
+                    <Lock className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Create a password (min 6 characters)"
+                      className="w-full pl-10 pr-10 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3.5 top-3.5 text-text-subtle hover:text-text cursor-pointer"
+                      title={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Mobile Number */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text flex items-center justify-between">
+                    <span>Mobile Number</span>
+                    <span className="text-[11px] text-text-subtle font-normal">Optional</span>
+                  </label>
+                  <div className="relative">
+                    <Smartphone className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
+                    <input
+                      type="tel"
+                      value={mobileNumber}
+                      onChange={(e) => setMobileNumber(e.target.value)}
+                      placeholder="10-digit mobile"
+                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand tabular-nums"
+                    />
+                  </div>
+                </div>
+
+                {/* Soundbox toggle */}
+                <div className="pt-0.5 flex items-center justify-between">
+                  <label className="text-xs font-medium text-text-muted flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={soundboxWelcome}
+                      onChange={(e) => setSoundboxWelcome(e.target.checked)}
+                      className="rounded text-brand focus:ring-brand"
+                    />
+                    <span>Play Audio Soundbox welcome</span>
+                  </label>
+                  <Volume2 className="w-4 h-4 text-brand" />
+                </div>
+
+                {/* Submit button */}
+                <Button
+                  type="submit"
+                  variant="primary"
+                  className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending OTP...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Create Account &amp; Verify Code
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  )}
+                </Button>
+
+                {/* Switch to Login Link */}
+                <div className="pt-2 text-center text-xs text-text-muted">
+                  Already have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('login');
+                      setAuthError(null);
+                    }}
+                    className="font-bold text-brand hover:underline"
+                  >
+                    Log In
+                  </button>
+                </div>
+              </form>
+            )}
+
+            {/* MODE 3: Sign In with OTP only */}
+            {authMode === 'otp_login' && !otpSent && (
+              <form onSubmit={handleRequestOtp} className="space-y-4">
                 {/* Email Address */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-text flex items-center justify-between">
@@ -351,65 +736,50 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   </div>
                 </div>
 
-                {/* Mobile Number */}
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-text flex items-center justify-between">
-                    <span>Mobile Number</span>
-                    <span className="text-[11px] text-text-subtle font-normal">SMS / WhatsApp</span>
-                  </label>
-                  <div className="relative">
-                    <Smartphone className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
-                    <input
-                      type="tel"
-                      value={mobileNumber}
-                      onChange={(e) => setMobileNumber(e.target.value)}
-                      placeholder="10-digit mobile"
-                      className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand tabular-nums"
-                    />
-                  </div>
-                </div>
-
-                {/* Soundbox toggle */}
-                <div className="pt-1 flex items-center justify-between">
-                  <label className="text-xs font-medium text-text-muted flex items-center gap-2 cursor-pointer select-none">
-                    <input
-                      type="checkbox"
-                      checked={soundboxWelcome}
-                      onChange={(e) => setSoundboxWelcome(e.target.checked)}
-                      className="rounded text-brand focus:ring-brand"
-                    />
-                    <span>Play Audio Soundbox welcome</span>
-                  </label>
-                  <Volume2 className="w-4 h-4 text-brand" />
-                </div>
-
                 {/* Submit button */}
                 <Button
                   type="submit"
                   variant="primary"
                   className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
-                  disabled={isSendingOtp}
+                  disabled={isSubmitting}
                 >
-                  {isSendingOtp ? (
+                  {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       Sending OTP...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Get Verification Code
+                      Send Verification Code
                       <ArrowRight className="w-4 h-4" />
                     </span>
                   )}
                 </Button>
+
+                {/* Switch to Password Login */}
+                <div className="pt-2 text-center text-xs text-text-muted">
+                  Know your password?{' '}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthMode('login');
+                      setAuthError(null);
+                    }}
+                    className="font-bold text-brand hover:underline"
+                  >
+                    Log In with Password
+                  </button>
+                </div>
               </form>
-            ) : (
-              // Step 2: 6-Box OTP Verification
+            )}
+
+            {/* OTP Verification Step */}
+            {otpSent && (
               <form onSubmit={handleVerifyOtp} className="space-y-5">
                 <OtpInput
                   value={otpCode}
                   onChange={setOtpCode}
-                  disabled={isVerifying}
+                  disabled={isSubmitting}
                 />
 
                 <div className="flex items-center justify-between text-xs pt-1">
@@ -419,10 +789,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                       setOtpSent(false);
                       setAuthError(null);
                     }}
-                    className="inline-flex items-center gap-1 font-semibold text-text-muted hover:text-text"
+                    className="inline-flex items-center gap-1 font-semibold text-text-muted hover:text-text cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
-                    Change Email
+                    Change Email / Password
                   </button>
 
                   {countdown > 0 ? (
@@ -433,8 +803,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                     <button
                       type="button"
                       onClick={handleRequestOtp}
-                      disabled={isSendingOtp}
-                      className="font-bold text-brand hover:underline"
+                      disabled={isSubmitting}
+                      className="font-bold text-brand hover:underline cursor-pointer"
                     >
                       Resend Code
                     </button>
@@ -445,12 +815,12 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                   type="submit"
                   variant="primary"
                   className="w-full py-3 justify-center text-sm font-bold shadow-fintech"
-                  disabled={isVerifying || otpCode.join('').length !== 6}
+                  disabled={isSubmitting || otpCode.join('').length !== 6}
                 >
-                  {isVerifying ? (
+                  {isSubmitting ? (
                     <span className="flex items-center gap-2">
                       <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Verifying &amp; Logging in...
+                      Verifying &amp; Creating Account...
                     </span>
                   ) : (
                     <span className="flex items-center gap-2">
@@ -467,7 +837,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               <button
                 type="button"
                 onClick={() => setDemoModalOpen(true)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:underline cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-brand" />
                 <span>Try demo account (Pre-loaded personas)</span>

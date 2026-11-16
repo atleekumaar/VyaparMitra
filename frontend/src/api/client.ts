@@ -366,13 +366,23 @@ export const api = {
       mode: string;
     }>('/api/notifications/status'),
 
-  // OTP Authentication (Brevo SMTP & Mobile OTP)
+  // Authentication (Password & OTP)
+  login: (data: { username_or_email: string; password: string }) =>
+    request<AuthTokenResponse>('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  signup: (data: { email: string; password: string; full_name?: string; phone?: string; business_name?: string }) =>
+    request<AuthTokenResponse>('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
   requestOtp: (data: { email: string; phone?: string; name?: string }) =>
     request<RequestOtpResponse>('/api/auth/otp/send', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-  verifyOtp: (data: { email: string; otp: string; phone?: string; name?: string; store_id?: string }) =>
+  verifyOtp: (data: { email: string; otp: string; phone?: string; name?: string; store_id?: string; password?: string }) =>
     request<AuthTokenResponse>('/api/auth/otp/verify', {
       method: 'POST',
       body: JSON.stringify(data),

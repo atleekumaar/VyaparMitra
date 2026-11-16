@@ -27,6 +27,14 @@ class RegisterBusinessRequest(BaseModel):
     owner_password: str = Field(..., min_length=6, max_length=100)
 
 
+class SignupRequest(BaseModel):
+    email: str = Field(..., min_length=3, max_length=120)
+    password: str = Field(..., min_length=4, max_length=128)
+    full_name: Optional[str] = Field(None, max_length=100)
+    phone: Optional[str] = Field(None, max_length=20)
+    business_name: Optional[str] = Field(None, max_length=120)
+
+
 class LoginRequest(BaseModel):
     username_or_email: str = Field(..., min_length=3)
     password: str = Field(..., min_length=4)
@@ -95,6 +103,7 @@ class VerifyOtpRequest(BaseModel):
     phone: Optional[str] = Field(None, max_length=20, description="Merchant phone number")
     name: Optional[str] = Field(None, max_length=100, description="Merchant full name")
     store_id: Optional[str] = Field(None, max_length=50, description="Store or Branch ID")
+    password: Optional[str] = Field(None, min_length=4, max_length=128, description="Password to set for the merchant")
 
 
 
