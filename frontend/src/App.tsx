@@ -7,6 +7,8 @@ import { ComparePage } from './pages/ComparePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import { ProductsPage } from './pages/ProductsPage';
 import { CustomersPage } from './pages/CustomersPage';
+import { SuppliersPage } from './pages/SuppliersPage';
+import { FinancePage } from './pages/FinancePage';
 import { ForecastsPage } from './pages/ForecastsPage';
 import { RecommendationsPage } from './pages/RecommendationsPage';
 import { CopilotPage } from './pages/CopilotPage';
@@ -103,6 +105,8 @@ export const App: React.FC = () => {
       analytics: 'Analytics & Insights | VyaparMitra',
       products: 'Products & Inventory | VyaparMitra',
       customers: 'Customers & Khata | VyaparMitra',
+      suppliers: 'Suppliers & PO | VyaparMitra',
+      finance: 'Finance & P&L | VyaparMitra',
       forecasts: 'Sales & Demand Forecasts | VyaparMitra',
       recommendations: 'Action Center | VyaparMitra',
       copilot: 'AI Business Copilot | VyaparMitra',
@@ -237,6 +241,10 @@ export const App: React.FC = () => {
             {currentTab === 'products' && <ProductsPage />}
 
             {currentTab === 'customers' && <CustomersPage />}
+
+            {currentTab === 'suppliers' && <SuppliersPage />}
+
+            {currentTab === 'finance' && <FinancePage />}
 
             {currentTab === 'forecasts' && (
               <ForecastsPage

@@ -14,6 +14,8 @@ import {
   Wifi,
   Store,
   LogOut,
+  Wallet,
+  Truck,
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { UserProfile } from '../types';
@@ -24,6 +26,8 @@ export type NavTab =
   | 'analytics'
   | 'products'
   | 'customers'
+  | 'suppliers'
+  | 'finance'
   | 'forecasts'
   | 'recommendations'
   | 'copilot'
@@ -57,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   userProfile,
   onLogout,
 }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const navItems: NavItemConfig[] = [
     // Overview
@@ -68,6 +72,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
     // Operations
     { id: 'products', label: t('nav_products', 'Products & Stock'), icon: Package, section: 'operations' },
     { id: 'customers', label: t('nav_customers', 'Customers & Khata'), icon: Users, section: 'operations' },
+    { id: 'suppliers', label: language === 'hindi' ? 'सप्लायर व खरीद' : 'Suppliers & PO', icon: Truck, section: 'operations' },
+    { id: 'finance', label: language === 'hindi' ? 'वित्त व लाभ-हानि' : 'Finance & P&L', icon: Wallet, section: 'operations' },
     { id: 'forecasts', label: t('nav_forecasts', 'Forecasts'), icon: TrendingUp, section: 'operations' },
 
     // Intelligence

@@ -399,4 +399,85 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+
+  // Finance & Profit/Loss
+  getFinanceSummary: (branchId?: string) => {
+    const q = branchId ? `?branch_id=${encodeURIComponent(branchId)}` : '';
+    return request<{
+      business_id: string;
+      total_sales_revenue: number;
+      cost_of_goods_sold: number;
+      gross_profit: number;
+      gross_profit_margin_pct: number;
+      total_operational_expenses: number;
+      net_profit: number;
+      net_profit_margin_pct: number;
+      total_receivables_khata: number;
+      total_payables_suppliers: number;
+      cash_inflow: number;
+      cash_outflow: number;
+    }>(`/api/finance/summary${q}`);
+  },
+  getExpenses: (params?: { category?: string; limit?: number }) => {
+    const q = new URLSearchParams();
+    if (params?.category) q.set('category', params.category);
+    if (params?.limit) q.set('limit', String(params.limit));
+    const qs = q.toString() ? `?${q.toString()}` : '';
+    return request<{ total_count: number; total_expenses: number; expenses: any[] }>(`/api/finance/expenses${qs}`);
+  },
+  createExpense: (data: {
+    category: string;
+    amount: number;
+    payment_method?: string;
+    description?: string;
+    branch_id?: string;
+  }) =>
+    request<any>('/api/finance/expenses', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getCashflow: (days: number = 30) =>
+    request<{ total_inflow: number; total_outflow: number; net_cashflow: number; daily_breakdown: any[] }>(
+      `/api/finance/cashflow?days=${days}`
+    ),
+
+  // Suppliers & Vendor Management
+  getSuppliers: (params?: { search?: string; limit?: number }) => {
+    const q = new URLSearchParams();
+    if (params?.search) q.set('search', params.search);
+    if (params?.limit) q.set('limit', String(params.limit));
+    const qs = q.toString() ? `?${q.toString()}` : '';
+    return request<{ total_suppliers: number; total_payables: number; suppliers: any[] }>(`/api/suppliers${qs}`);
+  },
+  createSupplier: (data: {
+    name: string;
+    contact_person?: string;
+    phone?: string;
+    email?: string;
+    address?: string;
+    gstin?: string;
+    payment_terms?: string;
+  }) =>
+    request<any>('/api/suppliers', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  getSupplierInvoices: (params?: { supplier_id?: string; status?: string; limit?: number }) => {
+    const q = new URLSearchParams();
+    if (params?.supplier_id) q.set('supplier_id', params.supplier_id);
+    if (params?.status) q.set('status', params.status);
+    if (params?.limit) q.set('limit', String(params.limit));
+    const qs = q.toString() ? `?${q.toString()}` : '';
+    return request<any[]>(`/api/suppliers/invoices/list${qs}`);
+  },
+  createSupplierInvoice: (supplierId: string, data: any) =>
+    request<any>(`/api/suppliers/${encodeURIComponent(supplierId)}/invoices`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  recordSupplierPayment: (supplierId: string, data: { amount: number; payment_method?: string; notes?: string }) =>
+    request<any>(`/api/suppliers/${encodeURIComponent(supplierId)}/payments`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 };

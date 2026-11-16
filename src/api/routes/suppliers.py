@@ -155,6 +155,52 @@ def create_supplier(
 
 
 @router.get(
+    "/invoices/list",
+    summary="List supplier purchase invoices",
+)
+def list_supplier_invoices(
+    supplier_id: Optional[str] = Query(None, description="Filter by supplier"),
+    status: Optional[str] = Query(None, description="Filter by status (PAID, PARTIAL, UNPAID)"),
+    limit: int = Query(50, ge=1, le=200),
+    current_user: CurrentUser = Depends(get_current_user),
+    db: sqlite3.Connection = Depends(get_db),
+):
+    """Returns past purchase invoices recorded for this business."""
+    query = """
+        SELECT si.*, s.name as supplier_name
+        FROM supplier_invoices si
+        JOIN suppliers s ON si.supplier_id = s.id
+        WHERE si.business_id = ?
+    """
+    params: List[Any] = [current_user.business_id]
+    if supplier_id:
+        query += " AND si.supplier_id = ?"
+        params.append(supplier_id)
+    if status:
+        query += " AND UPPER(si.status) = ?"
+        params.append(status.upper())
+    query += " ORDER BY si.created_at DESC LIMIT ?"
+    params.append(limit)
+
+    rows = db.execute(query, params).fetchall()
+    return [
+        {
+            "id": r["id"],
+            "invoice_number": r["invoice_number"],
+            "supplier_id": r["supplier_id"],
+            "supplier_name": r["supplier_name"],
+            "total_amount": float(r["total_amount"]),
+            "paid_amount": float(r["paid_amount"]),
+            "unpaid_amount": max(0.0, float(r["total_amount"]) - float(r["paid_amount"])),
+            "status": r["status"],
+            "notes": r["notes"],
+            "created_at": r["created_at"],
+        }
+        for r in rows
+    ]
+
+
+@router.get(
     "/{supplier_id}",
     response_model=SupplierOutput,
     summary="Get supplier details",
