@@ -23,7 +23,6 @@ import { UserCategory, UserProfile } from '../types';
 import { api } from '../api/client';
 import { LoginBrandPanel } from '../components/auth/LoginBrandPanel';
 import { OtpInput } from '../components/auth/OtpInput';
-import { DemoProfilesModal, DemoPersona } from '../components/auth/DemoProfilesModal';
 import { Button } from '../components/Button';
 import { Badge } from '../components/Badge';
 
@@ -31,17 +30,21 @@ interface LoginPageProps {
   onLogin: (profile: UserProfile) => void;
   isDarkMode: boolean;
   onToggleDarkMode: () => void;
+  onGoToLanding?: () => void;
+  initialAuthMode?: 'login' | 'signup' | 'otp_login';
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({
   onLogin,
   isDarkMode,
   onToggleDarkMode,
+  onGoToLanding,
+  initialAuthMode = 'login',
 }) => {
   const { t, language, setLanguage } = useLanguage();
 
   // Auth Mode: 'login' (Email & Password), 'signup' (Create Account with Password), 'otp_login' (One-Time Password)
-  const [authMode, setAuthMode] = useState<'login' | 'signup' | 'otp_login'>('login');
+  const [authMode, setAuthMode] = useState<'login' | 'signup' | 'otp_login'>(initialAuthMode);
 
   // Input states - BLANK BY DEFAULT as requested
   const [fullName, setFullName] = useState<string>('');
@@ -51,7 +54,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const [storeId, setStoreId] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<UserCategory>('small_merchant');
-  const [selectedDemoPersona, setSelectedDemoPersona] = useState<DemoPersona | null>(null);
 
   // Flow & State
   const [otpSent, setOtpSent] = useState<boolean>(false);
@@ -60,7 +62,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string | null>(null);
   const [notificationMsg, setNotificationMsg] = useState<string | null>(null);
-  const [demoModalOpen, setDemoModalOpen] = useState<boolean>(false);
 
   // Soundbox Welcome audio toggle
   const [soundboxWelcome, setSoundboxWelcome] = useState<boolean>(true);
@@ -248,9 +249,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         merchant_id: res.user.business_id,
         name: res.user.full_name || fullName || 'Merchant Partner',
         email: res.user.email,
-        storeName:
-          selectedDemoPersona?.storeName ||
-          (fullName ? `${fullName}'s Store` : 'My Retail Store'),
+        storeName: fullName ? `${fullName}'s Store` : 'My Retail Store',
         category: selectedCategory,
         categoryLabel:
           selectedCategory === 'wholesaler'
@@ -261,11 +260,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             ? 'Enterprise Retail Chain'
             : 'Kirana & Retail Store',
         phone: res.user.phone || mobileNumber || '+919876543210',
-        city: selectedDemoPersona?.city || 'India',
+        city: 'India',
         role: res.user.role || 'owner',
         avatarInitials: initials,
         token: res.access_token,
-        is_demo: Boolean(selectedDemoPersona),
+        is_demo: false,
       };
 
       onLogin(profile);
@@ -275,27 +274,16 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
   };
 
-  // When user selects a demo persona
-  const handleSelectDemoPersona = (p: DemoPersona) => {
-    setSelectedDemoPersona(p);
-    setSelectedCategory(p.category);
-    setFullName(p.name);
-    setEmail(p.email);
-    setPassword('DemoPassword123!');
-    setMobileNumber(p.phone);
-    setStoreId(p.id);
-    setOtpSent(false);
-    setOtpCode(['', '', '', '', '', '']);
-    setAuthError(null);
-    setNotificationMsg(`Demo persona loaded: ${p.name} (${p.id})`);
-  };
-
   return (
     <div className="min-h-screen bg-surface bg-ambient-mesh flex flex-col justify-between transition-colors">
       {/* Top Navigation Bar */}
       <header className="px-6 py-4 flex items-center justify-between border-b border-border/40 bg-surface/80 backdrop-blur-sm sticky top-0 z-30">
-        <div className="flex items-center gap-3">
-          <div className="w-8.5 h-8.5 rounded-xl bg-brand text-brand-contrast flex items-center justify-center shadow-xs select-none">
+        <div
+          onClick={onGoToLanding}
+          className="flex items-center gap-3 cursor-pointer group"
+          title="Back to VyaparMitra Home"
+        >
+          <div className="w-8.5 h-8.5 rounded-xl bg-brand text-brand-contrast flex items-center justify-center shadow-xs select-none transition-transform group-hover:scale-105">
             <Store className="w-4 h-4 text-white" />
           </div>
           <span className="font-extrabold text-base text-text tracking-tight">
@@ -305,10 +293,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
         {/* Center Nav Links */}
         <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-text-muted">
-          <span className="text-text hover:text-brand cursor-pointer transition-colors">Home</span>
-          <span className="hover:text-brand cursor-pointer transition-colors">Features</span>
-          <span className="hover:text-brand cursor-pointer transition-colors">For Merchants</span>
-          <span className="hover:text-brand cursor-pointer transition-colors">Pricing</span>
+          <span onClick={onGoToLanding} className="text-text hover:text-brand cursor-pointer transition-colors">Home</span>
+          <span onClick={onGoToLanding} className="hover:text-brand cursor-pointer transition-colors">Features</span>
+          <span onClick={onGoToLanding} className="hover:text-brand cursor-pointer transition-colors">For Merchants</span>
+          <span onClick={onGoToLanding} className="hover:text-brand cursor-pointer transition-colors">Pricing</span>
         </nav>
 
         <div className="flex items-center gap-2.5 sm:gap-3">
@@ -436,11 +424,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                     ? 'Create Merchant Account'
                     : 'Sign in with OTP'}
                 </h2>
-                {selectedDemoPersona && (
-                  <Badge variant="demo" dot>
-                    Demo: {selectedDemoPersona.id}
-                  </Badge>
-                )}
               </div>
               <p className="text-xs text-text-muted mt-1 leading-relaxed">
                 {otpSent
@@ -832,17 +815,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
               </form>
             )}
 
-            {/* Try demo account link */}
-            <div className="pt-4 border-t border-border/80 text-center">
-              <button
-                type="button"
-                onClick={() => setDemoModalOpen(true)}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:underline cursor-pointer"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-brand" />
-                <span>Try demo account (Pre-loaded personas)</span>
-              </button>
-            </div>
           </div>
         </div>
       </main>
@@ -851,13 +823,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       <footer className="px-6 py-4 text-center text-xs text-text-subtle">
         VyaparMitra AI Merchant OS &bull; ISO Bank Grade Security &bull; Powered by DeepMind Agentic AI
       </footer>
-
-      {/* Demo Profiles Modal */}
-      <DemoProfilesModal
-        isOpen={demoModalOpen}
-        onClose={() => setDemoModalOpen(false)}
-        onSelect={handleSelectDemoPersona}
-      />
     </div>
   );
 };

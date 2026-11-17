@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sidebar, NavTab } from './components/Sidebar';
 import { Navbar } from './components/Navbar';
 import { LoginPage } from './pages/LoginPage';
+import { LandingPage } from './pages/LandingPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ComparePage } from './pages/ComparePage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
@@ -39,6 +40,10 @@ export const App: React.FC = () => {
     return null;
   });
 
+  // Public Landing / Login Navigation
+  const [publicView, setPublicView] = useState<'landing' | 'login'>('landing');
+  const [initialAuthMode, setInitialAuthMode] = useState<'login' | 'signup' | 'otp_login'>('login');
+
   // Theme Dark / Light Mode State
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
     const saved = localStorage.getItem('vyaparmitra_theme');
@@ -69,6 +74,7 @@ export const App: React.FC = () => {
   const handleLogout = () => {
     setCurrentUser(null);
     clearAuthSession();
+    setPublicView('login');
   };
 
   // Listen for unauthorized 401 events to cleanly wipe session and redirect to login
@@ -76,6 +82,7 @@ export const App: React.FC = () => {
     const onUnauthorized = () => {
       setCurrentUser(null);
       clearAuthSession();
+      setPublicView('login');
     };
     window.addEventListener('vyaparmitra:unauthorized', onUnauthorized);
     return () => window.removeEventListener('vyaparmitra:unauthorized', onUnauthorized);
@@ -162,13 +169,32 @@ export const App: React.FC = () => {
     setCurrentTab('copilot');
   };
 
-  // Render Login Page if not logged in
+  // Render Landing Page or Login Page if not logged in
   if (!currentUser) {
+    if (publicView === 'landing') {
+      return (
+        <LandingPage
+          onGetStarted={() => {
+            setInitialAuthMode('signup');
+            setPublicView('login');
+          }}
+          onLogin={() => {
+            setInitialAuthMode('login');
+            setPublicView('login');
+          }}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={toggleDarkMode}
+        />
+      );
+    }
+
     return (
       <LoginPage
         onLogin={handleLogin}
         isDarkMode={isDarkMode}
         onToggleDarkMode={toggleDarkMode}
+        onGoToLanding={() => setPublicView('landing')}
+        initialAuthMode={initialAuthMode}
       />
     );
   }
