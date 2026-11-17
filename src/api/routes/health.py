@@ -4,11 +4,13 @@ Health and readiness route for VyaparMitra Phase 6 API.
 
 from __future__ import annotations
 
-from typing import Any, Dict
-from fastapi import APIRouter, Depends, Header, HTTPException, status
+from typing import Any, Dict, Optional
+import sqlite3
+from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
 from src.api.auth import CurrentUser, get_current_user, require_roles
 from src.api.backup import create_database_backup
 from src.api.config import get_api_config
+from src.api.db import get_db
 from src.api.schemas import HealthResponse
 from src.api.services.copilot_service_adapter import CopilotServiceAdapter
 
@@ -40,8 +42,9 @@ def get_health() -> HealthResponse:
 
 @router.post("/health/backup")
 def trigger_database_backup(
-    x_backup_secret: str | None = Header(None),
-    current_user: CurrentUser = Depends(get_current_user),
+    request: Request,
+    x_backup_secret: Optional[str] = Header(default=None),
+    db: sqlite3.Connection = Depends(get_db),
 ) -> Dict[str, Any]:
     """
     Triggers an atomic online SQLite database backup snapshot.
@@ -49,7 +52,21 @@ def trigger_database_backup(
     """
     config = get_api_config()
     is_authorized_secret = bool(x_backup_secret and x_backup_secret == config.jwt_secret_key)
-    is_authorized_role = current_user.role in ("owner", "admin")
+    
+    is_authorized_role = False
+    auth_header = request.headers.get("Authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        try:
+            from src.api.auth import decode_access_token
+            token = auth_header.split(" ")[1].strip()
+            payload = decode_access_token(token)
+            user_id = payload.get("sub")
+            if user_id:
+                row = db.execute("SELECT role FROM users WHERE id = ?", (user_id,)).fetchone()
+                if row and row["role"] in ("owner", "admin"):
+                    is_authorized_role = True
+        except Exception:
+            pass
 
     if not (is_authorized_secret or is_authorized_role or config.demo_mode):
         raise HTTPException(

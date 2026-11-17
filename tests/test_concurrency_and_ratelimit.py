@@ -80,7 +80,17 @@ class TestConcurrencyAndRateLimit(unittest.TestCase):
     def test_trigger_database_backup_endpoint(self):
         """Verifies that POST /api/health/backup generates snapshot."""
         client = TestClient(app)
-        res = client.post("/api/health/backup")
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT OR IGNORE INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, is_active, created_at) "
+            "VALUES ('USR_BACKUP_TEST', 'M015', 'BR_M015_MAIN', 'test_backup_user', 'backup@test.com', 'Backup User', 'hash', 'owner', 1, '2026-01-01')"
+        )
+        conn.commit()
+        conn.close()
+
+        from src.api.auth import create_access_token
+        token = create_access_token({"sub": "USR_BACKUP_TEST", "role": "owner", "business_id": "M015"})
+        res = client.post("/api/health/backup", headers={"Authorization": f"Bearer {token}"})
         self.assertEqual(res.status_code, 200)
         data = res.json()
         self.assertTrue(data["success"])
@@ -90,8 +100,17 @@ class TestConcurrencyAndRateLimit(unittest.TestCase):
     def test_copilot_tenant_isolation(self):
         """Verifies that copilot ask automatically scopes to authenticated merchant."""
         client = TestClient(app)
-        # Pass a specific merchant header
-        headers = {"X-Merchant-Id": "M015"}
+        conn = get_db_connection()
+        conn.execute(
+            "INSERT OR IGNORE INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, is_active, created_at) "
+            "VALUES ('USR_COPILOT_TEST', 'M015', 'BR_M015_MAIN', 'copilot_test_user', 'copilot@test.com', 'Copilot User', 'hash', 'owner', 1, '2026-01-01')"
+        )
+        conn.commit()
+        conn.close()
+
+        from src.api.auth import create_access_token
+        token = create_access_token({"sub": "USR_COPILOT_TEST", "role": "owner", "business_id": "M015"})
+        headers = {"Authorization": f"Bearer {token}", "X-Merchant-Id": "M015"}
         res = client.post(
             "/api/copilot/ask",
             json={"query": "Meri dukaan ka status kya hai?", "merchant_id": "M999"},
