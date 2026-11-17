@@ -126,7 +126,10 @@ def approve_agent_request(
             context=ctx,
         )
     except ValueError as err:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(err))
+        msg = str(err).lower()
+        if "not found" in msg:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(err))
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err))
     except (UnauthorizedAgentActionError, TenantIsolationError) as sec_err:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(sec_err))
 
@@ -176,6 +179,9 @@ def reject_agent_request(
             context=ctx,
         )
     except ValueError as err:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(err))
+        msg = str(err).lower()
+        if "not found" in msg:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(err))
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err))
     except (UnauthorizedAgentActionError, TenantIsolationError) as sec_err:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(sec_err))

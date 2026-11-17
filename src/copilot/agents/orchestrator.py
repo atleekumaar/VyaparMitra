@@ -8,6 +8,7 @@ from typing import Any, Dict, List, Optional, TypedDict
 from src.copilot.agents.security import Role, UnauthorizedAgentActionError, TenantIsolationError, normalize_role
 from src.copilot.agents.inventory_tools import InventoryAgentTools
 from src.copilot.agents.finance_tools import FinanceAgentTools
+from src.api.db import get_db_connection
 
 
 class AgentState(TypedDict):
@@ -29,12 +30,17 @@ class MerchantOSAgentOrchestrator:
         self.inventory_tools = InventoryAgentTools()
         self.finance_tools = FinanceAgentTools()
 
-    def _extract_reorder_params(self, query: str, low_stock_items: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """Extracts SKU/product and quantity from query, falling back to top low-stock item."""
+    def _extract_reorder_params(
+        self,
+        query: str,
+        low_stock_items: List[Dict[str, Any]],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> Dict[str, Any]:
+        """Extracts SKU/product and quantity from query, checking low-stock and tenant inventory."""
         qty_match = re.search(r"(\d+)\s*(?:units?|pcs?|packets?|bottles?|kg|liters?|qty)?", query.lower())
         qty = int(qty_match.group(1)) if qty_match else None
 
-        # Match against actual low-stock inventory items first
+        # 1. Match against actual low-stock inventory items first
         q_lower = query.lower()
         for item in low_stock_items:
             if item["sku"].lower() in q_lower or any(w in q_lower for w in item["name"].lower().split() if len(w) > 3):
@@ -43,7 +49,24 @@ class MerchantOSAgentOrchestrator:
                     "quantity": qty or item["recommended_reorder_qty"],
                 }
 
-        # Explicit fallback for mustard oil or first low-stock alert
+        # 2. Match against any inventory item for this tenant
+        tenant_id = (context or {}).get("tenant_id") or (context or {}).get("business_id")
+        if tenant_id:
+            conn = get_db_connection()
+            try:
+                inv_items = conn.execute(
+                    "SELECT product_id, product_name FROM inventory WHERE business_id = ?",
+                    (tenant_id,),
+                ).fetchall()
+                for inv in inv_items:
+                    pid = inv["product_id"]
+                    pname = inv["product_name"] or ""
+                    if pid.lower() in q_lower or (pname and any(w in q_lower for w in pname.lower().split() if len(w) > 3)):
+                        return {"sku": pid, "quantity": qty or 25}
+            finally:
+                conn.close()
+
+        # 3. Explicit fallback for mustard oil or first low-stock alert
         if "mustard" in q_lower or "oil" in q_lower:
             return {"sku": "SKU-OIL-001", "quantity": qty or 50}
         if low_stock_items:
@@ -71,7 +94,7 @@ class MerchantOSAgentOrchestrator:
             if any(w in query_lower for w in ["reorder", "order", "purchase", "buy stock", "restock"]):
                 state["intent"] = "PURCHASE_REORDER_DRAFT"
                 low_stock = self.inventory_tools.check_low_stock(context=context)
-                params = self._extract_reorder_params(state.get("query", ""), low_stock)
+                params = self._extract_reorder_params(state.get("query", ""), low_stock, context=context)
                 draft = self.inventory_tools.draft_purchase_reorder(
                     sku=params["sku"],
                     quantity=params["quantity"],
