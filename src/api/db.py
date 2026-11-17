@@ -396,7 +396,12 @@ def init_db() -> None:
 
 
 def seed_default_data() -> None:
-    """Seeds baseline data for demo business M015 and default roles if absent."""
+    """Seeds baseline data for demo business M015 and default roles if demo mode is enabled."""
+    config = get_api_config()
+    if not config.demo_mode:
+        logger.info("Production mode active (demo_mode=False): skipping default demo data seeding.")
+        return
+
     conn = get_db_connection()
     cursor = conn.cursor()
     now_str = datetime.now(timezone.utc).isoformat()

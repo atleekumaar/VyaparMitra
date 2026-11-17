@@ -23,9 +23,28 @@ logger = logging.getLogger("vyaparmitra.api.auth")
 
 class UserRole(str, Enum):
     OWNER = "owner"
-    ADMIN = "admin"
     MANAGER = "manager"
     STAFF = "staff"
+
+
+def normalize_role(role_val: Optional[str]) -> str:
+    """
+    Safely normalizes legacy role strings and aliases into the canonical
+    three business roles: OWNER, MANAGER, STAFF.
+    - 'owner', 'admin', 'administrator', 'superadmin' -> 'owner'
+    - 'manager', 'supervisor', 'lead' -> 'manager'
+    - 'staff', 'cashier', 'clerk', 'biller', 'billing_staff' -> 'staff'
+    """
+    if not role_val:
+        return UserRole.STAFF.value
+    r = role_val.strip().lower()
+    if r in ("owner", "admin", "administrator", "superadmin"):
+        return UserRole.OWNER.value
+    if r in ("manager", "supervisor", "lead"):
+        return UserRole.MANAGER.value
+    if r in ("staff", "cashier", "clerk", "biller", "billing_staff"):
+        return UserRole.STAFF.value
+    return UserRole.STAFF.value
 
 
 ROLE_PERMISSIONS: Dict[str, List[str]] = {
@@ -46,24 +65,7 @@ ROLE_PERMISSIONS: Dict[str, List[str]] = {
         "finance:view_pl",
         "finance:expenses",
         "audit:view",
-    ],
-    UserRole.ADMIN.value: [
-        "auth:manage_users",
-        "branches:manage",
-        "sales:create",
-        "sales:view_all",
-        "sales:refund",
-        "inventory:view",
-        "inventory:manage",
-        "inventory:adjust",
-        "customers:view",
-        "customers:manage",
-        "customers:khata",
-        "suppliers:view",
-        "suppliers:manage",
-        "finance:view_pl",
-        "finance:expenses",
-        "audit:view",
+        "approvals:manage",
     ],
     UserRole.MANAGER.value: [
         "sales:create",
@@ -160,131 +162,68 @@ def decode_access_token(token: str) -> Dict[str, Any]:
 def get_current_user(
     request: Request,
     authorization: Optional[str] = Header(None),
-    x_merchant_id: Optional[str] = Header(None),
     db: Any = Depends(get_db),
 ) -> CurrentUser:
     """
-    FastAPI dependency extracting and verifying user identity from Authorization header or tenant context.
-    Supports JWT Bearer token, X-Merchant-Id header, and demo fallback.
+    FastAPI dependency extracting and verifying user identity from Authorization header.
+    Strictly requires a valid JWT Bearer token for all operational merchant endpoints.
+    Does NOT permit query param or header auth bypass.
     """
-    config = get_api_config()
-
-    if authorization and authorization.startswith("Bearer "):
-        token = authorization.split(" ")[1].strip()
-        payload = decode_access_token(token)
-        user_id = payload.get("sub")
-        if not user_id:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Token payload is missing subject (user_id).",
-            )
-
-        row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
-        if not row:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="User account no longer exists.",
-            )
-
-        if not row["is_active"]:
-            raise HTTPException(
-                status_code=status.HTTP_403_FORBIDDEN,
-                detail="User account is deactivated. Contact business administrator.",
-            )
-
-        role = row["role"]
-        permissions = ROLE_PERMISSIONS.get(role, [])
-        return CurrentUser(
-            id=row["id"],
-            business_id=row["business_id"],
-            branch_id=row["branch_id"],
-            username=row["username"],
-            email=row["email"],
-            full_name=row["full_name"],
-            role=role,
-            is_active=bool(row["is_active"]),
-            permissions=permissions,
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication required. Please provide a valid Bearer token in the Authorization header.",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
-    # Tenant header fallback: resolve user for X-Merchant-Id
-    tenant_merchant = x_merchant_id or request.query_params.get("merchant_id")
-    if tenant_merchant and tenant_merchant.strip():
-        m_id = tenant_merchant.strip()
-        row = db.execute("SELECT * FROM users WHERE business_id = ? ORDER BY id ASC LIMIT 1", (m_id,)).fetchone()
-        if row:
-            role = row["role"]
-            return CurrentUser(
-                id=row["id"],
-                business_id=row["business_id"],
-                branch_id=row["branch_id"],
-                username=row["username"],
-                email=row["email"],
-                full_name=row["full_name"],
-                role=role,
-                is_active=bool(row["is_active"]),
-                permissions=ROLE_PERMISSIONS.get(role, []),
-            )
-        # Auto-construct Owner context for valid active tenant
-        return CurrentUser(
-            id=f"USR_{m_id}",
-            business_id=m_id,
-            branch_id=f"BR_{m_id}_MAIN",
-            username=f"merchant_{m_id.lower()}",
-            email=f"{m_id.lower()}@vyaparmitra.com",
-            full_name="Merchant Owner",
-            role="owner",
-            is_active=True,
-            permissions=ROLE_PERMISSIONS.get("owner", []),
+    token = authorization.split(" ")[1].strip()
+    payload = decode_access_token(token)
+    user_id = payload.get("sub")
+    if not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token payload is missing subject (user_id).",
         )
 
-    # If demo mode is active and no Authorization header provided, fall back to seed owner
-    if config.demo_mode:
-        row = db.execute("SELECT * FROM users WHERE username = 'owner_m015'").fetchone()
-        if row:
-            return CurrentUser(
-                id=row["id"],
-                business_id=row["business_id"],
-                branch_id=row["branch_id"],
-                username=row["username"],
-                email=row["email"],
-                full_name=row["full_name"],
-                role=row["role"],
-                is_active=bool(row["is_active"]),
-                permissions=ROLE_PERMISSIONS.get(row["role"], []),
-            )
-        # Fallback if seed user not in DB yet
-        return CurrentUser(
-            id="USR_OWNER_DEMO",
-            business_id="M015",
-            branch_id="BR_M015_MAIN",
-            username="demo_owner",
-            email="owner@vyaparmitra.com",
-            full_name="Demo Owner",
-            role="owner",
-            is_active=True,
-            permissions=ROLE_PERMISSIONS.get("owner", []),
+    row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+    if not row:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User account no longer exists.",
         )
 
-    raise HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Authorization header required. Format: Bearer <token>",
+    if not row["is_active"]:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User account is deactivated. Contact business administrator.",
+        )
+
+    canonical_role = normalize_role(row["role"])
+    permissions = ROLE_PERMISSIONS.get(canonical_role, [])
+    return CurrentUser(
+        id=row["id"],
+        business_id=row["business_id"],
+        branch_id=row["branch_id"],
+        username=row["username"],
+        email=row["email"],
+        full_name=row["full_name"],
+        role=canonical_role,
+        is_active=bool(row["is_active"]),
+        permissions=permissions,
     )
 
 
 def require_roles(allowed_roles: List[str]) -> Callable:
     """
     Role-Based Access Control decorator/dependency.
-    Enforces that current user belongs to one of the authorized roles.
-    Owner and Admin are mutually aliased with top permissions.
+    Enforces that current user belongs to one of the authorized roles
+    normalized to the canonical three business roles: OWNER, MANAGER, STAFF.
     """
-    normalized_allowed = [r.lower() for r in allowed_roles]
-    if "owner" in normalized_allowed and "admin" not in normalized_allowed:
-        normalized_allowed.append("admin")
-    if "admin" in normalized_allowed and "owner" not in normalized_allowed:
-        normalized_allowed.append("owner")
+    normalized_allowed = {normalize_role(r) for r in allowed_roles}
 
     def role_dependency(user: CurrentUser = Depends(get_current_user)) -> CurrentUser:
-        if user.role.lower() not in normalized_allowed:
+        user_canonical = normalize_role(user.role)
+        if user_canonical not in normalized_allowed:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail=f"Access forbidden: requires role in {allowed_roles}. Your current role is '{user.role}'.",
@@ -299,9 +238,10 @@ def enforce_branch_isolation(user: CurrentUser, target_branch_id: Optional[str] 
     Enforces multi-branch data isolation:
     - Staff are strictly scoped to their assigned branch.
     - Managers can only operate within their assigned branch (unless multi-branch manager).
-    - Owners/Admins have full visibility across all branches of their business.
+    - Owners have full visibility across all branches of their business.
     """
-    if user.role.lower() == UserRole.STAFF.value:
+    user_role = normalize_role(user.role)
+    if user_role == UserRole.STAFF.value:
         if target_branch_id and target_branch_id != user.branch_id:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
@@ -309,7 +249,7 @@ def enforce_branch_isolation(user: CurrentUser, target_branch_id: Optional[str] 
             )
         return user.branch_id
 
-    if user.role.lower() == UserRole.MANAGER.value:
+    if user_role == UserRole.MANAGER.value:
         if user.branch_id and target_branch_id and target_branch_id != user.branch_id:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
@@ -317,7 +257,7 @@ def enforce_branch_isolation(user: CurrentUser, target_branch_id: Optional[str] 
             )
         return target_branch_id or user.branch_id
 
-    # Owner / Admin can target any branch or query across all branches
+    # Owner can target any branch or query across all branches of their business
     return target_branch_id
 
 
@@ -327,25 +267,40 @@ def resolve_merchant_id(
     authorization: Optional[str] = None,
 ) -> Optional[str]:
     """
-    Extracts the active merchant/business context with priority:
-    1. Explicit merchant_id query param
-    2. X-Merchant-Id header
-    3. Bearer token business_id claim
+    Extracts the active merchant/business context with strict tenant isolation:
+    1. If Bearer token is provided, tenant is strictly derived from the verified token.
+       Cross-tenant access attempts via query params or X-Merchant-Id header are rejected with 403.
+    2. If no Bearer token is provided, public demo analytics are only allowed in demo mode.
     """
-    if merchant_id and merchant_id.strip():
-        return merchant_id.strip()
-    if x_merchant_id and x_merchant_id.strip():
-        return x_merchant_id.strip()
+    config = get_api_config()
+    param_m_id = (merchant_id.strip() if merchant_id and merchant_id.strip() else None) or \
+                 (x_merchant_id.strip() if x_merchant_id and x_merchant_id.strip() else None)
+
     if authorization and authorization.startswith("Bearer "):
         token = authorization.split(" ")[1].strip()
         try:
             payload = decode_access_token(token)
-            biz_id = payload.get("business_id")
-            if biz_id:
-                return str(biz_id).strip()
-        except Exception:
-            pass
-    return None
+            token_biz_id = str(payload.get("business_id", "")).strip()
+            if token_biz_id:
+                if param_m_id and param_m_id != token_biz_id:
+                    logger.warning(
+                        f"Cross-tenant access attempt blocked: user token '{token_biz_id}' requested '{param_m_id}'"
+                    )
+                    raise HTTPException(
+                        status_code=status.HTTP_403_FORBIDDEN,
+                        detail="Cross-tenant access prohibited. You cannot query or modify another merchant's data.",
+                    )
+                return token_biz_id
+        except HTTPException:
+            raise
+        except Exception as exc:
+            logger.warning(f"Error decoding token in resolve_merchant_id: {exc}")
+
+    # Fallback only for public demo mode read-only analytics
+    if config.demo_mode:
+        return param_m_id or config.default_merchant_id
+
+    return param_m_id
 
 
 def get_request_merchant_id(
@@ -353,7 +308,7 @@ def get_request_merchant_id(
     x_merchant_id: Optional[str] = Header(None),
     authorization: Optional[str] = Header(None),
 ) -> Optional[str]:
-    """FastAPI dependency for auto-extracting tenant merchant context."""
+    """FastAPI dependency for extracting tenant merchant context with isolation checks."""
     return resolve_merchant_id(
         merchant_id=merchant_id,
         x_merchant_id=x_merchant_id,

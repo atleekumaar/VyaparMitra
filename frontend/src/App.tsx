@@ -13,7 +13,7 @@ import { ForecastsPage } from './pages/ForecastsPage';
 import { RecommendationsPage } from './pages/RecommendationsPage';
 import { CopilotPage } from './pages/CopilotPage';
 import { SettingsPage } from './pages/SettingsPage';
-import { api } from './api/client';
+import { api, clearAuthSession } from './api/client';
 import { Menu } from 'lucide-react';
 import { UserProfile } from './types';
 import { ToastProvider } from './components/Toast';
@@ -68,8 +68,18 @@ export const App: React.FC = () => {
 
   const handleLogout = () => {
     setCurrentUser(null);
-    localStorage.removeItem('vyaparmitra_user');
+    clearAuthSession();
   };
+
+  // Listen for unauthorized 401 events to cleanly wipe session and redirect to login
+  useEffect(() => {
+    const onUnauthorized = () => {
+      setCurrentUser(null);
+      clearAuthSession();
+    };
+    window.addEventListener('vyaparmitra:unauthorized', onUnauthorized);
+    return () => window.removeEventListener('vyaparmitra:unauthorized', onUnauthorized);
+  }, []);
 
   // Poll health and pending actions
   useEffect(() => {

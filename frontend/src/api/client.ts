@@ -40,15 +40,31 @@ export function getStoredAuthContext(): { token: string | null; merchantId: stri
   try {
     const rawUser = localStorage.getItem('vyaparmitra_user');
     const directToken = localStorage.getItem('vyaparmitra_token');
+    const directMerchantId = localStorage.getItem('vyaparmitra_merchant_id');
     if (rawUser) {
       const parsed: UserProfile = JSON.parse(rawUser);
-      const mId = parsed.business_id || parsed.merchant_id || parsed.id || null;
+      const mId = parsed.business_id || parsed.merchant_id || parsed.id || directMerchantId || null;
       const tok = parsed.token || directToken || null;
       return { token: tok, merchantId: mId };
     }
-    return { token: directToken, merchantId: null };
+    return { token: directToken, merchantId: directMerchantId || null };
   } catch {
     return { token: null, merchantId: null };
+  }
+}
+
+/**
+ * Completely clears all authentication tokens, user profiles, merchant IDs,
+ * and session state to prevent stale authenticated requests after logout.
+ */
+export function clearAuthSession(): void {
+  try {
+    localStorage.removeItem('vyaparmitra_token');
+    localStorage.removeItem('vyaparmitra_user');
+    localStorage.removeItem('vyaparmitra_merchant_id');
+    sessionStorage.clear();
+  } catch {
+    // Ignored in environments where storage is restricted
   }
 }
 
@@ -74,8 +90,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   if (!response.ok) {
     if (response.status === 401 && !endpoint.includes('/auth/')) {
       try {
-        localStorage.removeItem('vyaparmitra_token');
-        localStorage.removeItem('vyaparmitra_user');
+        clearAuthSession();
         window.dispatchEvent(new Event('vyaparmitra:unauthorized'));
       } catch {
         // Ignored
