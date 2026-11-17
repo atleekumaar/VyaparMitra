@@ -63,3 +63,4 @@ data/*.db.bak
 
 # Scratch and temporary directories
 scratch/
+data/backups/

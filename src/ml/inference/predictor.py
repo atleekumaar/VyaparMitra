@@ -176,13 +176,22 @@ class Predictor:
             columns={"date": "forecast_date"}
         )
 
-    def predict_churn(self, snapshot_date: str = "2026-07-15") -> pd.DataFrame:
+    def predict_churn(self, snapshot_date: Optional[str] = None) -> pd.DataFrame:
         """Evaluates customer churn and assigns risk probabilities and bands."""
         model = self.get_churn_model()
         tx_file = self.processed_dir / "clean_transactions.parquet"
         if not tx_file.exists():
             tx_file = self.processed_dir / "cleaned_transactions.parquet"
         clean_tx = pd.read_parquet(tx_file)
+
+        if not snapshot_date:
+            if not clean_tx.empty and "date" in clean_tx.columns:
+                snapshot_date = str(clean_tx["date"].max())
+            elif not clean_tx.empty and "timestamp" in clean_tx.columns:
+                snapshot_date = str(pd.to_datetime(clean_tx["timestamp"]).dt.strftime("%Y-%m-%d").max())
+            else:
+                snapshot_date = "2026-07-15"
+
         snapshot_df, _ = build_customer_churn_snapshot(clean_tx, snapshot_date=snapshot_date)
 
         if hasattr(model, "score_customers"):

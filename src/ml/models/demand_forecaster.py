@@ -75,9 +75,14 @@ class ProductDemandForecaster:
                 pid = prod["product_id"]
                 pcat = prod["product_category"]
 
-                # Extract latest product history
+                # Extract latest product history with category-level cold-start fallback
                 prod_history = panel_df[panel_df["product_id"] == pid].sort_values(by="date")
-                latest_units = prod_history["units_sold"].values if not prod_history.empty else np.array([0.0])
+                if not prod_history.empty:
+                    latest_units = prod_history["units_sold"].values
+                else:
+                    cat_history = panel_df[panel_df["product_category"] == pcat]
+                    cat_mean = float(cat_history["units_sold"].mean()) if not cat_history.empty else 1.0
+                    latest_units = np.array([cat_mean])
 
                 lag_1 = float(latest_units[-1]) if len(latest_units) >= 1 else 0.0
                 lag_7 = float(latest_units[-7]) if len(latest_units) >= 7 else lag_1
