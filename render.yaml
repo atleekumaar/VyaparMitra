@@ -9,7 +9,10 @@ services:
       - key: APP_ENV
         value: production
       - key: DEMO_MODE
-        value: "true"
+        value: "false"
       - key: LOG_LEVEL
         value: INFO
+      - key: JWT_SECRET_KEY
+        generateValue: true
+
 

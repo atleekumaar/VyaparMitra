@@ -48,6 +48,18 @@ node_modules/
 .env
 .env.local
 .env.*.local
+*.pem
+*.key
+
+# Database and SQLite operational files
+*.db
+*.db-wal
+*.db-shm
+*.db.bak
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db.bak
 
 # Scratch and temporary directories
 scratch/

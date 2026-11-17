@@ -76,13 +76,22 @@ def _resolve_demo_mode() -> bool:
 
 def _resolve_jwt_secret() -> str:
     secret = os.getenv("JWT_SECRET_KEY")
-    if secret:
-        return secret
     app_env = os.getenv("APP_ENV", "development").lower()
+    if secret:
+        clean_secret = secret.strip()
+        if app_env == "production" and len(clean_secret) < 32:
+            raise RuntimeError(
+                "CRITICAL SECURITY HALT: JWT_SECRET_KEY must be at least 32 characters long in production. "
+                f"Current key has only {len(clean_secret)} characters. Startup aborted."
+            )
+        return clean_secret
     if app_env == "production":
-        import secrets
-        return secrets.token_hex(32)
-    return "vyaparmitra-production-jwt-secret-key-32bytes-secure-2026"
+        raise RuntimeError(
+            "CRITICAL SECURITY HALT: JWT_SECRET_KEY environment variable is missing in production. "
+            "A stable, high-entropy secret of at least 32 characters must be provided. "
+            "Application startup aborted."
+        )
+    return "vyaparmitra-dev-jwt-secret-key-32bytes-secure-2026"
 
 
 @dataclass
