@@ -1,5 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Bot, Send, Sparkles, User, ShieldCheck, ChevronDown, ChevronUp, RefreshCw, Volume2 } from 'lucide-react';
+import {
+  Bot,
+  Send,
+  Sparkles,
+  User,
+  ShieldCheck,
+  ChevronDown,
+  ChevronUp,
+  RefreshCw,
+  Volume2,
+  VolumeX,
+  Mic,
+  MicOff,
+} from 'lucide-react';
 import { api } from '../api/client';
 import { CopilotMessage } from '../types';
 import { Badge } from '../components/Badge';
@@ -33,6 +46,66 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [expandedSources, setExpandedSources] = useState<Record<string, boolean>>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Voice Speech-to-Text (STT) & Text-to-Speech (TTS)
+  const [isListening, setIsListening] = useState<boolean>(false);
+  const [speakingMsgId, setSpeakingMsgId] = useState<string | null>(null);
+  const recognitionRef = useRef<any>(null);
+  const speechSupported = typeof window !== 'undefined' && Boolean((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = currentLanguage === 'hindi' ? 'hi-IN' : 'en-IN';
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          setInputValue(transcript);
+          setIsListening(false);
+          handleSend(transcript);
+        }
+      };
+      recognition.onerror = () => setIsListening(false);
+      recognition.onend = () => setIsListening(false);
+      recognitionRef.current = recognition;
+    }
+  }, [currentLanguage]);
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) return;
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (err) {
+        setIsListening(false);
+      }
+    }
+  };
+
+  const handleSpeak = (msgId: string, text: string) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    if (speakingMsgId === msgId) {
+      window.speechSynthesis.cancel();
+      setSpeakingMsgId(null);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = currentLanguage === 'hindi' ? 'hi-IN' : 'en-IN';
+    utterance.rate = 0.95;
+    utterance.onend = () => setSpeakingMsgId(null);
+    utterance.onerror = () => setSpeakingMsgId(null);
+    setSpeakingMsgId(msgId);
+    window.speechSynthesis.speak(utterance);
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -204,6 +277,26 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
                   }`}
                 >
                   <p className="whitespace-pre-line">{m.text}</p>
+                  {!isUser && (
+                    <div className="mt-2.5 pt-2 border-t border-border/50 flex items-center justify-between text-[11px]">
+                      <span className="text-[10px] text-text-muted">
+                        {new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleSpeak(m.id, m.text)}
+                        title={speakingMsgId === m.id ? 'Stop reading' : 'Read aloud (Voice)'}
+                        className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg border text-[10px] font-semibold transition-all cursor-pointer ${
+                          speakingMsgId === m.id
+                            ? 'bg-purple-600 text-white border-purple-600 animate-pulse'
+                            : 'bg-surface-muted border-border text-text-muted hover:text-purple-600 hover:border-purple-300'
+                        }`}
+                      >
+                        {speakingMsgId === m.id ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3 text-purple-600" />}
+                        <span>{speakingMsgId === m.id ? 'Stop' : 'Listen'}</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
 
                 {/* Assistant Metadata / Citations Pill */}
@@ -299,6 +392,22 @@ export const CopilotPage: React.FC<CopilotPageProps> = ({
             disabled={loading}
             className="flex-1 bg-transparent text-xs font-medium text-text placeholder-text-muted focus:outline-none"
           />
+
+          {/* Voice Input Microphone Button */}
+          {speechSupported && (
+            <button
+              type="button"
+              onClick={toggleListening}
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-all shrink-0 cursor-pointer ${
+                isListening
+                  ? 'bg-red-500 text-white animate-pulse shadow-md ring-2 ring-red-400'
+                  : 'bg-surface-card border border-border text-text-muted hover:text-purple-600 hover:border-purple-300'
+              }`}
+              title={isListening ? 'Listening... Click to stop' : 'Speak your question (Voice Input)'}
+            >
+              {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
+            </button>
+          )}
 
           <button
             type="submit"

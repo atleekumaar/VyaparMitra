@@ -18,7 +18,11 @@ import {
   X,
   Upload,
   Download,
+  Barcode,
+  Scan,
+  Printer,
 } from 'lucide-react';
+import { ReceiptModal, ReceiptData } from '../components/ReceiptModal';
 import { api } from '../api/client';
 import {
   ActionItem,
@@ -71,6 +75,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const [isRecordSaleOpen, setIsRecordSaleOpen] = useState(false);
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
   const [isImportCsvOpen, setIsImportCsvOpen] = useState(false);
+  const [lastReceipt, setLastReceipt] = useState<ReceiptData | null>(null);
+  const [isReceiptOpen, setIsReceiptOpen] = useState<boolean>(false);
 
   // Record Sale Form state
   const [saleAmount, setSaleAmount] = useState('');
@@ -205,6 +211,33 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         product_name: saleProductName || 'Direct Counter Sale',
       });
       setIsRecordSaleOpen(false);
+
+      // Compute GST invoice breakup (2.5% CGST + 2.5% SGST)
+      const taxSubtotal = Math.round((amt / 1.05) * 100) / 100;
+      const taxHalf = Math.round(((amt - taxSubtotal) / 2) * 100) / 100;
+      setLastReceipt({
+        invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+        storeName: currentUser?.storeName || summary?.merchant_name || 'Vyapar Store',
+        storeAddress: 'Main Market Road',
+        storeCity: currentUser?.city || 'India',
+        storePhone: currentUser?.phone,
+        items: [
+          {
+            name: saleProductName || 'Direct Counter Item',
+            quantity: 1,
+            price: amt,
+            total: amt,
+          },
+        ],
+        subtotal: taxSubtotal,
+        cgst: taxHalf,
+        sgst: taxHalf,
+        totalAmount: amt,
+        paymentMethod: salePaymentMethod,
+        timestamp: new Date().toISOString(),
+      });
+      setIsReceiptOpen(true);
+
       setSaleAmount('');
       setSaleProductName('');
       await loadDashboardData();
@@ -679,6 +712,36 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             </div>
 
             <form onSubmit={handleRecordSaleSubmit} className="space-y-4">
+              {topProducts.length > 0 && (
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-text">Barcode / Quick Product</label>
+                    <span className="text-[10px] text-text-muted flex items-center gap-1 font-semibold">
+                      <Barcode className="w-3.5 h-3.5 text-brand" />
+                      <span>Auto-fills Details</span>
+                    </span>
+                  </div>
+                  <select
+                    onChange={(e) => {
+                      const found = topProducts.find((p) => p.product_id === e.target.value);
+                      if (found) {
+                        setSaleProductName(found.product_name);
+                        const unitRate = found.units > 0 ? Math.round((found.revenue / found.units) * 100) / 100 : 50;
+                        setSaleAmount(String(unitRate));
+                      }
+                    }}
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-border bg-surface-muted text-text focus:outline-none focus:ring-2 focus:ring-brand font-medium"
+                  >
+                    <option value="">-- Select from Catalog or Type below --</option>
+                    {topProducts.map((p) => (
+                      <option key={p.product_id} value={p.product_id}>
+                        {p.product_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-text">Sale Amount (₹)</label>
                 <input
@@ -957,6 +1020,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
         </div>
       )}
+
+      {/* Printable Thermal Receipt Modal */}
+      <ReceiptModal
+        isOpen={isReceiptOpen}
+        onClose={() => setIsReceiptOpen(false)}
+        receipt={lastReceipt}
+      />
     </div>
   );
 };
