@@ -737,15 +737,15 @@ def create_user(
 ) -> UserResponse:
     """Creates a user within the same business. Managers can only create Staff."""
     role_target = req.role.lower().strip()
-    if role_target not in [UserRole.OWNER.value, UserRole.ADMIN.value, UserRole.MANAGER.value, UserRole.STAFF.value]:
+    if role_target not in [UserRole.OWNER.value, UserRole.MANAGER.value, UserRole.STAFF.value]:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Invalid role '{req.role}'. Allowed: owner, manager, staff",
         )
 
-    # Manager restriction: cannot create owner or admin
+    # Manager restriction: cannot create owner or manager
     if current_user.role.lower() == UserRole.MANAGER.value:
-        if role_target in [UserRole.OWNER.value, UserRole.ADMIN.value, UserRole.MANAGER.value]:
+        if role_target in [UserRole.OWNER.value, UserRole.MANAGER.value]:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Managers are only authorized to create Staff users.",

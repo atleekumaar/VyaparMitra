@@ -73,6 +73,8 @@ class ProductService:
                             )
                         )
                     return items
+                elif merchant_id not in ("M001", "M015"):
+                    return []
             finally:
                 conn.close()
 
@@ -172,6 +174,8 @@ class ProductService:
                         cross_sell_recommendations=[],
                         active_recommendations=[],
                     )
+                elif merchant_id not in ("M001", "M015"):
+                    return None
             finally:
                 conn.close()
 

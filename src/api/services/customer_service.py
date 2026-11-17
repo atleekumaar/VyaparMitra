@@ -59,6 +59,8 @@ class CustomerService:
                         for r in rows
                     ]
                     return items
+                elif merchant_id not in ("M001", "M015"):
+                    return []
             finally:
                 conn.close()
 
@@ -149,6 +151,8 @@ class CustomerService:
                             {"metric": "Contact", "value": str(row["phone"] or "Not provided"), "source": "customers.phone"},
                         ],
                     )
+                elif merchant_id not in ("M001", "M015"):
+                    return None
             finally:
                 conn.close()
 

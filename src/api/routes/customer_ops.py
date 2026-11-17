@@ -39,10 +39,16 @@ def list_customers(
     has_udhaar_only: bool = Query(False, description="Filter customers with positive Udhaar balance"),
     limit: int = Query(50, ge=1, le=200),
     offset: int = Query(0, ge=0),
+    merchant_id: Optional[str] = Query(None, description="Tenant business ID"),
     current_user: CurrentUser = Depends(get_current_user),
     db: sqlite3.Connection = Depends(get_db),
 ) -> CustomerManageListResponse:
     """Lists customers with multi-tenant business data isolation."""
+    if merchant_id and merchant_id.strip() != current_user.business_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cross-tenant access prohibited. You cannot query or modify another merchant's data.",
+        )
     query = "SELECT * FROM customers WHERE business_id = ?"
     params: List[Any] = [current_user.business_id]
 

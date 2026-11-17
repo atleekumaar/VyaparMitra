@@ -125,7 +125,7 @@ def test_complete_inventory_alert_to_owner_approval_workflow(live_env):
     )
     assert res_mgr_approve.status_code == 403
 
-    # 5. Owner approves draft -> Executes live stock update (+20 units -> 23)
+    # 5. Owner approves draft -> Issues Purchase Order (PO), status = APPROVED, stock still 3
     res_owner_approve = client.post(
         f"/api/copilot/approvals/{approval_id}/approve",
         json={"notes": "Approved for morning delivery"},
@@ -134,17 +134,35 @@ def test_complete_inventory_alert_to_owner_approval_workflow(live_env):
     assert res_owner_approve.status_code == 200
     approved_payload = res_owner_approve.json()
     assert approved_payload["status"] == "APPROVED"
-    assert approved_payload["quantity_added"] == 20
-    assert approved_payload["updated_stock"] == 23
+    assert "po_number" in approved_payload
+    assert approved_payload["po_number"].startswith("PO-")
+
+    # Verify physical stock has NOT increased yet (strict procurement separation)
+    conn = get_db_connection()
+    stock_mid = conn.execute("SELECT current_stock FROM inventory WHERE id = ?", (inv_id,)).fetchone()[0]
+    audit_po = conn.execute("SELECT action FROM audit_logs WHERE resource_id = ? AND action = 'PURCHASE_ORDER_GENERATED'", (approval_id,)).fetchone()
+    conn.close()
+    assert stock_mid == 3
+    assert audit_po is not None
+
+    # 6. Goods Receipt (Manager/Owner receives physical delivery) -> Stock increases to 23
+    res_grn = client.post(
+        f"/api/copilot/approvals/{approval_id}/receive-goods",
+        headers={"Authorization": f"Bearer {tokens['manager']}"},
+    )
+    assert res_grn.status_code == 200
+    grn_payload = res_grn.json()
+    assert grn_payload["status"] == "GOODS_RECEIVED"
+    assert grn_payload["quantity_added"] == 20
+    assert grn_payload["updated_stock"] == 23
 
     # Verify live DB stock & audit log persistence
     conn = get_db_connection()
     stock_now = conn.execute("SELECT current_stock FROM inventory WHERE id = ?", (inv_id,)).fetchone()[0]
-    audit_row = conn.execute("SELECT action FROM audit_logs WHERE resource_id = ?", (approval_id,)).fetchone()
+    audit_row = conn.execute("SELECT action FROM audit_logs WHERE resource_id = ? AND action = 'GOODS_RECEIVED_STOCK_UPDATED'", (approval_id,)).fetchone()
     conn.close()
     assert stock_now == 23
     assert audit_row is not None
-    assert audit_row[0] == "AGENT_APPROVAL_EXECUTED"
 
 
 def test_live_finance_and_owner_rejection_flow(live_env):

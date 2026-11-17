@@ -306,10 +306,16 @@ def list_sales(
     customer_id: Optional[str] = Query(None, description="Filter by customer ID"),
     limit: int = Query(50, ge=1, le=200),
     offset: int = Query(0, ge=0),
+    merchant_id: Optional[str] = Query(None, description="Tenant business ID"),
     current_user: CurrentUser = Depends(get_current_user),
     db: sqlite3.Connection = Depends(get_db),
 ) -> SaleListResponse:
     """Returns sales history adhering to multi-branch tenant isolation."""
+    if merchant_id and merchant_id.strip() != current_user.business_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Cross-tenant access prohibited. You cannot query or modify another merchant's data.",
+        )
     target_branch = enforce_branch_isolation(current_user, branch_id)
 
     query = "SELECT * FROM sales WHERE business_id = ?"
