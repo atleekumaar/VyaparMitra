@@ -166,7 +166,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-6 shadow-2xs animate-fade-in">
             <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span>भारत के 60M+ खुदरा व्यापारियों के लिए AI ऑपरेटिंग सिस्टम</span>
+            <span>AI Operating System for India's 60M+ Retail Merchants</span>
             {backendWarmedUp && (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.2 rounded-full border border-emerald-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -177,16 +177,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Main Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-text tracking-tight max-w-4xl mx-auto leading-tight sm:leading-tight">
-            दुकान चलाएं स्मार्ट AI से—
+            Run Your Retail Store with Smart AI—
             <br />
             <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              तेज़ बिलिंग, डिजिटल खाता और सटीक मुनाफा
+              Lightning-Fast POS, Digital Khata &amp; Precise Profits
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="mt-5 text-base sm:text-lg text-text-muted max-w-2xl mx-auto leading-relaxed">
-            VyaparMitra transforms traditional kirana &amp; retail stores with 3-second POS billing, voice-enabled UPI soundbox alerts, automated customer Khata (उधार), and predictive stock reorders.
+            VyaparMitra transforms traditional kirana &amp; retail stores with 3-second POS billing, voice-enabled UPI soundbox alerts, automated customer Khata (credit ledger), and predictive stock reorders.
           </p>
 
           {/* Action CTAs */}
@@ -197,7 +197,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               onClick={onGetStarted}
               className="w-full sm:w-auto px-7 py-3 text-sm font-bold shadow-fintech-md flex items-center justify-center gap-2 group"
             >
-              <span>Get Started Free &bull; बिना क्रेडिट कार्ड</span>
+              <span>Get Started Free &bull; No Credit Card Required</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
             <button
@@ -237,10 +237,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">
             <h2 className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-2">
-              Everything Your Kirana Needs
+              Everything Your Store Needs
             </h2>
             <h3 className="text-2xl sm:text-4xl font-extrabold text-text tracking-tight">
-              हर खुदरा व्यापारी की ज़रूरतों के लिए संपूर्ण समाधान
+              Complete Operating Suite for Modern Retail Merchants
             </h3>
             <p className="mt-3 text-sm text-text-muted">
               Built ground-up for Indian retail workflows—from quick barcode billing to credit collection and predictive procurement.
@@ -283,7 +283,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-4">
                 <Users className="w-6 h-6" />
               </div>
-              <h4 className="text-base font-bold text-text mb-2">Digital Customer Khata &amp; Udhaar</h4>
+              <h4 className="text-base font-bold text-text mb-2">Digital Customer Khata &amp; Credit Ledger</h4>
               <p className="text-xs text-text-muted leading-relaxed mb-4">
                 Track customer debit balances, enforce credit limits, send automatic WhatsApp reminders, and eliminate ledger calculation errors.
               </p>
@@ -313,9 +313,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
                 <Bot className="w-6 h-6" />
               </div>
-              <h4 className="text-base font-bold text-text mb-2">Multilingual AI Copilot (Hindi/Hinglish)</h4>
+              <h4 className="text-base font-bold text-text mb-2">Multilingual AI Copilot (English &amp; Regional)</h4>
               <p className="text-xs text-text-muted leading-relaxed mb-4">
-                Ask queries naturally like <em>"Kal kitna profit hua?"</em> or <em>"Atta kab reorder karein?"</em>. Zero hallucinations, grounded 100% in your store's live ledger.
+                Ask queries naturally like <em>"What was yesterday's profit?"</em> or <em>"When should we reorder flour?"</em>. Zero hallucinations, grounded 100% in your store's live ledger.
               </p>
               <div className="flex items-center gap-1.5 text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
                 <CheckCircle2 className="w-3.5 h-3.5" />
@@ -334,7 +334,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </p>
               <div className="flex items-center gap-1.5 text-[11px] font-semibold text-cyan-600 dark:text-cyan-400">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Local Kirana Ranks &bull; Stockout Protection</span>
+                <span>Local Retail Ranks &bull; Stockout Protection</span>
               </div>
             </div>
           </div>
@@ -349,7 +349,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               Transparent Pricing
             </h2>
             <h3 className="text-2xl sm:text-4xl font-extrabold text-text tracking-tight">
-              सरल और पारदर्शी योजनाएं—कोई छुपा शुल्क नहीं
+              Simple, Transparent Plans — No Hidden Fees
             </h3>
             <p className="mt-3 text-sm text-text-muted">
               Choose the right tier for your single store or multi-branch retail network.
@@ -365,7 +365,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <Badge variant="neutral">Free Forever</Badge>
                 </div>
                 <div className="text-3xl font-black text-text mb-2">₹0 <span className="text-xs font-normal text-text-muted">/ month</span></div>
-                <p className="text-xs text-text-muted mb-6">Perfect for small neighborhood kirana stores getting started with digital billing.</p>
+                <p className="text-xs text-text-muted mb-6">Perfect for small neighborhood retail stores getting started with digital billing.</p>
                 <ul className="space-y-2.5 text-xs text-text">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -446,7 +446,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <Badge variant="neutral">Multi-Store</Badge>
                 </div>
                 <div className="text-3xl font-black text-text mb-2">₹999 <span className="text-xs font-normal text-text-muted">/ month</span></div>
-                <p className="text-xs text-text-muted mb-6">For multi-outlet kirana chains and wholesale supermarket operations.</p>
+                <p className="text-xs text-text-muted mb-6">For multi-outlet retail chains and wholesale supermarket operations.</p>
                 <ul className="space-y-2.5 text-xs text-text">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
@@ -462,7 +462,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-purple-600 shrink-0" />
-                    <span>Dedicated SLA &bull; WhatsApp Support</span>
+                    <span>Dedicated SLA &bull; Priority Support</span>
                   </li>
                 </ul>
               </div>
@@ -493,20 +493,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="space-y-3">
             {[
               {
-                q: 'क्या मुझे विशेष कंप्यूटर या हार्डवेयर खरीदना होगा?',
-                a: 'बिलकुल नहीं। VyaparMitra किसी भी साधारण स्मार्टफोन, टैबलेट, या लैपटॉप पर तुरंत चलता है। आप अपने मौजूदा ब्लूटूथ या USB थर्मल प्रिंटर को भी सीधे जोड़ सकते हैं।',
+                q: 'Do I need special hardware or computers to run VyaparMitra?',
+                a: 'Not at all. VyaparMitra runs smoothly in any web browser on smartphones, tablets, laptops, or desktop PCs. You can also connect your existing USB or Bluetooth 80mm thermal receipt printer directly.',
               },
               {
-                q: 'क्या मेरा दुकान का डेटा सुरक्षित है?',
-                a: 'हाँ। VyaparMitra 256-बिट बैंक-ग्रेड एन्क्रिप्शन का उपयोग करता है। आपका डेटा केवल आपकी दुकान के लिए सुरक्षित रूप से संग्रहीत होता है।',
+                q: 'Is my store financial and customer data secure?',
+                a: 'Yes. VyaparMitra uses 256-bit bank-grade encryption with multi-tenant database isolation. Your store records, khata balances, and sales data are private and accessible strictly by you.',
               },
               {
-                q: 'क्या AI कॉपायलट हिंदी में काम करता है?',
-                a: 'हाँ। हमारा AI कॉपायलट हिंदी, हिंग्लिश और अंग्रेजी तीनों भाषाओं में बात कर सकता है। आप बोलकर भी सवाल पूछ सकते हैं।',
+                q: 'Does the AI Copilot understand conversational queries?',
+                a: 'Yes. Our AI Copilot understands plain English, Hinglish, and Hindi queries. You can type or speak questions regarding daily profits, customer receivables, or restocking schedules.',
               },
               {
-                q: 'क्या मैं अपने पुराने ग्राहकों और सामान की लिस्ट CSV से ला सकता हूँ?',
-                a: 'हाँ। Products और Customers पेज पर बल्क CSV अपलोड की सुविधा है, जिससे आप 1 मिनट में 5,000+ आइटम इम्पोर्ट कर सकते हैं।',
+                q: 'Can I import my existing product list and customer khata balances?',
+                a: 'Yes. The Products and Customers pages feature fast CSV bulk import tools with automatic column mapping and validation, allowing you to import thousands of records in seconds.',
               },
             ].map((faq, i) => (
               <div
