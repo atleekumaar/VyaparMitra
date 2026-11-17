@@ -51,3 +51,4 @@ node_modules/
 
 # Scratch and temporary directories
 scratch/
+data/backups/
