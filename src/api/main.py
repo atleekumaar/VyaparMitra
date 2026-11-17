@@ -13,7 +13,11 @@ from fastapi.staticfiles import StaticFiles
 
 from src.api.config import get_api_config
 from src.api.db import init_db
-from src.api.middleware import RequestLoggingMiddleware, register_error_handlers
+from src.api.middleware import (
+    RateLimitingMiddleware,
+    RequestLoggingMiddleware,
+    register_error_handlers,
+)
 from src.api.routes import api_router
 
 logger = logging.getLogger("vyaparmitra.api")
@@ -54,10 +58,13 @@ def create_app() -> FastAPI:
     # 2. Performance & Request ID Middleware
     app.add_middleware(RequestLoggingMiddleware)
 
-    # 3. Global Error Handlers (Envelope formatting)
+    # 3. Sliding-window Rate Limiting Middleware (DoS, OTP & LLM protection)
+    app.add_middleware(RateLimitingMiddleware)
+
+    # 4. Global Error Handlers (Envelope formatting)
     register_error_handlers(app)
 
-    # 4. Register API Routes
+    # 5. Register API Routes
     app.include_router(api_router)
 
     # 5. Static Frontend Serving (if built in frontend/dist)

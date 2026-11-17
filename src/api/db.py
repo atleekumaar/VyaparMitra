@@ -25,14 +25,16 @@ def hash_password(password: str) -> str:
 
 
 def get_db_connection() -> sqlite3.Connection:
+def get_db_connection() -> sqlite3.Connection:
     """Creates a raw SQLite connection with Row factory, WAL concurrency, and multi-thread safety."""
     config = get_api_config()
-    conn = sqlite3.connect(str(config.db_path), check_same_thread=False, timeout=10.0)
+    conn = sqlite3.connect(str(config.db_path), timeout=30.0, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     conn.execute("PRAGMA journal_mode = WAL")
+    conn.execute("PRAGMA busy_timeout = 10000")
     conn.execute("PRAGMA synchronous = NORMAL")
-    conn.execute("PRAGMA busy_timeout = 5000")
+    return conn
     return conn
 
 

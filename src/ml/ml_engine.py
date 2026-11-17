@@ -78,7 +78,7 @@ class MLEngine:
         """Forecasts unit demand across all catalog products for horizon_days."""
         return self.predictor.predict_demand(horizon_days=horizon_days)
 
-    def score_customer_risk(self, snapshot_date: str = "2026-07-15") -> pd.DataFrame:
+    def score_customer_risk(self, snapshot_date: Optional[str] = None) -> pd.DataFrame:
         """Evaluates customer inactivity and churn risk probabilities."""
         return self.predictor.predict_churn(snapshot_date=snapshot_date)
 
