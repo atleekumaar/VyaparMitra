@@ -29,36 +29,36 @@ class CustomerService:
         limit: int = 100,
         merchant_id: Optional[str] = None,
     ) -> List[CustomerListItem]:
-        is_explicit_non_demo = merchant_id is not None and merchant_id not in ("M001", "M015")
-
-        if is_explicit_non_demo:
+        if merchant_id:
             conn = get_db_connection()
             try:
-                query = """
-                    SELECT c.id, c.name, c.city, c.current_balance, c.credit_limit,
-                           COALESCE(SUM(s.total_amount), 0.0) as actual_spend,
-                           COUNT(s.id) as actual_orders
-                    FROM customers c
-                    LEFT JOIN sales s ON s.customer_id = c.id AND s.status != 'CANCELLED'
-                    WHERE c.business_id = ?
-                    GROUP BY c.id
-                    ORDER BY actual_spend DESC, c.name ASC
-                    LIMIT ?
-                """
-                rows = conn.execute(query, (merchant_id, limit)).fetchall()
-                items = [
-                    CustomerListItem(
-                        customer_id=f"{r['name']} ({r['id']})" if r["name"] else r["id"],
-                        segment="Loyal" if float(r["actual_spend"]) > 5000 else ("Regular" if float(r["actual_spend"]) > 0 else "New Lead"),
-                        lifetime_spend=round(float(r["actual_spend"]), 2),
-                        total_orders=int(r["actual_orders"]),
-                        recency_days=3.0 if float(r["actual_spend"]) > 0 else 0.0,
-                        churn_risk_tier="Low",
-                        churn_probability=0.10,
-                    )
-                    for r in rows
-                ]
-                return items
+                cust_count = conn.execute("SELECT COUNT(*) FROM customers WHERE business_id = ?", (merchant_id,)).fetchone()[0]
+                if cust_count > 0:
+                    query = """
+                        SELECT c.id, c.name, c.city, c.current_balance, c.credit_limit,
+                               COALESCE(SUM(s.total_amount), 0.0) as actual_spend,
+                               COUNT(s.id) as actual_orders
+                        FROM customers c
+                        LEFT JOIN sales s ON s.customer_id = c.id AND s.status != 'CANCELLED'
+                        WHERE c.business_id = ?
+                        GROUP BY c.id
+                        ORDER BY actual_spend DESC, c.name ASC
+                        LIMIT ?
+                    """
+                    rows = conn.execute(query, (merchant_id, limit)).fetchall()
+                    items = [
+                        CustomerListItem(
+                            customer_id=f"{r['name']} ({r['id']})" if r["name"] else r["id"],
+                            segment="Loyal" if float(r["actual_spend"]) > 5000 else ("Regular" if float(r["actual_spend"]) > 0 else "New Lead"),
+                            lifetime_spend=round(float(r["actual_spend"]), 2),
+                            total_orders=int(r["actual_orders"]),
+                            recency_days=3.0 if float(r["actual_spend"]) > 0 else 0.0,
+                            churn_risk_tier="Low",
+                            churn_probability=0.10,
+                        )
+                        for r in rows
+                    ]
+                    return items
             finally:
                 conn.close()
 
@@ -119,9 +119,7 @@ class CustomerService:
         ]
 
     def get_customer(self, customer_id: str, merchant_id: Optional[str] = None) -> Optional[CustomerDetailResponse]:
-        is_explicit_non_demo = merchant_id is not None and merchant_id not in ("M001", "M015")
-
-        if is_explicit_non_demo:
+        if merchant_id:
             conn = get_db_connection()
             try:
                 clean_id = customer_id.split("(")[-1].rstrip(")") if "(" in customer_id else customer_id

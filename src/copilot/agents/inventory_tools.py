@@ -171,7 +171,11 @@ class InventoryAgentTools:
         review_notes: str = "Approved by Owner",
         context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
-        """Owner-only L3 Execution: Approves draft, updates live inventory stock, and logs audit trail."""
+        """
+        Owner-only L3 Approval: Approves draft purchase request and generates Purchase Order (PO).
+        Per strict retail procurement rules, approval DOES NOT increase physical stock.
+        Stock is updated only when physical goods are received via receive_goods_request.
+        """
         ctx = context or {}
         tenant_id = ctx.get("tenant_id") or ctx.get("business_id")
         reviewer_id = ctx.get("user_id", "owner")
@@ -193,18 +197,90 @@ class InventoryAgentTools:
             qty = int(row["quantity"])
             sku = row["sku"]
             branch_id = row["branch_id"]
+            po_number = f"PO-{approval_id.replace('appr_', '').upper()[:8]}"
 
-            # 1. Update approval record
+            # 1. Update approval record to APPROVED (Purchase Order Issued)
             conn.execute(
                 """
                 UPDATE agent_approvals
                 SET status = 'APPROVED', reviewed_by = ?, review_notes = ?, reviewed_at = ?
                 WHERE id = ? AND business_id = ?
                 """,
-                (reviewer_id, review_notes, now, approval_id, tenant_id),
+                (reviewer_id, f"{review_notes} [PO: {po_number}]", now, approval_id, tenant_id),
             )
 
-            # 2. Execute live stock replenishment in inventory table
+            # 2. Record security audit log for Purchase Order Generation (auditable operation)
+            conn.execute(
+                """
+                INSERT INTO audit_logs (
+                    id, business_id, branch_id, user_id, user_name, user_role,
+                    action, resource, resource_id, details, timestamp
+                ) VALUES (?, ?, ?, ?, ?, 'owner', 'PURCHASE_ORDER_GENERATED', 'agent_approvals', ?, ?, ?)
+                """,
+                (
+                    f"aud_{uuid.uuid4().hex[:10]}", tenant_id, branch_id, reviewer_id, reviewer_name,
+                    approval_id, f"Approved request. Generated Purchase Order {po_number} for {qty} units of {sku}. Physical stock pending goods receipt.", now
+                ),
+            )
+            conn.commit()
+
+            return {
+                "approval_id": approval_id,
+                "po_number": po_number,
+                "status": "APPROVED",
+                "sku": sku,
+                "quantity": qty,
+                "reviewed_by": reviewer_id,
+                "reviewed_at": now,
+                "message": f"Purchase Order {po_number} issued. Physical stock will update upon Goods Receipt.",
+            }
+        finally:
+            conn.close()
+
+    @staticmethod
+    def receive_goods_request(
+        approval_id: str,
+        context: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """
+        Goods Receipt (GRN): Inwards physical inventory against an approved Purchase Order.
+        This is the only procurement step that increases physical inventory stock.
+        """
+        ctx = context or {}
+        tenant_id = ctx.get("tenant_id") or ctx.get("business_id")
+        user_id = ctx.get("user_id", "staff")
+        user_name = ctx.get("user_name", user_id)
+        now = datetime.now(timezone.utc).isoformat()
+
+        conn = get_db_connection()
+        try:
+            _ensure_tables(conn)
+            row = conn.execute(
+                "SELECT * FROM agent_approvals WHERE id = ? AND business_id = ?",
+                (approval_id, tenant_id),
+            ).fetchone()
+            if not row:
+                raise ValueError(f"Approval request '{approval_id}' not found for tenant '{tenant_id}'.")
+            if row["status"] != "APPROVED":
+                raise ValueError(
+                    f"Cannot receive goods for request with status '{row['status']}'. Status must be 'APPROVED'."
+                )
+
+            qty = int(row["quantity"])
+            sku = row["sku"]
+            branch_id = row["branch_id"]
+
+            # Update status to GOODS_RECEIVED
+            conn.execute(
+                """
+                UPDATE agent_approvals
+                SET status = 'GOODS_RECEIVED'
+                WHERE id = ? AND business_id = ?
+                """,
+                (approval_id, tenant_id),
+            )
+
+            # Inward physical stock to inventory table
             inv_row = None
             if branch_id:
                 inv_row = conn.execute(
@@ -225,29 +301,28 @@ class InventoryAgentTools:
                     (new_stock, now, inv_row["id"]),
                 )
 
-            # 3. Record security audit log
+            # Record audit log
             conn.execute(
                 """
                 INSERT INTO audit_logs (
                     id, business_id, branch_id, user_id, user_name, user_role,
                     action, resource, resource_id, details, timestamp
-                ) VALUES (?, ?, ?, ?, ?, 'owner', 'AGENT_APPROVAL_EXECUTED', 'agent_approvals', ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, 'manager', 'GOODS_RECEIVED_STOCK_UPDATED', 'agent_approvals', ?, ?, ?)
                 """,
                 (
-                    f"aud_{uuid.uuid4().hex[:10]}", tenant_id, branch_id, reviewer_id, reviewer_name,
-                    approval_id, f"Approved reorder of {qty} units for {sku}. New stock: {new_stock}. Notes: {review_notes}", now
+                    f"aud_{uuid.uuid4().hex[:10]}", tenant_id, branch_id, user_id, user_name,
+                    approval_id, f"Goods received for {sku}. Quantity: +{qty}. Updated stock: {new_stock}.", now
                 ),
             )
             conn.commit()
 
             return {
                 "approval_id": approval_id,
-                "status": "APPROVED",
+                "status": "GOODS_RECEIVED",
                 "sku": sku,
                 "quantity_added": qty,
                 "updated_stock": new_stock,
-                "reviewed_by": reviewer_id,
-                "reviewed_at": now,
+                "received_at": now,
             }
         finally:
             conn.close()

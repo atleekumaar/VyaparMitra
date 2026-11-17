@@ -144,8 +144,15 @@ export const ProductsPage: React.FC = () => {
     setIsSubmitting(true);
     try {
       const res = await api.uploadCsv(selectedFile, 'inventory');
-      setCsvUploadSuccess(`Imported ${res.rows_imported || 0} items successfully!`);
-      showToast(`${res.rows_imported || 0} inventory rows synced.`, 'success');
+      const count = res.inserted_rows ?? res.rows_imported ?? 0;
+      const failed = res.failed_rows ?? 0;
+      if (failed > 0) {
+        setCsvUploadSuccess(`Imported ${count} items successfully (${failed} failed rows).`);
+        showToast(`${count} items synced, ${failed} rows had errors.`, 'warning');
+      } else {
+        setCsvUploadSuccess(`Imported ${count} items successfully!`);
+        showToast(`${count} inventory items synced into catalog.`, 'success');
+      }
       setSelectedFile(null);
       await loadProducts();
       setTimeout(() => {

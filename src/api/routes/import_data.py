@@ -125,7 +125,7 @@ async def import_csv(
             detail=f"Invalid entity_type '{entity_type}'. Allowed: {', '.join(sorted(VALID_ENTITY_TYPES))}",
         )
 
-    # 1. File Type Check
+    # 1. File Type & Size Check
     filename = file.filename or "upload.csv"
     if not filename.lower().endswith(".csv"):
         raise HTTPException(
@@ -133,12 +133,19 @@ async def import_csv(
             detail=f"Invalid file extension for '{filename}'. Only .csv files are supported.",
         )
 
-    # 2. Read and Decode Content
+    # 2. Read and Decode Content with size limits
     raw_bytes = await file.read()
     if not raw_bytes or len(raw_bytes.strip()) == 0:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Uploaded CSV file is empty.",
+        )
+
+    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+    if len(raw_bytes) > MAX_FILE_SIZE:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="CSV file exceeds maximum allowed limit of 5 MB.",
         )
 
     try:
@@ -169,21 +176,31 @@ async def import_csv(
         if h in SYNONYM_MAP:
             canonical_tokens.add(SYNONYM_MAP[h])
 
-    # 4. Smart auto-detection to protect users from tab mismatches
+    # 4. Strict Entity-Type Respect & Header Validation
+    # Never silently override the user's selected entity_type.
+    # If headers clearly belong to another entity type, return an explicit error.
     has_inv_markers = "current_stock" in canonical_tokens or "min_stock_threshold" in canonical_tokens or "barcode" in canonical_tokens
-    has_sales_markers = "quantity" in canonical_tokens or "payment_method" in canonical_tokens or "discount" in canonical_tokens
+    has_sales_markers = "quantity" in canonical_tokens or "payment_method" in canonical_tokens
     has_cust_markers = "credit_limit" in canonical_tokens or (("phone" in canonical_tokens or "email" in canonical_tokens) and "name" in canonical_tokens)
 
-    if has_inv_markers and not has_sales_markers:
-        normalized_type = "inventory"
-    elif has_cust_markers and not has_sales_markers and not has_inv_markers:
-        normalized_type = "customers"
-    elif has_sales_markers:
-        normalized_type = "sales"
-    elif "selling_price" in canonical_tokens and "product_name" in canonical_tokens:
-        normalized_type = "inventory"
+    detected_type: Optional[str] = None
+    if has_inv_markers and not has_sales_markers and normalized_type != "inventory" and normalized_type != "products":
+        detected_type = "inventory"
+    elif has_cust_markers and not has_sales_markers and not has_inv_markers and normalized_type != "customers":
+        detected_type = "customers"
+    elif has_sales_markers and normalized_type != "sales":
+        detected_type = "sales"
 
-    # 5. Flexible Schema Validation
+    if detected_type:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                f"Entity type mismatch: You selected '{entity_type}', but the CSV headers indicate '{detected_type}' data. "
+                f"Please select the correct entity type or upload matching CSV headers for '{entity_type}'."
+            ),
+        )
+
+    # 5. Schema Validation for the chosen entity type
     missing_requirements: List[str] = []
     if normalized_type in ("inventory", "products"):
         if not ({"product_name", "product_id"} & canonical_tokens):
@@ -301,45 +318,72 @@ def _import_inventory_row(
     now_str: str,
 ) -> None:
     product_name = row.get("product_name") or row.get("name") or row.get("product") or row.get("title")
-    if not product_name:
-        raise ValueError("Missing 'product_name'.")
+    if not product_name or not product_name.strip():
+        raise ValueError("Missing required 'product_name'.")
+    clean_p_name = product_name.strip()
 
-    product_id = row.get("product_id") or f"PRD_{uuid.uuid4().hex[:8].upper()}"
-    category = row.get("category") or "General"
+    product_id = (row.get("product_id") or row.get("sku") or "").strip()
+    if not product_id:
+        product_id = f"PRD_{uuid.uuid4().hex[:8].upper()}"
+    category = (row.get("category") or "General").strip()
 
-    price_val = row.get("selling_price") or row.get("price") or row.get("unit_price") or 0.0
+    # Validate selling price (strict positive float)
+    price_val = row.get("selling_price") or row.get("price") or row.get("unit_price")
+    if not price_val:
+        raise ValueError("Missing required 'selling_price'.")
     try:
         selling_price = float(price_val)
-        if selling_price < 0:
-            raise ValueError("Selling price cannot be negative.")
-    except (ValueError, TypeError):
-        raise ValueError(f"Invalid selling_price: '{price_val}'. Must be a positive number.")
+        if selling_price <= 0:
+            raise ValueError(f"Selling price must be greater than zero, got '{price_val}'.")
+    except (ValueError, TypeError) as pe:
+        raise ValueError(f"Invalid selling_price '{price_val}': {pe}")
 
-    try:
-        unit_cost = float(row.get("unit_cost", 0.0)) if row.get("unit_cost") else round(selling_price * 0.8, 2)
-    except (ValueError, TypeError):
-        unit_cost = round(selling_price * 0.8, 2)
+    # Validate unit cost (optional, must be >= 0 and <= selling_price if provided)
+    cost_val = row.get("unit_cost") or row.get("cost") or row.get("cost_price")
+    if cost_val and cost_val.strip():
+        try:
+            unit_cost = float(cost_val)
+            if unit_cost < 0:
+                raise ValueError("Unit cost cannot be negative.")
+            if unit_cost > selling_price:
+                raise ValueError(f"Unit cost (₹{unit_cost:.2f}) cannot exceed selling price (₹{selling_price:.2f}).")
+        except (ValueError, TypeError) as ce:
+            raise ValueError(f"Invalid unit_cost '{cost_val}': {ce}")
+    else:
+        unit_cost = 0.0
 
-    try:
-        current_stock = int(float(row.get("current_stock", 0))) if row.get("current_stock") else 50
-        if current_stock < 0:
-            current_stock = 0
-    except (ValueError, TypeError):
-        current_stock = 50
+    # Validate current stock (strict non-negative integer, do not invent 50)
+    stock_val = row.get("current_stock") or row.get("stock")
+    if stock_val and stock_val.strip():
+        try:
+            current_stock = int(float(stock_val))
+            if current_stock < 0:
+                raise ValueError(f"Current stock cannot be negative, got '{stock_val}'.")
+        except (ValueError, TypeError):
+            raise ValueError(f"Invalid current_stock '{stock_val}'. Must be a non-negative integer.")
+    else:
+        current_stock = 0
 
-    try:
-        min_stock = int(float(row.get("min_stock_threshold", 10))) if row.get("min_stock_threshold") else 10
-    except (ValueError, TypeError):
+    # Validate min stock threshold
+    min_val = row.get("min_stock_threshold") or row.get("min_stock")
+    if min_val and min_val.strip():
+        try:
+            min_stock = int(float(min_val))
+            if min_stock < 0:
+                raise ValueError("min_stock_threshold cannot be negative.")
+        except (ValueError, TypeError):
+            min_stock = 10
+    else:
         min_stock = 10
 
-    barcode = row.get("barcode") or None
-    unit = row.get("unit") or "pcs"
+    barcode = (row.get("barcode") or "").strip() or None
+    unit = (row.get("unit") or "pcs").strip()
 
     # Check if SKU already exists for this branch by product_id or product_name
     existing = db.execute("""
         SELECT id FROM inventory
         WHERE business_id = ? AND branch_id = ? AND (product_id = ? OR LOWER(TRIM(product_name)) = LOWER(TRIM(?)))
-    """, (business_id, branch_id, product_id, product_name)).fetchone()
+    """, (business_id, branch_id, product_id, clean_p_name)).fetchone()
 
     if existing:
         db.execute("""
@@ -348,7 +392,7 @@ def _import_inventory_row(
                 unit_cost = ?, selling_price = ?, barcode = ?, unit = ?, updated_at = ?
             WHERE id = ?
         """, (
-            product_name, category, current_stock, min_stock,
+            clean_p_name, category, current_stock, min_stock,
             unit_cost, selling_price, barcode, unit, now_str, existing["id"]
         ))
     else:
@@ -360,7 +404,7 @@ def _import_inventory_row(
                 barcode, unit, updated_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            inv_id, business_id, branch_id, product_id, product_name, category,
+            inv_id, business_id, branch_id, product_id, clean_p_name, category,
             current_stock, min_stock, unit_cost, selling_price, barcode, unit, now_str
         ))
 
@@ -372,25 +416,32 @@ def _import_customer_row(
     now_str: str,
 ) -> None:
     name = row.get("name") or row.get("customer_name") or row.get("client_name")
-    if not name:
+    if not name or not name.strip():
         raise ValueError("Missing customer 'name'.")
+    clean_name = name.strip()
 
-    phone = row.get("phone") or None
-    email = row.get("email") or None
-    address = row.get("address") or None
-    city = row.get("city") or None
+    phone = (row.get("phone") or row.get("mobile") or "").strip() or None
+    email = (row.get("email") or "").strip() or None
+    address = (row.get("address") or "").strip() or None
+    city = (row.get("city") or "").strip() or None
 
-    try:
-        credit_limit = float(row.get("credit_limit", 5000.0)) if row.get("credit_limit") else 5000.0
-    except (ValueError, TypeError):
+    raw_credit = row.get("credit_limit") or row.get("credit")
+    if raw_credit and raw_credit.strip():
+        try:
+            credit_limit = float(raw_credit)
+            if credit_limit < 0:
+                raise ValueError("Credit limit cannot be negative.")
+        except (ValueError, TypeError):
+            raise ValueError(f"Invalid credit_limit '{raw_credit}'.")
+    else:
         credit_limit = 5000.0
 
-    cust_id = row.get("customer_id") or f"CUST_{uuid.uuid4().hex[:8].upper()}"
+    cust_id = (row.get("customer_id") or "").strip() or f"CUST_{uuid.uuid4().hex[:8].upper()}"
 
     # Upsert customer by customer_id or phone
     existing = None
     if row.get("customer_id"):
-        existing = db.execute("SELECT id FROM customers WHERE id = ? AND business_id = ?", (row["customer_id"], business_id)).fetchone()
+        existing = db.execute("SELECT id FROM customers WHERE id = ? AND business_id = ?", (cust_id, business_id)).fetchone()
     elif phone:
         existing = db.execute("SELECT id FROM customers WHERE phone = ? AND business_id = ?", (phone, business_id)).fetchone()
 
@@ -399,14 +450,14 @@ def _import_customer_row(
             UPDATE customers
             SET name = ?, phone = ?, email = ?, address = ?, city = ?, credit_limit = ?
             WHERE id = ?
-        """, (name, phone, email, address, city, credit_limit, existing["id"]))
+        """, (clean_name, phone, email, address, city, credit_limit, existing["id"]))
     else:
         db.execute("""
             INSERT INTO customers (
                 id, business_id, name, phone, email, address, city,
                 credit_limit, current_balance, loyalty_points, status, created_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0.0, 0, 'ACTIVE', ?)
-        """, (cust_id, business_id, name, phone, email, address, city, credit_limit, now_str))
+        """, (cust_id, business_id, clean_name, phone, email, address, city, credit_limit, now_str))
 
 
 def _import_sale_row(
@@ -416,20 +467,24 @@ def _import_sale_row(
     row: Dict[str, str],
     now_str: str,
 ) -> None:
-    product_id = row.get("product_id")
-    product_name = row.get("product_name") or row.get("product") or row.get("item")
+    product_id = (row.get("product_id") or row.get("sku") or "").strip()
+    product_name = (row.get("product_name") or row.get("product") or row.get("item") or "").strip()
 
     if not product_id and not product_name:
         raise ValueError("Missing product identifier (provide 'product_id' or 'product_name').")
 
+    # Strict quantity validation (must be positive integer, never invent default)
+    raw_qty = row.get("quantity") or row.get("qty") or row.get("units")
+    if not raw_qty or not str(raw_qty).strip():
+        raise ValueError("Missing 'quantity' for sale item.")
     try:
-        quantity = int(float(row.get("quantity", 1)))
+        quantity = int(float(raw_qty))
         if quantity <= 0:
-            quantity = 1
+            raise ValueError(f"Quantity must be a positive integer, got '{raw_qty}'.")
     except (ValueError, TypeError):
-        quantity = 1
+        raise ValueError(f"Invalid quantity '{raw_qty}'. Must be an integer > 0.")
 
-    # Check inventory for matching product
+    # Strictly lookup inventory item - NEVER auto-create or invent unknown products
     inv = None
     if product_id:
         inv = db.execute("""
@@ -437,69 +492,64 @@ def _import_sale_row(
             WHERE business_id = ? AND branch_id = ? AND product_id = ?
         """, (current_user.business_id, branch_id, product_id)).fetchone()
 
-    if not inv and (product_name or product_id):
-        search_term = product_name or product_id
+    if not inv and product_name:
         inv = db.execute("""
             SELECT * FROM inventory
             WHERE business_id = ? AND branch_id = ? AND LOWER(TRIM(product_name)) = LOWER(TRIM(?))
-        """, (current_user.business_id, branch_id, search_term)).fetchone()
+        """, (current_user.business_id, branch_id, product_name)).fetchone()
 
-    # Determine unit price
-    if inv:
-        default_price = float(inv["selling_price"])
-        unit_cost = float(inv["unit_cost"] or (default_price * 0.8))
-        resolved_p_id = inv["product_id"]
-        resolved_p_name = inv["product_name"]
-    else:
-        # Fallback price from row or reasonable default
-        raw_price = row.get("unit_price") or row.get("price") or row.get("selling_price")
-        try:
-            default_price = float(raw_price) if raw_price else 50.0
-        except (ValueError, TypeError):
-            default_price = 50.0
-        unit_cost = round(default_price * 0.8, 2)
-        resolved_p_id = product_id or f"PRD_{uuid.uuid4().hex[:8].upper()}"
-        resolved_p_name = product_name or product_id or "Standard Product"
+    if not inv:
+        p_desc = product_id or product_name
+        raise ValueError(
+            f"Product '{p_desc}' not found in inventory for branch '{branch_id}'. "
+            f"Sales import cannot reference uncataloged items. Please create this product in inventory first."
+        )
 
-        # Auto-create in inventory so sale import never breaks
-        inv_id = f"INV_{branch_id}_{resolved_p_id}"
-        db.execute("""
-            INSERT INTO inventory (
-                id, business_id, branch_id, product_id, product_name, category,
-                current_stock, min_stock_threshold, unit_cost, selling_price,
-                barcode, unit, updated_at
-            ) VALUES (?, ?, ?, ?, ?, 'General', ?, 10, ?, ?, NULL, 'pcs', ?)
-        """, (
-            inv_id, current_user.business_id, branch_id, resolved_p_id, resolved_p_name,
-            max(100, quantity * 10), unit_cost, default_price, now_str
-        ))
-        inv = db.execute("SELECT * FROM inventory WHERE id = ?", (inv_id,)).fetchone()
-
-    # Ensure sufficient stock
+    # Strictly verify stock availability
     if inv["current_stock"] < quantity:
-        raise ValueError(f"Insufficient stock for '{inv['product_name']}'. In stock: {inv['current_stock']}, Requested: {quantity}.")
+        raise ValueError(
+            f"Insufficient stock for '{inv['product_name']}'. "
+            f"Available in branch: {inv['current_stock']}, Requested: {quantity}."
+        )
 
-    try:
-        unit_price = float(row.get("unit_price")) if row.get("unit_price") else default_price
-    except (ValueError, TypeError):
-        unit_price = default_price
+    # Determine unit price - never invent arbitrary default
+    raw_price = row.get("unit_price") or row.get("price") or row.get("selling_price")
+    if raw_price and str(raw_price).strip():
+        try:
+            unit_price = float(raw_price)
+            if unit_price <= 0:
+                raise ValueError("Sale unit price must be positive.")
+        except (ValueError, TypeError):
+            raise ValueError(f"Invalid unit price '{raw_price}'.")
+    else:
+        unit_price = float(inv["selling_price"])
 
-    try:
-        discount = float(row.get("discount", 0.0)) if row.get("discount") else 0.0
-    except (ValueError, TypeError):
-        discount = 0.0
+    unit_cost = float(inv["unit_cost"] or 0.0)
+    resolved_p_id = inv["product_id"]
+    resolved_p_name = inv["product_name"]
+
+    # Validate discount
+    raw_disc = row.get("discount")
+    discount = 0.0
+    if raw_disc and str(raw_disc).strip():
+        try:
+            discount = float(raw_disc)
+            if discount < 0:
+                discount = 0.0
+        except (ValueError, TypeError):
+            discount = 0.0
 
     total_amount = max(0.0, (unit_price * quantity) - discount)
     payment_method = (row.get("payment_method") or "UPI").upper().strip()
-    customer_id = row.get("customer_id") or None
-    customer_name = row.get("customer_name") or row.get("customer") or "Walk-in Customer"
-    notes = row.get("notes") or "Bulk CSV Sale Import"
-    sale_timestamp = row.get("created_at") or now_str
+    customer_id = (row.get("customer_id") or "").strip() or None
+    customer_name = (row.get("customer_name") or row.get("customer") or "").strip() or "Walk-in Customer"
+    notes = (row.get("notes") or "").strip() or "Bulk CSV Sale Import"
+    sale_timestamp = (row.get("created_at") or "").strip() or now_str
 
     sale_id = f"SALE_{uuid.uuid4().hex[:10].upper()}"
     invoice_number = f"INV-CSV-{uuid.uuid4().hex[:8].upper()}"
 
-    # Deduct stock
+    # Atomic stock deduction
     db.execute("""
         UPDATE inventory SET current_stock = current_stock - ?, updated_at = ?
         WHERE id = ?

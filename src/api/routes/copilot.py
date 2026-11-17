@@ -109,9 +109,9 @@ def list_agent_approvals(
 def approve_agent_request(
     approval_id: str,
     payload: ApprovalReviewRequest = ApprovalReviewRequest(),
-    current_user: CurrentUser = Depends(require_roles(["owner", "admin"])),
+    current_user: CurrentUser = Depends(require_roles(["owner"])),
 ) -> Dict[str, Any]:
-    """Owner-only endpoint: Approves purchase reorder draft, updates live inventory stock, and logs audit."""
+    """Owner-only endpoint: Approves purchase reorder draft, issues Purchase Order (PO), and logs audit."""
     ctx = {
         "tenant_id": current_user.business_id,
         "user_id": current_user.id,
@@ -131,11 +131,35 @@ def approve_agent_request(
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(sec_err))
 
 
+@router.post("/approvals/{approval_id}/receive-goods")
+def receive_goods_for_approval(
+    approval_id: str,
+    current_user: CurrentUser = Depends(require_roles(["owner", "manager"])),
+) -> Dict[str, Any]:
+    """Inwards physical stock against an approved Purchase Order (Manager/Owner only)."""
+    ctx = {
+        "tenant_id": current_user.business_id,
+        "user_id": current_user.id,
+        "user_name": current_user.full_name,
+        "role": current_user.role,
+        "branch_id": current_user.branch_id,
+    }
+    try:
+        return InventoryAgentTools.receive_goods_request(
+            approval_id=approval_id,
+            context=ctx,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(err))
+    except (UnauthorizedAgentActionError, TenantIsolationError) as sec_err:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(sec_err))
+
+
 @router.post("/approvals/{approval_id}/reject")
 def reject_agent_request(
     approval_id: str,
     payload: ApprovalReviewRequest = ApprovalReviewRequest(),
-    current_user: CurrentUser = Depends(require_roles(["owner", "admin"])),
+    current_user: CurrentUser = Depends(require_roles(["owner"])),
 ) -> Dict[str, Any]:
     """Owner-only endpoint: Rejects a pending agent purchase reorder draft and logs audit."""
     ctx = {

@@ -29,50 +29,50 @@ class ProductService:
         limit: int = 100,
         merchant_id: Optional[str] = None,
     ) -> List[ProductListItem]:
-        is_explicit_non_demo = merchant_id is not None and merchant_id not in ("M001", "M015")
-
-        if is_explicit_non_demo:
+        if merchant_id:
             conn = get_db_connection()
             try:
-                query = "SELECT product_id, product_name, category, selling_price, current_stock FROM inventory WHERE business_id = ?"
-                params: List[Any] = [merchant_id]
-                if category:
-                    query += " AND LOWER(category) LIKE ?"
-                    params.append(f"%{category.lower()}%")
-                if search:
-                    query += " AND (LOWER(product_name) LIKE ? OR LOWER(product_id) LIKE ?)"
-                    params.extend([f"%{search.lower()}%", f"%{search.lower()}%"])
-                query += " LIMIT ?"
-                params.append(limit)
+                inv_count = conn.execute("SELECT COUNT(*) FROM inventory WHERE business_id = ?", (merchant_id,)).fetchone()[0]
+                if inv_count > 0:
+                    query = "SELECT product_id, product_name, category, selling_price, current_stock FROM inventory WHERE business_id = ?"
+                    params: List[Any] = [merchant_id]
+                    if category:
+                        query += " AND LOWER(category) LIKE ?"
+                        params.append(f"%{category.lower()}%")
+                    if search:
+                        query += " AND (LOWER(product_name) LIKE ? OR LOWER(product_id) LIKE ?)"
+                        params.extend([f"%{search.lower()}%", f"%{search.lower()}%"])
+                    query += " ORDER BY product_name ASC LIMIT ?"
+                    params.append(limit)
 
-                rows = conn.execute(query, params).fetchall()
-                items = []
-                for r in rows:
-                    pid = r["product_id"]
-                    rev_row = conn.execute(
-                        """
-                        SELECT COALESCE(SUM(si.subtotal), 0.0) as rev, COALESCE(SUM(si.quantity), 0) as units
-                        FROM sale_items si
-                        JOIN sales s ON si.sale_id = s.id
-                        WHERE s.business_id = ? AND si.product_id = ? AND s.payment_status != 'CANCELLED'
-                        """,
-                        (merchant_id, pid)
-                    ).fetchone()
-                    rev = float(rev_row["rev"]) if rev_row else 0.0
-                    units = int(rev_row["units"]) if rev_row else 0
-                    items.append(
-                        ProductListItem(
-                            product_id=pid,
-                            product_name=r["product_name"],
-                            category=r["category"] or "General",
-                            selling_price=float(r["selling_price"]),
-                            total_revenue=round(rev, 2),
-                            total_units=units,
-                            forecast_7d_units=0,
-                            status="STAR" if rev > 10000 else "MONITOR",
+                    rows = conn.execute(query, params).fetchall()
+                    items = []
+                    for r in rows:
+                        pid = r["product_id"]
+                        rev_row = conn.execute(
+                            """
+                            SELECT COALESCE(SUM(si.total_price), 0.0) as rev, COALESCE(SUM(si.quantity), 0) as units
+                            FROM sale_items si
+                            JOIN sales s ON si.sale_id = s.id
+                            WHERE s.business_id = ? AND si.product_id = ? AND s.status != 'CANCELLED'
+                            """,
+                            (merchant_id, pid)
+                        ).fetchone()
+                        rev = float(rev_row["rev"]) if rev_row else 0.0
+                        units = int(rev_row["units"]) if rev_row else 0
+                        items.append(
+                            ProductListItem(
+                                product_id=pid,
+                                product_name=r["product_name"],
+                                category=r["category"] or "General",
+                                selling_price=float(r["selling_price"]),
+                                total_revenue=round(rev, 2),
+                                total_units=units,
+                                forecast_7d_units=0,
+                                status="STAR" if rev > 10000 else "MONITOR",
+                            )
                         )
-                    )
-                return items
+                    return items
             finally:
                 conn.close()
 
@@ -135,9 +135,7 @@ class ProductService:
         ]
 
     def get_product(self, product_id: str, merchant_id: Optional[str] = None) -> Optional[ProductDetailResponse]:
-        is_explicit_non_demo = merchant_id is not None and merchant_id not in ("M001", "M015")
-
-        if is_explicit_non_demo:
+        if merchant_id:
             conn = get_db_connection()
             try:
                 row = conn.execute(
@@ -151,10 +149,10 @@ class ProductService:
                     uc = float(row["unit_cost"])
                     rev_row = conn.execute(
                         """
-                        SELECT COALESCE(SUM(si.subtotal), 0.0) as rev, COALESCE(SUM(si.quantity), 0) as units
+                        SELECT COALESCE(SUM(si.total_price), 0.0) as rev, COALESCE(SUM(si.quantity), 0) as units
                         FROM sale_items si
                         JOIN sales s ON si.sale_id = s.id
-                        WHERE s.business_id = ? AND si.product_id = ? AND s.payment_status != 'CANCELLED'
+                        WHERE s.business_id = ? AND si.product_id = ? AND s.status != 'CANCELLED'
                         """,
                         (merchant_id, pid)
                     ).fetchone()

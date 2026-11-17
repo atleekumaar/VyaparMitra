@@ -81,7 +81,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   // Record Sale Form state
   const [saleAmount, setSaleAmount] = useState('');
   const [saleProductName, setSaleProductName] = useState('');
-  const [salePaymentMethod, setSalePaymentMethod] = useState<'CASH' | 'UPI' | 'CARD'>('CASH');
+  const [selectedProductId, setSelectedProductId] = useState('');
+  const [saleQuantity, setSaleQuantity] = useState(1);
+  const [salePaymentMethod, setSalePaymentMethod] = useState<'CASH' | 'UPI' | 'CARD' | 'CREDIT'>('CASH');
   const [isSubmittingSale, setIsSubmittingSale] = useState(false);
 
   // Add Product Form state
@@ -198,51 +200,93 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     }
   };
 
-  // Submit Quick Sale
+  // Submit POS Sale with atomic database transaction and stock deduction
   const handleRecordSaleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const amt = parseFloat(saleAmount);
-    if (isNaN(amt) || amt <= 0) return;
+    if (isNaN(amt) || amt <= 0) {
+      alert('Please enter a valid sale price greater than 0.');
+      return;
+    }
+    if (saleQuantity <= 0) {
+      alert('Quantity must be at least 1.');
+      return;
+    }
 
     setIsSubmittingSale(true);
     try {
-      await api.recordCashSale({
-        amount: amt,
-        product_name: saleProductName || 'Direct Counter Sale',
+      // Resolve product ID or ensure SKU in inventory
+      let targetPid = selectedProductId;
+      if (!targetPid) {
+        const found = topProducts.find((p) => p.product_name.toLowerCase() === (saleProductName || '').toLowerCase());
+        if (found) {
+          targetPid = found.product_id;
+        } else {
+          // If product doesn't exist, create it in inventory first so stock and catalog stay consistent
+          const newSku = `SKU_${Date.now().toString().slice(-6)}`;
+          await api.createInventoryItem({
+            product_id: newSku,
+            product_name: saleProductName || 'Counter Sale Item',
+            category: 'Counter Sale',
+            selling_price: amt,
+            unit_cost: Math.round(amt * 0.7 * 100) / 100,
+            current_stock: Math.max(50, saleQuantity * 5),
+          });
+          targetPid = newSku;
+        }
+      }
+
+      // Execute atomic POS checkout transaction via operational backend API
+      const saleRes = await api.createSale({
+        payment_method: salePaymentMethod,
+        customer_name: 'Walk-in Customer',
+        items: [
+          {
+            product_id: targetPid,
+            product_name: saleProductName || 'Counter Sale Item',
+            quantity: saleQuantity,
+            unit_price: amt,
+          },
+        ],
       });
+
       setIsRecordSaleOpen(false);
 
       // Compute GST invoice breakup (2.5% CGST + 2.5% SGST)
-      const taxSubtotal = Math.round((amt / 1.05) * 100) / 100;
-      const taxHalf = Math.round(((amt - taxSubtotal) / 2) * 100) / 100;
+      const totalVal = saleRes.total_amount || (amt * saleQuantity);
+      const taxSubtotal = Math.round((totalVal / 1.05) * 100) / 100;
+      const taxHalf = Math.round(((totalVal - taxSubtotal) / 2) * 100) / 100;
+
       setLastReceipt({
-        invoiceNumber: `INV-${Date.now().toString().slice(-6)}`,
+        invoiceNumber: saleRes.invoice_number || `INV-${Date.now().toString().slice(-6)}`,
         storeName: currentUser?.storeName || summary?.merchant_name || 'Vyapar Store',
         storeAddress: 'Main Market Road',
         storeCity: currentUser?.city || 'India',
         storePhone: currentUser?.phone,
         items: [
           {
-            name: saleProductName || 'Direct Counter Item',
-            quantity: 1,
+            name: saleProductName || 'Counter Sale Item',
+            quantity: saleQuantity,
             price: amt,
-            total: amt,
+            total: totalVal,
           },
         ],
         subtotal: taxSubtotal,
         cgst: taxHalf,
         sgst: taxHalf,
-        totalAmount: amt,
+        totalAmount: totalVal,
         paymentMethod: salePaymentMethod,
-        timestamp: new Date().toISOString(),
+        timestamp: saleRes.created_at || new Date().toISOString(),
       });
       setIsReceiptOpen(true);
 
       setSaleAmount('');
       setSaleProductName('');
+      setSelectedProductId('');
+      setSaleQuantity(1);
       await loadDashboardData();
     } catch (err: any) {
-      alert(`Error recording sale: ${err?.message}`);
+      alert(`POS Checkout Error: ${err?.message || 'Transaction failed'}`);
     } finally {
       setIsSubmittingSale(false);
     }
@@ -722,8 +766,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     </span>
                   </div>
                   <select
+                    value={selectedProductId}
                     onChange={(e) => {
-                      const found = topProducts.find((p) => p.product_id === e.target.value);
+                      const pid = e.target.value;
+                      setSelectedProductId(pid);
+                      const found = topProducts.find((p) => p.product_id === pid);
                       if (found) {
                         setSaleProductName(found.product_name);
                         const unitRate = found.units > 0 ? Math.round((found.revenue / found.units) * 100) / 100 : 50;
@@ -743,34 +790,60 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               )}
 
               <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-text">Sale Amount (₹)</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  required
-                  autoFocus
-                  value={saleAmount}
-                  onChange={(e) => setSaleAmount(e.target.value)}
-                  placeholder="e.g. 1500"
-                  className="w-full px-3.5 py-2.5 text-sm font-bold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-semibold text-text">Product / Description</label>
+                <label className="text-xs font-semibold text-text">Product / Item Description</label>
                 <input
                   type="text"
+                  required
                   value={saleProductName}
-                  onChange={(e) => setSaleProductName(e.target.value)}
+                  onChange={(e) => {
+                    setSaleProductName(e.target.value);
+                    if (selectedProductId) setSelectedProductId('');
+                  }}
                   placeholder="e.g. Fortune Sunflower Oil 1L"
                   className="w-full px-3.5 py-2 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand"
                 />
               </div>
 
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text">Unit Price (₹)</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0.01"
+                    required
+                    value={saleAmount}
+                    onChange={(e) => setSaleAmount(e.target.value)}
+                    placeholder="e.g. 150"
+                    className="w-full px-3.5 py-2 text-sm font-bold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-xs font-semibold text-text">Quantity</label>
+                  <input
+                    type="number"
+                    min="1"
+                    step="1"
+                    required
+                    value={saleQuantity}
+                    onChange={(e) => setSaleQuantity(Math.max(1, parseInt(e.target.value, 10) || 1))}
+                    className="w-full px-3.5 py-2 text-sm font-bold rounded-xl border border-border bg-surface-muted text-text focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand tabular-nums"
+                  />
+                </div>
+              </div>
+
+              {/* Total Calculation Preview */}
+              <div className="flex items-center justify-between p-2.5 rounded-xl bg-surface-muted border border-border/80 text-xs">
+                <span className="font-semibold text-text-muted">Total Payable:</span>
+                <span className="font-black text-sm text-text tabular-nums">
+                  {formatCurrency((parseFloat(saleAmount) || 0) * (saleQuantity || 1))}
+                </span>
+              </div>
+
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-text">Payment Method</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {(['CASH', 'UPI', 'CARD'] as const).map((method) => (
+                <div className="grid grid-cols-4 gap-2">
+                  {(['CASH', 'UPI', 'CARD', 'CREDIT'] as const).map((method) => (
                     <button
                       key={method}
                       type="button"
@@ -781,7 +854,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                           : 'border-border text-text-muted hover:text-text'
                       }`}
                     >
-                      {method}
+                      {method === 'CREDIT' ? 'Khata' : method}
                     </button>
                   ))}
                 </div>
