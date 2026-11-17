@@ -2,14 +2,22 @@ services:
   - type: web
     name: vyaparmitra
     runtime: docker
-    plan: free
+    plan: starter
     region: oregon
     dockerfilePath: Dockerfile
+    disk:
+      name: vyaparmitra-db-data
+      mountPath: /app/data
+      sizeGB: 5
     envVars:
       - key: APP_ENV
         value: production
       - key: DEMO_MODE
-        value: "true"
+        value: "false"
       - key: LOG_LEVEL
         value: INFO
+      - key: DB_PATH
+        value: /app/data/vyaparmitra.db
+      - key: JWT_SECRET_KEY
+        generateValue: true
 

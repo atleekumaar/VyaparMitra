@@ -41,8 +41,16 @@ class ApprovalReviewRequest(BaseModel):
 
 
 @router.post("/ask", response_model=CopilotAskResponse)
-def ask_copilot(payload: CopilotAskRequest) -> CopilotAskResponse:
-    """Processes a natural language query in Hindi, Hinglish, or English via Phase 5 Copilot."""
+def ask_copilot(
+    payload: CopilotAskRequest,
+    current_user: CurrentUser = Depends(get_current_user),
+) -> CopilotAskResponse:
+    """
+    Processes a natural language query in Hindi, Hinglish, or English via Phase 5 Copilot,
+    enforcing authenticated merchant tenant isolation.
+    """
+    if current_user and current_user.business_id:
+        payload.merchant_id = current_user.business_id
     return adapter.ask(payload)
 
 
@@ -51,9 +59,14 @@ def get_daily_brief(
     session_id: str = Query("default_session", description="Session identifier"),
     merchant_id: Optional[str] = Query(None, description="Target merchant ID"),
     language: Optional[str] = Query("hinglish", description="Target language (hindi, hinglish, english)"),
+    current_user: CurrentUser = Depends(get_current_user),
 ) -> CopilotDailyBriefResponse:
-    """Generates the morning action briefing covering sales, forecasts, and actions."""
-    return adapter.daily_brief(session_id=session_id, merchant_id=merchant_id, language=language)
+    """
+    Generates the morning action briefing covering sales, forecasts, and actions,
+    enforcing authenticated merchant tenant isolation.
+    """
+    target_merchant = current_user.business_id if (current_user and current_user.business_id) else merchant_id
+    return adapter.daily_brief(session_id=session_id, merchant_id=target_merchant, language=language)
 
 
 @router.post("/agent/execute", response_model=AgentExecuteResponse)

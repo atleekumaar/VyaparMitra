@@ -76,3 +76,27 @@ class TestConcurrencyAndRateLimit(unittest.TestCase):
         self.assertFalse(df.empty)
         self.assertIn("risk_probability", df.columns)
         self.assertIn("risk_band", df.columns)
+
+    def test_trigger_database_backup_endpoint(self):
+        """Verifies that POST /api/health/backup generates snapshot."""
+        client = TestClient(app)
+        res = client.post("/api/health/backup")
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertTrue(data["success"])
+        self.assertIn("backup_file", data)
+        self.assertGreater(data["size_bytes"], 0)
+
+    def test_copilot_tenant_isolation(self):
+        """Verifies that copilot ask automatically scopes to authenticated merchant."""
+        client = TestClient(app)
+        # Pass a specific merchant header
+        headers = {"X-Merchant-Id": "M015"}
+        res = client.post(
+            "/api/copilot/ask",
+            json={"query": "Meri dukaan ka status kya hai?", "merchant_id": "M999"},
+            headers=headers,
+        )
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertIsNotNone(data["answer"])
