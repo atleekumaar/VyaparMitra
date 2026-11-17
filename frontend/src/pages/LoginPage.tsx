@@ -192,12 +192,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       setCountdown(res.expires_in_seconds ? Math.min(res.expires_in_seconds, 60) : 60);
       setOtpCode(['', '', '', '', '', '']);
       setNotificationMsg(res.message || `Verification code sent to ${cleanEmail}`);
-
-      // Auto-fill demo OTP only in DEV environment
-      const isDev = Boolean((import.meta as any).env?.DEV);
-      if (isDev && res.demo_otp && res.demo_otp.length === 6) {
-        setOtpCode(res.demo_otp.split(''));
-      }
     } catch (err: any) {
       setIsSubmitting(false);
       setAuthError(err?.message || 'Failed to send verification code. Please try again.');

@@ -104,7 +104,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     fetchHealth();
   }, []);
 
-  const isDemo = currentUser?.is_demo ?? true;
+  const isDemo = currentUser?.is_demo ?? false;
   const merchantId = currentUser?.merchant_id || currentUser?.business_id || 'M001';
   const storeName = currentUser?.storeName || (isDemo ? 'Vyapar Kirana & General Store' : 'My Vyapar Store');
   const ownerName = currentUser?.name || (isDemo ? 'Demo Merchant' : 'Store Owner');

@@ -70,8 +70,7 @@ def _resolve_demo_mode() -> bool:
     env_val = os.getenv("DEMO_MODE")
     if env_val is not None:
         return env_val.lower() in ("true", "1", "yes")
-    app_env = os.getenv("APP_ENV", "development").lower()
-    return app_env != "production"
+    return False
 
 
 def _resolve_jwt_secret() -> str:
