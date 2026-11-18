@@ -663,25 +663,14 @@ export const ProductsPage: React.FC = () => {
             <span className="text-text-muted text-[11px]">
               Need a ready template with sample products?
             </span>
-            <button
-              type="button"
-              onClick={() => {
-                const content = `product_id,product_name,category,selling_price,unit_cost,current_stock,min_stock_threshold,barcode,unit\nPRD_TATA_SALT,Tata Salt 1kg,Groceries,28,22,85,15,8901030381029,pkt\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,Edible Oils,165,138,42,10,8906007281014,btl\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,Staples,245,210,30,8,8901030012345,bag\nPRD_AMUL_BUTTER,Amul Butter 500g,Dairy,280,248,24,6,8901262010053,pkt\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,Snacks & Bakery,30,24,120,25,8901719101019,pkt\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,Instant Foods,56,45,95,20,8901058852372,pkt\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,Personal Care,58,46,60,12,8901396312450,pcs\n`;
-                const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'sample_inventory.csv';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-              }}
+            <a
+              href="/sample_csvs/sample_inventory.csv"
+              download="sample_inventory.csv"
               className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
             >
               <Download className="w-3.5 h-3.5" />
-              Download Template
-            </button>
+              Download Sample CSV
+            </a>
           </div>
 
           <div className="p-6 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center text-center space-y-2 bg-surface-muted/30">

@@ -639,27 +639,16 @@ export const CustomersPage: React.FC = () => {
 
           <div className="flex items-center justify-between px-3 py-2 bg-brand/5 border border-brand/20 rounded-xl text-xs">
             <span className="text-text-muted text-[11px]">
-              Need a sample CSV template with customer data?
+              Need a ready sample CSV with customer data?
             </span>
-            <button
-              type="button"
-              onClick={() => {
-                const content = `name,phone,email,address,city,credit_limit\nRamesh Kumar Sharma,+919811223344,ramesh.sharma@example.com,Shop 4 Market Complex,Gurugram,10000\nSunita Verma,+919822334455,sunita.verma@example.com,B-12 Civil Lines,Jaipur,8000\nVijay Agarwal,+919833445566,vijay.agarwal@example.com,14 MG Road,Indore,15000\nPriya Patel,+919844556677,priya.patel@example.com,Navrangpura,Ahmedabad,12000\nMohammad Farhan,+919855667788,farhan.m@example.com,Hazratganj,Lucknow,6000\nAnil Joshi,+919866778899,anil.joshi@example.com,Kothrud,Pune,7500\n`;
-                const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = 'sample_customers.csv';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-              }}
+            <a
+              href="/sample_csvs/sample_customers.csv"
+              download="sample_customers.csv"
               className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
             >
               <Download className="w-3.5 h-3.5" />
-              Download Template
-            </button>
+              Download Sample CSV
+            </a>
           </div>
 
           <div className="p-6 border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center text-center space-y-2 bg-surface-muted/30">

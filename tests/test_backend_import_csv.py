@@ -219,3 +219,39 @@ def test_import_audit_logging():
     logs = audit_res.json()["logs"]
     assert len(logs) > 0
     assert logs[0]["action"] == "CSV_IMPORT"
+
+
+def test_import_indian_formats_and_quantity_in_inventory():
+    """Validates robust parsing of currency (₹, Rs, /-, commas) and 'quantity' header in inventory import."""
+    token = get_token("manager")
+    csv_content = (
+        'Item Name,Rate,Cost Price,Quantity,Category\n'
+        'Special Basmati Rice,"₹ 1,250.00","Rs. 1,050/-",25 bags,Grains\n'
+        'Masala Chai 500g,240/-,₹ 190.50,50 pkts,Beverages\n'
+    )
+    files = {"file": ("kirana_stock.csv", io.BytesIO(csv_content.encode("utf-8")), "text/csv")}
+
+    res = client.post(
+        "/api/import/csv?entity_type=inventory&branch_id=BR_M015_MAIN",
+        headers={"Authorization": f"Bearer {token}"},
+        files=files,
+    )
+    assert res.status_code == 200
+    data = res.json()
+    assert data["total_rows"] == 2
+    assert data["inserted_rows"] == 2
+    assert data["failed_rows"] == 0
+
+    # Verify inventory was inserted with parsed numerical values
+    inv_check = client.get(
+        "/api/inventory?search=Special Basmati Rice&branch_id=BR_M015_MAIN",
+        headers={"Authorization": f"Bearer {token}"},
+    )
+    assert inv_check.status_code == 200
+    items = inv_check.json()["items"]
+    assert len(items) >= 1
+    rice_item = [i for i in items if i["product_name"] == "Special Basmati Rice"][0]
+    assert rice_item["selling_price"] == 1250.0
+    assert rice_item["unit_cost"] == 1050.0
+    assert rice_item["current_stock"] == 25
+

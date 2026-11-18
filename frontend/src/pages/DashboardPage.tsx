@@ -97,6 +97,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const [chartRange, setChartRange] = useState<'7D' | '30D' | '90D'>('7D');
   const [quickQuery, setQuickQuery] = useState('');
   const [csvEntityType, setCsvEntityType] = useState<'inventory' | 'customers' | 'sales'>('inventory');
+  const [csvUploading, setCsvUploading] = useState(false);
+  const [importResult, setImportResult] = useState<{
+    success: boolean;
+    message: string;
+    total_rows?: number;
+    inserted_rows?: number;
+    failed_rows?: number;
+    errors?: Array<{ row_number: number; error: string; row_data?: any }>;
+  } | null>(null);
 
   const loadDashboardData = async () => {
     setLoading(true);
@@ -988,7 +997,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     key={tab.id}
                     type="button"
-                    onClick={() => setCsvEntityType(tab.id as any)}
+                    onClick={() => {
+                      setCsvEntityType(tab.id as any);
+                      setImportResult(null);
+                    }}
                     className={`py-1.5 px-2 rounded-lg text-[11px] font-semibold transition-all ${
                       csvEntityType === tab.id
                         ? 'bg-brand text-white shadow-xs'
@@ -1001,95 +1013,151 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center justify-between px-3 py-2 bg-brand/5 border border-brand/20 rounded-xl text-xs">
-              <span className="text-text-muted text-[11px]">
-                {csvEntityType === 'inventory' && 'Products, categories, price & stock'}
-                {csvEntityType === 'customers' && 'Customer names, phone & credit limits'}
-                {csvEntityType === 'sales' && 'Product sales, quantities & payment mode'}
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  let content = '';
-                  let filename = `sample_${csvEntityType}.csv`;
-                  if (csvEntityType === 'inventory') {
-                    content = `product_id,product_name,category,selling_price,unit_cost,current_stock,min_stock_threshold,barcode,unit\nPRD_TATA_SALT,Tata Salt 1kg,Groceries,28,22,85,15,8901030381029,pkt\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,Edible Oils,165,138,42,10,8906007281014,btl\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,Staples,245,210,30,8,8901030012345,bag\nPRD_AMUL_BUTTER,Amul Butter 500g,Dairy,280,248,24,6,8901262010053,pkt\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,Snacks & Bakery,30,24,120,25,8901719101019,pkt\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,Instant Foods,56,45,95,20,8901058852372,pkt\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,Personal Care,58,46,60,12,8901396312450,pcs\n`;
-                  } else if (csvEntityType === 'sales') {
-                    content = `product_id,product_name,quantity,unit_price,payment_method,customer_name,discount\nPRD_TATA_SALT,Tata Salt 1kg,2,28,UPI,Ramesh Kumar,0\nPRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,1,165,UPI,Sunita Verma,0\nPRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,1,245,CASH,Walk-in Customer,0\nPRD_AMUL_BUTTER,Amul Butter 500g,2,280,UPI,Vijay Agarwal,10\nPRD_PARLE_G,Parle-G Glucose Biscuits 250g,5,30,CASH,Walk-in Customer,0\nPRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,4,56,UPI,Priya Patel,0\nPRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,2,58,CASH,Mohammad Farhan,0\n`;
-                  } else {
-                    content = `name,phone,email,address,city,credit_limit\nRamesh Kumar Sharma,+919811223344,ramesh.sharma@example.com,Shop 4 Market Complex,Gurugram,10000\nSunita Verma,+919822334455,sunita.verma@example.com,B-12 Civil Lines,Jaipur,8000\nVijay Agarwal,+919833445566,vijay.agarwal@example.com,14 MG Road,Indore,15000\nPriya Patel,+919844556677,priya.patel@example.com,Navrangpura,Ahmedabad,12000\n`;
-                  }
-                  const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-                  const url = URL.createObjectURL(blob);
-                  const link = document.createElement('a');
-                  link.href = url;
-                  link.download = filename;
-                  document.body.appendChild(link);
-                  link.click();
-                  document.body.removeChild(link);
-                  URL.revokeObjectURL(url);
-                }}
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
-              >
-                <Download className="w-3.5 h-3.5" />
-                Template
-              </button>
-            </div>
+            {importResult ? (
+              <div className="space-y-3 pt-1">
+                <div
+                  className={`p-4 rounded-xl border flex items-start gap-3 ${
+                    importResult.failed_rows && importResult.failed_rows > 0
+                      ? 'bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400'
+                      : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400'
+                  }`}
+                >
+                  {importResult.failed_rows && importResult.failed_rows > 0 ? (
+                    <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
+                  ) : (
+                    <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
+                  )}
+                  <div className="space-y-1 text-xs">
+                    <div className="font-bold text-sm">
+                      {importResult.failed_rows && importResult.failed_rows > 0
+                        ? 'Import Completed with Warnings'
+                        : 'Import Successful!'}
+                    </div>
+                    <p className="text-text">{importResult.message}</p>
+                    {importResult.total_rows !== undefined && (
+                      <div className="flex gap-4 pt-1 font-medium text-[11px] text-text-muted">
+                        <span>Total: {importResult.total_rows}</span>
+                        <span className="text-emerald-600 dark:text-emerald-400">
+                          Imported: {importResult.inserted_rows}
+                        </span>
+                        {(importResult.failed_rows ?? 0) > 0 && (
+                          <span className="text-rose-500">
+                            Skipped: {importResult.failed_rows}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-            <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
-              <Upload className="w-8 h-8 text-brand mx-auto" />
-              <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
-              <p className="text-[11px] text-text-muted">
-                Select your <code>.csv</code> file or use the template above.
-              </p>
-              <input
-                type="file"
-                accept=".csv"
-                className="hidden"
-                id="csv-file-upload"
-                onChange={async (e) => {
-                  const file = e.target.files?.[0];
-                  if (!file) return;
-                  try {
-                    // Auto-detect entity type from header
-                    const slice = await file.slice(0, 2048).text();
-                    const firstLine = slice.split(/[\r\n]+/)[0].toLowerCase().trim();
-                    let targetType = csvEntityType;
+                {importResult.errors && importResult.errors.length > 0 && (
+                  <div className="space-y-1.5">
+                    <div className="text-[11px] font-bold text-text-muted">Row Error Details:</div>
+                    <div className="max-h-36 overflow-y-auto rounded-xl border border-border bg-surface-muted p-2.5 space-y-1 text-[11px]">
+                      {importResult.errors.slice(0, 10).map((err, idx) => (
+                        <div key={idx} className="flex gap-2 text-rose-500">
+                          <span className="font-bold shrink-0">Row {err.row_number}:</span>
+                          <span className="truncate">{err.error}</span>
+                        </div>
+                      ))}
+                      {importResult.errors.length > 10 && (
+                        <div className="text-text-muted text-[10px] italic">
+                          ...and {importResult.errors.length - 10} more rows with errors.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
 
-                    const hasStock = firstLine.includes('current_stock') || firstLine.includes('min_stock') || firstLine.includes('barcode');
-                    const hasSales = firstLine.includes('quantity') || firstLine.includes('qty') || firstLine.includes('payment') || firstLine.includes('discount');
-                    const hasCust = firstLine.includes('credit_limit') || ((firstLine.includes('phone') || firstLine.includes('email')) && firstLine.includes('name'));
+                <div className="flex justify-end gap-2 pt-2 border-t border-border">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setImportResult(null)}
+                  >
+                    Import Another File
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {
+                      setIsImportCsvOpen(false);
+                      setImportResult(null);
+                    }}
+                  >
+                    Done
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center justify-between px-3 py-2 bg-brand/5 border border-brand/20 rounded-xl text-xs">
+                  <span className="text-text-muted text-[11px]">
+                    {csvEntityType === 'inventory' && 'Products, categories, price & stock'}
+                    {csvEntityType === 'customers' && 'Customer names, phone & credit limits'}
+                    {csvEntityType === 'sales' && 'Product sales, quantities & payment mode'}
+                  </span>
+                  <a
+                    href={`/sample_csvs/sample_${csvEntityType}.csv`}
+                    download={`sample_${csvEntityType}.csv`}
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-brand hover:underline"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Download Sample CSV
+                  </a>
+                </div>
 
-                    if (hasStock && !hasSales) {
-                      targetType = 'inventory';
-                    } else if (hasCust && !hasSales && !hasStock) {
-                      targetType = 'customers';
-                    } else if (hasSales) {
-                      targetType = 'sales';
-                    } else if (firstLine.includes('selling_price') && (firstLine.includes('product') || firstLine.includes('item'))) {
-                      targetType = 'inventory';
-                    }
-
-                    const res = await api.uploadCsv(file, targetType);
-                    if (res.failed_rows > 0) {
-                      alert(`Import completed with warnings: ${res.inserted_rows} rows imported, ${res.failed_rows} skipped.`);
-                    } else {
-                      alert(`CSV processed successfully! ${res.inserted_rows || 0} rows imported into ${targetType}.`);
-                    }
-                    setIsImportCsvOpen(false);
-                    await loadDashboardData();
-                  } catch (err: any) {
-                    alert(`Import failed: ${err?.message}`);
-                  }
-                }}
-              />
-              <label
-                htmlFor="csv-file-upload"
-                className="inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs"
-              >
-                Browse File
-              </label>
-            </div>
+                <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
+                  <Upload className="w-8 h-8 text-brand mx-auto" />
+                  <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
+                  <p className="text-[11px] text-text-muted">
+                    Select your <code>.csv</code> file for <b>{csvEntityType.toUpperCase()}</b> or use the template above.
+                  </p>
+                  <input
+                    type="file"
+                    accept=".csv"
+                    className="hidden"
+                    id="csv-file-upload"
+                    disabled={csvUploading}
+                    onChange={async (e) => {
+                      const file = e.target.files?.[0];
+                      if (!file) return;
+                      setCsvUploading(true);
+                      try {
+                        // Strictly use the user-selected tab entity type
+                        const targetType = csvEntityType;
+                        const res = await api.uploadCsv(file, targetType);
+                        setImportResult({
+                          success: res.failed_rows === 0,
+                          message: res.message || `Processed ${res.inserted_rows || 0} rows into ${targetType}.`,
+                          total_rows: res.total_rows,
+                          inserted_rows: res.inserted_rows,
+                          failed_rows: res.failed_rows,
+                          errors: res.errors,
+                        });
+                        await loadDashboardData();
+                      } catch (err: any) {
+                        setImportResult({
+                          success: false,
+                          message: err?.message || 'CSV import failed. Please verify headers and format.',
+                        });
+                      } finally {
+                        setCsvUploading(false);
+                        e.target.value = '';
+                      }
+                    }}
+                  />
+                  <label
+                    htmlFor="csv-file-upload"
+                    className={`inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs ${
+                      csvUploading ? 'opacity-50 pointer-events-none' : ''
+                    }`}
+                  >
+                    {csvUploading ? 'Processing CSV...' : 'Browse File'}
+                  </label>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}

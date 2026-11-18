@@ -1,0 +1,16 @@
+product_id,product_name,quantity,unit_price,payment_method,customer_name,discount
+PRD_TATA_SALT,Tata Salt 1kg,2,28,UPI,Ramesh Kumar,0
+PRD_FORTUNE_OIL,Fortune Sunflower Oil 1L,1,165,UPI,Sunita Verma,0
+PRD_ATTA_5KG,Aashirvaad Shudh Chakki Atta 5kg,1,245,CASH,Walk-in Customer,0
+PRD_AMUL_BUTTER,Amul Butter 500g,2,280,UPI,Vijay Agarwal,10
+PRD_PARLE_G,Parle-G Glucose Biscuits 250g,5,30,CASH,Walk-in Customer,0
+PRD_MAGGI,Maggi 2-Minute Masala Noodles 280g,4,56,UPI,Priya Patel,0
+PRD_DETTOL_SOAP,Dettol Original Bathing Soap 125g,2,58,CASH,Mohammad Farhan,0
+PRD_SURF_EXCEL,Surf Excel Easy Wash Detergent 1kg,1,145,UPI,Anil Joshi,0
+PRD_TAJ_TEA,Taj Mahal Tea 500g,1,365,UPI,Ramesh Kumar,15
+PRD_DAIRY_MILK,Cadbury Dairy Milk Silk 60g,3,85,UPI,Priya Patel,0
+PRD_BHUJIA,Haldiram's Nagpur Bhujia Sev 400g,2,115,CASH,Walk-in Customer,0
+PRD_COLGATE,Colgate Strong Teeth Toothpaste 200g,1,112,CARD,Sunita Verma,0
+PRD_NESCAFE,Nescafe Classic Instant Coffee 50g,1,195,UPI,Vijay Agarwal,0
+PRD_GOOD_DAY,Good Day Butter Cookies 200g,4,45,CASH,Walk-in Customer,0
+PRD_SAFFOLA_OIL,Saffola Gold Blended Oil 1L,2,180,UPI,Anil Joshi,0
