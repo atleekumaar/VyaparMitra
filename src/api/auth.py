@@ -187,6 +187,42 @@ def get_current_user(
 
     row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
     if not row:
+        user_email = payload.get("email")
+        if user_email:
+            row = db.execute("SELECT * FROM users WHERE email = ?", (user_email,)).fetchone()
+        if not row and payload.get("username"):
+            row = db.execute("SELECT * FROM users WHERE username = ?", (payload.get("username"),)).fetchone()
+
+    # If container restarted/rebuilt on ephemeral cloud disk, restore verified merchant context
+    if not row and payload.get("business_id"):
+        biz_id = payload.get("business_id")
+        user_role = payload.get("role", "owner")
+        user_email = payload.get("email") or f"{user_id}@vyaparmitra.internal"
+        user_name = payload.get("full_name") or payload.get("username") or "Merchant Partner"
+        user_branch = payload.get("branch_id") or f"BR_{biz_id}_MAIN"
+        now_str = datetime.now(timezone.utc).isoformat()
+
+        db.execute("""
+            INSERT OR IGNORE INTO businesses (id, name, created_at)
+            VALUES (?, ?, ?)
+        """, (biz_id, f"{user_name}'s Store", now_str))
+        db.execute("""
+            INSERT OR IGNORE INTO branches (id, business_id, name, is_main, created_at)
+            VALUES (?, ?, 'Main Branch', 1, ?)
+        """, (user_branch, biz_id, now_str))
+        db.execute("""
+            INSERT OR REPLACE INTO users (
+                id, business_id, branch_id, username, email, full_name,
+                password_hash, role, is_active, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, 'jwt_session_restored', ?, 1, ?)
+        """, (
+            user_id, biz_id, user_branch, payload.get("username") or user_email,
+            user_email, user_name, user_role, now_str
+        ))
+        db.commit()
+        row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+
+    if not row:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="User account no longer exists.",

@@ -240,6 +240,14 @@ export const api = {
       body: formData,
     });
     if (!res.ok) {
+      if (res.status === 401) {
+        try {
+          clearAuthSession();
+          window.dispatchEvent(new Event('vyaparmitra:unauthorized'));
+        } catch {
+          // Ignored
+        }
+      }
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error?.message || err.detail || err.message || `CSV import failed (${res.status})`);
     }

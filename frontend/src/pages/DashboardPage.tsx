@@ -14,6 +14,7 @@ import {
   FileSpreadsheet,
   CheckCircle2,
   AlertTriangle,
+  AlertCircle,
   CreditCard,
   X,
   Upload,
@@ -1047,40 +1048,53 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
             {importResult ? (
               <div className="space-y-3 pt-1">
-                <div
-                  className={`p-4 rounded-xl border flex items-start gap-3 ${
-                    importResult.failed_rows && importResult.failed_rows > 0
-                      ? 'bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400'
-                      : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400'
-                  }`}
-                >
-                  {importResult.failed_rows && importResult.failed_rows > 0 ? (
-                    <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" />
-                  ) : (
-                    <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
-                  )}
-                  <div className="space-y-1 text-xs">
-                    <div className="font-bold text-sm">
-                      {importResult.failed_rows && importResult.failed_rows > 0
-                        ? 'Import Completed with Warnings'
-                        : 'Import Successful!'}
-                    </div>
-                    <p className="text-text">{importResult.message}</p>
-                    {importResult.total_rows !== undefined && (
-                      <div className="flex gap-4 pt-1 font-medium text-[11px] text-text-muted">
-                        <span>Total: {importResult.total_rows}</span>
-                        <span className="text-emerald-600 dark:text-emerald-400">
-                          Imported: {importResult.inserted_rows}
-                        </span>
-                        {(importResult.failed_rows ?? 0) > 0 && (
-                          <span className="text-rose-500">
-                            Skipped: {importResult.failed_rows}
-                          </span>
+                {(() => {
+                  const isError = importResult.success === false && (!importResult.inserted_rows || importResult.inserted_rows === 0);
+                  const isWarning = Boolean(importResult.failed_rows && importResult.failed_rows > 0);
+
+                  return (
+                    <div
+                      className={`p-4 rounded-xl border flex items-start gap-3 ${
+                        isError
+                          ? 'bg-rose-500/10 border-rose-500/20 text-rose-600 dark:text-rose-400'
+                          : isWarning
+                          ? 'bg-amber-500/10 border-amber-500/20 text-amber-600 dark:text-amber-400'
+                          : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400'
+                      }`}
+                    >
+                      {isError ? (
+                        <AlertCircle className="w-5 h-5 shrink-0 mt-0.5 text-rose-500" />
+                      ) : isWarning ? (
+                        <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5 text-amber-500" />
+                      ) : (
+                        <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5 text-emerald-500" />
+                      )}
+                      <div className="space-y-1 text-xs">
+                        <div className="font-bold text-sm">
+                          {isError
+                            ? 'Import Failed'
+                            : isWarning
+                            ? 'Import Completed with Warnings'
+                            : 'Import Successful!'}
+                        </div>
+                        <p className="text-text">{importResult.message}</p>
+                        {importResult.total_rows !== undefined && (
+                          <div className="flex gap-4 pt-1 font-medium text-[11px] text-text-muted">
+                            <span>Total: {importResult.total_rows}</span>
+                            <span className="text-emerald-600 dark:text-emerald-400">
+                              Imported: {importResult.inserted_rows}
+                            </span>
+                            {(importResult.failed_rows ?? 0) > 0 && (
+                              <span className="text-rose-500">
+                                Skipped: {importResult.failed_rows}
+                              </span>
+                            )}
+                          </div>
                         )}
                       </div>
-                    )}
-                  </div>
-                </div>
+                    </div>
+                  );
+                })()}
 
                 {importResult.errors && importResult.errors.length > 0 && (
                   <div className="space-y-1.5">

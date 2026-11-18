@@ -16,4 +16,4 @@ services:
       - key: DB_PATH
         value: /app/data/vyaparmitra.db
       - key: JWT_SECRET_KEY
-        generateValue: true
+        value: "vyaparmitra-production-jwt-high-entropy-secret-key-2026-sha256"
