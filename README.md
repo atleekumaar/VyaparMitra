@@ -1,5 +1,5 @@
 # 🛍️ VyaparMitra (व्यापारमित्र) — MerchantOS
-### *Intelligence-Led Operating System for Digitally-Enabled Indian Retail Merchants*
+### *Intelligence-Led Retail Operating System for Digitally-Enabled Indian Merchants*
 
 [![Live Application](https://img.shields.io/badge/Live%20Application-vyaparmitra--xdy9.onrender.com-00BAF2?style=for-the-badge&logo=render&logoColor=white)](https://vyaparmitra-xdy9.onrender.com/)
 [![API Swagger Docs](https://img.shields.io/badge/Swagger%20Docs-Live%20API-002970?style=for-the-badge&logo=fastapi&logoColor=white)](https://vyaparmitra-xdy9.onrender.com/docs)
@@ -8,211 +8,181 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6.svg)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC.svg)](https://tailwindcss.com/)
-[![Tests](https://img.shields.io/badge/Tests-248%20Passed-00B970.svg)](tests/)
-[![Security](https://img.shields.io/badge/Security-RBAC%20%2B%20JWT%20Isolated-success.svg)](#-security--authentication-architecture)
+[![Security](https://img.shields.io/badge/Security-RBAC%20%2B%20JWT%20Isolated-success.svg)](#4-security-authentication--multi-tenancy)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
-> 🚀 **Live Production URL:** [https://vyaparmitra-xdy9.onrender.com/](https://vyaparmitra-xdy9.onrender.com/)  
-> 📖 **Interactive API Swagger Docs:** [https://vyaparmitra-xdy9.onrender.com/docs](https://vyaparmitra-xdy9.onrender.com/docs)
+> 🌐 **Live Web Application:** [https://vyaparmitra-xdy9.onrender.com/](https://vyaparmitra-xdy9.onrender.com/)  
+> 📖 **Interactive API Documentation:** [https://vyaparmitra-xdy9.onrender.com/docs](https://vyaparmitra-xdy9.onrender.com/docs)  
+> 🎬 **Official Launch Video:** [`brag-output/brag.mp4`](brag-output/brag.mp4) (Full HD, 20s Launch Demo)  
+> 📂 **Sample Datasets for Testing:** [`sample_csvs/`](sample_csvs/) (Inventory, Customers, Sales)
 
 ---
 
-## 📌 1. Product Overview & Core Promise
+## 📌 1. Executive Summary & Problem-Solution Fit
 
-**VyaparMitra (MerchantOS)** is an intelligence-led retail operating system built for India's 60M+ local retail merchants (kirana stores, pharmacies, electronics, and general trade). 
+India is home to over **60 million micro, small, and medium retail merchants** (Kirana stores, general provision stores, pharmacies, electronics shops). Despite widespread digital payment adoption via UPI, day-to-day store operations remain fragmented:
+- **Loose Paper Diaries (उधार बहीखाता):** Unrecorded customer debt, forgotten credit balances, and slow manual debt recovery.
+- **Stockout Guesswork:** Overstocking slow-moving SKUs while popular staples run out during peak weekend rushes and regional festivals.
+- **Billing Friction:** Slow calculator-based checkout queues leading to cart abandonment.
+- **Disconnected Supply Chains:** Manual phone orders to distributors with zero visibility into purchase price variations.
 
-### Core Product Flywheel:
+**VyaparMitra (MerchantOS)** replaces manual paper ledgers with an integrated, intelligence-led operating system designed around a closed-loop execution model:
+
 $$\textbf{UNDERSTAND} \longrightarrow \textbf{DECIDE} \longrightarrow \textbf{ACT}$$
 
-- **UNDERSTAND:** Aggregates POS billing, Khata credit, customer purchase patterns, and stock movements into real-time metrics, ML sales forecasts, and hyperlocal benchmarks.
-- **DECIDE:** Intelligent Copilot AI agents run autonomous analyses to propose stock reorders, dynamic pricing, churn prevention alerts, and cash flow actions.
-- **ACT:** Closed-loop human-in-the-loop approval workflows. An Owner or Manager reviews and approves purchase orders, records goods inward receipts, and settles Khata ledgers with full audit trails.
+1. **UNDERSTAND:** Ingests live counter sales, barcode scans, customer Khata balances, and stock velocity into real-time operational ledgers and hyperlocal demand models.
+2. **DECIDE:** An autonomous, zero-hallucination AI Copilot and statistical engine detects low stock, calculates 7-day demand spikes (incorporating festival calendars), and prepares draft procurement orders.
+3. **ACT:** Multi-tier role-based approvals enforce strict operational control. Owners approve purchase orders, managers record physical goods receipt, and automated WhatsApp balance links recover customer credit.
 
 ---
 
-## 🏗️ 2. Architecture & Technology Stack
+## 🏗️ 2. System Architecture & Tech Stack
 
-The system is architected as a lightweight, high-performance monorepo:
+The platform is structured as a production-grade monorepo combining a high-performance Python ASGI backend and a modern React client:
 
 ```
 vyaparmitra/
-├── frontend/                     # Modern React SPA
+├── frontend/                     # React 19 + TypeScript SPA
 │   ├── src/
-│   │   ├── api/client.ts         # Centralized API client with JWT & 401 interception
-│   │   ├── components/           # UI components, layout, soundbox alerts
-│   │   ├── pages/                # Dashboard, Products, Sales POS, Customers Khata, Copilot
-│   │   └── types/                # Strict TypeScript domain interfaces
+│   │   ├── api/client.ts         # Axios API client with automatic JWT injection & 401 redirection
+│   │   ├── components/           # Reusable UI primitives (Modals, Badges, Soundbox, Thermal Receipt)
+│   │   ├── pages/                # LandingPage, Dashboard, Products, Sales POS, Customers Khata, Copilot
+│   │   └── types/                # Canonical TypeScript interfaces matching backend models
+│   ├── public/                   # Static assets, launch video, and 1-click sample CSV downloads
 │   └── package.json
 ├── src/                          # FastAPI Backend & Intelligence Core
-│   ├── analytics/                # Sales, customer RFM, payment & product analytics
-│   ├── api/                      # REST API routing, auth, config, and middleware
-│   │   ├── auth.py               # Canonical RBAC (OWNER, MANAGER, STAFF) & JWT validation
-│   │   ├── db.py                 # SQLite WAL persistence, schema migrations, and indexing
-│   │   ├── routes/               # Modular API routers (sales, inventory, copilot, etc.)
+│   ├── api/                      # REST API routing, authentication, and database session management
+│   │   ├── auth.py               # Canonical 3-tier RBAC (OWNER, MANAGER, STAFF) & JWT validation
+│   │   ├── db.py                 # SQLite WAL mode connection pooling, indexing, and migrations
+│   │   ├── routes/               # Domain routers (auth, inventory, sales, customers, copilot, import, health)
 │   │   └── services/             # Business services (ProductService, CustomerService, EmailService)
-│   ├── copilot/                  # Autonomous agents, L3 draft generation & approval tools
-│   ├── features/                 # Parquet feature stores & contextual aggregations
-│   ├── ml/                       # Scikit-learn demand forecasting & inference predictors
-│   └── recommendations/          # Deterministic prioritization & action engine
-├── data/                         # Parquet feature store & operational SQLite database
-├── tests/                        # 248 Automated unit, integration, and security tests
-├── render.yaml                   # Production Render blueprint configuration
+│   ├── copilot/                  # Autonomous agent orchestration, L3 drafts, and approval execution
+│   ├── analytics/                # Real-time transaction aggregation and financial metrics
+│   ├── ml/                       # Scikit-learn demand forecasting & festival trend analysis
+│   └── recommendations/          # Deterministic reorder prioritization engine
+├── sample_csvs/                  # Ready-to-import Kirana datasets (Inventory, Customers, Sales)
+├── brag-output/                  # Official launch video deliverables (brag.mp4, poster, share copy)
+├── tests/                        # Automated unit, integration, RBAC, and concurrency test suites
+├── render.yaml                   # Infrastructure-as-code Render deployment blueprint
 └── Dockerfile                    # Multi-stage production container
 ```
 
-### Technology Highlights:
-- **Backend:** FastAPI (Python 3.12+), Pydantic v2, SQLite in WAL mode with Foreign Keys enabled.
-- **Frontend:** React 19, TypeScript 5.5, Vite 6, TailwindCSS v4, Lucide Icons.
-- **Intelligence & ML:** Scikit-learn regressors, Pandas/PyArrow Parquet feature stores, Groq LPU (`llama-3.3-70b-versatile` / `qwen-2.5-32b`) with zero-hallucination deterministic fallbacks.
-- **Auth & Security:** HMAC-SHA256 JWT tokens, bcrypt password hashing, constant-time comparisons, branch-isolated tenant enforcement.
+### Core Technologies
+- **Backend:** [FastAPI](https://fastapi.tiangolo.com/) (Python 3.12+), [Pydantic v2](https://docs.pydantic.dev/), SQLite 3 in WAL mode with Foreign Keys enabled.
+- **Frontend:** [React 19](https://react.dev/), [TypeScript 5.5](https://www.typescriptlang.org/), [Vite 6](https://vitejs.dev/), [Tailwind CSS v4](https://tailwindcss.com/), [Lucide React](https://lucide.dev/).
+- **AI & Forecasting:** Groq LPU (`llama-3.3-70b-versatile` / `qwen-2.5-32b`) with deterministic rule-based fallback, Scikit-learn demand regressors.
+- **Security & Communications:** HMAC-SHA256 JWT tokens, bcrypt password hashing, Brevo transactional email/SMS OTP delivery.
 
 ---
 
-## 🔒 3. Security & Authentication Architecture
+## ⚡ 3. Key Functional Modules
 
-Security is enforced at the backend middleware and dependency injection layer, never relying solely on frontend UI visibility.
+### 1. Business Command Center (`/dashboard`)
+- **Live Revenue & Ticket Size:** Real-time calculation of gross revenue, average transaction value, and payment method distribution (UPI, Cash, Card).
+- **Cold-Start Warmup Architecture:** A static, high-speed landing page with background health checks (`/api/health`) eliminates spin-down latency on cloud hosting.
+- **Quick Action Bar:** 1-click modals for recording counter sales, adding new catalog SKUs, and bulk CSV ingestion.
 
-### A. Strict JWT Authentication
-- **Zero-Bypass Enforcement:** All operational endpoints (`/api/inventory`, `/api/sales`, `/api/customer-ops`, `/api/audit-logs`, `/api/copilot/approvals`) strictly require an `Authorization: Bearer <token>` header.
-- **Header & Query Param Neutralization:** Deprecated or insecure mechanisms (e.g. `X-Merchant-Id` or `?merchant_id=...` parameter bypasses) are completely removed. Requests without a valid cryptographic JWT receive `401 Unauthorized`.
-- **Production Startup Hardening:** If `ENVIRONMENT=production`, the application refuses to start if `JWT_SECRET_KEY` is missing, default, or less than 32 characters in length.
-- **Session Termination (Logout):** The frontend `clearAuthSession()` method purges tokens, cached merchant IDs, and user profiles from `localStorage`, and the global 401 axios interceptor immediately redirects to `/login`.
+### 2. Point of Sale (POS) & Voice Soundbox (`/sales`)
+- **3-Second Checkout:** Instant SKU barcode lookup, quantity adjustments, and custom discounts.
+- **Smart Soundbox Simulation:** Integrated audio alert engine confirming incoming payments in English and Hindi (*"₹193.00 Prapt Hue"*).
+- **Thermal Slip Generation:** Instant printable receipt formatting compatible with 58mm/80mm thermal receipt printers.
+
+### 3. Digital Customer Khata (`/customers`)
+- **Ledger Balance Tracking:** Real-time customer balance calculation (credit vs. debit ledger).
+- **Credit Limit Guards:** Prevents opening new debt lines if a customer exceeds their configured credit limit.
+- **1-Click WhatsApp Collection:** Generates pre-filled WhatsApp payment reminders containing direct UPI payment links.
+
+### 4. Inventory & Catalog Management (`/products`)
+- **Real-Time Stock Depletion:** Stock decrements automatically upon counter sale completion.
+- **Low-Stock Alerts:** Color-coded status chips (`STAR`, `FOCUS`, `MONITOR`) highlighting reorder urgency.
+- **Multi-Branch Isolation:** Ensures stock levels and catalog items are cleanly separated across multiple physical store locations.
+
+### 5. AI Copilot & Two-Step Procurement (`/copilot`, `/approvals`)
+To prevent unauthorized purchases and ensure strict inventory accounting:
+1. **L3 Reorder Proposal:** The AI Copilot detects low-stock items and creates a reorder proposal with status `PENDING_APPROVAL`.
+2. **Owner Authorization:** Only users with the `OWNER` role can approve the proposal, generating a formal Purchase Order (`PO-XXXX`). **Physical stock does not increase at this step.**
+3. **Goods Receipt Inward:** When stock physically arrives at the store, an `OWNER` or `MANAGER` executes Goods Receipt (`POST /api/copilot/approvals/{id}/receive-goods`), which formally increments inventory and logs an immutable audit entry.
+
+---
+
+## 🔒 4. Security, Authentication & Multi-Tenancy
+
+Security is enforced at the backend routing and dependency injection layer, never relying purely on frontend visual gating.
+
+### A. Zero-Bypass JWT Authentication
+- All operational routes (`/api/inventory`, `/api/sales`, `/api/customer-ops`, `/api/audit-logs`, `/api/copilot/approvals`) mandate a valid `Authorization: Bearer <token>` header.
+- Insecure parameter bypasses (such as `X-Merchant-Id` headers or `?merchant_id=` query parameters) are strictly rejected. Requests without a valid cryptographic JWT receive `401 Unauthorized`.
+- **Production Startup Guard:** In `ENVIRONMENT=production`, the application refuses to start if `JWT_SECRET_KEY` is missing, default, or less than 32 characters in length.
 
 ### B. Role-Based Access Control (RBAC)
 MerchantOS enforces exactly three canonical business roles:
 
-| Role | Permissions & Operational Scope | Restricted Endpoints |
+| Role | Scope & Permissions | Enforced Restrictions |
 |---|---|---|
-| **OWNER** | Full administrative and business control. Can view all branches, manage users/roles, view audit logs, access finance & P&L summaries, and approve high-value L3 agent drafts / Purchase Orders. | *None* |
-| **MANAGER** | Store operational management. Can manage inventory, inward goods (Goods Receipt), initiate purchase drafts, register customers, and record counter sales. Restricted to assigned branch. | Cannot create Owners or Managers. Cannot approve high-value purchase drafts. Cannot view cross-store audit logs or sensitive business finance records. |
-| **STAFF** | Point of Sale (POS) and counter operations only. Can record retail counter sales, perform product SKU lookups, and register new customer contacts. | Cannot import CSVs. Cannot adjust stock manually. Cannot create users. Cannot view financial reports or audit logs. Cannot approve or reject agent requests. |
+| **OWNER** | Full administrative and business control across all store branches. Can manage users, view complete P&L analytics, access audit logs, and approve high-value procurement orders. | *None* |
+| **MANAGER** | Daily store management. Can manage inventory, receive physical goods deliveries, register customers, initiate purchase drafts, and record sales within their assigned branch. | Cannot create Owners or Managers. Cannot approve high-value POs. Cannot view cross-store financial records or audit logs. |
+| **STAFF** | Point of Sale (POS) billing and counter operations only. Can record retail sales, look up product SKUs, and register new walk-in customers. | Cannot import CSVs. Cannot adjust stock manually. Cannot create users. Cannot view financial reports or audit logs. Cannot approve or reject agent requests. |
 
-*Legacy aliases (`admin`, `supervisor`) are automatically normalized to `owner` and `manager` respectively on token validation without breaking legacy accounts.*
+*Legacy role aliases (`admin`, `supervisor`) are automatically normalized to `owner` and `manager` during token validation without disrupting existing accounts.*
 
-### C. Tenant & Branch Isolation
-- Every operational database query filters by `WHERE business_id = ?`.
-- Attempting to pass another merchant's ID via query parameters or headers triggers an immediate `403 Forbidden` response: `Cross-tenant access prohibited. You cannot query or modify another merchant's data.`
-- Staff and Manager queries are automatically constrained to their assigned `branch_id`.
-
----
-
-## 💾 4. Database & Persistence Runbook
-
-### Engine & Storage
-- **Production Engine:** SQLite 3 with Write-Ahead Logging (`PRAGMA journal_mode=WAL;`), synchronous normal (`PRAGMA synchronous=NORMAL;`), and enforced foreign keys (`PRAGMA foreign_keys=ON;`).
-- **Database Path:** Configured via `DATABASE_URL` (default: `sqlite:///data/vyaparmitra.db`).
-
-### Git Tracking & Secret Hygiene
-- Operational database files (`*.db`, `*.db-wal`, `*.db-shm`) and secrets are explicitly ignored in `.gitignore` and untracked from Git history to prevent data leakage.
-- `init_db()` is idempotent: it runs `CREATE TABLE IF NOT EXISTS` and applies non-destructive column migrations without resetting existing merchant records.
-
-### Render Persistent Disk Mount Configuration
-By default, Render web services run on ephemeral filesystems. Redeploying or restarting the container will destroy local SQLite data unless a persistent disk is configured.
-
-To configure persistent storage on Render:
-1. In the **Render Dashboard**, open your Web Service (`vyaparmitra-xdy9`).
-2. Navigate to **Disks** → Click **Add Disk**.
-3. Configure the disk:
-   - **Name:** `vyaparmitra-db-data`
-   - **Mount Path:** `/var/data`
-   - **Size:** `1 GB` (or larger depending on merchant scale).
-4. Update **Environment Variables** in Render:
-   - `DATABASE_URL` = `sqlite:////var/data/vyaparmitra.db`
-5. Click **Save Changes** and deploy.
-
-> ⚠️ **Important Migration Note for Horizontal Scaling:**  
-> SQLite is suitable for single-instance MVPs. When scaling beyond 1 web container or onboarding high-concurrency paying merchants, migrate `DATABASE_URL` to a managed PostgreSQL cluster (e.g. Render Managed Postgres).
+### C. Tenant & Multi-Branch Isolation
+- Every database query strictly filters by `WHERE business_id = ?`.
+- Cross-tenant access attempts immediately return `403 Forbidden` (`"Cross-tenant access prohibited. You cannot query or modify another merchant's data."`).
+- Manager and Staff permissions are automatically scoped to their designated `branch_id`.
 
 ---
 
-## 📥 5. Bulk CSV Ingestion Specifications
+## 📥 5. Bulk CSV Ingestion Engine
 
-The `POST /api/import/csv` endpoint enables high-throughput data migration for onboarding existing kirana stores.
+The `POST /api/import/csv` endpoint allows merchants to onboard existing catalogs and customer lists in seconds.
 
-### Constraints & Guards:
-- **Maximum File Size:** `5 MB` (Files exceeding 5MB are rejected with `400 Bad Request`).
-- **Allowed File Format:** `.csv` only.
-- **Allowed Roles:** `OWNER` or `MANAGER` (Staff requests return `403 Forbidden`).
-- **Entity Type Matching:** The endpoint inspects headers and rejects mismatched files (e.g., uploading customer headers to `entity_type=inventory` returns `400 Bad Request`).
+### Parsing Resilience for Indian Retail Formats
+Real-world Kirana spreadsheets contain unique formatting that standard CSV parsers fail on. VyaparMitra handles:
+- **Currency Symbols & Suffixes:** Strips `₹`, `Rs.`, `INR`, and trailing `/-` (e.g., `₹ 1,250.00` and `Rs. 45/-` parse cleanly to floats).
+- **Thousands Separators:** Handles quoted numbers with commas (`"1,250.00"` → `1250.0`).
+- **Units in Stock Quantities:** Strips measurement units (e.g., `25 bags`, `10 pcs`, `50 pkts` → `25`, `10`, `50`).
+- **Header Synonym Mapping:** Recognizes diverse column aliases (`Item Name`, `Particulars`, `Rate`, `MRP`, `Cost Price`, `Qty`, `Closing Stock`, `Mobile`).
+- **Transparent Reporting:** The UI displays a detailed summary (Total, Imported, Skipped) with an expandable row-by-row error inspector.
 
-### Entity Schemas & Required Headers:
-
-#### 1. Inventory (`entity_type=inventory`)
-- **Required Columns:** `product_name`, `selling_price`
-- **Optional Columns:** `product_id`, `category`, `current_stock`, `min_stock_threshold`, `unit_cost`
-- **Validation Rules:** `selling_price > 0`, `unit_cost >= 0`, `current_stock >= 0`.
-- **Example CSV:**
-  ```csv
-  product_id,product_name,category,current_stock,unit_cost,selling_price
-  SKU_ATT_10K,Aashirvaad Atta 10kg,Flours,25,380.00,430.00
-  SKU_OIL_1L,Fortune Sunflower Oil 1L,Oils,40,110.00,135.00
-  ```
-
-#### 2. Customers (`entity_type=customers`)
-- **Required Columns:** `name`
-- **Optional Columns:** `phone`, `email`, `city`, `credit_limit`
-- **Validation Rules:** `credit_limit >= 0`. Deduplicates on phone/name.
-- **Example CSV:**
-  ```csv
-  name,phone,email,city,credit_limit
-  Ramesh Verma,+919876543210,ramesh@example.com,Lucknow,5000.00
-  Pooja Sharma,+919876543219,pooja@example.com,Kanpur,10000.00
-  ```
-
-#### 3. Sales (`entity_type=sales`)
-- **Required Columns:** `product_id`, `quantity`
-- **Optional Columns:** `payment_method` (`CASH`, `UPI`, `CARD`, `CREDIT`), `customer_id`, `unit_price`, `sale_date`
-- **Validation Rules:** `quantity > 0` (integer). The `product_id` **must exist** in the merchant's active inventory. Sales for non-existent SKUs are rejected with row errors and **never** auto-create phantom inventory items. Sufficient inventory stock is verified before decrementing.
-- **Example CSV:**
-  ```csv
-  product_id,quantity,payment_method
-  SKU_ATT_10K,2,UPI
-  SKU_OIL_1L,1,CASH
-  ```
+### Pre-Packaged Sample Datasets
+The repository includes three pre-formatted sample files in [`sample_csvs/`](sample_csvs/) (also downloadable directly from the web app's CSV import modal):
+1. **[`sample_inventory.csv`](sample_csvs/sample_inventory.csv):** 21 popular Kirana items (Tata Salt, Fortune Oil, Aashirvaad Atta, Amul Butter, Maggi, Parle-G, Dettol Soap, etc.).
+2. **[`sample_customers.csv`](sample_csvs/sample_customers.csv):** 10 verified customer contacts with phone numbers and credit limits.
+3. **[`sample_sales.csv`](sample_csvs/sample_sales.csv):** 15 retail sales transactions across UPI, Cash, and Card.
 
 ---
 
-## ⚡ 6. Two-Step Procurement Workflow
-
-To maintain absolute accounting integrity:
-1. **Purchase Reorder Draft (L3):** Triggered by AI copilot or merchant request when stock drops below threshold. Status: `PENDING_APPROVAL`.
-2. **Owner Approval (`POST /api/copilot/approvals/{id}/approve`):** Generates an official Purchase Order (`PO-XXXX`) and transitions state to `APPROVED`. **Physical stock does NOT increase at this step.**
-3. **Goods Receipt (`POST /api/copilot/approvals/{id}/receive-goods`):** Executed by Owner or Manager upon physical stock delivery. Verifies PO, transitions status to `GOODS_RECEIVED`, updates live inventory stock, and appends a security audit entry.
-
----
-
-## ⚙️ 7. Environment Variables Reference
+## ⚙️ 6. Environment Variables Reference
 
 | Variable | Required in Production | Default / Example | Purpose |
 |---|---|---|---|
-| `ENVIRONMENT` | Yes | `production` | Enables strict security guards (halts startup if secrets are weak). |
-| `JWT_SECRET_KEY` | Yes | `min-32-char-random-string` | Cryptographic secret for signing JWT auth tokens. |
-| `DEMO_MODE` | Yes | `false` | When `false`, disables seed credentials and default demo users. |
+| `ENVIRONMENT` | Yes | `production` | Enables strict production security guards. |
+| `JWT_SECRET_KEY` | Yes | `32+ char random string` | Signing secret for cryptographic HMAC-SHA256 JWT tokens. |
+| `DEMO_MODE` | Yes | `false` | When `false`, disables default demo users and enforces real OTP authentication. |
 | `DATABASE_URL` | No | `sqlite:///data/vyaparmitra.db` | Operational database connection string. |
-| `GROQ_API_KEY` | Optional | `gsk_...` | Enables Groq LPU inference for natural language Copilot chat. |
-| `BREVO_API_KEY` | Optional | `xkeysib-...` | Enables transactional email OTP delivery via Brevo. |
-| `CORS_ORIGINS` | No | `*` | Allowed CORS origins for frontend-backend communication. |
+| `GROQ_API_KEY` | Optional | `gsk_...` | Groq LPU inference key for natural language Copilot chat. |
+| `BREVO_API_KEY` | Optional | `xkeysib-...` | Brevo API key for transactional email OTP delivery. |
+| `CORS_ORIGINS` | No | `*` | Allowed CORS origins for API communication. |
 
 ---
 
-## 🚀 8. Local Development Setup
+## 🚀 7. Local Development Setup
 
-### Prerequisites:
-- Python 3.12 or higher
-- Node.js 18 or higher & npm
+### Prerequisites
+- Python 3.12+
+- Node.js 18+ and npm
 
-### Backend Setup:
+### 1. Backend Setup
 ```bash
 # Clone the repository
 git clone https://github.com/atleekumaar/VyaparMitra.git
 cd VyaparMitra
 
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv .venv
 
-# Activate virtual environment
 # Windows:
 .venv\Scripts\activate
 # Linux/macOS:
@@ -221,41 +191,65 @@ source .venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Run database migrations and seed
+# Initialize database schema and indexes
 python -c "from src.api.db import init_db; init_db()"
 
 # Start FastAPI development server
 uvicorn src.api.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-API will be live at `http://127.0.0.1:8000` with Swagger docs at `/docs`.
+The API will be available at `http://127.0.0.1:8000` with Swagger documentation at `http://127.0.0.1:8000/docs`.
 
-### Frontend Setup:
+### 2. Frontend Setup
 ```bash
+# Navigate to frontend directory
 cd frontend
+
+# Install npm dependencies
 npm install
+
+# Start Vite development server
 npm run dev
 ```
-Frontend will be live at `http://localhost:5173`.
+The React frontend will be live at `http://localhost:5173`.
 
 ---
 
-## 🧪 9. Quality Assurance & Test Execution
+## ☁️ 8. Production Deployment & Persistent Storage (Render)
 
-Run the complete test suite:
+The application is deployed using Render's Infrastructure-as-Code blueprint (`render.yaml`).
+
+### Persistent Disk Configuration
+Because standard Render web services run on ephemeral containers, local SQLite data would reset on redeployment unless mounted to a persistent disk:
+1. In the **Render Dashboard**, open the Web Service (`vyaparmitra-xdy9`).
+2. Navigate to **Disks** → Click **Add Disk**.
+3. Configure the persistent mount:
+   - **Name:** `vyaparmitra-db-data`
+   - **Mount Path:** `/var/data`
+   - **Size:** `1 GB` (or larger)
+4. Set the environment variable:
+   - `DATABASE_URL` = `sqlite:////var/data/vyaparmitra.db`
+5. Save changes and trigger a deployment.
+
+---
+
+## 🧪 9. Quality Assurance & Testing
+
+Run the automated test suite:
 ```bash
-# Run all tests
-pytest -q
-
-# Run specific security & RBAC tests
+# Run security, RBAC, and isolation tests
 pytest tests/test_backend_auth_rbac.py tests/test_negative_security_and_isolation.py -v
 
-# Run targeted procurement workflow test
+# Run CSV import validation (including Indian currency & unit parser tests)
+pytest tests/test_backend_import_csv.py -v
+
+# Run concurrency and rate-limiting tests
+pytest tests/test_concurrency_and_ratelimit.py -v
+
+# Run procurement and approval workflow tests
 pytest tests/test_live_agent_approval_workflow.py -v
 ```
-
-Current test status: **248 passed, 0 failed (100% pass rate)**.
 
 ---
 
 ## 📄 License
-Distributed under the **MIT License**.
+This project is open-source software licensed under the [MIT License](LICENSE).
