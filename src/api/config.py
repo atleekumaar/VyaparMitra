@@ -62,6 +62,7 @@ def _resolve_cors_origins() -> List[str]:
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
         "https://vyaparmitra.onrender.com",
+        "https://vyaparmitra-xdy9.onrender.com",
         "https://atleekumaar.github.io",
     ]
 
