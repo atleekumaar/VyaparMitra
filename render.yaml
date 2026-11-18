@@ -2,14 +2,10 @@ services:
   - type: web
     name: vyaparmitra
     runtime: docker
-    plan: starter
+    plan: free
     region: oregon
     dockerfilePath: Dockerfile
     healthCheckPath: /api/health
-    disk:
-      name: vyaparmitra-db-data
-      mountPath: /app/data
-      sizeGB: 5
     envVars:
       - key: APP_ENV
         value: production

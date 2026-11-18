@@ -39,12 +39,8 @@ COPY models/ ./models/
 # Copy built frontend assets from Stage 1 into frontend/dist
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Expose HTTP port
+# Expose HTTP port (Render dynamically overrides PORT at runtime)
 EXPOSE 8000
-
-# Health check with generous start period for cold boots on shared cloud vCPUs
-HEALTHCHECK --interval=30s --timeout=10s --start-period=45s --retries=3 \
-    CMD curl -f http://127.0.0.1:${PORT:-8000}/api/health || exit 1
 
 # Run the API server
 CMD ["python", "-m", "src.api"]
