@@ -122,6 +122,7 @@ class ProductRankItem(BaseModel):
     revenue: float
     units: int
     rank: int
+    current_stock: Optional[int] = 0
 
 
 class ProductAnalyticsResponse(BaseModel):
@@ -205,6 +206,7 @@ class ProductListItem(BaseModel):
     total_units: int
     forecast_7d_units: int
     status: str  # STAR, FOCUS, MONITOR
+    current_stock: Optional[int] = 0
 
 
 class ProductDetailResponse(BaseModel):
@@ -219,6 +221,7 @@ class ProductDetailResponse(BaseModel):
     forecast_7d_units: int
     cross_sell_recommendations: List[Dict[str, Any]]
     active_recommendations: List[ActionItem]
+    current_stock: Optional[int] = 0
 
 
 class CustomerListItem(BaseModel):

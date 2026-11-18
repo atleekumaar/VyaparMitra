@@ -60,6 +60,7 @@ class ProductService:
                         ).fetchone()
                         rev = float(rev_row["rev"]) if rev_row else 0.0
                         units = int(rev_row["units"]) if rev_row else 0
+                        stock_val = int(r["current_stock"] if r["current_stock"] is not None else 0)
                         items.append(
                             ProductListItem(
                                 product_id=pid,
@@ -69,7 +70,8 @@ class ProductService:
                                 total_revenue=round(rev, 2),
                                 total_units=units,
                                 forecast_7d_units=0,
-                                status="STAR" if rev > 10000 else "MONITOR",
+                                status="STAR" if rev > 10000 else ("FOCUS" if stock_val <= 15 else "MONITOR"),
+                                current_stock=stock_val,
                             )
                         )
                     return items
@@ -160,6 +162,7 @@ class ProductService:
                     ).fetchone()
                     tot_rev = float(rev_row["rev"]) if rev_row else 0.0
                     tot_units = int(rev_row["units"]) if rev_row else 0
+                    c_stock = int(row["current_stock"] if row["current_stock"] is not None else 0)
 
                     return ProductDetailResponse(
                         product_id=pid,
@@ -173,6 +176,7 @@ class ProductService:
                         forecast_7d_units=0,
                         cross_sell_recommendations=[],
                         active_recommendations=[],
+                        current_stock=c_stock,
                     )
                 elif merchant_id not in ("M001", "M015"):
                     return None

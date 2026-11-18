@@ -111,18 +111,31 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     setLoading(true);
     setError(null);
     try {
-      const [sumRes, actRes, salesRes, prodRes, payRes] = await Promise.all([
+      const [sumRes, actRes, salesRes, prodRes, payRes, catalogRes] = await Promise.all([
         api.getDashboardSummary(),
         api.getDashboardActions(5),
         api.getSalesAnalytics(),
         api.getProductAnalytics().catch(() => ({ top_performers: [] })),
         api.getPaymentAnalytics().catch(() => null),
+        api.getProducts({ limit: 20 }).catch(() => []),
       ]);
 
       setSummary(sumRes);
       setActions(actRes.actions || []);
       setSalesAnalytics(salesRes);
-      setTopProducts(prodRes?.top_performers || []);
+      
+      const effectiveTop = (prodRes?.top_performers && prodRes.top_performers.length > 0)
+        ? prodRes.top_performers
+        : (catalogRes || []).map((p: any, idx: number) => ({
+            product_id: p.product_id,
+            product_name: p.product_name,
+            category: p.category,
+            revenue: p.total_revenue || 0,
+            units: p.total_units || 0,
+            rank: idx + 1,
+            current_stock: p.current_stock || 0,
+          }));
+      setTopProducts(effectiveTop);
       setPaymentAnalytics(payRes);
 
       try {
@@ -190,7 +203,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   // Check onboarding progress
   const totalOrders = summary?.kpis?.orders?.value ? Number(summary.kpis.orders.value) : 0;
-  const hasProducts = topProducts.length > 0;
+  const hasProducts = topProducts.length > 0 || (summary?.kpis?.inventory?.value ? Number(summary.kpis.inventory.value) > 0 : false);
   const hasSales = totalOrders > 0;
   const onboardingCompletedCount = 1 + (hasProducts ? 1 : 0) + (hasSales ? 1 : 0);
   const showOnboarding = onboardingCompletedCount < 3 && !summary?.demo_mode;
@@ -352,14 +365,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
   // Horizontal bar data for Top Products
   const topProductsBarData = useMemo(() => {
-    return topProducts.map((p) => ({
-      id: p.product_id,
-      label: p.product_name,
-      value: p.revenue,
-      category: p.category,
-      subtext: `${p.units || 0} units`,
-    }));
-  }, [topProducts]);
+    return topProducts.map((p) => {
+      const isSalesActive = hasSales && p.revenue > 0;
+      return {
+        id: p.product_id,
+        label: p.product_name,
+        value: isSalesActive ? p.revenue : (p.current_stock || 1),
+        category: p.category,
+        subtext: isSalesActive ? `${p.units || 0} sold` : `${p.current_stock || 0} in stock`,
+      };
+    });
+  }, [topProducts, hasSales]);
 
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in-50 duration-200">
@@ -552,14 +568,28 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           loading={loading}
         />
         <MetricCard
-          card={{
-            label: 'UPI Collection',
-            value: upiStats.value,
-            formatted_value: upiStats.formatted_value,
-            change_pct: null,
-            subtext: upiStats.subtext,
-          }}
-          icon={<CreditCard className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
+          card={
+            (hasSales && upiStats.value > 0)
+              ? {
+                  label: 'UPI Collection',
+                  value: upiStats.value,
+                  formatted_value: upiStats.formatted_value,
+                  change_pct: null,
+                  subtext: upiStats.subtext,
+                }
+              : (summary?.kpis?.inventory || {
+                  label: 'Stocked Inventory',
+                  value: isDemo ? 1250 : 0,
+                  formatted_value: isDemo ? '1,250 pcs' : '0 pcs',
+                  change_pct: null,
+                  subtext: isDemo ? '45 SKUs tracked' : 'No items added yet',
+                })
+          }
+          icon={
+            (hasSales && upiStats.value > 0)
+              ? <CreditCard className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              : <Package className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          }
           variant="emerald"
           loading={loading}
         />
@@ -642,10 +672,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div className="lg:col-span-2">
           <HorizontalBarChart
             data={topProductsBarData}
-            title="Top Performing Products"
-            subtitle="Ranked by cumulative revenue"
+            title={hasSales ? "Top Performing Products" : "Tracked Inventory & Stock Levels"}
+            subtitle={hasSales ? "Ranked by cumulative revenue" : "Live inventory counts per product"}
+            currency={hasSales}
             loading={loading}
-            emptyMessage="No product sales recorded yet"
+            emptyMessage="No items in inventory. Click '+ Add Product' above to start tracking."
           />
         </div>
 

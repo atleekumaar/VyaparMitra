@@ -106,7 +106,7 @@ export const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({
                       </span>
                     )}
                     <span className="font-bold text-text">
-                      {currency ? formatCurrency(item.value) : formatNumber(item.value)}
+                      {currency ? formatCurrency(item.value) : `${formatNumber(item.value)} pcs`}
                     </span>
                   </div>
                 </div>

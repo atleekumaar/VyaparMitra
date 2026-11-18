@@ -291,6 +291,16 @@ def create_inventory_item(
         b_row = db.execute("SELECT id FROM branches WHERE business_id = ? ORDER BY is_main DESC LIMIT 1", (current_user.business_id,)).fetchone()
         target_branch = b_row["id"] if b_row else f"BR_{current_user.business_id}_MAIN"
 
+    now_str = datetime.now(timezone.utc).isoformat()
+
+    # Ensure branch exists in branches table to guarantee foreign key integrity
+    branch_check = db.execute("SELECT id FROM branches WHERE id = ?", (target_branch,)).fetchone()
+    if not branch_check:
+        db.execute("""
+            INSERT OR IGNORE INTO branches (id, business_id, name, code, is_main, created_at)
+            VALUES (?, ?, 'Main Branch', 'MAIN', 1, ?)
+        """, (target_branch, current_user.business_id, now_str))
+
     # Check unique
     existing = db.execute(
         "SELECT id FROM inventory WHERE business_id = ? AND branch_id = ? AND product_id = ?",
@@ -303,7 +313,6 @@ def create_inventory_item(
             detail=f"Product SKU '{req.product_id}' already exists in branch '{target_branch}'.",
         )
 
-    now_str = datetime.now(timezone.utc).isoformat()
     inv_id = f"INV_{target_branch}_{req.product_id.strip()}"
     u_cost = float(req.unit_cost) if req.unit_cost is not None else round(float(req.selling_price) * 0.8, 2)
     s_price = float(req.selling_price)
@@ -354,12 +363,12 @@ def create_inventory_item(
         category=req.category.strip(),
         current_stock=req.current_stock,
         min_stock_threshold=req.min_stock_threshold,
-        unit_cost=float(req.unit_cost),
-        selling_price=float(req.selling_price),
+        unit_cost=u_cost,
+        selling_price=s_price,
         barcode=req.barcode,
         unit=req.unit,
-        stock_value_cost=round(req.current_stock * float(req.unit_cost), 2),
-        stock_value_retail=round(req.current_stock * float(req.selling_price), 2),
+        stock_value_cost=round(req.current_stock * u_cost, 2),
+        stock_value_retail=round(req.current_stock * s_price, 2),
         is_low_stock=(req.current_stock <= req.min_stock_threshold),
         updated_at=now_str,
     )

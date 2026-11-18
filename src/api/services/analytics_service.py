@@ -208,7 +208,7 @@ class AnalyticsService:
             try:
                 inv_rows = conn.execute(
                     """
-                    SELECT i.product_id, i.product_name, i.category,
+                    SELECT i.product_id, i.product_name, i.category, i.current_stock,
                            COALESCE(SUM(si.total_price), 0.0) as rev,
                            COALESCE(SUM(si.quantity), 0) as units
                     FROM inventory i
@@ -216,8 +216,8 @@ class AnalyticsService:
                     LEFT JOIN sales s ON si.sale_id = s.id AND s.business_id = ? AND s.status != 'CANCELLED'
                     WHERE i.business_id = ?
                     GROUP BY i.product_id
-                    ORDER BY rev DESC
-                    LIMIT 15
+                    ORDER BY rev DESC, i.updated_at DESC
+                    LIMIT 20
                     """,
                     (merchant_id, merchant_id)
                 ).fetchall()
@@ -230,6 +230,7 @@ class AnalyticsService:
                         revenue=round(float(r["rev"]), 2),
                         units=int(r["units"]),
                         rank=idx + 1,
+                        current_stock=int(r["current_stock"] if r["current_stock"] is not None else 0),
                     )
                     for idx, r in enumerate(inv_rows)
                 ]

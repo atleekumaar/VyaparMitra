@@ -43,6 +43,7 @@ class LoginRequest(BaseModel):
 class UserResponse(BaseModel):
     id: str
     business_id: str
+    business_name: Optional[str] = None
     branch_id: Optional[str] = None
     username: str
     email: str

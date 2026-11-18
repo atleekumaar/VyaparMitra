@@ -154,6 +154,7 @@ def register_business(
     user_resp = UserResponse(
         id=user_id,
         business_id=biz_id,
+        business_name=req.business_name.strip(),
         branch_id=branch_id,
         username=req.owner_username.strip(),
         email=req.owner_email.strip().lower(),
@@ -295,6 +296,7 @@ def signup(
         user=UserResponse(
             id=user_id,
             business_id=biz_id,
+            business_name=biz_name,
             branch_id=branch_id,
             username=username,
             email=clean_email,
@@ -363,9 +365,13 @@ def login(
         ip_address=request.client.host if request.client else "127.0.0.1",
     )
 
+    biz_row = db.execute("SELECT name FROM businesses WHERE id = ?", (user_row["business_id"],)).fetchone()
+    biz_name = biz_row["name"] if biz_row else f"{user_row['full_name']}'s Store"
+
     user_resp = UserResponse(
         id=user_row["id"],
         business_id=user_row["business_id"],
+        business_name=biz_name,
         branch_id=user_row["branch_id"],
         username=user_row["username"],
         email=user_row["email"],
@@ -664,9 +670,13 @@ def verify_otp(
         ip_address=request.client.host if request.client else "127.0.0.1",
     )
 
+    biz_row = db.execute("SELECT name FROM businesses WHERE id = ?", (user_row["business_id"],)).fetchone()
+    biz_name = biz_row["name"] if biz_row else f"{user_row['full_name']}'s Store"
+
     user_resp = UserResponse(
         id=user_row["id"],
         business_id=user_row["business_id"],
+        business_name=biz_name,
         branch_id=user_row["branch_id"],
         username=user_row["username"],
         email=user_row["email"],
@@ -696,10 +706,13 @@ def get_current_user_profile(
 ) -> UserResponse:
     """Returns current authenticated user details."""
     row = db.execute("SELECT * FROM users WHERE id = ?", (current_user.id,)).fetchone()
+    biz_row = db.execute("SELECT name FROM businesses WHERE id = ?", (current_user.business_id,)).fetchone()
+    biz_name = biz_row["name"] if biz_row else f"{current_user.full_name}'s Store"
     if not row:
         return UserResponse(
             id=current_user.id,
             business_id=current_user.business_id,
+            business_name=biz_name,
             branch_id=current_user.branch_id,
             username=current_user.username,
             email=current_user.email,
@@ -712,6 +725,7 @@ def get_current_user_profile(
     return UserResponse(
         id=row["id"],
         business_id=row["business_id"],
+        business_name=biz_name,
         branch_id=row["branch_id"],
         username=row["username"],
         email=row["email"],

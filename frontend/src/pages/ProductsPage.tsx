@@ -185,12 +185,16 @@ export const ProductsPage: React.FC = () => {
     return products.reduce((acc, p) => acc + (p.total_revenue || 0), 0);
   }, [products]);
 
+  const totalStockUnits = useMemo(() => {
+    return products.reduce((acc, p) => acc + (p.current_stock ?? 0), 0);
+  }, [products]);
+
   const starCount = useMemo(() => {
     return products.filter((p) => p.status === 'STAR').length;
   }, [products]);
 
   const focusCount = useMemo(() => {
-    return products.filter((p) => p.status === 'FOCUS').length;
+    return products.filter((p) => p.status === 'FOCUS' || (p.current_stock !== undefined && p.current_stock <= 15)).length;
   }, [products]);
 
   return (
@@ -238,6 +242,19 @@ export const ProductsPage: React.FC = () => {
 
         <Card className="p-4 sm:p-5">
           <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Total Units in Stock</span>
+            <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center">
+              <Package className="w-4 h-4" />
+            </div>
+          </div>
+          <p className="text-2xl font-bold text-blue-600 dark:text-blue-400 tabular-nums mt-2">
+            {formatNumber(totalStockUnits)}
+          </p>
+          <span className="text-xs text-text-muted mt-1 block">Available across shelves</span>
+        </Card>
+
+        <Card className="p-4 sm:p-5">
+          <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Catalog Revenue</span>
             <div className="w-8 h-8 rounded-lg bg-success/10 text-success flex items-center justify-center">
               <DollarSign className="w-4 h-4" />
@@ -251,18 +268,7 @@ export const ProductsPage: React.FC = () => {
 
         <Card className="p-4 sm:p-5">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Star Performers</span>
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4" />
-            </div>
-          </div>
-          <p className="text-2xl font-bold text-text tabular-nums mt-2">{starCount}</p>
-          <span className="text-xs text-text-muted mt-1 block">High margin &amp; velocity</span>
-        </Card>
-
-        <Card className="p-4 sm:p-5">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Focus / Low Cover</span>
+            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">Low Stock Alerts</span>
             <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
               <AlertTriangle className="w-4 h-4" />
             </div>
@@ -386,11 +392,7 @@ export const ProductsPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-border/60">
                 {filteredProducts.map((p) => {
-                  // Compute dynamic stock & status matching fintech mockup
-                  const stock = p.forecast_7d_units > 0 
-                    ? Math.max(0, p.forecast_7d_units * 3 - (p.total_units % 15))
-                    : p.status === 'FOCUS' ? 8 : p.status === 'STAR' ? 36 : 22;
-                  
+                  const stock = p.current_stock !== undefined ? p.current_stock : (p.status === 'FOCUS' ? 8 : p.status === 'STAR' ? 36 : 22);
                   const statusType = stock === 0 
                     ? 'out' 
                     : stock <= 15 || p.status === 'FOCUS'

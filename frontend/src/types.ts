@@ -20,6 +20,7 @@ export interface DashboardSummary {
     orders: MetricCardData;
     aov: MetricCardData;
     units: MetricCardData;
+    inventory?: MetricCardData;
   };
   sales_trend_direction: string;
   forecast_7d_total_revenue: number;
@@ -80,6 +81,7 @@ export interface ProductRank {
   revenue: number;
   units: number;
   rank: number;
+  current_stock?: number;
 }
 
 export interface ProductAnalytics {
@@ -132,6 +134,7 @@ export interface ProductListItem {
   total_units: number;
   forecast_7d_units: number;
   status: 'STAR' | 'FOCUS' | 'MONITOR';
+  current_stock?: number;
 }
 
 export interface ProductDetail extends ProductListItem {
@@ -348,6 +351,7 @@ export interface AuthTokenResponse {
   user: {
     id: string;
     business_id: string;
+    business_name?: string | null;
     branch_id?: string | null;
     username: string;
     email: string;

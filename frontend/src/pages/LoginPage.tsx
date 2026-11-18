@@ -138,7 +138,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         merchant_id: res.user.business_id,
         name: res.user.full_name || 'Merchant Partner',
         email: res.user.email,
-        storeName: `${res.user.full_name || 'Merchant'}'s Store`,
+        storeName: res.user.business_name || `${res.user.full_name || 'Merchant'}'s Store`,
         category: 'small_merchant',
         categoryLabel: 'Kirana & Retail Store',
         phone: res.user.phone || '+919876543210',
@@ -243,7 +243,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         merchant_id: res.user.business_id,
         name: res.user.full_name || fullName || 'Merchant Partner',
         email: res.user.email,
-        storeName: fullName ? `${fullName}'s Store` : 'My Retail Store',
+        storeName: res.user.business_name || (fullName ? `${fullName}'s Store` : 'My Retail Store'),
         category: selectedCategory,
         categoryLabel:
           selectedCategory === 'wholesaler'
