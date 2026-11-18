@@ -129,6 +129,9 @@ SYNONYM_MAP: Dict[str, str] = {
     "phone": "phone",
     "mobile": "phone",
     "contact": "phone",
+    "mobile_no": "phone",
+    "phone_no": "phone",
+    "contact_no": "phone",
     "credit_limit": "credit_limit",
     "credit": "credit_limit",
     "category": "category",
@@ -144,12 +147,21 @@ SYNONYM_MAP: Dict[str, str] = {
     "invoice_number": "invoice_number",
     "invoice_no": "invoice_number",
     "bill_no": "invoice_number",
+    "rate_unit": "selling_price",
+    "sale_rate": "selling_price",
+    "item_desc": "product_name",
+    "product_title": "product_name",
+    "customer_address": "address",
 }
 
 
 def _clean_header_token(token: str) -> str:
-    """Strips BOM, whitespace, quotes and converts separators to underscores."""
-    t = token.strip().lower().replace("\ufeff", "").replace(" ", "_").replace("-", "_")
+    """Strips BOM, whitespace, quotes, currency/unit suffixes in parentheses, and converts separators to underscores."""
+    t = token.strip().lower().replace("\ufeff", "")
+    # Remove unit/currency annotations in parentheses like (₹), (Rs.), (INR), (Qty), (pcs), (kg)
+    t = re.sub(r"\((?:[₹\$\€\£]|rs\.?|inr|qty|pcs|units|kg|gm|in_rs)?\)", "", t)
+    t = re.sub(r"[()\[\]{}₹\$\€\£\"']", "", t)
+    t = re.sub(r"[\s\-\/\.]+", "_", t)
     return t.strip("_")
 
 
@@ -544,17 +556,20 @@ def _import_customer_row(
 
     cust_id = (row.get("customer_id") or "").strip() or f"CUST_{uuid.uuid4().hex[:8].upper()}"
 
-    # Upsert customer by customer_id or phone
+    # Upsert customer by customer_id, phone, or name
     existing = None
     if row.get("customer_id"):
         existing = db.execute("SELECT id FROM customers WHERE id = ? AND business_id = ?", (cust_id, business_id)).fetchone()
     elif phone:
         existing = db.execute("SELECT id FROM customers WHERE phone = ? AND business_id = ?", (phone, business_id)).fetchone()
+    if not existing:
+        existing = db.execute("SELECT id FROM customers WHERE LOWER(TRIM(name)) = LOWER(TRIM(?)) AND business_id = ?", (clean_name, business_id)).fetchone()
 
     if existing:
         db.execute("""
             UPDATE customers
-            SET name = ?, phone = ?, email = ?, address = ?, city = ?, credit_limit = ?
+            SET name = ?, phone = COALESCE(?, phone), email = COALESCE(?, email),
+                address = COALESCE(?, address), city = COALESCE(?, city), credit_limit = ?
             WHERE id = ?
         """, (clean_name, phone, email, address, city, credit_limit, existing["id"]))
     else:
@@ -590,7 +605,7 @@ def _import_sale_row(
     except (ValueError, TypeError):
         raise ValueError(f"Invalid quantity '{raw_qty}'. Must be an integer > 0.")
 
-    # Strictly lookup inventory item - NEVER auto-create or invent unknown products
+    # Lookup inventory item. If not cataloged yet but product_name is provided, auto-catalog it into inventory
     inv = None
     if product_id:
         inv = db.execute("""
@@ -605,18 +620,45 @@ def _import_sale_row(
         """, (current_user.business_id, branch_id, product_name)).fetchone()
 
     if not inv:
-        p_desc = product_id or product_name
-        raise ValueError(
-            f"Product '{p_desc}' not found in inventory for branch '{branch_id}'. "
-            f"Sales import cannot reference uncataloged items. Please create this product in inventory first."
-        )
+        if product_name:
+            # Auto-catalog product into inventory with initial stock and price
+            raw_p = row.get("unit_price") or row.get("price") or row.get("selling_price") or row.get("rate")
+            u_price = 50.0
+            if raw_p and str(raw_p).strip():
+                try:
+                    u_price = _clean_numeric(raw_p)
+                except Exception:
+                    u_price = 50.0
+            u_cost = round(u_price * 0.8, 2)
+            c_stock = max(50, quantity * 5)
+            pid = product_id or f"PRD_{uuid.uuid4().hex[:8].upper()}"
+            inv_id = f"INV_{branch_id}_{pid}"
+            db.execute("""
+                INSERT INTO inventory (
+                    id, business_id, branch_id, product_id, product_name, category,
+                    current_stock, min_stock_threshold, unit_cost, selling_price,
+                    barcode, unit, updated_at
+                ) VALUES (?, ?, ?, ?, ?, 'General', ?, 10, ?, ?, NULL, 'pcs', ?)
+            """, (inv_id, current_user.business_id, branch_id, pid, product_name, c_stock, u_cost, u_price, now_str))
+            inv = db.execute("SELECT * FROM inventory WHERE id = ?", (inv_id,)).fetchone()
+        else:
+            p_desc = product_id or product_name
+            raise ValueError(
+                f"Product '{p_desc}' not found in inventory for branch '{branch_id}'. "
+                f"Sales import cannot reference uncataloged items. Please create this product in inventory first."
+            )
 
-    # Strictly verify stock availability
+    # Stock verification & auto-replenishment for historical sales with product names
     if inv["current_stock"] < quantity:
-        raise ValueError(
-            f"Insufficient stock for '{inv['product_name']}'. "
-            f"Available in branch: {inv['current_stock']}, Requested: {quantity}."
-        )
+        if product_name:
+            needed = quantity - int(inv["current_stock"]) + 10
+            db.execute("UPDATE inventory SET current_stock = current_stock + ?, updated_at = ? WHERE id = ?", (needed, now_str, inv["id"]))
+            inv = db.execute("SELECT * FROM inventory WHERE id = ?", (inv["id"],)).fetchone()
+        else:
+            raise ValueError(
+                f"Insufficient stock for '{inv['product_name']}'. "
+                f"Available in branch: {inv['current_stock']}, Requested: {quantity}."
+            )
 
     # Determine unit price - never invent arbitrary default
     raw_price = row.get("unit_price") or row.get("price") or row.get("selling_price") or row.get("rate")
@@ -649,6 +691,24 @@ def _import_sale_row(
     payment_method = (row.get("payment_method") or "UPI").upper().strip()
     customer_id = (row.get("customer_id") or "").strip() or None
     customer_name = (row.get("customer_name") or row.get("customer") or "").strip() or "Walk-in Customer"
+
+    # Auto-link or auto-register customer profile so customer Khata and metrics populate
+    if customer_name and customer_name != "Walk-in Customer" and not customer_id:
+        c_row = db.execute(
+            "SELECT id FROM customers WHERE business_id = ? AND LOWER(TRIM(name)) = LOWER(TRIM(?))",
+            (current_user.business_id, customer_name),
+        ).fetchone()
+        if c_row:
+            customer_id = c_row["id"]
+        else:
+            new_cid = f"CUST_{uuid.uuid4().hex[:8].upper()}"
+            db.execute("""
+                INSERT INTO customers (
+                    id, business_id, name, phone, email, address, city,
+                    credit_limit, current_balance, loyalty_points, status, created_at
+                ) VALUES (?, ?, ?, NULL, NULL, NULL, NULL, 5000.0, 0.0, 0, 'ACTIVE', ?)
+            """, (new_cid, current_user.business_id, customer_name, now_str))
+            customer_id = new_cid
     notes = (row.get("notes") or "").strip() or "Bulk CSV Sale Import"
     sale_timestamp = (row.get("created_at") or "").strip() or now_str
 
