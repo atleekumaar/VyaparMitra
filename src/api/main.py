@@ -5,7 +5,15 @@ Main application factory for VyaparMitra Phase 6 REST API and Command Center.
 from __future__ import annotations
 
 import logging
+import os
+import sys
 from pathlib import Path
+
+# Ensure project root is in sys.path even when invoked directly
+_project_root = Path(__file__).resolve().parents[2]
+if str(_project_root) not in sys.path:
+    sys.path.insert(0, str(_project_root))
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -99,3 +107,8 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
+
+if __name__ == "__main__":
+    import uvicorn
+    cfg = get_api_config()
+    uvicorn.run("src.api.main:app", host=cfg.api_host, port=cfg.api_port)

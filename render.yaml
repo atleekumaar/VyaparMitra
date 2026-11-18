@@ -5,6 +5,7 @@ services:
     plan: starter
     region: oregon
     dockerfilePath: Dockerfile
+    healthCheckPath: /api/health
     disk:
       name: vyaparmitra-db-data
       mountPath: /app/data
