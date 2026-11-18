@@ -32,7 +32,7 @@ router = APIRouter(prefix="/import", tags=["Bulk CSV Import"])
 VALID_ENTITY_TYPES = {"inventory", "products", "customers", "sales"}
 
 # Robust numeric cleaning utilities for Indian currency formats (₹, Rs, /-, commas, units)
-def _clean_numeric(val: Any, default: float = 0.0) -> float:
+def _clean_numeric(val: Any, default: float = 0.0, raise_on_error: bool = False) -> float:
     """Parses float stripping currency symbols, commas, trailing /-, and unit suffixes."""
     if val is None:
         return default
@@ -49,6 +49,8 @@ def _clean_numeric(val: Any, default: float = 0.0) -> float:
                 return float(m.group(0))
             except Exception:
                 pass
+        if raise_on_error:
+            raise ValueError(f"Could not parse numeric value from '{val}'")
         return default
 
 
@@ -276,11 +278,10 @@ async def import_csv(
 
     # 1. File Type & Size Check
     filename = file.filename or "upload.csv"
-    valid_exts = (".csv", ".tsv", ".txt")
-    if not any(filename.lower().endswith(ext) for ext in valid_exts):
+    if not filename.lower().endswith(".csv"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid file extension for '{filename}'. Supported formats: .csv, .tsv, .txt",
+            detail=f"Invalid file extension for '{filename}'. Only .csv files are supported.",
         )
 
     # 2. Read and Decode Content with size limits
@@ -291,11 +292,11 @@ async def import_csv(
             detail="Uploaded CSV file is empty.",
         )
 
-    MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
     if len(raw_bytes) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="CSV file exceeds maximum allowed limit of 10 MB.",
+            detail="CSV file exceeds maximum allowed limit of 5 MB.",
         )
 
     # Multi-encoding fallback (UTF-16 LE/BE from Excel, UTF-8 with/without BOM, Windows CP1252, Latin-1)
@@ -351,11 +352,35 @@ async def import_csv(
         if h in SYNONYM_MAP:
             canonical_tokens.add(SYNONYM_MAP[h])
 
-    # 4. Schema Validation for the chosen entity type
+    # 4. Strict Entity-Type Respect & Header Validation
+    has_inv_markers = "current_stock" in canonical_tokens or "min_stock_threshold" in canonical_tokens or "barcode" in canonical_tokens or "unit_cost" in canonical_tokens
+    has_sales_markers = "payment_method" in canonical_tokens or "invoice_number" in canonical_tokens or "payment_mode" in canonical_tokens
+    has_cust_markers = "credit_limit" in canonical_tokens or (("phone" in canonical_tokens or "email" in canonical_tokens) and "name" in canonical_tokens and "product_name" not in canonical_tokens)
+
+    detected_type: Optional[str] = None
+    if has_inv_markers and not has_sales_markers and normalized_type not in ("inventory", "products"):
+        detected_type = "inventory"
+    elif has_cust_markers and not has_sales_markers and not has_inv_markers and normalized_type != "customers":
+        detected_type = "customers"
+    elif has_sales_markers and normalized_type != "sales":
+        detected_type = "sales"
+
+    if detected_type:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=(
+                f"Entity type mismatch: You selected '{entity_type}', but the CSV headers indicate '{detected_type}' data. "
+                f"Please select the correct entity type or upload matching CSV headers for '{entity_type}'."
+            ),
+        )
+
+    # 5. Schema Validation for the chosen entity type
     missing_requirements: List[str] = []
     if normalized_type in ("inventory", "products"):
         if not ({"product_name", "product_id"} & canonical_tokens):
             missing_requirements.append("product_name (or item / product / title / particulars)")
+        if not ({"selling_price", "unit_price"} & canonical_tokens):
+            missing_requirements.append("selling_price (or price / rate / mrp)")
     elif normalized_type == "customers":
         if not ({"name", "customer_name", "phone", "email"} & canonical_tokens):
             missing_requirements.append("name (or customer / client / mobile / phone)")
@@ -500,7 +525,7 @@ def _import_inventory_row(
         product_id = f"PRD_{uuid.uuid4().hex[:8].upper()}"
     category = (row.get("category") or row.get("group") or "General").strip()
 
-    # Validate selling price (defaults to 0.0 if not provided)
+    # Validate selling price (strict validation: non-numeric raises error)
     price_val = (
         row.get("selling_price")
         or row.get("price")
@@ -510,7 +535,10 @@ def _import_inventory_row(
         or row.get("sale_price")
         or row.get("retail_price")
     )
-    selling_price = max(0.0, _clean_numeric(price_val, default=0.0))
+    if price_val and str(price_val).strip():
+        selling_price = max(0.0, _clean_numeric(price_val, default=0.0, raise_on_error=True))
+    else:
+        selling_price = 0.0
 
     # Validate unit cost (optional, must be >= 0)
     cost_val = (

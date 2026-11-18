@@ -6,6 +6,7 @@ Provides user registration, login, role enforcement, and user administration.
 from __future__ import annotations
 
 import logging
+import re
 import secrets
 import sqlite3
 import uuid
