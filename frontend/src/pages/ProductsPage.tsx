@@ -681,9 +681,15 @@ export const ProductsPage: React.FC = () => {
             <p className="text-[11px] text-text-muted">
               Supported columns: <code>product_name, category, selling_price, current_stock, unit_cost</code>
             </p>
+            {selectedFile ? (
+              <div className="flex items-center gap-2 p-2 bg-brand/10 border border-brand/30 rounded-lg text-brand font-bold text-xs mt-1">
+                <CheckCircle2 className="w-4 h-4 text-brand shrink-0" />
+                <span>Selected: {selectedFile.name} ({(selectedFile.size / 1024).toFixed(1)} KB)</span>
+              </div>
+            ) : null}
             <input
               type="file"
-              accept=".csv"
+              accept=".csv,.tsv,.txt"
               onChange={(e) => {
                 if (e.target.files && e.target.files[0]) {
                   setSelectedFile(e.target.files[0]);

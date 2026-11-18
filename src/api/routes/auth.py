@@ -322,15 +322,22 @@ def login(
 ) -> TokenResponse:
     """Authenticates credentials and returns a signed JWT token."""
     login_id = req.username_or_email.strip().lower()
+    clean_digits = re.sub(r"\D", "", login_id)
     user_row = db.execute(
-        "SELECT * FROM users WHERE LOWER(username) = ? OR LOWER(email) = ?",
-        (login_id, login_id),
+        """
+        SELECT * FROM users 
+        WHERE LOWER(username) = ? 
+           OR LOWER(email) = ? 
+           OR phone = ? 
+           OR (? != '' AND (phone = ? OR phone = ? OR REPLACE(REPLACE(REPLACE(phone, '+91', ''), ' ', ''), '-', '') = ?))
+        """,
+        (login_id, login_id, login_id, clean_digits, clean_digits, f"+91{clean_digits}", clean_digits),
     ).fetchone()
 
     if not user_row or not verify_password(req.password, user_row["password_hash"]):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials. Check your username/email and password.",
+            detail="Invalid credentials. Check your username/email/phone and password, or use 'Login via OTP'.",
         )
 
     if not user_row["is_active"]:
@@ -633,6 +640,7 @@ def verify_otp(
                 now_str,
             ),
         )
+        db.commit()
         user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
     else:
         # If existing user provided a password during OTP verification, save it so they can log in with password later

@@ -98,9 +98,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setAuthError(null);
     setNotificationMsg(null);
 
-    const cleanEmail = email.trim().toLowerCase();
-    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
-      setAuthError('Please enter a valid email address.');
+    const cleanId = email.trim();
+    if (!cleanId) {
+      setAuthError('Please enter your registered email address or mobile number.');
       return;
     }
     if (!password || password.trim().length < 4) {
@@ -112,7 +112,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
     try {
       const res = await api.login({
-        username_or_email: cleanEmail,
+        username_or_email: cleanId.toLowerCase(),
         password: password.trim(),
       });
 
@@ -125,9 +125,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
       playWelcomeAudio();
 
-      const initials = (res.user.full_name || cleanEmail)
+      const initials = (res.user.full_name || res.user.email || cleanId)
         .split(' ')
-        .map((w) => w[0])
+        .map((w: string) => w[0])
         .join('')
         .toUpperCase()
         .slice(0, 2);
@@ -370,8 +370,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         <div className="w-full max-w-md mx-auto">
           <div className="bg-surface-card rounded-3xl border border-border p-6 sm:p-8 shadow-fintech-lg transition-all space-y-5">
             
-            {/* Top Auth Mode Tabs (Log In vs Create Account) */}
-            <div className="grid grid-cols-2 p-1 bg-surface-muted border border-border rounded-2xl gap-1">
+            {/* Top Auth Mode Tabs (Password vs OTP Login vs Create Account) */}
+            <div className="grid grid-cols-3 p-1 bg-surface-muted border border-border rounded-2xl gap-1">
               <button
                 type="button"
                 onClick={() => {
@@ -386,7 +386,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                     : 'text-text-muted hover:text-text'
                 }`}
               >
-                Log In
+                Password
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode('otp_login');
+                  setOtpSent(false);
+                  setAuthError(null);
+                  setNotificationMsg(null);
+                }}
+                className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                  authMode === 'otp_login'
+                    ? 'bg-surface-card text-text shadow-xs border border-border/80'
+                    : 'text-text-muted hover:text-text'
+                }`}
+              >
+                OTP Login
               </button>
               <button
                 type="button"
@@ -402,7 +418,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
                     : 'text-text-muted hover:text-text'
                 }`}
               >
-                Create Account
+                Sign Up
               </button>
             </div>
 
@@ -449,20 +465,20 @@ export const LoginPage: React.FC<LoginPageProps> = ({
             {/* MODE 1: Email & Password Login */}
             {authMode === 'login' && !otpSent && (
               <form onSubmit={handlePasswordLogin} className="space-y-4">
-                {/* Email Address */}
+                {/* Email Address or Phone */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-text flex items-center justify-between">
-                    <span>Email Address</span>
-                    <span className="text-[11px] text-text-subtle font-normal">Registered email</span>
+                    <span>Email or Mobile Number</span>
+                    <span className="text-[11px] text-text-subtle font-normal">Registered email / phone</span>
                   </label>
                   <div className="relative">
                     <Mail className="w-4 h-4 text-text-subtle absolute left-3.5 top-3.5" />
                     <input
-                      type="email"
+                      type="text"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@example.com"
+                      placeholder="you@example.com or 10-digit mobile"
                       className="w-full pl-10 pr-3.5 py-2.5 text-xs font-semibold rounded-xl border border-border bg-surface-muted text-text placeholder-text-subtle focus:bg-surface-card focus:outline-none focus:ring-2 focus:ring-brand focus:border-brand"
                     />
                   </div>

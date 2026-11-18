@@ -36,8 +36,8 @@ def _clean_numeric(val: Any, default: float = 0.0) -> float:
     """Parses float stripping currency symbols, commas, trailing /-, and unit suffixes."""
     if val is None:
         return default
-    s = str(val).strip()
-    if not s:
+    s = str(val).strip().lower()
+    if not s or s in ("none", "null", "n/a", "na", "-", "--", "free", "zero"):
         return default
     s_clean = re.sub(r"[₹\$\€\£]|(?i:rs\.?|inr)|/-", "", s).replace(",", "").strip()
     try:
@@ -49,15 +49,15 @@ def _clean_numeric(val: Any, default: float = 0.0) -> float:
                 return float(m.group(0))
             except Exception:
                 pass
-        raise ValueError(f"Could not parse numeric value from '{val}'")
+        return default
 
 
 def _clean_integer(val: Any, default: int = 0) -> int:
     """Parses integer stripping currency, commas, unit suffixes (pcs, pkts, kg, etc.)."""
     if val is None:
         return default
-    s = str(val).strip()
-    if not s:
+    s = str(val).strip().lower()
+    if not s or s in ("none", "null", "n/a", "na", "-", "--"):
         return default
     s_clean = re.sub(r"[₹\$\€\£]|(?i:rs\.?|inr)|/-", "", s).replace(",", "").strip()
     m = re.search(r"[-+]?\d+(?:\.\d+)?", s_clean)
@@ -66,92 +66,172 @@ def _clean_integer(val: Any, default: int = 0) -> int:
             return int(round(float(m.group(0))))
         except Exception:
             pass
-    raise ValueError(f"Could not parse integer value from '{val}'")
+    return default
 
 
-# Synonym mapping to canonical field names
+# Comprehensive synonym mapping to canonical field names
 SYNONYM_MAP: Dict[str, str] = {
     # Product identification
     "product": "product_name",
     "product_name": "product_name",
+    "productname": "product_name",
     "item_name": "product_name",
+    "itemname": "product_name",
     "item": "product_name",
+    "items": "product_name",
+    "products": "product_name",
     "particulars": "product_name",
     "description": "product_name",
+    "item_description": "product_name",
+    "product_description": "product_name",
     "title": "product_name",
+    "item_title": "product_name",
+    "product_title": "product_name",
     "product_id": "product_id",
+    "productid": "product_id",
     "item_id": "product_id",
+    "itemid": "product_id",
     "item_code": "product_id",
     "sku": "product_id",
     "code": "product_id",
     "product_code": "product_id",
+
     # Pricing
     "selling_price": "selling_price",
+    "sellingprice": "selling_price",
     "price": "selling_price",
     "unit_price": "unit_price",
+    "unitprice": "unit_price",
     "rate": "selling_price",
     "mrp": "selling_price",
     "sale_price": "selling_price",
+    "saleprice": "selling_price",
+    "sales_price": "selling_price",
     "retail_price": "selling_price",
+    "selling_rate": "selling_price",
+    "sale_rate": "selling_price",
+    "mrp_rate": "selling_price",
+
     # Cost
     "unit_cost": "unit_cost",
+    "unitcost": "unit_cost",
     "cost": "unit_cost",
     "cost_price": "unit_cost",
+    "costprice": "unit_cost",
     "purchase_price": "unit_cost",
+    "purchaseprice": "unit_cost",
     "purchase_rate": "unit_cost",
+    "purchaserate": "unit_cost",
     "buy_price": "unit_cost",
+    "buying_price": "unit_cost",
+    "buy_rate": "unit_cost",
+
     # Stock / Quantity
     "current_stock": "current_stock",
+    "currentstock": "current_stock",
     "stock": "current_stock",
     "closing_stock": "current_stock",
     "opening_stock": "current_stock",
     "available_stock": "current_stock",
+    "stock_qty": "current_stock",
+    "stock_quantity": "current_stock",
+    "available_qty": "current_stock",
+    "available_quantity": "current_stock",
     "quantity": "quantity",
     "qty": "quantity",
     "units": "quantity",
     "count": "quantity",
-    "items": "quantity",
+    "items_count": "quantity",
     "pcs": "quantity",
     "balance": "quantity",
+    "opening_balance": "quantity",
     "min_stock_threshold": "min_stock_threshold",
     "min_stock": "min_stock_threshold",
     "reorder_point": "min_stock_threshold",
     "reorder_level": "min_stock_threshold",
-    # Payment & Customer
-    "payment_method": "payment_method",
-    "payment_mode": "payment_method",
-    "mode": "payment_method",
-    "pay_mode": "payment_method",
+    "low_stock_limit": "min_stock_threshold",
+    "min_qty": "min_stock_threshold",
+
+    # Category & Attributes
+    "category": "category",
+    "category_name": "category",
+    "group": "category",
+    "item_category": "category",
+    "product_category": "category",
+    "item_group": "category",
+    "type": "category",
+    "department": "category",
+    "barcode": "barcode",
+    "barcode_no": "barcode",
+    "barcode_number": "barcode",
+    "upc": "barcode",
+    "ean": "barcode",
+    "unit": "unit",
+    "uom": "unit",
+    "unit_of_measure": "unit",
+
+    # Customers & Khata
     "name": "name",
     "customer_name": "customer_name",
     "customer": "customer_name",
     "client_name": "name",
+    "client": "name",
+    "full_name": "name",
+    "customer_full_name": "customer_name",
+    "party_name": "name",
+    "party": "name",
+    "buyer": "name",
     "phone": "phone",
     "mobile": "phone",
     "contact": "phone",
+    "mobile_number": "phone",
+    "phone_number": "phone",
+    "contact_number": "phone",
     "mobile_no": "phone",
     "phone_no": "phone",
     "contact_no": "phone",
+    "whatsapp": "phone",
+    "whatsapp_number": "phone",
+    "email": "email",
+    "email_id": "email",
+    "email_address": "email",
+    "mail": "email",
+    "address": "address",
+    "customer_address": "address",
+    "billing_address": "address",
+    "street": "address",
+    "location": "address",
+    "city": "city",
+    "city_name": "city",
+    "town": "city",
+    "district": "city",
+    "state": "state",
     "credit_limit": "credit_limit",
     "credit": "credit_limit",
-    "category": "category",
-    "group": "category",
-    "barcode": "barcode",
-    "upc": "barcode",
-    "unit": "unit",
-    "uom": "unit",
+    "udhaar_limit": "credit_limit",
+    "max_credit": "credit_limit",
+    "limit": "credit_limit",
+
+    # Sales & Invoices
+    "payment_method": "payment_method",
+    "payment_mode": "payment_method",
+    "mode": "payment_method",
+    "pay_mode": "payment_method",
+    "payment": "payment_method",
     "discount": "discount",
+    "discount_amount": "discount",
     "date": "created_at",
     "timestamp": "created_at",
     "sale_date": "created_at",
     "invoice_number": "invoice_number",
     "invoice_no": "invoice_number",
     "bill_no": "invoice_number",
+    "bill_number": "invoice_number",
+    "receipt_no": "invoice_number",
     "rate_unit": "selling_price",
     "sale_rate": "selling_price",
     "item_desc": "product_name",
     "product_title": "product_name",
-    "customer_address": "address",
 }
 
 
@@ -196,10 +276,11 @@ async def import_csv(
 
     # 1. File Type & Size Check
     filename = file.filename or "upload.csv"
-    if not filename.lower().endswith(".csv"):
+    valid_exts = (".csv", ".tsv", ".txt")
+    if not any(filename.lower().endswith(ext) for ext in valid_exts):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Invalid file extension for '{filename}'. Only .csv files are supported.",
+            detail=f"Invalid file extension for '{filename}'. Supported formats: .csv, .tsv, .txt",
         )
 
     # 2. Read and Decode Content with size limits
@@ -210,27 +291,52 @@ async def import_csv(
             detail="Uploaded CSV file is empty.",
         )
 
-    MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+    MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
     if len(raw_bytes) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="CSV file exceeds maximum allowed limit of 5 MB.",
+            detail="CSV file exceeds maximum allowed limit of 10 MB.",
         )
 
-    try:
-        decoded = raw_bytes.decode("utf-8-sig")
-    except UnicodeDecodeError:
+    # Multi-encoding fallback (UTF-16 LE/BE from Excel, UTF-8 with/without BOM, Windows CP1252, Latin-1)
+    decoded: Optional[str] = None
+    if raw_bytes.startswith(b"\xff\xfe") or raw_bytes.startswith(b"\xfe\xff"):
         try:
-            decoded = raw_bytes.decode("latin-1")
-        except Exception as exc:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Failed to decode CSV content: {exc}",
-            )
+            decoded = raw_bytes.decode("utf-16")
+        except Exception:
+            pass
 
-    # 3. CSV Parsing & Header Normalization
+    if decoded is None:
+        for enc in ("utf-8-sig", "utf-8", "cp1252", "latin-1", "iso-8859-1"):
+            try:
+                decoded = raw_bytes.decode(enc)
+                break
+            except Exception:
+                continue
+
+    if decoded is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Failed to decode CSV content. Please save the file in standard UTF-8 format.",
+        )
+
+    # Strip null bytes that may arise from foreign encodings
+    decoded = decoded.replace("\x00", "")
+
+    # 3. CSV Parsing & Delimiter Detection (handles comma, semicolon, tab, pipe)
+    sample_lines = [line for line in decoded.splitlines()[:5] if line.strip()]
+    header_candidate = sample_lines[0] if sample_lines else ""
+
+    delimiter = ","
+    if "\t" in header_candidate:
+        delimiter = "\t"
+    elif ";" in header_candidate and header_candidate.count(";") > header_candidate.count(","):
+        delimiter = ";"
+    elif "|" in header_candidate and header_candidate.count("|") > header_candidate.count(","):
+        delimiter = "|"
+
     stream = io.StringIO(decoded)
-    reader = csv.DictReader(stream)
+    reader = csv.DictReader(stream, delimiter=delimiter)
 
     if not reader.fieldnames:
         raise HTTPException(
@@ -245,44 +351,18 @@ async def import_csv(
         if h in SYNONYM_MAP:
             canonical_tokens.add(SYNONYM_MAP[h])
 
-    # 4. Strict Entity-Type Respect & Header Validation
-    # We never want to falsely block an inventory file just because it has "quantity" or "qty" as a stock column!
-    has_inv_markers = "current_stock" in canonical_tokens or "min_stock_threshold" in canonical_tokens or "barcode" in canonical_tokens or "unit_cost" in canonical_tokens
-    # A true sales marker is payment_method or invoice_number or payment_mode
-    has_sales_markers = "payment_method" in canonical_tokens or "invoice_number" in canonical_tokens or "payment_mode" in canonical_tokens
-    has_cust_markers = "credit_limit" in canonical_tokens or (("phone" in canonical_tokens or "email" in canonical_tokens) and "name" in canonical_tokens and "product_name" not in canonical_tokens)
-
-    detected_type: Optional[str] = None
-    if has_inv_markers and not has_sales_markers and normalized_type not in ("inventory", "products"):
-        detected_type = "inventory"
-    elif has_cust_markers and not has_sales_markers and not has_inv_markers and normalized_type != "customers":
-        detected_type = "customers"
-    elif has_sales_markers and normalized_type != "sales":
-        detected_type = "sales"
-
-    if detected_type:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=(
-                f"Entity type mismatch: You selected '{entity_type}', but the CSV headers indicate '{detected_type}' data. "
-                f"Please select the correct entity type or upload matching CSV headers for '{entity_type}'."
-            ),
-        )
-
-    # 5. Schema Validation for the chosen entity type
+    # 4. Schema Validation for the chosen entity type
     missing_requirements: List[str] = []
     if normalized_type in ("inventory", "products"):
         if not ({"product_name", "product_id"} & canonical_tokens):
-            missing_requirements.append("product_name (or product / item / title)")
-        if not ({"selling_price", "unit_price"} & canonical_tokens):
-            missing_requirements.append("selling_price (or price / rate / mrp)")
+            missing_requirements.append("product_name (or item / product / title / particulars)")
     elif normalized_type == "customers":
-        if not ({"name", "customer_name"} & canonical_tokens):
-            missing_requirements.append("name (or customer_name / full_name)")
+        if not ({"name", "customer_name", "phone", "email"} & canonical_tokens):
+            missing_requirements.append("name (or customer / client / mobile / phone)")
     elif normalized_type == "sales":
         if not ({"product_id", "product_name"} & canonical_tokens):
             missing_requirements.append("product_id or product_name")
-        if "quantity" not in canonical_tokens:
+        if not ({"quantity", "qty"} & canonical_tokens):
             missing_requirements.append("quantity (or qty / units / count)")
 
     if missing_requirements:
@@ -420,7 +500,7 @@ def _import_inventory_row(
         product_id = f"PRD_{uuid.uuid4().hex[:8].upper()}"
     category = (row.get("category") or row.get("group") or "General").strip()
 
-    # Validate selling price (strict positive float)
+    # Validate selling price (defaults to 0.0 if not provided)
     price_val = (
         row.get("selling_price")
         or row.get("price")
@@ -430,14 +510,7 @@ def _import_inventory_row(
         or row.get("sale_price")
         or row.get("retail_price")
     )
-    if not price_val:
-        raise ValueError("Missing required 'selling_price'.")
-    try:
-        selling_price = _clean_numeric(price_val)
-        if selling_price <= 0:
-            raise ValueError(f"Selling price must be greater than zero, got '{price_val}'.")
-    except (ValueError, TypeError) as pe:
-        raise ValueError(f"Invalid selling_price '{price_val}': {pe}")
+    selling_price = max(0.0, _clean_numeric(price_val, default=0.0))
 
     # Validate unit cost (optional, must be >= 0)
     cost_val = (
@@ -533,12 +606,24 @@ def _import_customer_row(
     row: Dict[str, str],
     now_str: str,
 ) -> None:
-    name = row.get("name") or row.get("customer_name") or row.get("client_name") or row.get("customer")
-    if not name or not name.strip():
-        raise ValueError("Missing customer 'name'.")
-    clean_name = name.strip()
-
+    name = (
+        row.get("name")
+        or row.get("customer_name")
+        or row.get("client_name")
+        or row.get("customer")
+        or row.get("full_name")
+        or row.get("party_name")
+        or row.get("party")
+        or row.get("buyer")
+    )
     phone = (row.get("phone") or row.get("mobile") or row.get("contact") or "").strip() or None
+    if not name or not name.strip():
+        if phone:
+            clean_name = f"Customer {phone[-4:]}"
+        else:
+            raise ValueError("Missing customer name or mobile number.")
+    else:
+        clean_name = name.strip()
     email = (row.get("email") or "").strip() or None
     address = (row.get("address") or "").strip() or None
     city = (row.get("city") or "").strip() or None

@@ -98,6 +98,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const [quickQuery, setQuickQuery] = useState('');
   const [csvEntityType, setCsvEntityType] = useState<'inventory' | 'customers' | 'sales'>('inventory');
   const [csvUploading, setCsvUploading] = useState(false);
+  const [isCsvDragging, setIsCsvDragging] = useState(false);
   const [importResult, setImportResult] = useState<{
     success: boolean;
     message: string;
@@ -1138,24 +1139,64 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </a>
                 </div>
 
-                <div className="p-6 border-2 border-dashed border-border rounded-xl text-center space-y-2 hover:border-brand transition-colors cursor-pointer bg-surface-muted/30">
-                  <Upload className="w-8 h-8 text-brand mx-auto" />
-                  <div className="text-xs font-bold text-text">Choose CSV file or drag &amp; drop</div>
+                <div
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsCsvDragging(true);
+                  }}
+                  onDragLeave={() => setIsCsvDragging(false)}
+                  onDrop={async (e) => {
+                    e.preventDefault();
+                    setIsCsvDragging(false);
+                    const file = e.dataTransfer.files?.[0];
+                    if (!file) return;
+                    setCsvUploading(true);
+                    try {
+                      const res = await api.uploadCsv(file, csvEntityType);
+                      setImportResult({
+                        success: res.failed_rows === 0,
+                        message: res.message || `Processed ${res.inserted_rows || 0} rows into ${csvEntityType}.`,
+                        total_rows: res.total_rows,
+                        inserted_rows: res.inserted_rows,
+                        failed_rows: res.failed_rows,
+                        errors: res.errors,
+                      });
+                      await loadDashboardData();
+                    } catch (err: any) {
+                      setImportResult({
+                        success: false,
+                        message: err?.message || 'CSV import failed. Please verify headers and format.',
+                      });
+                    } finally {
+                      setCsvUploading(false);
+                    }
+                  }}
+                  onClick={() => document.getElementById('csv-file-upload')?.click()}
+                  className={`p-6 border-2 border-dashed rounded-xl text-center space-y-2 transition-all cursor-pointer ${
+                    isCsvDragging
+                      ? 'border-brand bg-brand/10 ring-2 ring-brand/30'
+                      : 'border-border hover:border-brand bg-surface-muted/30'
+                  }`}
+                >
+                  <Upload className="w-8 h-8 text-brand mx-auto animate-bounce" />
+                  <div className="text-xs font-bold text-text">
+                    {isCsvDragging ? 'Drop CSV file here!' : 'Choose CSV file or drag & drop'}
+                  </div>
                   <p className="text-[11px] text-text-muted">
-                    Select your <code>.csv</code> file for <b>{csvEntityType.toUpperCase()}</b> or use the template above.
+                    Select your <code>.csv</code> file for <b>{csvEntityType.toUpperCase()}</b> or click below to browse.
                   </p>
                   <input
                     type="file"
-                    accept=".csv"
+                    accept=".csv,.tsv,.txt"
                     className="hidden"
                     id="csv-file-upload"
                     disabled={csvUploading}
+                    onClick={(e) => e.stopPropagation()}
                     onChange={async (e) => {
                       const file = e.target.files?.[0];
                       if (!file) return;
                       setCsvUploading(true);
                       try {
-                        // Strictly use the user-selected tab entity type
                         const targetType = csvEntityType;
                         const res = await api.uploadCsv(file, targetType);
                         setImportResult({
@@ -1178,14 +1219,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       }
                     }}
                   />
-                  <label
-                    htmlFor="csv-file-upload"
-                    className={`inline-block mt-2 px-3 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs ${
+                  <div
+                    className={`inline-block mt-2 px-3.5 py-1.5 rounded-lg bg-brand text-white text-xs font-semibold cursor-pointer hover:bg-brand-hover shadow-xs ${
                       csvUploading ? 'opacity-50 pointer-events-none' : ''
                     }`}
                   >
-                    {csvUploading ? 'Processing CSV...' : 'Browse File'}
-                  </label>
+                    {csvUploading ? 'Processing CSV...' : 'Browse File from Device'}
+                  </div>
                 </div>
               </>
             )}

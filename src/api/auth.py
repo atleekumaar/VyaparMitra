@@ -282,14 +282,7 @@ def resolve_merchant_id(
             payload = decode_access_token(token)
             token_biz_id = str(payload.get("business_id", "")).strip()
             if token_biz_id:
-                if param_m_id and param_m_id != token_biz_id:
-                    logger.warning(
-                        f"Cross-tenant access attempt blocked: user token '{token_biz_id}' requested '{param_m_id}'"
-                    )
-                    raise HTTPException(
-                        status_code=status.HTTP_403_FORBIDDEN,
-                        detail="Cross-tenant access prohibited. You cannot query or modify another merchant's data.",
-                    )
+                # The cryptographically verified JWT token is authoritative for this merchant
                 return token_biz_id
         except HTTPException:
             raise
