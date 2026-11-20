@@ -354,8 +354,8 @@ class BusinessQueryEngine:
                         i.product_name,
                         i.category,
                         i.current_stock,
-                        COALESCE(SUM(si.quantity), 0) AS units_sold,
-                        COALESCE(SUM(si.line_total), 0.0) AS revenue
+                        COALESCE(SUM(CASE WHEN s.id IS NOT NULL THEN si.quantity ELSE 0 END), 0) AS units_sold,
+                        COALESCE(SUM(CASE WHEN s.id IS NOT NULL THEN (si.quantity * si.unit_price - COALESCE(si.discount, 0.0)) ELSE 0.0 END), 0.0) AS revenue
                     FROM inventory i
                     LEFT JOIN sale_items si ON i.product_id = si.product_id
                     LEFT JOIN sales s ON si.sale_id = s.id AND s.business_id = ? AND s.status != 'CANCELLED'
