@@ -1,14 +1,16 @@
 """
 Controlled Business Query Layer for VyaparMitra Copilot.
-Directly interfaces with Phase 1-4 Parquet artifacts to retrieve grounded metrics,
-preventing the LLM from hallucinating numbers or executing arbitrary code.
+Enforces strict multi-tenant isolation:
+- Live registered businesses (e.g., BIZ_*) query tenant-scoped SQLite tables directly,
+  never falling back to shared static demo Parquet artifacts.
+- Legacy demo merchant IDs (M001 / M015 / None) continue to use Phase 1-4 artifacts.
 """
-
 from __future__ import annotations
 
 import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
 import pandas as pd
 import yaml
 
@@ -16,9 +18,24 @@ from src.copilot.schemas import Fact, SourceReference
 
 logger = logging.getLogger(__name__)
 
+DEMO_MERCHANT_IDS = {"M001", "M015", "DEFAULT_MERCHANT"}
+
+
+def _is_live_tenant(merchant_id: Optional[str]) -> bool:
+    """Returns True when merchant_id belongs to a live tenant rather than static demo fixtures."""
+    if not merchant_id:
+        return False
+    return str(merchant_id).strip().upper() not in DEMO_MERCHANT_IDS
+
+
+def _get_sqlite_conn():
+    """Lazily resolves SQLite DB connection from API layer."""
+    from src.api.db import get_db_connection
+    return get_db_connection()
+
 
 class BusinessQueryEngine:
-    """Retrieves verified business facts, metrics, and recommendations."""
+    """Retrieves verified business facts, metrics, and recommendations with tenant isolation."""
 
     def __init__(
         self,
@@ -28,7 +45,6 @@ class BusinessQueryEngine:
         self.config_path = config_path
         self.data_dir = Path(data_dir) if data_dir else Path("data")
 
-        # Default fallback paths
         self.features_dir = self.data_dir / "features"
         self.analytics_dir = self.data_dir / "analytics"
         self.ml_dir = self.data_dir / "ml"
@@ -51,12 +67,89 @@ class BusinessQueryEngine:
             except Exception as e:
                 logger.warning(f"Error reading config {config_path}: {e}")
 
+    # ------------------------------------------------------------------
+    # Live Tenant SQLite Helpers
+    # ------------------------------------------------------------------
+    def _live_sales_summary(self, business_id: str, time_range: Optional[str] = None) -> Dict[str, Any]:
+        metrics: Dict[str, Any] = {
+            "total_revenue": 0.0,
+            "total_orders": 0,
+            "average_order_value": 0.0,
+            "discount_rate": 0.0,
+            "time_range": time_range or "overall",
+            "tenant_id": business_id,
+        }
+        facts: List[Fact] = []
+        sources: List[SourceReference] = [
+            SourceReference(
+                source="sqlite.sales",
+                artifact=f"db://sales?business_id={business_id}",
+                description="Tenant-isolated live sales records",
+            )
+        ]
+
+        conn = _get_sqlite_conn()
+        try:
+            row = conn.execute(
+                """
+                SELECT
+                    COUNT(*) AS tot_orders,
+                    COALESCE(SUM(total_amount), 0.0) AS tot_rev,
+                    COALESCE(AVG(total_amount), 0.0) AS aov,
+                    COALESCE(SUM(discount), 0.0) AS tot_disc
+                FROM sales
+                WHERE business_id = ? AND status != 'CANCELLED'
+                """,
+                (business_id,),
+            ).fetchone()
+
+            tot_orders = int(row["tot_orders"]) if row else 0
+            tot_rev = round(float(row["tot_rev"]), 2) if row else 0.0
+            aov = round(float(row["aov"]), 2) if (row and tot_orders > 0) else 0.0
+            disc_rate = round(float(row["tot_disc"]) / tot_rev, 4) if tot_rev > 0 else 0.0
+
+            metrics["total_revenue"] = tot_rev
+            metrics["total_orders"] = tot_orders
+            metrics["average_order_value"] = aov
+            metrics["discount_rate"] = disc_rate
+            if tot_orders == 0:
+                metrics["store_status"] = "EMPTY_NO_SALES_YET"
+
+            facts.append(Fact(key="total_revenue", value=tot_rev, source=f"db:sales:{business_id}", category="historical"))
+            facts.append(Fact(key="total_orders", value=tot_orders, source=f"db:sales:{business_id}", category="historical"))
+            facts.append(Fact(key="average_order_value", value=aov, source=f"db:sales:{business_id}", category="historical"))
+
+            latest = conn.execute(
+                """
+                SELECT DATE(created_at) AS dt, COUNT(*) AS orders, COALESCE(SUM(total_amount), 0.0) AS rev
+                FROM sales
+                WHERE business_id = ? AND status != 'CANCELLED'
+                GROUP BY DATE(created_at)
+                ORDER BY dt DESC
+                LIMIT 1
+                """,
+                (business_id,),
+            ).fetchone()
+            if latest:
+                metrics["latest_date"] = str(latest["dt"])
+                metrics["latest_daily_revenue"] = round(float(latest["rev"]), 2)
+                metrics["latest_daily_orders"] = int(latest["orders"])
+        finally:
+            conn.close()
+
+        res = {"metrics": metrics, "facts": facts, "sources": sources}
+        res.update(metrics)
+        return res
+
     # 1. Sales Summary
     def get_sales_summary(
         self,
         merchant_id: Optional[str] = None,
         time_range: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            return self._live_sales_summary(str(merchant_id), time_range=time_range)
+
         path = self.analytics_dir / "sales" / "sales_summary.parquet"
         daily_path = self.analytics_dir / "sales" / "sales_daily.parquet"
 
@@ -98,12 +191,6 @@ class BusinessQueryEngine:
                         metrics["march_total_revenue"] = float(march_df["revenue"].sum())
                         metrics["march_total_orders"] = int(march_df["orders"].sum())
                         metrics["march_aov"] = round(metrics["march_total_revenue"] / max(1, metrics["march_total_orders"]), 2)
-                        metrics["total_revenue"] = metrics["march_total_revenue"]
-                        metrics["total_orders"] = metrics["march_total_orders"]
-                        metrics["average_order_value"] = metrics["march_aov"]
-                        facts.append(Fact(key="march_revenue", value=metrics["march_total_revenue"], source="analytics/sales_daily.parquet", category="historical"))
-
-                sources.append(SourceReference(source="phase2.analytics", artifact=str(daily_path), description="Daily sales time series"))
 
         res = {"metrics": metrics, "facts": facts, "sources": sources}
         res.update(metrics)
@@ -115,6 +202,43 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         time_range: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            conn = _get_sqlite_conn()
+            try:
+                rows = conn.execute(
+                    """
+                    SELECT DATE(created_at) AS dt, COUNT(*) AS orders, COALESCE(SUM(total_amount), 0.0) AS rev
+                    FROM sales
+                    WHERE business_id = ? AND status != 'CANCELLED'
+                    GROUP BY DATE(created_at)
+                    ORDER BY dt ASC
+                    """,
+                    (biz_id,),
+                ).fetchall()
+            finally:
+                conn.close()
+
+            tot_rev = round(sum(float(r["rev"]) for r in rows), 2)
+            tot_orders = sum(int(r["orders"]) for r in rows)
+            days_rec = len(rows)
+            direction = "INSUFFICIENT_DATA" if days_rec < 2 else ("GROWING" if float(rows[-1]["rev"]) >= float(rows[0]["rev"]) else "DECLINING")
+            metrics = {
+                "trend_direction": direction,
+                "confidence": 0.85 if days_rec >= 7 else 0.0,
+                "total_revenue": tot_rev,
+                "total_orders": tot_orders,
+                "days_recorded": days_rec,
+            }
+            facts = [
+                Fact(key="total_revenue", value=tot_rev, source=f"db:sales:{biz_id}", category="historical"),
+                Fact(key="days_recorded", value=days_rec, source=f"db:sales:{biz_id}", category="historical"),
+            ]
+            sources = [SourceReference(source="sqlite.sales", artifact=f"db://sales?business_id={biz_id}", description="Tenant-isolated daily sales trend")]
+            res = {"metrics": metrics, "facts": facts, "sources": sources}
+            res.update(metrics)
+            return res
+
         path = self.ml_dir / "trends" / "business_trend_predictions.parquet"
         hist_trend = self.analytics_dir / "trends" / "trend_analysis.parquet"
         daily_path = self.analytics_dir / "sales" / "sales_daily.parquet"
@@ -164,6 +288,27 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         horizon: Optional[Any] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            summary = self._live_sales_summary(biz_id)
+            tot_orders = summary["total_orders"]
+            tot_rev = summary["total_revenue"]
+            avg_daily_rev = (tot_rev / 7.0) if tot_orders > 0 else 0.0
+            metrics = {
+                "forecast_total_revenue": round(avg_daily_rev * 7.0, 2),
+                "forecast_total_orders": tot_orders if tot_orders > 0 else 0,
+                "forecast_horizon": "7 days",
+                "model_name": "TenantLiveRunRate" if tot_orders > 0 else "NoDataYet",
+            }
+            facts = [
+                Fact(key="forecast_7d_total_revenue", value=metrics["forecast_total_revenue"], source=f"db:sales:{biz_id}", category="prediction"),
+                Fact(key="forecast_7d_total_orders", value=metrics["forecast_total_orders"], source=f"db:sales:{biz_id}", category="prediction"),
+            ]
+            sources = [SourceReference(source="sqlite.sales", artifact=f"db://sales?business_id={biz_id}", description="Tenant-isolated 7-day forecast")]
+            res = {"metrics": metrics, "facts": facts, "sources": sources}
+            res.update(metrics)
+            return res
+
         path = self.ml_dir / "forecasts" / "sales_forecast_7d.parquet"
         metrics: Dict[str, Any] = {
             "forecast_total_revenue": 0.0,
@@ -198,9 +343,62 @@ class BusinessQueryEngine:
         product_id: Optional[str] = None,
         category: Optional[str] = None,
     ) -> Dict[str, Any]:
-        rank_path = self.analytics_dir / "products" / "product_rankings.parquet"
-        feat_path = self.features_dir / "product_features.parquet"
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            conn = _get_sqlite_conn()
+            try:
+                rows = conn.execute(
+                    """
+                    SELECT
+                        i.product_id,
+                        i.product_name,
+                        i.category,
+                        i.current_stock,
+                        COALESCE(SUM(CASE WHEN s.id IS NOT NULL THEN si.quantity ELSE 0 END), 0) AS units_sold,
+                        COALESCE(SUM(CASE WHEN s.id IS NOT NULL THEN (si.quantity * si.unit_price - COALESCE(si.discount, 0.0)) ELSE 0.0 END), 0.0) AS revenue
+                    FROM inventory i
+                    LEFT JOIN sale_items si ON i.product_id = si.product_id
+                    LEFT JOIN sales s ON si.sale_id = s.id AND s.business_id = ? AND s.status != 'CANCELLED'
+                    WHERE i.business_id = ?
+                    GROUP BY i.product_id, i.product_name, i.category, i.current_stock
+                    ORDER BY revenue DESC, units_sold DESC
+                    """,
+                    (biz_id, biz_id),
+                ).fetchall()
+            finally:
+                conn.close()
 
+            metrics: Dict[str, Any] = {
+                "product_id": product_id or "None",
+                "product_name": "No products in inventory yet",
+                "product_revenue": 0.0,
+                "product_units_sold": 0,
+                "total_skus": len(rows),
+            }
+            facts: List[Fact] = [
+                Fact(key="total_skus", value=len(rows), source=f"db:inventory:{biz_id}", category="historical")
+            ]
+            sources = [SourceReference(source="sqlite.inventory", artifact=f"db://inventory?business_id={biz_id}", description="Tenant-isolated product performance")]
+
+            if rows:
+                selected = rows[0]
+                if product_id:
+                    for r in rows:
+                        if product_id.lower() in str(r["product_id"]).lower() or product_id.lower() in str(r["product_name"]).lower():
+                            selected = r
+                            break
+                metrics["product_id"] = str(selected["product_id"])
+                metrics["product_name"] = str(selected["product_name"])
+                metrics["product_revenue"] = round(float(selected["revenue"]), 2)
+                metrics["product_units_sold"] = int(selected["units_sold"])
+                facts.append(Fact(key=f"{metrics['product_id']}_revenue", value=metrics["product_revenue"], source=f"db:inventory:{biz_id}", category="historical"))
+                facts.append(Fact(key=f"{metrics['product_id']}_units", value=metrics["product_units_sold"], source=f"db:inventory:{biz_id}", category="historical"))
+
+            res = {"metrics": metrics, "facts": facts, "sources": sources}
+            res.update(metrics)
+            return res
+
+        rank_path = self.analytics_dir / "products" / "product_rankings.parquet"
         metrics: Dict[str, Any] = {
             "product_id": product_id or "All Products",
             "product_revenue": 0.0,
@@ -240,6 +438,21 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         product_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            perf = self.get_product_performance(merchant_id=biz_id, product_id=product_id)
+            forecast_units = int(perf.get("product_units_sold", 0))
+            metrics = {
+                "product_id": perf.get("product_id", product_id or "None"),
+                "forecast_units": forecast_units,
+                "horizon": "7 days",
+            }
+            facts = [Fact(key=f"{metrics['product_id']}_demand_forecast_units", value=forecast_units, source=f"db:inventory:{biz_id}", category="prediction")]
+            sources = [SourceReference(source="sqlite.inventory", artifact=f"db://inventory?business_id={biz_id}", description="Tenant-isolated SKU demand projection")]
+            res = {"metrics": metrics, "facts": facts, "sources": sources}
+            res.update(metrics)
+            return res
+
         path = self.ml_dir / "forecasts" / "product_demand_forecast_7d.parquet"
         metrics: Dict[str, Any] = {
             "product_id": product_id or "SKU",
@@ -275,6 +488,37 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         customer_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            conn = _get_sqlite_conn()
+            try:
+                rows = conn.execute(
+                    "SELECT id, name, current_balance, credit_limit FROM customers WHERE business_id = ?",
+                    (biz_id,),
+                ).fetchall()
+            finally:
+                conn.close()
+
+            high_risk = sum(
+                1 for r in rows
+                if float(r["credit_limit"] or 0) > 0 and float(r["current_balance"] or 0) >= 0.8 * float(r["credit_limit"])
+            )
+            metrics = {
+                "total_customers_evaluated": len(rows),
+                "high_risk_customers_count": high_risk,
+                "customer_id": customer_id,
+                "churn_tier": "High" if high_risk > 0 else "None",
+                "churn_probability": 0.0,
+            }
+            facts = [
+                Fact(key="total_customers", value=len(rows), source=f"db:customers:{biz_id}", category="historical"),
+                Fact(key="high_risk_customer_count", value=high_risk, source=f"db:customers:{biz_id}", category="prediction"),
+            ]
+            sources = [SourceReference(source="sqlite.customers", artifact=f"db://customers?business_id={biz_id}", description="Tenant-isolated customer ledger risk")]
+            res = {"metrics": metrics, "facts": facts, "sources": sources}
+            res.update(metrics)
+            return res
+
         path = self.ml_dir / "customer_risk" / "customer_risk_scores.parquet"
         metrics: Dict[str, Any] = {
             "total_customers_evaluated": 0,
@@ -315,6 +559,48 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         product_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            biz_id = str(merchant_id)
+            conn = _get_sqlite_conn()
+            try:
+                low_rows = conn.execute(
+                    """
+                    SELECT product_id, product_name, current_stock, min_stock_threshold, selling_price
+                    FROM inventory
+                    WHERE business_id = ? AND current_stock <= min_stock_threshold
+                    ORDER BY current_stock ASC
+                    LIMIT 10
+                    """,
+                    (biz_id,),
+                ).fetchall()
+            finally:
+                conn.close()
+
+            recommendations: List[Dict[str, Any]] = []
+            facts: List[Fact] = []
+            for idx, r in enumerate(low_rows, 1):
+                deficit = max(10, int(r["min_stock_threshold"] or 10) * 2 - int(r["current_stock"] or 0))
+                rec = {
+                    "recommendation_id": f"REC_LIVE_{idx:03d}",
+                    "type": "INVENTORY",
+                    "action": "RESTOCK",
+                    "sku": str(r["product_id"]),
+                    "product_name": str(r["product_name"]),
+                    "suggested_quantity": deficit,
+                    "estimated_revenue_impact": round(deficit * float(r["selling_price"] or 0.0), 2),
+                }
+                recommendations.append(rec)
+                facts.append(Fact(key=f"restock_{rec['sku']}", value=deficit, source=f"db:inventory:{biz_id}", category="recommendation"))
+
+            sources = [SourceReference(source="sqlite.inventory", artifact=f"db://inventory?business_id={biz_id}", description="Tenant-isolated live low-stock alerts")]
+            return {
+                "recommendations": recommendations,
+                "evidence": [],
+                "facts": facts,
+                "sources": sources,
+                "metrics": {"total_inventory_recs": len(recommendations)},
+            }
+
         path = self.rec_dir / "inventory_recommendations.parquet"
         ev_path = self.rec_dir / "recommendation_evidence.parquet"
 
@@ -364,6 +650,14 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         product_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            return {
+                "recommendations": [],
+                "facts": [],
+                "sources": [SourceReference(source="sqlite.sales", artifact=f"db://sales?business_id={merchant_id}", description="Tenant-isolated affinity analysis")],
+                "metrics": {"total_cross_sell_recs": 0},
+            }
+
         path = self.rec_dir / "cross_sell_recommendations.parquet"
         recommendations: List[Dict[str, Any]] = []
         facts: List[Fact] = []
@@ -384,7 +678,7 @@ class BusinessQueryEngine:
                     recommendations.append(rec_dict)
                     facts.append(Fact(key=f"bundle_{rec_dict['target_sku']}", value=rec_dict["recommended_sku"], source="recommendations/cross_sell_recommendations.parquet", category="recommendation"))
 
-                sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Product bundling and affinity"))
+            sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Product bundling and affinity"))
 
         return {
             "recommendations": recommendations,
@@ -399,6 +693,15 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         product_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            return {
+                "recommendations": [],
+                "evidence": [],
+                "facts": [],
+                "sources": [SourceReference(source="sqlite.inventory", artifact=f"db://inventory?business_id={merchant_id}", description="Tenant-isolated pricing analysis")],
+                "metrics": {"total_pricing_recs": 0},
+            }
+
         path = self.rec_dir / "pricing_recommendations.parquet"
         recommendations: List[Dict[str, Any]] = []
         evidence: List[Dict[str, Any]] = []
@@ -421,7 +724,7 @@ class BusinessQueryEngine:
                     recommendations.append(rec_dict)
                     facts.append(Fact(key=f"price_{rec_dict['sku']}", value=rec_dict["recommended_price"], source="recommendations/pricing_recommendations.parquet", category="recommendation"))
 
-                sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Price elasticity adjustments"))
+            sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Price elasticity adjustments"))
 
         return {
             "recommendations": recommendations,
@@ -437,6 +740,16 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         limit: int = 5,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            inv = self.get_inventory_recommendations(merchant_id=merchant_id)
+            recs = inv["recommendations"][:limit]
+            return {
+                "recommendations": recs,
+                "facts": [Fact(key="daily_actions_count", value=len(recs), source=f"db:inventory:{merchant_id}", category="recommendation")],
+                "sources": inv["sources"],
+                "metrics": {"pending_action_count": len(recs)},
+            }
+
         path = self.rec_dir / "merchant_action_plan.parquet"
         recommendations: List[Dict[str, Any]] = []
         facts: List[Fact] = []
@@ -456,8 +769,8 @@ class BusinessQueryEngine:
                     }
                     recommendations.append(rec_dict)
 
-                facts.append(Fact(key="daily_actions_count", value=len(recommendations), source="recommendations/merchant_action_plan.parquet", category="recommendation"))
-                sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Top prioritized daily merchant action items"))
+            facts.append(Fact(key="daily_actions_count", value=len(recommendations), source="recommendations/merchant_action_plan.parquet", category="recommendation"))
+            sources.append(SourceReference(source="phase4.recommendations", artifact=str(path), description="Top prioritized daily merchant action items"))
 
         return {
             "recommendations": recommendations,
@@ -472,9 +785,15 @@ class BusinessQueryEngine:
         merchant_id: Optional[str] = None,
         recommendation_id: Optional[str] = None,
     ) -> Dict[str, Any]:
-        ev_path = self.rec_dir / "recommendation_evidence.parquet"
-        all_path = self.rec_dir / "all_recommendations.parquet"
+        if _is_live_tenant(merchant_id):
+            return {
+                "evidence": [],
+                "facts": [],
+                "sources": [SourceReference(source="sqlite.inventory", artifact=f"db://inventory?business_id={merchant_id}", description="Tenant-isolated recommendation evidence")],
+                "metrics": {"evidence_records": 0},
+            }
 
+        ev_path = self.rec_dir / "recommendation_evidence.parquet"
         evidence: List[Dict[str, Any]] = []
         facts: List[Fact] = []
         sources: List[SourceReference] = []
@@ -495,7 +814,7 @@ class BusinessQueryEngine:
                     }
                     evidence.append(ev_dict)
 
-                sources.append(SourceReference(source="phase4.evidence", artifact=str(ev_path), description="Auditable reasoning behind merchant recommendations"))
+            sources.append(SourceReference(source="phase4.evidence", artifact=str(ev_path), description="Auditable reasoning behind merchant recommendations"))
 
         return {
             "evidence": evidence,
@@ -538,6 +857,14 @@ class BusinessQueryEngine:
         self,
         merchant_id: Optional[str] = None,
     ) -> Dict[str, Any]:
+        if _is_live_tenant(merchant_id):
+            return {
+                "metrics": {"status": "NOT_ENOUGH_STORE_HISTORY"},
+                "facts": [],
+                "sources": [SourceReference(source="sqlite.sales", artifact=f"db://sales?business_id={merchant_id}", description="Tenant-isolated store status")],
+                "recommendations": [],
+            }
+
         m_id = str(merchant_id or "M001").upper()
         from src.analytics.benchmark import get_benchmark_engine
         engine = get_benchmark_engine()
@@ -591,4 +918,3 @@ class BusinessQueryEngine:
             "sources": sources,
             "recommendations": recommendations,
         }
-
