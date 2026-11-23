@@ -64,4 +64,5 @@ data/*.db.bak
 # Scratch and temporary directories
 scratch/
 data/backups/
+data/users_credentials_backup.json
 brag-output/work/

@@ -412,12 +412,12 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-  requestOtp: (data: { email: string; phone?: string; name?: string }) =>
+  requestOtp: (data: { email: string; phone?: string; name?: string; purpose?: 'login' | 'signup' }) =>
     request<RequestOtpResponse>('/api/auth/otp/send', {
       method: 'POST',
       body: JSON.stringify(data),
     }),
-  verifyOtp: (data: { email: string; otp: string; phone?: string; name?: string; store_id?: string; password?: string }) =>
+  verifyOtp: (data: { email: string; otp: string; phone?: string; name?: string; store_id?: string; password?: string; purpose?: 'login' | 'signup' }) =>
     request<AuthTokenResponse>('/api/auth/otp/verify', {
       method: 'POST',
       body: JSON.stringify(data),

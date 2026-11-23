@@ -166,6 +166,7 @@ def test_roles_directory():
 def test_signup_and_email_password_login():
     """Validates that a merchant can sign up with email and password and subsequently log in."""
     email = f"merchant_{secrets.token_hex(4)}@example.com"
+    phone = f"+919{secrets.randbelow(899999999) + 100000000}"
     password = "SecureMerchantPassword123!"
 
     # 1. Signup with email & password
@@ -175,7 +176,7 @@ def test_signup_and_email_password_login():
             "email": email,
             "password": password,
             "full_name": "Test Signer",
-            "phone": "+919876500000",
+            "phone": phone,
             "business_name": "Signer Store",
         },
     )
@@ -201,6 +202,7 @@ def test_signup_and_email_password_login():
 def test_otp_verify_with_password_creation():
     """Validates that setting a password during OTP verification allows password login later."""
     email = f"otp_pwd_{secrets.token_hex(4)}@example.com"
+    phone = f"+919{secrets.randbelow(899999999) + 100000000}"
     password = "MyOtpCreatedPassword456!"
 
     # 1. Send OTP
@@ -215,6 +217,7 @@ def test_otp_verify_with_password_creation():
             "email": email,
             "otp": otp,
             "password": password,
+            "phone": phone,
             "name": "OTP User",
         },
     )
@@ -230,4 +233,39 @@ def test_otp_verify_with_password_creation():
     )
     assert login_res.status_code == 200
     assert login_res.json()["user"]["email"] == email
+
+    # 4. Duplicate signup with same email must fail with clear instruction
+    dup_res = client.post(
+        "/api/auth/signup",
+        json={
+            "email": email,
+            "password": password,
+            "phone": phone,
+        },
+    )
+    assert dup_res.status_code == 400
+    assert "already exists" in dup_res.json().get("detail", "").lower()
+    assert "log in" in dup_res.json().get("detail", "").lower()
+
+    # 5. Duplicate signup request via OTP must fail
+    dup_otp_res = client.post(
+        "/api/auth/otp/send",
+        json={
+            "email": email,
+            "phone": phone,
+            "purpose": "signup",
+        },
+    )
+    assert dup_otp_res.status_code == 400
+    assert "already exists" in dup_otp_res.json().get("detail", "").lower()
+
+    # 6. Login using mobile number
+    phone_login = client.post(
+        "/api/auth/login",
+        json={
+            "username_or_email": phone,
+            "password": password,
+        },
+    )
+    assert phone_login.status_code == 200
 

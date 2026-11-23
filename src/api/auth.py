@@ -7,9 +7,13 @@ from __future__ import annotations
 
 import hashlib
 import hmac
+import json
 import logging
+import re
+import uuid
 from datetime import datetime, timedelta, timezone
 from enum import Enum
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 import jwt
 from fastapi import Depends, Header, HTTPException, Request, status
@@ -126,6 +130,94 @@ def verify_password(plain_password: str, stored_hash: str) -> bool:
         return False
 
 
+def get_user_backup_path() -> Path:
+    config = get_api_config()
+    backup_path = config.db_path.parent / "users_credentials_backup.json"
+    backup_path.parent.mkdir(parents=True, exist_ok=True)
+    return backup_path
+
+
+def save_user_backup(user_data: Dict[str, Any]) -> None:
+    """Safely records user credentials backup into persistent JSON file."""
+    try:
+        path = get_user_backup_path()
+        users = {}
+        if path.exists():
+            try:
+                users = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                users = {}
+        email = (user_data.get("email") or "").strip().lower()
+        if email:
+            users[email] = user_data
+        path.write_text(json.dumps(users, indent=2), encoding="utf-8")
+    except Exception as exc:
+        logger.warning(f"Could not persist user credentials backup: {exc}")
+
+
+def restore_user_from_backup(db: Any, identifier: str) -> Optional[Any]:
+    """Restores user from backup file if SQLite was wiped on container reboot."""
+    try:
+        path = get_user_backup_path()
+        if not path.exists():
+            return None
+        users = json.loads(path.read_text(encoding="utf-8"))
+        clean_id = identifier.strip().lower()
+        clean_digits = re.sub(r"\D", "", clean_id)
+        phone_10 = clean_digits[-10:] if len(clean_digits) >= 10 else None
+
+        matched_data = None
+        for u in users.values():
+            u_email = (u.get("email") or "").strip().lower()
+            u_username = (u.get("username") or "").strip().lower()
+            u_phone = (u.get("phone") or "").strip()
+            u_phone_digits = re.sub(r"\D", "", u_phone)[-10:] if u_phone else ""
+            if clean_id in (u_email, u_username) or (phone_10 and phone_10 == u_phone_digits):
+                matched_data = u
+                break
+
+        if not matched_data:
+            return None
+
+        biz_id = matched_data.get("business_id") or f"BIZ_{uuid.uuid4().hex[:8].upper()}"
+        branch_id = matched_data.get("branch_id") or f"BR_{biz_id}_MAIN"
+        biz_name = matched_data.get("business_name") or f"{matched_data.get('full_name', 'Merchant')}'s Store"
+        now_str = datetime.now(timezone.utc).isoformat()
+
+        db.execute("""
+            INSERT OR IGNORE INTO businesses (id, name, business_type, phone, email, city, state, created_at)
+            VALUES (?, ?, 'Retail & FMCG', ?, ?, 'India', 'India', ?)
+        """, (biz_id, biz_name, matched_data.get("phone"), matched_data.get("email"), now_str))
+
+        db.execute("""
+            INSERT OR IGNORE INTO branches (id, business_id, name, is_main, created_at)
+            VALUES (?, ?, 'Main Branch', 1, ?)
+        """, (branch_id, biz_id, now_str))
+
+        db.execute("""
+            INSERT OR REPLACE INTO users (
+                id, business_id, branch_id, username, email, full_name,
+                password_hash, role, phone, is_active, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+        """, (
+            matched_data.get("id"),
+            biz_id,
+            branch_id,
+            matched_data.get("username"),
+            matched_data.get("email"),
+            matched_data.get("full_name"),
+            matched_data.get("password_hash"),
+            matched_data.get("role", "owner"),
+            matched_data.get("phone"),
+            matched_data.get("created_at") or now_str,
+        ))
+        db.commit()
+        return db.execute("SELECT * FROM users WHERE id = ?", (matched_data.get("id"),)).fetchone()
+    except Exception as exc:
+        logger.warning(f"Error restoring user from backup: {exc}")
+        return None
+
+
 def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
     """Generates an RFC-compliant signed JWT access token."""
     config = get_api_config()
@@ -192,6 +284,8 @@ def get_current_user(
             row = db.execute("SELECT * FROM users WHERE email = ?", (user_email,)).fetchone()
         if not row and payload.get("username"):
             row = db.execute("SELECT * FROM users WHERE username = ?", (payload.get("username"),)).fetchone()
+        if not row:
+            row = restore_user_from_backup(db, user_id) or (restore_user_from_backup(db, user_email) if user_email else None)
 
     # If container restarted/rebuilt on ephemeral cloud disk, restore verified merchant context
     if not row and payload.get("business_id"):

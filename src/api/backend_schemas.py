@@ -86,6 +86,7 @@ class RequestOtpRequest(BaseModel):
     email: str = Field(..., min_length=3, max_length=120, description="Recipient email address for OTP delivery")
     phone: Optional[str] = Field(None, max_length=20, description="Merchant phone number")
     name: Optional[str] = Field(None, max_length=100, description="Merchant full name")
+    purpose: Optional[str] = Field("login", description="Purpose: 'login' or 'signup'")
 
 
 class RequestOtpResponse(BaseModel):
@@ -105,6 +106,7 @@ class VerifyOtpRequest(BaseModel):
     name: Optional[str] = Field(None, max_length=100, description="Merchant full name")
     store_id: Optional[str] = Field(None, max_length=50, description="Store or Branch ID")
     password: Optional[str] = Field(None, min_length=4, max_length=128, description="Password to set for the merchant")
+    purpose: Optional[str] = Field(None, description="Purpose: 'login' or 'signup'")
 
 
 

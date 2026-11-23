@@ -475,13 +475,17 @@ def seed_default_data() -> None:
             "+919876543213",
         ),
     ]
-    for u_id, b_id, br_id, uname, email, fname, pwd_hash, role, phone in default_users:
-        exists = cursor.execute("SELECT id FROM users WHERE username = ?", (uname,)).fetchone()
-        if not exists:
-            cursor.execute("""
-                INSERT INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, phone, is_active, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
-            """, (u_id, b_id, br_id, uname, email, fname, pwd_hash, role, phone, now_str))
+    if config.demo_mode:
+        for u_id, b_id, br_id, uname, email, fname, pwd_hash, role, phone in default_users:
+            exists = cursor.execute("SELECT id FROM users WHERE username = ?", (uname,)).fetchone()
+            if not exists:
+                cursor.execute("""
+                    INSERT INTO users (id, business_id, branch_id, username, email, full_name, password_hash, role, phone, is_active, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
+                """, (u_id, b_id, br_id, uname, email, fname, pwd_hash, role, phone, now_str))
+    else:
+        # In non-demo production mode, clear demo users' phone numbers so they never hijack real merchant logins
+        cursor.execute("UPDATE users SET phone = NULL WHERE id IN ('USR_OWNER_01', 'USR_MGR_01', 'USR_STAFF_01')")
 
     # Seed Inventory from clean_products table if inventory empty for M015
     inv_count = cursor.execute("SELECT COUNT(*) FROM inventory WHERE business_id = 'M015'").fetchone()[0]

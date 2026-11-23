@@ -21,8 +21,11 @@ from src.api.auth import (
     UserRole,
     create_access_token,
     get_current_user,
+    get_user_backup_path,
     hash_password,
     require_roles,
+    restore_user_from_backup,
+    save_user_backup,
     verify_password,
 )
 from src.api.backend_schemas import (
@@ -205,8 +208,24 @@ def signup(
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="An account with this email already exists. Please log in using your password.",
+            detail="An account with this email already exists. Kindly click on Log In.",
         )
+
+    if req.phone and req.phone.strip():
+        clean_phone_digits = re.sub(r"\D", "", req.phone.strip())
+        if len(clean_phone_digits) >= 10:
+            existing_phone = db.execute(
+                """
+                SELECT id FROM users 
+                WHERE phone = ? OR phone = ? OR REPLACE(REPLACE(REPLACE(phone, '+91', ''), ' ', ''), '-', '') = ?
+                """,
+                (req.phone.strip(), f"+91{clean_phone_digits[-10:]}", clean_phone_digits[-10:]),
+            ).fetchone()
+            if existing_phone:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="An account with this mobile number already exists. Kindly click on Log In.",
+                )
 
     now_utc = datetime.now(timezone.utc)
     now_str = now_utc.isoformat()
@@ -267,6 +286,20 @@ def signup(
     ))
     db.commit()
 
+    save_user_backup({
+        "id": user_id,
+        "business_id": biz_id,
+        "branch_id": branch_id,
+        "username": username,
+        "email": clean_email,
+        "full_name": full_name,
+        "password_hash": hashed,
+        "role": role,
+        "phone": req.phone.strip() if req.phone else None,
+        "business_name": biz_name,
+        "created_at": now_str,
+    })
+
     token_payload = {
         "sub": user_id,
         "username": username,
@@ -324,21 +357,51 @@ def login(
     """Authenticates credentials and returns a signed JWT token."""
     login_id = req.username_or_email.strip().lower()
     clean_digits = re.sub(r"\D", "", login_id)
-    user_row = db.execute(
-        """
-        SELECT * FROM users 
-        WHERE LOWER(username) = ? 
-           OR LOWER(email) = ? 
-           OR phone = ? 
-           OR (? != '' AND (phone = ? OR phone = ? OR REPLACE(REPLACE(REPLACE(phone, '+91', ''), ' ', ''), '-', '') = ?))
-        """,
-        (login_id, login_id, login_id, clean_digits, clean_digits, f"+91{clean_digits}", clean_digits),
-    ).fetchone()
+    user_row = None
 
-    if not user_row or not verify_password(req.password, user_row["password_hash"]):
+    if "@" in login_id:
+        # Strict email matching
+        user_row = db.execute("SELECT * FROM users WHERE LOWER(email) = ?", (login_id,)).fetchone()
+    elif len(clean_digits) >= 10:
+        # Phone matching with country code / 10-digit normalization
+        phone_10 = clean_digits[-10:]
+        user_row = db.execute(
+            """
+            SELECT * FROM users 
+            WHERE phone = ? OR phone = ? OR REPLACE(REPLACE(REPLACE(phone, '+91', ''), ' ', ''), '-', '') = ?
+            ORDER BY CASE WHEN id LIKE 'USR_OWNER%' OR id LIKE 'USR_MGR%' THEN 1 ELSE 0 END, created_at DESC
+            LIMIT 1
+            """,
+            (login_id, f"+91{phone_10}", phone_10),
+        ).fetchone()
+    else:
+        # Username or short handle matching
+        user_row = db.execute(
+            """
+            SELECT * FROM users 
+            WHERE LOWER(username) = ? OR LOWER(email) = ?
+            LIMIT 1
+            """,
+            (login_id, login_id),
+        ).fetchone()
+
+    # If user was not found in SQLite (e.g. after container reboot), restore from backup
+    if not user_row:
+        user_row = restore_user_from_backup(db, login_id)
+
+    if not user_row:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid credentials. Check your username/email/phone and password, or use 'Login via OTP'.",
+            detail="Account not found. Check your email or mobile number, or create an account via Sign Up.",
+        )
+
+    # Check password (trying both trimmed and original in case of user space entry)
+    raw_pwd = req.password or ""
+    pwd_matches = verify_password(raw_pwd.strip(), user_row["password_hash"]) or verify_password(raw_pwd, user_row["password_hash"])
+    if not pwd_matches:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect password. Please verify your password or use 'Login via OTP' to access your account.",
         )
 
     if not user_row["is_active"]:
@@ -418,6 +481,42 @@ def request_otp(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="A valid email address is required to receive your verification code.",
         )
+
+    # In signup mode, verify that account does not already exist
+    if getattr(req, "purpose", None) == "signup":
+        existing = db.execute("SELECT id FROM users WHERE LOWER(email) = ?", (clean_email,)).fetchone()
+        if not existing:
+            backup_path = get_user_backup_path()
+            if backup_path.exists():
+                try:
+                    bk_users = json.loads(backup_path.read_text(encoding="utf-8"))
+                    if clean_email in bk_users:
+                        existing = True
+                except Exception:
+                    pass
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="An account with this email already exists. Kindly click on Log In.",
+            )
+
+        if req.phone and req.phone.strip():
+            clean_digits = re.sub(r"\D", "", req.phone.strip())
+            if len(clean_digits) >= 10:
+                phone_10 = clean_digits[-10:]
+                existing_phone = db.execute(
+                    """
+                    SELECT id FROM users 
+                    WHERE (phone = ? OR phone = ? OR REPLACE(REPLACE(REPLACE(phone, '+91', ''), ' ', ''), '-', '') = ?)
+                      AND id NOT LIKE 'USR_OWNER%' AND id NOT LIKE 'USR_MGR%'
+                    """,
+                    (req.phone.strip(), f"+91{phone_10}", phone_10),
+                ).fetchone()
+                if existing_phone:
+                    raise HTTPException(
+                        status_code=status.HTTP_400_BAD_REQUEST,
+                        detail="An account with this mobile number already exists. Kindly click on Log In.",
+                    )
 
     config = get_api_config()
     now_utc = datetime.now(timezone.utc)
@@ -571,6 +670,13 @@ def verify_otp(
         (clean_email,),
     ).fetchone()
 
+    # If signing up, reject if user already exists
+    if getattr(req, "purpose", None) == "signup" and user_row:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="An account with this email already exists. Kindly click on Log In.",
+        )
+
     now_str = now_utc.isoformat()
     if not user_row:
         user_id = f"USR_{uuid.uuid4().hex[:8].upper()}"
@@ -619,6 +725,7 @@ def verify_otp(
             business_id = biz_row["id"]
             main_branch = db.execute("SELECT id FROM branches WHERE business_id = ? ORDER BY is_main DESC LIMIT 1", (business_id,)).fetchone()
             branch_id = main_branch["id"] if main_branch else f"BR_{business_id}_MAIN"
+            biz_name = biz_row["name"]
 
         pwd_val = req.password.strip() if (req.password and req.password.strip()) else secrets.token_urlsafe(16)
         pwd_hash = hash_password(pwd_val)
@@ -643,15 +750,41 @@ def verify_otp(
         )
         db.commit()
         user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+        save_user_backup({
+            "id": user_id,
+            "business_id": business_id,
+            "branch_id": branch_id,
+            "username": username,
+            "email": clean_email,
+            "full_name": full_name,
+            "password_hash": pwd_hash,
+            "role": role,
+            "phone": req.phone.strip() if req.phone else None,
+            "business_name": biz_name,
+            "created_at": now_str,
+        })
     else:
         # If existing user provided a password during OTP verification, save it so they can log in with password later
         if req.password and req.password.strip():
+            new_hash = hash_password(req.password.strip())
             db.execute(
                 "UPDATE users SET password_hash = ? WHERE id = ?",
-                (hash_password(req.password.strip()), user_row["id"]),
+                (new_hash, user_row["id"]),
             )
             db.commit()
             user_row = db.execute("SELECT * FROM users WHERE id = ?", (user_row["id"],)).fetchone()
+            save_user_backup({
+                "id": user_row["id"],
+                "business_id": user_row["business_id"],
+                "branch_id": user_row["branch_id"],
+                "username": user_row["username"],
+                "email": user_row["email"],
+                "full_name": user_row["full_name"],
+                "password_hash": new_hash,
+                "role": user_row["role"],
+                "phone": user_row["phone"],
+                "created_at": user_row["created_at"],
+            })
 
     role = user_row["role"]
     token_payload = {

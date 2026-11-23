@@ -185,6 +185,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         email: cleanEmail,
         phone: mobileNumber.trim() || undefined,
         name: fullName.trim() || undefined,
+        purpose: authMode === 'signup' ? 'signup' : 'login',
       });
 
       setIsSubmitting(false);
@@ -219,6 +220,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         name: fullName.trim() || undefined,
         store_id: storeId.trim() || undefined,
         password: password.trim() || undefined,
+        purpose: authMode === 'signup' ? 'signup' : 'login',
       });
 
       setIsSubmitting(false);
@@ -448,9 +450,27 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
             {/* Error banner */}
             {authError && (
-              <div className="p-3 rounded-xl bg-danger-soft border border-danger/30 text-danger text-xs flex items-start gap-2 animate-in fade-in-50">
-                <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span className="leading-normal font-medium">{authError}</span>
+              <div className="p-3.5 rounded-xl bg-danger-soft border border-danger/30 text-danger text-xs space-y-2 animate-in fade-in-50">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+                  <span className="leading-normal font-medium">{authError}</span>
+                </div>
+                {(authError.toLowerCase().includes('already exists') || authError.toLowerCase().includes('log in')) && authMode === 'signup' && (
+                  <div className="pt-1 pl-6">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAuthMode('login');
+                        setOtpSent(false);
+                        setAuthError(null);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand text-white text-[11px] font-bold rounded-lg hover:bg-brand-hover shadow-xs transition-colors cursor-pointer"
+                    >
+                      <span>Click Here to Log In</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 
