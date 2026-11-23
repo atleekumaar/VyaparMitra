@@ -150,3 +150,75 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Receipt Print Optimization & 1-Page Thermal Slip Layout
+   ========================================================================== */
+#receipt-print-root {
+  display: none;
+}
+
+@media print {
+  /* When printing a receipt slip, isolate background and ensure clean black & white */
+  body.print-receipt-active {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Completely hide the application root, navigation, sidebars, dashboard & backdrops */
+  body.print-receipt-active #root {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Show ONLY the isolated receipt slip */
+  body.print-receipt-active #receipt-print-root {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 80mm !important; /* 80mm / 3-inch POS thermal printer roll & compact A4 column */
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Force single-page bounds and minimal margins to prevent spillover pages */
+  @page {
+    size: auto;
+    margin: 4mm 6mm;
+  }
+
+  .print-receipt-slip {
+    display: block !important;
+    width: 100% !important;
+    max-width: 80mm !important;
+    margin: 0 auto !important;
+    padding: 2mm 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-family: 'Courier New', Courier, monospace, 'Inter', sans-serif !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .print-receipt-slip * {
+    color: #000000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
